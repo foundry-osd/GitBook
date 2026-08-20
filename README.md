@@ -2,6 +2,10 @@
 
 Foundry OSD helps Windows deployment teams prepare boot media, connect devices in Windows PE, and deploy Windows through a guided workflow.
 
+<figure>
+  <img src=".gitbook/assets/shared-overview-01-hero.png" alt="Foundry OSD">
+</figure>
+
 ## Choose your task
 
 - [Download Foundry OSD](start-here/download.md) for an x64 or ARM64 administrator workstation.
