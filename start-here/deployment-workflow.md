@@ -33,9 +33,12 @@ Foundry prepares the target disk, downloads and applies Windows, stages drivers 
 
 Review the completion state, deployment summary, and any reported error. Reboot only after Foundry reports success or after collecting the required troubleshooting evidence.
 
-{% hint style="warning" %}
-**Screenshot required**
-
-- **File:** `shared-deployment-workflow.svg`
-- **Capture:** Diagram the Foundry OSD to Foundry Connect to Foundry Deploy lifecycle.
-{% endhint %}
+<figure>
+  <img
+    src="../.gitbook/assets/shared-deployment-workflow.svg"
+    alt="Foundry deployment workflow from media authoring through network readiness, Windows deployment, verification, and reboot"
+  >
+  <figcaption>
+    Foundry OSD authors deployment media, Foundry Connect establishes network readiness, and Foundry Deploy applies and verifies Windows.
+  </figcaption>
+</figure>
