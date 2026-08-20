@@ -1,0 +1,21 @@
+root: ./
+
+structure:
+  readme: README.md
+  summary: SUMMARY.md
+
+redirects:
+  docs/start: README.md
+  docs/start/requirements: start-here/requirements.md
+  docs/start/quick-start: start-here/quick-start.md
+  docs/autopilot/overview: foundry-osd/autopilot/README.md
+  docs/configure/customization: foundry-osd/customization/README.md
+  docs/configure/general: foundry-osd/general.md
+  docs/configure/network: foundry-osd/network/README.md
+  docs/build-media/media-creation: foundry-osd/media/README.md
+  docs/connect/network-readiness: foundry-connect/network-readiness.md
+  docs/deploy/deployment-flow: foundry-deploy/README.md
+  docs/technical/post-winpe-handoff: foundry-deploy/verify-deployment.md
+  docs/technical/deployment-orchestrator: reference/README.md
+  docs/configure/autopilot: foundry-osd/autopilot/README.md
+  docs/deploy/autopilot-hash-upload: foundry-osd/autopilot/README.md
