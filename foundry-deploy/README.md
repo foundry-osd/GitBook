@@ -1,4 +1,4 @@
-# Deploy Windows
+# Foundry Deploy
 
 Foundry Deploy runs in Windows PE after network readiness. It guides a technician through target selection and Windows deployment.
 

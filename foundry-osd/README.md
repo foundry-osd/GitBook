@@ -1,4 +1,4 @@
-# Configure deployment media
+# Foundry OSD
 
 Foundry OSD is the Windows desktop application used to prepare deployment media.
 

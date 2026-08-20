@@ -1,6 +1,6 @@
-# Home
+# Application home
 
-Home summarizes the Foundry OSD workflow and provides shortcuts to the next action.
+Application home summarizes the Foundry OSD workflow and provides shortcuts to the next action.
 
 ## Main actions
 

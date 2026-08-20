@@ -1,4 +1,4 @@
-# Connect a device
+# Foundry Connect
 
 Foundry Connect runs in Windows PE before deployment. It reports network state and allows the technician to establish connectivity required by Foundry Deploy.
 
