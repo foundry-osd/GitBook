@@ -12,7 +12,7 @@ Do not substitute another ADK or Windows PE Add-on version. Use `10.1.26100.2454
 
 ## Windows deployment media
 
-Foundry Deploy currently supports Windows 11 23H2, 24H2, and 25H2. Available languages, editions, architectures, and license channels are then determined by the current catalog and any restrictions configured during media authoring.
+The current Foundry operating-system catalog contains Windows 11 23H2, 24H2, and 25H2. These are the Windows releases currently offered for deployment because no other releases are present in the catalog. Available languages, editions, architectures, and license channels are determined by the catalog and any restrictions configured during media authoring.
 
 ## Hardware
 
