@@ -1,6 +1,6 @@
 # Windows ADK and Windows PE
 
-Foundry OSD uses Windows ADK and Windows PE Add-on version `10.1.26100.2454` for its built-in installation workflow.
+Foundry OSD requires Windows ADK and Windows PE Add-on version `10.1.26100.2454` to build deployment media.
 
 ## What Foundry checks
 
@@ -8,8 +8,8 @@ The ADK page detects:
 
 - Whether the Windows ADK is installed.
 - Whether the Windows PE Add-on is installed.
-- The installed component versions.
-- Whether the detected versions satisfy the required Windows ADK 24H2 (`10.1.26100`) compatibility policy.
+- The installed ADK component version.
+- Whether the detected ADK build satisfies the current compatibility check.
 
 {% hint style="warning" %}
 **Screenshot required**
@@ -35,7 +35,7 @@ The ADK page detects:
 {% endhint %}
 
 {% hint style="info" %}
-The automatic installation downloads and installs Windows ADK `10.1.26100.2454` first, followed by Windows PE Add-on `10.1.26100.2454`. Media creation still checks the installed components against the required Windows ADK 24H2 (`10.1.26100`) policy before enabling WinPE workflows.
+The automatic installation downloads and installs Windows ADK `10.1.26100.2454` first, followed by Windows PE Add-on `10.1.26100.2454`.
 {% endhint %}
 
 ## When the page reports ready

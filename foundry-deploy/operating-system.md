@@ -17,4 +17,4 @@ The Operating system step selects the Windows media applied to the target.
 - **Capture:** Show the operating-system selection hierarchy without obscuring required controls.
 {% endhint %}
 
-Available choices come from the Foundry operating-system catalog and the restrictions configured during media authoring. Confirm that the selection matches licensing and application compatibility requirements.
+Foundry Deploy currently supports Windows 11 23H2, 24H2, and 25H2. Available languages, editions, architectures, and license channels are then determined by the current catalog and any restrictions configured during media authoring. Confirm that the selection matches licensing and application compatibility requirements.

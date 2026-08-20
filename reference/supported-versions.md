@@ -3,16 +3,16 @@
 ## Administrator workstation
 
 - Windows 10 or Windows 11.
-- Windows ADK 24H2 on the supported `10.1.26100` build line.
-- Windows PE Add-on on the same supported `10.1.26100` build line.
+- Windows ADK `10.1.26100.2454`.
+- Windows PE Add-on `10.1.26100.2454`.
 
 {% hint style="warning" %}
-Do not assume another ADK family is supported. Use the version recommended by the current Foundry OSD release. The current built-in installation workflow downloads `10.1.26100.2454`.
+Do not substitute another ADK or Windows PE Add-on version. Use `10.1.26100.2454` for both components.
 {% endhint %}
 
 ## Windows deployment media
 
-Available Windows releases, languages, editions, architectures, and license channels are determined by the current Foundry catalog and the restrictions configured during media authoring.
+Foundry Deploy currently supports Windows 11 23H2, 24H2, and 25H2. Available languages, editions, architectures, and license channels are then determined by the current catalog and any restrictions configured during media authoring.
 
 ## Hardware
 

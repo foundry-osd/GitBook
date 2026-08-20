@@ -11,7 +11,7 @@ Configure:
 - Windows PE language.
 - Deployment time zone.
 
-The selected Windows PE language remains unavailable until the ADK and matching Windows PE Add-on are ready.
+The selected Windows PE language remains unavailable until Windows ADK and Windows PE Add-on `10.1.26100.2454` are ready.
 
 ## Deployment completion
 
