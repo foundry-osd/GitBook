@@ -2,9 +2,14 @@
 
 Foundry OSD helps Windows deployment teams prepare boot media, connect devices in Windows PE, and deploy Windows through a guided workflow.
 
+<figure>
+  <img src=".gitbook/assets/shared-overview-01-hero.png" alt="Foundry OSD">
+</figure>
+
 ## Choose your task
 
-- [Prepare Foundry OSD](start-here/quick-start.md) to configure an administrator workstation and create your first deployment media.
+- [Download Foundry OSD](start-here/download.md) for an x64 or ARM64 administrator workstation.
+- Follow the [quick start](start-here/quick-start.md) to configure an administrator workstation and create your first deployment media.
 - [Configure deployment media](foundry-osd/README.md) to define networking, Windows customization, and Windows Autopilot behavior.
 - [Connect a device](foundry-connect/README.md) after booting into Windows PE.
 - [Deploy Windows](foundry-deploy/README.md) by selecting a target disk, operating system, and driver pack.
@@ -21,5 +26,3 @@ Foundry uses three applications in one deployment lifecycle:
 {% hint style="warning" %}
 Creating or updating USB media and deploying Windows can erase data. Verify the selected USB device and target disk before confirming a destructive operation.
 {% endhint %}
-
-Continue with the [quick start](start-here/quick-start.md) or review the complete [deployment workflow](start-here/deployment-workflow.md).

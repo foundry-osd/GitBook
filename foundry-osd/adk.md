@@ -11,12 +11,10 @@ The ADK page detects:
 - The installed ADK component version.
 - Whether the detected ADK build satisfies the current compatibility check.
 
-{% hint style="warning" %}
-**Screenshot required**
-
-- **File:** `foundry-osd-adk-01-status-missing.png`
-- **Capture:** Show the ADK page when the required ADK or Windows PE Add-on is missing.
-{% endhint %}
+<figure>
+  <img src="../.gitbook/assets/foundry-osd-adk-01-status-missing.png" alt="Foundry OSD showing missing Windows ADK and Windows PE Add-on components">
+  <figcaption>Foundry identifies each required component that is not ready.</figcaption>
+</figure>
 
 ## Install missing components
 
@@ -27,12 +25,10 @@ The ADK page detects:
 5. Keep Foundry OSD open while the installer is downloaded and executed.
 6. Wait for Foundry to refresh the component status.
 
-{% hint style="warning" %}
-**Screenshot required**
-
-- **File:** `foundry-osd-adk-02-install-button.png`
-- **Capture:** Show the automatic ADK and Windows PE Add-on installation action before installation.
-{% endhint %}
+<figure>
+  <img src="../.gitbook/assets/foundry-osd-adk-02-install-button.png" alt="Foundry OSD automatic Windows ADK and Windows PE Add-on installation action">
+  <figcaption>Install the supported ADK and Windows PE Add-on directly from Foundry OSD.</figcaption>
+</figure>
 
 {% hint style="info" %}
 The automatic installation downloads and installs Windows ADK `10.1.26100.2454` first, followed by Windows PE Add-on `10.1.26100.2454`.

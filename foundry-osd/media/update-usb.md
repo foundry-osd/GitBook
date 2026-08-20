@@ -15,13 +15,11 @@ Update existing Foundry USB media when configuration or runtime content changes.
 2. Open **Start** and select the correct target.
 3. Confirm Foundry recognizes the drive as existing Foundry media.
 4. Resolve readiness items.
-5. Select **Create USB**. Foundry automatically uses the update path for recognized media and refreshes the boot partition.
+5. Select **Update USB**. Foundry refreshes the boot partition while preserving the cache partition.
 6. Keep the drive connected until the update completes.
 7. Test boot the updated media before production use.
 
-{% hint style="warning" %}
-**Screenshot required**
-
-- **File:** `foundry-osd-media-update-usb-01-action.png`
-- **Capture:** Show recognized Foundry USB media and the Create USB action that starts the update path.
-{% endhint %}
+<figure>
+  <img src="../../.gitbook/assets/foundry-osd-media-update-usb-01-action.png" alt="Foundry OSD showing recognized deployment media and the Update USB action">
+  <figcaption>Update recognized Foundry USB media without rebuilding its cache partition or re-downloading cached Windows sources.</figcaption>
+</figure>

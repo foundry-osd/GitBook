@@ -5,7 +5,10 @@ structure:
   summary: SUMMARY.md
 
 redirects:
-  docs/start: README.md
+  download: start-here/download.md
+  downloads: start-here/download.md
+  docs/start: start-here/README.md
+  docs/start/download: start-here/download.md
   docs/start/requirements: start-here/requirements.md
   docs/start/quick-start: start-here/quick-start.md
   docs/autopilot/overview: foundry-osd/autopilot/README.md

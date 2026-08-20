@@ -9,12 +9,10 @@ Use Operating system selection to control which Windows choices are available du
 3. Review the resulting selection. Changes are saved automatically.
 4. Return to **Start**.
 
-{% hint style="warning" %}
-**Screenshot required**
-
-- **File:** `foundry-osd-customization-operating-system-01-selection.png`
-- **Capture:** Show the operating-system selection controls and supported option hierarchy.
-{% endhint %}
+<figure>
+  <img src="../../.gitbook/assets/foundry-osd-customization-operating-system-01-selection.png" alt="Foundry OSD operating system selection controls">
+  <figcaption>Define the Windows choices available to the deployment technician.</figcaption>
+</figure>
 
 Foundry Deploy obtains available media from the configured catalog and presents compatible combinations to the technician.
 

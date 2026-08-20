@@ -1,6 +1,6 @@
-# Home
+# Application home
 
-Home summarizes the Foundry OSD workflow and provides shortcuts to the next action.
+Application home summarizes the Foundry OSD workflow and provides shortcuts to the next action.
 
 ## Main actions
 
@@ -11,9 +11,7 @@ Home summarizes the Foundry OSD workflow and provides shortcuts to the next acti
 
 The workflow indicator shows progress through configuration, readiness review, and media creation. Readiness cards highlight areas that still require attention.
 
-{% hint style="warning" %}
-**Screenshot required**
-
-- **File:** `foundry-osd-home-01-workflow.png`
-- **Capture:** Show the Home workflow indicator, main actions, and readiness cards.
-{% endhint %}
+<figure>
+  <img src="../.gitbook/assets/foundry-osd-home-01-workflow.png" alt="Foundry OSD home page showing the configuration workflow and readiness status">
+  <figcaption>Use the workflow and readiness cards to identify the next configuration action.</figcaption>
+</figure>

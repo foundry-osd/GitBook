@@ -11,12 +11,10 @@ Create an ISO for virtual machines, remote-management virtual media, or a separa
 5. Select **Create ISO**.
 6. Keep Foundry OSD open until verification and cleanup complete.
 
-{% hint style="warning" %}
-**Screenshot required**
-
-- **File:** `foundry-osd-media-create-iso-01-output.png`
-- **Capture:** Show the ISO output path and Create ISO action.
-{% endhint %}
+<figure>
+  <img src="../../.gitbook/assets/foundry-osd-media-create-iso-01-output.png" alt="Foundry OSD ISO output path and Create ISO action">
+  <figcaption>Choose the ISO output path before creating the media.</figcaption>
+</figure>
 
 ## Validate the ISO
 

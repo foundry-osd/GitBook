@@ -10,11 +10,9 @@ The Operating system step selects the Windows media applied to the target.
 4. Select the edition.
 5. Select the license channel when more than one is available.
 
-{% hint style="warning" %}
-**Screenshot required**
-
-- **File:** `foundry-deploy-operating-system-01-selection.png`
-- **Capture:** Show the operating-system selection hierarchy without obscuring required controls.
-{% endhint %}
+<figure>
+  <img src="../.gitbook/assets/foundry-deploy-operating-system-01-selection.png" alt="Foundry Deploy Windows release, language, edition, and license selection">
+  <figcaption>Select a compatible Windows release, language, edition, and license channel.</figcaption>
+</figure>
 
 The current Foundry operating-system catalog contains Windows 11 23H2, 24H2, and 25H2. Foundry Deploy therefore offers only these three releases with the current catalog. Available languages, editions, architectures, and license channels are determined by the catalog and any restrictions configured during media authoring. Confirm that the selection matches licensing and application compatibility requirements.

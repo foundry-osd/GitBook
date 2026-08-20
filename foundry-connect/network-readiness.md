@@ -2,6 +2,11 @@
 
 Foundry Connect validates that the deployment environment can use the network before Foundry Deploy continues.
 
+<figure>
+  <img src="../.gitbook/assets/foundry-connect-network-readiness-01-ready.png" alt="Foundry Connect showing network readiness, Ethernet details, and available Wi-Fi networks">
+  <figcaption>Review the ready state and available network connections before continuing.</figcaption>
+</figure>
+
 ## Ethernet
 
 Review:
@@ -21,20 +26,6 @@ When Wi-Fi is enabled, you can:
 - Enter or reveal a passphrase when required.
 - Use a provisioned profile.
 - Connect or disconnect.
-
-{% hint style="warning" %}
-**Screenshot required**
-
-- **File:** `foundry-connect-network-readiness-01-waiting.png`
-- **Capture:** Show Foundry Connect waiting for network with Ethernet and Wi-Fi status visible.
-{% endhint %}
-
-{% hint style="warning" %}
-**Screenshot required**
-
-- **File:** `foundry-connect-network-readiness-02-ready.png`
-- **Capture:** Show the Network ready state and Continue action.
-{% endhint %}
 
 ## Common waiting states
 

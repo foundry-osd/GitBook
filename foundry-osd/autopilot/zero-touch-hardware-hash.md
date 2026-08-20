@@ -20,12 +20,10 @@ Zero-touch upload registers a device without requiring a technician to sign in d
 6. Configure the group tag when required by the organization.
 7. Return to **Start** and confirm Autopilot readiness.
 
-{% hint style="warning" %}
-**Screenshot required**
-
-- **File:** `foundry-osd-autopilot-zero-touch-01-readiness.png`
-- **Capture:** Show zero-touch prerequisite validation with sanitized tenant and application values.
-{% endhint %}
+<figure>
+  <img src="../../.gitbook/assets/foundry-osd-autopilot-zero-touch-01-readiness.png" alt="Foundry OSD zero-touch hardware hash upload prerequisite validation">
+  <figcaption>Confirm tenant, application, permission, and certificate readiness.</figcaption>
+</figure>
 
 {% hint style="danger" %}
 Protect the certificate private key and generated media. Revoke or rotate the credential if its confidentiality is uncertain.
