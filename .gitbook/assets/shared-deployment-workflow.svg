@@ -64,21 +64,21 @@
   <text x="390" y="611" fill="#dbeafe" font-family="Segoe UI, Arial, sans-serif" font-size="16" font-weight="600">NETWORK READY</text>
 
   <g filter="url(#shadow)">
-    <rect x="40" y="640" width="640" height="240" rx="20" fill="#102b3b" stroke="#22d3ee" stroke-width="2"/>
+    <rect x="40" y="640" width="640" height="250" rx="20" fill="#102b3b" stroke="#22d3ee" stroke-width="2"/>
     <rect x="40" y="640" width="640" height="8" rx="4" fill="url(#deployAccent)"/>
     <text x="70" y="684" fill="#67e8f9" font-family="Segoe UI, Arial, sans-serif" font-size="16" font-weight="600" letter-spacing="0.8">TARGET DEVICE · WINDOWS PE</text>
     <text x="70" y="725" fill="#ffffff" font-family="Segoe UI, Arial, sans-serif" font-size="30" font-weight="700">Foundry Deploy</text>
 
-    <circle cx="92" cy="770" r="19" fill="#0891b2"/>
-    <text x="92" y="777" text-anchor="middle" fill="#ffffff" font-family="Segoe UI, Arial, sans-serif" font-size="17" font-weight="700">3</text>
-    <text x="126" y="777" fill="#ecfeff" font-family="Segoe UI, Arial, sans-serif" font-size="21" font-weight="600">Select deployment inputs</text>
+    <circle cx="92" cy="765" r="19" fill="#0891b2"/>
+    <text x="92" y="772" text-anchor="middle" fill="#ffffff" font-family="Segoe UI, Arial, sans-serif" font-size="17" font-weight="700">3</text>
+    <text x="126" y="772" fill="#ecfeff" font-family="Segoe UI, Arial, sans-serif" font-size="21" font-weight="600">Select deployment inputs</text>
 
-    <circle cx="370" cy="770" r="19" fill="#0891b2"/>
-    <text x="370" y="777" text-anchor="middle" fill="#ffffff" font-family="Segoe UI, Arial, sans-serif" font-size="17" font-weight="700">4</text>
-    <text x="404" y="777" fill="#ecfeff" font-family="Segoe UI, Arial, sans-serif" font-size="21" font-weight="600">Apply Windows</text>
+    <circle cx="92" cy="815" r="19" fill="#0891b2"/>
+    <text x="92" y="822" text-anchor="middle" fill="#ffffff" font-family="Segoe UI, Arial, sans-serif" font-size="17" font-weight="700">4</text>
+    <text x="126" y="822" fill="#ecfeff" font-family="Segoe UI, Arial, sans-serif" font-size="21" font-weight="600">Apply and configure Windows</text>
 
-    <circle cx="92" cy="832" r="19" fill="#059669"/>
-    <text x="92" y="839" text-anchor="middle" fill="#ffffff" font-family="Segoe UI, Arial, sans-serif" font-size="17" font-weight="700">5</text>
-    <text x="126" y="839" fill="#ecfdf5" font-family="Segoe UI, Arial, sans-serif" font-size="21" font-weight="600">Verify the deployment and reboot</text>
+    <circle cx="92" cy="865" r="19" fill="#059669"/>
+    <text x="92" y="872" text-anchor="middle" fill="#ffffff" font-family="Segoe UI, Arial, sans-serif" font-size="17" font-weight="700">5</text>
+    <text x="126" y="872" fill="#ecfdf5" font-family="Segoe UI, Arial, sans-serif" font-size="21" font-weight="600">Verify the deployment and reboot</text>
   </g>
 </svg>
