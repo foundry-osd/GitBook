@@ -5,11 +5,16 @@ Use Operating system selection to control which Windows choices are available du
 ## Configure available Windows options
 
 1. Open **Customization > OS selection**.
-2. Select the Windows releases and architectures allowed by the deployment standard.
-3. Review language, edition, and license-channel availability.
-4. Save the selection and return to **Start**.
+2. Select the Windows releases, languages, license channels, editions, and default media preference allowed by the deployment standard.
+3. Review the resulting selection. Changes are saved automatically.
+4. Return to **Start**.
 
-<!-- SCREENSHOT_PENDING: foundry-osd-customization-operating-system-01-selection.png | Show the operating-system selection controls and supported option hierarchy. -->
+{% hint style="warning" %}
+**Screenshot required**
+
+- **File:** `foundry-osd-customization-operating-system-01-selection.png`
+- **Capture:** Show the operating-system selection controls and supported option hierarchy.
+{% endhint %}
 
 Foundry Deploy obtains available media from the configured catalog and presents compatible combinations to the technician.
 

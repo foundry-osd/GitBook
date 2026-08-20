@@ -10,7 +10,12 @@ Use a local Autopilot JSON profile when the deployment should stage profile sett
 4. Select the profile that should be included in deployment media.
 5. Return to **Start** and confirm Autopilot readiness.
 
-<!-- SCREENSHOT_PENDING: foundry-osd-autopilot-json-profile-01-import.png | Show the JSON profile import and selection controls without tenant-specific data. -->
+{% hint style="warning" %}
+**Screenshot required**
+
+- **File:** `foundry-osd-autopilot-json-profile-01-import.png`
+- **Capture:** Show the JSON profile import and selection controls without tenant-specific data.
+{% endhint %}
 
 ## Expected result
 

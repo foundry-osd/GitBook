@@ -3,11 +3,11 @@
 ## Administrator workstation
 
 - Windows 10 or Windows 11.
-- Windows ADK and Windows PE Add-on from the supported `10.1.26100.x` family.
-- Minimum supported ADK version: `10.1.26100.2454`.
+- Windows ADK 24H2 on the supported `10.1.26100` build line.
+- Windows PE Add-on on the same supported `10.1.26100` build line.
 
 {% hint style="warning" %}
-Do not assume that a newer ADK family is supported. Use the status reported by the current Foundry OSD release.
+Do not assume another ADK family is supported. Use the version recommended by the current Foundry OSD release. The current built-in installation workflow downloads `10.1.26100.2454`.
 {% endhint %}
 
 ## Windows deployment media

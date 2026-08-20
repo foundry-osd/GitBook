@@ -9,6 +9,11 @@ Use OOBE settings to control the Windows out-of-box experience after deployment.
 3. Enable only settings approved by the organization.
 4. Return to **Start** and confirm customization readiness.
 
-<!-- SCREENSHOT_PENDING: foundry-osd-customization-oobe-01-options.png | Show the OOBE options with the default state visible. -->
+{% hint style="warning" %}
+**Screenshot required**
+
+- **File:** `foundry-osd-customization-oobe-01-options.png`
+- **Capture:** Show the OOBE options with the default state visible.
+{% endhint %}
 
 Test the result with the same Windows edition and provisioning method used in production. Windows release changes can alter OOBE behavior.

@@ -8,10 +8,10 @@ Foundry OSD prepares Windows deployment media on an administrator workstation. T
 - Local administrator permissions.
 - Internet access.
 - Sufficient free space for Windows media, drivers, temporary workspace files, and the output ISO or USB content.
-- Windows ADK `10.1.26100.2454` or later within the supported `10.1.26100.x` family.
-- The Windows PE Add-on that matches the installed ADK.
+- Windows ADK 24H2 on the supported `10.1.26100` build line.
+- Windows PE Add-on on the same supported `10.1.26100` build line.
 
-Foundry OSD detects the ADK and Windows PE Add-on. If a required component is missing, use the installation action on the [Windows ADK and Windows PE page](../foundry-osd/adk.md).
+Foundry OSD detects the ADK and Windows PE Add-on. If a required component is missing, use the installation action on the [Windows ADK and Windows PE page](../foundry-osd/adk.md). The current built-in installation workflow downloads version `10.1.26100.2454` for both components.
 
 {% hint style="info" %}
 Foundry OSD manages the normal ADK and Windows PE installation workflow. Manual installation is not required for a standard setup.

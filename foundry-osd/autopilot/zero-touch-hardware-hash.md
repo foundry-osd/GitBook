@@ -7,7 +7,7 @@ Zero-touch upload registers a device without requiring a technician to sign in d
 - Microsoft Entra tenant information.
 - An application registration approved for the deployment workflow.
 - Required Microsoft Graph application permissions and administrator consent.
-- A certificate and private key available in the format accepted by Foundry OSD.
+- A plan to create a Foundry-managed certificate after connecting the tenant, or an approved matching PFX and private key for boot media.
 - A credential-rotation process that covers certificate expiration.
 
 ## Configure zero-touch upload
@@ -20,7 +20,12 @@ Zero-touch upload registers a device without requiring a technician to sign in d
 6. Configure the group tag when required by the organization.
 7. Return to **Start** and confirm Autopilot readiness.
 
-<!-- SCREENSHOT_PENDING: foundry-osd-autopilot-zero-touch-01-readiness.png | Show zero-touch prerequisite validation with sanitized tenant and application values. -->
+{% hint style="warning" %}
+**Screenshot required**
+
+- **File:** `foundry-osd-autopilot-zero-touch-01-readiness.png`
+- **Capture:** Show zero-touch prerequisite validation with sanitized tenant and application values.
+{% endhint %}
 
 {% hint style="danger" %}
 Protect the certificate private key and generated media. Revoke or rotate the credential if its confidentiality is uncertain.

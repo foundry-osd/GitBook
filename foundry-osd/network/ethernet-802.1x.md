@@ -10,7 +10,12 @@ Use Ethernet 802.1X configuration when the wired deployment network requires aut
 4. Add the trusted root CA certificate required to validate the authentication service.
 5. Review the configuration and return to **Start**.
 
-<!-- SCREENSHOT_PENDING: foundry-osd-network-ethernet-01-profile-configuration.png | Show the Ethernet 802.1X configuration controls with sanitized values. -->
+{% hint style="warning" %}
+**Screenshot required**
+
+- **File:** `foundry-osd-network-ethernet-01-profile-configuration.png`
+- **Capture:** Show the Ethernet 802.1X configuration controls with sanitized values.
+{% endhint %}
 
 ## Validate the deployment path
 

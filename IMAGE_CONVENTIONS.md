@@ -67,10 +67,15 @@ shared-deployment-workflow.svg
 
 ## Screenshot placeholders
 
-Add an invisible placeholder where a screenshot is expected but not yet available:
+Add a visible GitBook placeholder where a screenshot is expected but not yet available:
 
-```html
-<!-- SCREENSHOT_PENDING: foundry-osd-adk-02-install-button.png | Show the automatic ADK and WinPE Add-on installation button before installation. -->
+```markdown
+{% hint style="warning" %}
+**Screenshot required**
+
+- **File:** `foundry-osd-adk-02-install-button.png`
+- **Capture:** Show the automatic ADK and Windows PE Add-on installation button before installation.
+{% endhint %}
 ```
 
 The placeholder must include:
@@ -134,5 +139,5 @@ Use sanitized demonstration data. Redact sensitive information before adding an 
 - Replace an outdated image in place when its documentation purpose has not changed.
 - Rename an image only when its page or purpose changes.
 - Remove images that are no longer referenced.
-- `SCREENSHOT_PENDING` markers are allowed while the GitBook site remains private or in draft review.
-- Before public publication, replace every marker or explicitly approve the corresponding screenshot as non-blocking.
+- Visible screenshot placeholders are allowed while the GitBook site remains private or in draft review.
+- Before public publication, replace every placeholder or explicitly approve the corresponding screenshot as non-blocking.

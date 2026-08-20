@@ -8,7 +8,7 @@ Administrator permissions are required to install deployment components and crea
 
 ## 2. Prepare Windows ADK and Windows PE
 
-Open **ADK** in Foundry OSD. Review the detected component versions and use the installation button if a supported ADK or matching Windows PE Add-on is missing.
+Open **ADK** in Foundry OSD. Review the detected component versions and use the installation button if a required Windows ADK 24H2 (`10.1.26100`) component is missing or incompatible. The current built-in installation workflow downloads version `10.1.26100.2454`.
 
 See [Windows ADK and Windows PE](../foundry-osd/adk.md).
 

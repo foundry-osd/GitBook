@@ -11,15 +11,22 @@ Use the Wi-Fi page to prepare wireless connectivity for Foundry Connect.
 5. Add a trusted root certificate when the enterprise network requires one.
 6. Review the profile and return to **Start** to confirm readiness.
 
-<!-- SCREENSHOT_PENDING: foundry-osd-network-wifi-01-profile-configuration.png | Show the Wi-Fi profile configuration controls with sanitized demonstration values. -->
+{% hint style="warning" %}
+**Screenshot required**
+
+- **File:** `foundry-osd-network-wifi-01-profile-configuration.png`
+- **Capture:** Show the Wi-Fi profile configuration controls with sanitized demonstration values.
+{% endhint %}
 
 {% hint style="warning" %}
-Wireless profiles can contain sensitive configuration. Restrict access to generated media and never use real secrets in documentation screenshots.
+Wireless profiles can contain sensitive configuration. Restrict access to generated media and never use real credentials or secrets in screenshots.
 {% endhint %}
 
 ## Provisioned profiles
 
-Foundry Connect can display and use profiles included during media creation. Availability still depends on a supported wireless adapter and Windows PE driver.
+Foundry Connect can display and use profiles included during media creation. When Wi-Fi provisioning is enabled, Foundry automatically switches to the Wi-Fi-capable boot-image path, stages the required Wi-Fi dependencies, and injects the resolved WinPE driver packages during media creation.
+
+Availability still depends on a supported wireless adapter and any additional vendor or custom WinPE drivers required by the target hardware.
 
 ## Validate before deployment
 

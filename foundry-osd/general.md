@@ -23,7 +23,12 @@ Enable the supported Dell or HP driver options required by the hardware fleet. A
 
 Validate custom drivers on representative hardware before using the media in production.
 
-<!-- SCREENSHOT_PENDING: foundry-osd-general-01-overview.png | Show the General configuration page with its major setting groups. -->
+{% hint style="warning" %}
+**Screenshot required**
+
+- **File:** `foundry-osd-general-01-overview.png`
+- **Capture:** Show the General configuration page with its major setting groups.
+{% endhint %}
 
 ## Protected deployment
 

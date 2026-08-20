@@ -15,7 +15,12 @@ Interactive upload stages an assistant that asks a technician to authenticate du
 2. Enable the interactive workflow.
 3. Return to **Start** and confirm Autopilot readiness.
 
-<!-- SCREENSHOT_PENDING: foundry-osd-autopilot-interactive-01-configuration.png | Show the control that enables interactive hardware hash upload. -->
+{% hint style="warning" %}
+**Screenshot required**
+
+- **File:** `foundry-osd-autopilot-interactive-01-configuration.png`
+- **Capture:** Show the control that enables interactive hardware hash upload.
+{% endhint %}
 
 ## During deployment
 

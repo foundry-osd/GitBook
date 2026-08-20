@@ -22,9 +22,19 @@ When Wi-Fi is enabled, you can:
 - Use a provisioned profile.
 - Connect or disconnect.
 
-<!-- SCREENSHOT_PENDING: foundry-connect-network-readiness-01-waiting.png | Show Foundry Connect waiting for network with Ethernet and Wi-Fi status visible. -->
+{% hint style="warning" %}
+**Screenshot required**
 
-<!-- SCREENSHOT_PENDING: foundry-connect-network-readiness-02-ready.png | Show the Network ready state and Continue action. -->
+- **File:** `foundry-connect-network-readiness-01-waiting.png`
+- **Capture:** Show Foundry Connect waiting for network with Ethernet and Wi-Fi status visible.
+{% endhint %}
+
+{% hint style="warning" %}
+**Screenshot required**
+
+- **File:** `foundry-connect-network-readiness-02-ready.png`
+- **Capture:** Show the Network ready state and Continue action.
+{% endhint %}
 
 ## Common waiting states
 

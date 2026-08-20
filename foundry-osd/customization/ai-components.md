@@ -5,11 +5,15 @@ Use AI components to control supported Windows AI-related components during depl
 ## Configure component actions
 
 1. Open **Customization > AI components**.
-2. Enable AI component customization.
-3. Select the approved component actions.
-4. Review compatibility information for the selected Windows release.
-5. Return to **Start**.
+2. Enable AI component customization. Foundry enables all available AI actions.
+3. Disable any actions that are not approved for the deployment standard.
+4. Return to **Start**.
 
-<!-- SCREENSHOT_PENDING: foundry-osd-customization-ai-components-01-selection.png | Show the AI component controls and compatibility state. -->
+{% hint style="warning" %}
+**Screenshot required**
 
-Test the deployed Windows image after every change. Component availability and servicing behavior can change between Windows releases.
+- **File:** `foundry-osd-customization-ai-components-01-selection.png`
+- **Capture:** Show the AI component controls with the available actions and their selected states.
+{% endhint %}
+
+This page does not report per-release compatibility. Test the deployed Windows image after every change because component availability and servicing behavior can change between Windows releases.

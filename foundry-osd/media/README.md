@@ -6,7 +6,12 @@ The Start page validates configuration and creates or updates Foundry deployment
 
 Resolve every blocking readiness item before starting. Checks cover Windows ADK and Windows PE, architecture, language, boot-image source, output paths, USB target, media options, drivers, networking, runtime configuration, secrets, customization, and Windows Autopilot.
 
-<!-- SCREENSHOT_PENDING: foundry-osd-media-01-readiness-overview.png | Show the Start page readiness groups before media creation. -->
+{% hint style="warning" %}
+**Screenshot required**
+
+- **File:** `foundry-osd-media-01-readiness-overview.png`
+- **Capture:** Show the Start page readiness groups before media creation.
+{% endhint %}
 
 ## Choose an operation
 

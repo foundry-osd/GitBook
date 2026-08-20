@@ -6,7 +6,12 @@ Foundry Deploy finishes with a success or error state.
 
 Review the completion message and session summary. Use the reboot action or follow the displayed reboot instruction.
 
-<!-- SCREENSHOT_PENDING: foundry-deploy-verify-01-success.png | Show the deployment success page and reboot action. -->
+{% hint style="warning" %}
+**Screenshot required**
+
+- **File:** `foundry-deploy-verify-01-success.png`
+- **Capture:** Show the deployment success page and reboot action.
+{% endhint %}
 
 After reboot:
 
@@ -20,6 +25,11 @@ After reboot:
 
 The error page identifies the failed deployment step and displays details.
 
-<!-- SCREENSHOT_PENDING: foundry-deploy-verify-02-error.png | Show the deployment error page with a sanitized sample failure. -->
+{% hint style="warning" %}
+**Screenshot required**
+
+- **File:** `foundry-deploy-verify-02-error.png`
+- **Capture:** Show the deployment error page with a sanitized sample failure.
+{% endhint %}
 
 Do not immediately retry a destructive deployment. Record the failed step and error, then collect [logs and support information](../troubleshooting/logs-and-support.md).

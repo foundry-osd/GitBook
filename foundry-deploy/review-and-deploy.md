@@ -13,7 +13,12 @@ Confirm:
 - Windows Autopilot method and, for zero-touch hardware hash upload, the configured group tag.
 - Optional features and other deployment customization.
 
-<!-- SCREENSHOT_PENDING: foundry-deploy-review-01-summary.png | Show the deployment summary with sanitized device and tenant information. -->
+{% hint style="warning" %}
+**Screenshot required**
+
+- **File:** `foundry-deploy-review-01-summary.png`
+- **Capture:** Show the deployment summary with sanitized device and tenant information.
+{% endhint %}
 
 ## Start deployment
 
@@ -27,4 +32,9 @@ Do not power off the device, disconnect required networking, or remove deploymen
 
 The progress page reports the current step, completed-step count, and overall progress when the operation can be measured.
 
-<!-- SCREENSHOT_PENDING: foundry-deploy-progress-01-running.png | Show a deployment in progress with current step and overall progress. -->
+{% hint style="warning" %}
+**Screenshot required**
+
+- **File:** `foundry-deploy-progress-01-running.png`
+- **Capture:** Show a deployment in progress with current step and overall progress.
+{% endhint %}

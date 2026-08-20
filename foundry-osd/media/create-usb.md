@@ -16,7 +16,12 @@ The selected USB drive can be erased. Verify its identity, capacity, and content
 6. Select **Create USB** and confirm the destructive operation.
 7. Keep the drive connected until verification and cleanup complete.
 
-<!-- SCREENSHOT_PENDING: foundry-osd-media-create-usb-01-confirmation.png | Show the destructive USB confirmation with a sanitized device label. -->
+{% hint style="warning" %}
+**Screenshot required**
+
+- **File:** `foundry-osd-media-create-usb-01-confirmation.png`
+- **Capture:** Show the destructive USB confirmation with a sanitized device label.
+{% endhint %}
 
 ## Validate the drive
 

@@ -1,6 +1,6 @@
 # Settings
 
-Foundry OSD settings control the desktop application rather than generated deployment behavior.
+Foundry OSD settings mostly control the desktop application. The telemetry toggle also affects the runtime telemetry configuration written during media creation.
 
 ## General
 
@@ -12,6 +12,15 @@ Configure:
 - Access to the application log directory.
 
 Changing application language updates the authoring interface. It does not select the Windows PE or deployed Windows language.
+
+## Telemetry
+
+Use **Enable telemetry** to control anonymous product telemetry.
+
+- The toggle applies to the Foundry OSD desktop application.
+- The same setting is synchronized into the runtime telemetry configuration used when media is created.
+
+Foundry states that telemetry excludes names, secrets, SSIDs, IP addresses, file paths, disk identifiers, computer names, Autopilot profile names, and hardware identifiers.
 
 ## Theme
 
@@ -34,4 +43,9 @@ Review:
 
 Use **Check for updates** to refresh status. When an update is available, review the release notes, then use the download and restart action. Complete the update before creating media when the release contains required compatibility or deployment fixes.
 
-<!-- SCREENSHOT_PENDING: foundry-osd-settings-01-app-updates.png | Show the App updates settings page with update status and actions. -->
+{% hint style="warning" %}
+**Screenshot required**
+
+- **File:** `foundry-osd-settings-01-app-updates.png`
+- **Capture:** Show the App updates settings page with update status and actions.
+{% endhint %}

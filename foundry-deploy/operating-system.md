@@ -10,6 +10,11 @@ The Operating system step selects the Windows media applied to the target.
 4. Select the edition.
 5. Select the license channel when more than one is available.
 
-<!-- SCREENSHOT_PENDING: foundry-deploy-operating-system-01-selection.png | Show the operating-system selection hierarchy without obscuring required controls. -->
+{% hint style="warning" %}
+**Screenshot required**
+
+- **File:** `foundry-deploy-operating-system-01-selection.png`
+- **Capture:** Show the operating-system selection hierarchy without obscuring required controls.
+{% endhint %}
 
 Available choices come from the Foundry operating-system catalog and the restrictions configured during media authoring. Confirm that the selection matches licensing and application compatibility requirements.

@@ -14,7 +14,12 @@ Enter a name from 1 to 15 characters using letters, numbers, or hyphens. Follow 
 
 Choose the intended internal target disk. Foundry blocks disks that do not meet deployment eligibility rules.
 
-<!-- SCREENSHOT_PENDING: foundry-deploy-target-01-disk-selection.png | Show the Target step with sanitized hardware information and an eligible disk. -->
+{% hint style="warning" %}
+**Screenshot required**
+
+- **File:** `foundry-deploy-target-01-disk-selection.png`
+- **Capture:** Show the Target step with sanitized hardware information and an eligible disk.
+{% endhint %}
 
 {% hint style="danger" %}
 All data on the selected target disk will be lost. Capacity alone is not enough to identify a disk; verify its model and position when available.

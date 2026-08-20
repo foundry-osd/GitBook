@@ -11,4 +11,9 @@ Home summarizes the Foundry OSD workflow and provides shortcuts to the next acti
 
 The workflow indicator shows progress through configuration, readiness review, and media creation. Readiness cards highlight areas that still require attention.
 
-<!-- SCREENSHOT_PENDING: foundry-osd-home-01-workflow.png | Show the Home workflow indicator, main actions, and readiness cards. -->
+{% hint style="warning" %}
+**Screenshot required**
+
+- **File:** `foundry-osd-home-01-workflow.png`
+- **Capture:** Show the Home workflow indicator, main actions, and readiness cards.
+{% endhint %}

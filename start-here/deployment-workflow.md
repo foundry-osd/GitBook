@@ -33,4 +33,9 @@ Foundry prepares the target disk, downloads and applies Windows, stages drivers 
 
 Review the completion state, deployment summary, and any reported error. Reboot only after Foundry reports success or after collecting the required troubleshooting evidence.
 
-<!-- SCREENSHOT_PENDING: shared-deployment-workflow.svg | Diagram the Foundry OSD to Foundry Connect to Foundry Deploy lifecycle. -->
+{% hint style="warning" %}
+**Screenshot required**
+
+- **File:** `shared-deployment-workflow.svg`
+- **Capture:** Diagram the Foundry OSD to Foundry Connect to Foundry Deploy lifecycle.
+{% endhint %}

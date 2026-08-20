@@ -19,4 +19,9 @@ Update existing Foundry USB media when configuration or runtime content changes.
 6. Keep the drive connected until the update completes.
 7. Test boot the updated media before production use.
 
-<!-- SCREENSHOT_PENDING: foundry-osd-media-update-usb-01-action.png | Show recognized Foundry USB media and the Create USB action that starts the update path. -->
+{% hint style="warning" %}
+**Screenshot required**
+
+- **File:** `foundry-osd-media-update-usb-01-action.png`
+- **Capture:** Show recognized Foundry USB media and the Create USB action that starts the update path.
+{% endhint %}

@@ -10,7 +10,12 @@ Use App removal to remove selected provisioned Windows applications during deplo
 4. Review dependencies and organizational application requirements.
 5. Return to **Start**.
 
-<!-- SCREENSHOT_PENDING: foundry-osd-customization-app-removal-01-selection.png | Show the application removal list and enable control. -->
+{% hint style="warning" %}
+**Screenshot required**
+
+- **File:** `foundry-osd-customization-app-removal-01-selection.png`
+- **Capture:** Show the application removal list and enable control.
+{% endhint %}
 
 {% hint style="warning" %}
 Removing provisioned applications can affect user experience, later servicing, and dependent workflows. Test every removal set against the target Windows release.
