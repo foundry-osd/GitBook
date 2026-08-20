@@ -7,7 +7,7 @@ structure:
 redirects:
   download: start-here/download.md
   downloads: start-here/download.md
-  docs/start: README.md
+  docs/start: start-here/README.md
   docs/start/download: start-here/download.md
   docs/start/requirements: start-here/requirements.md
   docs/start/quick-start: start-here/quick-start.md

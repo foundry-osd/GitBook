@@ -20,7 +20,7 @@ Use **Enable telemetry** to control anonymous product telemetry.
 - The toggle applies to the Foundry OSD desktop application.
 - The same setting is synchronized into the runtime telemetry configuration used when media is created.
 
-Foundry states that telemetry excludes names, secrets, SSIDs, IP addresses, file paths, disk identifiers, computer names, Autopilot profile names, and hardware identifiers.
+Telemetry excludes names, secrets, SSIDs, IP addresses, file paths, disk identifiers, computer names, Autopilot profile names, serial numbers, and hardware hashes. Deployment telemetry can include the device vendor and model. Events use an anonymous identifier created for the Foundry installation.
 
 ## Theme
 
