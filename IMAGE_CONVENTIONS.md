@@ -49,12 +49,12 @@ Optional themes:
 Examples:
 
 ```text
-foundry-osd-adk-01-status-ready.png
+foundry-osd-adk-01-status-missing.png
 foundry-osd-adk-02-install-button.png
-foundry-osd-media-create-03-usb-warning.png
-foundry-connect-network-readiness-02-wifi-error.png
-foundry-deploy-operating-system-01-edition-selection.png
-foundry-deploy-progress-02-download-error.png
+foundry-osd-media-create-usb-01-confirmation.png
+foundry-connect-network-readiness-01-ready.png
+foundry-deploy-operating-system-01-selection.png
+foundry-deploy-verify-02-error.png
 shared-deployment-workflow.svg
 ```
 
@@ -88,7 +88,7 @@ Replace the marker with the final image before publication:
 ```html
 <figure>
   <img
-    src="../.gitbook/assets/foundry-osd-adk-02-install-button.png"
+    src=".gitbook/assets/foundry-osd-adk-02-install-button.png"
     alt="Automatic ADK installation button on the Foundry OSD ADK page"
   >
   <figcaption>

@@ -43,9 +43,7 @@ Review:
 
 Use **Check for updates** to refresh status. When an update is available, review the release notes, then use the download and restart action. Complete the update before creating media when the release contains required compatibility or deployment fixes.
 
-{% hint style="warning" %}
-**Screenshot required**
-
-- **File:** `foundry-osd-settings-01-app-updates.png`
-- **Capture:** Show the App updates settings page with update status and actions.
-{% endhint %}
+<figure>
+  <img src="../.gitbook/assets/foundry-osd-settings-01-app-updates.png" alt="Foundry OSD application update status and actions">
+  <figcaption>Review the installed version, update status, and available update actions.</figcaption>
+</figure>

@@ -8,7 +8,7 @@ Configure only the options required by the deployment standard:
 - [Machine naming](machine-naming.md)
 - [Out-of-box experience](oobe.md)
 - [Optional features](optional-features.md)
-- [App removal](app-removal.md)
+- [AppX removals](appx-removals.md)
 - [AI components](ai-components.md)
 
 Review changes on representative hardware before updating production media. Removing applications, features, or components can affect later Windows servicing and organizational applications.

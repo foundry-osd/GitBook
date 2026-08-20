@@ -22,7 +22,7 @@
     * [Machine naming](foundry-osd/customization/machine-naming.md)
     * [Out-of-box experience](foundry-osd/customization/oobe.md)
     * [Optional features](foundry-osd/customization/optional-features.md)
-    * [App removal](foundry-osd/customization/app-removal.md)
+    * [AppX removals](foundry-osd/customization/appx-removals.md)
     * [AI components](foundry-osd/customization/ai-components.md)
   * [Create deployment media](foundry-osd/media/README.md)
     * [Create an ISO](foundry-osd/media/create-iso.md)

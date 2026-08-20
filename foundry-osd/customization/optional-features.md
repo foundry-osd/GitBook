@@ -10,11 +10,9 @@ Use Optional features to enable or disable supported Windows optional features d
 4. Review the compatibility details shown by Foundry OSD. Validate features marked partially available, unavailable, or requiring runtime verification against the target Windows image.
 5. Return to **Start**.
 
-{% hint style="warning" %}
-**Screenshot required**
-
-- **File:** `foundry-osd-customization-optional-features-01-selection.png`
-- **Capture:** Show optional-feature selection and compatibility status.
-{% endhint %}
+<figure>
+  <img src="../../.gitbook/assets/foundry-osd-customization-optional-features-01-selection.png" alt="Foundry OSD optional feature selection and compatibility status">
+  <figcaption>Select optional-feature actions and review their compatibility status.</figcaption>
+</figure>
 
 Feature availability depends on the selected Windows release and edition. Validate the deployed state before using the media broadly.

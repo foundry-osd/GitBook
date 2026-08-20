@@ -11,12 +11,10 @@ Use the Wi-Fi page to prepare wireless connectivity for Foundry Connect.
 5. Add a trusted root certificate when the enterprise network requires one.
 6. Review the profile and return to **Start** to confirm readiness.
 
-{% hint style="warning" %}
-**Screenshot required**
-
-- **File:** `foundry-osd-network-wifi-01-profile-configuration.png`
-- **Capture:** Show the Wi-Fi profile configuration controls with sanitized demonstration values.
-{% endhint %}
+<figure>
+  <img src="../../.gitbook/assets/foundry-osd-network-wifi-01-profile-configuration.png" alt="Foundry OSD Wi-Fi profile configuration">
+  <figcaption>Configure the wireless profile and any required trusted root certificate.</figcaption>
+</figure>
 
 {% hint style="warning" %}
 Wireless profiles can contain sensitive configuration. Restrict access to generated media and never use real credentials or secrets in screenshots.

@@ -17,9 +17,7 @@ Choose a naming method that prevents duplicate names and matches directory, inve
 3. Configure the computer-name prefix, choose whether the suffix is generated automatically, and decide whether the deployment operator can edit the suffix.
 4. Return to **Start** and confirm customization readiness.
 
-{% hint style="warning" %}
-**Screenshot required**
-
-- **File:** `foundry-osd-customization-machine-naming-01-configuration.png`
-- **Capture:** Show the machine-naming configuration and validation guidance.
-{% endhint %}
+<figure>
+  <img src="../../.gitbook/assets/foundry-osd-customization-machine-naming-01-configuration.png" alt="Foundry OSD machine naming configuration">
+  <figcaption>Configure the computer-name prefix, generated suffix, and operator editing behavior.</figcaption>
+</figure>
