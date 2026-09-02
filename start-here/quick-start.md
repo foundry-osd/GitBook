@@ -14,7 +14,7 @@ See [Windows ADK and Windows PE](../foundry-osd/adk.md).
 
 ## 3. Review general configuration
 
-Open **General configuration** and confirm the deployment settings. Configure protected deployment only if technicians must unlock the media with a password.
+Open **General configuration** and confirm the deployment settings. Enable **Protected deployment** when the media contains credentials, private keys, or Autopilot JSON profiles that must not remain directly accessible. Follow the organization’s removable-media policy for every deployment image.
 
 ## 4. Configure only what you need
 
@@ -41,5 +41,6 @@ In Foundry Deploy:
 1. Select the target disk.
 2. Select a Windows release, language, edition, and license channel.
 3. Select a compatible driver pack.
-4. Review the summary and start deployment.
-5. Verify the success page before rebooting.
+4. Configure Windows Autopilot when JSON profile or zero-touch upload media displays that step. Interactive upload runs later during Windows OOBE.
+5. Review the summary and start deployment.
+6. Verify the success page before rebooting.

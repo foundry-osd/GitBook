@@ -10,9 +10,11 @@ Confirm the displayed hardware information matches the physical device. Review f
 
 Enter a name from 1 to 15 characters using letters, numbers, or hyphens. Follow the organization’s naming policy and avoid a name already assigned to another device.
 
+The policy authored in Foundry OSD can prefill a required prefix, require a non-empty suffix, or lock manual editing. A name that meets Windows character rules can still be rejected when it does not satisfy that deployment policy.
+
 ## Select the disk
 
-Choose the intended internal target disk. Foundry blocks disks that do not meet deployment eligibility rules.
+Choose the intended internal target disk. Foundry excludes disks connected over USB and blocks system, boot, read-only, and offline disks.
 
 <figure>
   <img src="../.gitbook/assets/foundry-deploy-target-01-disk-selection.png" alt="Foundry Deploy target disk selection">
