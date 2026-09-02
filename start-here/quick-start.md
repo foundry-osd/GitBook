@@ -41,5 +41,6 @@ In Foundry Deploy:
 1. Select the target disk.
 2. Select a Windows release, language, edition, and license channel.
 3. Select a compatible driver pack.
-4. Review the summary and start deployment.
-5. Verify the success page before rebooting.
+4. Configure Windows Autopilot when JSON profile or zero-touch upload media displays that step. Interactive upload runs later during Windows OOBE.
+5. Review the summary and start deployment.
+6. Verify the success page before rebooting.
