@@ -4,10 +4,11 @@ The Driver pack step selects hardware drivers compatible with the target device 
 
 ## Make a selection
 
-1. Select the driver source or manufacturer when prompted.
-2. Confirm the detected or selected model.
-3. Select the appropriate package version.
-4. Review package details before continuing.
+1. Choose **None** when Windows inbox drivers or separately managed drivers are sufficient.
+2. Choose **Microsoft Update Catalog** when the deployment should obtain applicable device drivers from that source.
+3. Choose an available manufacturer catalog when the device requires a supported OEM driver pack.
+4. For a manufacturer catalog, confirm the detected or selected model and choose the appropriate package version.
+5. Review package details before continuing.
 
 <figure>
   <img src="../.gitbook/assets/foundry-deploy-driver-pack-01-selection.png" alt="Foundry Deploy driver pack source, model, and version selection">
