@@ -15,6 +15,16 @@ Use a local Autopilot JSON profile when the deployment should stage profile sett
   <figcaption>Import or download a profile, then select the profile to include in deployment media.</figcaption>
 </figure>
 
+## Protect the profile on deployment media
+
+Enable deployment password protection from [General configuration](../general.md) before creating the media when the Autopilot profile must not remain readable on the ISO or USB drive.
+
+When protection is enabled, Foundry stores the selected profile on the deployment media using AES-256-GCM encryption. The readable JSON file is not stored alongside the encrypted profile. Foundry Deploy asks for the technician password, unlocks the deployment key, and decrypts the profile before staging it in the Windows installation.
+
+{% hint style="warning" %}
+Without deployment password protection, the Autopilot JSON profile is stored in readable form on the deployment media. Restrict access to the ISO or USB drive and recreate the media if it is lost or copied without authorization.
+{% endhint %}
+
 ## Expected result
 
 Foundry stages the selected profile for the deployed Windows installation. Hardware registration remains a separate administrative responsibility.
