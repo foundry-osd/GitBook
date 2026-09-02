@@ -48,6 +48,8 @@ Use a dedicated application registration for Foundry deployment media. Do not re
 
 Foundry places the certificate PFX and its PFX password in the deployment configuration. Both values are encrypted with AES-256-GCM, which also detects whether the encrypted data has been modified.
 
+Enable deployment password protection from [General configuration](../general.md) before creating the media.
+
 Foundry generates a random 256-bit deployment key for each media-creation operation. When deployment password protection is enabled:
 
 1. Foundry derives a key from the deployment password using PBKDF2-HMAC-SHA-256, 600,000 iterations, and a random 128-bit salt.
