@@ -15,6 +15,8 @@ Interactive upload stages an assistant that asks a technician to authenticate du
 2. Enable the interactive workflow.
 3. Return to **Start** and confirm Autopilot readiness.
 
+For this workflow, the readiness result confirms only that interactive upload is enabled. It does not test the technician account, delegated Microsoft Graph permissions, Conditional Access, Microsoft service connectivity, or group-tag access. Validate these requirements before distributing the media.
+
 <figure>
   <img src="../../.gitbook/assets/foundry-osd-autopilot-interactive-01-configuration.png" alt="Foundry OSD interactive hardware hash upload configuration">
   <figcaption>Enable the interactive registration assistant for use during Windows OOBE.</figcaption>

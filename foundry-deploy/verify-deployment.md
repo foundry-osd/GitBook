@@ -4,7 +4,7 @@ Foundry Deploy finishes with a success or error state.
 
 ## Success
 
-Review the completion message and session summary. Use the reboot action or follow the displayed reboot instruction.
+Review the completion message and session summary when the configured reboot policy allows it. Foundry OSD can configure a manual reboot, an immediate automatic reboot, or an automatic reboot after a displayed countdown. Configure a manual reboot or sufficient delay before creating media when technicians must inspect results or collect logs.
 
 <figure>
   <img src="../.gitbook/assets/foundry-deploy-verify-01-success.png" alt="Foundry Deploy success page with the reboot action">
@@ -29,3 +29,5 @@ The error page identifies the failed deployment step and displays details.
 </figure>
 
 Do not immediately retry a destructive deployment. Record the failed step and error, then collect [logs and support information](../troubleshooting/logs-and-support.md).
+
+Foundry Deploy does not roll back or resume a failed deployment. A failure after disk preparation can leave the target partially deployed and unable to boot. After correcting the cause, retrying starts the destructive workflow from the beginning.

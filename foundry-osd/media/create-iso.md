@@ -6,10 +6,11 @@ Create an ISO for virtual machines, remote-management virtual media, or a separa
 
 1. Open **Start**.
 2. Resolve all blocking readiness items.
-3. Select the architecture, Windows PE language, boot-image source, and required drivers.
-4. Choose an output path with sufficient free space.
-5. Select **Create ISO**.
-6. Keep Foundry OSD open until verification and cleanup complete.
+3. Configure the architecture, Windows PE language, boot-image behavior, and required drivers under **General configuration**.
+4. Return to **Start** and review readiness.
+5. Choose an output path with sufficient free space.
+6. Select **Create ISO**.
+7. Keep Foundry OSD open until verification and cleanup complete.
 
 <figure>
   <img src="../../.gitbook/assets/foundry-osd-media-create-iso-01-output.png" alt="Foundry OSD ISO output path and Create ISO action">

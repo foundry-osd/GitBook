@@ -13,6 +13,12 @@ Configure:
 
 Changing application language updates the authoring interface. It does not select the Windows PE or deployed Windows language.
 
+### Export diagnostics
+
+Use **Export diagnostics** to create a sanitized support archive. Sanitization is applied to the exported copy and does not modify the original application logs.
+
+Use **Advanced: export raw logs** only when explicitly requested by a trusted support contact. Raw logs can contain credentials, identifiers, file paths, network names, and other sensitive data. Review the destination and handle the archive according to the organization’s security policy.
+
 ## Telemetry
 
 Use **Enable telemetry** to control anonymous product telemetry.
