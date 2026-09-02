@@ -26,4 +26,9 @@ For this workflow, the readiness result confirms only that interactive upload is
 
 Foundry Deploy provisions the interactive registration assistant during Windows deployment. After Windows starts in OOBE, the assistant presents device-code sign-in, group-tag selection, hardware hash capture, and upload. The technician completes authentication in a browser, returns to the deployment device, and waits for registration to finish.
 
-Do not share device codes or authentication screenshots. If registration fails, collect the stage and error details described in [Autopilot troubleshooting](../../troubleshooting/autopilot.md).
+<figure>
+  <img src="../../.gitbook/assets/foundry-osd-autopilot-interactive-02-device-code-sign-in.png" alt="Foundry OSD device-code sign-in prompt displayed during Windows OOBE">
+  <figcaption>Use the displayed device code to sign in to Microsoft from another browser.</figcaption>
+</figure>
+
+Do not share active device codes or screenshots captured during a real authentication session. If registration fails, collect the stage and error details described in [Autopilot troubleshooting](../../troubleshooting/autopilot.md).
