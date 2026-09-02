@@ -14,7 +14,7 @@ See [Windows ADK and Windows PE](../foundry-osd/adk.md).
 
 ## 3. Review general configuration
 
-Open **General configuration** and confirm the deployment settings. Configure protected deployment only if technicians must unlock the media with a password.
+Open **General configuration** and confirm the deployment settings. Enable **Protected deployment** when the media contains credentials, private keys, or Autopilot JSON profiles that must not remain directly accessible. Follow the organization’s removable-media policy for every deployment image.
 
 ## 4. Configure only what you need
 
