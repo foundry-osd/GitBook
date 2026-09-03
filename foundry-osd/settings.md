@@ -51,14 +51,20 @@ A successful test confirms only those Foundry OSD service checks. It does not va
 
 ## Telemetry
 
-Use **Enable telemetry** to control anonymous product telemetry.
+Use **Enable telemetry** to control anonymous product telemetry. Use **Enable remote diagnostics** to control privacy-filtered operational logs and exception details. Both settings are enabled by default and can be disabled independently.
 
-- The toggle applies to the Foundry OSD desktop application.
-- The same setting is synchronized into the runtime telemetry configuration used when media is created.
+- Both toggles apply to the Foundry OSD desktop application.
+- Both preferences are synchronized into the runtime configuration used when media is created.
 
 Telemetry excludes names, secrets, SSIDs, IP addresses, file paths, disk identifiers, computer names, Autopilot profile names, serial numbers, and hardware hashes. Deployment telemetry can include the device vendor and model. Events use an anonymous identifier created for the Foundry installation.
 
 When telemetry is enabled, Foundry OSD can report the selected proxy method and, for a manual proxy, the authentication mode. It does not report the proxy address, port, bypass list, username, domain, password, PAC details, credentials, or tested URLs.
+
+Remote diagnostics include warning, error, and fatal events, plus explicitly marked terminal workflow diagnostics. Foundry applies an explicit property allowlist and sanitizes paths, URIs, credentials, tokens, network identifiers, machine names, user names, and similar direct identifiers before delivery to PostHog. Local logs remain the authoritative diagnostic source and are not modified by remote export.
+
+Remote delivery is best effort and does not use a persistent outbox. Records can be dropped when the queue is full, the application exits, the network is unavailable, or PostHog rejects a request. Disabling remote diagnostics stops new records from entering the delivery queue.
+
+See [Telemetry and privacy](../reference/telemetry-and-privacy.md) for the complete data and delivery boundaries.
 
 ## Theme
 
