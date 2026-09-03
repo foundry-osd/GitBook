@@ -25,12 +25,15 @@ Confirm that you have:
 5. Import the copied WIM as a boot image into the existing PXE server.
 6. Configure and advertise the boot image according to the PXE vendor documentation.
 
-## Validate the PXE boot
+## Validate the deployment
 
 1. Boot a representative client from the imported image.
 2. Confirm that Windows PE obtains the required network access.
 3. Confirm that [Foundry Connect](../../foundry-connect/README.md) starts and reports network readiness.
 4. Continue and confirm that [Foundry Deploy](../../foundry-deploy/README.md) starts.
+5. Complete one representative end-to-end deployment.
+6. Confirm that Foundry Deploy reports successful completion.
+7. Complete the relevant [post-boot checks](../../foundry-deploy/verify-deployment.md).
 
 Resolve driver, architecture, firmware, or network compatibility issues in the ISO and PXE environment before wider deployment.
 

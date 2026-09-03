@@ -15,4 +15,4 @@ The Operating system step selects the Windows media applied to the target.
   <figcaption>Select a compatible Windows release, language, edition, and license channel.</figcaption>
 </figure>
 
-The current Foundry operating-system catalog contains Windows 11 23H2, 24H2, and 25H2. Foundry Deploy therefore offers only these three releases with the current catalog. Available languages, editions, architectures, and license channels are determined by the catalog and any restrictions configured during media authoring. Confirm that the selection matches licensing and application compatibility requirements.
+Available releases, languages, editions, architectures, and license channels come from the current [operating-system catalog](../reference/catalog.md) and any restrictions configured during media authoring. The catalog can update independently of the application. Confirm that the selection matches licensing and application compatibility requirements.
