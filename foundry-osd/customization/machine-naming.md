@@ -28,10 +28,16 @@ Choose a naming method that prevents duplicate names and matches directory, inve
    - Asset tag
    - System UUID
    - Random text
-5. For device-data components, choose a maximum length from 1 to 15 characters and whether truncation keeps characters from the left or right. Serial numbers keep characters from the right by default.
-6. Reorder the components, select no separator or a hyphen, and choose whether to preserve, uppercase, or lowercase letters.
-7. Keep the configured maximum within the 15-character budget shown on the page. Separators count toward this limit.
-8. Decide whether the deployment operator can edit the complete generated name.
-9. Return to **Start** and confirm customization readiness.
+5. Configure each component:
+   - Enter the value for **Fixed text**.
+   - For **Random text**, choose a length from 1 to 15 characters.
+   - For device-data components, choose a maximum length from 1 to 15 characters and whether truncation keeps characters from the left or right. **Serial number** keeps characters from the right by default.
+6. Use the arrow buttons to reorder components or the delete button to remove one. **Add component** becomes unavailable when no unused component can fit within the remaining budget.
+7. Select either **No separator** or **Hyphen**, then choose whether to preserve, uppercase, or lowercase letters.
+8. Keep the configured maximum within the 15-character budget shown on the page. Separators count toward this limit.
+9. Decide whether the deployment operator can edit the complete generated name.
+10. Return to **Start** and confirm customization readiness.
 
-The preview uses representative hardware values. Foundry Deploy resolves the actual device values at startup and generates a random component once per deployment session. Deployment is blocked when a required hardware value is missing, blank, or a known placeholder.
+The preview uses representative values. Foundry Deploy resolves actual hardware values at deployment startup and applies casing and separators to the same component rules used in the preview. For random text, a random value is generated with the configured length during deployment startup.
+
+Deployment is blocked if a required hardware value is missing, blank, or a known placeholder.
