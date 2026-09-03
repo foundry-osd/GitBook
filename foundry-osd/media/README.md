@@ -24,4 +24,6 @@ Resolve every blocking readiness item before starting. Checks cover Windows ADK 
 
 Choose [Create an ISO](create-iso.md), [Create a USB drive](create-usb.md), or [Update an existing USB drive](update-usb.md).
 
+PXE is not a native Foundry OSD media output. [Use existing PXE infrastructure](pxe-deployment.md) by importing the boot image from a validated Foundry OSD ISO.
+
 During creation, Foundry reports workspace preparation, driver resolution, image customization, language and component processing, runtime payload provisioning, media creation, verification, and cleanup.

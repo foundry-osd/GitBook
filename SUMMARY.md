@@ -28,6 +28,7 @@
     * [Create an ISO](foundry-osd/media/create-iso.md)
     * [Create a USB drive](foundry-osd/media/create-usb.md)
     * [Update a USB drive](foundry-osd/media/update-usb.md)
+    * [Use existing PXE infrastructure](foundry-osd/media/pxe-deployment.md)
   * [Settings](foundry-osd/settings.md)
 * [Foundry Connect](foundry-connect/README.md)
   * [Network readiness](foundry-connect/network-readiness.md)

@@ -32,7 +32,7 @@ USB creation can erase the selected drive. Verify the device identity and capaci
 
 ## 6. Boot the target device
 
-Boot the device from the ISO or USB media. Foundry Connect verifies network readiness before Foundry Deploy begins.
+Boot the device from a [prepared USB drive](../foundry-osd/media/create-usb.md), attach a validated [ISO](../foundry-osd/media/create-iso.md) as virtual media or virtual-machine media, or use [existing PXE infrastructure](../foundry-osd/media/pxe-deployment.md) where applicable. Foundry Connect verifies network readiness before Foundry Deploy begins.
 
 ## 7. Deploy Windows
 
