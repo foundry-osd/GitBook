@@ -16,7 +16,7 @@ Zero-touch upload registers a device without requiring a technician to sign in d
 2. Select **Connect tenant** and complete the Microsoft sign-in flow.
 3. Allow Foundry OSD to create or adopt the dedicated tenant application registration used for upload.
 4. Review application registration, Microsoft Graph permissions, administrator consent, and service-principal readiness.
-5. Create a Foundry-managed certificate or select an approved password-protected PFX containing the certificate and private key, then provide its password.
+5. Create a Foundry-managed certificate or [use an externally managed certificate](#use-an-externally-managed-certificate).
 6. Configure the group tag when required by the organization.
 7. Return to **Start** and confirm Autopilot readiness.
 
@@ -28,6 +28,26 @@ Zero-touch upload registers a device without requiring a technician to sign in d
 {% hint style="danger" %}
 Protect the certificate private key and generated media. Revoke or rotate the credential if its confidentiality is uncertain.
 {% endhint %}
+
+## Use an externally managed certificate
+
+An administrator can register a certificate created outside Foundry with the `Foundry OSD Autopilot Registration` application:
+
+1. Create or obtain the certificate according to the organization's credential policy.
+2. Retain a password-protected PFX containing the certificate and private key for Foundry OSD.
+3. Export the public certificate as a `.cer`, `.pem`, or `.crt` file.
+4. In the Microsoft Entra admin center, open **App registrations > Foundry OSD Autopilot Registration > Certificates & secrets > Certificates > Upload certificate**.
+5. Set the certificate description to `Foundry OSD Autopilot Registration`, upload the public certificate, and select **Add**. Foundry currently uses this description to identify certificates managed for zero-touch upload.
+6. Connect or reconnect the tenant in Foundry OSD so that it discovers the registered certificate.
+7. Select the matching password-protected PFX in Foundry OSD and provide its password.
+
+Foundry verifies that the PFX contains a private key, is not expired, and has the same thumbprint as the public certificate registered in Microsoft Entra.
+
+{% hint style="warning" %}
+Upload only the public certificate to Microsoft Entra. Do not upload or otherwise disclose the PFX because it contains the private key.
+{% endhint %}
+
+For the Microsoft Entra procedure and supported public-certificate formats, see [Add and manage application credentials in Microsoft Entra ID](https://learn.microsoft.com/en-us/entra/identity-platform/how-to-add-credentials).
 
 ## Permissions and authentication
 
