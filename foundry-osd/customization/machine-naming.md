@@ -38,6 +38,23 @@ Choose a naming method that prevents duplicate names and matches directory, inve
 9. Decide whether the deployment operator can edit the complete generated name.
 10. Return to **Start** and confirm customization readiness.
 
-The preview uses representative values. Foundry Deploy resolves actual hardware values at deployment startup and applies casing and separators to the same component rules used in the preview. For random text, a random value is generated with the configured length during deployment startup.
+## How Foundry Deploy selects the name
 
-Deployment is blocked if a required hardware value is missing, blank, or a known placeholder.
+The name shown in the Foundry Deploy wizard depends on the Machine naming configuration:
+
+| Configuration | Name shown in the wizard |
+| --- | --- |
+| **Composed** | The name generated from the configured components and the device's hardware values. |
+| **Manual** with an initial value | The configured initial value. |
+| **Manual** without an initial value | The first available fallback name described below. |
+| Machine naming disabled or not configured | The first available fallback name described below. |
+
+When a fallback is required, Foundry Deploy uses the first valid name available in this order:
+
+1. The computer name from the Windows installation already present on the device.
+2. The current WinPE computer name, which is usually similar to `MININT-123ABC`.
+3. `PC` if neither previous name is available or valid.
+
+The name remains editable in the wizard unless **Composed** mode is configured to prevent editing. If a composed name cannot be generated because a required hardware value is unavailable, Foundry Deploy displays an error and blocks deployment instead of using a fallback name.
+
+The preview uses representative values. Foundry Deploy resolves actual hardware values at deployment startup and applies casing and separators to the same component rules used in the preview. For random text, a random value is generated with the configured length during deployment startup.
