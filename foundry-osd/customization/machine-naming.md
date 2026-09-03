@@ -2,6 +2,11 @@
 
 Use Machine naming to define how a computer name is selected during deployment.
 
+<figure>
+  <img src="../../.gitbook/assets/foundry-osd-customization-machine-naming-01-configuration.png" alt="Foundry OSD machine naming configuration">
+  <figcaption>Choose a naming mode and configure the ordered components used to build the computer name.</figcaption>
+</figure>
+
 ## Naming requirements
 
 Foundry Deploy validates names as 1–15 characters containing letters, numbers, or hyphens. Underscores are not available because Windows computer names that use them are not DNS compatible.
@@ -30,8 +35,3 @@ Choose a naming method that prevents duplicate names and matches directory, inve
 9. Return to **Start** and confirm customization readiness.
 
 The preview uses representative hardware values. Foundry Deploy resolves the actual device values at startup and generates a random component once per deployment session. Deployment is blocked when a required hardware value is missing, blank, or a known placeholder.
-
-<figure>
-  <img src="../../.gitbook/assets/foundry-osd-customization-machine-naming-01-configuration.png" alt="Foundry OSD machine naming configuration">
-  <figcaption>Choose a naming mode and configure the ordered components used to build the computer name.</figcaption>
-</figure>
