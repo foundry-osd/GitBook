@@ -53,6 +53,8 @@ Foundry does not configure AutoLogon and does not request account passwords duri
 
 Non-empty local account passwords require [Protected deployment](../general.md#protected-deployment). Foundry keeps authoring passwords only for the current session and encrypts them in the deployment configuration written to the media.
 
+If a predefined account password is enabled while Protected deployment is disabled, Foundry blocks media creation and marks both **OOBE** and **Password protection** as needing attention. Enable Protected deployment and configure its technician password, or turn off the predefined account password to use an intentional blank password.
+
 Foundry saves whether each account requires a predefined password, but it never saves the password itself in the authoring configuration. After restarting Foundry OSD, re-enter and confirm every required account password before creating deployment media. Foundry marks the OOBE configuration as needing attention until those passwords are available again.
 
 Blank passwords do not require Protected deployment because no password secret is stored. Apply the organization's password and device-access policies before using this option.
