@@ -16,6 +16,8 @@ Check tenant and application identifiers, Microsoft Graph application permission
 
 Confirm network access, system time, certificate validity, application permission, tenant policy, and whether the device is already registered.
 
+If the motherboard was replaced, remove the old Windows Autopilot registration before retrying. Foundry captures and uploads the repaired device's current hardware hash, but an existing registration with the same serial number keeps its stored hash. Follow the [Microsoft motherboard replacement procedure](https://learn.microsoft.com/en-us/autopilot/autopilot-motherboard-replacement), then run the deployment again and verify the new registration before continuing to OOBE.
+
 ## Interactive sign-in fails
 
 Confirm that the device code is entered before expiration, the technician uses an authorized account, delegated permissions are granted, and conditional-access policy permits the workflow.
