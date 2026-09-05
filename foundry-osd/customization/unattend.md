@@ -25,10 +25,11 @@ Validate the answer file with Windows System Image Manager for the target Window
 5. Return to **Start**, resolve readiness errors, and [create deployment media](../media/README.md).
 
 {% hint style="warning" %}
-**Screenshot required before publication**
+**Screenshot required before squash and publication**
 
-- **File:** `foundry-osd-unattend-01-catalog.png`
-- **Capture:** Show the Unattend page with two sanitized sample files, validation results, the header enable switch and documentation button, and the default selection. Exclude source paths containing personal information.
+- **File:** `.gitbook/assets/foundry-osd-unattend-01-catalog.png`
+- **Capture:** Show the final Unattend layout with the feature enabled, two sanitized sample files, validation results, the header enable switch and documentation button, and the deployment default selection. Use sample source paths without personal information.
+- **Before squash:** Add the screenshot and replace this placeholder with a GitBook figure and descriptive alt text.
 {% endhint %}
 
 Saved Foundry configurations contain source paths and content fingerprints, not the XML. Keep the original files accessible until media creation finishes. Built media contains encrypted copies and no longer needs those sources.
