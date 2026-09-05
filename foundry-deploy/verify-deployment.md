@@ -19,7 +19,7 @@ After reboot:
 - Verify Windows Autopilot registration or staged profile when configured.
 - Complete the organization’s acceptance checks before handoff.
 
-For the unreleased [custom answer-file feature](../foundry-osd/customization/unattend.md), also verify the expected time zone, OOBE, accounts, commands, and enrollment outcome. Foundry success confirms deployment completed; it does not prove that Windows has consumed every setting. Keep the target Panther answer file until the required setup passes finish, then follow your sensitive-file cleanup process.
+When using a [custom answer file](../foundry-osd/customization/unattend.md), also verify the expected time zone, OOBE, accounts, commands, and enrollment outcome. Foundry success confirms deployment completed; it does not prove that Windows has consumed every setting. Keep the target Panther answer file until the required setup passes finish, then follow your sensitive-file cleanup process.
 
 ## Error
 

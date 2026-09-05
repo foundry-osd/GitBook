@@ -34,9 +34,9 @@ Use [Protected deployment](../foundry-osd/general.md#protected-deployment) when 
 
 If media is lost, stolen, or copied without authorization, revoke embedded credentials where applicable and recreate the media. Do not rely on the technician password as a substitute for physical media controls.
 
-## Custom answer files (unreleased)
+## Custom answer files
 
-The [custom answer-file feature](../foundry-osd/customization/unattend.md) in Foundry PR #314 requires Protected deployment for every embedded file. The complete XML is encrypted on media. Source files and the decrypted `Windows\Panther\unattend.xml` on the target still require access controls.
+Using [custom answer files](../foundry-osd/customization/unattend.md) requires Protected deployment for every embedded file. The complete XML is encrypted on media. Source files and the decrypted `Windows\Panther\unattend.xml` on the target still require access controls.
 
 Custom XML may contain passwords or secrets in commands and extensions. Do not assume Windows will scrub them. Keep the target file until its required setup passes finish, then arrange cleanup through the deployment process. Do not include raw answer files in support attachments.
 

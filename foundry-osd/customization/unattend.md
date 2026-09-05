@@ -1,9 +1,5 @@
 # Custom answer files (Unattend)
 
-{% hint style="info" %}
-Unreleased feature: this page describes [Foundry PR #314](https://github.com/foundry-osd/foundry/pull/314). Custom answer-file import and selection are not available in release `v26.9.1.1`. The application PR remains draft pending manual WinPE and Windows first-boot validation.
-{% endhint %}
-
 Embed one or more Windows answer files in the boot image, then let the technician choose one in Foundry Deploy. Each file is an alternative deployment configuration. Foundry does not merge files or combine a custom file with its generated naming and OOBE settings.
 
 ## Prepare the files
@@ -36,7 +32,7 @@ Saved Foundry configurations contain source paths and content fingerprints, not 
 | Action | Scope | Effect |
 | --- | --- | --- |
 | **Check sources** | All imported files | Rechecks availability and validity against the saved fingerprints. It does not accept changed XML. |
-| **Refresh source** | Selected file | Reimports and validates its current XML, then saves the new fingerprint while retaining the label and selection identity. |
+| **Refresh source** | Selected file | Reimports and validates its current XML, then accepts the changes while retaining its display name and any deployment default pointing to it. |
 
 For example, after editing an imported XML file, **Check sources** reports that its contents changed. Use **Refresh source** for that file to accept the edit before rebuilding media. A missing or changed source blocks media creation until corrected. Duplicate content is kept as one catalog entry.
 
@@ -44,7 +40,7 @@ You can rename display labels, remove files, and change the default. Disabling t
 
 ## Select a file during deployment
 
-Unlock the media, then select a file on [Target](../../foundry-deploy/target.md#select-a-custom-answer-file-unreleased), before the computer-name field. Review the active choice and compatibility messages in the deployment summary and confirmation.
+Unlock the media, then select a file on [Target](../../foundry-deploy/target.md#select-a-custom-answer-file), before the computer-name field. Review the active choice and compatibility messages in the deployment summary and confirmation.
 
 Selecting a custom file makes it responsible for naming, time zone, and OOBE. Selecting **Use Foundry settings** restores native behavior. A missing default or an invalid selected file blocks deployment; Foundry never silently substitutes another choice.
 
@@ -80,7 +76,7 @@ Do not remove the target answer file before `oobeSystem` has consumed it. Arrang
 | Symptom | Action |
 | --- | --- |
 | Source changed or cannot be read | Restore access, then check sources. If edits were intentional, refresh that file before rebuilding. |
-| A network-source check times out | Restore the source location or remove the unavailable entry and recheck. If both background checks remain waiting for file access, restore connectivity and retry. |
+| A network-source check times out | Restore access to the source location and check again, or remove the unavailable entry. |
 | Default file is unavailable | Choose an available default or explicitly select **Use Foundry settings**, then rebuild media if the authored catalog is incorrect. |
 | File is incompatible with selected Windows | Use a file with supported components for that architecture and validate it against the target image. |
 | Autopilot conflict | Remove the incompatible settings from the source and refresh it, or change Autopilot configuration before rebuilding. |

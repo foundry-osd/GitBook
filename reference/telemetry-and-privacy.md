@@ -8,16 +8,15 @@ Foundry uses two independent data controls to understand application usage and d
 
 Telemetry can include application and release information, an anonymous installation identifier, workflow outcomes, durations, stable failure categories, and the device vendor and model during deployment. It excludes names, secrets, network identifiers, file paths, disk identifiers, computer names, Autopilot profile names, serial numbers, and hardware hashes.
 
-### Custom answer files (unreleased)
+### Custom answer files
 
-The [Unattend feature](../foundry-osd/customization/unattend.md) extends existing workflow events when telemetry is enabled:
+When telemetry is enabled, using [custom answer files](../foundry-osd/customization/unattend.md) can report:
 
-| Event | Properties |
-| --- | --- |
-| `osd:boot_media_finished` | `unattend_enabled`, `unattend_default_mode` (`native` or `custom`), and `unattend_file_count`. Disabled catalogs report zero files and native mode; the count is capped at 100, meaning 100 or more. |
-| `deploy:session_finished` | `deploy_unattend_mode` (`native` or `custom`), based on the selection used for that deployment. |
+- Whether the feature is enabled and how many files are configured for the media. The count is capped at 100, meaning 100 or more; disabled catalogs report zero files.
+- Whether the deployment default uses Foundry settings or a custom file.
+- Whether the technician actually used Foundry settings or a custom file for a deployment.
 
-The media event describes the configured catalog and default, including when media creation fails. The deployment event reflects the technician's actual selection. Custom mode does not count overridden Foundry OOBE settings as active. File names, display labels, identifiers, source paths, content hashes, XML, and credentials are excluded. These fields use the existing telemetry preference; there is no separate Unattend telemetry switch.
+Usage information can be reported even when media creation fails. File names, display labels, identifiers, source paths, content hashes, XML, and credentials are excluded. Use **Settings > Enable telemetry** to control this collection.
 
 ## Remote error diagnostics
 

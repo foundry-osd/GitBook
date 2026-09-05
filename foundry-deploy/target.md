@@ -6,11 +6,7 @@ The Target step identifies the device and selects where Windows will be installe
 
 Confirm the displayed hardware information matches the physical device. Review firmware, Windows Autopilot, and other options enabled by the media configuration.
 
-## Select a custom answer file (unreleased)
-
-{% hint style="info" %}
-Custom answer-file selection is part of [Foundry PR #314](https://github.com/foundry-osd/foundry/pull/314) and is not available in release `v26.9.1.1`.
-{% endhint %}
+## Select a custom answer file
 
 When the media enables custom answer files, choose one before the computer-name field or select **Use Foundry settings**. A custom file controls the computer name, time zone, and OOBE, so Foundry's native naming and OOBE settings are suppressed even when the file omits those values.
 
