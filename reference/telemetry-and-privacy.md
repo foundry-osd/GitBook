@@ -8,6 +8,17 @@ Foundry uses two independent data controls to understand application usage and d
 
 Telemetry can include application and release information, an anonymous installation identifier, workflow outcomes, durations, stable failure categories, and the device vendor and model during deployment. It excludes names, secrets, network identifiers, file paths, disk identifiers, computer names, Autopilot profile names, serial numbers, and hardware hashes.
 
+### Custom answer files (unreleased)
+
+The [Unattend feature](../foundry-osd/customization/unattend.md) extends existing workflow events when telemetry is enabled:
+
+| Event | Properties |
+| --- | --- |
+| `osd:boot_media_finished` | `unattend_enabled`, `unattend_default_mode` (`native` or `custom`), and `unattend_file_count`. Disabled catalogs report zero files and native mode; the count is capped at 100, meaning 100 or more. |
+| `deploy:session_finished` | `deploy_unattend_mode` (`native` or `custom`), based on the selection used for that deployment. |
+
+The media event describes the configured catalog and default, including when media creation fails. The deployment event reflects the technician's actual selection. Custom mode does not count overridden Foundry OOBE settings as active. File names, display labels, identifiers, source paths, content hashes, XML, and credentials are excluded. These fields use the existing telemetry preference; there is no separate Unattend telemetry switch.
+
 ## Remote error diagnostics
 
 **Enable remote diagnostics** controls privacy-filtered operational logs and exception details sent to PostHog. This setting is separate from anonymous product telemetry, applies immediately to new diagnostic records, and is written to newly created media for Foundry Connect and Foundry Deploy.
