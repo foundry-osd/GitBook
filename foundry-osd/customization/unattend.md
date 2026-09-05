@@ -34,7 +34,14 @@ Validate the answer file with Windows System Image Manager for the target Window
 
 Saved Foundry configurations contain source paths and content fingerprints, not the XML. Keep the original files accessible until media creation finishes. Built media contains encrypted copies and no longer needs those sources.
 
-Use **Refresh source** to accept edits to an imported source. Use **Check sources** to recheck availability and validity without accepting changed contents. A missing or changed source blocks media creation until corrected. Duplicate content is kept as one catalog entry.
+**Import files** and **Check sources** apply to the catalog and appear above the file list. Select a file to use **Rename**, **Refresh source**, or **Remove** in the display-name editor below the list.
+
+| Action | Scope | Effect |
+| --- | --- | --- |
+| **Check sources** | All imported files | Rechecks availability and validity against the saved fingerprints. It does not accept changed XML. |
+| **Refresh source** | Selected file | Reimports and validates its current XML, then saves the new fingerprint while retaining the label and selection identity. |
+
+For example, after editing an imported XML file, **Check sources** reports that its contents changed. Use **Refresh source** for that file to accept the edit before rebuilding media. A missing or changed source blocks media creation until corrected. Duplicate content is kept as one catalog entry.
 
 You can rename display labels, remove files, and change the default. Disabling the feature retains the authoring catalog but excludes its files from newly generated media. Keep native Foundry settings valid because technicians can still select **Use Foundry settings**.
 
