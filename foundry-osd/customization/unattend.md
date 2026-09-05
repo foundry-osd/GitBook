@@ -24,13 +24,10 @@ Validate the answer file with Windows System Image Manager for the target Window
 4. Enable [Protected deployment](../general.md#protected-deployment) and enter the media password. Protection is required for every custom file, even one that appears to contain no credentials.
 5. Return to **Start**, resolve readiness errors, and [create deployment media](../media/README.md).
 
-{% hint style="warning" %}
-**Screenshot required before squash and publication**
-
-- **File:** `.gitbook/assets/foundry-osd-unattend-01-catalog.png`
-- **Capture:** Show the final Unattend layout with the feature enabled, two sanitized sample files, validation results, the header enable switch and documentation button, and the deployment default selection. Use sample source paths without personal information.
-- **Before squash:** Add the screenshot and replace this placeholder with a GitBook figure and descriptive alt text.
-{% endhint %}
+<figure>
+  <img src="../../.gitbook/assets/foundry-osd-unattend-01-catalog.png" alt="Foundry OSD Unattend page enabled with one validated answer file, the Selected file section, and Use Foundry settings as the deployment default">
+  <figcaption>Unattend enabled with a validated answer file and Use Foundry settings as the deployment default. Select a file to enable its editing controls.</figcaption>
+</figure>
 
 Saved Foundry configurations contain source paths and content fingerprints, not the XML. Keep the original files accessible until media creation finishes. Built media contains encrypted copies and no longer needs those sources.
 
