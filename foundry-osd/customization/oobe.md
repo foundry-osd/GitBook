@@ -18,10 +18,6 @@ Test the result with the same Windows edition and provisioning method used in pr
 
 ## Configure local accounts
 
-{% hint style="info" %}
-Local account provisioning is unreleased and planned for a future Foundry OSD release.
-{% endhint %}
-
 Foundry can prepare local accounts as part of the unattended Windows setup. These settings are not available when Windows Autopilot is configured for the same deployment.
 
 ### Built-in Administrator
