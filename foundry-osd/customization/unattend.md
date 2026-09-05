@@ -18,9 +18,9 @@ Validate the answer file with Windows System Image Manager for the target Window
 
 ## Import and build media
 
-1. Open **Customization > Unattend** in Foundry OSD.
+1. Open **Customization > Unattend** in Foundry OSD and enable the feature using the switch in the page header. Its controls remain disabled while the feature is off. The documentation button beside the switch opens this guide.
 2. Import one or more XML files. Review the validation results and give each file a recognizable display label.
-3. Enable custom answer files. Choose a default file, or keep **Use Foundry settings** as the default.
+3. Choose a default file, or keep **Use Foundry settings** as the default.
 4. Enable [Protected deployment](../general.md#protected-deployment) and enter the media password. Protection is required for every custom file, even one that appears to contain no credentials.
 5. Return to **Start**, resolve readiness errors, and [create deployment media](../media/README.md).
 
@@ -28,7 +28,7 @@ Validate the answer file with Windows System Image Manager for the target Window
 **Screenshot required before publication**
 
 - **File:** `foundry-osd-unattend-01-catalog.png`
-- **Capture:** Show the Unattend page with two sanitized sample files, validation results, the enable switch, and the default selection. Exclude source paths containing personal information.
+- **Capture:** Show the Unattend page with two sanitized sample files, validation results, the header enable switch and documentation button, and the default selection. Exclude source paths containing personal information.
 {% endhint %}
 
 Saved Foundry configurations contain source paths and content fingerprints, not the XML. Keep the original files accessible until media creation finishes. Built media contains encrypted copies and no longer needs those sources.
