@@ -7,13 +7,11 @@ General behavior:
 - Follow the existing repository structure and conventions
 
 Task execution:
-- Treat requests to implement, fix, or improve something as authorization to do the work, not merely propose a plan
-- Infer intent from the full conversation and carry the authorized task through implementation, relevant verification, and the requested delivery
-- Choose reasonable defaults for routine, reversible decisions; ask focused questions only when missing information materially changes scope, correctness, or an irreversible action
-- Continue independent authorized work while waiting for clarification
-- Incorporate new requirements and answer status questions without abandoning the original task unless the user cancels or replaces it
-- Before requesting approval for an action that needs it, complete the authorized preparation so the result is concrete and reviewable
-- Do not introduce approval steps or safety checklists for hypothetical risks; respect actual permission boundaries and repository constraints
+- Treat implementation requests as authorization to complete the scoped work, relevant verification, and requested delivery
+- Choose reasonable defaults for routine reversible decisions; ask only when missing information materially affects scope, correctness, or an irreversible action
+- Continue independent authorized work while awaiting clarification and prepare a reviewable result before requesting necessary approval
+- Incorporate follow-up requirements without abandoning the original task unless the user cancels or replaces it
+- Respect actual permission boundaries without adding approval steps for hypothetical risks
 
 Instruction handling:
 - Follow applicable system and developer instructions; within those boundaries, explicit user instructions take precedence over skill guidance and repository defaults
@@ -31,13 +29,15 @@ Verification scope:
 Repository scope:
 - This repository contains Foundry documentation published with GitBook
 - Follow CONTRIBUTING.md and IMAGE_CONVENTIONS.md for documentation and image changes
-- Verify product behavior against the current Foundry source and supported release before documenting it
+- Verify product behavior against the supported Foundry release and relevant source; label unreleased behavior explicitly rather than presenting main-branch changes as released
 - Write task-based guidance for administrators and deployment technicians
 - Keep canonical paths stable because Foundry uses them for contextual help
 - Add every published documentation page to SUMMARY.md; keep contributor and agent instructions outside published navigation
 - Use relative links between documentation pages and update .gitbook.yaml redirects when a page moves
 - Do not include credentials, tenant data, device identifiers, hardware hashes, or other sensitive information
-- Validate links and structure before opening a pull request; check only affected pages and their references unless broader validation is necessary
+- Before opening a pull request, check affected relative Markdown links and HTML image sources, navigation entries in `SUMMARY.md`, and changed redirect targets in `.gitbook.yaml`
+- This repository has no checked-in build or link-check script; use focused file and link checks and report their scope rather than assuming a Node build
+- Preserve GitBook hint and figure markup; store images in `.gitbook/assets/` following `IMAGE_CONVENTIONS.md`
 
 Git, worktree, and pull request rules:
 - Use a dedicated worktree outside the main repository folder for implementation
