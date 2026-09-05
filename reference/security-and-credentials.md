@@ -11,6 +11,7 @@ Depending on configuration, media may include or use:
 - Windows Autopilot tenant and application information.
 - Certificate-based application credentials.
 - Protected deployment and its technician password.
+- Predefined passwords for local Windows accounts created during OOBE.
 - Device hardware hashes and registration artifacts.
 
 ## Required practices
@@ -28,6 +29,7 @@ Use [Protected deployment](../foundry-osd/general.md#protected-deployment) when 
 
 - Every retained [Autopilot JSON profile](../foundry-osd/autopilot/json-profile.md) is readable on media created without Protected deployment.
 - [Zero-touch upload](../foundry-osd/autopilot/zero-touch-hardware-hash.md) credentials remain encrypted without Protected deployment, but the deployment key required to decrypt them is stored on the same media.
+- Non-empty [OOBE local account passwords](../foundry-osd/customization/oobe.md#password-protection) require Protected deployment under Foundry's security policy and are encrypted in the deployment configuration. During Windows Setup, they are written to `unattend.xml` using reversible encoding, not encryption. Treat that answer file and its copies as sensitive data.
 - Protected deployment does not encrypt the complete ISO, USB drive, Windows image, or data staged into the installed Windows system.
 
 If media is lost, stolen, or copied without authorization, revoke embedded credentials where applicable and recreate the media. Do not rely on the technician password as a substitute for physical media controls.
