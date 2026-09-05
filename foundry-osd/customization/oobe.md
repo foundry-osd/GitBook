@@ -18,6 +18,10 @@ Test the result with the same Windows edition and provisioning method used in pr
 
 ## Configure local accounts
 
+{% hint style="info" %}
+Local account provisioning is unreleased and planned for a future Foundry OSD release.
+{% endhint %}
+
 Foundry can prepare local accounts as part of the unattended Windows setup. These settings are not available when Windows Autopilot is configured for the same deployment.
 
 ### Built-in Administrator
@@ -26,6 +30,8 @@ Enable **Built-in Administrator** to activate the Windows built-in Administrator
 
 - Keep **Set a password** enabled and enter the same value in both fields to assign a predefined password.
 - Turn **Set a password** off to assign an intentional blank password. Turning it off clears any password entered during the current session.
+
+Foundry enables this account during the Windows `specialize` phase using a PowerShell command embedded in `unattend.xml`. The command identifies the account by its SID ending in `-500`, so it works regardless of the Windows display language or account name. Windows applies its configured password through `UserAccounts/AdministratorPassword` during `oobeSystem`.
 
 {% hint style="danger" %}
 A blank Administrator password provides substantially less protection. Use it only when the deployment standard explicitly requires it and the device is secured by other controls.
@@ -56,5 +62,7 @@ Non-empty local account passwords require [Protected deployment](../general.md#p
 If a predefined account password is enabled while Protected deployment is disabled, Foundry blocks media creation and marks both **OOBE** and **Password protection** as needing attention. Enable Protected deployment and configure its technician password, or turn off the predefined account password to use an intentional blank password.
 
 Foundry saves whether each account requires a predefined password, but it never saves the password itself in the authoring configuration. After restarting Foundry OSD, re-enter and confirm every required account password before creating deployment media. Foundry marks the OOBE configuration as needing attention until those passwords are available again.
+
+The **Accounts** header shows **Needs attention** even when collapsed if an account setting is invalid, a required password is missing, or deployment protection is required. Autopilot only causes this attention indicator when local account provisioning is also configured.
 
 Blank passwords do not require Protected deployment because no password secret is stored. Apply the organization's password and device-access policies before using this option.
