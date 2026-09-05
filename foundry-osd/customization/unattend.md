@@ -34,7 +34,7 @@ Validate the answer file with Windows System Image Manager for the target Window
 
 Saved Foundry configurations contain source paths and content fingerprints, not the XML. Keep the original files accessible until media creation finishes. Built media contains encrypted copies and no longer needs those sources.
 
-**Import files** and **Check sources** apply to the catalog and appear above the file list. Select a file to use **Rename**, **Refresh source**, or **Remove** in the display-name editor below the list.
+**Import files** and **Check sources** apply to the catalog and appear above the file list. Select a file to use **Rename**, **Refresh source**, or **Remove** in the **Selected file** section below the list. Its **Display name** field edits the label shown to the technician.
 
 | Action | Scope | Effect |
 | --- | --- | --- |
