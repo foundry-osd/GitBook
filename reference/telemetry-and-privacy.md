@@ -8,6 +8,16 @@ Foundry uses two independent data controls to understand application usage and d
 
 Telemetry can include application and release information, an anonymous installation identifier, workflow outcomes, durations, stable failure categories, and the device vendor and model during deployment. It excludes names, secrets, network identifiers, file paths, disk identifiers, computer names, Autopilot profile names, serial numbers, and hardware hashes.
 
+### Custom answer files
+
+When telemetry is enabled, using [custom answer files](../foundry-osd/customization/unattend.md) can report:
+
+- Whether the feature is enabled and how many files are configured for the media. The count is capped at 100, meaning 100 or more; disabled catalogs report zero files.
+- Whether the deployment default uses Foundry settings or a custom file.
+- Whether the technician actually used Foundry settings or a custom file for a deployment.
+
+Usage information can be reported even when media creation fails. File names, display labels, identifiers, source paths, content hashes, XML, and credentials are excluded. Use **Settings > Enable telemetry** to control this collection.
+
 ## Remote error diagnostics
 
 **Enable remote diagnostics** controls privacy-filtered operational logs and exception details sent to PostHog. This setting is separate from anonymous product telemetry, applies immediately to new diagnostic records, and is written to newly created media for Foundry Connect and Foundry Deploy.

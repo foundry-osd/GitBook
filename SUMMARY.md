@@ -21,6 +21,7 @@
     * [Operating system](foundry-osd/customization/operating-system.md)
     * [Machine naming](foundry-osd/customization/machine-naming.md)
     * [Out-of-box experience](foundry-osd/customization/oobe.md)
+    * [Custom answer files (Unattend)](foundry-osd/customization/unattend.md)
     * [Optional features](foundry-osd/customization/optional-features.md)
     * [AppX removals](foundry-osd/customization/appx-removals.md)
     * [AI components](foundry-osd/customization/ai-components.md)
