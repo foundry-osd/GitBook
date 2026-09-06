@@ -21,8 +21,8 @@ Validate the answer file with Windows System Image Manager for the target Window
 5. Return to **Start**, resolve readiness errors, and [create deployment media](../media/README.md).
 
 <figure>
-  <img src="../../.gitbook/assets/foundry-osd-unattend-01-catalog.png" alt="Foundry OSD Unattend page enabled with one validated answer file, the Selected file section, and Use Foundry settings as the deployment default">
-  <figcaption>Unattend enabled with a validated answer file and Use Foundry settings as the deployment default. Select a file to enable its editing controls.</figcaption>
+  <img src="../../.gitbook/assets/foundry-osd-unattend-01-catalog.png" alt="Foundry OSD Unattend page enabled with three validated answer files, no selected file, and Use Foundry settings as the deployment default">
+  <figcaption>Unattend enabled with three validated answer files and Use Foundry settings as the deployment default. Select a file to enable its editing controls.</figcaption>
 </figure>
 
 Saved Foundry configurations contain source paths and content fingerprints, not the XML. Keep the original files accessible until media creation finishes. Built media contains encrypted copies and no longer needs those sources.
