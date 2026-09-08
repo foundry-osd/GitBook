@@ -2,6 +2,14 @@
 
 Collect evidence before rebooting, recreating media, or starting another deployment.
 
+## Foundry OSD diagnostic export
+
+In **Settings > General**, use **Export diagnostics** to save a sanitized archive of the desktop application's logs. The export does not modify the source logs or collect logs from a separate Windows PE deployment.
+
+Use **Advanced: export raw logs** only when requested by a trusted support contact, and review the sensitive-data warning before sharing the archive. See [Export diagnostics](../foundry-osd/settings.md#export-diagnostics).
+
+Remote error diagnostics do not replace local logs or a support archive; delivery is best effort. See [Telemetry and privacy](../reference/telemetry-and-privacy.md#remote-error-diagnostics).
+
 ## Information to record
 
 - Foundry application and media version.

@@ -1,5 +1,9 @@
 # Supported versions
 
+## Application and boot media updates
+
+Updating Foundry OSD does not update media already distributed. Recreate ISO media or [update an existing USB drive](../foundry-osd/media/update-usb.md) to include new configuration and runtime assets. Test the refreshed media before production use.
+
 ## Administrator workstation
 
 - Windows 10 or Windows 11.

@@ -1,6 +1,6 @@
 # Settings
 
-Foundry OSD settings mostly control the desktop application. The telemetry toggle also affects the runtime telemetry configuration written during media creation. Proxy settings are limited to the Foundry OSD application.
+Foundry OSD settings mostly control the desktop application. The telemetry and remote-diagnostics toggles also affect the runtime configuration written during media creation. Proxy settings are limited to the Foundry OSD application.
 
 ## General
 
@@ -43,7 +43,7 @@ Choose how Foundry OSD authenticates to a manual proxy:
 
 Explicit credentials are stored in Windows Credential Manager and are not written to the Foundry settings file. Applying a method that does not use explicit credentials removes the previously stored proxy credential.
 
-Select **Apply** to save the settings and use them for new Foundry OSD connections. Select **Test connection** to test the values currently displayed without saving or applying them. The test checks access to GitHub, Microsoft sign-in, and Microsoft Graph services.
+Select **Apply** to save the settings and use them for subsequent connection and authentication requests, including requests made by existing Foundry OSD clients. Existing authenticated connections and authentication exchanges already in progress are not interrupted. Select **Test connection** to test the values currently displayed without saving or applying them. The test checks connectivity to GitHub, Microsoft sign-in, and Microsoft Graph endpoints; it does not verify account permissions or access to every download.
 
 {% hint style="warning" %}
 A successful test confirms only those Foundry OSD service checks. It does not validate connectivity from Windows PE, Foundry Connect, Foundry Deploy, or the installed Windows system.
@@ -55,6 +55,8 @@ Use **Enable telemetry** to control anonymous product telemetry. Use **Enable re
 
 - Both toggles apply to the Foundry OSD desktop application.
 - Both preferences are synchronized into the runtime configuration used when media is created.
+
+Restart Foundry OSD after changing **Enable telemetry** so desktop reporting uses the saved preference. Remote-diagnostics changes apply immediately to new records. Recreate media to apply either preference to Foundry Connect and Foundry Deploy; existing media is unchanged.
 
 Telemetry excludes names, secrets, SSIDs, IP addresses, file paths, disk identifiers, computer names, Autopilot profile names, serial numbers, and hardware hashes. Deployment telemetry can include the device vendor and model. Events use an anonymous identifier created for the Foundry installation.
 

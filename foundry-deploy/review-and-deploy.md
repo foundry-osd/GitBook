@@ -18,6 +18,8 @@ Confirm:
   <figcaption>Review every deployment choice before starting the destructive operation.</figcaption>
 </figure>
 
+When the media includes [custom answer files](../foundry-osd/customization/unattend.md), also review the selected **Answer file**. A custom file controls the computer name, time zone, and OOBE settings; Foundry does not apply its native values for these settings.
+
 ## Start deployment
 
 Start only when every value is correct. Foundry opens **Confirm disk erase** before crossing the destructive boundary. Verify the disk number, model, bus, size, and selected operating system before accepting.

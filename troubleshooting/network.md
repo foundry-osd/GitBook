@@ -25,3 +25,9 @@ Verify the passphrase or provisioned profile, enterprise certificate chain, time
 ## Network is connected but deployment cannot continue
 
 The local connection may be ready while DNS, proxy policy, or required Internet endpoints remain unavailable. Test the same network path with the organization’s approved diagnostic process.
+
+## Foundry OSD cannot connect through a proxy
+
+In **Settings > Proxy**, verify the connection method, address, port, bypass rules, and authentication mode, then select **Test connection**. The test uses the displayed values without saving them. If credentials have changed, enter the new credentials and select **Apply** to use them for subsequent authentication requests. Existing authenticated connections are not interrupted.
+
+Foundry OSD proxy settings are not copied to boot media and do not configure Foundry Connect or Foundry Deploy. A successful desktop test does not confirm Windows PE connectivity. See [Proxy settings](../foundry-osd/settings.md#proxy).
