@@ -9,9 +9,15 @@ Configure:
 - Target architecture.
 - Secure Boot signing compatibility, including CA 2023 when required by the deployment environment.
 - Windows PE language.
-- Deployment time zone.
+- Windows PE time zone.
 
 The selected Windows PE language remains unavailable until Windows ADK and Windows PE Add-on `10.1.26100.2454` are ready.
+
+### Windows PE time zone
+
+Keep **Automatic** to detect the time zone from the deployment network's public IP address after Foundry Connect establishes connectivity. Windows PE uses **UTC** if detection is unavailable or the result cannot be mapped to a supported time zone.
+
+Select a specific time zone to override automatic detection, for example when the network's public IP location differs from the deployment site. This setting applies only to the Windows PE session. Recreate or update the media after changing it.
 
 ## Deployment completion
 
