@@ -9,7 +9,9 @@ Use Machine naming to define how a computer name is selected during deployment.
 
 ## Naming requirements
 
-Foundry Deploy validates names as 1–15 characters containing letters, numbers, or hyphens. Underscores are not available because Windows computer names that use them are not DNS compatible.
+Use 1–15 ASCII characters containing letters, numbers, or hyphens. Windows Setup rejects names containing only digits. Underscores are not supported by Foundry's naming rules.
+
+For a numeric serial number, add fixed text such as `PC-` and limit the serial component to 12 characters so the result fits the 15-character limit. Truncation can remove the letters from an otherwise alphanumeric serial number, so check the complete result. Foundry rejects numeric-only final names before deployment confirmation.
 
 {% hint style="warning" %}
 Choose a naming method that prevents duplicate names and matches directory, inventory, and device-management requirements.

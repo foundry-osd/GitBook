@@ -1,5 +1,11 @@
 # Windows deployment troubleshooting
 
+## Computer name is invalid
+
+Use 1–15 ASCII letters, numbers, or hyphens, and avoid a name containing only digits. A numeric serial number, or truncation that removes its letters, can produce a name Windows Setup rejects. Use fixed text such as `PC-` with at most 12 serial characters.
+
+In the composed naming workflow, a missing hardware value or firmware placeholder also prevents generation. If editing is allowed, enter a valid complete name. Otherwise, correct the naming configuration and refresh the media. See [machine naming](../foundry-osd/customization/machine-naming.md) for naming requirements and editing options.
+
 ## Target disk is unavailable
 
 - Confirm the storage controller is supported in Windows PE.

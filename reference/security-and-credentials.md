@@ -12,6 +12,7 @@ Depending on configuration, media may include or use:
 - Certificate-based application credentials.
 - Protected deployment and its technician password.
 - Predefined passwords for local Windows accounts created during OOBE.
+- Custom Windows answer files, including credentials in their settings or commands.
 - Device hardware hashes and registration artifacts.
 
 ## Required practices

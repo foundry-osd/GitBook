@@ -6,6 +6,8 @@ Foundry uses two independent data controls to understand application usage and d
 
 **Enable telemetry** controls anonymous product and workflow events from Foundry OSD. The same preference is written to newly created media for Foundry Connect and Foundry Deploy.
 
+Restart Foundry OSD after changing this setting so desktop reporting uses the saved preference. Changing the setting does not update existing media.
+
 Telemetry can include application and release information, an anonymous installation identifier, workflow outcomes, durations, stable failure categories, and the device vendor and model during deployment. It excludes names, secrets, network identifiers, file paths, disk identifiers, computer names, Autopilot profile names, serial numbers, and hardware hashes.
 
 ### Custom answer files
@@ -22,13 +24,13 @@ Usage information can be reported even when media creation fails. File names, di
 
 **Enable remote diagnostics** controls privacy-filtered operational logs and exception details sent to PostHog. This setting is separate from anonymous product telemetry, applies immediately to new diagnostic records, and is written to newly created media for Foundry Connect and Foundry Deploy.
 
-Remote diagnostics include warning, error, and fatal events, plus information events explicitly marked as terminal workflow diagnostics. Approved fields can include application and release context, random session or operation identifiers, workflow stage, duration, retry count, and stable failure categories or process and HTTP status codes.
+Remote diagnostics include warning, error, and fatal events, plus information events explicitly marked as terminal workflow diagnostics. Approved fields can include application and release context, random session or operation identifiers, workflow stage, duration, retry count, stable failure categories, and process exit codes.
 
 Before delivery, Foundry applies an explicit property allowlist and sanitizes message, exception, and stack-trace content. Paths, URLs and other URIs, credentials, tokens, network identifiers, machine names, user names, and similar direct identifiers are removed or replaced. Full commands, process output, local file locations, and support-bundle details remain in local logs and are not exported as remote diagnostic attributes.
 
 Remote delivery is best effort. Foundry uses a bounded in-memory queue with rate limiting and duplicate exception suppression, without a persistent outbox. Records can be dropped if the queue is full, the process exits, the network is unavailable, or PostHog rejects the request. A diagnostic delivery failure does not replace or change the original operation result.
 
-Local logs remain the authoritative diagnostic source. Disabling remote diagnostics stops new records from entering the queue; a record already being transmitted may finish.
+Local logs remain the authoritative diagnostic source. Disabling remote diagnostics stops new records from entering the queue and discards records still waiting in Foundry's queue. Records already handed to the delivery transport may still be sent.
 
 ## Privacy expectations
 

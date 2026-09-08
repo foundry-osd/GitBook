@@ -51,6 +51,7 @@ Foundry validates and retains the selected file before preparing the target disk
 | Configuration area | When a custom file is selected |
 | --- | --- |
 | Windows answer-file configuration | The custom file replaces the Foundry-generated file in full. Its scope includes Windows settings supported by the target image and the allowed passes, beyond the options available in Foundry. |
+| Foundry computer name, time zone, and OOBE settings | Are not applied, including Foundry's OOBE privacy policies and local account settings. Configure the required behavior in the custom file. |
 | Settings omitted from the file | Foundry does not add them. Windows or image defaults remain where applicable. |
 | Other Foundry deployment operations | Remain enabled according to the media configuration. Custom settings or commands can conflict with their effects. |
 | Autopilot JSON profile or interactive registration | Known incompatible settings block deployment. Use a compatible file or change the authored Autopilot configuration. |
@@ -76,7 +77,7 @@ Do not remove the target answer file before `oobeSystem` has consumed it. Arrang
 | --- | --- |
 | Source changed or cannot be read | Restore access, then check sources. If edits were intentional, refresh that file before rebuilding. |
 | A network-source check times out | Restore access to the source location and check again, or remove the unavailable entry. |
-| Default file is unavailable | Choose an available default or explicitly select **Use Foundry settings**, then rebuild media if the authored catalog is incorrect. |
+| Default file is missing from the catalog | In Foundry OSD, choose an available default or **Use Foundry settings**, then rebuild media. An invalid catalog default blocks deployment even if another runtime choice is available. |
 | File is incompatible with selected Windows | Use a file with supported components for that architecture and validate it against the target image. |
 | Autopilot conflict | Remove the incompatible settings from the source and refresh it, or change Autopilot configuration before rebuilding. |
 | Deployment succeeds but Windows setup fails | Inspect Windows setup diagnostics without exposing secrets. Check the file against the selected image and test its commands and setup-hook dependencies. |

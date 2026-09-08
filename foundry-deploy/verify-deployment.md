@@ -15,6 +15,7 @@ After reboot:
 
 - Confirm that Windows starts from the target disk.
 - Confirm the expected computer name.
+- When local accounts are configured, verify the expected account type and password sign-in, including built-in Administrator activation if enabled.
 - Confirm network and required device drivers.
 - Verify Windows Autopilot registration or staged profile when configured.
 - Complete the organization’s acceptance checks before handoff.

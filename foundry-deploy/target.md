@@ -16,7 +16,7 @@ Review the selected file in the summary and confirmation. Missing files, an inva
 
 The following naming rules apply when using native Foundry settings.
 
-Enter a name from 1 to 15 characters using letters, numbers, or hyphens. Follow the organization’s naming policy and avoid a name already assigned to another device.
+Enter a name from 1 to 15 ASCII characters using letters, numbers, or hyphens. The complete name must not contain only digits. For numeric serial numbers, use a prefix such as `PC-` and keep the total within 15 characters. Follow the organization’s naming policy and avoid a name already assigned to another device. See [naming requirements](../foundry-osd/customization/machine-naming.md#naming-requirements).
 
 The policy authored in Foundry OSD can request a complete manual name or compose one from fixed text, device data, and random text. A composed name can be locked or made editable as a complete value. When editing is allowed, you can replace the entire generated name with any name that meets the length and character requirements above. The replacement does not have to match the configured components, casing, or separators.
 
