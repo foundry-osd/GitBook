@@ -18,9 +18,9 @@ The following naming rules apply when using native Foundry settings.
 
 Enter a name from 1 to 15 characters using letters, numbers, or hyphens. Follow the organization’s naming policy and avoid a name already assigned to another device.
 
-The policy authored in Foundry OSD can request a complete manual name or compose one from fixed text, device data, and random text. A composed name can be locked or made editable as a complete value. A name that meets Windows character rules can still be rejected when it does not satisfy the configured component policy.
+The policy authored in Foundry OSD can request a complete manual name or compose one from fixed text, device data, and random text. A composed name can be locked or made editable as a complete value. When editing is allowed, you can replace the entire generated name with any name that meets the length and character requirements above. The replacement does not have to match the configured components, casing, or separators.
 
-Foundry Deploy resolves serial number, manufacturer, model, asset tag, and system UUID from the current device. Deployment is blocked when a required value is unavailable or contains a known firmware placeholder.
+Foundry Deploy resolves serial number, manufacturer, model, asset tag, and system UUID from the current device. If a required value is unavailable or contains a known firmware placeholder, name generation fails and an error is displayed. When editing is allowed, enter a valid complete name to clear the naming error and continue. When the name is locked, the error blocks deployment; correct the device data or update the naming configuration and recreate or update the media.
 
 ## Select the disk
 

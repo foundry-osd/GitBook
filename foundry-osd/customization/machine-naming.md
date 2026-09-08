@@ -55,6 +55,8 @@ When a fallback is required, Foundry Deploy uses the first valid name available 
 2. The current WinPE computer name, which is usually similar to `MININT-123ABC`.
 3. `PC` if neither previous name is available or valid.
 
-The name remains editable in the wizard unless **Composed** mode is configured to prevent editing. If a composed name cannot be generated because a required hardware value is unavailable, Foundry Deploy displays an error and blocks deployment instead of using a fallback name.
+The name remains editable in the wizard unless **Composed** mode is configured to prevent editing. When editing is allowed, the operator can replace the entire generated name with any name that meets the length and character requirements above. The replacement does not have to match the configured components, casing, or separators.
+
+If a composed name cannot be generated because a required hardware value is unavailable or contains a known firmware placeholder, Foundry Deploy displays an error without selecting a fallback name. When editing is allowed, entering a valid complete name clears the naming error and allows deployment to continue. When the name is locked, the error blocks deployment; correct the device data or update the naming configuration and recreate or update the media.
 
 The preview uses representative values. Foundry Deploy resolves actual hardware values at deployment startup and applies casing and separators to the same component rules used in the preview. For random text, a random value is generated with the configured length during deployment startup.
