@@ -12,6 +12,8 @@ Foundry Connect runs in Windows PE before deployment. It reports network state a
 
 Foundry Connect may continue automatically after readiness is established. The interface shows the connection state, configuration source, refresh timing, and latest update.
 
+After Foundry Connect completes, the bootstrap applies the [Windows PE time zone](../foundry-osd/general.md#windows-pe-time-zone). It uses the manual choice from the media configuration, or detects the time zone from the network's public IP address when **Automatic** is selected. Automatic detection falls back to **UTC** when no supported time zone can be resolved.
+
 Readiness confirms that an active network path and at least one configured connectivity probe succeeded. It does not verify every catalog, download, Microsoft, or organization-specific endpoint required later by Foundry Deploy.
 
 {% hint style="warning" %}

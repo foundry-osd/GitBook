@@ -51,7 +51,7 @@ Foundry validates and retains the selected file before preparing the target disk
 | Configuration area | When a custom file is selected |
 | --- | --- |
 | Windows answer-file configuration | The custom file replaces the Foundry-generated file in full. Its scope includes Windows settings supported by the target image and the allowed passes, beyond the options available in Foundry. |
-| Foundry computer name, time zone, and OOBE settings | Are not applied, including Foundry's OOBE privacy policies and local account settings. Configure the required behavior in the custom file. |
+| Foundry computer name and OOBE settings | Are not applied, including Foundry's OOBE privacy policies and local account settings. Configure the required behavior in the custom file. |
 | Settings omitted from the file | Foundry does not add them. Windows or image defaults remain where applicable. |
 | Other Foundry deployment operations | Remain enabled according to the media configuration. Custom settings or commands can conflict with their effects. |
 | Autopilot JSON profile or interactive registration | Known incompatible settings block deployment. Use a compatible file or change the authored Autopilot configuration. |
