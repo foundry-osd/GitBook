@@ -50,4 +50,6 @@ Start with `FoundryBootstrap.log`, then collect the affected application's log. 
 
 If Bootstrap does not display any progress, inspect `X:\Foundry\Logs\FoundryBootstrap.Launcher.log`. The Windows command launcher records the launch attempt and exit code even when the .NET runtime cannot start.
 
-For diagnostic data settings, see [Telemetry and privacy](telemetry-and-privacy.md). For refreshing existing media, see [Application and boot media updates](supported-versions.md#application-and-boot-media-updates).
+Bootstrap reports a product event only when startup fails. Separately enabled remote diagnostics can include sanitized warnings, exceptions, and stage outcomes. Delivery starts after network and clock preparation, with a bounded best-effort attempt when startup stops earlier. See [Bootstrap reporting](telemetry-and-privacy.md#bootstrap-reporting) for consent, pending records, and delivery limits.
+
+For refreshing existing media, see [Application and boot media updates](supported-versions.md#application-and-boot-media-updates).
