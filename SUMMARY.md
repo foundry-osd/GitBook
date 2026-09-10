@@ -47,6 +47,7 @@
   * [Logs and support information](troubleshooting/logs-and-support.md)
 * [Reference](reference/README.md)
   * [Supported versions](reference/supported-versions.md)
+  * [Windows PE bootstrap](reference/bootstrap.md)
   * [Catalogs](reference/catalog.md)
   * [Security and credentials](reference/security-and-credentials.md)
   * [Telemetry and privacy](reference/telemetry-and-privacy.md)

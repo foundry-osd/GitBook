@@ -14,7 +14,8 @@ Remote error diagnostics do not replace local logs or a support archive; deliver
 
 - Foundry application and media version.
 - Device manufacturer and model.
-- Current application: Foundry OSD, Foundry Connect, or Foundry Deploy.
+- Current application: Foundry OSD, Foundry Bootstrap, Foundry Connect, or Foundry Deploy.
+- Diagnostic session ID, when available, to match Bootstrap, Connect, and Deploy logs from the same boot.
 - Current or failed workflow stage.
 - Complete error message.
 - Network state and connection type.
@@ -24,11 +25,17 @@ Remote error diagnostics do not replace local logs or a support archive; deliver
 
 ## Windows PE log location
 
-Foundry Connect and Foundry Deploy initially write logs under:
+Foundry Bootstrap, Foundry Connect, and Foundry Deploy initially write logs under:
 
 ```text
 X:\Foundry\Logs
 ```
+
+The active files are `FoundryBootstrap.log`, `FoundryConnect.log`, and `FoundryDeploy.log`. Collect any rotated files covering the failure as well. For a failure before the deployment wizard appears, start with the [bootstrap stage and outcome](../reference/bootstrap.md).
+
+When a **Foundry Cache** volume is available, the bootstrap attempts to copy session logs to `<cache-drive>:\Logs\<session-id>`. Copying is best effort, so check that the files are present. Deploy can write additional logs after the bootstrap has finished.
+
+`X:` is temporary Windows PE storage. Copy relevant logs to persistent storage before rebooting; files on `X:` do not survive a reboot.
 
 ## Applied Windows log location
 

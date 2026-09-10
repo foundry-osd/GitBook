@@ -16,6 +16,8 @@ Use **Foundry OSD** on an administrator workstation to:
 
 Boot the target device into Windows PE. **Foundry Connect** checks Ethernet and, when enabled, Wi-Fi connectivity. Deployment continues when the configured readiness checks succeed.
 
+The [Windows PE bootstrap](../reference/bootstrap.md) prepares this session and launches Connect and Deploy in order. Closing Connect stops that sequence.
+
 ## Phase 3: Select deployment inputs
 
 **Foundry Deploy** guides the technician through:
