@@ -47,6 +47,8 @@ If readiness is not confirmed within two minutes, Bootstrap stops with a timeout
 
 Payloads without a compatible startup capability manifest keep process-only observation. Bootstrap shows a warning and reports readiness as unverified. An invalid manifest stops startup instead of silently bypassing confirmation. Recreate the media or refresh the affected runtime cache when investigating invalid startup metadata.
 
+When an application reports a startup failure, Bootstrap allows up to five seconds for the child to exit so it can recover the diagnostic record. It does not terminate the child if that wait expires.
+
 An exit before Deploy handoff is a startup failure, even if a ready message was written just before it exited. Once Bootstrap confirms the handoff, later deployment errors belong to Deploy.
 
 ## Cache and connectivity
