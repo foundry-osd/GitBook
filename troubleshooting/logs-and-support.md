@@ -37,6 +37,8 @@ The active files are `FoundryBootstrap.log`, `FoundryConnect.log`, and `FoundryD
 
 When a **Foundry Cache** volume is available, the bootstrap attempts to copy session logs to `<cache-drive>:\Logs\<session-id>`. Copying is best effort, so check that the files are present. Deploy can write additional logs after the bootstrap has finished.
 
+Supervised startup evidence is stored under `<cache-drive>:\Logs\<session-id>\Startup\<launch-id>` when a cache is available, or `X:\Foundry\Logs\<session-id>\Startup\<launch-id>` otherwise. Collect `status.json`, any remaining `startup-failure.json`, and `startup-terminated.txt` alongside the logs. A failure record can disappear after Bootstrap transfers it into its pending diagnostic journal; this does not confirm remote delivery. See [Startup confirmation](../reference/bootstrap.md#startup-confirmation).
+
 `X:` is temporary Windows PE storage. Copy relevant logs to persistent storage before rebooting; files on `X:` do not survive a reboot.
 
 ## Applied Windows log location

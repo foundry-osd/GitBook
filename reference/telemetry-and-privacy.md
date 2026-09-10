@@ -44,6 +44,10 @@ With a **Foundry Cache** volume, Bootstrap retains sanitized pending records und
 
 Failure events keep the same event identifier across retries. Logs and exception reports use buffered transports without individual delivery receipts, so they can be submitted on up to three boots and duplicates are possible. If the cache journal cannot be updated, Bootstrap skips transmission to preserve these retry limits. Remote reporting remains best effort; collect local logs when investigating a failure.
 
+For an early Connect or Deploy failure, the child application writes a bounded, sanitized failure record before publishing its failure status. Bootstrap can recover that record after the child exits, preserving its original application, exception details, and identifiers. The child does not independently upload the same transferred record. If Bootstrap has already stopped, a later boot can recover it from persistent cache storage once the child is no longer running. Temporary Windows PE storage is lost on reboot.
+
+Recovered child diagnostics use the same consent, destination, retention, and replay limits as Bootstrap diagnostics. Bootstrap reports a process outcome when no child exception is available; an exit code or readiness timeout is not presented as an invented child exception. Errors after UI readiness remain owned by the child application.
+
 ## Privacy expectations
 
 Diagnostic and telemetry data must not include:

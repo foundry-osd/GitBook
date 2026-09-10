@@ -22,15 +22,25 @@ The console shows five stages in order:
 | Start Connect | Resolves Foundry Connect, starts it, and waits for the network workflow to finish. |
 | Prepare system | Attempts to correct the clock and configure the time zone after Connect succeeds. |
 | Prepare deployment application | Resolves Foundry Deploy. On release-provisioned USB media, also checks for a Connect runtime update. |
-| Start Deploy | Launches Foundry Deploy. |
+| Start Deploy | Launches Foundry Deploy and waits for its startup acknowledgement. |
 
 Text statuses identify pending, running, completed, warning, failed, and cancelled work. Downloads show transferred data and a percentage when the total size is available. Longer operations show elapsed time.
 
 A warning describes a recoverable issue; startup can continue. A failure identifies the affected stage and displays the diagnostic session ID and log location.
 
-The final success message confirms that Deploy was launched. Wait for the deployment wizard before proceeding. If it does not appear, collect both Bootstrap and Deploy logs.
+The final ready message confirms that Deploy initialized its services and displayed a usable interface. A deployment password prompt counts as a usable interface; readiness does not mean that deployment has started or finished.
 
 Closing or cancelling Foundry Connect stops the boot workflow; it does not bypass network readiness. A Connect startup or configuration failure also prevents Deploy from launching. See [Network readiness](../foundry-connect/network-readiness.md) for the technician workflow.
+
+## Startup confirmation
+
+Connect and Deploy acknowledge managed startup, configuration loading, and UI readiness. Bootstrap waits up to two minutes for the first usable UI. After Connect acknowledges readiness, its network workflow can continue for as long as the technician needs; successful completion is still required before Deploy starts.
+
+If readiness is not confirmed within two minutes, Bootstrap stops with a timeout and preserves the last acknowledged stage. The application may still be running. Bootstrap does not kill or restart it, so inspect the screen and logs before trying another launch.
+
+Payloads without a compatible startup capability manifest keep process-only observation. Bootstrap shows a warning and reports readiness as unverified. An invalid manifest stops startup instead of silently bypassing confirmation. Recreate the media or refresh the affected runtime cache when investigating invalid startup metadata.
+
+An exit before Deploy handoff is a startup failure, even if a ready message was written just before it exited. Once Bootstrap confirms the handoff, later deployment errors belong to Deploy.
 
 ## Cache and connectivity
 
@@ -47,6 +57,8 @@ Debug-provisioned runtimes skip the normal release update lookup. Record whether
 Record the last console stage, the displayed result, and the diagnostic session ID. Bootstrap, Connect, and Deploy share that ID so their log entries can be matched across the same boot.
 
 Start with `FoundryBootstrap.log`, then collect the affected application's log. See [Windows PE log location](../troubleshooting/logs-and-support.md#windows-pe-log-location) for filenames, cache copies, and the information to preserve before rebooting.
+
+Each supervised launch also has a `Startup\<launch-id>` directory under its diagnostic session directory. `status.json` contains the last startup acknowledgement. When remote diagnostics permit it, `startup-failure.json` preserves a sanitized child exception for recovery. A terminating crash may leave minimal evidence in `startup-terminated.txt`. These files supplement the application logs.
 
 If Bootstrap does not display any progress, inspect `X:\Foundry\Logs\FoundryBootstrap.Launcher.log`. The Windows command launcher records the launch attempt and exit code even when the .NET runtime cannot start.
 
