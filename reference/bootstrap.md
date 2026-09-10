@@ -2,6 +2,11 @@
 
 Foundry Bootstrap prepares the Windows PE session, starts Foundry Connect, and launches Foundry Deploy after Connect succeeds. Use this page to follow startup progress or investigate a problem before the deployment wizard appears.
 
+<figure>
+  <img src="../.gitbook/assets/shared-bootstrap-01-download-progress.png" alt="Foundry Bootstrap showing startup stages and Foundry Connect download progress">
+  <figcaption>Follow startup stages and payload download progress in the Windows PE console.</figcaption>
+</figure>
+
 ## Boot media preparation
 
 Foundry OSD includes Bootstrap in every ISO and USB boot image at `X:\Foundry\Bootstrap\Foundry.Bootstrap.exe`. Windows PE runs `wpeinit` before launching it.
