@@ -2,6 +2,16 @@
 
 Foundry Bootstrap prepares the Windows PE session, starts Foundry Connect, and launches Foundry Deploy after Connect succeeds. Use this page to follow startup progress or investigate a problem before the deployment wizard appears.
 
+## Boot media preparation
+
+Foundry OSD includes Bootstrap in every ISO and USB boot image at `X:\Foundry\Bootstrap\Foundry.Bootstrap.exe`. Windows PE runs `wpeinit` before launching it.
+
+During media creation, release provisioning downloads the Bootstrap archive for the selected architecture from GitHub. Runtime downloads in the same media build use one release snapshot. If a required asset is missing or invalid, media creation fails with an error.
+
+Local development provisioning uses a supplied archive or publishes the local project. It does not fall back to a GitHub download when the local Bootstrap payload cannot be prepared.
+
+Bootstrap stays in the boot image while Connect and Deploy use their runtime caches. To refresh Bootstrap, [recreate or update the boot media](supported-versions.md#application-and-boot-media-updates).
+
 ## Startup progress
 
 The console shows five stages in order:
@@ -37,5 +47,7 @@ Debug-provisioned runtimes skip the normal release update lookup. Record whether
 Record the last console stage, the displayed result, and the diagnostic session ID. Bootstrap, Connect, and Deploy share that ID so their log entries can be matched across the same boot.
 
 Start with `FoundryBootstrap.log`, then collect the affected application's log. See [Windows PE log location](../troubleshooting/logs-and-support.md#windows-pe-log-location) for filenames, cache copies, and the information to preserve before rebooting.
+
+If Bootstrap does not display any progress, inspect `X:\Foundry\Logs\FoundryBootstrap.Launcher.log`. The Windows command launcher records the launch attempt and exit code even when the .NET runtime cannot start.
 
 For diagnostic data settings, see [Telemetry and privacy](telemetry-and-privacy.md). For refreshing existing media, see [Application and boot media updates](supported-versions.md#application-and-boot-media-updates).

@@ -33,6 +33,8 @@ X:\Foundry\Logs
 
 The active files are `FoundryBootstrap.log`, `FoundryConnect.log`, and `FoundryDeploy.log`. Collect any rotated files covering the failure as well. For a failure before the deployment wizard appears, start with the [bootstrap stage and outcome](../reference/bootstrap.md).
 
+`FoundryBootstrap.Launcher.log` records the Bootstrap launch attempt and process exit code. Collect it if no Bootstrap progress or application log appears.
+
 When a **Foundry Cache** volume is available, the bootstrap attempts to copy session logs to `<cache-drive>:\Logs\<session-id>`. Copying is best effort, so check that the files are present. Deploy can write additional logs after the bootstrap has finished.
 
 `X:` is temporary Windows PE storage. Copy relevant logs to persistent storage before rebooting; files on `X:` do not survive a reboot.
