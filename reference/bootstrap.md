@@ -14,17 +14,19 @@ Bootstrap stays in the boot image while Connect and Deploy use their runtime cac
 
 ## Startup progress
 
-The console shows five stages in order:
+Bootstrap clears the interactive console once and updates five stage rows in place:
 
 | Stage | What happens |
 | --- | --- |
-| Prepare environment | Selects the x64 or ARM64 runtime and storage location, then prepares wired authentication and supported wireless services. |
-| Start Connect | Resolves Foundry Connect, starts it, and waits for the network workflow to finish. |
-| Prepare system | Attempts to correct the clock and configure the time zone after Connect succeeds. |
-| Prepare deployment application | Resolves Foundry Deploy. On release-provisioned USB media, also checks for a Connect runtime update. |
-| Start Deploy | Launches Foundry Deploy and waits for its startup acknowledgement. |
+| Environment | Selects the x64 or ARM64 runtime and storage location, then prepares wired authentication and supported wireless services. |
+| Network connection | Resolves Foundry Connect, starts it, and waits for the network workflow to finish. |
+| Clock and time zone | Attempts to correct the clock and configure the time zone after Connect succeeds. |
+| Deployment files | Resolves Foundry Deploy. On release-provisioned USB media, also checks for a Connect runtime update. |
+| Deployment application | Launches Foundry Deploy and waits for its startup acknowledgement. |
 
-Text statuses identify pending, running, completed, warning, failed, and cancelled work. Downloads show transferred data and a percentage when the total size is available. Longer operations show elapsed time.
+Text statuses identify waiting, in-progress, completed, failed, and cancelled work. Completed stages are green, the current action is cyan, warnings are yellow, and failures are red. Colour supplements the text labels. Downloads show transferred data and a percentage when the total size is available; elapsed time remains visible throughout startup.
+
+Warnings remain visible after their stage completes. The final result retains a warning summary and provides the log location when attention is needed. If the console is too small, output is redirected, or cursor positioning is unavailable, Bootstrap uses plain sequential output.
 
 A warning describes a recoverable issue; startup can continue. A failure identifies the affected stage and displays the diagnostic session ID and log location.
 
