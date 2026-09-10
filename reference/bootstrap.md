@@ -24,9 +24,9 @@ Bootstrap clears the interactive console once and updates five stage rows in pla
 | Deployment files | Resolves Foundry Deploy. On release-provisioned USB media, also checks for a Connect runtime update. |
 | Deployment application | Launches Foundry Deploy and waits for its startup acknowledgement. |
 
-Text statuses identify waiting, in-progress, completed, failed, and cancelled work. Completed stages are green, the current action is cyan, warnings are yellow, and failures are red. Colour supplements the text labels. Downloads show transferred data and a percentage when the total size is available; elapsed time remains visible throughout startup.
+Text statuses identify waiting, in-progress, completed, failed, and cancelled work. Stage labels remain white, while statuses use green for completion, cyan for active work, yellow for warnings or cancellation, and red for failure. Each started stage shows its duration in grey. Downloads have a dedicated progress line with transferred data, a bar, and a percentage when the total size is available; total elapsed time remains visible throughout startup.
 
-Warnings remain visible after their stage completes. The final result retains a warning summary and provides the log location when attention is needed. If the console is too small, output is redirected, or cursor positioning is unavailable, Bootstrap uses plain sequential output.
+Warnings remain visible after their stage completes. The final subtitle identifies readiness, cancellation, or failure. The result retains a warning summary and provides the log location when attention is needed. Normal cancellation without warnings does not display a diagnostic footer. If the console is too small, output is redirected, or cursor positioning is unavailable, Bootstrap uses plain sequential output.
 
 A warning describes a recoverable issue; startup can continue. A failure identifies the affected stage and displays the diagnostic session ID and log location.
 
