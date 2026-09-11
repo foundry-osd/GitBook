@@ -8,7 +8,27 @@ In **Settings > General**, use **Export diagnostics** to save a sanitized archiv
 
 Use **Advanced: export raw logs** only when requested by a trusted support contact, and review the sensitive-data warning before sharing the archive. See [Export diagnostics](../foundry-osd/settings.md#export-diagnostics).
 
-Remote error diagnostics do not replace local logs or a support archive; delivery is best effort. See [Telemetry and privacy](../reference/telemetry-and-privacy.md#remote-error-diagnostics).
+Remote diagnostics supplement local logs and support archives. Keep local evidence when investigating a failure: remote delivery can have gaps, and external-tool log files are not automatically uploaded. See [Telemetry and privacy](../reference/telemetry-and-privacy.md#remote-error-diagnostics).
+
+## Find application logs in PostHog
+
+**Foundry's PostHog logs are retained for 7 days, then automatically deleted.** Preserve evidence needed for a longer investigation before it expires. This retention does not delete local files or set the retention of Error Tracking reports.
+
+{% hint style="info" %}
+**Unreleased: unified application logging**
+
+The workflow below describes the upcoming release's all-level logging and durable retry. The supported release sends a filtered and more broadly sanitized selection of logs. Check the installed application and media versions when comparing local and remote records.
+{% endhint %}
+
+1. Confirm **Enable remote diagnostics** was enabled in Foundry OSD or in the configuration used to create the affected media. **Enable telemetry** is not required for Logs.
+2. In PostHog Logs, select the time range covering the incident and the application service: `foundry_bootstrap`, `foundry_connect`, `foundry_deploy`, or `foundry_osd`.
+3. Include Trace, Debug, Info, Warn, Error, and Fatal. A zero count can simply mean no events at that level match the selected range.
+4. Use the diagnostic session and available operation context to follow the workflow. Bootstrap, Connect, and Deploy share a session for the same boot.
+5. Compare the event's original timestamp and identifier with the local record. Foundry keeps the creation time in OTLP, but PostHog replaces an indexed timestamp more than 24 hours from ingestion with the ingestion time. Check `$originalTimestamp` for the submitted value after a long offline period or an incorrect boot clock. Use the process sequence to resolve ordering within one process when the system clock was corrected. See [timestamp handling](../reference/telemetry-and-privacy.md#application-logs).
+
+Repeated messages are expected and are not rate limited by their content. Retries can create duplicate records with the same stable event identifier if the server accepted a batch but its response was lost.
+
+If records are missing, check consent, application version, network access, the selected time range, and local delivery-health warnings. Each queue is limited to 4,096 records or 50 MiB; overflow removes its oldest records. Reboot recovery requires storage that survives, such as the Foundry Cache volume. Startup failures before consent is readable and internal delivery-health warnings remain local. Enabling diagnostics later does not backfill local files recorded while diagnostics were disabled. See [Delivery and retention](../reference/telemetry-and-privacy.md#delivery-and-retention) for queue locations and storage limits.
 
 ## Information to record
 

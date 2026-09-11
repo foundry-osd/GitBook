@@ -1,6 +1,6 @@
 # Telemetry and privacy
 
-Foundry uses two independent data controls to understand application usage and diagnose operational failures without collecting deployment secrets. Both controls are enabled by default and can be disabled independently in **Settings**.
+Foundry uses two independent data controls: **Enable telemetry** for PostHog Product Analytics, and **Enable remote diagnostics** for PostHog Logs and Error Tracking. Both controls are enabled by default and can be disabled independently in **Settings**. Local application logging remains enabled when both controls are disabled.
 
 ## Anonymous product telemetry
 
@@ -22,35 +22,85 @@ Usage information can be reported even when media creation fails. File names, di
 
 ## Remote error diagnostics
 
-**Enable remote diagnostics** controls privacy-filtered operational logs and exception details sent to PostHog. This setting is separate from anonymous product telemetry, applies immediately to new diagnostic records, and is written to newly created media for Foundry Bootstrap, Foundry Connect, and Foundry Deploy.
+**Enable remote diagnostics** controls operational logs and exception reports sent to PostHog. This preference is separate from anonymous product telemetry, applies immediately to new diagnostic records, and is written to newly created media for Foundry Bootstrap, Foundry Connect, and Foundry Deploy. Changing it does not update existing media.
 
-Remote diagnostics include warning, error, and fatal events, plus information events explicitly marked as workflow diagnostics. Approved fields can include application and release context, random session or operation identifiers, workflow stage, duration, retry count, stable failure categories, and process exit codes.
+{% hint style="info" %}
+**Unreleased: unified application logging**
 
-Before delivery, Foundry applies an explicit property allowlist and sanitizes message, exception, and stack-trace content. Paths, URLs and other URIs, credentials, tokens, network identifiers, machine names, user names, and similar direct identifiers are removed or replaced. Full commands, process output, local file locations, and support-bundle details remain in local logs and are not exported as remote diagnostic attributes.
+The all-level logging and durable delivery behavior below belongs to the upcoming Foundry release. The supported release sends a filtered selection of operational logs with broader privacy sanitization; it does not provide the shared durable log outbox described here. Update the applications and [refresh boot media](supported-versions.md#application-and-boot-media-updates) when the release becomes available.
+{% endhint %}
 
-Remote delivery is best effort. Foundry OSD, Connect, and Deploy use a bounded in-memory queue with rate limiting and duplicate exception suppression, without a persistent outbox. Records can be dropped if the queue is full, the process exits, the network is unavailable, or PostHog rejects the request. A diagnostic delivery failure does not replace or change the original operation result.
+### Application logs
 
-Local logs remain the authoritative diagnostic source. Disabling remote diagnostics stops new records from entering the queue and discards records still waiting in Foundry's queue. Records already handed to the delivery transport may still be sent.
+Foundry OSD, Bootstrap, Connect, and Deploy use one shared application logging pipeline. A normal log call writes to the local file and, when remote diagnostics are enabled, queues the same event for PostHog. No additional remote marker is required. PostHog receives emitted events at all six levels:
+
+| Application level | PostHog level |
+| --- | --- |
+| Verbose / Trace | Trace |
+| Debug | Debug |
+| Information | Info |
+| Warning | Warn |
+| Error | Error |
+| Fatal / Critical | Fatal |
+
+Developer mode does not control the local-file or PostHog logging threshold. Repeated messages are retained without per-message rate limiting. A level can still show zero results when the application did not emit an event at that level or the selected time range contains none.
+
+The shared pipeline preserves the rendered message, message template, structured properties, and exception details, including stack traces. It masks recognized authentication secrets before writing either destination, rather than removing ordinary diagnostic properties. Paths, technical URLs, process output, machine names, network information, and tenant context can therefore appear when application code logs them. These logs are operational data, not anonymous product telemetry. Do not add credentials or unnecessary sensitive content to log messages; targeted masking cannot identify every arbitrary secret in free text.
+
+Events retain their original timestamp, represented in UTC for transport, plus a stable event identifier and a process sequence. Delivery after reconnecting does not replace the event time with the upload time. Clock correction during boot can change wall-clock order; the process sequence preserves emission order within that process. It is not a shared counter across all applications.
+
+PostHog can adjust the indexed timestamp after receiving a record. Its current ingestion code replaces timestamps more than 24 hours before or after ingestion with the ingestion time and keeps the submitted value in `$originalTimestamp`. Foundry still sends the original timestamp over OTLP. For a long offline period or an incorrect boot clock, inspect that attribute and the local log when comparing times. See [PostHog's log timestamp handling](https://github.com/PostHog/posthog/blob/master/rust/capture-logs/src/log_record.rs).
+
+Use `service.name` to select an application:
+
+| Application | Service |
+| --- | --- |
+| Foundry Bootstrap | `foundry_bootstrap` |
+| Foundry Connect | `foundry_connect` |
+| Foundry Deploy | `foundry_deploy` |
+| Foundry OSD | `foundry_osd` |
+
+Application version, component, and available session or operation context help correlate records. Bootstrap, Connect, and Deploy share a diagnostic session for the same boot; Foundry OSD has its own application session. Files written by external tools or the command launcher are not automatically uploaded by this application logging pipeline. Internal delivery failures stay local to avoid recursively logging failures through the failing transport. Startup failures before reporting consent can be read remain local.
+
+### Delivery and retention
+
+The shared log pipeline stores pending records before sending them asynchronously in batches over HTTPS using OpenTelemetry OTLP/Protobuf. It retires accepted batches after a successful server response and retries transient failures. Application execution and shutdown do not wait indefinitely for PostHog.
+
+Pending records are isolated by installation and PostHog destination. Disabling remote diagnostics stops new remote capture, invalidates unsent records, and attempts to delete their files. Persisted revocation markers prevent revoked queues from being replayed, including when deleting individual payload files fails. Storage failures are reported locally and can leave files on disk; disabling the setting is not a guarantee of physical file erasure. It does not delete logs already accepted by PostHog, and a request already in flight can still complete. Re-enabling diagnostics does not upload local log-file history collected while the setting was disabled.
+
+Each active or recovered log queue holds at most **4,096 records or 50 MiB**, whichever limit is reached first. If the queue exceeds a limit, it removes the oldest queued records and writes a local delivery-health warning with loss counts. A single record larger than the byte limit cannot be queued. These limits apply to each queue, not to the total storage used by every running application. Pending logs have no separate age-based expiry; PostHog's seven-day retention is independent and does not expire the local outbox.
+
+Foundry OSD stores pending logs under `PendingLogs` beside its selected application log files. Bootstrap stores its persistent queue under `<cache-drive>:\Diagnostics\Bootstrap\pending.jsonl.logs`. Connect and Deploy use `<cache-drive>:\Logs\PendingLogs` when Bootstrap supplies a valid cache-backed session directory; otherwise their queue sits under `PendingLogs` beside the selected local log files. Subdirectories separate services, hashed destinations, and process writers. Queue files contain masked operational records and should receive the same protection as local logs.
+
+Retry survives a process restart when the pending-record directory remains available and writable. Bootstrap uses bounded memory when no persistent cache is available. On Windows PE, data stored only on the `X:` RAM drive is lost on reboot. If storage fails, new records can remain only in bounded memory; a process exit can then lose them. Unavailable storage, exhausted capacity, or a rejected payload can leave gaps. The pipeline reports delivery losses locally. Preserve local logs when investigating a failure.
+
+Server acceptance is not a guarantee that a record is already searchable. If a server accepts a batch but its response is lost, retry can produce duplicates. Stable event identifiers allow those duplicates to be recognized; delivery does not guarantee exactly one copy.
+
+**Logs in Foundry's PostHog project are retained for 7 days, then automatically deleted.** This is the retention configured for this project, not a universal PostHog limit. It does not set the retention of local log files, pending delivery records, Product Analytics, or Error Tracking. Export any evidence needed for a longer investigation before it expires, following your organization's data-handling policy.
+
+### Error Tracking
+
+Error Tracking remains separate from the all-level Logs stream. Exception reports retain their conservative property allowlist, privacy sanitization, and duplicate suppression. Enabling Trace or recording repeated log entries does not create an equivalent number of Error Tracking reports. An exception can appear in both products, with more operational detail in Logs.
 
 ## Bootstrap reporting
 
-Bootstrap creates one `bootstrap:failed` product event when startup ends in an unrecoverable failure. It creates no product event for successful startup, cancellation, or a recovered warning. Remote diagnostics remain independently controlled: they can include sanitized warnings, exceptions, completed stages, and the terminal outcome even when product telemetry is disabled.
+Bootstrap creates one `bootstrap:failed` product event when startup ends in an unrecoverable failure. It creates no product event for successful startup, cancellation, or a recovered warning. Remote diagnostics remain independently controlled and can be enabled when product telemetry is disabled.
 
 Bootstrap reads its preferences from `X:\Foundry\Config\foundry.bootstrap.config.json`. Missing or invalid Bootstrap configuration keeps reporting local. An explicit opt-out in either child application's configuration also disables the corresponding Bootstrap category. Bootstrap reads these preferences without decrypting deployment or network secrets.
 
-Eligible records are captured before connectivity is available. Background delivery starts after Connect succeeds and system preparation has attempted clock synchronization. An earlier failure gets a bounded best-effort delivery attempt at shutdown. Reporting cannot prevent boot from continuing or change its result; shutdown allows at most two seconds for reporting and log flushing.
+Eligible records are captured before connectivity is available. Background delivery starts after Connect succeeds and system preparation has attempted clock synchronization. An earlier failure gets a bounded delivery attempt at shutdown. Reporting cannot prevent boot from continuing or change its result.
 
-With a **Foundry Cache** volume, Bootstrap retains sanitized pending records under `<cache-drive>:\Diagnostics\Bootstrap`. The journal is limited to 5 MB and seven days; age-based cleanup waits until the clock is usable. A boot replays at most 100 records within a shared five-second budget. Records are scoped to the installation and PostHog destination, and disabling a category removes its pending records. Without persistent cache storage, records remain in memory and are lost when Bootstrap exits.
+In the upcoming release, Bootstrap application logs use the shared [delivery and retention](#delivery-and-retention) mechanism. They keep their original timestamps even when captured before clock correction. Clock synchronization cannot retrospectively correct an inaccurate timestamp already recorded.
 
-Failure events keep the same event identifier across retries. Logs and exception reports use buffered transports without individual delivery receipts, so they can be submitted on up to three boots and duplicates are possible. If the cache journal cannot be updated, Bootstrap skips transmission to preserve these retry limits. Remote reporting remains best effort; collect local logs when investigating a failure.
+Product events and recovered Error Tracking reports keep their separate Bootstrap recovery journal under `<cache-drive>:\Diagnostics\Bootstrap` when a **Foundry Cache** volume is available. Their existing consent and recovery limits are independent of the shared log outbox. Without persistent storage, recovery cannot survive reboot. Do not treat a transferred startup failure record or a queued Error Tracking report as confirmation of PostHog log delivery.
 
 For an early Connect or Deploy failure, the child application writes a bounded, sanitized failure record before publishing its failure status. For a reported startup failure, Bootstrap allows up to five seconds for child cleanup before its own reporting shutdown. It can recover the record after the child exits, preserving its original application, exception details, and identifiers. The child does not independently upload the same transferred record. If Bootstrap has already stopped, a later boot can recover it from persistent cache storage once the child is no longer running. Temporary Windows PE storage is lost on reboot.
 
-Recovered child diagnostics use the same consent, destination, retention, and replay limits as Bootstrap diagnostics. Bootstrap reports a process outcome when no child exception is available; an exit code or readiness timeout is not presented as an invented child exception. Errors after UI readiness remain owned by the child application.
+Recovered child exceptions use Bootstrap's exception-recovery consent and destination rules. Bootstrap reports a process outcome when no child exception is available; an exit code or readiness timeout is not presented as an invented child exception. Errors after UI readiness remain owned by the child application.
 
 ## Privacy expectations
 
-Diagnostic and telemetry data must not include:
+Application code must not deliberately log or report:
 
 - Passwords or network secrets.
 - Tokens, private keys, or certificate contents.
@@ -58,9 +108,9 @@ Diagnostic and telemetry data must not include:
 - Sensitive query strings.
 - User content unrelated to the deployment workflow.
 
-Review the telemetry settings available in the current Foundry OSD release and apply organizational policy before deployment.
+Review the telemetry settings available in the installed Foundry OSD release and apply organizational policy before deployment. In the upcoming release, all-level Logs can contain operational identifiers that Product Analytics and Error Tracking exclude. Review access to the PostHog project accordingly.
 
-PostHog receives the connection source IP as transport metadata during direct HTTPS delivery. Foundry does not add it to event attributes, and Error Tracking events disable GeoIP enrichment.
+PostHog receives the connection source IP as transport metadata during direct HTTPS delivery. Product Analytics does not add it to event attributes, and Error Tracking events disable GeoIP enrichment. Operational log messages can contain network addresses logged by application code.
 
 ## Proxy settings
 

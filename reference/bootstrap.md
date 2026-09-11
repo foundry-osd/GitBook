@@ -71,6 +71,12 @@ Each supervised launch also has a `Startup\<launch-id>` directory under its diag
 
 If Bootstrap does not display any progress, inspect `X:\Foundry\Logs\FoundryBootstrap.Launcher.log`. The Windows command launcher records the launch attempt and exit code even when the .NET runtime cannot start.
 
-Bootstrap reports a product event only when startup fails. Separately enabled remote diagnostics can include sanitized warnings, exceptions, and stage outcomes. Delivery starts after network and clock preparation, with a bounded best-effort attempt when startup stops earlier. See [Bootstrap reporting](telemetry-and-privacy.md#bootstrap-reporting) for consent, pending records, and delivery limits.
+Bootstrap reports a product event only when startup fails. Remote application logs and Error Tracking reports are controlled separately from product telemetry. Delivery starts after network and clock preparation, with a bounded attempt when startup stops earlier. See [Bootstrap reporting](telemetry-and-privacy.md#bootstrap-reporting) for consent, pending records, and delivery limits.
+
+{% hint style="info" %}
+**Unreleased: unified application logging**
+
+The upcoming release sends emitted Bootstrap application logs to PostHog after remote-diagnostics consent is known. Earlier startup failures and internal delivery-health warnings remain local. Logs captured before network preparation keep their original timestamps and process sequence, with recognized authentication secrets masked in both local and remote output. Pending logs can be retried after a restart if their storage survives; data held only in memory or on `X:` is lost on reboot. Foundry's PostHog logs are automatically deleted after 7 days. Local files follow separate retention rules.
+{% endhint %}
 
 For refreshing existing media, see [Application and boot media updates](supported-versions.md#application-and-boot-media-updates).
