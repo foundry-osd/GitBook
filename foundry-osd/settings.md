@@ -8,7 +8,6 @@ Configure:
 
 - Whether Foundry OSD starts automatically with Windows.
 - The application display language.
-- Developer diagnostics.
 - Access to the application log directory.
 
 Changing application language updates the authoring interface. It does not select the Windows PE or deployed Windows language.
@@ -51,20 +50,35 @@ A successful test confirms only those Foundry OSD service checks. It does not va
 
 ## Telemetry
 
-Use **Enable telemetry** to control anonymous product telemetry. Use **Enable remote diagnostics** to control privacy-filtered operational logs and exception details. Both settings are enabled by default and can be disabled independently.
+The two reporting settings are independent and enabled by default:
+
+| Setting | When enabled |
+| --- | --- |
+| **Enable telemetry** | Sends anonymous usage and workflow events to PostHog Product Analytics. |
+| **Enable remote diagnostics** | Sends application logs to PostHog Logs and separate exception reports to Error Tracking. |
+
+Local application log files remain enabled when both settings are disabled.
 
 - Both toggles apply to the Foundry OSD desktop application.
 - Both preferences are synchronized into the runtime configuration used when media is created.
 
-Restart Foundry OSD after changing **Enable telemetry** so desktop reporting uses the saved preference. Remote-diagnostics changes apply immediately to new records. Recreate media to apply either preference to Foundry Connect and Foundry Deploy; existing media is unchanged.
+Restart Foundry OSD after changing **Enable telemetry** so desktop reporting uses the saved preference. Remote-diagnostics changes apply immediately to new records. Recreate media to apply either preference to Foundry Bootstrap, Foundry Connect, and Foundry Deploy; existing media is unchanged.
 
 Telemetry excludes names, secrets, SSIDs, IP addresses, file paths, disk identifiers, computer names, Autopilot profile names, serial numbers, and hardware hashes. Deployment telemetry can include the device vendor and model. Events use an anonymous identifier created for the Foundry installation.
 
 When telemetry is enabled, Foundry OSD can report the selected proxy method and, for a manual proxy, the authentication mode. It does not report the proxy address, port, bypass list, username, domain, password, PAC details, credentials, or tested URLs.
 
-Remote diagnostics include warning, error, and fatal events, plus explicitly marked terminal workflow diagnostics. Foundry applies an explicit property allowlist and sanitizes paths, URIs, credentials, tokens, network identifiers, machine names, user names, and similar direct identifiers before delivery to PostHog. Local logs remain the authoritative diagnostic source and are not modified by remote export.
+{% hint style="info" %}
+**Application logging**
 
-Remote delivery is best effort and does not use a persistent outbox. Records can be dropped when the queue is full, the application exits, the network is unavailable, or PostHog rejects a request. Disabling remote diagnostics stops new records from entering the delivery queue.
+Foundry sends every emitted application log level: Trace, Debug, Info, Warn, Error, and Fatal.
+{% endhint %}
+
+Local and remote application logs share the original message, structured properties, exception details, and original event timestamp after targeted masking of recognized authentication secrets. Windows PE events captured before clock synchronization use PostHog's receipt time for indexing while retaining their raw original timestamp; Foundry OSD keeps its usual event timestamps. See [timestamp handling](../reference/telemetry-and-privacy.md#application-logs). Operational identifiers, paths, network information, and tenant context can remain in Logs. Error Tracking keeps its separate, more restrictive sanitization and duplicate suppression.
+
+The shared delivery mechanism queues logs on writable storage and retries transient failures. Reboot recovery requires persistent storage. Disabling remote diagnostics invalidates unsent records and attempts to delete their files; filesystem failures can prevent physical deletion. A request already in flight can complete. Re-enabling the setting does not upload local files recorded while it was disabled.
+
+**Foundry's PostHog logs are retained for 7 days, then automatically deleted.** This does not change local-file retention. Pending delivery records have their own storage limits, and remote delivery can still have gaps or duplicates.
 
 See [Telemetry and privacy](../reference/telemetry-and-privacy.md) for the complete data and delivery boundaries.
 
