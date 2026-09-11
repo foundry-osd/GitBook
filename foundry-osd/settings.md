@@ -71,7 +71,7 @@ When telemetry is enabled, Foundry OSD can report the selected proxy method and,
 {% hint style="info" %}
 **Unreleased: unified application logging**
 
-The upcoming release sends every emitted application log level: Trace, Debug, Info, Warn, Error, and Fatal. The developer diagnostics card is removed: logging levels and warnings about missing translations no longer require a separate switch. The supported release still sends a filtered and more broadly sanitized selection of logs.
+The upcoming release sends every emitted application log level: Trace, Debug, Info, Warn, Error, and Fatal. The supported release still sends a filtered and more broadly sanitized selection of logs.
 {% endhint %}
 
 In the upcoming release, local and remote application logs share the original message, structured properties, exception details, and event timestamp after targeted masking of recognized authentication secrets. Operational identifiers, paths, network information, and tenant context can remain in Logs. Error Tracking keeps its separate, more restrictive sanitization and duplicate suppression.

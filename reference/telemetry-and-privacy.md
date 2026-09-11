@@ -43,7 +43,7 @@ Foundry OSD, Bootstrap, Connect, and Deploy use one shared application logging p
 | Error | Error |
 | Fatal / Critical | Fatal |
 
-No developer-mode switch is needed; the developer diagnostics card is removed. Repeated messages are retained without per-message rate limiting. A level can still show zero results when the application did not emit an event at that level or the selected time range contains none.
+Repeated messages are retained without per-message rate limiting. A level can still show zero results when the application did not emit an event at that level or the selected time range contains none.
 
 The shared pipeline preserves the rendered message, message template, structured properties, and exception details, including stack traces. It masks recognized authentication secrets before writing either destination, rather than removing ordinary diagnostic properties. Paths, technical URLs, process output, machine names, network information, and tenant context can therefore appear when application code logs them. These logs are operational data, not anonymous product telemetry. Do not add credentials or unnecessary sensitive content to log messages; targeted masking cannot identify every arbitrary secret in free text.
 
