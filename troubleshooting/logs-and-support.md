@@ -21,10 +21,10 @@ The workflow below describes the upcoming release's all-level logging and durabl
 {% endhint %}
 
 1. Confirm **Enable remote diagnostics** was enabled in Foundry OSD or in the configuration used to create the affected media. **Enable telemetry** is not required for Logs.
-2. In PostHog Logs, select the time range covering the incident and the application service: `foundry_bootstrap`, `foundry_connect`, `foundry_deploy`, or `foundry_osd`.
+2. In PostHog Logs, select the time range covering the incident and the application service: `foundry_bootstrap`, `foundry_connect`, `foundry_deploy`, or `foundry_osd`. For Windows PE logs created before clock synchronization, include the time when network access returned and PostHog received them.
 3. Include Trace, Debug, Info, Warn, Error, and Fatal. A zero count can simply mean no events at that level match the selected range.
 4. Use the diagnostic session and available operation context to follow the workflow. Bootstrap, Connect, and Deploy share a session for the same boot.
-5. Compare the event's original timestamp and identifier with the local record. Foundry keeps the creation time in OTLP, but PostHog replaces an indexed timestamp more than 24 hours from ingestion with the ingestion time. Check `$originalTimestamp` for the submitted value after a long offline period or an incorrect boot clock. Use the process sequence to resolve ordering within one process when the system clock was corrected. See [timestamp handling](../reference/telemetry-and-privacy.md#application-logs).
+5. Match the event identifier and original timestamp with the local record. If `diagnostics.clock_synchronized` is `false`, `diagnostics.timestamp_source` is `ingestion`: PostHog uses server receipt time for indexing while `diagnostics.original_timestamp` preserves the raw creation time. The flag reflects capture time, even if the clock was corrected before upload. Synchronized events and Foundry OSD use their creation time, although PostHog can replace an indexed timestamp more than 24 hours from ingestion and preserve the submitted value in `$originalTimestamp`. Use the process sequence to resolve ordering within one process when the system clock was corrected. See [timestamp handling](../reference/telemetry-and-privacy.md#application-logs).
 
 Repeated messages are expected and are not rate limited by their content. Retries can create duplicate records with the same stable event identifier if the server accepted a batch but its response was lost.
 
