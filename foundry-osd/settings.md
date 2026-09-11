@@ -69,14 +69,14 @@ Telemetry excludes names, secrets, SSIDs, IP addresses, file paths, disk identif
 When telemetry is enabled, Foundry OSD can report the selected proxy method and, for a manual proxy, the authentication mode. It does not report the proxy address, port, bypass list, username, domain, password, PAC details, credentials, or tested URLs.
 
 {% hint style="info" %}
-**Unreleased: unified application logging**
+**Application logging**
 
-The upcoming release sends every emitted application log level: Trace, Debug, Info, Warn, Error, and Fatal. The supported release still sends a filtered and more broadly sanitized selection of logs.
+Foundry sends every emitted application log level: Trace, Debug, Info, Warn, Error, and Fatal.
 {% endhint %}
 
-In the upcoming release, local and remote application logs share the original message, structured properties, exception details, and original event timestamp after targeted masking of recognized authentication secrets. Windows PE events captured before clock synchronization use PostHog's receipt time for indexing while retaining their raw original timestamp; Foundry OSD keeps its usual event timestamps. See [timestamp handling](../reference/telemetry-and-privacy.md#application-logs). Operational identifiers, paths, network information, and tenant context can remain in Logs. Error Tracking keeps its separate, more restrictive sanitization and duplicate suppression.
+Local and remote application logs share the original message, structured properties, exception details, and original event timestamp after targeted masking of recognized authentication secrets. Windows PE events captured before clock synchronization use PostHog's receipt time for indexing while retaining their raw original timestamp; Foundry OSD keeps its usual event timestamps. See [timestamp handling](../reference/telemetry-and-privacy.md#application-logs). Operational identifiers, paths, network information, and tenant context can remain in Logs. Error Tracking keeps its separate, more restrictive sanitization and duplicate suppression.
 
-The upcoming shared delivery mechanism queues logs on writable storage and retries transient failures. Reboot recovery requires persistent storage. Disabling remote diagnostics invalidates unsent records and attempts to delete their files; filesystem failures can prevent physical deletion. A request already in flight can complete. Re-enabling the setting does not upload local files recorded while it was disabled.
+The shared delivery mechanism queues logs on writable storage and retries transient failures. Reboot recovery requires persistent storage. Disabling remote diagnostics invalidates unsent records and attempts to delete their files; filesystem failures can prevent physical deletion. A request already in flight can complete. Re-enabling the setting does not upload local files recorded while it was disabled.
 
 **Foundry's PostHog logs are retained for 7 days, then automatically deleted.** This does not change local-file retention. Pending delivery records have their own storage limits, and remote delivery can still have gaps or duplicates.
 

@@ -14,11 +14,7 @@ Remote diagnostics supplement local logs and support archives. Keep local eviden
 
 **Foundry's PostHog logs are retained for 7 days, then automatically deleted.** Preserve evidence needed for a longer investigation before it expires. This retention does not delete local files or set the retention of Error Tracking reports.
 
-{% hint style="info" %}
-**Unreleased: unified application logging**
-
-The workflow below describes the upcoming release's all-level logging and durable retry. The supported release sends a filtered and more broadly sanitized selection of logs. Check the installed application and media versions when comparing local and remote records.
-{% endhint %}
+Check the installed application and media versions when comparing local and remote records.
 
 1. Confirm **Enable remote diagnostics** was enabled in Foundry OSD or in the configuration used to create the affected media. **Enable telemetry** is not required for Logs.
 2. In PostHog Logs, select the time range covering the incident and the application service: `foundry_bootstrap`, `foundry_connect`, `foundry_deploy`, or `foundry_osd`. For Windows PE logs created before clock synchronization, include the time when network access returned and PostHog received them.

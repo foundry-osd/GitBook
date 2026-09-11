@@ -24,12 +24,6 @@ Usage information can be reported even when media creation fails. File names, di
 
 **Enable remote diagnostics** controls operational logs and exception reports sent to PostHog. This preference is separate from anonymous product telemetry, applies immediately to new diagnostic records, and is written to newly created media for Foundry Bootstrap, Foundry Connect, and Foundry Deploy. Changing it does not update existing media.
 
-{% hint style="info" %}
-**Unreleased: unified application logging**
-
-The all-level logging and durable delivery behavior below belongs to the upcoming Foundry release. The supported release sends a filtered selection of operational logs with broader privacy sanitization; it does not provide the shared durable log outbox described here. Update the applications and [refresh boot media](supported-versions.md#application-and-boot-media-updates) when the release becomes available.
-{% endhint %}
-
 ### Application logs
 
 Foundry OSD, Bootstrap, Connect, and Deploy use one shared application logging pipeline. A normal log call writes to the local file and, when remote diagnostics are enabled, queues the same event for PostHog. No additional remote marker is required. PostHog receives emitted events at all six levels:
@@ -94,7 +88,7 @@ Bootstrap reads its preferences from `X:\Foundry\Config\foundry.bootstrap.config
 
 Eligible records are captured before connectivity is available. Background delivery starts after Connect succeeds and system preparation has attempted clock synchronization. An earlier failure gets a bounded delivery attempt at shutdown. Reporting cannot prevent boot from continuing or change its result.
 
-In the upcoming release, Bootstrap application logs use the shared [delivery and retention](#delivery-and-retention) mechanism. Events captured before successful clock synchronization retain their original time and unverified clock state, and use PostHog's receipt time for indexing. Later synchronization does not rewrite local records or pending events. See [Application logs](#application-logs) for timestamp comparison.
+Bootstrap application logs use the shared [delivery and retention](#delivery-and-retention) mechanism. Events captured before successful clock synchronization retain their original time and unverified clock state, and use PostHog's receipt time for indexing. Later synchronization does not rewrite local records or pending events. See [Application logs](#application-logs) for timestamp comparison.
 
 Product events and recovered Error Tracking reports keep their separate Bootstrap recovery journal under `<cache-drive>:\Diagnostics\Bootstrap` when a **Foundry Cache** volume is available. Their existing consent and recovery limits are independent of the shared log outbox. Without persistent storage, recovery cannot survive reboot. Do not treat a transferred startup failure record or a queued Error Tracking report as confirmation of PostHog log delivery.
 
@@ -112,7 +106,7 @@ Application code must not deliberately log or report:
 - Sensitive query strings.
 - User content unrelated to the deployment workflow.
 
-Review the telemetry settings available in the installed Foundry OSD release and apply organizational policy before deployment. In the upcoming release, all-level Logs can contain operational identifiers that Product Analytics and Error Tracking exclude. Review access to the PostHog project accordingly.
+Review the telemetry settings in Foundry OSD and apply organizational policy before deployment. All-level Logs can contain operational identifiers that Product Analytics and Error Tracking exclude. Review access to the PostHog project accordingly.
 
 PostHog receives the connection source IP as transport metadata during direct HTTPS delivery. Product Analytics does not add it to event attributes, and Error Tracking events disable GeoIP enrichment. Operational log messages can contain network addresses logged by application code.
 

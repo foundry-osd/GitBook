@@ -30,9 +30,9 @@ Bootstrap clears the interactive console once and updates five stage rows in pla
 | Deployment application | Launches Foundry Deploy and waits for its startup acknowledgement. |
 
 {% hint style="info" %}
-**Unreleased: early clock synchronization**
+**Clock synchronization**
 
-The upcoming release attempts clock synchronization before Connect with a total budget of two seconds. If networking is unavailable or the attempt fails, startup continues into Connect normally. After Connect succeeds, Bootstrap retries clock synchronization if it is still unverified, then applies the configured time zone. This early attempt does not perform time-zone detection or change Connect's network-readiness requirements.
+Bootstrap attempts clock synchronization before Connect with a total budget of two seconds. If networking is unavailable or the attempt fails, startup continues into Connect normally. After Connect succeeds, Bootstrap retries clock synchronization if it is still unverified, then applies the configured time zone. This early attempt does not perform time-zone detection or change Connect's network-readiness requirements.
 {% endhint %}
 
 Text statuses identify waiting, in-progress, completed, failed, and cancelled work. Stage labels remain white, while statuses use green for completion, cyan for active work, yellow for warnings or cancellation, and red for failure. Each started stage shows its duration in grey. Downloads have a dedicated progress line with transferred data, a bar, and a percentage when the total size is available; total elapsed time remains visible throughout startup. Archive verification and native ZIP extraction show measured progress bars. Cache replacement uses an activity indicator because directory moves do not provide a byte-based percentage.
@@ -80,9 +80,9 @@ If Bootstrap does not display any progress, inspect `X:\Foundry\Logs\FoundryBoot
 Bootstrap reports a product event only when startup fails. Remote application logs and Error Tracking reports are controlled separately from product telemetry. Delivery starts after network and clock preparation, with a bounded attempt when startup stops earlier. See [Bootstrap reporting](telemetry-and-privacy.md#bootstrap-reporting) for consent, pending records, and delivery limits.
 
 {% hint style="info" %}
-**Unreleased: unified application logging**
+**Application logging**
 
-The upcoming release sends emitted Bootstrap application logs to PostHog after remote-diagnostics consent is known. Earlier startup failures and internal delivery-health warnings remain local. Logs keep their original timestamps and process sequence, with recognized authentication secrets masked in both local and remote output. Events captured before successful clock synchronization use PostHog's receipt time for indexing and retain their raw time in `diagnostics.original_timestamp`; later synchronization does not change their captured clock state. See [timestamp handling](telemetry-and-privacy.md#application-logs). Pending logs can be retried after a restart if their storage survives; data held only in memory or on `X:` is lost on reboot. Foundry's PostHog logs are automatically deleted after 7 days. Local files follow separate retention rules.
+Bootstrap sends emitted application logs to PostHog after remote-diagnostics consent is known. Earlier startup failures and internal delivery-health warnings remain local. Logs keep their original timestamps and process sequence, with recognized authentication secrets masked in both local and remote output. Events captured before successful clock synchronization use PostHog's receipt time for indexing and retain their raw time in `diagnostics.original_timestamp`; later synchronization does not change their captured clock state. See [timestamp handling](telemetry-and-privacy.md#application-logs). Pending logs can be retried after a restart if their storage survives; data held only in memory or on `X:` is lost on reboot. Foundry's PostHog logs are automatically deleted after 7 days. Local files follow separate retention rules.
 {% endhint %}
 
 For refreshing existing media, see [Application and boot media updates](supported-versions.md#application-and-boot-media-updates).
