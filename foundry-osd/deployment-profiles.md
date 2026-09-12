@@ -135,4 +135,6 @@ To replace a shared access key, use **Create shared profile** with a fresh dedic
 
 Select the intended profile, check passwords and source files, and resolve readiness issues before starting media creation. Foundry captures the configuration, secret values, and selected file bytes for that build. A later edit or shared update does not change the inputs of the running build.
 
+Custom drivers remain local and are copied into the build snapshot. The selected driver source must fit within **2 GiB** and **10,000 filesystem entries**; use a focused driver source for the target hardware.
+
 Profile package encryption does not replace [Protected deployment](general.md#protected-deployment) or the [security requirements for deployment media](../reference/security-and-credentials.md). Recreate media when its embedded credentials or deployment settings change.
