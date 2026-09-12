@@ -2,6 +2,8 @@
 
 Use **Settings > Deployment profiles** to keep named deployment configurations, transfer them in encrypted packages, and synchronize a profile with a trusted deployment team.
 
+The card header contains the profile selector and **Open**. Expand the card to access profile actions, password retention, and synchronization. The **Active profile** row names the configuration affected by management actions; selecting another profile does not activate it until you choose **Open** and confirm.
+
 A profile contains authoring settings and, when explicitly included, passwords and selected deployment files. Activating a profile replaces the current authoring configuration. It does not change media that has already been created.
 
 ## Create and select a local profile
@@ -11,7 +13,7 @@ A profile contains authoring settings and, when explicitly included, passwords a
 3. Enter a name and continue. The new independent profile becomes active.
 4. To return to another profile, select it in the profile list, choose **Open**, and confirm replacement.
 
-Changes to the active profile are saved locally after a short pause. **Save as copy** creates a separate identity without shared enrollment; it starts with password remembering disabled. Use the profile management menu to rename, change password retention, export, or delete the active profile.
+Changes to the active profile are saved locally after a short pause. **Save as copy** creates a separate identity without shared enrollment; it starts with password remembering disabled. The **Active profile** row groups **Save as copy**, **Import as copy**, **Export encrypted profile**, and **Manage**. Use **Manage** to rename, share, forget credentials, or delete the active profile. The separate **Remember passwords** row shows the current retention state; its **Manage** button opens the retention confirmation dialog.
 
 Closing Foundry saves pending edits. If the profile cannot be saved, cancel closing to complete the inputs or resolve the storage problem. Choosing **Close** keeps the last successfully saved revision.
 
@@ -107,7 +109,7 @@ If you do not remember the shared key, it remains available for the current sess
 
 ## Synchronize and resolve conflicts
 
-Enable **Automatic sync** to check for changes periodically, or use **Sync now**. Turning off automatic synchronization keeps the local profile available; use **Sync now** when you want to synchronize manually.
+The synchronization row appears for shared profiles. Enable the **Automatic sync** switch to check for changes periodically, or use **Sync now**. Turning off automatic synchronization keeps the local profile available; use **Sync now** when you want to synchronize manually.
 
 Foundry publishes only against the shared revision it last read. When another editor publishes first, it preserves the local draft and reports a conflict instead of choosing a winner by file timestamp. Coordinate with the other editor before choosing an action:
 
