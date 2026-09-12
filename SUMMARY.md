@@ -31,6 +31,7 @@
     * [Update a USB drive](foundry-osd/media/update-usb.md)
     * [Use existing PXE infrastructure](foundry-osd/media/pxe-deployment.md)
   * [Settings](foundry-osd/settings.md)
+  * [Deployment profiles](foundry-osd/deployment-profiles.md)
 * [Foundry Connect](foundry-connect/README.md)
   * [Network readiness](foundry-connect/network-readiness.md)
 * [Foundry Deploy](foundry-deploy/README.md)

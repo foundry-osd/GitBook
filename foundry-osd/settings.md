@@ -1,6 +1,12 @@
 # Settings
 
-Foundry OSD settings mostly control the desktop application. The telemetry and remote-diagnostics toggles also affect the runtime configuration written during media creation. Proxy settings are limited to the Foundry OSD application.
+Foundry OSD settings control the desktop application and provide access to deployment profiles. The telemetry and remote-diagnostics toggles also affect the runtime configuration written during media creation. Proxy settings are limited to the Foundry OSD application.
+
+## Deployment profiles
+
+Use **Deployment profiles** to select named configurations, remember supported authoring passwords for your Windows user, import or export encrypted packages, and synchronize a profile with a trusted team through an SMB share. Local password retention, inclusion of secrets in shared profiles, and remembering the shared access key are separate choices.
+
+See [Deployment profiles](deployment-profiles.md) for profile activation, Forget, recovery packages, and conflict resolution.
 
 ## General
 
