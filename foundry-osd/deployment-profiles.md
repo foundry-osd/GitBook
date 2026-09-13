@@ -169,7 +169,11 @@ After that startup check, automatic activation of a remote update waits until th
 
 **More options > Delete from this PC** removes that workstation's enrollment. Deleting the shared profile requires **Also delete for everyone** and a separate confirmation. A remote deletion is reported to other editors; preserve needed local work with **Duplicate** rather than attempting to revive the deleted profile.
 
-The shared repository accepts up to **4,096 revisions**. When the history limit is reached, disconnect the reviewed current profile, share it in a new network folder, and distribute the new connection file. Do not manually remove revision files or substitute an older backup to bypass a history or rollback warning.
+A shared configuration can keep receiving updates without a lifetime publication limit. After safely saving an update, Foundry keeps the **20 most recent encrypted configuration snapshots** and removes older snapshot files. A cleanup failure produces a warning in the logs and does not prevent the update from being published.
+
+Small synchronization records remain available so PCs returning after time offline can reconnect and interrupted updates can recover safely. These records continue to accumulate, so the 20-snapshot retention rule does not cap the total file count or storage used by the shared folder. Let Foundry manage snapshot cleanup; do not manually delete synchronization records or replace them with an older backup.
+
+Update every PC using the shared configuration to use this retention behavior. Existing shared folders and connection files remain usable without disconnecting or creating a new shared configuration.
 
 To replace a shared access key, **Disconnect** the reviewed configuration, then choose **Set up synchronization… > Share this configuration** with a new configuration name or parent folder. Foundry creates a new connection file for enrolling the team against that folder and leaves the old repository intact. If you need to keep the original local enrollment too, **Duplicate** the reviewed configuration instead and review the copy’s password and sharing choices before setting up the new folder. Old key holders can continue using that repository while they have access to it: remove their old share permissions or archive the folder with restricted access. A new key cannot revoke secrets or packages that someone already copied. Rotate the underlying passwords and certificates when exposure requires it.
 
