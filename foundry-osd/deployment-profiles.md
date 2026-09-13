@@ -101,7 +101,9 @@ Do not place the shared repository in a OneDrive, Dropbox, or other cloud-synchr
 6. Choose whether to **Remember this connection on this PC**, then select **Share**.
 7. Foundry creates `Connection.foundryprofile` inside the new shared configuration folder. Check synchronization status and give the other PCs access to this file, with its password supplied separately.
 
-The dialog keeps the configuration name, folder, password, and password confirmation together, followed by the two sharing choices. Its width adapts to smaller windows, with related choices and helper text grouped together. The main action is highlighted; destructive confirmations keep **Cancel** as the default. Select **Learn more** for the shared-folder requirements and recovery guidance on this page.
+If sharing is interrupted, restore access to the shared folder and choose **Synchronize** on the same configuration to resume setup and the connection-file upload. Keep the shared folder and this PC’s local profile data intact while retrying. If you did not select **Remember this connection on this PC**, keep Foundry open until the connection file is available; restarting before then can leave you without the access key needed to resume.
+
+Select **Learn more** for the shared-folder requirements and recovery guidance on this page.
 
 If the named folder already exists, choose **Connect** and provide its connection file, or **Choose another name**. Existing folders and files are not overwritten. Renaming the configuration later changes its display name while keeping its synchronization folder in place.
 
@@ -118,10 +120,12 @@ Keep a protected recovery copy **outside the shared repository** as well. The au
 On another workstation:
 
 1. Choose **Set up synchronization…** in the **Synchronize** row, then **Connect to a shared configuration**, and select `Connection.foundryprofile` from the team’s shared configuration folder or a protected copy supplied by your team. The file picker initially shows `.foundryprofile` files, with **All files** available as an alternative. If this PC is already enrolled but has lost its access key, choose **Restore access** instead.
-2. Enter the **Connection password** and review the preview.
-3. Check the configuration’s full UNC folder, such as `\\server\share\Foundry\Deployment - Paris`, rather than its parent share. Foundry fills in the path carried by the connection file or the existing-name prompt. Older files without a path require you to enter it.
-4. Review **Remember passwords**, which is selected by default when the connection file contains a complete profile. It is left unchecked when any passwords or files are omitted or unavailable; supply the missing inputs after connecting, then enable it. Choose **Remember this connection on this PC** separately; it controls access to synchronization, not local password retention.
-5. Continue to validate the shared identity and activate its current revision.
+2. Enter the **Connection password**.
+3. Check the configuration’s full UNC folder, such as `\\server\share\Foundry\Deployment - Paris`, rather than its parent share. Foundry fills in the path carried by the connection file or the existing-name prompt. Older files without a path require you to enter it. Continue to validate the shared identity and load its current revision for preview.
+4. Review the current shared configuration’s name and included-file and password counts. Review **Remember passwords**, which is selected by default when that revision is complete. It is left unchecked when any passwords or files are omitted or unavailable; supply the missing inputs after connecting, then enable it. Choose **Remember this connection on this PC** separately; it controls access to synchronization, not local password retention.
+5. Continue to activate the reviewed revision. If another PC changes the shared configuration before confirmation completes, Foundry shows the latest preview and asks you to confirm again.
+
+**Restore access** validates the connection file against the existing enrollment and restores access without replacing the current local draft. It does not repeat the shared-folder selection or current-revision activation steps.
 
 If a connection file contains a NAS name that this PC cannot resolve, open the file directly through a reachable server name or IP address. When the selected file is in the same share and relative configuration folder as the saved path, Foundry prefills that reachable server address. A file opened from a local backup or a different folder keeps its saved path; check and correct the shared folder before connecting. This changes the suggested address only: Foundry still validates the shared configuration’s identity and access key.
 
@@ -129,7 +133,9 @@ If you do not remember the shared key, it remains available for the current sess
 
 ## Synchronize and resolve conflicts
 
-The **Synchronize** row shows **Set up synchronization…** for a local profile. A shared profile provides **Synchronize** and **Disconnect**. When this PC lacks its shared access key, **Restore access** replaces the synchronization action. Enable the separate **Automatic sync** switch to check for changes at startup and every **30 seconds** afterward, or choose **Synchronize** when needed. Local edits are saved after about **750 milliseconds** of inactivity; the next automatic check publishes them. Checks defer while a dialog or operation is running and for two seconds after an edit. Turning off automatic synchronization keeps the local profile available for editing and manual synchronization.
+The **Synchronize** row shows **Set up synchronization…** for a local profile. A shared profile provides **Synchronize** and **Disconnect**. When this PC lacks its shared access key, **Restore access** replaces the synchronization action. Enable the separate **Automatic sync** switch to check for changes at startup and every **30 seconds** afterward, or choose **Synchronize** when needed. Local edits are saved after about **750 milliseconds** of inactivity; the next automatic check publishes changes to shared settings. Checks defer while a dialog or operation is running and for two seconds after an edit. Turning off automatic synchronization keeps the local profile available for editing and manual synchronization.
+
+ISO output paths, custom driver directories, and telemetry or remote-diagnostics choices stay local to this PC. Changing only these settings does not queue a shared revision for publication.
 
 Choose **Disconnect** and confirm to stop synchronizing this configuration on this PC. Foundry keeps the current local settings and password-remembering choice, removes this PC’s shared connection and retained shared access, and leaves the shared configuration and other PCs unchanged. To connect to a different shared configuration afterward, choose **Set up synchronization…**.
 
@@ -163,11 +169,11 @@ Recovery recognizes changes that were already shared and avoids publishing them 
 
 At startup, Foundry checks the active shared configuration in the background after local settings and startup readiness are restored. With automatic synchronization enabled and the shared access key available, it can apply a remote update before you start editing, including from Home. Conflicting local changes still require your choice. If you did not remember the connection on this PC, use **Restore access** after restarting.
 
-After that startup check, automatic activation of a remote update waits until the **Settings backup and sync** card in Settings is open and no profile dialog or media operation is running. During editing elsewhere, an available update does not silently replace the authoring configuration. Return to the card, review status, and use **Synchronize** when ready.
+After that startup check, automatic activation of a remote update waits until the **Settings** page is open and no profile dialog or media operation is running. The **Settings backup and sync** card can be collapsed. During editing elsewhere, an available update does not silently replace the authoring configuration. Return to Settings to allow the update to apply, or expand the card and choose **Synchronize**.
 
 ### Deletion, history, and key replacement
 
-**More options > Delete from this PC** removes that workstation's enrollment. Deleting the shared profile requires **Also delete for everyone** and a separate confirmation. A remote deletion is reported to other editors; preserve needed local work with **Duplicate** rather than attempting to revive the deleted profile.
+**More options > Delete from this PC** deletes the local profile and clears the active authoring configuration, including its session passwords and shared enrollment. Use **Disconnect** to keep the local configuration while removing its enrollment. Deleting the shared profile requires **Also delete for everyone** and a separate confirmation. A remote deletion is reported to other editors; preserve needed local work with **Duplicate** rather than attempting to revive the deleted profile.
 
 A shared configuration can keep receiving updates without a lifetime publication limit. After safely saving an update, Foundry keeps the **20 most recent encrypted configuration snapshots** and removes older snapshot files. A cleanup failure produces a warning in the logs and does not prevent the update from being published.
 
