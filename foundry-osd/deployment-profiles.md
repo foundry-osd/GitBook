@@ -77,7 +77,7 @@ Send the passphrase through a separate trusted channel. Anyone who can decrypt a
 
 Remembering requires a complete profile. For a package with omitted or unavailable passwords or files, import without remembering, supply the missing inputs, then enable **Remember passwords**.
 
-An import creates an independent local copy with a new profile identity. It does not join synchronization, including when the selected file is a connection file. To connect to a shared configuration, choose **Set up** in the **Synchronize** row, then **Connect to a shared configuration**. For an already shared profile, open the arrow beside **Synchronize** to find **Set up**.
+An import creates an independent local copy with a new profile identity. It does not join synchronization, including when the selected file is a connection file. To connect to a shared configuration, choose **Set up synchronization…** in the **Synchronize** row, then **Connect to a shared configuration**. For an already shared profile, choose **Connection settings…** beside **Synchronize**.
 
 A wrong passphrase, altered package, or unsupported package version fails validation before activation. Keep the original file and resolve the cause instead of replacing an existing profile with an empty configuration.
 
@@ -87,7 +87,7 @@ Use one authoritative SMB folder for each shared profile. Prepare a dedicated UN
 
 Do not place the shared repository in a OneDrive, Dropbox, or other cloud-synchronized mirror. Multiple independent replicas do not provide the locking and conditional publication expected by this workflow. Use a NAS only after validating its SMB locking, rename, reconnect, and failover behavior with your deployment environment; a working file browser alone does not establish compatibility.
 
-1. Activate the local profile, choose **Set up** in the **Synchronize** row, then **Share this configuration**.
+1. Activate the local profile, choose **Set up synchronization…** in the **Synchronize** row, then **Share this configuration**.
 2. Enter or browse to the dedicated UNC folder.
 3. Choose whether published revisions include secrets.
 4. Choose whether to remember the shared key on this computer, then continue.
@@ -103,17 +103,17 @@ Store recovery material **outside the shared repository**; Foundry rejects expor
 
 On another workstation:
 
-1. Choose **Set up** in the **Synchronize** row, then **Connect to a shared configuration**, and select the connection file supplied by your team. For an already shared profile, **Set up** is under the arrow beside **Synchronize**.
+1. Choose **Set up synchronization…** in the **Synchronize** row, then **Connect to a shared configuration**, and select the connection file supplied by your team. For an already shared profile, choose **Connection settings…** beside **Synchronize**.
 2. Enter the passphrase and review the preview.
 3. Provide the authoritative UNC folder.
 4. Choose local password remembering and shared-key remembering separately.
 5. Continue to validate the shared identity and activate its current revision.
 
-If you do not remember the shared key, it remains available for the current session. After a restart or a switch that clears it, use **Set up > Connect to a shared configuration** with the connection file to join again. Keep the connection file and passphrase accessible before relying on this policy.
+If you do not remember the shared key, it remains available for the current session. After a restart or a switch that clears it, use **Connection settings… > Connect to a shared configuration** with the connection file to join again. Keep the connection file and passphrase accessible before relying on this policy.
 
 ## Synchronize and resolve conflicts
 
-The **Synchronize** row shows **Set up** for a local profile and **Synchronize** for a shared profile. The arrow beside the button provides **Set up** when you need to change or restore a shared connection. For a shared profile, enable the separate **Automatic sync** switch to check for changes periodically, or choose **Synchronize** when needed. Turning off automatic synchronization keeps the local profile available for editing and manual synchronization.
+The **Synchronize** row shows **Set up synchronization…** for a local profile. A shared profile has separate **Synchronize** and **Connection settings…** buttons: the first synchronizes changes, while the second changes or restores the shared connection. For a shared profile, enable the separate **Automatic sync** switch to check for changes periodically, or choose **Synchronize** when needed. Turning off automatic synchronization keeps the local profile available for editing and manual synchronization.
 
 Foundry publishes only against the shared revision it last read. When another editor publishes first, it preserves the local draft and reports a conflict instead of choosing a winner by file timestamp. Coordinate with the other editor before choosing an action:
 
@@ -135,7 +135,7 @@ Automatic activation of a remote update waits until the Deployment profiles card
 
 The shared repository accepts up to **4,096 revisions**. When the history limit is reached, create a fresh shared repository from the reviewed current profile and distribute new recovery material. Do not manually remove revision files or substitute an older backup to bypass a history or rollback warning.
 
-To replace a shared access key, open the arrow beside **Synchronize**, choose **Set up > Share this configuration** with a fresh dedicated folder, then save a new connection file and enroll the team against that folder. This replaces the local enrollment and leaves the old repository intact. If you need to keep the original local enrollment too, **Duplicate** the reviewed configuration first and review the copy's password and sharing choices before setting up the new folder. Old key holders can continue using that repository while they have access to it: remove their old share permissions or archive the folder with restricted access. A new key cannot revoke secrets or packages that someone already copied. Rotate the underlying passwords and certificates when exposure requires it.
+To replace a shared access key, choose **Connection settings… > Share this configuration** with a fresh dedicated folder, then save a new connection file and enroll the team against that folder. This replaces the local enrollment and leaves the old repository intact. If you need to keep the original local enrollment too, **Duplicate** the reviewed configuration first and review the copy's password and sharing choices before setting up the new folder. Old key holders can continue using that repository while they have access to it: remove their old share permissions or archive the folder with restricted access. A new key cannot revoke secrets or packages that someone already copied. Rotate the underlying passwords and certificates when exposure requires it.
 
 ## Create media from the selected profile
 

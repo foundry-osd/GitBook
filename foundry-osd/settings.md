@@ -6,7 +6,7 @@ Foundry OSD settings control the desktop application and provide access to deplo
 
 Use **Deployment profiles** to select named configurations, remember supported authoring passwords for your Windows user, import or export encrypted packages, and synchronize a profile with a trusted team through an SMB share. Local password retention, inclusion of secrets in shared profiles, and remembering the shared access key are separate choices.
 
-Expand the card for **Import**, **Export**, **Synchronize**, and **Remember passwords**. Use **Set up** in the **Synchronize** row to share a local configuration or connect to one supplied by your team. **More options** beside the profile selector contains rename, duplicate, and delete actions.
+Expand the card for **Import**, **Export**, **Synchronize**, and **Remember passwords**. Use **Set up synchronization…** in the **Synchronize** row to share a local configuration or connect to one supplied by your team. **More options** beside the profile selector contains rename, duplicate, and delete actions.
 
 See [Deployment profiles](deployment-profiles.md) for profile activation, clearing saved passwords and access, connection files, and conflict resolution.
 
