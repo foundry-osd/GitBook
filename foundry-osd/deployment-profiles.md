@@ -129,7 +129,7 @@ If you do not remember the shared key, it remains available for the current sess
 
 ## Synchronize and resolve conflicts
 
-The **Synchronize** row shows **Set up synchronization…** for a local profile. A shared profile provides **Synchronize** and **Disconnect**. When this PC lacks its shared access key, **Restore access** replaces the synchronization action. Enable the separate **Automatic sync** switch to check for changes periodically, or choose **Synchronize** when needed. Turning off automatic synchronization keeps the local profile available for editing and manual synchronization.
+The **Synchronize** row shows **Set up synchronization…** for a local profile. A shared profile provides **Synchronize** and **Disconnect**. When this PC lacks its shared access key, **Restore access** replaces the synchronization action. Enable the separate **Automatic sync** switch to check for changes at startup and every **30 seconds** afterward, or choose **Synchronize** when needed. Local edits are saved after about **750 milliseconds** of inactivity; the next automatic check publishes them. Checks defer while a dialog or operation is running and for two seconds after an edit. Turning off automatic synchronization keeps the local profile available for editing and manual synchronization.
 
 Choose **Disconnect** and confirm to stop synchronizing this configuration on this PC. Foundry keeps the current local settings and password-remembering choice, removes this PC’s shared connection and retained shared access, and leaves the shared configuration and other PCs unchanged. To connect to a different shared configuration afterward, choose **Set up synchronization…**.
 
@@ -161,7 +161,9 @@ While the share is unavailable, edits remain local. If a connection fails during
 
 Recovery recognizes changes that were already shared and avoids publishing them twice. Edits made afterward remain pending, and simultaneous changes from another PC still require a conflict decision. Turning automatic synchronization off or on preserves changes waiting to be shared.
 
-Automatic activation of a remote update waits until the **Settings backup and sync** card in Settings is open and no profile dialog or media operation is running. During editing elsewhere, an available update does not silently replace the authoring configuration. Return to the card, review status, and use **Synchronize** when ready.
+At startup, Foundry checks the active shared configuration in the background after local settings and startup readiness are restored. With automatic synchronization enabled and the shared access key available, it can apply a remote update before you start editing, including from Home. Conflicting local changes still require your choice. If you did not remember the connection on this PC, use **Restore access** after restarting.
+
+After that startup check, automatic activation of a remote update waits until the **Settings backup and sync** card in Settings is open and no profile dialog or media operation is running. During editing elsewhere, an available update does not silently replace the authoring configuration. Return to the card, review status, and use **Synchronize** when ready.
 
 ### Deletion, history, and key replacement
 
