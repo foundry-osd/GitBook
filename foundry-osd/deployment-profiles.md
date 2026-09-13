@@ -1,6 +1,6 @@
 # Deployment profiles
 
-Use **Settings > Deployment profiles** to keep named deployment configurations, transfer them in encrypted packages, and synchronize a profile with a trusted deployment team.
+Use **Settings > Settings backup and sync** to keep named deployment configurations, transfer them in encrypted packages, and synchronize a profile with a trusted deployment team.
 
 The card header names the active configuration and contains the profile selector, **Open**, and **More options**. Selecting another profile does not activate it until you choose **Open** and confirm. Actions always affect the active configuration named in the header.
 
@@ -11,7 +11,7 @@ A profile contains authoring settings and, when explicitly included, passwords a
 ## Create and select a local profile
 
 1. Configure the deployment in Foundry OSD.
-2. Open **Settings > Deployment profiles** and select **More options > Duplicate**.
+2. Open **Settings > Settings backup and sync** and select **More options > Duplicate**.
 3. Enter a name and continue. The new independent profile becomes active.
 4. To return to another profile, select it in the profile list, choose **Open**, and confirm replacement.
 
@@ -127,7 +127,7 @@ Conflict decisions apply to the whole profile, not individual fields. If the sha
 
 While the share is unavailable, edits remain local. If a connection fails during publication, Foundry keeps the encrypted pending operation and checks whether that exact operation committed before retrying it. Keep local profile and pending-operation files intact while recovery is unresolved.
 
-Automatic activation of a remote update waits until the Deployment profiles card in Settings is open and no profile dialog or media operation is running. During editing elsewhere, an available update does not silently replace the authoring configuration. Return to the card, review status, and use **Synchronize** when ready.
+Automatic activation of a remote update waits until the **Settings backup and sync** card in Settings is open and no profile dialog or media operation is running. During editing elsewhere, an available update does not silently replace the authoring configuration. Return to the card, review status, and use **Synchronize** when ready.
 
 ### Deletion, history, and key replacement
 
