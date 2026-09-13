@@ -10,6 +10,8 @@ Configure network settings that Foundry Connect can use in Windows PE.
 
 Only include profiles and certificates required for deployment. Generated media may contain sensitive network configuration and must be protected accordingly.
 
+Use [deployment profiles](../deployment-profiles.md) to retain network settings and explicitly selected passwords or files, or to transfer them in an encrypted package. Review missing credentials and local certificate paths after activating or importing a profile.
+
 ## Windows profile roaming
 
 Foundry can import selected Wi-Fi and wired 802.1X profiles into the installed Windows system before OOBE. Configure roaming separately for each connection type.

@@ -2,6 +2,8 @@
 
 The Start page validates configuration and creates or updates Foundry deployment media.
 
+Choose the intended [deployment profile](../deployment-profiles.md) before starting. Foundry uses the settings, passwords, and selected files from when you start creating media. Later edits or synchronized changes do not alter that running build.
+
 ## Review readiness
 
 Resolve every blocking readiness item before starting. Checks cover Windows ADK and Windows PE, architecture, language, boot-image source, output paths, USB target, media options, drivers, networking, runtime configuration, secrets, customization, and Windows Autopilot.
