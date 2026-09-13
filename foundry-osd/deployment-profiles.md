@@ -2,9 +2,9 @@
 
 Use **Settings > Settings backup and sync** to keep named deployment configurations, transfer them in encrypted packages, and synchronize a profile with a trusted deployment team.
 
-The card header contains the active configuration selector and **More options**. Selecting a configuration saves pending changes to the current profile and applies the selected configuration immediately. The selector always reflects the active configuration; when none is active, it displays **Choose a configuration**. **More options** contains **Rename**, **Duplicate**, and **Delete from this PC**.
+The card header contains the active configuration selector and **More options**. Selecting a configuration saves pending changes to the current profile and applies the selected configuration immediately. The selector always reflects the active configuration; when none is active, it displays **Choose a configuration**. **More options** contains **Rename**, **Duplicate**, and **Delete from this PC**. For a shared configuration, it also provides **Save connection file** when shared access is available.
 
-Expand the card to find separate **Import**, **Export**, **Synchronize**, and **Remember passwords** rows. Each row explains its purpose and places its action beside that explanation. **Synchronize** remains visible for local profiles so you can set up sharing; shared profiles also show **Automatic sync** and **Save connection file**.
+Expand the card to find separate **Import**, **Export**, **Synchronize**, and **Remember passwords** rows. Each row explains its purpose and places its action beside that explanation. **Synchronize** remains visible for local profiles so you can set up sharing. Shared profiles also show **Automatic sync** and a **Disconnect** action.
 
 A profile contains authoring settings and, when explicitly included, passwords and selected deployment files. Activating a profile replaces the current authoring configuration. It does not change media that has already been created.
 
@@ -37,7 +37,7 @@ These choices are independent:
 | Include passwords and confidential files | Includes the available passwords and selected file contents when exporting or creating a shared profile, for recipients who can decrypt it. |
 | Remember this connection on this PC | Stores the shared profile access key for this Windows user so synchronization can resume after restarting Foundry OSD. |
 
-Local profile files are encrypted. Windows Credential Manager holds the keys for the Windows user running Foundry OSD, on that computer. Even a settings-only local profile needs its local encryption key. Copying the local profile directory to another computer or running Foundry OSD as another Windows account does not transfer those keys. Use **Export** to transfer an independent copy or **Save connection file** to connect another computer to a shared configuration.
+Local profile files are encrypted. Windows Credential Manager holds the keys for the Windows user running Foundry OSD, on that computer. Even a settings-only local profile needs its local encryption key. Copying the local profile directory to another computer or running Foundry OSD as another Windows account does not transfer those keys. Use **Export** to transfer an independent copy or the shared configuration’s `Connection.foundryprofile` file to connect another computer. **More options > Save connection file** creates an additional protected copy when shared access is available.
 
 During the first migration from legacy application settings, applicable saved network passwords remain available in the current session. Choose **Remember passwords** explicitly to retain them in the new local profile; migration does not enable that choice automatically.
 
@@ -76,14 +76,14 @@ Send the file password through a separate trusted channel. Anyone who can decryp
 
 ## Preview and import a copy
 
-1. Choose **Import** and select a `.foundryprofile` file.
+1. Choose **Import** and select a `.foundryprofile` file. The file picker opens with **All files** selected; Foundry validates the selected file before importing it.
 2. Enter its **File password**. Foundry decrypts and validates it before offering activation.
 3. Review the profile name and counts of included files, passwords, and access keys. The preview also warns when files are missing or omitted; check their paths before building media.
 4. Choose whether to **Remember passwords** on this PC, then confirm replacement of the current settings.
 
 Remembering requires a complete profile. For a package with omitted or unavailable passwords or files, import without remembering, supply the missing inputs, then enable **Remember passwords**.
 
-An import creates an independent local copy with a new profile identity. It does not join synchronization, including when the selected file is a connection file. To connect to a shared configuration, choose **Set up synchronization…** in the **Synchronize** row, then **Connect to a shared configuration**. For an already shared profile, choose **Connection settings…** beside **Synchronize**.
+An import creates an independent local copy with a new profile identity. It does not join synchronization, including when the selected file is a connection file. To connect to a shared configuration, choose **Set up synchronization…** in the **Synchronize** row, then **Connect to a shared configuration**. To connect an already shared local configuration to a different share, use **Disconnect** first, then set up synchronization again.
 
 A wrong file password, altered package, or unsupported package version fails validation before activation. Keep the original file and resolve the cause instead of replacing an existing profile with an empty configuration.
 
@@ -96,9 +96,10 @@ Do not place the shared repository in a OneDrive, Dropbox, or other cloud-synchr
 1. Activate the local profile, choose **Set up synchronization…** in the **Synchronize** row, then **Share this configuration**.
 2. Enter a **Configuration name**; the current name is filled in for you. Use a valid Windows folder name without a trailing dot or space.
 3. Enter the shared parent folder or choose **Browse** beside the path field. Foundry creates its dedicated named folder inside `Foundry` beneath that parent.
-4. Choose whether to **Include passwords and confidential files** in shared updates.
-5. Choose whether to **Remember this connection on this PC**, then continue.
-6. Check synchronization status and choose **Save connection file** to prepare access for other computers and key recovery.
+4. Enter a **File password** and repeat it in **Confirm file password**. This protects the connection file used by other PCs.
+5. Choose whether to **Include passwords and confidential files** in shared updates.
+6. Choose whether to **Remember this connection on this PC**, then continue.
+7. Foundry creates `Connection.foundryprofile` inside the new shared configuration folder. Check synchronization status and give the other PCs access to this file, with its password supplied separately.
 
 If the named folder already exists, choose **Connect** and provide its connection file, or **Choose another name**. Existing folders and files are not overwritten. Renaming the configuration later changes its display name while keeping its synchronization folder in place.
 
@@ -106,23 +107,27 @@ Every member with the shared key is trusted to read included secrets and publish
 
 ## Export recovery material and join the team
 
-Choose **Save connection file** for the shared profile and protect the `.foundryprofile` file with a password. This encrypted connection file also serves as recovery material: it includes the shared identity and access key needed to enroll another workstation, plus profile content according to the sharing choice. It also carries that secret-inclusion choice to the joined workstation.
+Sharing creates a password-protected `Connection.foundryprofile` file in the configuration’s shared folder. This encrypted connection file also serves as recovery material: it includes the shared identity and access key needed to enroll another workstation, plus profile content according to the sharing choice. It carries that secret-inclusion choice and, when present, the shared folder path to the joined workstation.
 
-Store recovery material **outside the shared repository**; Foundry rejects exports inside that folder. Designate a primary and a backup custodian, keep protected copies in an approved separate location, and arrange controlled access to the file password. A backup of the shared folder alone cannot replace a lost decryption key.
+For an existing shared configuration that needs a connection file, or to create another protected copy, choose **More options > Save connection file** and enter a file password. This action is available when this PC has shared access.
+
+Keep a protected recovery copy **outside the shared repository** as well. The automatically created connection file stays inside the shared folder for convenient team enrollment; manual **Save connection file** exports must use a separate destination. Designate a primary and a backup custodian and arrange controlled access to the file password. The encrypted shared revisions alone cannot replace a lost access key.
 
 On another workstation:
 
-1. Choose **Set up synchronization…** in the **Synchronize** row, then **Connect to a shared configuration**, and select the connection file supplied by your team. For an already shared profile, choose **Connection settings…** beside **Synchronize**.
+1. Choose **Set up synchronization…** in the **Synchronize** row, then **Connect to a shared configuration**, and select `Connection.foundryprofile` from the team’s shared configuration folder or a protected copy supplied by your team. The file picker defaults to **All files**. If this PC is already enrolled but has lost its access key, choose **Restore access** instead.
 2. Enter the file password and review the preview.
-3. Provide the configuration's full UNC folder, such as `\\server\share\Foundry\Deployment - Paris`, rather than its parent share. When connecting from an existing-name prompt, this path is filled in for you.
+3. Check the configuration’s full UNC folder, such as `\\server\share\Foundry\Deployment - Paris`, rather than its parent share. Foundry fills in the path carried by the connection file or the existing-name prompt. Older files without a path require you to enter it.
 4. Choose **Remember passwords** and **Remember this connection on this PC** separately.
 5. Continue to validate the shared identity and activate its current revision.
 
-If you do not remember the shared key, it remains available for the current session. After a restart or a switch that clears it, use **Connection settings… > Connect to a shared configuration** with the connection file to join again. Keep the connection file and its password accessible before relying on this policy.
+If you do not remember the shared key, it remains available for the current session. After a restart or a switch that clears it, use **Restore access** with the connection file and its password. Keep both accessible before relying on this policy.
 
 ## Synchronize and resolve conflicts
 
-The **Synchronize** row shows **Set up synchronization…** for a local profile. A shared profile has separate **Synchronize** and **Connection settings…** buttons: the first synchronizes changes, while the second changes or restores the shared connection. For a shared profile, enable the separate **Automatic sync** switch to check for changes periodically, or choose **Synchronize** when needed. Turning off automatic synchronization keeps the local profile available for editing and manual synchronization.
+The **Synchronize** row shows **Set up synchronization…** for a local profile. A shared profile provides **Synchronize** and **Disconnect**. When this PC lacks its shared access key, **Restore access** replaces the synchronization action. Enable the separate **Automatic sync** switch to check for changes periodically, or choose **Synchronize** when needed. Turning off automatic synchronization keeps the local profile available for editing and manual synchronization.
+
+Choose **Disconnect** and confirm to stop synchronizing this configuration on this PC. Foundry keeps the current local settings and password-remembering choice, removes this PC’s shared connection and retained shared access, and leaves the shared configuration and other PCs unchanged. To connect to a different shared configuration afterward, choose **Set up synchronization…**.
 
 A colored icon and a short status label beside the synchronization buttons show the current state:
 
@@ -156,9 +161,9 @@ Automatic activation of a remote update waits until the **Settings backup and sy
 
 **More options > Delete from this PC** removes that workstation's enrollment. Deleting the shared profile requires **Also delete for everyone** and a separate confirmation. A remote deletion is reported to other editors; preserve needed local work with **Duplicate** rather than attempting to revive the deleted profile.
 
-The shared repository accepts up to **4,096 revisions**. When the history limit is reached, create a fresh shared repository from the reviewed current profile and distribute new recovery material. Do not manually remove revision files or substitute an older backup to bypass a history or rollback warning.
+The shared repository accepts up to **4,096 revisions**. When the history limit is reached, disconnect the reviewed current profile, share it in a new network folder, and distribute the new connection file. Do not manually remove revision files or substitute an older backup to bypass a history or rollback warning.
 
-To replace a shared access key, choose **Connection settings… > Share this configuration** with a new configuration name or parent folder, then save a new connection file and enroll the team against that folder. This replaces the local enrollment and leaves the old repository intact. If you need to keep the original local enrollment too, **Duplicate** the reviewed configuration first and review the copy's password and sharing choices before setting up the new folder. Old key holders can continue using that repository while they have access to it: remove their old share permissions or archive the folder with restricted access. A new key cannot revoke secrets or packages that someone already copied. Rotate the underlying passwords and certificates when exposure requires it.
+To replace a shared access key, **Disconnect** the reviewed configuration, then choose **Set up synchronization… > Share this configuration** with a new configuration name or parent folder. Foundry creates a new connection file for enrolling the team against that folder and leaves the old repository intact. If you need to keep the original local enrollment too, **Duplicate** the reviewed configuration instead and review the copy’s password and sharing choices before setting up the new folder. Old key holders can continue using that repository while they have access to it: remove their old share permissions or archive the folder with restricted access. A new key cannot revoke secrets or packages that someone already copied. Rotate the underlying passwords and certificates when exposure requires it.
 
 ## Create media from the selected profile
 
