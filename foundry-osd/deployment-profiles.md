@@ -43,6 +43,8 @@ Supported password contexts include Wi-Fi, Protected deployment, OOBE local acco
 
 Microsoft sign-in sessions and token caches are not transferred. An Autopilot tenant connection still requires the appropriate sign-in and permissions. [Desktop proxy credentials](settings.md#proxy) remain separate from deployment profiles and do not configure Windows PE.
 
+An imported Autopilot configuration with a valid saved registration can use its matching PFX certificate without a new Microsoft sign-in. If the file was omitted, select that certificate and enter its password on this PC. A different or expired certificate does not satisfy readiness checks. Creating or retiring certificates still requires a tenant connection.
+
 ### Forget retained secrets
 
 Choose **Clear saved passwords and access** in the **Remember passwords** row and confirm. Foundry saves a settings-only local revision, clears the active profile's session secrets and shared key, disables synchronization for that enrollment, and retires its earlier stored keys. Re-enter required passwords before building media.
@@ -59,6 +61,8 @@ Clearing saved passwords and access does not remove exported packages, previousl
 4. Choose whether to **Include passwords and confidential files**, then continue.
 
 With secret inclusion disabled, the package transfers settings without password values or attached sensitive file contents. Inline Autopilot JSON profile configuration remains part of the settings; review it before distribution.
+
+When synchronizing without confidential files, changes made on a PC that lacks a certificate do not remove the matching certificate and password already available on another PC. Changing or removing the selected source clears that association. Each PC still needs its own required files and passwords before it can create media.
 
 With secret inclusion enabled, Foundry captures available files already selected in the configuration: custom answer files, wired or enterprise Wi-Fi XML profiles, and network or Autopilot PFX certificates. This choice applies to the selected dependencies; it is not a browser for arbitrary folders. Missing files are not recovered from another workstation.
 
@@ -139,6 +143,8 @@ Conflict decisions apply to the whole profile, not individual fields. If the sha
 
 While the share is unavailable, edits remain local. If a connection fails during publication, Foundry keeps the encrypted pending operation and checks whether that exact operation committed before retrying it. Keep local profile and pending-operation files intact while recovery is unresolved.
 
+Recovery recognizes changes that were already shared and avoids publishing them twice. Edits made afterward remain pending, and simultaneous changes from another PC still require a conflict decision. Turning automatic synchronization off or on preserves changes waiting to be shared.
+
 Automatic activation of a remote update waits until the **Settings backup and sync** card in Settings is open and no profile dialog or media operation is running. During editing elsewhere, an available update does not silently replace the authoring configuration. Return to the card, review status, and use **Synchronize** when ready.
 
 ### Deletion, history, and key replacement
@@ -154,5 +160,7 @@ To replace a shared access key, choose **Connection settings… > Share this con
 Select the intended profile, check passwords and source files, and resolve readiness issues before starting media creation. Foundry captures the configuration, secret values, and selected file bytes for that build. A later edit or shared update does not change the inputs of the running build.
 
 Custom drivers remain local and are copied into the build snapshot. The selected driver source must fit within **2 GiB** and **10,000 filesystem entries**; use a focused driver source for the target hardware.
+
+Foundry removes its temporary copies after media creation. If a locked file or an interrupted session prevents cleanup, it retries when Foundry starts or prepares another build. Temporary files belonging to an active build remain available until that build finishes.
 
 Profile package encryption does not replace [Protected deployment](general.md#protected-deployment) or the [security requirements for deployment media](../reference/security-and-credentials.md). Recreate media when its embedded credentials or deployment settings change.
