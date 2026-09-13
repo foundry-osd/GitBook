@@ -76,7 +76,7 @@ Send the file password through a separate trusted channel. Anyone who can decryp
 
 ## Preview and import a copy
 
-1. Choose **Import** and select a `.foundryprofile` file. The file picker opens with **All files** selected; Foundry validates the selected file before importing it.
+1. Choose **Import** and select a `.foundryprofile` file. The file picker initially shows `.foundryprofile` files; **All files** remains available as an alternative. Foundry validates the selected file before importing it.
 2. Enter its **File password**. Foundry decrypts and validates it before offering activation.
 3. Review the profile name and counts of included files, passwords, and access keys. The preview also warns when files are missing or omitted; check their paths before building media.
 4. Choose whether to **Remember passwords** on this PC, then confirm replacement of the current settings.
@@ -96,12 +96,12 @@ Do not place the shared repository in a OneDrive, Dropbox, or other cloud-synchr
 1. Activate the local profile, choose **Set up synchronization…** in the **Synchronize** row, then **Share this configuration**.
 2. Enter a **Configuration name**; the current name is filled in for you. Use a valid Windows folder name without a trailing dot or space.
 3. Enter the shared parent folder or choose **Browse** beside the path field. Check the full destination path shown below the field; it updates as you change the name or parent folder.
-4. Enter a **Connection password** and repeat it in **Confirm password**. Other PCs will need this password to connect.
+4. Enter a **Connection password** and repeat it in **Confirm password**. Other PCs will need this password to connect. A mismatch appears beside the confirmation field as you enter it and is checked again when you select **Share**.
 5. Choose whether to **Include passwords and confidential files** in shared updates. Enabling this choice displays a reminder that people using the configuration can read those passwords and files.
 6. Choose whether to **Remember this connection on this PC**, then select **Share**.
 7. Foundry creates `Connection.foundryprofile` inside the new shared configuration folder. Check synchronization status and give the other PCs access to this file, with its password supplied separately.
 
-The dialog keeps the configuration name, folder, password, and password confirmation together, followed by the two sharing choices. Select **Learn more** for the shared-folder requirements and recovery guidance on this page.
+The dialog keeps the configuration name, folder, password, and password confirmation together, followed by the two sharing choices. Its width adapts to smaller windows, with related choices and helper text grouped together. The main action is highlighted; destructive confirmations keep **Cancel** as the default. Select **Learn more** for the shared-folder requirements and recovery guidance on this page.
 
 If the named folder already exists, choose **Connect** and provide its connection file, or **Choose another name**. Existing folders and files are not overwritten. Renaming the configuration later changes its display name while keeping its synchronization folder in place.
 
@@ -117,11 +117,13 @@ Keep a protected recovery copy **outside the shared repository** as well. The au
 
 On another workstation:
 
-1. Choose **Set up synchronization…** in the **Synchronize** row, then **Connect to a shared configuration**, and select `Connection.foundryprofile` from the team’s shared configuration folder or a protected copy supplied by your team. The file picker defaults to **All files**. If this PC is already enrolled but has lost its access key, choose **Restore access** instead.
-2. Enter the file password and review the preview.
+1. Choose **Set up synchronization…** in the **Synchronize** row, then **Connect to a shared configuration**, and select `Connection.foundryprofile` from the team’s shared configuration folder or a protected copy supplied by your team. The file picker initially shows `.foundryprofile` files, with **All files** available as an alternative. If this PC is already enrolled but has lost its access key, choose **Restore access** instead.
+2. Enter the **Connection password** and review the preview.
 3. Check the configuration’s full UNC folder, such as `\\server\share\Foundry\Deployment - Paris`, rather than its parent share. Foundry fills in the path carried by the connection file or the existing-name prompt. Older files without a path require you to enter it.
 4. Choose **Remember passwords** and **Remember this connection on this PC** separately.
 5. Continue to validate the shared identity and activate its current revision.
+
+If a connection file contains a NAS name that this PC cannot resolve, open the file directly through a reachable server name or IP address. When the selected file is in the same share and relative configuration folder as the saved path, Foundry prefills that reachable server address. A file opened from a local backup or a different folder keeps its saved path; check and correct the shared folder before connecting. This changes the suggested address only: Foundry still validates the shared configuration’s identity and access key.
 
 If you do not remember the shared key, it remains available for the current session. After a restart or a switch that clears it, use **Restore access** with the connection file and its password. Keep both accessible before relying on this policy.
 
@@ -152,6 +154,8 @@ Foundry publishes only against the shared revision it last read. When another ed
 | Duplicate | Preserves the current configuration as an independent local profile without shared enrollment. |
 
 Conflict decisions apply to the whole profile, not individual fields. If the shared revision changes again before your decision completes, resolve the new conflict. Save a copy first when you need to preserve your draft; enable local secret remembering on that copy if required.
+
+Foundry distinguishes an unreachable folder from a folder temporarily in use. For an unreachable folder, check its address and this PC’s network access. For a busy folder, retry shortly. In both cases, edits remain local.
 
 While the share is unavailable, edits remain local. If a connection fails during publication, Foundry keeps the encrypted pending operation and checks whether that exact operation committed before retrying it. Keep local profile and pending-operation files intact while recovery is unresolved.
 
