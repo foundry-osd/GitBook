@@ -89,15 +89,18 @@ A wrong file password, altered package, or unsupported package version fails val
 
 ## Create a shared profile
 
-Use one authoritative SMB folder for each shared profile. Prepare a new, empty subfolder with a dedicated UNC path such as `\\server\share\deployment-profile`, with Windows-authenticated access restricted to the intended team. Require SMB 3 encryption according to your server policy. Foundry uses the access available to the Windows user; it does not manage share permissions or enable SMB encryption.
+Use one authoritative SMB folder for each shared profile. Select a parent UNC folder such as `\\server\share`, with Windows-authenticated access restricted to the intended team. It can already contain files. Foundry creates a separate folder at `\\server\share\Foundry\<configuration name>`. Require SMB 3 encryption according to your server policy. Foundry uses the access available to the Windows user; it does not manage share permissions or enable SMB encryption.
 
 Do not place the shared repository in a OneDrive, Dropbox, or other cloud-synchronized mirror. Multiple independent replicas do not provide the locking and conditional publication expected by this workflow. Use a NAS only after validating its SMB locking, rename, reconnect, and failover behavior with your deployment environment; a working file browser alone does not establish compatibility.
 
 1. Activate the local profile, choose **Set up synchronization…** in the **Synchronize** row, then **Share this configuration**.
-2. Enter or browse to the new, empty UNC subfolder. Foundry can create it if it does not exist. If the selected folder already contains files, choose a new subfolder; existing files remain unchanged.
-3. Choose whether to **Include passwords and confidential files** in shared updates.
-4. Choose whether to **Remember this connection on this PC**, then continue.
-5. Check synchronization status and choose **Save connection file** to prepare access for other computers and key recovery.
+2. Enter a **Configuration name**; the current name is filled in for you. Use a valid Windows folder name without a trailing dot or space.
+3. Enter the shared parent folder or choose **Browse** beside the path field. Foundry creates its dedicated named folder inside `Foundry` beneath that parent.
+4. Choose whether to **Include passwords and confidential files** in shared updates.
+5. Choose whether to **Remember this connection on this PC**, then continue.
+6. Check synchronization status and choose **Save connection file** to prepare access for other computers and key recovery.
+
+If the named folder already exists, choose **Connect** and provide its connection file, or **Choose another name**. Existing folders and files are not overwritten. Renaming the configuration later changes its display name while keeping its synchronization folder in place.
 
 Every member with the shared key is trusted to read included secrets and publish revisions. Share permissions and package encryption do not create a hidden-password role for team members who hold that key.
 
@@ -111,7 +114,7 @@ On another workstation:
 
 1. Choose **Set up synchronization…** in the **Synchronize** row, then **Connect to a shared configuration**, and select the connection file supplied by your team. For an already shared profile, choose **Connection settings…** beside **Synchronize**.
 2. Enter the file password and review the preview.
-3. Provide the authoritative UNC folder.
+3. Provide the configuration's full UNC folder, such as `\\server\share\Foundry\Deployment - Paris`, rather than its parent share. When connecting from an existing-name prompt, this path is filled in for you.
 4. Choose **Remember passwords** and **Remember this connection on this PC** separately.
 5. Continue to validate the shared identity and activate its current revision.
 
@@ -155,7 +158,7 @@ Automatic activation of a remote update waits until the **Settings backup and sy
 
 The shared repository accepts up to **4,096 revisions**. When the history limit is reached, create a fresh shared repository from the reviewed current profile and distribute new recovery material. Do not manually remove revision files or substitute an older backup to bypass a history or rollback warning.
 
-To replace a shared access key, choose **Connection settings… > Share this configuration** with a fresh dedicated folder, then save a new connection file and enroll the team against that folder. This replaces the local enrollment and leaves the old repository intact. If you need to keep the original local enrollment too, **Duplicate** the reviewed configuration first and review the copy's password and sharing choices before setting up the new folder. Old key holders can continue using that repository while they have access to it: remove their old share permissions or archive the folder with restricted access. A new key cannot revoke secrets or packages that someone already copied. Rotate the underlying passwords and certificates when exposure requires it.
+To replace a shared access key, choose **Connection settings… > Share this configuration** with a new configuration name or parent folder, then save a new connection file and enroll the team against that folder. This replaces the local enrollment and leaves the old repository intact. If you need to keep the original local enrollment too, **Duplicate** the reviewed configuration first and review the copy's password and sharing choices before setting up the new folder. Old key holders can continue using that repository while they have access to it: remove their old share permissions or archive the folder with restricted access. A new key cannot revoke secrets or packages that someone already copied. Rotate the underlying passwords and certificates when exposure requires it.
 
 ## Create media from the selected profile
 
