@@ -95,11 +95,13 @@ Do not place the shared repository in a OneDrive, Dropbox, or other cloud-synchr
 
 1. Activate the local profile, choose **Set up synchronization…** in the **Synchronize** row, then **Share this configuration**.
 2. Enter a **Configuration name**; the current name is filled in for you. Use a valid Windows folder name without a trailing dot or space.
-3. Enter the shared parent folder or choose **Browse** beside the path field. Foundry creates its dedicated named folder inside `Foundry` beneath that parent.
-4. Enter a **File password** and repeat it in **Confirm file password**. This protects the connection file used by other PCs.
-5. Choose whether to **Include passwords and confidential files** in shared updates.
-6. Choose whether to **Remember this connection on this PC**, then continue.
+3. Enter the shared parent folder or choose **Browse** beside the path field. Check the full destination path shown below the field; it updates as you change the name or parent folder.
+4. Enter a **Connection password** and repeat it in **Confirm password**. Other PCs will need this password to connect.
+5. Choose whether to **Include passwords and confidential files** in shared updates. Enabling this choice displays a reminder that people using the configuration can read those passwords and files.
+6. Choose whether to **Remember this connection on this PC**, then select **Share**.
 7. Foundry creates `Connection.foundryprofile` inside the new shared configuration folder. Check synchronization status and give the other PCs access to this file, with its password supplied separately.
+
+The dialog keeps the configuration name, folder, password, and password confirmation together, followed by the two sharing choices. Select **Learn more** for the shared-folder requirements and recovery guidance on this page.
 
 If the named folder already exists, choose **Connect** and provide its connection file, or **Choose another name**. Existing folders and files are not overwritten. Renaming the configuration later changes its display name while keeping its synchronization folder in place.
 
