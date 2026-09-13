@@ -19,7 +19,7 @@ If pending changes cannot be saved or the selected profile cannot be read, Found
 
 Changes to the active profile are saved locally after a short pause. **Duplicate** creates an independent local configuration without shared enrollment; it starts with password remembering disabled. **More options** also contains **Rename** and **Delete from this PC**.
 
-Use the **Remember passwords** switch to change local password retention and confirm the choice. Canceling the dialog or a failed save leaves the switch showing the saved state. Turning the switch off saves a settings-only local revision; it does not clear passwords from the current session or remove the separately remembered shared access key. To clear those too, use **Clear saved passwords and access** in the same row.
+Use the **Remember passwords** switch to change local password retention and confirm the choice. Canceling the dialog or a failed save leaves the switch showing the saved state. Turning the switch off saves a settings-only local revision; it does not clear passwords from the current session or remove the separately remembered shared access key. To clear those too, use the **Clear saved passwords and access** button beside the switch.
 
 Closing Foundry saves pending edits. If the profile cannot be saved, cancel closing to complete the inputs or resolve the storage problem. Choosing **Close** keeps the last successfully saved revision.
 
@@ -89,12 +89,12 @@ A wrong file password, altered package, or unsupported package version fails val
 
 ## Create a shared profile
 
-Use one authoritative SMB folder for each shared profile. Prepare a dedicated UNC path such as `\\server\share\deployment-profile`, with Windows-authenticated access restricted to the intended team. Require SMB 3 encryption according to your server policy. Foundry uses the access available to the Windows user; it does not manage share permissions or enable SMB encryption.
+Use one authoritative SMB folder for each shared profile. Prepare a new, empty subfolder with a dedicated UNC path such as `\\server\share\deployment-profile`, with Windows-authenticated access restricted to the intended team. Require SMB 3 encryption according to your server policy. Foundry uses the access available to the Windows user; it does not manage share permissions or enable SMB encryption.
 
 Do not place the shared repository in a OneDrive, Dropbox, or other cloud-synchronized mirror. Multiple independent replicas do not provide the locking and conditional publication expected by this workflow. Use a NAS only after validating its SMB locking, rename, reconnect, and failover behavior with your deployment environment; a working file browser alone does not establish compatibility.
 
 1. Activate the local profile, choose **Set up synchronization…** in the **Synchronize** row, then **Share this configuration**.
-2. Enter or browse to the dedicated UNC folder.
+2. Enter or browse to the new, empty UNC subfolder. Foundry can create it if it does not exist. If the selected folder already contains files, choose a new subfolder; existing files remain unchanged.
 3. Choose whether to **Include passwords and confidential files** in shared updates.
 4. Choose whether to **Remember this connection on this PC**, then continue.
 5. Check synchronization status and choose **Save connection file** to prepare access for other computers and key recovery.
