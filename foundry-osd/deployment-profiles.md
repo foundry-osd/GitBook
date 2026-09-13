@@ -2,7 +2,7 @@
 
 Use **Settings > Settings backup and sync** to keep named deployment configurations, transfer them in encrypted packages, and synchronize a profile with a trusted deployment team.
 
-The card header shows **Current settings** with the active configuration name and contains the profile selector, **Open**, and **More options**. Selecting another profile does not activate it until you choose **Open** and confirm. Actions always affect the active configuration named in the header.
+The card header contains the active configuration selector and **More options**. Selecting a configuration saves pending changes to the current profile and applies the selected configuration immediately. The selector always reflects the active configuration; when none is active, it displays **Choose a configuration**. **More options** contains **Rename**, **Duplicate**, and **Delete from this PC**.
 
 Expand the card to find separate **Import**, **Export**, **Synchronize**, and **Remember passwords** rows. Each row explains its purpose and places its action beside that explanation. **Synchronize** remains visible for local profiles so you can set up sharing; shared profiles also show **Automatic sync** and **Save connection file**.
 
@@ -13,7 +13,9 @@ A profile contains authoring settings and, when explicitly included, passwords a
 1. Configure the deployment in Foundry OSD.
 2. Open **Settings > Settings backup and sync** and select **More options > Duplicate**.
 3. Enter a **Configuration name** and continue. The new independent profile becomes active.
-4. To return to another profile, select it in the profile list, choose **Open**, and confirm replacement.
+4. To return to another profile, choose it in the profile list. Foundry applies it immediately.
+
+If pending changes cannot be saved or the selected profile cannot be read, Foundry reports the problem and keeps the current profile active. Complete missing inputs or resolve the access problem, then select the profile again.
 
 Changes to the active profile are saved locally after a short pause. **Duplicate** creates an independent local configuration without shared enrollment; it starts with password remembering disabled. **More options** also contains **Rename** and **Delete from this PC**.
 
