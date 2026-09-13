@@ -6,7 +6,7 @@ The card header contains the active configuration selector and **More options**.
 
 Expand the card to find separate **Import**, **Export**, **Synchronize**, and **Remember passwords** rows. Each row explains its purpose and places its action beside that explanation. **Synchronize** remains visible for local profiles so you can set up sharing. Shared profiles also show **Automatic sync** and a **Disconnect** action.
 
-A profile contains authoring settings and, when explicitly included, passwords and selected deployment files. Activating a profile replaces the current authoring configuration. It does not change media that has already been created.
+A profile contains authoring settings and can retain supported passwords and selected deployment files according to its save and sharing choices. Activating a profile replaces the current authoring configuration. It does not change media that has already been created.
 
 ## Create and select a local profile
 
@@ -17,13 +17,13 @@ A profile contains authoring settings and, when explicitly included, passwords a
 
 If pending changes cannot be saved or the selected profile cannot be read, Foundry reports the problem and keeps the current profile active. Complete missing inputs or resolve the access problem, then select the profile again.
 
-Changes to the active profile are saved locally after a short pause. **Duplicate** creates an independent local configuration without shared enrollment; it starts with password remembering disabled. **More options** also contains **Rename** and **Delete from this PC**.
+Changes to the active profile are saved locally after a short pause. New local profiles start with **Remember passwords** enabled. Existing profiles keep their saved choice. **Duplicate** creates an independent local configuration without shared enrollment and inherits the source profile’s **Remember passwords** choice. When enabled, the copy retains available passwords and selected sensitive files. **More options** also contains **Rename** and **Delete from this PC**.
 
 Use the **Remember passwords** switch to change local password retention and confirm the choice. Canceling the dialog or a failed save leaves the switch showing the saved state. Turning the switch off saves a settings-only local revision; it does not clear passwords from the current session or remove the separately remembered shared access key. To clear those too, use the **Clear saved passwords and access** button beside the switch.
 
 Closing Foundry saves pending edits. If the profile cannot be saved, cancel closing to complete the inputs or resolve the storage problem. Choosing **Close** keeps the last successfully saved revision.
 
-When **Remember passwords** is enabled, Foundry keeps the last complete saved revision until required passwords and selected source files are available. An incomplete password confirmation or missing required file leaves the current draft on screen and displays a completion message; it does not replace that draft with an older password. Complete the missing inputs to save a new revision. Publishing a shared profile with secrets included requires the same completeness check.
+A new local profile or a duplicate can initially save the passwords and selected files that are available, even if other required inputs are incomplete. After that initial save, when **Remember passwords** is enabled, subsequent saves wait until required passwords and selected source files are complete. Foundry keeps the last successfully saved revision until then. An incomplete password confirmation or missing required file leaves the current draft on screen and displays a completion message; it does not replace that draft with an older password. Complete the missing inputs to save a new revision. Publishing a shared profile with secrets included requires the same completeness check.
 
 Review [media readiness](media/README.md#review-readiness) after activation. A profile can refer to files, drivers, or credentials that need attention on this workstation.
 
@@ -39,7 +39,7 @@ These choices are independent:
 
 Local profile files are encrypted. Windows Credential Manager holds the keys for the Windows user running Foundry OSD, on that computer. Even a settings-only local profile needs its local encryption key. Copying the local profile directory to another computer or running Foundry OSD as another Windows account does not transfer those keys. Use **Export** to transfer an independent copy or the shared configuration’s `Connection.foundryprofile` file to connect another computer. **More options > Save connection file** creates an additional protected copy when shared access is available.
 
-During the first migration from legacy application settings, applicable saved network passwords remain available in the current session. Choose **Remember passwords** explicitly to retain them in the new local profile; migration does not enable that choice automatically.
+During the first migration from legacy application settings, the new local profile starts with **Remember passwords** enabled and retains applicable saved network passwords and available selected files. An existing profile’s saved choice is preserved, including when remembering is disabled.
 
 Supported password contexts include Wi-Fi, Protected deployment, OOBE local accounts, and selected network or Autopilot PFX certificates. Required passwords must be present and meet their validation rules, including matching confirmation where requested. Configure an intentionally blank OOBE password through its explicit password choice; an empty required password field is incomplete. Profile activation does not fill missing values from an unrelated profile.
 
@@ -79,9 +79,9 @@ Send the file password through a separate trusted channel. Anyone who can decryp
 1. Choose **Import** and select a `.foundryprofile` file. The file picker initially shows `.foundryprofile` files; **All files** remains available as an alternative. Foundry validates the selected file before importing it.
 2. Enter its **File password**. Foundry decrypts and validates it before offering activation.
 3. Review the profile name and counts of included files, passwords, and access keys. The preview also warns when files are missing or omitted; check their paths before building media.
-4. Choose whether to **Remember passwords** on this PC, then confirm replacement of the current settings.
+4. Review **Remember passwords**, which is selected by default when the package is complete and left unchecked when any passwords or files are omitted or unavailable. Clear it if you do not want this PC to retain passwords and sensitive files, then confirm replacement of the current settings.
 
-Remembering requires a complete profile. For a package with omitted or unavailable passwords or files, import without remembering, supply the missing inputs, then enable **Remember passwords**.
+Remembering requires a complete profile. For a package with omitted or unavailable passwords or files, leave **Remember passwords** unchecked, import the settings, supply the missing inputs, then enable it.
 
 An import creates an independent local copy with a new profile identity. It does not join synchronization, including when the selected file is a connection file. To connect to a shared configuration, choose **Set up synchronization…** in the **Synchronize** row, then **Connect to a shared configuration**. To connect an already shared local configuration to a different share, use **Disconnect** first, then set up synchronization again.
 
@@ -120,7 +120,7 @@ On another workstation:
 1. Choose **Set up synchronization…** in the **Synchronize** row, then **Connect to a shared configuration**, and select `Connection.foundryprofile` from the team’s shared configuration folder or a protected copy supplied by your team. The file picker initially shows `.foundryprofile` files, with **All files** available as an alternative. If this PC is already enrolled but has lost its access key, choose **Restore access** instead.
 2. Enter the **Connection password** and review the preview.
 3. Check the configuration’s full UNC folder, such as `\\server\share\Foundry\Deployment - Paris`, rather than its parent share. Foundry fills in the path carried by the connection file or the existing-name prompt. Older files without a path require you to enter it.
-4. Choose **Remember passwords** and **Remember this connection on this PC** separately.
+4. Review **Remember passwords**, which is selected by default when the connection file contains a complete profile. It is left unchecked when any passwords or files are omitted or unavailable; supply the missing inputs after connecting, then enable it. Choose **Remember this connection on this PC** separately; it controls access to synchronization, not local password retention.
 5. Continue to validate the shared identity and activate its current revision.
 
 If a connection file contains a NAS name that this PC cannot resolve, open the file directly through a reachable server name or IP address. When the selected file is in the same share and relative configuration folder as the saved path, Foundry prefills that reachable server address. A file opened from a local backup or a different folder keeps its saved path; check and correct the shared folder before connecting. This changes the suggested address only: Foundry still validates the shared configuration’s identity and access key.
@@ -153,7 +153,7 @@ Foundry publishes only against the shared revision it last read. When another ed
 | Use this PC's version | Publishes the local draft against the reviewed shared revision, provided that revision has not changed again. |
 | Duplicate | Preserves the current configuration as an independent local profile without shared enrollment. |
 
-Conflict decisions apply to the whole profile, not individual fields. If the shared revision changes again before your decision completes, resolve the new conflict. Save a copy first when you need to preserve your draft; enable local secret remembering on that copy if required.
+Conflict decisions apply to the whole profile, not individual fields. If the shared revision changes again before your decision completes, resolve the new conflict. Use **Duplicate** first when you need to preserve your draft. The copy inherits the source profile’s password-remembering choice and, when enabled, retains available passwords and selected sensitive files. Review that choice before resolving the conflict.
 
 Foundry distinguishes an unreachable folder from a folder temporarily in use. For an unreachable folder, check its address and this PC’s network access. For a busy folder, retry shortly. In both cases, edits remain local.
 
