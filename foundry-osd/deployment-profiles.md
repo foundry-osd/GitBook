@@ -1,6 +1,6 @@
 # Deployment profiles
 
-Use **Settings > Settings backup and sync** to save named deployment configurations, transfer them to another PC, and keep settings synchronized with your team.
+Use [Settings > Settings backup and sync](settings.md#settings-backup-and-sync) to save named deployment configurations, transfer them to another PC, and keep settings synchronized with your team.
 
 Choose the configuration you want to use from the list at the top of the card. Foundry saves your pending changes and applies your selection immediately. Expand the card to find **Import**, **Export**, **Synchronize**, and **Remember passwords**. Use **More options** to rename, duplicate, or delete a configuration.
 
