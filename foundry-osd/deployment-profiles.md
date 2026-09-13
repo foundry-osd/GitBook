@@ -115,6 +115,18 @@ If you do not remember the shared key, it remains available for the current sess
 
 The **Synchronize** row shows **Set up synchronization…** for a local profile. A shared profile has separate **Synchronize** and **Connection settings…** buttons: the first synchronizes changes, while the second changes or restores the shared connection. For a shared profile, enable the separate **Automatic sync** switch to check for changes periodically, or choose **Synchronize** when needed. Turning off automatic synchronization keeps the local profile available for editing and manual synchronization.
 
+A colored icon and a short status label beside the synchronization buttons show the current state:
+
+| Status | Meaning |
+| --- | --- |
+| Up to date — green | The last synchronization succeeded and this PC has no changes waiting to be shared. |
+| Synchronizing… / Changes to synchronize / Changes available — informational color | A check is running, this PC has changes to share, or shared changes are ready to apply. |
+| Choose a version / Folder unavailable / Needs attention — amber | Review the conflict or the detailed message below the card. |
+| Unable to synchronize — red | Resolve the reported access, format, or storage problem before retrying. |
+| Not configured / Ready to synchronize — neutral | Set up synchronization, or run a check to confirm the shared settings are current. |
+
+The icon and text communicate the state together. Colors follow the Windows theme, and longer labels wrap in compact layouts. Detailed errors and conflict actions remain below the card. Automatic checks do not repeatedly announce an unchanged result to a screen reader.
+
 Foundry publishes only against the shared revision it last read. When another editor publishes first, it preserves the local draft and reports a conflict instead of choosing a winner by file timestamp. Coordinate with the other editor before choosing an action:
 
 | Action | Result |
