@@ -2,7 +2,7 @@
 
 The Start page validates configuration and creates or updates Foundry deployment media.
 
-Choose the intended [deployment profile](../deployment-profiles.md) before starting. Media creation captures its configuration, secrets, and selected file contents for the running build; subsequent profile edits or shared updates do not replace those inputs.
+Choose the intended [deployment profile](../deployment-profiles.md) before starting. Foundry uses the settings, passwords, and selected files from when you start creating media. Later edits or synchronized changes do not alter that running build.
 
 ## Review readiness
 
