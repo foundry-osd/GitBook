@@ -61,29 +61,21 @@ An exit before Deploy handoff is a startup failure, even if a ready message was 
 
 A volume labelled **Foundry Cache** takes precedence for runtime storage. Otherwise, Bootstrap uses `X:\Foundry\Runtime` in temporary Windows PE storage.
 
-In currently published releases, Bootstrap tries to use an available Connect runtime before requiring a release lookup, so Connect can help establish networking. Application release lookup or download failures can fall back to usable cached content or an embedded archive when one is available. A fallback warning can therefore be followed by a successful launch.
+Bootstrap verifies applications before launching them. Application updates saved on the USB drive require online verification at each boot before they can run.
 
-A cache does not guarantee a fully offline deployment. Connect still requires its connectivity checks to succeed, and the selected Windows, drivers, catalogs, or Autopilot workflow may require additional services. If neither usable local content nor a downloadable runtime is available, boot stops before the affected application launches.
+When online verification is unavailable, Foundry uses the verified original application included when the media was created, if one is available. You may therefore see an older application version while offline. Standard media includes Foundry Connect, which lets you establish networking. Foundry Deploy normally requires a network connection unless it was also included during media creation.
+
+A cache does not guarantee a fully offline deployment. Connect still requires its connectivity checks to succeed, and the selected Windows, drivers, catalogs, or Autopilot workflow may require additional services. If neither a verified original nor a verified download is available, boot stops before the affected application launches.
+
+[Recreate or update your boot media](supported-versions.md#application-and-boot-media-updates) with the current Foundry release to get this protection. Copying newer applications onto an existing USB drive is not sufficient.
 
 Debug-provisioned runtimes skip the normal release update lookup. Record whether the media uses release or debug content when reporting a startup problem.
-
-{% hint style="info" %}
-**Upcoming release: verified application startup — not yet released**
-
-For media created with the upcoming release:
-
-- The original application included when the media was created can start offline after verification. Standard media includes Foundry Connect, which lets you establish networking. Foundry Deploy normally requires a network connection unless it was also included during media creation.
-- Application updates saved on the USB drive require online verification at each boot before they can run. When verification is unavailable, Foundry uses the verified original application if one is available. You may therefore see an older application version while offline.
-- This does not enable a fully offline deployment: network readiness and the selected deployment's services and downloads are still required.
-
-Once that release is available, [recreate or update your boot media](supported-versions.md#application-and-boot-media-updates) with it to get this protection. Copying newer applications onto an existing USB drive is not sufficient.
 
 If startup stops because an application cannot be verified, preserve the [startup logs](../troubleshooting/logs-and-support.md#windows-pe-log-location) before restarting if you need support. Then:
 
 1. Reconnect the device to the network and check that its date and time are correct.
 2. Restart the device and try again.
-3. If startup still fails, recreate the media with the updated Foundry release.
-{% endhint %}
+3. If startup still fails, recreate the media with the current Foundry release.
 
 ## Collect startup evidence
 
