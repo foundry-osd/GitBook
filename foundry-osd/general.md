@@ -36,18 +36,26 @@ Validate custom drivers on representative hardware before using the media in pro
 
 ## Protected deployment
 
-**Protected deployment** requires a technician password before Foundry Deploy initializes. Enable it when deployment media contains credentials, private keys, or Autopilot JSON profiles that must not remain directly accessible.
+**Protected deployment** requires a technician password before Foundry Deploy initializes. Enable it to protect the following deployment data on generated media:
+
+| Data | Protected by the technician password |
+| --- | --- |
+| OOBE local account passwords | Yes |
+| Autopilot certificate credentials for zero-touch upload, including the PFX file and its password | Yes |
+| Autopilot JSON profiles | Yes |
+| Custom Windows answer files | Yes |
+| Embedded Wi-Fi passwords, wired and Wi-Fi certificate PFX passwords, and network certificate private keys | No |
+
+Foundry Connect uses embedded network credentials before Foundry Deploy asks for the technician password, so automatic network setup remains available. Anyone who can read the ISO or USB can recover those network credentials, even when Protected deployment is enabled. Restrict access to the media and use dedicated network credentials that can be revoked.
 
 Foundry accepts passwords from 8 characters and recommends at least 12 characters. Use a unique password for each set of deployment media and store it using the organization’s approved credential-management process.
 
-Foundry encrypts protected deployment data with AES-256-GCM and generates a random 256-bit deployment key for each media-creation operation. The technician password is processed with PBKDF2-HMAC-SHA-256 using 600,000 iterations and a random 128-bit salt. The resulting key protects the deployment key. Each AES-GCM encrypted value uses a unique 96-bit nonce and a 128-bit authentication tag.
+Protected deployment does not encrypt the complete ISO, USB drive, Windows image, or files staged into the installed Windows system.
 
-Protected data can include Autopilot JSON profiles and certificate-based deployment credentials. Protection does not encrypt the complete ISO, USB drive, Windows image, or files staged into the installed Windows system.
-
-When Protected deployment is disabled, Autopilot JSON profiles remain readable on the media. Other deployment secrets can remain encrypted, but their deployment key is stored on the same media so that deployment can start without a password. Treat possession of unprotected media as access to all embedded deployment information.
+When Protected deployment is disabled, Autopilot JSON profiles remain readable on the media and other embedded deployment credentials can be recovered without a technician password. Treat possession of unprotected media as access to all embedded deployment information.
 
 {% hint style="warning" %}
-The technician password cannot be recovered from generated media. If it is lost, recreate the media with a new password.
+If you no longer have the technician password, recreate the media with a new password.
 {% endhint %}
 
 Do not include the password in documentation, issue reports, screenshots, or deployment notes.

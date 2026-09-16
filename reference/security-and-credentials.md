@@ -26,10 +26,10 @@ Depending on configuration, media may include or use:
 
 ## Deployment media protection
 
-Use [Protected deployment](../foundry-osd/general.md#protected-deployment) when media contains credentials, private keys, or Autopilot JSON profiles that must not remain directly accessible.
+Review the [Protected deployment scope](../foundry-osd/general.md#protected-deployment) before choosing credentials and files to include on media. The technician password protects the listed deployment data; embedded network credentials remain accessible to anyone who can read the ISO or USB.
 
 - Every retained [Autopilot JSON profile](../foundry-osd/autopilot/json-profile.md) is readable on media created without Protected deployment.
-- [Zero-touch upload](../foundry-osd/autopilot/zero-touch-hardware-hash.md) credentials remain encrypted without Protected deployment, but the deployment key required to decrypt them is stored on the same media.
+- [Zero-touch upload](../foundry-osd/autopilot/zero-touch-hardware-hash.md) credentials can be recovered from media created without Protected deployment.
 - Non-empty [OOBE local account passwords](../foundry-osd/customization/oobe.md#password-protection) require Protected deployment under Foundry's security policy and are encrypted in the deployment configuration. During Windows Setup, they are written to `unattend.xml` using reversible encoding, not encryption. Treat that answer file and its copies as sensitive data.
 - Protected deployment does not encrypt the complete ISO, USB drive, Windows image, or data staged into the installed Windows system.
 

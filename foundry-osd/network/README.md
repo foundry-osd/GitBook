@@ -8,7 +8,7 @@ Configure network settings that Foundry Connect can use in Windows PE.
 - Use [Ethernet 802.1X](ethernet-802.1x.md) when wired access requires enterprise authentication.
 - Skip network provisioning when target devices use an unrestricted wired connection with DHCP.
 
-Only include profiles and certificates required for deployment. Generated media may contain sensitive network configuration and must be protected accordingly.
+Only include profiles and certificates required for deployment. [Protected deployment](../general.md#protected-deployment) does not protect embedded network credentials: anyone who can read the ISO or USB can recover them. Restrict media access and use dedicated network credentials that can be revoked. Foundry Connect uses these credentials before the technician enters the deployment password, so automatic network setup remains available.
 
 Use [deployment profiles](../deployment-profiles.md) to retain network settings and explicitly selected passwords or files, or to transfer them in an encrypted package. Review missing credentials and local certificate paths after activating or importing a profile.
 
