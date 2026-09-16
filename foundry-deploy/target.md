@@ -26,6 +26,10 @@ Foundry Deploy resolves serial number, manufacturer, model, asset tag, and syste
 
 Choose the intended internal target disk. Foundry excludes disks connected over USB and blocks system, boot, read-only, and offline disks.
 
+Foundry also requires the disk to report an identity that distinguishes it from the other connected disks. It checks the confirmed disk again before erasing it. If the disk is missing, its identity or disk number has changed, or it cannot be distinguished from another disk, deployment stops.
+
+Restart Foundry Deploy, select the intended disk again, and review the confirmation. If the identity warning remains, use a disk or connection that exposes a distinct device identity. Keep storage devices connected and do not change their connections during deployment.
+
 <figure>
   <img src="../.gitbook/assets/foundry-deploy-target-01-disk-selection.png" alt="Foundry Deploy target disk selection">
   <figcaption>Verify the device and select the intended deployment disk.</figcaption>

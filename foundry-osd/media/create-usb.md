@@ -21,6 +21,12 @@ The selected USB drive can be erased. Verify its identity, capacity, and content
   <figcaption>Verify the selected USB drive before confirming the destructive operation.</figcaption>
 </figure>
 
+## If the disk identity cannot be confirmed
+
+Foundry checks that the connected drive still matches the one you confirmed before changing it. A missing, changed or ambiguous device identity, or a changed disk number, stops the operation.
+
+Refresh the removable-device list, select the intended drive again, and confirm creation. If the warning remains, use a drive or connection that reports a distinct device identity. Keep the drive connected throughout creation; do not swap drives after confirmation.
+
 ## Validate the drive
 
 Safely eject the drive, boot representative hardware, and confirm that Foundry Connect and Foundry Deploy start correctly.
