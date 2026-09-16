@@ -15,9 +15,11 @@ Deployment erases and repartitions the selected target disk. Verify the target b
 
 When Protected deployment is enabled, Foundry Deploy requests the technician password before initialization. Cancelling the prompt closes Foundry Deploy. Incorrect attempts can be retried, with a progressively longer delay of up to five seconds. If the password is lost, recreate the media in Foundry OSD.
 
-{% hint style="danger" %}
-Foundry Deploy does not validate HTTPS server certificates for catalog and artifact downloads in Windows PE. Use deployment media only on a trusted, controlled network. A catalog-provided file hash can detect a changed download when a hash is available, but it is not an independent authenticity guarantee because the catalog is obtained through the same network path.
+{% hint style="info" %}
+Foundry Deploy validates HTTPS server certificates. When the catalog supplies a file hash, Deploy checks downloaded files and rechecks cached files before reuse. Allow extra time for **Checking cache...** when using large Windows images or slower USB drives. A cached file that fails verification is downloaded again; a replacement that also fails verification stops the affected step. See [download troubleshooting](../troubleshooting/deployment.md#download-fails).
 {% endhint %}
+
+Keep deployment media under your control. Packages without a catalog hash retain compatibility support, but their contents cannot be verified against a catalog hash.
 
 ## Wizard sequence
 

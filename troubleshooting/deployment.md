@@ -29,7 +29,11 @@ In the composed naming workflow, a missing hardware value or firmware placeholde
 
 Record the current deployment step, source type, and complete error. Confirm DNS, proxy, firewall, available storage, and system time before retrying.
 
-Use only a trusted, controlled deployment network. Foundry Deploy does not validate HTTPS server certificates in Windows PE. A file hash is checked only when the selected catalog provides one, and the catalog is obtained through the same network path.
+For an HTTPS certificate error, check the device clock and certificate trust in Windows PE. If your network inspects HTTPS traffic, ask your administrator to provide the required trusted certificates or a network path that does not replace the server certificate.
+
+If **Checking cache...** takes longer than expected, allow the file verification to finish. Large Windows images and slower USB drives take longer to read. When a catalog hash is available, Deploy checks the file contents before reusing them, even if the file was used successfully before.
+
+A cached file that fails verification is downloaded again automatically. If the replacement also fails with a hash verification error, collect the logs and check the download source, deployment storage, and network before retrying. Files without a catalog hash cannot receive this integrity check.
 
 ## Deployment stops with an error
 
