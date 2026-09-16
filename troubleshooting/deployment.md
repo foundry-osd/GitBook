@@ -35,6 +35,17 @@ During **Checking cache...** for a Windows image or OEM driver pack, the verific
 
 A cached file that fails verification is downloaded again automatically. The display switches from cache verification to the replacement download, which has its own progress. If the replacement also fails with a hash verification error, collect the logs and check the download source, deployment storage, and network before retrying. Files without a catalog hash cannot receive this integrity check.
 
+## Checks before disk preparation fail
+
+If Foundry stops before **Prepare target disk layout**, the target has not been erased by that deployment attempt. Record the failed step and follow the reported action:
+
+- For source-access or image-download errors, check the network and selected catalog entry.
+- For an unavailable edition, select another Windows image containing the required edition.
+- For insufficient space, choose a larger target or make room on the deployment USB cache. Do not delete files from the intended target as a workaround for an image or network error.
+- For a cache-location error, check that the cache is available on separate storage and restart Foundry Deploy after correcting the connection.
+
+With ISO or USB overflow to target storage, some image checks finish after disk preparation. A successful source-access check does not guarantee that the complete download or later image verification will succeed. See [checks before disk preparation](../foundry-deploy/review-and-deploy.md#checks-before-disk-preparation).
+
 ## Deployment stops with an error
 
 1. Record the failed step exactly as displayed.
