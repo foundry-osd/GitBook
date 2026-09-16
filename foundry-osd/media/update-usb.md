@@ -9,6 +9,8 @@ Update existing Foundry USB media when configuration or runtime content changes.
 - Close applications that may be using files on the USB drive.
 - Review the current configuration because the update uses the active Foundry OSD settings.
 
+If Foundry cannot confirm that the selected drive is still the same device, the update stops. Refresh the removable-device list, select the drive again, and retry. See [disk identity guidance](create-usb.md#if-the-disk-identity-cannot-be-confirmed) if the warning persists.
+
 ## Update the drive
 
 1. Connect the existing Foundry USB drive.
