@@ -31,9 +31,9 @@ Record the current deployment step, source type, and complete error. Confirm DNS
 
 For an HTTPS certificate error, check the device clock and certificate trust in Windows PE. If your network inspects HTTPS traffic, ask your administrator to provide the required trusted certificates or a network path that does not replace the server certificate.
 
-If **Checking cache...** takes longer than expected, allow the file verification to finish. Large Windows images and slower USB drives take longer to read. When a catalog hash is available, Deploy checks the file contents before reusing them, even if the file was used successfully before.
+During **Checking cache...** for a Windows image or OEM driver pack, the verification percentage and bytes processed show how much of the cached file has been checked. If verification takes longer than expected, allow it to finish. Large files and slower USB drives take longer to read. When a catalog hash is available, Deploy checks the file contents before reusing them, even if the file was used successfully before.
 
-A cached file that fails verification is downloaded again automatically. If the replacement also fails with a hash verification error, collect the logs and check the download source, deployment storage, and network before retrying. Files without a catalog hash cannot receive this integrity check.
+A cached file that fails verification is downloaded again automatically. The display switches from cache verification to the replacement download, which has its own progress. If the replacement also fails with a hash verification error, collect the logs and check the download source, deployment storage, and network before retrying. Files without a catalog hash cannot receive this integrity check.
 
 ## Deployment stops with an error
 
