@@ -51,3 +51,9 @@ The progress page reports the current step, completed-step count, and overall pr
   <img src="../.gitbook/assets/foundry-deploy-progress-01-running.png" alt="Foundry Deploy showing the current deployment step and overall progress">
   <figcaption>Follow the current step and overall deployment progress.</figcaption>
 </figure>
+
+## Cancel deployment
+
+Select **Cancel** on the progress page. Foundry acknowledges the request and stops at a safe boundary. Downloads and cache checks can stop promptly; disk preparation, Windows servicing, and other changes already in progress may need to finish first. Keep the device powered on and the deployment media connected until Foundry reports that deployment was cancelled.
+
+Cancellation does not undo completed changes. If disk preparation has started, the target may contain an incomplete installation and may not boot. Collect the logs, then restart the workflow when ready; there is no resume operation. A cancelled deployment does not automatically reboot.
