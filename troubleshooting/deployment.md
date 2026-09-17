@@ -35,6 +35,8 @@ During **Checking cache...** for a Windows image or OEM driver pack, the verific
 
 A cached file that fails verification is downloaded again automatically. The display switches from cache verification to the replacement download, which has its own progress. If the replacement also fails with a hash verification error, collect the logs and check the download source, deployment storage, and network before retrying. Files without a catalog hash cannot receive this integrity check.
 
+Artifact downloads stop if no data is transferred for two minutes. A connection error can stop a request sooner. There is no fixed total duration limit: a slow download can continue while data is arriving. Check the connection and available storage before retrying a timeout. You can also [cancel deployment](../foundry-deploy/review-and-deploy.md#cancel-deployment) while it is running.
+
 ## Checks before disk preparation fail
 
 If Foundry stops before **Prepare target disk layout**, the target has not been erased by that deployment attempt. Record the failed step and follow the reported action:

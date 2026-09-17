@@ -29,3 +29,9 @@ Choose [Create an ISO](create-iso.md), [Create a USB drive](create-usb.md), or [
 PXE is not a native Foundry OSD media output. [Use existing PXE infrastructure](pxe-deployment.md) by importing the boot image from a validated Foundry OSD ISO.
 
 During creation, Foundry reports workspace preparation, driver resolution, image customization, language and component processing, runtime payload provisioning, media creation, verification, and cleanup.
+
+## Cancel media creation
+
+Select **Cancel** in the progress dialog to stop creating or updating media. Downloads stop promptly; a disk or image operation already in progress may need to finish before cleanup can complete. Keep Foundry OSD open and the USB drive connected until the dialog reports cancellation.
+
+Cancellation does not restore overwritten ISO files or USB contents. Create or update the media again before using it for deployment. For a download timeout, see [media creation troubleshooting](../../troubleshooting/media-creation.md#download-times-out).

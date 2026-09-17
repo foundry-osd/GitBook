@@ -34,6 +34,10 @@ Foundry OSD proxy settings do not configure deployment media, Foundry Connect, o
 
 Open each reported readiness group and correct the specific missing or invalid value. Common blockers include output paths, Windows PE language, architecture, boot-image source, USB target, runtime configuration, secrets, and incompatible customization.
 
+## Download times out
+
+Windows source, driver package, and runtime downloads stop after two minutes without data transfer. A connection error can stop a request sooner. There is no fixed total duration limit while data continues to arrive. Check the workstation's network connection, proxy settings and available storage, then retry media creation. See [cancelling media creation](../foundry-osd/media/README.md#cancel-media-creation) if you want to stop a running operation.
+
 ## ISO creation fails
 
 - Confirm free space in both the temporary workspace and output location.
