@@ -36,7 +36,7 @@ Open each reported readiness group and correct the specific missing or invalid v
 
 ## Download times out
 
-Windows source, driver package, and runtime downloads stop after two minutes without data transfer or after 30 minutes overall for each download. A connection error can stop a request sooner. Check the workstation's network connection, proxy settings and available storage, then retry media creation. See [cancelling media creation](../foundry-osd/media/README.md#cancel-media-creation) if you want to stop a running operation.
+Windows source, driver package, and runtime downloads stop after two minutes without data transfer. A connection error can stop a request sooner. There is no fixed total duration limit while data continues to arrive. Check the workstation's network connection, proxy settings and available storage, then retry media creation. See [cancelling media creation](../foundry-osd/media/README.md#cancel-media-creation) if you want to stop a running operation.
 
 ## ISO creation fails
 
