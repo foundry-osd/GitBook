@@ -122,6 +122,10 @@ Use a unique password of at least 12 characters for deployment media. Foundry ac
 
 ## During deployment
 
+When Foundry Deploy opens, it tries to retrieve the available Autopilot group tags. If the service is unavailable or takes too long to respond, startup continues and the configured default tag remains available. Foundry records a warning in the deployment logs. Review the selected tag in the deployment summary before starting.
+
+This fallback applies only to the group-tag list. Hardware hash upload and registration checks still need network access to Microsoft services.
+
 Foundry Deploy captures the current device's hardware hash and uses the `Foundry OSD Autopilot Registration` application identity to upload it. It then waits for a Windows Autopilot device with the captured serial number to become visible and applies the selected group tag when required.
 
 ### Existing Autopilot registrations
