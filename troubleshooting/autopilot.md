@@ -12,6 +12,12 @@ Identify the selected Autopilot method before troubleshooting.
 
 Check tenant and application identifiers, Microsoft Graph application permissions, administrator consent, service-principal availability, certificate format, and certificate expiration.
 
+## Group tags are missing in Foundry Deploy
+
+For zero-touch upload, Foundry limits how long it waits for the available group-tag list at startup. If the lookup fails or times out, Foundry Deploy still opens and keeps the configured default tag available. Check the selected tag in the deployment summary.
+
+If you need a tag that is missing, restore Microsoft service connectivity and restart Foundry Deploy before starting deployment. Review the [deployment logs](logs-and-support.md) for a group-tag discovery warning. Check network access, system time, certificate validity, application permission, and tenant policy. Successful startup does not confirm that hardware hash upload or registration checks can reach Microsoft services.
+
 ## Zero-touch upload fails during deployment
 
 Confirm network access, system time, certificate validity, application permission, tenant policy, and whether the device is already registered.
