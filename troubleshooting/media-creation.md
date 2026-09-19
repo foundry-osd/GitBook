@@ -51,6 +51,13 @@ Close File Explorer windows, terminals and other tools using the mounted image, 
 - Confirm security software has not quarantined a required deployment tool.
 - Record the failed operation before retrying.
 
+## Boot media exceeds a size limit
+
+- **Custom drivers exceed the limit:** keep the custom driver directory, including subfolders, within 2 GiB. The reported size is the amount found before the check stopped, so the directory can be larger. Select only the network and storage drivers required by Windows PE. This limit applies to USB and ISO creation.
+- **USB BOOT partition is too small:** compare the estimated space required with the partition capacity shown. Reduce customizations or drivers, or [create an ISO](../foundry-osd/media/create-iso.md). Foundry stops before erasing or formatting the USB drive.
+- **USB BOOT capacity cannot be verified:** check access to the source files, reconnect the intended USB drive, refresh the device list, and retry. Foundry stops before erasing or formatting when it cannot verify capacity.
+- **A file exceeds the FAT32 limit:** reduce the boot image size or create an ISO. Free space on the drive does not remove FAT32's per-file size limit.
+
 ## USB creation fails
 
 {% hint style="danger" %}

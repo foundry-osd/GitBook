@@ -2,6 +2,8 @@
 
 Create an ISO for virtual machines, remote-management virtual media, or a separate USB-writing process.
 
+ISO creation is not limited by USB BOOT partition capacity. The [2 GiB custom-driver directory limit](../general.md#drivers) still applies.
+
 ## Create the file
 
 1. Open **Start**.
