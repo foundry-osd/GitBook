@@ -33,7 +33,9 @@ For an HTTPS certificate error, check the device clock and certificate trust in 
 
 During **Checking cache...** for a Windows image or OEM driver pack, the verification percentage and bytes processed show how much of the cached file has been checked. If verification takes longer than expected, allow it to finish. Large files and slower USB drives take longer to read. When a catalog hash is available, Deploy checks the file contents before reusing them, even if the file was used successfully before.
 
-A cached file that fails verification is downloaded again automatically. The display switches from cache verification to the replacement download, which has its own progress. If the replacement also fails with a hash verification error, collect the logs and check the download source, deployment storage, and network before retrying. Files without a catalog hash cannot receive this integrity check.
+A cached file that fails verification is downloaded again automatically when enough storage is available. The display switches from cache verification to the replacement download, which has its own progress. Downloaded files become available for reuse only after the transfer completes and the available size and hash checks pass. If a replacement fails a size or hash check, collect the logs and check the download source, deployment storage, and network before retrying. Files without a catalog hash cannot receive the content integrity check.
+
+A failed or cancelled download does not replace an existing cached file. A retry downloads the incomplete file again from the beginning; it does not resume the interrupted transfer. Previously completed files can still be reused after their normal cache checks.
 
 Artifact downloads stop if no data is transferred for two minutes. A connection error can stop a request sooner. There is no fixed total duration limit: a slow download can continue while data is arriving. Check the connection and available storage before retrying a timeout. You can also [cancel deployment](../foundry-deploy/review-and-deploy.md#cancel-deployment) while it is running.
 
@@ -45,6 +47,8 @@ If Foundry stops before **Prepare target disk layout**, the target has not been 
 - For an unavailable edition, select another Windows image containing the required edition.
 - For insufficient space, choose a larger target or make room on the deployment USB cache. Do not delete files from the intended target as a workaround for an image or network error.
 - For a cache-location error, check that the cache is available on separate storage and restart Foundry Deploy after correcting the connection.
+
+Replacing an invalid Windows image in the USB cache requires enough additional free space for the complete replacement. If that space is unavailable, Foundry reports that the cache is unavailable and stops before disk preparation. Make room on the deployment USB cache and retry. An existing image that passes verification can still be reused without space for another copy.
 
 With ISO or USB overflow to target storage, some image checks finish after disk preparation. A successful source-access check does not guarantee that the complete download or later image verification will succeed. See [checks before disk preparation](../foundry-deploy/review-and-deploy.md#checks-before-disk-preparation).
 

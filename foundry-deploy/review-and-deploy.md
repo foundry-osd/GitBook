@@ -37,6 +37,8 @@ Foundry checks the selected image settings, storage location and known space req
 - **USB with enough usable cache space:** Foundry downloads or reuses the Windows image, checks its contents against the catalog hash when one is supplied, and verifies the selected edition before erasing the target. The prepared image is then used for deployment. Cache verification and downloads display their own progress.
 - **ISO, or USB when the image needs target-disk storage:** Foundry checks source access and the space requirements it can determine first. The complete download, file verification and edition check finish after the target disk is prepared. The progress page explains when image validation needs target storage.
 
+For an existing Windows image in the USB cache, Foundry keeps the cached file until a replacement is ready. If the image fails verification, the USB cache needs enough additional free space for the complete replacement; otherwise deployment stops before disk preparation. A valid cached image can be reused without space for another copy.
+
 An error during the checks before disk preparation stops deployment before the target is erased. Correct the reported image, network or storage issue before retrying. See [deployment troubleshooting](../troubleshooting/deployment.md#checks-before-disk-preparation-fail).
 
 {% hint style="warning" %}
