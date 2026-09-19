@@ -1,6 +1,6 @@
 # Windows ADK and Windows PE
 
-Foundry OSD requires Windows ADK and Windows PE Add-on version `10.1.26100.2454` to build deployment media.
+Foundry OSD requires the Windows ADK `10.1.26100` release, revision `2454` or later, with a matching Windows PE Add-on and verified ADK servicing updates to build deployment media.
 
 ## What Foundry checks
 
@@ -9,7 +9,9 @@ The ADK page detects:
 - Whether the Windows ADK is installed.
 - Whether the Windows PE Add-on is installed.
 - The installed ADK component version.
-- Whether the detected ADK build satisfies the current compatibility check.
+- Whether the ADK meets the supported release and minimum revision.
+- Whether the required Deployment Tools servicing updates are verified.
+- Whether the installed Windows PE components match the ADK release and the image, optional-component and boot files are available for the selected architecture.
 
 <figure>
   <img src="../.gitbook/assets/foundry-osd-adk-01-status-missing.png" alt="Foundry OSD showing missing Windows ADK and Windows PE Add-on components">
@@ -31,8 +33,30 @@ The ADK page detects:
 </figure>
 
 {% hint style="info" %}
-The automatic installation downloads and installs Windows ADK `10.1.26100.2454` first, followed by Windows PE Add-on `10.1.26100.2454`.
+The automatic installation downloads and installs Windows ADK `10.1.26100.2454` first, followed by Windows PE Add-on `10.1.26100.2454`. Apply the ADK servicing update afterward if the page still reports that servicing needs attention.
 {% endhint %}
+
+## Verify ADK servicing
+
+Foundry checks the DISM, Windows System Image Manager and Oscdimg updates supplied in `KB5101684`. An unchanged ADK version number does not tell you whether these updates are installed.
+
+1. Select **ADK update instructions** on the ADK page.
+2. Follow [Microsoft's ADK patch instructions](https://learn.microsoft.com/windows-hardware/get-started/adk-servicing) for the `10.1.26100.2454` release and apply all applicable patches with administrator permissions.
+3. Return to Foundry and select **Refresh**.
+
+If the update is not verified, media creation remains blocked. If you have already applied a newer update and the status remains unchanged, collect the [logs and support details](../troubleshooting/logs-and-support.md) with the installed update name. An unverified result can mean that the installed update is not recognized. If servicing information cannot be read, check permissions and repair the installation before refreshing.
+
+ADK servicing checks do not verify cumulative updates inside your Windows PE image. Follow Microsoft's guidance separately when servicing that image.
+
+## Repair Windows PE readiness
+
+The readiness details show availability for **x64** and **ARM64**. Missing files for one architecture block that target; a complete other architecture remains available.
+
+- If the matching add-on is already installed but files are missing, use its installer to **Repair** it.
+- If its version differs from the ADK, uninstall the Windows PE Add-on first, then install the matching `10.1.26100.2454` add-on from [Microsoft's ADK downloads](https://learn.microsoft.com/windows-hardware/get-started/adk-install).
+- Return to Foundry and select **Refresh**. Recheck ADK servicing after a repair or reinstall changes Deployment Tools files; apply the applicable updates again if required.
+
+Foundry's ordinary install action is for missing components. Repair or replacement of a registered add-on is performed through its installer.
 
 ## When the page reports ready
 
