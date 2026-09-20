@@ -27,6 +27,8 @@ Choose whether Foundry Deploy reboots automatically after success and configure 
 
 Enable the supported Dell or HP driver options required by the hardware fleet. Add a custom driver directory when Windows PE needs network or storage drivers that are not provided by the selected vendor options.
 
+Keep the total size of the custom driver directory, including subfolders, within 2 GiB for both USB and ISO creation. Select only the network and storage drivers needed by Windows PE. If the directory exceeds the limit, Foundry stops early and reports the size already found and the allowed maximum.
+
 Validate custom drivers on representative hardware before using the media in production.
 
 <figure>

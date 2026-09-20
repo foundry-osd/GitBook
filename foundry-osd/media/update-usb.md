@@ -11,6 +11,8 @@ Update existing Foundry USB media when configuration or runtime content changes.
 
 If Foundry cannot confirm that the selected drive is still the same device, the update stops. Refresh the removable-device list, select the drive again, and retry. See [disk identity guidance](create-usb.md#if-the-disk-identity-cannot-be-confirmed) if the warning persists.
 
+Foundry checks the prepared boot files against the existing BOOT partition's capacity before formatting it. If they do not fit or the capacity cannot be verified, the update stops before formatting. Reduce customizations or drivers, or [create an ISO](create-iso.md) when more space is needed. If capacity cannot be verified, check access to the source files, reconnect the USB drive, and retry.
+
 ## Update the drive
 
 1. Connect the existing Foundry USB drive.

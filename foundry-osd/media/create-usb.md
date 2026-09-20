@@ -27,6 +27,10 @@ Foundry checks that the connected drive still matches the one you confirmed befo
 
 Refresh the removable-device list, select the intended drive again, and confirm creation. If the warning remains, use a drive or connection that reports a distinct device identity. Keep the drive connected throughout creation; do not swap drives after confirmation.
 
+## If boot files do not fit
+
+Foundry checks that the prepared boot files fit the 2 GiB BOOT partition before erasing or formatting the drive. If they do not fit, reduce customizations or drivers, or [create an ISO](create-iso.md). A larger USB drive does not increase this BOOT partition size. See [capacity troubleshooting](../../troubleshooting/media-creation.md#boot-media-exceeds-a-size-limit) for other size warnings.
+
 ## Validate the drive
 
 Safely eject the drive, boot representative hardware, and confirm that Foundry Connect and Foundry Deploy start correctly.
