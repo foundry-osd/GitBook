@@ -22,6 +22,12 @@ After reboot:
 
 When using a [custom answer file](../foundry-osd/customization/unattend.md), verify that its settings and commands produced the intended Windows configuration and work with the other enabled Foundry options. Foundry success confirms deployment completed; it does not prove that Windows has consumed every setting. Keep the target Panther answer file until the required setup passes finish, then follow your sensitive-file cleanup process.
 
+## Automatic Windows activation (upcoming release)
+
+For standard RET deployments, Foundry automatically attempts to activate Windows after reboot using a compatible OEM product key stored in the device firmware. Online activation requires Internet access and a valid key for the installed Windows edition.
+
+Foundry preserves existing activation and explicitly configured licensing. It skips this attempt for VOL deployments and deployments using a custom answer file. An unsuccessful activation attempt does not stop Windows setup. Before handing over the device, check **Settings > System > Activation** to confirm its activation status.
+
 ## Error
 
 The error page identifies the failed deployment step and displays details.
