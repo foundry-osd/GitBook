@@ -47,12 +47,6 @@ These checks cannot guarantee that every later step will succeed. Network access
 
 The progress page reports the current step, completed-step count, and overall progress when the operation can be measured.
 
-{% hint style="info" %}
-**Upcoming deployment workflow**
-
-The conditional timeline described below is an unreleased change after `v26.9.14.1`. Existing media may still display the earlier fixed list of steps.
-{% endhint %}
-
 The timeline follows the selected deployment options and available storage. Disabled options and operations that do not apply are omitted. For example, custom answer-file validation and copying appear only when a custom file is selected; native computer-name and Windows Setup configuration are then omitted. Independent options such as AI policies, Windows features, and driver installation remain applicable when configured.
 
 - **Succeeded** means the displayed action completed. **Stage driver installer**, **Stage firmware update**, **Prepare setup tasks**, and **Prepare Autopilot assistant** confirm preparation for later execution in Windows. **Prepare target disk** performs disk preparation immediately.
