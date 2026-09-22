@@ -41,6 +41,8 @@ Artifact downloads stop if no data is transferred for two minutes. A connection 
 
 If Foundry stops before **Prepare target disk layout**, the target has not been erased by that deployment attempt. Record the failed step and follow the reported action:
 
+The unreleased conditional workflow after `v26.9.14.1` calls this step **Prepare target disk**. Its preceding image download and inspection steps depend on the available storage route; see [the deployment timeline](../foundry-deploy/review-and-deploy.md#follow-progress).
+
 - For source-access or image-download errors, check the network and selected catalog entry.
 - For an unavailable edition, select another Windows image containing the required edition.
 - For insufficient space, choose a larger target or make room on the deployment USB cache. Do not delete files from the intended target as a workaround for an image or network error.
