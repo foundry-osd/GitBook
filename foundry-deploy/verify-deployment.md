@@ -6,11 +6,6 @@ Foundry Deploy finishes with a success or error state.
 
 Review the completion message and session summary when the configured reboot policy allows it. Foundry OSD can configure a manual reboot, an immediate automatic reboot, or an automatic reboot after a displayed countdown. Configure a manual reboot or sufficient delay before creating media when technicians must inspect results or collect logs.
 
-<figure>
-  <img src="../.gitbook/assets/foundry-deploy-verify-01-success.png" alt="Foundry Deploy success page with the reboot action">
-  <figcaption>Confirm deployment success before rebooting the device.</figcaption>
-</figure>
-
 After reboot:
 
 - Confirm that Windows starts from the target disk.
@@ -38,12 +33,7 @@ Foundry preserves existing activation and explicitly configured licensing. It sk
 
 ## Error
 
-The error page identifies the failed deployment step and displays details.
-
-<figure>
-  <img src="../.gitbook/assets/foundry-deploy-verify-02-error.png" alt="Foundry Deploy error page showing the failed deployment step">
-  <figcaption>Record the failed step and error details before troubleshooting.</figcaption>
-</figure>
+The timeline identifies the failed deployment step. Select **View error details** on the error page to inspect the failure details.
 
 Do not immediately retry a destructive deployment. Record the failed step and error, then collect [logs and support information](../troubleshooting/logs-and-support.md).
 
