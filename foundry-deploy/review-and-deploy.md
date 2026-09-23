@@ -56,6 +56,8 @@ The timeline follows the selected deployment options and available storage. Disa
 
 With usable USB storage, **Download Windows image** and **Check Windows image** run before **Prepare target disk**. With ISO media or USB fallback to target storage, they run after disk preparation. **Apply Windows image** and **Configure Windows boot** follow in both paths. The step count reflects applicable work and can be refined as hardware or available payloads are resolved; it is not an estimate of remaining time.
 
+Driver and firmware downloads check USB cache capacity and write access separately from the Windows image. If that cache cannot accommodate the selected package, Foundry uses the prepared target disk. An existing selected file can provide reusable space, but its contents still undergo the usual cache verification.
+
 <figure>
   <img src="../.gitbook/assets/foundry-deploy-progress-01-running.png" alt="Foundry Deploy showing the current deployment step and overall progress">
   <figcaption>Follow the current step and overall deployment progress.</figcaption>

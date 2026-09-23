@@ -19,7 +19,7 @@ Foundry uses catalog metadata to identify supported models, operating-system tar
 
 ## Driver downloads and storage
 
-When you select **Microsoft Update Catalog**, Foundry uses `Cache/MicrosoftUpdateCatalog/Drivers` on USB media when the cache has enough space for the download size reported by the catalog. Otherwise, it uses the target disk. ISO deployments use the target disk. Drivers are extracted on the target disk, and only drivers selected for the current deployment are installed.
+When you select **Microsoft Update Catalog**, Foundry uses `Cache/MicrosoftUpdateCatalog/Drivers` on USB media when the cache is writable and has enough space for the download size reported by the catalog. Otherwise, it uses the target disk. ISO deployments use the target disk. Drivers are extracted on the target disk, and only drivers selected for the current deployment are installed.
 
 Foundry checks downloaded and cached driver files against the catalog hash when one is supplied. Drivers without a catalog hash are downloaded again for each deployment to temporary storage on the prepared target disk. Keep the device connected to the network and leave enough space for driver downloads and extraction.
 
