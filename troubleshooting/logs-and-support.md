@@ -61,25 +61,37 @@ Supervised startup evidence is stored under `<cache-drive>:\Logs\<session-id>\St
 
 ## Applied Windows log location
 
-After Foundry prepares the target Windows installation, deployment logs are rebound to:
+After a successful diagnostic transfer to the target Windows installation, deployment logs are stored in:
 
 ```text
-<target-drive>:\Windows\Temp\Foundry\Logs
+<target-drive>:\Windows\Temp\Foundry\Logs\Deployment
 ```
 
 After the deployed operating system starts, this is normally:
 
 ```text
-C:\Windows\Temp\Foundry\Logs
+C:\Windows\Temp\Foundry\Logs\Deployment
 ```
 
-Relevant subdirectories include:
+Other diagnostic categories under `C:\Windows\Temp\Foundry\Logs` include:
 
 ```text
 PreOobe
 AutopilotHash
 AutopilotRegistration
 ```
+
+Deployment state and the deployment summary are stored under `C:\Windows\Temp\Foundry\State\Deployment`. First-boot execution results are in `State\PreOobe`, and the interactive Autopilot assistant keeps its state in `State\AutopilotRegistration` under the same Foundry root.
+
+If diagnostic transfer fails, Foundry preserves the source workspace and reports the available diagnostic location. Collect that location as well; the presence of the final directory alone does not prove that every file was transferred.
+
+## First-boot files and cleanup
+
+Post-deployment files remain under `%SystemRoot%\Temp\Foundry`. `Runtime` contains the first-boot helpers, `Payloads` holds their inputs, `State` records execution and completion, `Logs` holds diagnostics, and `Work` is reserved for operation-specific temporary files. These directories are created when needed.
+
+A successful Windows PE deployment does not mean first-boot work has completed. Foundry records first-boot outcomes and input disposal separately. After an interrupted attempt, it reconciles disposal and requires affected inputs to be staged again; it does not automatically replay the scripts. Keep the runtime, state, and diagnostics when investigating an incomplete first boot. Do not treat them as unused files solely because no Foundry process is running.
+
+The cleanup step intentionally removes `C:\Drivers`. This is separate from the lifetime of Foundry's runtime and execution records.
 
 If the first-boot runner does not start, also collect:
 

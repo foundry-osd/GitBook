@@ -40,16 +40,36 @@ Windows source, driver package, and runtime downloads stop after two minutes wit
 
 ## A mounted image cannot be cleaned up
 
+Media preparation uses an operation-specific directory under `%ProgramData%\Foundry\Workspaces`. Reusable downloads are stored separately, so cleaning a completed workspace does not remove them. An active operation's workspace is preserved.
+
 If saving or discarding a mounted Windows image fails, Foundry attempts cleanup again after the previous command has finished. The original media-creation error remains available in the logs. Foundry keeps the temporary workspace when an image is still mounted or its mount state cannot be checked safely. If a cleanup command times out or its completion is uncertain, Foundry preserves that workspace across restarts instead of starting another cleanup attempt. Retained workspaces continue to use disk space.
 
 Close File Explorer windows, terminals and other tools using the mounted image, then retry media creation. Do not manually delete the retained workspace or change its file permissions while an image is mounted. If the error persists, collect the [logs and support details](logs-and-support.md) so the remaining mount can be checked before removing files.
 
 ## ISO creation fails
 
+The default ISO output is `%ProgramData%\Foundry\Artifacts\Iso\Foundry.iso`. Foundry migrates its previous default location automatically and preserves custom output paths. A failed or cancelled ISO build keeps the previous output file; the new ISO replaces it only after successful creation.
+
 - Confirm free space in both the temporary workspace and output location.
 - Confirm the output file is not open or locked.
 - Confirm security software has not quarantined a required deployment tool.
 - Record the failed operation before retrying.
+
+## Downloads and reusable cache
+
+Foundry OSD keeps downloaded originals under `%ProgramData%\Foundry\Cache`:
+
+| Directory | Content |
+| --- | --- |
+| `WinPeDrivers` | Downloaded Windows PE driver packages |
+| `WindowsSources` | Windows source images used to prepare the boot image |
+| `Installers` | Supported ADK and Windows PE Add-on setup executables |
+
+When the selected catalogue supplies a SHA-256 digest, Foundry checks the actual cached bytes against it before reuse. A change in source, version, architecture, or digest selects a different entry. For eligible versioned downloads without a catalogue digest, reuse requires a recorded completed transfer and a matching local file hash. This detects incomplete or changed local files; it does not provide publisher authentication.
+
+Cache verification can take time for large images, but a valid hit avoids another binary download. Catalogue lookups can still require Internet access, and cached ADK setup executables are not a complete offline ADK installation. Runtime archives are downloaded for each independent media preparation.
+
+Keep these cache directories when retrying media creation. Do not delete them while Foundry is preparing media or installing the ADK. Existing Windows source downloads with a matching catalogue hash can be adopted into the cache; older files without sufficient verification evidence are preserved rather than trusted automatically.
 
 ## Boot media exceeds a size limit
 
