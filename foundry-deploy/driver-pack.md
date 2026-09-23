@@ -19,6 +19,14 @@ Foundry uses catalog metadata to identify supported models, operating-system tar
 
 ## Driver downloads and storage
 
-When you select **Microsoft Update Catalog**, Foundry uses `Cache/MicrosoftUpdateCatalog/Drivers` on USB media when the cache has enough space for the download size reported by the catalog. Otherwise, it uses the target disk. ISO deployments use the target disk. Drivers are extracted on the target disk, and only drivers selected for the current deployment are installed.
+When you select **Microsoft Update Catalog**, Foundry uses `Cache/MicrosoftUpdateCatalog/Drivers` on USB media when the cache is writable and has enough space for the download size reported by the catalog. Otherwise, it uses the target disk. ISO deployments use the target disk. Drivers are extracted on the target disk, and only drivers selected for the current deployment are installed.
 
 Foundry checks downloaded and cached driver files against the catalog hash when one is supplied. Drivers without a catalog hash are downloaded again for each deployment to temporary storage on the prepared target disk. Keep the device connected to the network and leave enough space for driver downloads and extraction.
+
+## Driver installation paths
+
+- **None:** driver download, extraction, and installation steps are omitted.
+- **Offline driver packages:** **Download driver pack**, **Extract driver pack**, and **Install Windows drivers** prepare and inject INF drivers. **Install recovery drivers** also services Windows Recovery Environment when applicable.
+- **Deferred installers:** supported packages such as Lenovo executable installers and Surface MSI packages use **Stage driver installer** to copy the package, followed by **Prepare setup tasks** to schedule installation. Installation occurs during Windows setup after reboot. Extraction and offline INF installation steps are omitted for this path.
+
+A download can be **Skipped** because all selected files were reused from cache while extraction and installation still succeed normally. Microsoft Update Catalog lookup still requires network access; cached package files do not provide an offline copy of the catalog.

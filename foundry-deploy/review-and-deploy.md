@@ -45,7 +45,18 @@ These checks cannot guarantee that every later step will succeed. Network access
 
 ## Follow progress
 
-The progress page reports the current step, completed-step count, and overall progress when the operation can be measured.
+The progress page reports the current step, its position in the deployment plan, and overall progress when the operation can be measured.
+
+The timeline follows the selected deployment options and available storage. Disabled options and operations that do not apply are omitted. For example, custom answer-file validation and copying appear only when a custom file is selected; native computer-name and Windows Setup configuration are then omitted. Independent options such as AI policies, Windows features, and driver installation remain applicable when configured.
+
+- **Succeeded** means the displayed action completed. **Stage driver installer**, **Stage firmware update**, **Prepare setup tasks**, and **Prepare Autopilot assistant** confirm preparation for later execution in Windows. **Prepare target disk** performs disk preparation immediately.
+- **Skipped** uses an informational indicator and includes a reason, such as an accepted cached file being reused or requested settings already being configured. Cache checks still run before reuse. Cached driver or firmware archives may still require extraction and installation.
+- **Failed** identifies an action that could not complete. Read its details before retrying.
+- **Cancelled** identifies an interrupted active action. Previously completed actions retain their results; unstarted actions are not marked successful.
+
+With usable USB storage, **Download Windows image** and **Check Windows image** run before **Prepare target disk**. With ISO media or USB fallback to target storage, they run after disk preparation. **Apply Windows image** and **Configure Windows boot** follow in both paths. The step count reflects applicable work and can be refined as hardware or available payloads are resolved; it is not an estimate of remaining time.
+
+Driver and firmware downloads check USB cache capacity and write access separately from the Windows image. If that cache cannot accommodate the selected package, Foundry uses the prepared target disk. An existing selected file can provide reusable space, but its contents still undergo the usual cache verification.
 
 <figure>
   <img src="../.gitbook/assets/foundry-deploy-progress-01-running.png" alt="Foundry Deploy showing the current deployment step and overall progress">
