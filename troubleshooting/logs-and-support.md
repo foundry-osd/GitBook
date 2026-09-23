@@ -76,10 +76,13 @@ C:\Windows\Temp\Foundry\Logs\Deployment
 Other diagnostic categories under `C:\Windows\Temp\Foundry\Logs` include:
 
 ```text
+Bootstrap
 PreOobe
 AutopilotHash
 AutopilotRegistration
 ```
+
+Startup evidence copied from the Foundry Cache session is retained under `Logs\Bootstrap\Startup` within the same root.
 
 Deployment state and the deployment summary are stored under `C:\Windows\Temp\Foundry\State\Deployment`. First-boot execution results are in `State\PreOobe`, and the interactive Autopilot assistant keeps its state in `State\AutopilotRegistration` under the same Foundry root.
 
