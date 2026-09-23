@@ -58,6 +58,11 @@ With usable USB storage, **Download Windows image** and **Check Windows image** 
 
 Driver and firmware downloads check USB cache capacity and write access separately from the Windows image. If that cache cannot accommodate the selected package, Foundry uses the prepared target disk. An existing selected file can provide reusable space, but its contents still undergo the usual cache verification.
 
+<figure>
+  <img src="../.gitbook/assets/foundry-deploy-progress-01-running.png" alt="Foundry Deploy showing the current deployment step and overall progress">
+  <figcaption>Follow the current step and overall deployment progress.</figcaption>
+</figure>
+
 ## Cancel deployment
 
 Select **Cancel** at the bottom right of the progress page. Foundry acknowledges the request and stops at a safe boundary. Downloads and cache checks can stop promptly; disk preparation, Windows servicing, and other changes already in progress may need to finish first. Keep the device powered on and the deployment media connected until Foundry reports that deployment was cancelled.
