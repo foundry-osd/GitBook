@@ -22,6 +22,14 @@ After reboot:
 
 When using a [custom answer file](../foundry-osd/customization/unattend.md), verify that its settings and commands produced the intended Windows configuration and work with the other enabled Foundry options. Foundry success confirms deployment completed; it does not prove that Windows has consumed every setting. Keep the target Panther answer file until the required setup passes finish, then follow your sensitive-file cleanup process.
 
+{% hint style="info" %}
+**Review step outcomes**
+
+Review informational **Skipped** entries and their reasons as well as successful entries. A cache-related skip is expected reuse, but another skip can explain why requested optional work was not completed.
+
+**Stage driver installer**, **Stage firmware update**, **Prepare setup tasks**, and **Prepare Autopilot assistant** describe preparation. Confirm the corresponding driver, firmware, customization, or registration result after Windows starts. A successful Deploy session does not establish that those later actions succeeded.
+{% endhint %}
+
 ## Automatic Windows activation
 
 For standard RETAIL deployments of supported Windows Home and Pro editions, Foundry automatically attempts to activate Windows after reboot using a compatible OEM product key stored in the device firmware. Online activation requires Internet access and a valid key for the installed Windows edition.
@@ -30,7 +38,7 @@ Foundry preserves existing activation and explicitly configured licensing. It sk
 
 ## Error
 
-The error page identifies the failed deployment step and displays details.
+The timeline identifies the failed deployment step. Select **View error details** on the error page to inspect the failure details.
 
 <figure>
   <img src="../.gitbook/assets/foundry-deploy-verify-02-error.png" alt="Foundry Deploy error page showing the failed deployment step">
