@@ -12,7 +12,7 @@ Use **Windows customization > Custom Windows images** to import a Windows image,
 
 The progress bar appears during inspection and import, after a source has been selected.
 
-The page's image controls are disabled while custom images are off. Select an image to display its indexes in a second table. Image actions require an image selection; **Set index default** also requires an index selection. All actions are in the command bar, which uses additional rows in narrower windows. The default source remains **Foundry catalog** until you change it.
+The page's image controls are disabled while custom images are off. Select an image to display its indexes in a second table. Image actions require an image selection; **Set index default** also requires an index selection. All actions are in the command bar. In narrower windows, scroll the bar horizontally to reach the remaining actions. The default source remains **Foundry catalog** until you change it.
 
 Foundry copies WIM content into its local library. An ISO provides `sources\install.wim`, or `sources\install.esd`, which Foundry exports to WIM. Every image index is retained. Split `.swm` sets are not supported by this import flow.
 
