@@ -32,4 +32,12 @@ Confirm that the device code is entered before expiration, the technician uses a
 
 Verify the device record, group tag, assigned profile, and assignment state in the organization’s management service before rebooting into OOBE.
 
+## The computer name is not assigned
+
+Confirm that [Upload computer name to Autopilot](../foundry-osd/customization/machine-naming.md#upload-the-computer-name-to-autopilot) is enabled on the Foundry OSD **Machine naming** page and that the deployment media includes the updated setting. Machine naming and a hardware hash upload method must both be enabled. The assigned value comes from the final name confirmed in Foundry Deploy, including operator edits.
+
+Name assignment runs after the device becomes visible in Autopilot. For interactive upload, this happens in the OOBE assistant after technician sign-in. A custom answer file causes Foundry to skip name assignment because it does not manage that file's computer name.
+
+Review the Autopilot result and [logs](logs-and-support.md) for an assignment failure or skip reason. A successful hardware hash upload does not prove the name was assigned. Check Microsoft Graph connectivity and permissions for the selected upload method. Autopilot assigned names apply to Microsoft Entra join, not hybrid join.
+
 Never publish tenant identifiers, device codes, tokens, certificates, or hardware hashes in a support request.
