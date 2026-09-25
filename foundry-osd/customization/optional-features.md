@@ -16,3 +16,7 @@ Use Optional features to enable or disable supported Windows optional features d
 </figure>
 
 Feature availability depends on the selected Windows release and edition. Validate the deployed state before using the media broadly.
+
+## Custom images (unreleased)
+
+Enabled optional features also apply to [custom Windows images](custom-windows-images.md). ISO import can retain available `sources\sxs` files for servicing. Foundry does not verify in advance that those sources support a selected feature or image; test the combination before production deployment.

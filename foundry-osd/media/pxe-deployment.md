@@ -40,3 +40,7 @@ Resolve driver, architecture, firmware, or network compatibility issues in the I
 ## Maintain the boot image
 
 Re-import `sources\boot.wim` whenever the Foundry OSD ISO is regenerated. Keep the previous boot image available until the replacement has passed PXE boot and runtime validation on representative clients.
+
+## Custom image payloads (unreleased)
+
+[Custom Windows images](../customization/custom-windows-images.md) are external to `sources\boot.wim`. Copying that boot image alone does not transfer custom images or their manifest. This feature does not provide a supported PXE delivery path for custom WIMs; use the complete generated ISO or USB media.

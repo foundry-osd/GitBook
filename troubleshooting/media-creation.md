@@ -88,3 +88,7 @@ Creating USB media formats and erases the selected disk. Reconfirm the target be
 - Close applications using the drive.
 - Confirm that the selected layout supports the target firmware.
 - Do not retry against a different disk until its identity is verified.
+
+## Missing custom images (unreleased)
+
+On [Custom Windows images](../foundry-osd/customization/custom-windows-images.md), restore an included image by importing its original content again. A same-name file with different content does not restore that reference. Check optional source availability, preferred image/index, and free space. Content held by a running build cannot be deleted.

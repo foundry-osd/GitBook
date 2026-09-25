@@ -68,3 +68,7 @@ Driver and firmware downloads check USB cache capacity and write access separate
 Select **Cancel** at the bottom right of the progress page. Foundry acknowledges the request and stops at a safe boundary. Downloads and cache checks can stop promptly; disk preparation, Windows servicing, and other changes already in progress may need to finish first. Keep the device powered on and the deployment media connected until Foundry reports that deployment was cancelled.
 
 Cancellation does not undo completed changes. If disk preparation has started, the target may contain an incomplete installation and may not boot. Collect the logs, then restart the workflow when ready; there is no resume operation. A cancelled deployment does not automatically reboot.
+
+## Review a custom image (unreleased)
+
+For [custom images](../foundry-osd/customization/custom-windows-images.md), verify the image name and numeric WIM index as well as the target disk and customizations. Keep the source available until deployment completes. Source hash and metadata verification cannot guarantee that DISM will successfully apply every compressed resource or customization.

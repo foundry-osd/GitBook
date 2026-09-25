@@ -21,3 +21,7 @@ Available Windows releases, languages, editions, architectures, and license chan
 ## Hardware
 
 Network, storage, and platform support depends on Windows PE compatibility and available driver packages. Validate deployment media on representative hardware before production use.
+
+## Custom WIMs (unreleased)
+
+The [custom image workflow](../foundry-osd/customization/custom-windows-images.md) accepts readable WIM metadata without a Windows version, edition, or architecture allowlist. This is not a support guarantee for every image. Deployment tools, firmware, drivers, and selected customizations still have their own requirements.

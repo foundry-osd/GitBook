@@ -27,3 +27,7 @@ Foundry checks the prepared boot files against the existing BOOT partition's cap
   <img src="../../.gitbook/assets/foundry-osd-media-update-usb-01-action.png" alt="Foundry OSD showing recognized deployment media and the Update USB action">
   <figcaption>Update recognized Foundry USB media without rebuilding its cache partition or re-downloading cached Windows sources.</figcaption>
 </figure>
+
+## Custom image content (unreleased)
+
+When [custom images](../customization/custom-windows-images.md) are enabled, an update stages the current profile's new managed image content on the data partition and verifies capacity before refreshing BOOT. Keep enough free space for the new content as well as retained content. Manual WIMs and unrelated caches are preserved. Old managed images may remain physically present but are not selected by a new manifest. If an update is interrupted, repeat it and validate the resulting media before use.

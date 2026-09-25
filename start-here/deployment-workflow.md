@@ -44,3 +44,7 @@ Review the completion state, deployment summary, and any reported error. Reboot 
     Foundry OSD authors deployment media, Foundry Connect establishes network readiness, and Foundry Deploy applies and verifies Windows.
   </figcaption>
 </figure>
+
+## Use a custom Windows image (unreleased)
+
+Before creating media, optionally [import and include custom Windows images](../foundry-osd/customization/custom-windows-images.md). Boot the complete ISO or USB, complete Foundry Connect, and select the image and exact index in Deploy. Existing network prerequisites and enabled customizations continue to apply.

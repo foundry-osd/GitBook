@@ -35,3 +35,7 @@ During creation, Foundry reports workspace preparation, driver resolution, image
 Select **Cancel** in the progress dialog to stop creating or updating media. Downloads stop promptly; a disk or image operation already in progress may need to finish before cleanup can complete. Keep Foundry OSD open and the USB drive connected until the dialog reports cancellation.
 
 Cancellation does not restore overwritten ISO files or USB contents. Create or update the media again before using it for deployment. For a download timeout, see [media creation troubleshooting](../../troubleshooting/media-creation.md#download-times-out).
+
+## Custom image readiness (unreleased)
+
+[Custom Windows images](../customization/custom-windows-images.md) add source availability and default-selection checks to media readiness. Restore missing included WIMs and optional sources or update the profile. Images are stored outside `boot.wim`, so include their size in media and working-space planning.

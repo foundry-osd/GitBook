@@ -19,6 +19,7 @@
     * [Interactive hardware hash upload](foundry-osd/autopilot/interactive-hardware-hash.md)
   * [Windows customization](foundry-osd/customization/README.md)
     * [Operating system](foundry-osd/customization/operating-system.md)
+    * [Custom Windows images](foundry-osd/customization/custom-windows-images.md)
     * [Machine naming](foundry-osd/customization/machine-naming.md)
     * [Out-of-box experience](foundry-osd/customization/oobe.md)
     * [Custom answer files (Unattend)](foundry-osd/customization/unattend.md)

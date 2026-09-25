@@ -13,3 +13,5 @@ Configure only the options required by the deployment standard:
 - [AI components](ai-components.md)
 
 Review changes on representative hardware before updating production media. Removing applications, features, or components can affect later Windows servicing and organizational applications.
+
+[Custom Windows images](custom-windows-images.md) (unreleased) lets you import ISO/WIM content and choose image defaults independently of the catalog.
