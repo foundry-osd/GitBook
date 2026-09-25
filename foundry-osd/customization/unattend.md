@@ -56,6 +56,7 @@ Foundry validates and retains the selected file before preparing the target disk
 | Other Foundry deployment operations | Remain enabled according to the media configuration. Custom settings or commands can conflict with their effects. |
 | Autopilot JSON profile or interactive registration | Known incompatible settings block deployment. Use a compatible file or change the authored Autopilot configuration. |
 | Hardware hash upload from WinPE | Registration can continue. A successful upload does not guarantee Autopilot enrollment. |
+| Upload computer name to Autopilot | Skipped because Foundry does not manage the final computer name. See [Machine naming](machine-naming.md#upload-the-computer-name-to-autopilot). |
 
 A custom file does not disable every other Foundry feature. Test the file together with all enabled deployment options; do not assume arbitrary conflicts will be detected or resolved automatically.
 

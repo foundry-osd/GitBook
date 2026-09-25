@@ -17,6 +17,8 @@ Interactive upload stages an assistant that asks a technician to authenticate du
 
 For this workflow, the readiness result confirms only that interactive upload is enabled. It does not test the technician account, delegated Microsoft Graph permissions, Conditional Access, Microsoft service connectivity, or group-tag access. Validate these requirements before distributing the media.
 
+To also assign the final computer name confirmed in Foundry Deploy, enable [Upload computer name to Autopilot](../customization/machine-naming.md#upload-the-computer-name-to-autopilot) on the Foundry OSD **Machine naming** page before creating or updating media.
+
 <figure>
   <img src="../../.gitbook/assets/foundry-osd-autopilot-interactive-01-configuration.png" alt="Foundry OSD interactive hardware hash upload configuration">
   <figcaption>Enable the interactive registration assistant for use during Windows OOBE.</figcaption>
@@ -25,6 +27,8 @@ For this workflow, the readiness result confirms only that interactive upload is
 ## During deployment
 
 Foundry Deploy provisions the interactive registration assistant during Windows deployment. After Windows starts in OOBE, the assistant presents device-code sign-in, group-tag selection, hardware hash capture, and upload. The technician completes authentication in a browser, returns to the deployment device, and waits for registration to finish.
+
+When computer-name upload is enabled, Foundry Deploy passes the final confirmed name to the assistant. The assistant assigns that name after the device becomes visible in Autopilot, including when the device is already registered. This step is automatic after sign-in; the assistant has no separate name-upload switch. If name assignment fails, the assistant reports the failure even when hardware hash upload succeeds.
 
 <figure>
   <img src="../../.gitbook/assets/foundry-osd-autopilot-interactive-02-device-code-sign-in.png" alt="Foundry OSD device-code sign-in prompt displayed during Windows OOBE">

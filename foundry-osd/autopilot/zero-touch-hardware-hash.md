@@ -128,14 +128,16 @@ This fallback applies only to the group-tag list. Hardware hash upload and regis
 
 Foundry Deploy captures the current device's hardware hash and uses the `Foundry OSD Autopilot Registration` application identity to upload it. It then waits for a Windows Autopilot device with the captured serial number to become visible and applies the selected group tag when required.
 
+To also assign the final computer name confirmed in Foundry Deploy, enable [Upload computer name to Autopilot](../customization/machine-naming.md#upload-the-computer-name-to-autopilot) on the Foundry OSD **Machine naming** page before creating or updating media. Foundry assigns the name after the Autopilot device becomes visible.
+
 ### Existing Autopilot registrations
 
-If a Windows Autopilot device with the same serial number already exists, Foundry uses that record when checking the upload result. Foundry can reconcile the record's group tag, but it does not compare or replace the hardware hash stored in the existing registration.
+If a Windows Autopilot device with the same serial number already exists, Foundry uses that record when checking the upload result. Foundry can reconcile the record's group tag and assign the confirmed computer name when name upload is enabled, but it does not compare or replace the hardware hash stored in the existing registration.
 
 This distinction is important after a motherboard replacement because the repaired device has a new hardware identity. Remove the old Windows Autopilot registration before deployment, then let Foundry capture and upload the repaired device's new hardware hash. If the old registration remains, Microsoft Graph can report that the device is already assigned while the outdated hash remains registered.
 
 For the complete removal and re-registration sequence, see [Windows Autopilot motherboard replacement](https://learn.microsoft.com/en-us/autopilot/autopilot-motherboard-replacement).
 
 {% hint style="warning" %}
-Windows deployment can succeed even when Microsoft Graph upload or registration polling fails. Review the Autopilot result and verify the device record in the tenant before handoff.
+Windows deployment can succeed even when Microsoft Graph upload, registration polling, or computer-name assignment fails. Review the Autopilot result and verify the device record in the tenant before handoff.
 {% endhint %}
