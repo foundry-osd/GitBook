@@ -5,12 +5,14 @@ Use **Windows customization > Custom Windows images** to import a Windows image,
 ## Import an image
 
 1. Enable **Custom Windows images**.
-2. Select **Import image** in the **Image library** command bar.
+2. Select **Import ISO/WIM** in the command bar above the image table.
 3. Browse to a `.wim` or `.iso` file, review the source summary, and enter a name unique within the active profile (up to 200 characters). If the ISO contains both installation WIM and ESD files, choose which one to import.
-4. Select **Import image** and keep the source available until import completes. Use **Cancel** to stop an import.
+4. Select **Import ISO/WIM** and keep the source available until import completes. Use **Cancel** to stop an import.
 5. Select the imported row to inspect its image indexes and metadata.
 
-The page's image controls are disabled while custom images are off. Image details and editing controls appear after you select a row. The default source remains **Foundry catalog** until you change it.
+The progress bar appears during inspection and import, after a source has been selected.
+
+The page's image controls are disabled while custom images are off. Select an image to display its indexes in a second table. Image actions require an image selection; **Set index default** also requires an index selection. All actions are in the command bar, which uses additional rows in narrower windows. The default source remains **Foundry catalog** until you change it.
 
 Foundry copies WIM content into its local library. An ISO provides `sources\install.wim`, or `sources\install.esd`, which Foundry exports to WIM. Every image index is retained. Split `.swm` sets are not supported by this import flow.
 
@@ -20,7 +22,7 @@ Import checks that image metadata can be read. It does not certify that the imag
 **Screenshot required**
 
 - **File:** `foundry-osd-custom-images-01-library.png`
-- **Capture:** Show the enabled Custom Windows images page, the Image library command bar, sanitized imported images with inclusion and preferred-image columns, and a selected row with its details and numeric-index controls visible.
+- **Capture:** Show the enabled Custom Windows images page, the command bar above the image table, sanitized imported images with inclusion and preferred-image columns, and a selected row with its selectable index table visible.
 {% endhint %}
 
 ## Include images and choose defaults
@@ -29,12 +31,13 @@ The table distinguishes these actions:
 
 | Control | Effect |
 | --- | --- |
-| Select a row | Shows its details and actions. |
-| Toggle inclusion in profile | Adds or excludes the image from newly generated media. |
-| Rename in profile | Changes this profile's label without renaming the original file. |
+| Select an image row | Shows its indexes and enables image actions. |
+| Include / Exclude | Adds or excludes the image from newly generated media. |
+| Edit | Opens a dialog to change this profile's label without renaming the original file. |
 | Default image source in Deploy | Chooses Foundry catalog or custom Windows images as the initial workflow. |
-| Preferred index and Set preferred image and index | Includes the selected image and records its preferred image/index. An index is its numeric WIM index, even when several indexes share an edition name. |
-| Let the operator choose | Clears the preferred image/index. |
+| Set image default | Includes the selected image and makes it the preferred image, leaving its index for the operator to choose. |
+| Set index default | Includes the selected image and records the selected table row as its preferred numeric WIM index, even when several indexes share an edition name. |
+| Clear default | Clears the preferred image/index. |
 | Enable custom Windows images | Enables the custom workflow and packaging of included images for this profile. |
 
 The source defaults to **Foundry catalog**. Enabling custom images does not force that source to change. You can also enable the custom workflow without including a managed image, then supply a WIM manually on USB.
@@ -45,7 +48,7 @@ Reimporting the same WIM content restores a missing local copy. Reimport does no
 
 ## Remove a reference or delete local content
 
-**Remove from profile** changes the active profile only. **Delete local copy** removes Foundry's local image copy; other profiles referencing that content then need the source restored. Original files and existing ISO/USB media are unchanged.
+**Remove from profile** changes the active profile only. **Delete** removes Foundry's local image copy; other profiles referencing that content then need the source restored. Original files and existing ISO/USB media are unchanged.
 
 Content in use by a media build cannot be deleted. Removing or excluding a preferred image leaves a preference that requires attention until you explicitly change or clear it.
 
