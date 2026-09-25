@@ -12,7 +12,7 @@ Use **Windows customization > Custom Windows images** to import a Windows image,
 
 The progress bar appears during inspection and import, after a source has been selected.
 
-The page's image controls are disabled while custom images are off. Select an image to display its indexes in a second table. Image actions require an image selection; **Set index default** also requires an index selection. All actions are in the command bar. In narrower windows, scroll the bar horizontally to reach the remaining actions. The default source remains **Foundry catalog** until you change it.
+The page's image controls are disabled while custom images are off. Select an image to display its indexes in a second table. Image actions require an image selection; **Set default index** also requires an index selection. All actions are in the command bar. In narrower windows, scroll the bar horizontally to reach the remaining actions. The default source remains **Foundry catalog** until you change it.
 
 Foundry copies WIM content into its local library. An ISO provides `sources\install.wim`, or `sources\install.esd`, which Foundry exports to WIM. Every image index is retained. Split `.swm` sets are not supported by this import flow.
 
@@ -25,9 +25,13 @@ Import checks that image metadata can be read. It does not certify that the imag
 - **Capture:** Show the enabled Custom Windows images page, the command bar above the image table, sanitized imported images with inclusion and preferred-image columns, and a selected row with its selectable index table visible.
 {% endhint %}
 
+Opening the page or selecting **Refresh** updates older three-part version metadata from available cached WIMs. No reimport is required to display the revision.
+
 ## Include images and choose defaults
 
-The table distinguishes these actions:
+The tables show inclusion and preferred image/index values in green when they are **Yes**. Image status is green for **Available** and red for **Missing**. Text labels remain visible alongside these signals. Defaults are shown in the tables and changed through the command bar.
+
+Use these controls to manage images and deployment defaults:
 
 | Control | Effect |
 | --- | --- |
@@ -35,8 +39,8 @@ The table distinguishes these actions:
 | Include / Exclude | Adds or excludes the image from newly generated media. |
 | Edit | Opens a dialog to change this profile's label without renaming the original file. |
 | Default image source in Deploy | Chooses Foundry catalog or custom Windows images as the initial workflow. |
-| Set image default | Includes the selected image and makes it the preferred image, leaving its index for the operator to choose. |
-| Set index default | Includes the selected image and records the selected table row as its preferred numeric WIM index, even when several indexes share an edition name. |
+| Set default image | Includes the selected image and makes it the preferred image, leaving its index for the operator to choose. |
+| Set default index | Includes the selected image and records the selected table row as its preferred numeric WIM index, even when several indexes share an edition name. |
 | Clear default | Clears the preferred image/index. |
 | Enable custom Windows images | Enables the custom workflow and packaging of included images for this profile. |
 
