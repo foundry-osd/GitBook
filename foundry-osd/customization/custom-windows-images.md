@@ -16,7 +16,7 @@ The page's image controls are disabled while custom images are off. Select an im
 
 Foundry copies WIM content into its local library. An ISO provides `sources\install.wim`, or `sources\install.esd`, which Foundry exports to WIM. Every image index is retained. Split `.swm` sets are not supported by this import flow.
 
-Import checks that image metadata can be read. It does not certify that the image will deploy successfully or that your selected customizations suit it. Windows versions, editions, and architectures are not restricted to the Foundry catalog. Metadata reported by the image is shown as supplied; an unknown field is not replaced with a catalog default.
+Import checks that image metadata can be read. It does not certify that the image will deploy successfully or that your selected customizations suit it. Windows versions, editions, and architectures are not restricted to the Foundry catalog. Metadata reported by the image is shown as supplied; an unknown field is not replaced with a catalog default. Index versions include the revision reported by DISM, for example `10.0.26100.4652` (`major.minor.build.revision`). This is image metadata, not a separate inspection of the installed update state inside each index.
 
 {% hint style="warning" %}
 **Screenshot required**
