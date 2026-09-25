@@ -53,16 +53,16 @@ The local library is under `%LOCALAPPDATA%\Foundry\Images\Custom`. Profile expor
 
 ## Find images on generated media
 
-Included WIMs are stored outside `boot.wim`:
+Included WIMs use the same path on ISO and USB media, outside `boot.wim`:
 
 | Output | Location |
 | --- | --- |
-| ISO | `Foundry\Images\Custom\managed\<content hash>\image.wim` on the ISO filesystem |
-| USB | The same path on the NTFS data/cache partition |
+| ISO | `Cache\OperatingSystems\Custom\<SHA256>\image.wim` on the ISO filesystem |
+| USB | `Cache\OperatingSystems\Custom\<SHA256>\image.wim` on the NTFS data/cache partition |
 
-The manifest binding the media to its images is kept beside this managed content. WIMs are not stored on the USB FAT32 BOOT partition. Allow space for all included images.
+Each image directory is named after the WIM's SHA256 content hash. On both outputs, the manifest binding the media to its images is stored in `Cache\OperatingSystems\Custom\manifests`. The `Custom` directory keeps imported images separate from catalog downloads in the operating-system cache. WIMs are not stored on the USB FAT32 BOOT partition. Allow space for all included images.
 
-For a manual USB image, enable the custom workflow when authoring, then place a regular `.wim` file directly in `Foundry\Images\Custom\` on the data partition. Deploy does not recursively scan subfolders. Manual files are identified in the current session and are not used as substitutes for a missing managed default.
+For a manual USB image, enable the custom workflow when authoring, then place a regular `.wim` file directly in `Cache\OperatingSystems\Custom\` on the data partition. Deploy does not recursively scan subfolders. Manual files are identified in the current session and are not used as substitutes for a missing managed default.
 
 [USB updates](../media/update-usb.md) preserve manual files and unrelated cache data. New managed content is staged before the boot partition is refreshed. Old managed content may remain on the data partition and is not offered unless the current media manifest references it.
 
