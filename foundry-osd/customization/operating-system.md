@@ -18,6 +18,6 @@ Foundry Deploy obtains available media from the configured catalog and presents 
 
 See [Catalogs](../../reference/catalog.md) for field definitions and [Select Windows](../../foundry-deploy/operating-system.md) for the runtime workflow.
 
-## Custom Windows images (unreleased)
+## Custom Windows images
 
 The settings on this page constrain catalog selection. Use [Custom Windows images](custom-windows-images.md) to import your own WIMs and choose custom image defaults independently. Catalog restrictions do not filter custom WIM indexes.

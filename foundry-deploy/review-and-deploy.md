@@ -69,6 +69,6 @@ Select **Cancel** at the bottom right of the progress page. Foundry acknowledges
 
 Cancellation does not undo completed changes. If disk preparation has started, the target may contain an incomplete installation and may not boot. Collect the logs, then restart the workflow when ready; there is no resume operation. A cancelled deployment does not automatically reboot.
 
-## Review a custom image (unreleased)
+## Review a custom image
 
 For [custom images](../foundry-osd/customization/custom-windows-images.md), verify the image name and numeric WIM index as well as the target disk and customizations. Keep the source available until deployment completes. Source hash and metadata verification cannot guarantee that DISM will successfully apply every compressed resource or customization.

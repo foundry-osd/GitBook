@@ -17,7 +17,7 @@ The Operating system step selects the Windows media applied to the target.
 
 Available releases, languages, editions, architectures, and license channels come from the current [operating-system catalog](../reference/catalog.md) and any restrictions configured during media authoring. The catalog can update independently of the application. Confirm that the selection matches licensing and application compatibility requirements.
 
-## Custom images (unreleased)
+## Custom images
 
 Media authored with [Custom Windows images](../foundry-osd/customization/custom-windows-images.md) enabled can offer a custom image source alongside the catalog. Choose the image and its exact numeric WIM index. Identical edition names do not identify the same index. The authoring profile can select the initial source and a preferred image/index; these remain separate choices.
 

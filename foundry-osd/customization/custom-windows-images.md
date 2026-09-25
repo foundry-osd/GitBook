@@ -1,9 +1,5 @@
 # Custom Windows images
 
-{% hint style="info" %}
-**Unreleased:** This page describes the custom Windows image feature under development for [Foundry issue #379](https://github.com/foundry-osd/foundry/issues/379). It is not available in release `v26.9.14.1`.
-{% endhint %}
-
 Use **Windows customization > Custom Windows images** to import a Windows image, include it in deployment media, and choose the image source Foundry Deploy initially displays. Internet access remains required; Foundry Connect works as usual.
 
 ## Import an image

@@ -32,6 +32,6 @@ Foundry currently aggregates supported vendor data into unified DriverPack and W
 
 Prefer a non-legacy package that matches the detected manufacturer, model, Windows target, and architecture. Verify the displayed package information when more than one version is available.
 
-## Custom image selection (unreleased)
+## Custom image selection
 
 [Custom Windows images](../foundry-osd/customization/custom-windows-images.md) use imported WIM metadata and exact numeric indexes independently of catalog entries. Import does not add an image to the public Foundry catalog or certify it as supported. Internet access remains a prerequisite.

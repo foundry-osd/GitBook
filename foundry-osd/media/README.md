@@ -36,6 +36,6 @@ Select **Cancel** in the progress dialog to stop creating or updating media. Dow
 
 Cancellation does not restore overwritten ISO files or USB contents. Create or update the media again before using it for deployment. For a download timeout, see [media creation troubleshooting](../../troubleshooting/media-creation.md#download-times-out).
 
-## Custom image readiness (unreleased)
+## Custom image readiness
 
 [Custom Windows images](../customization/custom-windows-images.md) add source availability and default-selection checks to media readiness. Restore missing included WIMs and optional sources or update the profile. Images are stored outside `boot.wim`, so include their size in media and working-space planning.

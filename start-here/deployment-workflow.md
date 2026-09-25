@@ -45,6 +45,6 @@ Review the completion state, deployment summary, and any reported error. Reboot 
   </figcaption>
 </figure>
 
-## Use a custom Windows image (unreleased)
+## Use a custom Windows image
 
 Before creating media, optionally [import and include custom Windows images](../foundry-osd/customization/custom-windows-images.md). Boot the complete ISO or USB, complete Foundry Connect, and select the image and exact index in Deploy. Existing network prerequisites and enabled customizations continue to apply.

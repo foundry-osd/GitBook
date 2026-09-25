@@ -85,6 +85,6 @@ Do not remove the target answer file before `oobeSystem` has consumed it. Arrang
 
 After deployment, [verify Windows through first boot and OOBE](../../foundry-deploy/verify-deployment.md). A successful Foundry deployment does not confirm that Windows has consumed every answer-file setting.
 
-## Custom images (unreleased)
+## Custom images
 
 Enabled answer files also apply to [custom Windows images](custom-windows-images.md). Foundry does not add an image-specific answer-file compatibility scan. Verify that your answer file is suitable for the image, its architecture, and the remaining customizations.
