@@ -38,7 +38,7 @@ Use these controls to manage images and deployment defaults:
 | Select an image row | Shows its indexes and enables image actions. |
 | Include / Exclude | Adds or excludes the image from newly generated media. |
 | Edit | Opens a dialog to change this profile's label without renaming the original file. |
-| Default image source in Deploy | Chooses Foundry catalog or custom Windows images as the initial workflow. |
+| Default image source in Foundry Deploy | Chooses Foundry catalog or custom Windows images as the initial workflow. This setting is below the index card. |
 | Set default image | Includes the selected image and makes it the preferred image, leaving its index for the operator to choose. |
 | Set default index | Includes the selected image and records the selected table row as its preferred numeric WIM index, even when several indexes share an edition name. |
 | Clear default | Clears the preferred image/index. |
@@ -50,11 +50,11 @@ An explicit preference that becomes unavailable requires attention. Foundry does
 
 Reimporting the same WIM content restores a missing local copy. Reimport does not replace another profile's source choice.
 
-## Remove a reference or delete local content
+## Remove an image
 
-**Remove from profile** changes the active profile only. **Delete** removes Foundry's local image copy; other profiles referencing that content then need the source restored. Original files and existing ISO/USB media are unchanged.
+**Remove** removes the image from the current profile and deletes Foundry's local image copy after confirmation. Other profiles referencing that content show it as missing and need the source restored. Original files and existing ISO/USB media are unchanged.
 
-Content in use by a media build cannot be deleted. Removing or excluding a preferred image leaves a preference that requires attention until you explicitly change or clear it.
+Content in use by a media build cannot be deleted; if deletion fails, the profile reference is retained. Removing or excluding the preferred image clears its image and index preferences in the current profile. Excluding an image keeps its local copy.
 
 The local library is under `%LOCALAPPDATA%\Foundry\Images\Custom`. Profile export and synchronization transfer image references and defaults, not WIM bytes. On another PC, import the same image content to satisfy those references. See [Deployment profiles](../deployment-profiles.md).
 

@@ -17,6 +17,8 @@ The Driver pack step selects hardware drivers compatible with the target device 
 
 Foundry uses catalog metadata to identify supported models, operating-system targets, architecture, package format, and available hashes. If no suitable pack appears, see [Catalogs](../reference/catalog.md) and [Windows deployment troubleshooting](../troubleshooting/deployment.md).
 
+For [custom Windows images](operating-system.md#custom-images), recognized Windows client builds use the same driver release preference and fallback rules as catalog images. For example, a Windows 11 24H2 image (build 26100) prefers a matching 24H2 OEM pack, and Microsoft Update Catalog searches start with 24H2. Hardware and architecture matching still apply. Server images and unidentified builds are not assigned a Windows client release.
+
 ## Driver downloads and storage
 
 When you select **Microsoft Update Catalog**, Foundry uses `Cache/MicrosoftUpdateCatalog/Drivers` on USB media when the cache is writable and has enough space for the download size reported by the catalog. Otherwise, it uses the target disk. ISO deployments use the target disk. Drivers are extracted on the target disk, and only drivers selected for the current deployment are installed.
