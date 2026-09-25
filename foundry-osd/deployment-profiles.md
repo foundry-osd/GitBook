@@ -195,4 +195,4 @@ Protect the media separately using [Protected deployment](general.md#protected-d
 
 ## Custom image references
 
-[Custom Windows images](customization/custom-windows-images.md) store their names, content identities, inclusion choices, and preferred image/index in the profile. WIM bytes and companion source bundles are not attached to exports or synchronized profiles. Import the matching source on each authoring PC; a missing included image requires attention before media creation. Deleting a local library image can therefore affect several profiles.
+[Custom Windows images](customization/custom-windows-images.md) store their names, content identities, inclusion choices, and preferred image/index in the profile. WIM bytes are not attached to exports or synchronized profiles. Import the matching image content on each authoring PC; a missing included image requires attention before media creation. Deleting a local library image can therefore affect several profiles.

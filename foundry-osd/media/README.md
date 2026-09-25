@@ -38,4 +38,4 @@ Cancellation does not restore overwritten ISO files or USB contents. Create or u
 
 ## Custom image readiness
 
-[Custom Windows images](../customization/custom-windows-images.md) add source availability and default-selection checks to media readiness. Restore missing included WIMs and optional sources or update the profile. Images are stored outside `boot.wim`, so include their size in media and working-space planning.
+[Custom Windows images](../customization/custom-windows-images.md) add image availability and default-selection checks to media readiness. Restore missing included WIMs or update the profile. Images are stored outside `boot.wim`, so include their size in media and working-space planning.

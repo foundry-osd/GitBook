@@ -91,4 +91,4 @@ Creating USB media formats and erases the selected disk. Reconfirm the target be
 
 ## Missing custom images
 
-On [Custom Windows images](../foundry-osd/customization/custom-windows-images.md), restore an included image by importing its original content again. A same-name file with different content does not restore that reference. Check optional source availability, preferred image/index, and free space. Content held by a running build cannot be deleted.
+On [Custom Windows images](../foundry-osd/customization/custom-windows-images.md), enable the feature and restore an included image by importing its original content again. A same-name file with different content does not restore that reference. Check image availability, preferred image/index, and free space. Content held by a running build cannot be deleted.

@@ -25,4 +25,4 @@ Confirm that the output file exists and test boot it on representative hardware 
 
 ## Include custom images
 
-Enable and include images on [Custom Windows images](../customization/custom-windows-images.md) before creating the ISO. Their WIMs and optional source files are included in the ISO filesystem, outside `boot.wim`. The ISO grows by the included payload size, so allow enough working and output space. Use the full ISO for deployment.
+Enable and include images on [Custom Windows images](../customization/custom-windows-images.md) before creating the ISO. Their WIMs are included in the ISO filesystem, outside `boot.wim`. The ISO grows by the included image size, so allow enough working and output space. Use the full ISO for deployment.

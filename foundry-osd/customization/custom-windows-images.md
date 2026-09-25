@@ -4,13 +4,13 @@ Use **Windows customization > Custom Windows images** to import a Windows image,
 
 ## Import an image
 
-1. Select **Import image**.
-2. Browse to a `.wim` or `.iso` file, review the source summary, and enter a name unique within the active profile (up to 200 characters). If the ISO contains both installation WIM and ESD files, choose which one to import.
-3. For an ISO, choose whether to import available optional feature sources.
+1. Enable **Custom Windows images**.
+2. Select **Import image** in the **Image library** command bar.
+3. Browse to a `.wim` or `.iso` file, review the source summary, and enter a name unique within the active profile (up to 200 characters). If the ISO contains both installation WIM and ESD files, choose which one to import.
 4. Select **Import image** and keep the source available until import completes. Use **Cancel** to stop an import.
 5. Select the imported row to inspect its image indexes and metadata.
 
-The first successful import enables custom images for the profile. The default source remains **Foundry catalog** until you change it.
+The page's image controls are disabled while custom images are off. Image details and editing controls appear after you select a row. The default source remains **Foundry catalog** until you change it.
 
 Foundry copies WIM content into its local library. An ISO provides `sources\install.wim`, or `sources\install.esd`, which Foundry exports to WIM. Every image index is retained. Split `.swm` sets are not supported by this import flow.
 
@@ -20,7 +20,7 @@ Import checks that image metadata can be read. It does not certify that the imag
 **Screenshot required**
 
 - **File:** `foundry-osd-custom-images-01-library.png`
-- **Capture:** Show sanitized imported images with inclusion and preferred-image columns, and the source and numeric-index controls.
+- **Capture:** Show the enabled Custom Windows images page, the Image library command bar, sanitized imported images with inclusion and preferred-image columns, and a selected row with its details and numeric-index controls visible.
 {% endhint %}
 
 ## Include images and choose defaults
@@ -41,15 +41,15 @@ The source defaults to **Foundry catalog**. Enabling custom images does not forc
 
 An explicit preference that becomes unavailable requires attention. Foundry does not silently replace it with another image or the first index. Restore the source, change the preference, or clear it.
 
-Reimporting the same WIM content restores a missing local copy. Its available optional feature sources can also be refreshed from the import. Reimport does not replace another profile's source choice.
+Reimporting the same WIM content restores a missing local copy. Reimport does not replace another profile's source choice.
 
 ## Remove a reference or delete local content
 
 **Remove from profile** changes the active profile only. **Delete local copy** removes Foundry's local image copy; other profiles referencing that content then need the source restored. Original files and existing ISO/USB media are unchanged.
 
-Content in use by a media build cannot be deleted. Deletion also reclaims companion source bundles when no remaining local image references them; shared bundles are retained. Removing or excluding a preferred image leaves a preference that requires attention until you explicitly change or clear it.
+Content in use by a media build cannot be deleted. Removing or excluding a preferred image leaves a preference that requires attention until you explicitly change or clear it.
 
-The local library is under `%LOCALAPPDATA%\Foundry\Images\Custom`. Profile export and synchronization transfer image references and defaults, not WIM bytes or optional source bundles. On another PC, import the same source content to satisfy those references. See [Deployment profiles](../deployment-profiles.md).
+The local library is under `%LOCALAPPDATA%\Foundry\Images\Custom`. Profile export and synchronization transfer image references and defaults, not WIM bytes. On another PC, import the same image content to satisfy those references. See [Deployment profiles](../deployment-profiles.md).
 
 ## Find images on generated media
 
@@ -60,7 +60,7 @@ Included WIMs are stored outside `boot.wim`:
 | ISO | `Foundry\Images\Custom\managed\<content hash>\image.wim` on the ISO filesystem |
 | USB | The same path on the NTFS data/cache partition |
 
-Optional feature sources and the manifest binding the media to its images are kept beside this managed content. WIMs are not stored on the USB FAT32 BOOT partition. Allow space for all included images and their source files.
+The manifest binding the media to its images is kept beside this managed content. WIMs are not stored on the USB FAT32 BOOT partition. Allow space for all included images.
 
 For a manual USB image, enable the custom workflow when authoring, then place a regular `.wim` file directly in `Foundry\Images\Custom\` on the data partition. Deploy does not recursively scan subfolders. Manual files are identified in the current session and are not used as substitutes for a missing managed default.
 
@@ -70,7 +70,7 @@ Copying only `sources\boot.wim` for [PXE](../media/pxe-deployment.md) does not c
 
 ## Deploy and validate
 
-In [Foundry Deploy](../../foundry-deploy/operating-system.md), choose the custom source, image, and exact index. Enabled customizations still apply. Optional feature sources imported from an ISO are made available during servicing; Foundry does not preflight their compatibility with each feature or image.
+In [Foundry Deploy](../../foundry-deploy/operating-system.md), choose the custom source, image, and exact index. Enabled customizations, including [optional features](optional-features.md), still apply through the usual deployment workflow. You are responsible for checking that the image supports the selected customizations and for testing the result.
 
 Before destructive deployment starts, Foundry verifies source identity and metadata while holding read locks, and protects the physical source disk from target selection. Keep USB or ISO media available throughout deployment.
 
