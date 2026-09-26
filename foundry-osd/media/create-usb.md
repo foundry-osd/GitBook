@@ -38,3 +38,7 @@ Safely eject the drive, boot representative hardware, and confirm that Foundry C
 ## Include custom images
 
 [Custom Windows images](../customization/custom-windows-images.md) are stored under `Cache\OperatingSystems\Custom\` on the NTFS data partition, outside the FAT32 BOOT partition. This directory separates custom images from catalog downloads in the operating-system cache. Include at least one available library image when the feature is enabled, and allow enough space alongside other required data. After creating the media, you can add extra regular WIM files directly in that directory for manual selection in Deploy.
+
+## Post-installation content (unreleased)
+
+[Post-installation](../customization/post-installation.md) packages and matching runtime archives use the external data/cache volume. Source content must not reside on the USB disk being prepared. Foundry checks content, disk identity and combined capacity before erasure.

@@ -109,3 +109,7 @@ Review collected files before sharing them. Remove credentials, tokens, certific
 ## Open a support issue
 
 Provide reproduction steps, expected result, actual result, failed stage, sanitized logs, and whether the problem reproduces on newly created media.
+
+## PostInstall diagnostics (unreleased)
+
+[Post-installation](../foundry-osd/customization/post-installation.md) retains local structured runtime logs, bounded captured process output and installer logs under `%SystemRoot%\Temp\Foundry\Logs\PreOobe`, with journal/results in the sibling `State\PreOobe` directory. Correlate the persisted deployment session and operation. This runtime adds no remote telemetry stream. Desktop diagnostic export does not automatically collect target-machine logs. Treat raw script output and MSI logs as sensitive and review them before sharing; generic masking cannot guarantee complete redaction.

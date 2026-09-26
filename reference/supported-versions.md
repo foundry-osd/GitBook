@@ -25,3 +25,7 @@ Network, storage, and platform support depends on Windows PE compatibility and a
 ## Custom WIMs
 
 The [custom image workflow](../foundry-osd/customization/custom-windows-images.md) accepts readable WIM metadata without a Windows version, edition, or architecture allowlist. This is not a support guarantee for every image. Deployment tools, firmware, drivers, and selected customizations still have their own requirements.
+
+## PostInstall runtime pairing (unreleased)
+
+[Post-installation](../foundry-osd/customization/post-installation.md) uses x64 and ARM64 self-contained .NET runtime ZIPs paired with the Deploy archive. Deploy verifies the exact companion hash and contract. An incompatible cached runner is not accepted, and the target runner does not update itself during execution. Test supported Windows images and hardware before rollout.

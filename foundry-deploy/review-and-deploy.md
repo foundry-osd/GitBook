@@ -72,3 +72,7 @@ Cancellation does not undo completed changes. If disk preparation has started, t
 ## Review a custom image
 
 For [custom images](../foundry-osd/customization/custom-windows-images.md), verify the image name and numeric WIM index as well as the target disk and customizations. Keep the source available until deployment completes. Source hash and metadata verification cannot guarantee that DISM will successfully apply every compressed resource or customization.
+
+## Post-installation preparation (unreleased)
+
+[Post-installation](../foundry-osd/customization/post-installation.md) content and the matching runner are verified before target disk preparation. A catalog image downloaded onto the prepared target is inspected afterward, before image application. Successful staging does not prove first-boot actions succeeded; continue through [deployment verification](verify-deployment.md).

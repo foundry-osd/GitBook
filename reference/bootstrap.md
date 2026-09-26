@@ -96,3 +96,7 @@ Bootstrap sends emitted application logs to PostHog after remote-diagnostics con
 {% endhint %}
 
 For refreshing existing media, see [Application and boot media updates](supported-versions.md#application-and-boot-media-updates).
+
+## PostInstall companion (unreleased)
+
+[Post-installation](../foundry-osd/customization/post-installation.md) begins in installed Windows. Bootstrap continues to select Deploy in WinPE; Deploy resolves its exact authenticated PostInstall companion and stages it on the target. Authoring caches the baseline outside boot.wim. Updated Deploy can download its exact companion before disk preparation if necessary; application packages still need their external content source.

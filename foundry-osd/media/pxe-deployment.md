@@ -44,3 +44,7 @@ Re-import `sources\boot.wim` whenever the Foundry OSD ISO is regenerated. Keep t
 ## Custom image payloads
 
 [Custom Windows images](../customization/custom-windows-images.md) are external to `sources\boot.wim`. Copying that boot image alone does not transfer custom images or their manifest. This feature does not provide a supported PXE delivery path for custom WIMs; use the complete generated ISO or USB media.
+
+## Post-installation content (unreleased)
+
+A bare PXE boot image does not include the external [Post-installation](../customization/post-installation.md) cache. Provide supported companion cache media with its bound manifest and packages. Missing content blocks deployment; this feature does not add an HTTP or SMB package distribution service.

@@ -30,6 +30,12 @@ Review informational **Skipped** entries and their reasons as well as successful
 **Stage driver installer**, **Stage firmware update**, **Prepare setup tasks**, and **Prepare Autopilot assistant** describe preparation. Confirm the corresponding driver, firmware, customization, or registration result after Windows starts. A successful Deploy session does not establish that those later actions succeeded.
 {% endhint %}
 
+## Post-installation actions (unreleased)
+
+When evaluating [Post-installation](../foundry-osd/customization/post-installation.md), a successful Deploy session means the runner and content were staged for first boot. Confirm the ordered actions, planned restarts and final OOBE separately. Review failed actions even when Continue allowed the sequence to finish. An interrupted action is not automatically replayed.
+
+Retain the journal/results under `%SystemRoot%\Temp\Foundry\State\PreOobe` and the runtime/action logs under `%SystemRoot%\Temp\Foundry\Logs\PreOobe`. Verify applications after temporary payload cleanup, including any repair/servicing behavior that requires a persistent source.
+
 ## Automatic Windows activation
 
 For standard RETAIL deployments of supported Windows Home and Pro editions, Foundry automatically attempts to activate Windows after reboot using a compatible OEM product key stored in the device firmware. Online activation requires Internet access and a valid key for the installed Windows edition.

@@ -63,3 +63,7 @@ There is no rollback or resume operation. A failure after disk preparation can l
 ## Custom image failures
 
 For [custom images](../foundry-osd/customization/custom-windows-images.md), check that the complete ISO or USB remains available and that the chosen numeric index exists. Do not substitute a same-name manual WIM for a missing managed preference. Changed files, manifest mismatches, or a source disk chosen as the deployment target must be resolved before deployment. DISM apply or servicing failures can still occur after target preparation; review logs and validate the WIM and customizations on a test target.
+
+## Post-installation interruption (unreleased)
+
+For [Post-installation](../foundry-osd/customization/post-installation.md), distinguish WinPE staging from the later Windows sequence. A valid committed restart checkpoint resumes on the next boot. Missing/corrupt state, an installer-owned reboot or uncertain execution stops the sequence without automatic replay. Preserve the journal and logs before redeploying. Cleanup pending means some owned content could not yet be safely removed.
