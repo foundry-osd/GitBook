@@ -21,4 +21,8 @@ Available releases, languages, editions, architectures, and license channels com
 
 Media authored with [Custom Windows images](../foundry-osd/customization/custom-windows-images.md) enabled can offer a custom image source alongside the catalog. Choose the image and its exact numeric WIM index. Identical edition names do not identify the same index. The authoring profile can select the initial source and a preferred image/index; these remain separate choices.
 
+Below the image and index selectors, read-only fields show the selected index's version (including its revision), edition, architecture, and language. These values update when you select a different index.
+
+Foundry Deploy discovers images automatically at startup and when you choose **Custom image**. If you add a manual WIM to the USB cache during the session, switch to **Windows catalog**, then back to **Custom image** to discover it.
+
 The profile's enabled customizations apply to custom images. Catalog release restrictions do not determine which custom WIM can be used. Keep the source media connected throughout deployment, and resolve missing explicit preferences rather than expecting an automatic replacement. Internet access and Foundry Connect are still required.
