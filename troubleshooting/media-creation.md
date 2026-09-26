@@ -76,7 +76,7 @@ Keep these cache directories when retrying media creation. Do not delete them wh
 - **Custom drivers exceed the limit:** keep the custom driver directory, including subfolders, within 2 GiB. The reported size is the amount found before the check stopped, so the directory can be larger. Select only the network and storage drivers required by Windows PE. This limit applies to USB and ISO creation.
 - **USB BOOT partition is too small:** compare the estimated space required with the partition capacity shown. Reduce customizations or drivers, or [create an ISO](../foundry-osd/media/create-iso.md). Foundry stops before erasing or formatting the USB drive.
 - **USB BOOT capacity cannot be verified:** check access to the source files, reconnect the intended USB drive, refresh the device list, and retry. Foundry stops before erasing or formatting when it cannot verify capacity.
-- **A file exceeds the FAT32 limit:** reduce the boot image size or create an ISO. Free space on the drive does not remove FAT32's per-file size limit.
+- **A file exceeds the FAT32 limit:** reduce the boot image size or create an ISO on a filesystem that supports large files, such as NTFS. An ISO larger than 4 GiB cannot itself be saved on FAT32. Custom WIMs on Foundry USB media use the NTFS data partition. Free space does not remove FAT32's per-file size limit.
 
 ## USB creation fails
 
@@ -88,3 +88,7 @@ Creating USB media formats and erases the selected disk. Reconfirm the target be
 - Close applications using the drive.
 - Confirm that the selected layout supports the target firmware.
 - Do not retry against a different disk until its identity is verified.
+
+## Missing custom images
+
+When [Custom Windows images](../foundry-osd/customization/custom-windows-images.md) is enabled, an empty library or a profile with every image excluded blocks media creation and USB updates. Import and include at least one image, or disable the feature for catalog-only media. Restore a missing included image by importing its original content again; a same-name file with different content does not restore that reference. Check image availability, preferred image/index, and free space. Content held by a running build cannot be deleted.

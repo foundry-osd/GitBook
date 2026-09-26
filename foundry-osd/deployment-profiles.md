@@ -192,3 +192,7 @@ Custom drivers remain local. Keep the selected driver folder focused on the targ
 Foundry cleans up its temporary copies after the build. If cleanup is interrupted, it retries when you restart or prepare another build.
 
 Protect the media separately using [Protected deployment](general.md#protected-deployment) and the [deployment media security guidance](../reference/security-and-credentials.md). Recreate media when its included passwords or deployment settings change.
+
+## Custom image references
+
+[Custom Windows images](customization/custom-windows-images.md) store their names, content identities, inclusion choices, and preferred image/index in the profile. WIM bytes are not attached to exports or synchronized profiles. Import the matching image content on each authoring PC; a missing included image requires attention before media creation. Deleting a local library image can therefore affect several profiles.

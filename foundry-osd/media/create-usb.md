@@ -34,3 +34,7 @@ Foundry checks that the prepared boot files fit the 2 GiB BOOT partition before 
 ## Validate the drive
 
 Safely eject the drive, boot representative hardware, and confirm that Foundry Connect and Foundry Deploy start correctly.
+
+## Include custom images
+
+[Custom Windows images](../customization/custom-windows-images.md) are stored under `Cache\OperatingSystems\Custom\` on the NTFS data partition, outside the FAT32 BOOT partition. This directory separates custom images from catalog downloads in the operating-system cache. Include at least one available library image when the feature is enabled, and allow enough space alongside other required data. After creating the media, you can add extra regular WIM files directly in that directory for manual selection in Deploy.

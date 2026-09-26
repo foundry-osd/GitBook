@@ -16,3 +16,7 @@ Use Optional features to enable or disable supported Windows optional features d
 </figure>
 
 Feature availability depends on the selected Windows release and edition. Validate the deployed state before using the media broadly.
+
+## Custom images
+
+Enabled optional features also apply to [custom Windows images](custom-windows-images.md) through the usual deployment workflow. You are responsible for checking that the selected features are suitable for the image and testing the combination before production deployment.

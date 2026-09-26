@@ -5,6 +5,7 @@ Customization settings define the Windows installation produced by Foundry Deplo
 Configure only the options required by the deployment standard:
 
 - [Operating system](operating-system.md)
+- [Custom Windows images](custom-windows-images.md): import ISO/WIM content and choose image defaults independently of the catalog.
 - [Machine naming](machine-naming.md)
 - [Out-of-box experience](oobe.md)
 - [Custom answer files (Unattend)](unattend.md)
