@@ -1,6 +1,6 @@
 # Custom Windows images
 
-Use **Windows customization > Custom Windows images** to import a Windows image, include it in deployment media, and choose the image source Foundry Deploy initially displays. Internet access remains required; Foundry Connect works as usual.
+Use **Customization > Custom Windows images** to import a Windows image, include it in deployment media, and choose the image source Foundry Deploy initially displays. Internet access remains required; Foundry Connect works as usual.
 
 ## Import an image
 
@@ -44,11 +44,11 @@ Use these controls to manage images and deployment defaults:
 | Clear default | Clears the preferred image/index. |
 | Enable custom Windows images | Enables the custom workflow and packaging of included images for this profile. |
 
-The source defaults to **Foundry catalog**. Enabling custom images does not force that source to change. You can also enable the custom workflow without including a managed image, then supply a WIM manually on USB.
+The source defaults to **Foundry catalog**. Enabling custom images or setting a preferred image/index does not change that source. Choose **Custom Windows images** in **Default image source in Foundry Deploy** to start Deploy in custom mode. You can also enable the custom workflow without including a managed image, then supply a WIM manually on USB.
 
 An explicit preference that becomes unavailable requires attention. Foundry does not silently replace it with another image or the first index. Restore the source, change the preference, or clear it.
 
-Reimporting the same WIM content restores a missing local copy. Reimport does not replace another profile's source choice.
+Reimporting the same WIM content restores a missing local copy. The import dialog requires an unused name in the active profile, even when restoring an existing reference. If that profile already references the content, it keeps its existing label, inclusion, and preferences. Reimport does not replace another profile's source choice.
 
 ## Remove an image
 
@@ -66,6 +66,8 @@ Included WIMs use the same path on ISO and USB media, outside `boot.wim`:
 | --- | --- |
 | ISO | `Cache\OperatingSystems\Custom\<SHA256>\image.wim` on the ISO filesystem |
 | USB | `Cache\OperatingSystems\Custom\<SHA256>\image.wim` on the NTFS data/cache partition |
+
+These paths are relative to the source volume, whose drive letter can vary in Windows PE. The WIMs are not copied into the `X:` RAM drive.
 
 Each image directory is named after the WIM's SHA256 content hash. On both outputs, the manifest binding the media to its images is stored in `Cache\OperatingSystems\Custom\manifests`. The `Custom` directory keeps imported images separate from catalog downloads in the operating-system cache. WIMs are not stored on the USB FAT32 BOOT partition. Allow space for all included images.
 

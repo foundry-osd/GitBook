@@ -34,7 +34,7 @@ During creation, Foundry reports workspace preparation, driver resolution, image
 
 Select **Cancel** in the progress dialog to stop creating or updating media. Downloads stop promptly; a disk or image operation already in progress may need to finish before cleanup can complete. Keep Foundry OSD open and the USB drive connected until the dialog reports cancellation.
 
-Cancellation does not restore overwritten ISO files or USB contents. Create or update the media again before using it for deployment. For a download timeout, see [media creation troubleshooting](../../troubleshooting/media-creation.md#download-times-out).
+An ISO build publishes its new output only after successful creation; a failed or cancelled build preserves the previous ISO. Cancellation does not restore USB contents already changed. After a cancelled USB operation, create or update the media again before using it for deployment. For a download timeout, see [media creation troubleshooting](../../troubleshooting/media-creation.md#download-times-out).
 
 ## Custom image readiness
 
