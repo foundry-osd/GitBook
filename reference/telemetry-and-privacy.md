@@ -20,6 +20,21 @@ When telemetry is enabled, using [custom answer files](../foundry-osd/customizat
 
 Usage information can be reported even when media creation fails. File names, display labels, identifiers, source paths, content hashes, XML, and credentials are excluded. Use **Settings > Enable telemetry** to control this collection.
 
+### Custom Windows images
+
+When telemetry is enabled, [custom Windows images](../foundry-osd/customization/custom-windows-images.md) use the existing media-creation and deployment events:
+
+| Event | Custom-image information |
+| --- | --- |
+| `osd:boot_media_finished` | `boot_media_custom_images_enabled`, `boot_media_custom_images_count`, and `boot_media_default_os_source` (`catalog` or `custom`). |
+| `deploy:session_finished` | `deploy_os_source` (`catalog` or `custom`), the selected index's validated OS metadata, and the existing applied image index, outcome, duration, and failure properties. |
+
+The media image count includes only images selected for inclusion in that operation's configuration snapshot. Disabled custom images report zero and a catalog default. For a failed or cancelled operation, the count describes the intended selection, not images successfully copied to media.
+
+Custom deployments report the Windows release when recognized, the full image version including its revision, architecture, edition, and default language. Missing or unrecognized metadata reports `unknown`. License channel and media update month also report `unknown` for custom images because these values cannot reliably be inferred from a WIM.
+
+Product Analytics excludes custom image names, index names, paths, content hashes, and image or profile identifiers. Import start, completion, cancellation, and failure are diagnostic logs rather than separate product events; successful import logs include image size and index count. These logs follow the independent remote diagnostics control described below.
+
 ## Remote error diagnostics
 
 **Enable remote diagnostics** controls operational logs and exception reports sent to PostHog. This preference is separate from anonymous product telemetry, applies immediately to new diagnostic records, and is written to newly created media for Foundry Bootstrap, Foundry Connect, and Foundry Deploy. Changing it does not update existing media.
