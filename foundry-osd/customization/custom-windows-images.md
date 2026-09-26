@@ -18,12 +18,10 @@ Foundry copies WIM content into its local library. An ISO provides `sources\inst
 
 Import checks that image metadata can be read. It does not certify that the image will deploy successfully or that your selected customizations suit it. Windows versions, editions, and architectures are not restricted to the Foundry catalog. Metadata reported by the image is shown as supplied; an unknown field is not replaced with a catalog default. Index versions include the revision reported by DISM, for example `10.0.26100.4652` (`major.minor.build.revision`). This is image metadata, not a separate inspection of the installed update state inside each index.
 
-{% hint style="warning" %}
-**Screenshot required**
-
-- **File:** `foundry-osd-custom-images-01-library.png`
-- **Capture:** Show the enabled Custom Windows images page, the command bar above the image table, sanitized imported images with inclusion and preferred-image columns, and a selected row with its selectable index table visible.
-{% endhint %}
+<figure>
+  <img src="../../.gitbook/assets/foundry-osd-custom-images-01-library.png" alt="Foundry OSD Custom Windows images page showing an included image, its indexes and full versions, and the preferred image and index">
+  <figcaption>Manage image inclusion and defaults from the command bar, inspect index metadata, and choose the initial image source for Foundry Deploy.</figcaption>
+</figure>
 
 Opening the page or selecting **Refresh** updates older three-part version metadata from available cached WIMs. No reimport is required to display the revision.
 
