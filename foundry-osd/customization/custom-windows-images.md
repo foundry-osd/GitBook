@@ -42,7 +42,9 @@ Use these controls to manage images and deployment defaults:
 | Clear default | Clears the preferred image/index. |
 | Enable custom Windows images | Enables the custom workflow and packaging of included images for this profile. |
 
-The source defaults to **Foundry catalog**. Enabling custom images or setting a preferred image/index does not change that source. Choose **Custom Windows images** in **Default image source in Foundry Deploy** to start Deploy in custom mode. You can also enable the custom workflow without including a managed image, then supply a WIM manually on USB.
+When this page is enabled, creating or updating media requires at least one image included in the active profile, and every included image must be available locally. An empty library or a profile with all images excluded blocks media creation, even when the default source is **Foundry catalog**. Import and include an image, or disable the page to create catalog-only media. You can save an incomplete profile while preparing it.
+
+The source defaults to **Foundry catalog**. Enabling custom images or setting a preferred image/index does not change that source. Choose **Custom Windows images** in **Default image source in Foundry Deploy** to start Deploy in custom mode.
 
 An explicit preference that becomes unavailable requires attention. Foundry does not silently replace it with another image or the first index. Restore the source, change the preference, or clear it.
 
@@ -69,7 +71,7 @@ These paths are relative to the source volume, whose drive letter can vary in Wi
 
 Each image directory is named after the WIM's SHA256 content hash. On both outputs, the manifest binding the media to its images is stored in `Cache\OperatingSystems\Custom\manifests`. The `Custom` directory keeps imported images separate from catalog downloads in the operating-system cache. WIMs are not stored on the USB FAT32 BOOT partition. Allow space for all included images.
 
-For a manual USB image, enable the custom workflow when authoring, then place a regular `.wim` file directly in `Cache\OperatingSystems\Custom\` on the data partition. Deploy does not recursively scan subfolders. Manual files are identified in the current session and are not used as substitutes for a missing managed default.
+To add another image manually to authored USB media, place a regular `.wim` file directly in `Cache\OperatingSystems\Custom\` on the data partition. This supplements the included images; it does not replace the requirement to include at least one available library image when creating or updating media. Deploy does not recursively scan subfolders. Manual files are identified in the current session and are not used as substitutes for a missing managed default.
 
 [USB updates](../media/update-usb.md) preserve manual files and unrelated cache data. New managed content is staged before the boot partition is refreshed. Old managed content may remain on the data partition and is not offered unless the current media manifest references it.
 

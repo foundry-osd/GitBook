@@ -38,4 +38,4 @@ An ISO build publishes its new output only after successful creation; a failed o
 
 ## Custom image readiness
 
-[Custom Windows images](../customization/custom-windows-images.md) add image availability and default-selection checks to media readiness. Restore missing included WIMs or update the profile. Images are stored outside `boot.wim`, so include their size in media and working-space planning.
+[Custom Windows images](../customization/custom-windows-images.md) require at least one included image when enabled, with every included image available locally and any preferred image/index valid. These checks apply to ISO creation, USB creation, and USB updates, regardless of the default image source. Import and include an image, restore missing included WIMs, or disable the feature for catalog-only media. Images are stored outside `boot.wim`, so include their size in media and working-space planning.
