@@ -21,12 +21,14 @@ The action editor groups package and command fields beside **Execution settings*
 3. Give the action a recognizable name. For scripts and applications, import a file or a folder containing all required files.
 4. Select the script or installer relative to that content, review the automatically detected installer type and working directory, then enter its arguments. PowerShell has separate **PowerShell arguments** (before the script path) and **Script arguments** fields. For **Command line**, enter the complete command and its arguments; content is optional. For MSI installers, optionally enable **Generate installation log**.
 5. Review the timeout, success/restart return codes, **Continue on error** and **Defer restart**, then save.
-6. Select a row and use **Move up**, **Move down**, **Edit action**, **Enable/Disable** or **Remove**. Removing an action does not delete shared cached content.
+6. Select a row and use **Move up**, **Move down**, **Edit action**, **Enable/Disable** or **Remove**. Removing an action deletes its cached content only when no remaining action or saved local profile references it. Disabled actions still retain their content. Original source files are never deleted.
 7. Resolve missing-content or validation messages before creating media.
 
 An enabled page requires at least one enabled, valid action with available content before ISO or USB media can be created. An empty list or a list containing only disabled actions needs attention. Add or enable an action, or disable the page. Missing-content and invalid-settings warnings name the action to fix. Execution order is explained in the page description instead of a permanent information banner.
 
 Disabling this page disables its configuration controls and custom actions; the page switch and documentation remain available. Selected built-in tasks can still require Foundry.PostInstall and its answer-file launch hook.
+
+If cached content is in use, a saved profile cannot be checked, or cleanup fails, the action is removed but its cached files are retained and Foundry reports the cleanup failure.
 
 Edit an action and import its changed source again to use a new immutable content revision. Refresh checks the local references; it does not silently accept changes to an original source folder.
 
