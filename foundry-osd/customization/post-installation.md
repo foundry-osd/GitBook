@@ -12,6 +12,8 @@ Additional update workflows added on this page require your own scripts or packa
 
 ## Add and order actions
 
+Use the left-aligned CommandBar above the action table. Visible column headings identify each action's position, name, type, enabled state and content readiness.
+
 1. Enable the page using its header switch.
 2. Select **Add action** in the CommandBar and choose PowerShell, CMD, Application or Restart.
 3. Give the action a recognizable name. For scripts and applications, import a file or a folder containing all required files.
@@ -28,7 +30,7 @@ Edit an action and import its changed source again to use a new immutable conten
 **Screenshot required**
 
 - **File:** `foundry-osd-post-installation-01-ordered-actions.png`
-- **Capture:** Show the final Post-installation page with its CommandBar, a script, an application and a Restart action, using sanitized demonstration names.
+- **Capture:** Show the final Post-installation page with its left-aligned CommandBar, visible table headings, a script, an application and a Restart action, using sanitized demonstration names. The page has no cleanup banner or custom-answer-file integration controls.
 {% endhint %}
 
 | Action | Configuration |
@@ -104,27 +106,13 @@ After staging finishes, execution uses local files below `%SystemRoot%\Temp\Foun
 
 ## Custom answer files
 
-Native Foundry settings add the required launch hook automatically. With a [custom unattend file](unattend.md), explicitly enable **Integrate with custom answer files** to add it to the deployment copy. Imported originals remain unchanged. Review the integration summary before deployment.
+Whenever selected built-in tasks or enabled custom actions require Foundry.PostInstall, Foundry automatically adds its required launch command to the deployment copy of a [custom unattend file](unattend.md). Imported originals remain unchanged. No additional authoring option or manual hook is required.
 
-Select a catalog file and target architecture, then choose **Preview** to inspect the actual Foundry command and its insertion order. The preview omits unrelated XML and secrets. In exact-copy mode it validates the existing manual hook. A changed source must be refreshed on the Unattend page before it can be previewed or packaged. Deployment records the source and derived SHA-256 hashes in `State\PreOobe\unattend-integration.json`.
+Foundry owns this integration: it inserts the architecture-specific command in `specialize/RunSynchronous` with `WillReboot=OnRequest`, preserving your existing commands, their order and unrelated settings. A valid existing Foundry command is reused. Detected conflicts, including an incompatible existing Foundry command, block deployment; Foundry does not override your commands, silently renumber them or repair unrelated settings. Native Foundry settings receive the required command automatically too.
 
-Exact-copy mode remains available, but a deployment requiring PostInstall needs the supported manual launch hook already present. Missing, duplicate or incompatible hooks block integration. Foundry preserves unrelated commands and does not silently renumber them.
+A changed source must be refreshed on the Unattend page before packaging. Deployment records the source and derived SHA-256 hashes in `%SystemRoot%\Temp\Foundry\State\PreOobe\unattend-integration.json`, without including the answer-file contents in that audit. When no selected task requires PostInstall, this integration does not change the deployment copy.
 
-For manual integration, place this command in the `Microsoft-Windows-Deployment` component's `RunSynchronous` list in the `specialize` pass. Use the component architecture matching the image (`amd64` or `arm64`), declare the `wcm` namespace as shown, and choose a unique `Order` from 1 to 500 after your existing commands:
-
-```xml
-<RunSynchronousCommand xmlns="urn:schemas-microsoft-com:unattend"
-    xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" wcm:action="add">
-  <Order>1</Order>
-  <Description>Foundry PostInstall</Description>
-  <Path>%SystemRoot%\System32\cmd.exe /d /s /c ""%SystemRoot%\Temp\Foundry\Runtime\PreOobe\Launch.cmd""</Path>
-  <WillReboot>OnRequest</WillReboot>
-</RunSynchronousCommand>
-```
-
-This fragment is not a complete answer file. Keep the path and `WillReboot` value exactly as shown. Foundry stages the executable and wrapper; do not launch the executable directly or put this command in `SetupComplete.cmd`.
-
-Custom unattend is an expert configuration. Validation checks Foundry's integration prerequisites, not every possible command or Windows setting. Your custom settings can interfere with PostInstall, OOBE or Autopilot. Test the complete combination.
+Custom unattend is an expert configuration. Foundry validates its own integration prerequisites; you remain responsible for the custom Windows settings and commands you supply and for testing the complete deployment. Those settings and commands can interfere with PostInstall, OOBE or Autopilot even when no detectable conflict is present.
 
 ## Verify and troubleshoot
 
