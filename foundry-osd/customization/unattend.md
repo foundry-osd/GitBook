@@ -68,7 +68,7 @@ A custom file does not disable every other Foundry feature. Test the file togeth
 
 Foundry detects known XML conflicts but cannot predict arbitrary scripts. Arrange access to scripts referenced by the file; importing XML does not bundle those external files or execute its commands in WinPE.
 
-Some Foundry customizations depend on `SetupComplete.cmd`. Custom commands that replace setup hooks, reboot at the wrong time, or change enrollment and package state can disrupt them. Product-key and edition restrictions can also affect setup hooks. For dependent first-logon actions, use a single script that controls sequencing. Test the whole combination before production use.
+In released versions preceding the PostInstall workflow, some Foundry customizations depend on `SetupComplete.cmd`. Custom commands that replace setup hooks, reboot at the wrong time, or change enrollment and package state can disrupt them. Product-key and edition restrictions can also affect setup hooks. For dependent first-logon actions, use a single script that controls sequencing. Test the whole combination before production use.
 
 In the unreleased PostInstall workflow, Foundry automatically adds the required command to the deployment copy using `specialize/RunSynchronous` with `WillReboot=OnRequest` for planned restart/resume. Existing custom commands and their order remain intact. Detected integration conflicts block deployment instead of overriding your settings. Foundry does not validate indirect launches hidden inside your scripts or repair unrelated answer-file settings. The protected local audit records the source and derived SHA-256 hashes without XML contents. See [Post-installation](post-installation.md#custom-answer-files).
 

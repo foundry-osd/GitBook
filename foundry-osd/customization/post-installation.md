@@ -14,17 +14,19 @@ Additional update workflows added on this page require your own scripts or packa
 
 Use the left-aligned CommandBar above the action table. Visible column headings identify each action's position, name, type, enabled state and content readiness.
 
-The action editor groups package and command fields beside **Execution settings** in a wider dialog, stacking the groups on smaller windows. Restart actions use a compact dialog. Review the generated command preview after choosing a script or installer or entering a CMD command; validation messages appear above the dialog buttons. Commands and arguments must each be a single line. Use a PowerShell script file for multiple commands.
+The action editor groups package and command fields beside **Execution settings**, stacking the groups on smaller windows. The dialog sizes to its content within the available window space; Restart actions use a compact form. **Command preview** stays visible below the scrolling settings, with a placeholder until you select a script or installer or enter a command. Validation messages appear above the dialog buttons. Commands and arguments must each be a single line. Use a PowerShell script file for multiple commands.
 
 1. Enable the page using its header switch.
-2. Select **Add action** in the CommandBar and choose PowerShell, CMD, Application or Restart.
+2. Select **Add action** in the CommandBar and choose **PowerShell script (.ps1)**, **Command line**, **Software (.exe/.msi)** or **Restart Windows**.
 3. Give the action a recognizable name. For scripts and applications, import a file or a folder containing all required files.
-4. Select the script or installer relative to that content, then enter its arguments. For CMD, enter the command line; content is optional.
-5. Review the working directory, timeout, success/restart return codes and error policy, then save.
+4. Select the script or installer relative to that content, review the automatically detected installer type and working directory, then enter its arguments. For **Command line**, enter the command; content is optional.
+5. Review the timeout, success/restart return codes, **Continue on error** and **Defer restart**, then save.
 6. Select a row and use **Move up**, **Move down**, **Edit action**, **Enable/Disable** or **Remove**. Removing an action does not delete shared cached content.
 7. Resolve missing-content or validation messages before creating media.
 
-Disabling this page disables custom actions. Selected built-in tasks can still require Foundry.PostInstall and its answer-file launch hook.
+An enabled page requires at least one enabled, valid action with available content before ISO or USB media can be created. An empty list or a list containing only disabled actions needs attention. Add or enable an action, or disable the page.
+
+Disabling this page disables its configuration controls and custom actions; the page switch and documentation remain available. Selected built-in tasks can still require Foundry.PostInstall and its answer-file launch hook.
 
 Edit an action and import its changed source again to use a new immutable content revision. Refresh checks the local references; it does not silently accept changes to an original source folder.
 
@@ -37,10 +39,10 @@ Edit an action and import its changed source again to use a new immutable conten
 
 | Action | Configuration |
 | --- | --- |
-| PowerShell | A `.ps1` file and optional sibling content, executed by Windows PowerShell 5.1 with no profile and no interactive prompts. |
-| CMD | A command interpreted by `cmd.exe`; optionally import files it needs. |
-| Application | An EXE with vendor-specific silent arguments, or an MSI using generated quiet/no-restart/logging options and your additional properties or transforms. |
-| Restart | An explicit restart at this position, followed by resumption at the next action. No process arguments or timeout. |
+| PowerShell script (.ps1) | A `.ps1` file and optional sibling content, executed by Windows PowerShell 5.1 with no profile and no interactive prompts. |
+| Command line | A command interpreted by `cmd.exe`; optionally import files it needs. |
+| Software (.exe/.msi) | An EXE with vendor-specific silent arguments, or an MSI using generated quiet/no-restart/logging options and your additional properties or transforms. Installer type is detected from the selected file and is read-only. |
+| Restart Windows | An explicit restart at this position, followed by resumption at the next action. No process arguments or timeout. |
 
 ## Prepare content
 
@@ -55,14 +57,14 @@ ExampleApplication/
   Data1.cab
 ```
 
-Create an **Application** action, import that folder, choose `ExampleApplication.msi`, verify the automatically selected **MSI** mode, and add the property `TRANSFORMS="Organization.mst"` if that transform is supported by the package. Keep the working directory empty to use the content root. Foundry supplies quiet installation, restart suppression and an MSI log. Do not add conflicting restart options.
+Create a **Software (.exe/.msi)** action, import that folder, choose `ExampleApplication.msi`, verify the detected **MSI** type, and add the property `TRANSFORMS="Organization.mst"` if that transform is supported by the package. Keep the working directory empty to use the content root. Foundry supplies quiet installation, restart suppression and an MSI log. Do not add conflicting restart options.
 
 An example sequence is:
 
 1. A PowerShell action that performs your prerequisite configuration.
 2. The application action above.
 3. A Restart action.
-4. A CMD action that performs your final machine configuration.
+4. A Command line action that performs your final machine configuration.
 
 Packages must be suitable for unattended machine installation. EXE silent and no-reboot options depend on the vendor; Foundry cannot infer them. Installers must wait for their work to complete and return a meaningful exit code. Do not launch an independent background installer and immediately report success.
 
@@ -80,7 +82,7 @@ The default timeout is 1,800 seconds; the supported range is 1–86,400 seconds.
 
 PowerShell scripts must return a failure explicitly when appropriate. Non-terminating PowerShell errors and failed native commands do not always become a failed process exit code automatically.
 
-**Stop** is the default error policy. It stops later actions and prevents a successful handoff to OOBE. **Continue** permits later actions after an ordinary, fully observed failure, recording the sequence as completed with errors. Continue cannot override corrupt state, failed checkpoint publication, uncertain process termination or an installer-owned restart.
+**Continue on error** is disabled by default: a failure stops later actions and prevents a successful handoff to OOBE. Enabling it permits later actions after an ordinary, fully observed failure, recording the sequence as completed with errors. It cannot override corrupt state, failed checkpoint publication, uncertain process termination or an installer-owned restart.
 
 Keep secrets out of command arguments and normal output. Profile encryption does not make arbitrary script output or installer logs safe to share.
 
@@ -88,7 +90,7 @@ Keep secrets out of command arguments and normal output. Profile encryption does
 
 Use a Restart action or an installer restart-required code. Suppress installer-owned restarts. Foundry saves a durable checkpoint and asks Windows Setup to restart and invoke the runner again.
 
-By default, a recognized restart-required result triggers a restart before the next action. The defer option waits until the next explicit Restart or the end of the sequence. An explicit Restart runs even when no installer has requested one.
+By default, a recognized restart-required result triggers a restart before the next action. **Defer restart** waits until the next explicit Restart or the end of the sequence. An explicit Restart runs even when no installer has requested one.
 
 An installer returning `1641` has initiated a restart outside this protocol. Foundry treats that as an uncertain execution, even though Windows Installer defines it as an installation-success code.
 
