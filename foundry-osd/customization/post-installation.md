@@ -19,7 +19,7 @@ The action editor groups package and command fields beside **Execution settings*
 1. Enable the page using its header switch.
 2. Select **Add action** in the CommandBar and choose **PowerShell script (.ps1)**, **Command line**, **Software (.exe/.msi)** or **Restart Windows**.
 3. Give the action a recognizable name. For scripts and applications, import a file or a folder containing all required files.
-4. Select the script or installer relative to that content, review the automatically detected installer type and working directory, then enter its arguments. For **Command line**, enter the command; content is optional.
+4. Select the script or installer relative to that content, review the automatically detected installer type and working directory, then enter its arguments. PowerShell has separate **PowerShell arguments** (before the script path) and **Script arguments** fields. For **Command line**, enter the complete command and its arguments; content is optional. For MSI installers, optionally enable **Generate installation log**.
 5. Review the timeout, success/restart return codes, **Continue on error** and **Defer restart**, then save.
 6. Select a row and use **Move up**, **Move down**, **Edit action**, **Enable/Disable** or **Remove**. Removing an action does not delete shared cached content.
 7. Resolve missing-content or validation messages before creating media.
@@ -39,9 +39,9 @@ Edit an action and import its changed source again to use a new immutable conten
 
 | Action | Configuration |
 | --- | --- |
-| PowerShell script (.ps1) | A `.ps1` file and optional sibling content, executed by Windows PowerShell 5.1 with no profile and no interactive prompts. |
+| PowerShell script (.ps1) | A `.ps1` file and optional sibling content, executed by Windows PowerShell 5.1. You supply host arguments and script arguments separately. |
 | Command line | A command interpreted by `cmd.exe`; optionally import files it needs. |
-| Software (.exe/.msi) | An EXE with vendor-specific silent arguments, or an MSI using generated quiet/no-restart/logging options and your additional properties or transforms. Installer type is detected from the selected file and is read-only. |
+| Software (.exe/.msi) | An EXE or MSI with your arguments, properties or transforms. Foundry supplies only the executable path or `msiexec.exe /i` launch command, plus optional MSI logging. Installer type is detected from the selected file and is read-only. |
 | Restart Windows | An explicit restart at this position, followed by resumption at the next action. No process arguments or timeout. |
 
 ## Prepare content
@@ -57,7 +57,7 @@ ExampleApplication/
   Data1.cab
 ```
 
-Create a **Software (.exe/.msi)** action, import that folder, choose `ExampleApplication.msi`, verify the detected **MSI** type, and add the property `TRANSFORMS="Organization.mst"` if that transform is supported by the package. Keep the working directory empty to use the content root. Foundry supplies quiet installation, restart suppression and an MSI log. Do not add conflicting restart options.
+Create a **Software (.exe/.msi)** action, import that folder, choose `ExampleApplication.msi`, verify the detected **MSI** type, and add the property `TRANSFORMS="Organization.mst"` if that transform is supported by the package. Keep the working directory empty to use the content root. Supply any required silent installation and no-restart options yourself, for example `/qn /norestart` for an MSI. Foundry does not add or enforce these switches. Enable **Generate installation log** to append `/l*v "{LogRoot}\ExampleApplication.log"`. This option is off by default and available only for MSI installers; EXE logging arguments depend on the vendor.
 
 An example sequence is:
 
@@ -73,6 +73,16 @@ You are responsible for choosing scripts and installers compatible with the targ
 The target working copy is shared by actions referencing the same content hash. Changes made by an earlier action remain visible to later consumers, including after planned restarts. The source cache remains immutable.
 
 Content is a temporary deployment source. Foundry removes its owned working copies at the end. If the application requires original media for repair, modification or later updates, arrange a durable source as part of your packaging. Do not rely on Foundry's Windows Temp folder, a removed USB drive, or the Windows Installer cache to preserve every required source file. Verify repair and servicing after Foundry cleanup.
+
+## Arguments and installer logs
+
+The preview and runtime use the same command composition. Foundry preserves your arguments without adding quiet mode, profile suppression, execution-policy overrides or restart suppression. You are responsible for valid arguments, unattended execution and preventing installer-owned restarts.
+
+- **PowerShell arguments** go before `-File "<script>"`; **Script arguments** go after it. For example, enter `-NoProfile -ExecutionPolicy Bypass` in the first field only if your script requires those host options.
+- **Command line** supplies the complete command to `cmd.exe /c`. Include its arguments in the same field.
+- **Software (.exe/.msi)** appends your arguments to the selected executable or `msiexec.exe /i "<installer>"`.
+
+**Generate installation log** adds MSI verbose logging after your arguments. The filename is the selected installer basename with a `.log` extension. Each action has its own log folder, so two actions using the same installer do not overwrite each other's log. Leave the checkbox off if you supply your own MSI logging options. Foundry continues recording process output and execution results regardless of this checkbox. Captured output is stored separately under each action folder at `Process\output.log` so an installer filename cannot collide with it. PowerShell and Command line actions do not receive installer-logging switches.
 
 ## Execution and error policy
 
