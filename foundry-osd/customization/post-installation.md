@@ -14,7 +14,7 @@ Additional update workflows added on this page require your own scripts or packa
 
 Use the left-aligned CommandBar above the action table. Visible column headings identify each action's position, name, type, enabled state and content readiness.
 
-The action editor groups package and command fields beside **Execution settings**, stacking the groups on smaller windows. The dialog sizes to its content within the available window space; Restart actions use a compact form. **Command preview** stays visible below the scrolling settings, with a placeholder until you select a script or installer or enter a command. Validation messages appear above the dialog buttons. Commands and arguments must each be a single line. Use a PowerShell script file for multiple commands.
+The action editor groups package and command fields beside **Execution settings**, stacking the groups on smaller windows. The dialog sizes to its content within the available window space; Restart actions use a compact form. **Command preview** stays visible below the scrolling settings, with a placeholder until you select a script or installer or enter a command. Select **Save** to validate the draft. A message appears beside the first field that needs correction and that field receives focus; missing package content points to the Import controls. Import and operation errors appear above the dialog buttons. Commands and arguments must each be a single line. Use a PowerShell script file for multiple commands.
 
 1. Enable the page using its header switch.
 2. Select **Add action** in the CommandBar and choose **PowerShell script (.ps1)**, **Command line**, **Software (.exe/.msi)** or **Restart Windows**.
@@ -24,7 +24,7 @@ The action editor groups package and command fields beside **Execution settings*
 6. Select a row and use **Move up**, **Move down**, **Edit action**, **Enable/Disable** or **Remove**. Removing an action does not delete shared cached content.
 7. Resolve missing-content or validation messages before creating media.
 
-An enabled page requires at least one enabled, valid action with available content before ISO or USB media can be created. An empty list or a list containing only disabled actions needs attention. Add or enable an action, or disable the page.
+An enabled page requires at least one enabled, valid action with available content before ISO or USB media can be created. An empty list or a list containing only disabled actions needs attention. Add or enable an action, or disable the page. Missing-content and invalid-settings warnings name the action to fix. Execution order is explained in the page description instead of a permanent information banner.
 
 Disabling this page disables its configuration controls and custom actions; the page switch and documentation remain available. Selected built-in tasks can still require Foundry.PostInstall and its answer-file launch hook.
 
