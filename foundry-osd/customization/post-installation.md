@@ -14,6 +14,8 @@ Additional update workflows added on this page require your own scripts or packa
 
 Use the left-aligned CommandBar above the action table. Visible column headings identify each action's position, name, type, enabled state and content readiness.
 
+The action editor groups package and command fields beside **Execution settings** in a wider dialog, stacking the groups on smaller windows. Restart actions use a compact dialog. Review the generated command preview after choosing a script or installer or entering a CMD command; validation messages appear above the dialog buttons. Commands and arguments must each be a single line. Use a PowerShell script file for multiple commands.
+
 1. Enable the page using its header switch.
 2. Select **Add action** in the CommandBar and choose PowerShell, CMD, Application or Restart.
 3. Give the action a recognizable name. For scripts and applications, import a file or a folder containing all required files.
@@ -53,7 +55,7 @@ ExampleApplication/
   Data1.cab
 ```
 
-Create an **Application** action, import that folder, choose `ExampleApplication.msi`, select **MSI**, and add the property `TRANSFORMS="Organization.mst"` if that transform is supported by the package. Keep the working directory empty to use the content root. Foundry supplies quiet installation, restart suppression and an MSI log. Do not add conflicting restart options.
+Create an **Application** action, import that folder, choose `ExampleApplication.msi`, verify the automatically selected **MSI** mode, and add the property `TRANSFORMS="Organization.mst"` if that transform is supported by the package. Keep the working directory empty to use the content root. Foundry supplies quiet installation, restart suppression and an MSI log. Do not add conflicting restart options.
 
 An example sequence is:
 
