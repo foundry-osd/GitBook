@@ -40,7 +40,7 @@ Retain the journal/results under `%SystemRoot%\Temp\Foundry\State\PreOobe` and t
 
 For standard RETAIL deployments of supported Windows Home and Pro editions, Foundry automatically attempts to activate Windows after reboot using a compatible OEM product key stored in the device firmware. Online activation requires Internet access and a valid key for the installed Windows edition.
 
-Foundry preserves existing activation and explicitly configured licensing. It skips this attempt for VOLUME deployments and deployments using a custom answer file. An unsuccessful activation attempt does not stop Windows setup. Before handing over the device, check **Settings > System > Activation** to confirm its activation status.
+Foundry preserves existing activation and explicitly configured licensing. It skips this attempt for VOLUME deployments and deployments using a custom answer file. An ordinary licensing failure does not stop Windows setup. In the unreleased PostInstall workflow, a timeout or an activation process whose completion cannot be confirmed stops the sequence for investigation. Before handing over the device, check **Settings > System > Activation** to confirm its activation status.
 
 ## Error
 

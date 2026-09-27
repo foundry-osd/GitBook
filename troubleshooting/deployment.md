@@ -66,4 +66,4 @@ For [custom images](../foundry-osd/customization/custom-windows-images.md), chec
 
 ## Post-installation interruption (unreleased)
 
-For [Post-installation](../foundry-osd/customization/post-installation.md), distinguish WinPE staging from the later Windows sequence. A valid committed restart checkpoint resumes on the next boot. Missing/corrupt state, an installer-owned reboot or uncertain execution stops the sequence without automatic replay. Preserve the journal and logs before redeploying. Cleanup pending means some owned content could not yet be safely removed.
+For [Post-installation](../foundry-osd/customization/post-installation.md), distinguish WinPE staging from the later Windows sequence. Planned restarts resume from saved progress. An interrupted action, missing or damaged execution records, or an installer-owned restart stops the sequence without automatically retrying the action. Preserve the results and logs before deciding whether to redeploy. **Cleanup pending** means some temporary content could not yet be safely removed.

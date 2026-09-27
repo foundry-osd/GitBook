@@ -34,4 +34,4 @@ When [custom images](../customization/custom-windows-images.md) are enabled, an 
 
 ## Post-installation content (unreleased)
 
-Updating media publishes the verified [Post-installation](../customization/post-installation.md) content generation before making its configuration active. Allow space for new content alongside the previous valid generation. Removing an authored action does not authorize deletion of unrelated cached files.
+Updating media includes the current configuration's required [Post-installation](../customization/post-installation.md) packages and settings. Allow space for new packages alongside content already on the data partition. Removing an action in Foundry OSD does not remove its old package from previously created media. Unrelated cached files are preserved. If an update is interrupted, repeat it and test the updated media before use.

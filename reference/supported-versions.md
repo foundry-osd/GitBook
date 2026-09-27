@@ -28,4 +28,4 @@ The [custom image workflow](../foundry-osd/customization/custom-windows-images.m
 
 ## PostInstall runtime pairing (unreleased)
 
-[Post-installation](../foundry-osd/customization/post-installation.md) uses x64 and ARM64 self-contained .NET runtime ZIPs paired with the Deploy archive. Deploy verifies the exact companion hash and contract. An incompatible cached runner is not accepted, and the target runner does not update itself during execution. Test supported Windows images and hardware before rollout.
+[Post-installation](../foundry-osd/customization/post-installation.md) supports x64 and ARM64 targets. Foundry selects the matching runtime automatically; you do not need to install .NET on the target. Keep deployment media and its package content together, and choose scripts and installers compatible with the target Windows image and architecture. Test the complete workflow on representative hardware before rollout.

@@ -47,4 +47,4 @@ Re-import `sources\boot.wim` whenever the Foundry OSD ISO is regenerated. Keep t
 
 ## Post-installation content (unreleased)
 
-A bare PXE boot image does not include the external [Post-installation](../customization/post-installation.md) cache. Provide supported companion cache media with its bound manifest and packages. Missing content blocks deployment; this feature does not add an HTTP or SMB package distribution service.
+Copying `sources\boot.wim` to a PXE server does not transfer the external [Post-installation](../customization/post-installation.md) packages. Keep the complete generated ISO attached to the target, or provide its matching Foundry USB cache media, until deployment finishes. Do not mix the boot image and package content from different media builds. Missing required content blocks deployment; Foundry does not download these packages from an HTTP or SMB share.
