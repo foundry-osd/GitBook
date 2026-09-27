@@ -20,7 +20,7 @@ The action editor groups package and command fields beside **Execution settings*
 2. Select **Add action** in the CommandBar and choose PowerShell, CMD, Application or Restart.
 3. Give the action a recognizable name. For scripts and applications, import a file or a folder containing all required files.
 4. Select the script or installer relative to that content, then enter its arguments. For CMD, enter the command line; content is optional.
-5. Review the working directory, timeout, success/restart return codes, error policy and architecture, then save.
+5. Review the working directory, timeout, success/restart return codes and error policy, then save.
 6. Select a row and use **Move up**, **Move down**, **Edit action**, **Enable/Disable** or **Remove**. Removing an action does not delete shared cached content.
 7. Resolve missing-content or validation messages before creating media.
 
@@ -65,6 +65,8 @@ An example sequence is:
 4. A CMD action that performs your final machine configuration.
 
 Packages must be suitable for unattended machine installation. EXE silent and no-reboot options depend on the vendor; Foundry cannot infer them. Installers must wait for their work to complete and return a meaningful exit code. Do not launch an independent background installer and immediately report success.
+
+You are responsible for choosing scripts and installers compatible with the target Windows architecture. Foundry does not ask for or filter custom actions by architecture. Every enabled action is attempted in order; incompatible executables are handled through the configured failure policy.
 
 The target working copy is shared by actions referencing the same content hash. Changes made by an earlier action remain visible to later consumers, including after planned restarts. The source cache remains immutable.
 
