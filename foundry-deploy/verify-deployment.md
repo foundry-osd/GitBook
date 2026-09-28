@@ -32,9 +32,9 @@ Review informational **Skipped** entries and their reasons as well as successful
 
 ## Post-installation actions
 
-When using [Post-installation](../foundry-osd/customization/post-installation.md), a successful Deploy session means the runner and content were staged for first boot. Confirm the ordered actions, planned restarts and final OOBE separately. Review failed actions even when Continue allowed the sequence to finish. An interrupted action is not automatically replayed.
+When using [Post-installation](../foundry-osd/customization/post-installation.md), a successful Deploy session means Windows is ready to run those actions. Follow the Post-installation console through any planned restarts and confirm that Windows reaches OOBE. Review failed actions even when **Continue on error** allowed the sequence to finish. An interrupted action is not automatically retried.
 
-Retain the journal/results under `%SystemRoot%\Temp\Foundry\State\PreOobe` and the runtime/action logs under `%SystemRoot%\Temp\Foundry\Logs\PreOobe`. Verify applications after temporary payload cleanup, including any repair/servicing behavior that requires a persistent source.
+Verify that the installed applications work after cleanup. If they need source files for repair or updates, confirm that those files remain available. Keep the [PostInstall results and logs](../troubleshooting/logs-and-support.md#postinstall-diagnostics) when investigating a problem.
 
 ## Automatic Windows activation
 

@@ -1,14 +1,10 @@
 # Post-installation
 
-{% hint style="info" %}
-Use matching Foundry OSD and runtime assets for Post-installation. Validate the complete deployment on representative Windows images and hardware before production use.
-{% endhint %}
-
 Use **Customization > Post-installation** to run your own scripts, commands and application installers after Windows installation and before OOBE. The separate [OOBE page](oobe.md) configures the Windows first-run experience.
 
 Foundry runs selected built-in tasks first, then your enabled actions in the order shown, followed by cleanup. Built-in tasks cannot be moved or deleted from the custom action list. The interactive Autopilot registration assistant runs separately during OOBE.
 
-Additional update workflows added on this page require your own scripts or packages; there is no automatic “install all updates” action. Existing Foundry driver and firmware provisioning remains available.
+To add Windows, driver or BIOS updates, provide your own script or vendor package as a custom action.
 
 <figure>
   <img src="../../.gitbook/assets/foundry-osd-post-installation-01-ordered-actions.png" alt="Foundry OSD Post-installation page showing five enabled actions: two software installations, a restart, a PowerShell script and a command line">
@@ -17,21 +13,19 @@ Additional update workflows added on this page require your own scripts or packa
 
 ## Add and order actions
 
-Use **Add action** to create an action, then select rows to edit, enable, disable, remove or reorder them. **Command preview** shows the command that will run. Select **Save** and correct any highlighted fields.
-
 1. Enable the page using its header switch.
 2. Select **Add action** in the CommandBar and choose **PowerShell script (.ps1)**, **Command line**, **Software (.exe/.msi)** or **Restart Windows**.
 3. Give the action a recognizable name. For scripts and applications, import a file or a folder containing all required files.
-4. Select the script or installer relative to that content, review the automatically detected installer type and working directory, then enter its arguments. PowerShell has separate **PowerShell arguments** (before the script path) and **Script arguments** fields. For **Command line**, enter the complete command and its arguments; content is optional. For MSI installers, optionally enable **Generate installation log**.
-5. For scripts, commands and software, review the timeout, success/restart return codes, **Continue on error** and **Defer restart**. For a Restart action, set **Restart delay (seconds)**; use `0` to restart immediately. Then save.
-6. Select a row and use **Move up**, **Move down**, **Edit action**, **Enable/Disable** or **Remove**. Removing an action deletes its cached content only when no remaining action or saved local profile references it. Disabled actions still retain their content. Original source files are never deleted.
+4. Select the script or installer and enter its arguments. For **Command line**, enter the complete command; imported content is optional. Leave **Working directory** empty to use the imported content folder.
+5. Review the execution settings and **Command preview**, then select **Save**. For **Restart Windows**, set the delay in seconds; `0` restarts immediately.
+6. Select a row and use **Move up**, **Move down**, **Edit action**, **Enable/Disable** or **Remove**.
 7. Resolve missing-content or validation messages before creating media.
 
-An enabled page requires at least one enabled, valid action with available content before ISO or USB media can be created. An empty list or a list containing only disabled actions needs attention. Add or enable an action, or disable the page. Missing-content and invalid-settings warnings name the action to fix.
+When the page is enabled, add at least one enabled action and resolve any validation or missing-content messages before creating media. Restart actions and commands without imported files do not need package content.
 
-Disabling this page disables its configuration controls and custom actions; the page switch and documentation remain available. Selected built-in tasks still run when custom actions are disabled.
+Disabling the page keeps your configuration but excludes custom actions from newly created media. Selected built-in tasks still run.
 
-If cached content cannot be safely removed, Foundry reports the cleanup problem. The action remains removed, but cached files may remain on disk.
+Removing an action deletes its cached content only when no remaining action or saved local profile uses it. Original source files are never deleted. If cached files cannot be removed, Foundry reports the problem.
 
 To update a package, edit its action and import the changed source again. **Refresh** checks cached content availability; it does not import changes from the original source folder.
 
@@ -86,7 +80,7 @@ You are responsible for choosing scripts and installers compatible with the targ
 
 Actions using identical imported content share a working copy on the target. File changes made by an earlier action remain visible to later actions, including after planned restarts. They do not change the authoring cache.
 
-Content is a temporary deployment source. Foundry removes its owned working copies at the end. If the application requires original media for repair, modification or later updates, arrange a durable source as part of your packaging. Do not rely on Foundry's Windows Temp folder, a removed USB drive, or the Windows Installer cache to preserve every required source file. Verify repair and servicing after Foundry cleanup.
+Imported content is temporary and is removed from the target during cleanup. If an application needs source files for repair or later updates, provide a permanent source as part of your package.
 
 ## Arguments and installer logs
 
@@ -100,7 +94,7 @@ For **Command line**, **Package content (optional)** accepts any file type neede
 
 Commands and argument fields must each contain a single line. Use a script file for multiple commands. `{ContentRoot}` and `{LogRoot}` in the preview stand for paths selected during deployment; they are not variables that Foundry expands in your arguments. Use paths relative to the configured working directory when referencing imported files.
 
-**Generate installation log** adds MSI verbose logging after your arguments. The filename is the selected installer basename with a `.log` extension. Each action has its own log folder, so two actions using the same installer do not overwrite each other's log. Leave the checkbox off if you supply your own MSI logging options. Foundry continues recording process output and execution results regardless of this checkbox. Captured output is stored separately under each action folder at `Process\output.log` so an installer filename cannot collide with it. PowerShell and Command line actions do not receive installer-logging switches.
+**Generate installation log** adds MSI verbose logging using the installer name, for example `ExampleApplication.log`. Each action has its own log folder. Leave the checkbox off if you supply your own logging arguments. Foundry records script and command output regardless of this option; see [PostInstall diagnostics](../../troubleshooting/logs-and-support.md#postinstall-diagnostics).
 
 ## Execution and error policy
 
@@ -122,7 +116,7 @@ By default, a recognized restart-required result triggers a restart before the n
 
 For an explicit Restart action, **Restart delay (seconds)** accepts `0` to `86400`. The default `0` adds no delay. A positive value shows a live countdown after progress has been saved. This setting does not change restarts requested by installers or built-in tasks.
 
-An installer returning `1641` has initiated a restart outside this protocol. Foundry treats that as an uncertain execution, even though Windows Installer defines it as an installation-success code.
+Installer exit code `1641` means the installer initiated its own restart. Foundry stops the sequence in this case; configure the installer to let Foundry manage restarts instead.
 
 After a planned restart, Foundry resumes from its saved progress. If power is lost while an action is running, Foundry does not automatically retry that action. Missing or damaged execution records also stop the sequence. Inspect the results and logs before deciding whether to redeploy; scripts and installers are not necessarily safe to repeat.
 
@@ -130,9 +124,7 @@ If an interrupted process might still be using files, Foundry retains them and r
 
 ## Follow progress in Windows Setup
 
-The **Foundry Post-installation** console shows built-in and custom actions in execution order, with their status and elapsed time. Running actions appear in cyan, successful actions in green, failures in red, and waiting or skipped actions in gray. Warnings and restart countdowns appear in yellow. Text labels remain available when color or in-place updates are unavailable.
-
-An action's elapsed time covers its start through completion, including a planned restart within that action.
+The **Foundry Post-installation** console shows the current action, progress, status and elapsed time. Colors distinguish running, successful and failed actions. Warnings and restart countdowns appear in yellow.
 
 <figure>
   <img src="../../.gitbook/assets/shared-post-installation-01-console-progress.png" alt="Foundry Post-installation console running Google Chrome as action 3 of 4, with action statuses, elapsed times and a log path">
@@ -145,28 +137,22 @@ After a planned restart, the console restores completed results and indicates th
 
 ## Cache, profiles and deployment media
 
-Scripts and packages are stored in the local library under `%LOCALAPPDATA%\Foundry\Packages\PreOobe`, outside `boot.wim`. [Profiles](../deployment-profiles.md) contain action settings and content references, not package binaries. On another authoring PC, import the identical files and folder structure to restore those references.
+Foundry keeps imported scripts and packages in a local library. [Profiles](../deployment-profiles.md) share action settings, but do not include those files. On another PC, import the same files and folder structure to restore missing content.
 
-USB and ISO media carry required content outside `boot.wim`, under `Cache\PreOobe`. Keep the complete generated media available until deployment finishes. A PXE boot image alone does not include these packages; see [PXE deployment](../media/pxe-deployment.md#post-installation-content).
+Required packages are included on the generated USB or ISO, outside `boot.wim`. Keep the complete media available until deployment finishes. A PXE boot image alone is insufficient; see [PXE deployment](../media/pxe-deployment.md#post-installation-content).
 
-[Bootstrap](../../reference/bootstrap.md#postinstall-preparation) downloads and verifies PostInstall at boot, independently of Deploy, before opening the deployment wizard. Standard release media needs network access for this preparation; a previously downloaded runtime cache still requires online verification. Debug media includes the locally prepared runtime. Your application packages must still be available from the deployment media. Missing or invalid required content blocks deployment before disk preparation.
+[Bootstrap](../../reference/bootstrap.md#postinstall-preparation) prepares PostInstall automatically at startup. No separate installation or manual runtime selection is needed. Standard release media requires Internet access for this step, even with a previous download in the cache.
 
-After staging finishes, execution uses local files below `%SystemRoot%\Temp\Foundry`; it no longer needs the source USB/ISO. Your own scripts may still require a network or another resource.
+Foundry copies the required files to Windows before the first boot. Your scripts may still need network access or other resources when they run.
 
 ## Custom answer files
 
-Whenever selected built-in tasks or enabled custom actions require Foundry.PostInstall, Foundry automatically adds its required launch command to the deployment copy of a [custom unattend file](unattend.md). Imported originals remain unchanged. No additional authoring option or manual hook is required.
+Foundry automatically integrates Post-installation into the deployment copy of your [custom answer file](unattend.md) when needed. The imported original and your custom settings and command order are preserved. No manual launch command is required.
 
-Existing custom commands, their order and unrelated settings are preserved. Detected integration conflicts block deployment instead of overriding your settings. Native Foundry settings receive the required integration automatically too.
-
-After changing an imported answer file, use **Refresh source** on the Unattend page before rebuilding media. When no selected task requires PostInstall, this integration leaves the deployment copy unchanged.
-
-Custom unattend is an expert configuration. Foundry validates its own integration prerequisites; you remain responsible for the custom Windows settings and commands you supply and for testing the complete deployment. Those settings and commands can interfere with PostInstall, OOBE or Autopilot even when no detectable conflict is present.
+Custom answer files are an advanced option: you remain responsible for their settings and commands. Resolve reported conflicts and test the complete deployment. After editing a source file, use **Refresh source** on the Unattend page before rebuilding media.
 
 ## Verify and troubleshoot
 
 Successful WinPE staging is not proof of successful post-installation. Follow [Verify deployment](../../foundry-deploy/verify-deployment.md) through first boot, any planned restarts and OOBE.
 
-Preserve the operation journal/results under `%SystemRoot%\Temp\Foundry\State\PreOobe` and diagnostics under `%SystemRoot%\Temp\Foundry\Logs\PreOobe`. The runtime's application log is `Foundry.PostInstall.log`; action and installer logs provide additional context. Results distinguish full success, permitted action failures, interruption and cleanup still pending.
-
-Use [sanitized support exports](../../troubleshooting/logs-and-support.md) for the application's supported log sources. Post-installation results and target logs require separate collection. Review those files before sharing: raw script output and MSI logs may contain credentials or environment details, and arbitrary output cannot be guaranteed free of secrets.
+If an action fails, review the log path shown in the console and collect the [PostInstall diagnostics](../../troubleshooting/logs-and-support.md#postinstall-diagnostics) from the target PC. These logs are not included in Foundry OSD's diagnostic export. Remove sensitive information before sharing them.
