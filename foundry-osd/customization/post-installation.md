@@ -98,7 +98,7 @@ Review **Command preview** before saving. Foundry preserves your arguments witho
 - **Command line** supplies the complete command to `cmd.exe /c`. Include its arguments in the same field.
 - **Software (.exe/.msi)** appends your arguments to the selected executable or `msiexec.exe /i "<installer>"`.
 
-For **Command line**, **Package content (optional)** accepts any file type needed by that command. For example, import `settings.reg` and enter `reg import settings.reg`. Importing content alone does not run it. Importing a single `.cmd` or `.bat` file fills an empty command field with the quoted filename; an existing command is never overwritten. Review the command and add any arguments before saving. Leave **Working directory** empty to run from the imported content folder.
+For **Command line**, **Package content (optional)** accepts any file type needed by that command. For example, import `settings.reg` and enter `reg import settings.reg`. Importing content alone does not run it. Importing a single `.cmd` or `.bat` file fills an empty command field with the filename, without adding quotes; an existing command is never overwritten. Review the command and add any required arguments or quoting before saving. Leave **Working directory** empty to run from the imported content folder.
 
 Commands and argument fields must each contain a single line. Use a script file for multiple commands. `{ContentRoot}` and `{LogRoot}` in the preview stand for paths selected during deployment; they are not variables that Foundry expands in your arguments. Use paths relative to the configured working directory when referencing imported files.
 
