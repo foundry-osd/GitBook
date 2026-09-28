@@ -15,7 +15,7 @@ During media creation, release provisioning downloads the Bootstrap archive for 
 
 Local development provisioning uses a supplied archive or publishes the local project. It does not fall back to a GitHub download when the local Bootstrap payload cannot be prepared.
 
-Bootstrap stays in the boot image while Connect and Deploy use their runtime caches. To refresh Bootstrap, [recreate or update the boot media](supported-versions.md#application-and-boot-media-updates).
+Bootstrap stays in the boot image while Connect, Deploy and PostInstall use their runtime caches. To refresh Bootstrap, [recreate or update the boot media](supported-versions.md#application-and-boot-media-updates).
 
 ## Startup progress
 
@@ -26,7 +26,7 @@ Bootstrap clears the interactive console once and updates five stage rows in pla
 | Environment | Selects the x64 or ARM64 runtime and storage location, then prepares wired authentication and supported wireless services. |
 | Network connection | Resolves Foundry Connect, starts it, and waits for the network workflow to finish. |
 | Clock and time zone | Attempts to correct the clock and configure the time zone after Connect succeeds. |
-| Deployment files | Resolves Foundry Deploy. On release-provisioned USB media, also checks for a Connect runtime update. |
+| Deployment files | Prepares Foundry Deploy and PostInstall. On release-provisioned USB media, also checks for a Connect runtime update. |
 | Deployment application | Launches Foundry Deploy and waits for its startup acknowledgement. |
 
 {% hint style="info" %}
@@ -63,7 +63,7 @@ A volume labelled **Foundry Cache** takes precedence for runtime storage. Otherw
 
 Bootstrap verifies applications before launching them. Application updates saved on the USB drive require online verification at each boot before they can run.
 
-When online verification is unavailable, Foundry uses the verified original application included when the media was created, if one is available. You may therefore see an older application version while offline. Standard media includes Foundry Connect, which lets you establish networking. Foundry Deploy normally requires a network connection unless it was also included during media creation.
+When online verification is unavailable, Foundry uses the verified original application included when the media was created, if one is available. You may therefore see an older application version while offline. Standard media includes Foundry Connect, which lets you establish networking. Foundry Deploy and PostInstall normally require a network connection unless they were also included during media creation.
 
 A cache does not guarantee a fully offline deployment. Connect still requires its connectivity checks to succeed, and the selected Windows, drivers, catalogs, or Autopilot workflow may require additional services. If neither a verified original nor a verified download is available, boot stops before the affected application launches.
 
@@ -96,3 +96,11 @@ Bootstrap sends emitted application logs to PostHog after remote-diagnostics con
 {% endhint %}
 
 For refreshing existing media, see [Application and boot media updates](supported-versions.md#application-and-boot-media-updates).
+
+## PostInstall preparation
+
+[Post-installation](../foundry-osd/customization/post-installation.md) runs after the target starts Windows. Bootstrap prepares it automatically during **Deployment files**, before opening the deployment wizard. You do not need to download or select it yourself.
+
+Standard release media requires Internet access to download or verify PostInstall, even when a previous download is cached. It follows the same [cache and connectivity rules](#cache-and-connectivity) as Deploy.
+
+Debug media uses the locally prepared PostInstall application. In both modes, keep the complete deployment media available until deployment finishes so Foundry can copy your scripts and application packages to Windows.

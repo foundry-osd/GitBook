@@ -32,3 +32,5 @@ Foundry checks downloaded and cached driver files against the catalog hash when 
 - **Deferred installers:** supported packages such as Lenovo executable installers and Surface MSI packages use **Stage driver installer** to copy the package, followed by **Prepare setup tasks** to schedule installation. Installation occurs during Windows setup after reboot. Extraction and offline INF installation steps are omitted for this path.
 
 A download can be **Skipped** because all selected files were reused from cache while extraction and installation still succeed normally. Microsoft Update Catalog lookup still requires network access; cached package files do not provide an offline copy of the catalog.
+
+Deferred driver installers run before custom actions in the [Post-installation workflow](../foundry-osd/customization/post-installation.md#execution-order). They still run when the Post-installation page's custom actions are disabled.

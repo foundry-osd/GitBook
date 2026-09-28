@@ -8,6 +8,7 @@ Configure only the options required by the deployment standard:
 - [Custom Windows images](custom-windows-images.md): import ISO/WIM content and choose image defaults independently of the catalog.
 - [Machine naming](machine-naming.md)
 - [Out-of-box experience](oobe.md)
+- [Post-installation](post-installation.md): ordered scripts, commands, application packages and restarts before OOBE.
 - [Custom answer files (Unattend)](unattend.md)
 - [Optional features](optional-features.md)
 - [AppX removals](appx-removals.md)

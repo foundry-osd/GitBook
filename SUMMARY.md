@@ -22,6 +22,7 @@
     * [Custom Windows images](foundry-osd/customization/custom-windows-images.md)
     * [Machine naming](foundry-osd/customization/machine-naming.md)
     * [Out-of-box experience](foundry-osd/customization/oobe.md)
+    * [Post-installation](foundry-osd/customization/post-installation.md)
     * [Custom answer files (Unattend)](foundry-osd/customization/unattend.md)
     * [Optional features](foundry-osd/customization/optional-features.md)
     * [AppX removals](foundry-osd/customization/appx-removals.md)

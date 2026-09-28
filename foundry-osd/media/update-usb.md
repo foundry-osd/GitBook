@@ -31,3 +31,7 @@ Foundry checks the prepared boot files against the existing BOOT partition's cap
 ## Custom image content
 
 When [custom images](../customization/custom-windows-images.md) are enabled, an update stages the current profile's new managed image content on the data partition and verifies capacity before refreshing BOOT. Keep enough free space for the new content as well as retained content. Manual WIMs and unrelated caches are preserved. Existing managed images are reused when their content matches. Old managed content may remain on the data partition and is not offered unless the current media manifest references it. If an update is interrupted, repeat it and validate the resulting media before use.
+
+## Post-installation content
+
+Updating media includes the current configuration's required [Post-installation](../customization/post-installation.md) packages and settings. Allow space for new packages alongside content already on the data partition. Removing an action in Foundry OSD does not remove its old package from previously created media. Unrelated cached files are preserved. If an update is interrupted, repeat it and test the updated media before use.

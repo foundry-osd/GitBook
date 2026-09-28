@@ -28,3 +28,9 @@ Confirm that the output file exists and test boot it on representative hardware 
 Enable and include images on [Custom Windows images](../customization/custom-windows-images.md) before creating the ISO. Their WIMs are included in the ISO filesystem, outside `boot.wim`. The ISO grows by the included image size, so allow enough working and output space. Use the full ISO for deployment.
 
 The output can be a local path or an accessible UNC share. Foundry checks available space, including user quotas, and temporary copies needed to publish the completed ISO. Large ISOs need a filesystem that supports files over 4 GiB, such as NTFS; FAT32 is unsuitable even when it has enough free space. An accessible output share does not provide a network source for custom-image deployment: attach the complete ISO to the target.
+
+## Post-installation content
+
+[Post-installation](../customization/post-installation.md) packages are included outside `boot.wim`, even when no custom Windows image is selected. They increase the ISO size and the temporary space needed to create it. Allow enough space for both the working files and the completed ISO, and use the complete ISO for deployment.
+
+[Bootstrap prepares PostInstall automatically at startup](../../reference/bootstrap.md#postinstall-preparation). Standard release media needs Internet access for this step.

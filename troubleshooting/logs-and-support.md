@@ -30,7 +30,7 @@ If records are missing, check consent, application version, network access, the 
 
 - Foundry application and media version.
 - Device manufacturer and model.
-- Current application: Foundry OSD, Foundry Bootstrap, Foundry Connect, or Foundry Deploy.
+- Current application: Foundry OSD, Foundry Bootstrap, Foundry Connect, Foundry Deploy, or Foundry PostInstall.
 - Diagnostic session ID, when available, to match Bootstrap, Connect, and Deploy logs from the same boot.
 - Current or failed workflow stage.
 - Complete error message.
@@ -92,9 +92,9 @@ If diagnostic transfer fails, Foundry preserves the source workspace and reports
 
 Post-deployment files remain under `%SystemRoot%\Temp\Foundry`. `Runtime` contains the first-boot helpers, `Payloads` holds their inputs, `State` records execution and completion, `Logs` holds diagnostics, and `Work` is reserved for operation-specific temporary files. These directories are created when needed.
 
-A successful Windows PE deployment does not mean first-boot work has completed. Foundry records first-boot outcomes and input disposal separately. After an interrupted attempt, it reconciles disposal and requires affected inputs to be staged again; it does not automatically replay the scripts. Keep the runtime, state, and diagnostics when investigating an incomplete first boot. Do not treat them as unused files solely because no Foundry process is running.
+A successful Windows PE deployment does not mean first-boot work has completed. Foundry records first-boot outcomes and input disposal separately. In the PostInstall workflow, planned restarts resume from saved progress, while interrupted actions are not automatically retried. Inspect the results and logs before deciding whether to redeploy. Keep the runtime, state, and diagnostics when investigating an incomplete first boot. Do not treat them as unused files solely because no Foundry process is running.
 
-The cleanup step intentionally removes `C:\Drivers`. This is separate from the lifetime of Foundry's runtime and execution records.
+In the PostInstall workflow, cleanup removes temporary deployment payloads. It also removes the Lenovo `Drivers` directory on the Windows volume when Foundry recorded ownership of that directory. Execution records and diagnostics are retained. If a process may still be using files, cleanup can remain pending; investigate before deleting those files manually.
 
 If the first-boot runner does not start, also collect:
 
@@ -109,3 +109,15 @@ Review collected files before sharing them. Remove credentials, tokens, certific
 ## Open a support issue
 
 Provide reproduction steps, expected result, actual result, failed stage, sanitized logs, and whether the problem reproduces on newly created media.
+
+## PostInstall diagnostics
+
+For [Post-installation](../foundry-osd/customization/post-installation.md), collect these files from the target Windows installation:
+
+| Evidence | Location |
+| --- | --- |
+| Runtime log | `%SystemRoot%\Temp\Foundry\Logs\PreOobe\Foundry.PostInstall.log` |
+| Action output and optional installer logs | Action folders under `%SystemRoot%\Temp\Foundry\Logs\PreOobe` |
+| Execution results and saved progress | `%SystemRoot%\Temp\Foundry\State\PreOobe`, including `execution-result.json` |
+
+Desktop diagnostic export does not automatically collect target-machine logs. PostInstall does not send a separate remote telemetry stream. Review raw script output and installer logs before sharing them; they may contain secrets that automatic masking cannot remove reliably.

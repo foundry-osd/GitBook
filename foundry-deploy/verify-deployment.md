@@ -30,11 +30,17 @@ Review informational **Skipped** entries and their reasons as well as successful
 **Stage driver installer**, **Stage firmware update**, **Prepare setup tasks**, and **Prepare Autopilot assistant** describe preparation. Confirm the corresponding driver, firmware, customization, or registration result after Windows starts. A successful Deploy session does not establish that those later actions succeeded.
 {% endhint %}
 
+## Post-installation actions
+
+When using [Post-installation](../foundry-osd/customization/post-installation.md), a successful Deploy session means Windows is ready to run those actions. Follow the Post-installation console through any planned restarts and confirm that Windows reaches OOBE. Review failed actions even when **Continue on error** allowed the sequence to finish. An interrupted action is not automatically retried.
+
+Verify that the installed applications work after cleanup. If they need source files for repair or updates, confirm that those files remain available. Keep the [PostInstall results and logs](../troubleshooting/logs-and-support.md#postinstall-diagnostics) when investigating a problem.
+
 ## Automatic Windows activation
 
 For standard RETAIL deployments of supported Windows Home and Pro editions, Foundry automatically attempts to activate Windows after reboot using a compatible OEM product key stored in the device firmware. Online activation requires Internet access and a valid key for the installed Windows edition.
 
-Foundry preserves existing activation and explicitly configured licensing. It skips this attempt for VOLUME deployments and deployments using a custom answer file. An unsuccessful activation attempt does not stop Windows setup. Before handing over the device, check **Settings > System > Activation** to confirm its activation status.
+Foundry preserves existing activation and explicitly configured licensing. It skips this attempt for VOLUME deployments and deployments using a custom answer file. An ordinary licensing failure does not stop Windows setup. In the PostInstall workflow, a timeout or an activation process whose completion cannot be confirmed stops the sequence for investigation. Before handing over the device, check **Settings > System > Activation** to confirm its activation status.
 
 ## Error
 
