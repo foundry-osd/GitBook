@@ -127,7 +127,7 @@ If an interrupted process might still be using files, Foundry retains them and r
 The **Foundry Post-installation** console shows the current action, progress, status and elapsed time. Colors distinguish running, successful and failed actions. Warnings and restart countdowns appear in yellow.
 
 <figure>
-  <img src="../../.gitbook/assets/shared-post-installation-01-console-progress.png" alt="Foundry Post-installation console running Google Chrome as action 3 of 4, with action statuses, elapsed times and a log path">
+  <img src="../../.gitbook/assets/shared-post-installation-01-console-progress.png" alt="Foundry Post-installation console running Google Chrome as action 4 of 5 before OOBE, with action statuses, elapsed times and a log path">
   <figcaption>Follow the current action, completed results and elapsed times in the Post-installation console. Use the displayed log path to investigate an action.</figcaption>
 </figure>
 
