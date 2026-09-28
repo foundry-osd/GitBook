@@ -31,4 +31,6 @@ The output can be a local path or an accessible UNC share. Foundry checks availa
 
 ## Post-installation content (unreleased)
 
-[Post-installation](../customization/post-installation.md) packages and the matching runtime are included outside `boot.wim`, even when no custom Windows image is selected. They increase the ISO size and the temporary space needed to create it. Allow enough space for both the working files and the completed ISO, and use the complete ISO for deployment.
+[Post-installation](../customization/post-installation.md) packages are included outside `boot.wim`, even when no custom Windows image is selected. They increase the ISO size and the temporary space needed to create it. Allow enough space for both the working files and the completed ISO, and use the complete ISO for deployment.
+
+On standard release media, [Bootstrap downloads PostInstall at boot](../../reference/bootstrap.md#postinstall-preparation-unreleased), like Deploy. The runtime is not downloaded during ISO creation. Debug media includes the locally prepared runtime in the boot image, using the same layout as Deploy.

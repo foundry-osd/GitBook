@@ -41,4 +41,6 @@ Safely eject the drive, boot representative hardware, and confirm that Foundry C
 
 ## Post-installation content (unreleased)
 
-[Post-installation](../customization/post-installation.md) packages and matching runtime archives use the external data/cache volume. Source content must not reside on the USB disk being prepared. Foundry checks content, disk identity and combined capacity before erasure.
+[Post-installation](../customization/post-installation.md) packages use the external data/cache volume. Source content must not reside on the USB disk being prepared. Foundry checks content, disk identity and combined capacity before erasure.
+
+On standard release media, [Bootstrap downloads PostInstall at boot](../../reference/bootstrap.md#postinstall-preparation-unreleased) and caches it alongside Deploy and Connect. The runtime is not downloaded during USB creation. Debug media provisions the locally prepared runtime into the USB runtime cache, like Deploy.

@@ -134,7 +134,7 @@ Scripts and packages are stored in the local library under `%LOCALAPPDATA%\Found
 
 USB and ISO media carry required content outside `boot.wim`, under `Cache\PreOobe`. Keep the complete generated media available until deployment finishes. A PXE boot image alone does not include these packages; see [PXE deployment](../media/pxe-deployment.md#post-installation-content-unreleased).
 
-Foundry prepares the matching PostInstall runtime automatically. If Deploy is updated, it may need Internet access to download its matching runtime before preparing the target disk. Your application packages must still be available from the deployment media. Missing or invalid required content blocks deployment before disk preparation.
+[Bootstrap](../../reference/bootstrap.md#postinstall-preparation-unreleased) downloads and verifies PostInstall at boot, independently of Deploy, before opening the deployment wizard. Standard release media needs network access for this preparation; a previously downloaded runtime cache still requires online verification. Debug media includes the locally prepared runtime. Your application packages must still be available from the deployment media. Missing or invalid required content blocks deployment before disk preparation.
 
 After staging finishes, execution uses local files below `%SystemRoot%\Temp\Foundry`; it no longer needs the source USB/ISO. Your own scripts may still require a network or another resource.
 

@@ -97,6 +97,10 @@ Bootstrap sends emitted application logs to PostHog after remote-diagnostics con
 
 For refreshing existing media, see [Application and boot media updates](supported-versions.md#application-and-boot-media-updates).
 
-## PostInstall companion (unreleased)
+## PostInstall preparation (unreleased)
 
-[Post-installation](../foundry-osd/customization/post-installation.md) runs after the target starts Windows. Foundry prepares its runtime automatically. If Deploy is updated, it may need Internet access to obtain its matching PostInstall runtime before preparing the target disk. Keep the complete deployment media available: application packages are still read from its external cache.
+[Post-installation](../foundry-osd/customization/post-installation.md) runs after the target starts Windows. During the **Deployment files** stage, Bootstrap prepares PostInstall after Deploy and before launching the deployment wizard. It checks the latest release independently for each application. PostInstall is not started in Windows PE.
+
+On standard release media, PostInstall is downloaded at boot, using the same runtime storage and cache rules as Deploy. A **Foundry Cache** volume retains downloaded archives; without one, they remain in temporary Windows PE storage. Cached updates still need online verification. Offline fallback requires an authenticated original included when the media was created; a previous download alone is insufficient.
+
+Debug media uses the locally prepared PostInstall runtime and skips release lookup, following Deploy's debug selection. Its original archive is included in the ISO boot image or placed on the USB runtime cache, like Deploy. Keep the complete deployment media available until staging finishes: your scripts and application packages remain in their separate content cache.
