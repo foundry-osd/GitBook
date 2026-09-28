@@ -18,7 +18,7 @@ Use **Add action** to create an action, then select rows to edit, enable, disabl
 2. Select **Add action** in the CommandBar and choose **PowerShell script (.ps1)**, **Command line**, **Software (.exe/.msi)** or **Restart Windows**.
 3. Give the action a recognizable name. For scripts and applications, import a file or a folder containing all required files.
 4. Select the script or installer relative to that content, review the automatically detected installer type and working directory, then enter its arguments. PowerShell has separate **PowerShell arguments** (before the script path) and **Script arguments** fields. For **Command line**, enter the complete command and its arguments; content is optional. For MSI installers, optionally enable **Generate installation log**.
-5. Review the timeout, success/restart return codes, **Continue on error** and **Defer restart**, then save.
+5. For scripts, commands and software, review the timeout, success/restart return codes, **Continue on error** and **Defer restart**. For a Restart action, set **Restart delay (seconds)**; use `0` to restart immediately. Then save.
 6. Select a row and use **Move up**, **Move down**, **Edit action**, **Enable/Disable** or **Remove**. Removing an action deletes its cached content only when no remaining action or saved local profile references it. Disabled actions still retain their content. Original source files are never deleted.
 7. Resolve missing-content or validation messages before creating media.
 
@@ -42,7 +42,7 @@ To update a package, edit its action and import the changed source again. **Refr
 | PowerShell script (.ps1) | A `.ps1` file and optional sibling content, executed by Windows PowerShell 5.1. You supply host arguments and script arguments separately. |
 | Command line | A command interpreted by `cmd.exe`; optionally import files it needs. |
 | Software (.exe/.msi) | An EXE or MSI with your arguments, properties or transforms. Foundry supplies only the executable path or `msiexec.exe /i` launch command, plus optional MSI logging. Installer type is detected from the selected file and is read-only. |
-| Restart Windows | An explicit restart at this position, followed by resumption at the next action. No process arguments or timeout. |
+| Restart Windows | An explicit restart at this position, optionally preceded by a countdown, followed by resumption at the next action. No process arguments or timeout. |
 
 ## Execution order
 
@@ -122,11 +122,21 @@ Use a Restart action or an installer restart-required code. Suppress installer-o
 
 By default, a recognized restart-required result triggers a restart before the next action. **Defer restart** waits until the next explicit Restart or the end of the sequence. An explicit Restart runs even when no installer has requested one.
 
+For an explicit Restart action, **Restart delay (seconds)** accepts `0` to `86400`. The default `0` adds no delay. A positive value shows a live countdown after progress has been saved. This setting does not change restarts requested by installers or built-in tasks.
+
 An installer returning `1641` has initiated a restart outside this protocol. Foundry treats that as an uncertain execution, even though Windows Installer defines it as an installation-success code.
 
 After a planned restart, Foundry resumes from its saved progress. If power is lost while an action is running, Foundry does not automatically retry that action. Missing or damaged execution records also stop the sequence. Inspect the results and logs before deciding whether to redeploy; scripts and installers are not necessarily safe to repeat.
 
 If an interrupted process might still be using files, Foundry retains them and reports cleanup as pending. This does not retry the interrupted action.
+
+## Follow progress in Windows Setup
+
+The **Foundry Post-installation** console shows built-in and custom actions in execution order, with their status and elapsed time. Running actions appear in cyan, successful actions in green, failures in red, and waiting or skipped actions in gray. Warnings and restart countdowns appear in yellow. Text labels remain available when color or in-place updates are unavailable.
+
+Like Bootstrap, the console uses English messages. Your custom action names appear as entered; the Foundry OSD configuration page remains translated. Script output and full command lines are not displayed in the progress screen; use the action logs for troubleshooting.
+
+After a planned restart, the console restores completed results and indicates that execution is resuming. After success or completion with warnings, the final results remain visible for 10 seconds with a **Continuing Windows Setup** countdown. Windows Setup then continues and manages any remaining setup restarts. This final pause is separate from an explicit Restart action's delay.
 
 ## Cache, profiles and deployment media
 
