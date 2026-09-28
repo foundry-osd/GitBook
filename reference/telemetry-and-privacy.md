@@ -35,6 +35,18 @@ Custom deployments report the Windows release when recognized, the full image ve
 
 Product Analytics excludes custom image names, index names, paths, content hashes, and image or profile identifiers. Import start, completion, cancellation, and failure are diagnostic logs rather than separate product events; successful import logs include image size and index count. These logs follow the independent remote diagnostics control described below.
 
+### Post-installation (unreleased)
+
+When telemetry is enabled, creating media with [Post-installation](../foundry-osd/customization/post-installation.md) reports:
+
+- Whether Post-installation is enabled.
+- The total number of configured actions, including disabled actions and actions retained while the page is disabled.
+- The number of enabled actions, with counts for PowerShell scripts, command lines, software installations, and restarts. These counts are zero when the page is disabled.
+
+Counts are capped at 1,000 and describe the configuration captured for the media operation. They accompany the existing media-creation event, including reported failures or cancellations. They do not confirm that actions ran in Windows. Editing the page does not send a separate usage event.
+
+Action names, commands, arguments, file names, paths, content hashes, and script contents are excluded. **Settings > Enable telemetry** controls this collection.
+
 ## Remote error diagnostics
 
 **Enable remote diagnostics** controls operational logs and exception reports sent to PostHog. This preference is separate from anonymous product telemetry, applies immediately to new diagnostic records, and is written to newly created media for Foundry Bootstrap, Foundry Connect, and Foundry Deploy. Changing it does not update existing media.
