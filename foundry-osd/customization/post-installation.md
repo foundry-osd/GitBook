@@ -10,6 +10,11 @@ Foundry runs selected built-in tasks first, then your enabled actions in the ord
 
 Additional update workflows added on this page require your own scripts or packages; there is no automatic “install all updates” action. Existing Foundry driver and firmware provisioning remains available.
 
+<figure>
+  <img src="../../.gitbook/assets/foundry-osd-post-installation-01-ordered-actions.png" alt="Foundry OSD Post-installation page showing five enabled actions: two software installations, a restart, a PowerShell script and a command line">
+  <figcaption>Manage custom actions and their execution order from the Post-installation page.</figcaption>
+</figure>
+
 ## Add and order actions
 
 Use **Add action** to create an action, then select rows to edit, enable, disable, remove or reorder them. **Command preview** shows the command that will run. Select **Save** and correct any highlighted fields.
