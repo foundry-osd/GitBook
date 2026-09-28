@@ -39,8 +39,8 @@ Safely eject the drive, boot representative hardware, and confirm that Foundry C
 
 [Custom Windows images](../customization/custom-windows-images.md) are stored under `Cache\OperatingSystems\Custom\` on the NTFS data partition, outside the FAT32 BOOT partition. This directory separates custom images from catalog downloads in the operating-system cache. Include at least one available library image when the feature is enabled, and allow enough space alongside other required data. After creating the media, you can add extra regular WIM files directly in that directory for manual selection in Deploy.
 
-## Post-installation content (unreleased)
+## Post-installation content
 
 [Post-installation](../customization/post-installation.md) packages use the external data/cache volume. Source content must not reside on the USB disk being prepared. Foundry checks content, disk identity and combined capacity before erasure.
 
-On standard release media, [Bootstrap downloads PostInstall at boot](../../reference/bootstrap.md#postinstall-preparation-unreleased) and caches it alongside Deploy and Connect. The runtime is not downloaded during USB creation. Debug media provisions the locally prepared runtime into the USB runtime cache, like Deploy.
+On standard release media, [Bootstrap downloads PostInstall at boot](../../reference/bootstrap.md#postinstall-preparation) and caches it alongside Deploy and Connect. The runtime is not downloaded during USB creation. Debug media provisions the locally prepared runtime into the USB runtime cache, like Deploy.

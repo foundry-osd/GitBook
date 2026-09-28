@@ -33,4 +33,4 @@ Foundry checks downloaded and cached driver files against the catalog hash when 
 
 A download can be **Skipped** because all selected files were reused from cache while extraction and installation still succeed normally. Microsoft Update Catalog lookup still requires network access; cached package files do not provide an offline copy of the catalog.
 
-Deferred driver installers run before custom actions in the unreleased [Post-installation workflow](../foundry-osd/customization/post-installation.md#execution-order). They still run when the Post-installation page's custom actions are disabled.
+Deferred driver installers run before custom actions in the [Post-installation workflow](../foundry-osd/customization/post-installation.md#execution-order). They still run when the Post-installation page's custom actions are disabled.

@@ -26,7 +26,7 @@ Network, storage, and platform support depends on Windows PE compatibility and a
 
 The [custom image workflow](../foundry-osd/customization/custom-windows-images.md) accepts readable WIM metadata without a Windows version, edition, or architecture allowlist. This is not a support guarantee for every image. Deployment tools, firmware, drivers, and selected customizations still have their own requirements.
 
-## PostInstall runtime compatibility (unreleased)
+## PostInstall runtime compatibility
 
 [Post-installation](../foundry-osd/customization/post-installation.md) supports x64 and ARM64 targets. Bootstrap prepares PostInstall for the boot media architecture; you do not need to install .NET on the target. Use boot media matching the target Windows architecture. Deploy checks runtime compatibility before preparing the disk.
 

@@ -1,7 +1,7 @@
 # Post-installation
 
 {% hint style="info" %}
-This page describes unreleased Foundry.PostInstall functionality. Use matching Foundry OSD and runtime assets when evaluating it. Validate the complete deployment on representative Windows images and hardware before production use.
+Use matching Foundry OSD and runtime assets for Post-installation. Validate the complete deployment on representative Windows images and hardware before production use.
 {% endhint %}
 
 Use **Customization > Post-installation** to run your own scripts, commands and application installers after Windows installation and before OOBE. The separate [OOBE page](oobe.md) configures the Windows first-run experience.
@@ -29,13 +29,6 @@ Disabling this page disables its configuration controls and custom actions; the 
 If cached content cannot be safely removed, Foundry reports the cleanup problem. The action remains removed, but cached files may remain on disk.
 
 To update a package, edit its action and import the changed source again. **Refresh** checks cached content availability; it does not import changes from the original source folder.
-
-{% hint style="warning" %}
-**Screenshot required**
-
-- **File:** `foundry-osd-post-installation-01-ordered-actions.png`
-- **Capture:** Show the Post-installation page with a script, a software action and a Restart Windows action in execution order, using sanitized demonstration names.
-{% endhint %}
 
 | Action | Configuration |
 | --- | --- |
@@ -134,6 +127,13 @@ If an interrupted process might still be using files, Foundry retains them and r
 
 The **Foundry Post-installation** console shows built-in and custom actions in execution order, with their status and elapsed time. Running actions appear in cyan, successful actions in green, failures in red, and waiting or skipped actions in gray. Warnings and restart countdowns appear in yellow. Text labels remain available when color or in-place updates are unavailable.
 
+An action's elapsed time covers its start through completion, including a planned restart within that action.
+
+<figure>
+  <img src="../../.gitbook/assets/shared-post-installation-01-console-progress.png" alt="Foundry Post-installation console running Google Chrome as action 3 of 4, with action statuses, elapsed times and a log path">
+  <figcaption>Follow the current action, completed results and elapsed times in the Post-installation console. Use the displayed log path to investigate an action.</figcaption>
+</figure>
+
 Like Bootstrap, the console uses English messages. Your custom action names appear as entered; the Foundry OSD configuration page remains translated. Script output and full command lines are not displayed in the progress screen; use the action logs for troubleshooting.
 
 After a planned restart, the console restores completed results and indicates that execution is resuming. After success or completion with warnings, the final results remain visible for 10 seconds with a **Continuing Windows Setup** countdown. Windows Setup then continues and manages any remaining setup restarts. This final pause is separate from an explicit Restart action's delay.
@@ -142,9 +142,9 @@ After a planned restart, the console restores completed results and indicates th
 
 Scripts and packages are stored in the local library under `%LOCALAPPDATA%\Foundry\Packages\PreOobe`, outside `boot.wim`. [Profiles](../deployment-profiles.md) contain action settings and content references, not package binaries. On another authoring PC, import the identical files and folder structure to restore those references.
 
-USB and ISO media carry required content outside `boot.wim`, under `Cache\PreOobe`. Keep the complete generated media available until deployment finishes. A PXE boot image alone does not include these packages; see [PXE deployment](../media/pxe-deployment.md#post-installation-content-unreleased).
+USB and ISO media carry required content outside `boot.wim`, under `Cache\PreOobe`. Keep the complete generated media available until deployment finishes. A PXE boot image alone does not include these packages; see [PXE deployment](../media/pxe-deployment.md#post-installation-content).
 
-[Bootstrap](../../reference/bootstrap.md#postinstall-preparation-unreleased) downloads and verifies PostInstall at boot, independently of Deploy, before opening the deployment wizard. Standard release media needs network access for this preparation; a previously downloaded runtime cache still requires online verification. Debug media includes the locally prepared runtime. Your application packages must still be available from the deployment media. Missing or invalid required content blocks deployment before disk preparation.
+[Bootstrap](../../reference/bootstrap.md#postinstall-preparation) downloads and verifies PostInstall at boot, independently of Deploy, before opening the deployment wizard. Standard release media needs network access for this preparation; a previously downloaded runtime cache still requires online verification. Debug media includes the locally prepared runtime. Your application packages must still be available from the deployment media. Missing or invalid required content blocks deployment before disk preparation.
 
 After staging finishes, execution uses local files below `%SystemRoot%\Temp\Foundry`; it no longer needs the source USB/ISO. Your own scripts may still require a network or another resource.
 

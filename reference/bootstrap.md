@@ -97,7 +97,7 @@ Bootstrap sends emitted application logs to PostHog after remote-diagnostics con
 
 For refreshing existing media, see [Application and boot media updates](supported-versions.md#application-and-boot-media-updates).
 
-## PostInstall preparation (unreleased)
+## PostInstall preparation
 
 [Post-installation](../foundry-osd/customization/post-installation.md) runs after the target starts Windows. During the **Deployment files** stage, Bootstrap prepares PostInstall after Deploy and before launching the deployment wizard. It checks the latest release independently for each application. PostInstall is not started in Windows PE.
 

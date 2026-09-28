@@ -16,4 +16,4 @@ Use AI components to control supported Windows AI-related components during depl
 
 This page does not report per-release compatibility. Test the deployed Windows image after every change because component availability and servicing behavior can change between Windows releases.
 
-In the unreleased [Post-installation workflow](post-installation.md#execution-order), selected Copilot and AI Hub package removals run before custom actions and OOBE. Other AI changes may be applied earlier during deployment. Disabling custom Post-installation actions does not disable these selected removals.
+In the [Post-installation workflow](post-installation.md#execution-order), selected Copilot and AI Hub package removals run before custom actions and OOBE. Other AI changes may be applied earlier during deployment. Disabling custom Post-installation actions does not disable these selected removals.

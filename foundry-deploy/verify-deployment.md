@@ -30,9 +30,9 @@ Review informational **Skipped** entries and their reasons as well as successful
 **Stage driver installer**, **Stage firmware update**, **Prepare setup tasks**, and **Prepare Autopilot assistant** describe preparation. Confirm the corresponding driver, firmware, customization, or registration result after Windows starts. A successful Deploy session does not establish that those later actions succeeded.
 {% endhint %}
 
-## Post-installation actions (unreleased)
+## Post-installation actions
 
-When evaluating [Post-installation](../foundry-osd/customization/post-installation.md), a successful Deploy session means the runner and content were staged for first boot. Confirm the ordered actions, planned restarts and final OOBE separately. Review failed actions even when Continue allowed the sequence to finish. An interrupted action is not automatically replayed.
+When using [Post-installation](../foundry-osd/customization/post-installation.md), a successful Deploy session means the runner and content were staged for first boot. Confirm the ordered actions, planned restarts and final OOBE separately. Review failed actions even when Continue allowed the sequence to finish. An interrupted action is not automatically replayed.
 
 Retain the journal/results under `%SystemRoot%\Temp\Foundry\State\PreOobe` and the runtime/action logs under `%SystemRoot%\Temp\Foundry\Logs\PreOobe`. Verify applications after temporary payload cleanup, including any repair/servicing behavior that requires a persistent source.
 
@@ -40,7 +40,7 @@ Retain the journal/results under `%SystemRoot%\Temp\Foundry\State\PreOobe` and t
 
 For standard RETAIL deployments of supported Windows Home and Pro editions, Foundry automatically attempts to activate Windows after reboot using a compatible OEM product key stored in the device firmware. Online activation requires Internet access and a valid key for the installed Windows edition.
 
-Foundry preserves existing activation and explicitly configured licensing. It skips this attempt for VOLUME deployments and deployments using a custom answer file. An ordinary licensing failure does not stop Windows setup. In the unreleased PostInstall workflow, a timeout or an activation process whose completion cannot be confirmed stops the sequence for investigation. Before handing over the device, check **Settings > System > Activation** to confirm its activation status.
+Foundry preserves existing activation and explicitly configured licensing. It skips this attempt for VOLUME deployments and deployments using a custom answer file. An ordinary licensing failure does not stop Windows setup. In the PostInstall workflow, a timeout or an activation process whose completion cannot be confirmed stops the sequence for investigation. Before handing over the device, check **Settings > System > Activation** to confirm its activation status.
 
 ## Error
 

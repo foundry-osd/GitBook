@@ -35,7 +35,7 @@ Custom deployments report the Windows release when recognized, the full image ve
 
 Product Analytics excludes custom image names, index names, paths, content hashes, and image or profile identifiers. Import start, completion, cancellation, and failure are diagnostic logs rather than separate product events; successful import logs include image size and index count. These logs follow the independent remote diagnostics control described below.
 
-### Post-installation (unreleased)
+### Post-installation
 
 When telemetry is enabled, creating media with [Post-installation](../foundry-osd/customization/post-installation.md) reports:
 

@@ -19,4 +19,4 @@ Use AppX removals to remove selected provisioned Windows application packages du
 Removing provisioned applications can affect user experience, later servicing, and dependent workflows. Test every removal set against the target Windows release.
 {% endhint %}
 
-In the unreleased [Post-installation workflow](post-installation.md#execution-order), selected AppX removals run before custom actions and OOBE. They still run when custom Post-installation actions are disabled.
+In the [Post-installation workflow](post-installation.md#execution-order), selected AppX removals run before custom actions and OOBE. They still run when custom Post-installation actions are disabled.
