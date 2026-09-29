@@ -2,7 +2,9 @@
 
 ## Application and boot media updates
 
-Updating Foundry OSD does not update media already distributed. Recreate ISO media or [update an existing USB drive](../foundry-osd/media/update-usb.md) to include new configuration and runtime assets. Test the refreshed media before production use.
+Updating Foundry OSD does not rewrite media already distributed. [Bootstrap](bootstrap.md#cache-and-connectivity) can obtain newer release runtimes during startup, so existing media may run a newer Deploy application without being rebuilt. Check the running application version; an older or debug-provisioned runtime does not gain release support from a catalog update alone.
+
+Recreate ISO media or [update an existing USB drive](../foundry-osd/media/update-usb.md) when you need to refresh embedded Bootstrap, configuration, or bundled assets. Test runtime and media updates before production use.
 
 ## Administrator workstation
 
@@ -16,7 +18,15 @@ Do not substitute another ADK or Windows PE Add-on version. Use `10.1.26100.2454
 
 ## Windows deployment media
 
-Available Windows releases, languages, editions, architectures, and license channels come from the current [operating-system catalog](catalog.md) and any restrictions configured during media authoring. The catalog can update independently of the application.
+Available Windows releases, languages, editions, architectures, and license channels depend on the current [operating-system catalog](catalog.md), the running Deploy version, and any restrictions configured during media authoring. The catalog can update independently of the application.
+
+{% hint style="info" %}
+**Supported Windows releases**
+
+Foundry supports Windows 11 24H2, 25H2, and 26H2 for catalog deployments, with 26H2 as the default. Microsoft's servicing dates differ by edition, as listed in [Windows 11 release information](https://learn.microsoft.com/en-us/windows/release-health/windows11-release-information).
+
+Existing media needs a Deploy runtime that supports 26H2 to select it. When an older profile allows only releases that are no longer available, Deploy automatically falls back to supported catalog releases for the deployment architecture. If any allowed release remains available, that restriction stays in effect. See [Select Windows](../foundry-deploy/operating-system.md).
+{% endhint %}
 
 ## Hardware
 

@@ -17,7 +17,19 @@ When **Image source** is shown, choose **Windows catalog** for the steps below, 
   <figcaption>Select a compatible Windows release, language, edition, and license channel.</figcaption>
 </figure>
 
-Available releases, languages, editions, architectures, and license channels come from the current [operating-system catalog](../reference/catalog.md) and any restrictions configured during media authoring. The catalog can update independently of the application. Confirm that the selection matches licensing and application compatibility requirements.
+Available releases, languages, editions, architectures, and license channels depend on the current [operating-system catalog](../reference/catalog.md), the running Deploy version, and any restrictions configured during media authoring. The catalog can update independently of the application. Confirm that the selection matches licensing and application compatibility requirements.
+
+{% hint style="info" %}
+**Windows 11 releases and automatic fallback**
+
+Foundry supports Windows 11 24H2, 25H2, and 26H2.
+
+Deploy keeps the configured release restriction while any allowed release is available for the deployment architecture. If every allowed release is unavailable, Deploy automatically offers the supported releases available for that architecture. A profile allowing 25H2 and an unavailable release still offers only 25H2 when it is available.
+
+Deploy preserves a valid operator selection. When it needs an initial or replacement selection, it prefers an available configured default, then its supported default, 26H2, then the newest available supported release. Language, edition, and license-channel policies are evaluated independently. Confirm all selections before continuing.
+
+The running Deploy application must support 26H2; a catalog update alone cannot add that support to an older runtime. See [Application and boot media updates](../reference/supported-versions.md#application-and-boot-media-updates).
+{% endhint %}
 
 ## Custom images
 
