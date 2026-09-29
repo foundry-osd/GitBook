@@ -21,11 +21,11 @@ Do not substitute another ADK or Windows PE Add-on version. Use `10.1.26100.2454
 Available Windows releases, languages, editions, architectures, and license channels depend on the current [operating-system catalog](catalog.md), the running Deploy version, and any restrictions configured during media authoring. The catalog can update independently of the application.
 
 {% hint style="info" %}
-**Unreleased: Windows 11 26H2 support**
+**Supported Windows releases**
 
-The next Foundry release supports Windows 11 24H2, 25H2, and 26H2 for catalog deployments, with 26H2 as the default. Microsoft's servicing dates differ by edition, as listed in [Windows 11 release information](https://learn.microsoft.com/en-us/windows/release-health/windows11-release-information).
+Foundry supports Windows 11 24H2, 25H2, and 26H2 for catalog deployments, with 26H2 as the default. Microsoft's servicing dates differ by edition, as listed in [Windows 11 release information](https://learn.microsoft.com/en-us/windows/release-health/windows11-release-information).
 
-Existing media needs a Deploy runtime containing this support to select 26H2. When an older profile allows only releases that are no longer available, the updated runtime automatically falls back to supported catalog releases for the deployment architecture. If any allowed release remains available, that restriction stays in effect. See [Select Windows](../foundry-deploy/operating-system.md).
+Existing media needs a Deploy runtime that supports 26H2 to select it. When an older profile allows only releases that are no longer available, Deploy automatically falls back to supported catalog releases for the deployment architecture. If any allowed release remains available, that restriction stays in effect. See [Select Windows](../foundry-deploy/operating-system.md).
 {% endhint %}
 
 ## Hardware

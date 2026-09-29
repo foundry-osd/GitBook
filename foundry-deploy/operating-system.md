@@ -20,9 +20,9 @@ When **Image source** is shown, choose **Windows catalog** for the steps below, 
 Available releases, languages, editions, architectures, and license channels depend on the current [operating-system catalog](../reference/catalog.md), the running Deploy version, and any restrictions configured during media authoring. The catalog can update independently of the application. Confirm that the selection matches licensing and application compatibility requirements.
 
 {% hint style="info" %}
-**Unreleased: Windows 11 26H2 and release fallback**
+**Windows 11 releases and automatic fallback**
 
-The next Foundry release supports Windows 11 24H2, 25H2, and 26H2.
+Foundry supports Windows 11 24H2, 25H2, and 26H2.
 
 Deploy keeps the configured release restriction while any allowed release is available for the deployment architecture. If every allowed release is unavailable, Deploy automatically offers the supported releases available for that architecture. A profile allowing 25H2 and an unavailable release still offers only 25H2 when it is available.
 
