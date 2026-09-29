@@ -16,6 +16,14 @@ Use Operating system selection to control which Windows choices are available du
 
 Foundry Deploy obtains available media from the configured catalog and presents compatible combinations to the technician.
 
+{% hint style="info" %}
+**Unreleased: Windows 11 26H2 selection**
+
+The next Foundry release supports Windows 11 24H2, 25H2, and 26H2, with 26H2 as the default. Review older profiles that allow only unavailable releases and select the releases intended for new deployments.
+
+If at least one allowed release remains available for the deployment architecture, Deploy keeps that restriction. If none remains available, Deploy automatically offers the supported releases available for that architecture. This release fallback does not change language, edition, or license-channel policy. Review the final selection before deployment.
+{% endhint %}
+
 See [Catalogs](../../reference/catalog.md) for field definitions and [Select Windows](../../foundry-deploy/operating-system.md) for the runtime workflow.
 
 ## Custom Windows images
