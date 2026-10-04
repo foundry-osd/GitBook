@@ -14,7 +14,7 @@ Depending on configuration, media may include or use:
 - Predefined passwords for local Windows accounts created during OOBE.
 - Custom Windows answer files, including credentials in their settings or commands.
 - Device hardware hashes and registration artifacts.
-- Active Directory join credentials for Domain Join (unreleased).
+- Active Directory join credentials for Domain Join.
 
 ## Required practices
 
@@ -33,13 +33,13 @@ Review the [Protected deployment scope](../foundry-osd/general.md#protected-depl
 - [Zero-touch upload](../foundry-osd/autopilot/zero-touch-hardware-hash.md) credentials can be recovered from media created without Protected deployment.
 - Non-empty [OOBE local account passwords](../foundry-osd/customization/oobe.md#password-protection) require Protected deployment under Foundry's security policy and are encrypted in the deployment configuration. During Windows Setup, they are written to `unattend.xml` using reversible encoding, not encryption. Treat that answer file and its copies as sensitive data.
 - Protected deployment does not encrypt the complete ISO, USB drive, Windows image, or data staged into the installed Windows system.
-- [Zero Touch Domain Join (unreleased)](../foundry-osd/domain-join/zero-touch.md) requires the existing General protection key and Deploy unlock session. [Interactive mode](../foundry-osd/domain-join/interactive.md) collects credentials at launch and adds no media-password prerequisite.
+- [Zero Touch Domain Join](../foundry-osd/domain-join/zero-touch.md) requires the existing General protection key and Deploy unlock session. [Interactive mode](../foundry-osd/domain-join/interactive.md) collects credentials at launch and adds no media-password prerequisite.
 
 If media is lost, stolen, or copied without authorization, revoke embedded credentials where applicable and recreate the media. Do not rely on the technician password as a substitute for physical media controls.
 
-## Domain credentials (unreleased)
+## Domain credentials
 
-Domain passwords are context-bound to the active domain/account. Local **Remember passwords** and encrypted shared revisions can retain them under their respective choices. Ordinary portable exports always omit the direct domain password, including when confidential inputs are selected. Connection/recovery files also omit it, but shared-access keys can grant access to secrets in revisions. Follow [profile retention and sharing rules](../foundry-osd/deployment-profiles.md#domain-credentials-unreleased).
+Domain passwords are context-bound to the active domain/account. Local **Remember passwords** and encrypted shared revisions can retain them under their respective choices. Ordinary portable exports always omit the direct domain password, including when confidential inputs are selected. Connection/recovery files also omit it, but shared-access keys can grant access to secrets in revisions. Follow [profile retention and sharing rules](../foundry-osd/deployment-profiles.md#domain-credentials).
 
 Deploy stages a temporary plaintext binary payload at `%SystemRoot%\Temp\Foundry\Payloads\DomainJoin\<operation-id>\credentials.bin`. The operation directory has protected inheritance and permits SYSTEM and Administrators before the file is created. Joining is its only sensitive consumer; later membership verification uses no join credentials. Target access controls and physical security remain necessary.
 

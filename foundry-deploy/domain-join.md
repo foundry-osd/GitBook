@@ -1,9 +1,5 @@
 # Domain Join during deployment
 
-{% hint style="warning" %}
-**Unreleased draft** — These steps require Domain Join media and a compatible Foundry release. Native deployment acceptance remains pending.
-{% endhint %}
-
 Use media configured for [Interactive](../foundry-osd/domain-join/interactive.md) or [Zero Touch](../foundry-osd/domain-join/zero-touch.md) Domain Join. Obtain the intended domain, destination and unique computer name from the administrator. Installed Windows needs domain DNS, controller access and the appropriate account permissions.
 
 ## Review the target and Windows
@@ -47,6 +43,6 @@ A selected destination is used for a new account. A safely identified reused acc
 
 ## Confirm the result
 
-Check [deployment verification](verify-deployment.md#domain-join-unreleased) and [domain outcome evidence](../troubleshooting/logs-and-support.md#domain-join-evidence-unreleased). Joining, OU placement/directory readback, local membership, restart and credential cleanup have independent outcomes.
+Check [deployment verification](verify-deployment.md#domain-join) and [domain outcome evidence](../troubleshooting/logs-and-support.md#domain-join-evidence). Joining, OU placement/directory readback, local membership, restart and credential cleanup have independent outcomes.
 
 Join or placement failure, controlled interruption and domain-only cleanup failure warn and continue. **Unknown** means mutation may have occurred; Foundry does not automatically repeat joining or moving. Membership can later succeed while the earlier mutation remains Unknown. Resolve warnings and pending credentials with the administrator before handoff; see [Domain Join troubleshooting](../troubleshooting/domain-join.md).

@@ -6,7 +6,7 @@ Use 1–15 ASCII letters, numbers, or hyphens, and avoid a name containing only 
 
 In the composed naming workflow, a missing hardware value or firmware placeholder also prevents generation. If editing is allowed, enter a valid complete name. Otherwise, correct the naming configuration and refresh the media. See [machine naming](../foundry-osd/customization/machine-naming.md) for naming requirements and editing options.
 
-For unreleased Domain Join with custom XML, the answer file must supply one valid concrete applicable `specialize` name. Native fallback naming does not repair a missing/wildcard custom name. See [Domain Join input and compatibility](domain-join.md#media-is-not-ready-or-input-is-rejected).
+For Domain Join with custom XML, the answer file must supply one valid concrete applicable `specialize` name. Native fallback naming does not repair a missing/wildcard custom name. See [Domain Join input and compatibility](domain-join.md#media-is-not-ready-or-input-is-rejected).
 
 ## Target disk is unavailable
 
@@ -70,4 +70,4 @@ For [custom images](../foundry-osd/customization/custom-windows-images.md), chec
 
 For [Post-installation](../foundry-osd/customization/post-installation.md), distinguish WinPE staging from the later Windows sequence. Planned restarts resume from saved progress. An interrupted action, missing or damaged execution records, or an installer-owned restart stops the sequence without automatically retrying the action. Preserve the results and logs before deciding whether to redeploy. **Cleanup pending** means some temporary content could not yet be safely removed.
 
-Unreleased [domain operations](domain-join.md#interrupted-work-or-restart-is-pending) are a bounded warning exception: validated recovery does not replay join/move mutations and can continue after a controlled restart. Domain-only cleanup remains a warning; unrelated uncertain actions, damaged records and other sensitive-cleanup failures retain their normal stop policy.
+[Domain operations](domain-join.md#interrupted-work-or-restart-is-pending) are a bounded warning exception: validated recovery does not replay join/move mutations and can continue after a controlled restart. Domain-only cleanup remains a warning; unrelated uncertain actions, damaged records and other sensitive-cleanup failures retain their normal stop policy.

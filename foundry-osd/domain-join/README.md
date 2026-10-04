@@ -1,9 +1,5 @@
 # Domain Join
 
-{% hint style="warning" %}
-**Unreleased draft** — These guides describe the Domain Join implementation awaiting a supporting release and native deployment acceptance. Validate it in a disposable domain before rollout.
-{% endhint %}
-
 Use **Domain Join** to join installed Windows to an Active Directory domain before OOBE. Choose [Interactive Domain Join](interactive.md) when a technician supplies credentials for each deployment, or [Zero Touch Domain Join](zero-touch.md) when protected media supplies them.
 
 Exactly one Domain Join or [Windows Autopilot](../autopilot/README.md) mode can be active. Open the intended page and choose **Activate**. Confirm replacement if another mode is active. **Deactivate** excludes joining from new media while retaining nonsecret configuration. Credentials are cleared when their domain, account or active-mode ownership changes.
@@ -13,7 +9,7 @@ Exactly one Domain Join or [Windows Autopilot](../autopilot/README.md) mode can 
 - Arrange domain DNS and writable domain-controller access from installed Windows. A saved OU catalog can be authored offline; it does not make joining available offline. Connect's Internet readiness does not establish AD readiness.
 - Ask the AD administrator to provide an account with the required join, reuse, directory-read and destination-placement permissions. Discovery and configuration validation do not audit those permissions.
 - Choose a unique [concrete computer name](../customization/machine-naming.md). A [custom answer file](../customization/unattend.md) must supply exactly one valid applicable `specialize` computer name and contain no `Microsoft-Windows-UnattendedJoin` component.
-- Review [edition and runtime requirements](../../reference/supported-versions.md#domain-join-unreleased). Known Windows Home-family editions skip joining with a warning while Windows installation continues.
+- Review [edition and runtime requirements](../../reference/supported-versions.md#domain-join). Known Windows Home-family editions skip joining with a warning while Windows installation continues.
 
 ## Configure destinations
 

@@ -12,7 +12,7 @@ The application language changes the Foundry interface. Choose the Windows PE an
 
 Choose **Export diagnostics** to create a support archive with sensitive information filtered out. Your original log files are unchanged.
 
-The export collects only the desktop application's top-level `Foundry*.log` files. It does not retrieve target PostInstall logs. In the unreleased Domain Join implementation, recognized quoted/escaped credential values are masked in sanitized output, and the known `credentials.bin` payload filename is excluded before reading in both sanitized and raw modes. [Collect safe domain evidence separately](../troubleshooting/logs-and-support.md#domain-join-evidence-unreleased).
+The export collects only the desktop application's top-level `Foundry*.log` files. It does not retrieve target PostInstall logs. For Domain Join, recognized quoted/escaped credential values are masked in sanitized output, and the known `credentials.bin` payload filename is excluded before reading in both sanitized and raw modes. [Collect safe domain evidence separately](../troubleshooting/logs-and-support.md#domain-join-evidence).
 
 Use **Advanced: export raw logs** only when a support contact requests it. Raw logs can contain passwords, identifiers, paths, and network details. Review the warning and destination before sharing them. See [Logs and support](../troubleshooting/logs-and-support.md) for help collecting and sharing diagnostic information.
 
@@ -48,7 +48,7 @@ Select a configuration from the list to apply it immediately. Expand the card to
 
 See [Deployment profiles](deployment-profiles.md) for step-by-step instructions, the differences between remembering and sharing passwords, and help with connection files or conflicting changes.
 
-For unreleased automatic Domain Join, review [local retention, portable-export omission and shared-access keys](deployment-profiles.md#domain-credentials-unreleased). **Include passwords and confidential files** does not include the direct domain password in an ordinary export.
+For automatic Domain Join, review [local retention, portable-export omission and shared-access keys](deployment-profiles.md#domain-credentials). **Include passwords and confidential files** does not include the direct domain password in an ordinary export.
 
 ## Proxy
 

@@ -63,7 +63,7 @@ If a composed name cannot be generated because a required hardware value is unav
 
 The preview uses representative values. Foundry Deploy resolves actual hardware values at deployment startup and applies casing and separators to the same component rules used in the preview. For random text, a random value is generated with the configured length during deployment startup.
 
-## Domain Join (unreleased)
+## Domain Join
 
 [Domain Join](../domain-join/README.md) uses the final validated Windows name to identify the AD computer account. Review it before disk confirmation, particularly when reusing an existing account.
 

@@ -1,9 +1,5 @@
 # Zero Touch Domain Join
 
-{% hint style="warning" %}
-**Unreleased draft** — Requires a supporting Foundry release and native deployment acceptance. See [Domain Join prerequisites](README.md#before-configuring).
-{% endhint %}
-
 Choose this mode when protected deployment media should supply the join credentials. An optional destination picker can still require technician input.
 
 ## Prepare protected media
@@ -27,7 +23,7 @@ The automatic password is encrypted using the existing Protected deployment key.
 
 Changing the domain, account or active mode clears the entered password. Re-enter it for the reviewed identity. **Deactivate** excludes joining from new media and clears domain credentials while retaining nonsecret settings.
 
-[Remember passwords](../deployment-profiles.md#domain-credentials-unreleased) can retain the password with a local profile. Ordinary `.foundryprofile` exports always omit the direct domain password, even with **Include passwords and confidential files** selected. An imported automatic profile remains structurally valid, but media creation needs the password and usable General protection on that PC.
+[Remember passwords](../deployment-profiles.md#domain-credentials) can retain the password with a local profile. Ordinary `.foundryprofile` exports always omit the direct domain password, even with **Include passwords and confidential files** selected. An imported automatic profile remains structurally valid, but media creation needs the password and usable General protection on that PC.
 
 Encrypted shared revisions use a separate sharing path and may retain domain credentials when confidential inputs are explicitly included. Connection and recovery files omit the direct password, but their shared-access keys can grant access to secrets in those revisions. Restrict those files and their passwords accordingly.
 
@@ -37,4 +33,4 @@ Recreate or update media after credential changes. Profile edits do not change m
 
 Follow [Domain Join in Deploy](../../foundry-deploy/domain-join.md). Installed Windows needs online domain-controller access even when media has an offline OU catalog. Review joining, placement and post-restart membership separately.
 
-Credentials become a restricted temporary plaintext target payload for the child operation. See [credential lifetime and cleanup](../../reference/security-and-credentials.md#domain-credentials-unreleased); cleanup warnings require administrator review before handoff.
+Credentials become a restricted temporary plaintext target payload for the child operation. See [credential lifetime and cleanup](../../reference/security-and-credentials.md#domain-credentials); cleanup warnings require administrator review before handoff.

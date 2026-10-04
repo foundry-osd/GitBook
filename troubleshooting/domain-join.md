@@ -1,10 +1,6 @@
 # Domain Join troubleshooting
 
-{% hint style="warning" %}
-**Unreleased draft** — Applies to the Domain Join implementation awaiting a supporting release and native acceptance.
-{% endhint %}
-
-Record the failed phase and safe numeric error family before changing the target. Collect the [domain result, execution journal and local PostInstall logs](logs-and-support.md#domain-join-evidence-unreleased). A WinPE skip before staging has only Deploy's summary/logs, not an installed domain result.
+Record the failed phase and safe numeric error family before changing the target. Collect the [domain result, execution journal and local PostInstall logs](logs-and-support.md#domain-join-evidence). A WinPE skip before staging has only Deploy's summary/logs, not an installed domain result.
 
 | Phase state | Meaning |
 | --- | --- |
@@ -25,7 +21,7 @@ Restart states and cleanup states are recorded separately from these phases. A c
 - Correct retained catalog rows after an authored domain change. Discovery reads the authoring computer's AD domain using the current Windows identity; it does not test deployment-account permissions. Manual entries remain available when discovery fails.
 - For a custom answer file, supply one valid concrete applicable `specialize` name and remove conflicting `Microsoft-Windows-UnattendedJoin` configuration. Foundry does not fill a missing custom name from the wizard. Review arbitrary commands separately; not every scripted conflict can be detected.
 
-Known Windows Home-family editions skip joining and continue installation. Unfamiliar/missing edition metadata needs image/native inspection. Applied-image conflicts can also skip domain work. See [supported-version limits](../reference/supported-versions.md#domain-join-unreleased).
+Known Windows Home-family editions skip joining and continue installation. Unfamiliar/missing edition metadata needs image/native inspection. Applied-image conflicts can also skip domain work. See [supported-version limits](../reference/supported-versions.md#domain-join).
 
 ## Joining fails
 
@@ -55,4 +51,4 @@ Cleanup makes at most three deletion attempts per safe immediate/final gate, wit
 
 An administrator must confirm no active domain worker remains before inspecting access/ownership or removing the operation's leftover credential file. Preserve the result, journal and logs for investigation. Do not delete a live worker's input or restart a mutation manually to clear the warning. Failed staging can retain non-runnable ownership records when rollback cannot delete the credential; it must not be promoted into runnable work.
 
-See [credential lifetime](../reference/security-and-credentials.md#domain-credentials-unreleased) for memory and target-file boundaries. Complete domain acceptance and verify credential disposal before organizational handoff.
+See [credential lifetime](../reference/security-and-credentials.md#domain-credentials) for memory and target-file boundaries. Verify joining, placement, local membership and credential disposal before organizational handoff.

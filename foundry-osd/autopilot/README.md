@@ -2,7 +2,7 @@
 
 Foundry supports three Autopilot workflows. Choose the method that matches the organization’s provisioning and security model.
 
-[Domain Join (unreleased)](../domain-join/README.md) is an alternative provisioning choice. Activating it replaces the active Autopilot mode; activating an Autopilot mode replaces Domain Join. Review the replacement confirmation and rebuild media for the intended mode.
+[Domain Join](../domain-join/README.md) is an alternative provisioning choice. Activating it replaces the active Autopilot mode; activating an Autopilot mode replaces Domain Join. Review the replacement confirmation and rebuild media for the intended mode.
 
 ## Choose a method
 

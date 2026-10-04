@@ -42,9 +42,9 @@ The [custom image workflow](../foundry-osd/customization/custom-windows-images.m
 
 Keep deployment media and its package content together, and choose scripts and installers compatible with the target Windows image and architecture. Test the complete workflow on representative hardware before rollout.
 
-## Domain Join (unreleased)
+## Domain Join
 
-[Domain Join](../foundry-osd/domain-join/README.md) has no published minimum release yet. These draft guides describe the current implementation; x64/ARM64 compilation and portable tests do not establish native Windows Setup or disposable-domain acceptance.
+[Domain Join](../foundry-osd/domain-join/README.md) supports eligible Windows editions on x64 and ARM64 targets.
 
 Use matching media/target architecture and validate the complete workflow before rollout.
 

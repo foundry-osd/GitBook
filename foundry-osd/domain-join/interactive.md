@@ -1,9 +1,5 @@
 # Interactive Domain Join
 
-{% hint style="warning" %}
-**Unreleased draft** — Requires a supporting Foundry release and native deployment acceptance. See [Domain Join prerequisites](README.md#before-configuring).
-{% endhint %}
-
 Choose this mode for shared deployment media when technicians should enter a domain account and password for each target.
 
 ## Prepare the media
@@ -34,4 +30,4 @@ Without a compatible catalog, **OU distinguished name (optional)** accepts a des
 
 Select **Continue**, then review the actual domain and destination in **Confirm disk erase**. **Cancel** returns without starting deployment. See [technician steps and outcome verification](../../foundry-deploy/domain-join.md).
 
-Installed Windows must reach the domain controller when PostInstall runs. A successful WinPE deployment only confirms staging. Keep [safe outcome evidence](../../troubleshooting/logs-and-support.md#domain-join-evidence-unreleased) if joining or placement reports a warning.
+Installed Windows must reach the domain controller when PostInstall runs. A successful WinPE deployment only confirms staging. Keep [safe outcome evidence](../../troubleshooting/logs-and-support.md#domain-join-evidence) if joining or placement reports a warning.

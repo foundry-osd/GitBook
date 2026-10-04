@@ -17,7 +17,7 @@ A profile contains your deployment settings and, depending on your choices, pass
 
 Foundry saves changes automatically after a short pause and when you close the app. New local profiles start with **Remember passwords** enabled; existing profiles keep their saved choice.
 
-If Foundry asks you to complete a password or select a missing file, do so before switching profiles or closing the app. Your current changes stay on screen, and the last successfully saved settings remain available. A new profile can start with incomplete inputs, but later saves with **Remember passwords** enabled normally require those inputs to be complete. An omitted Domain Join password is the unreleased exception described [below](#domain-credentials-unreleased).
+If Foundry asks you to complete a password or select a missing file, do so before switching profiles or closing the app. Your current changes stay on screen, and the last successfully saved settings remain available. A new profile can start with incomplete inputs, but later saves with **Remember passwords** enabled normally require those inputs to be complete. An omitted Domain Join password is the exception described [below](#domain-credentials).
 
 If saving or switching fails, Foundry keeps the current profile selected. Resolve the reported problem and try again. If saving fails while closing, cancel closing to fix it; choosing **Close** leaves you with the last successfully saved settings.
 
@@ -39,7 +39,7 @@ Saved profiles are protected for your Windows account on this PC using Windows C
 
 When Foundry first brings your existing settings into a profile, **Remember passwords** starts enabled and saves supported passwords and selected files that are available. An existing profile's choice is preserved.
 
-Supported local retention includes Wi-Fi, Protected deployment, OOBE local accounts, selected network or Autopilot PFX certificates, and active automatic Domain Join credentials (unreleased). Complete required fields and matching confirmations. For an intentionally blank OOBE password, use its explicit password choice. Missing passwords are not filled from another profile.
+Supported local retention includes Wi-Fi, Protected deployment, OOBE local accounts, selected network or Autopilot PFX certificates, and active automatic Domain Join credentials. Complete required fields and matching confirmations. For an intentionally blank OOBE password, use its explicit password choice. Missing passwords are not filled from another profile.
 
 Microsoft sign-in sessions are not transferred. Sign in again when an Autopilot task requires it. An imported Autopilot configuration with a valid saved registration can use its matching PFX certificate without a new sign-in. If that file was omitted, select the matching certificate and enter its password on this PC. A different or expired certificate must be resolved before creating media.
 
@@ -53,7 +53,7 @@ If Foundry reports that cleanup is incomplete, resolve the reported problem and 
 
 This action does not remove exported files, copies on the shared folder, original source files, or existing deployment media.
 
-### Domain credentials (unreleased)
+### Domain credentials
 
 [Zero Touch Domain Join](domain-join/zero-touch.md) passwords belong to the active profile's canonical domain/account context. **Remember passwords** can retain them locally using the existing protected revision/key storage. Turning remembering off stops future retention without clearing the current session; **Clear saved passwords and access** also clears current passwords and synchronization access.
 
@@ -111,7 +111,7 @@ OneDrive, Dropbox, and other cloud-synchronized folders are not supported. If yo
 
 If Foundry asks for missing passwords or files, complete them before sharing confidential inputs.
 
-For unreleased Domain Join, this shared-revision path may include the password. The connection file itself omits the direct password but provides keys for shared access; see [domain credential rules](#domain-credentials-unreleased).
+For Domain Join, this shared-revision path may include the password. The connection file itself omits the direct password but provides keys for shared access; see [domain credential rules](#domain-credentials).
 
 If that configuration folder already exists, choose **Connect** and select its connection file, or choose **Choose another name**. Existing files are not overwritten. Renaming the configuration later does not move its shared folder.
 
