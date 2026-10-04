@@ -15,7 +15,7 @@ Restart states and cleanup states are recorded separately from these phases. A c
 
 ## Media is not ready or input is rejected
 
-- For Zero Touch, supply the context-matching domain password and a usable existing [General protection password](../foundry-osd/general.md#protected-deployment). Imported portable profiles deliberately omit the direct domain password.
+- For Zero-touch, supply the context-matching domain password and a usable existing [General protection password](../foundry-osd/general.md#protected-deployment). Imported portable profiles deliberately omit the direct domain password.
 - For Interactive without a catalog, enter the domain at launch. A typed optional OU DN must parse and belong to that domain.
 - For a compatible enabled catalog picker, choose a listed OU. Without a default, a selection is required. Changing the interactive domain clears earlier destination input and suppresses an incompatible catalog.
 - Correct retained catalog rows after an authored domain change. Discovery reads the authoring computer's AD domain using the current Windows identity; it does not test deployment-account permissions. Manual entries remain available when discovery fails.

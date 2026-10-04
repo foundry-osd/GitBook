@@ -1,4 +1,4 @@
-# Zero Touch Domain Join
+# Zero-touch Domain Join
 
 Choose this mode when protected deployment media should supply the join credentials. An optional destination picker can still require technician input.
 
@@ -16,7 +16,7 @@ The automatic password is encrypted using the existing Protected deployment key.
 **Screenshot required**
 
 - **File:** `foundry-osd-domain-join-zero-touch-01-readiness.png`
-- **Capture:** Show enabled Zero Touch Domain Join, credential field labels without credentials, readiness and the optional destination policy.
+- **Capture:** Show enabled Zero-touch Domain Join, credential field labels without credentials, readiness and the optional destination policy.
 {% endhint %}
 
 ## Keep credentials associated with the correct profile

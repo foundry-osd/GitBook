@@ -21,7 +21,7 @@ Open **General configuration** and confirm the deployment settings. Review the [
 - Add Wi-Fi or Ethernet 802.1X settings when the target cannot use an open wired network.
 - Choose Windows customization options required by the organization.
 - Configure Windows Autopilot only when the device must be registered or receive a profile.
-- Alternatively, configure [Domain Join](../foundry-osd/domain-join/README.md). It replaces active Autopilot provisioning. Only Zero Touch adds the existing General protection prerequisite; Interactive adds none.
+- Alternatively, configure [Domain Join](../foundry-osd/domain-join/README.md). It replaces active Autopilot provisioning. Only Zero-touch adds the existing General protection prerequisite; Interactive adds none.
 
 ## 5. Create deployment media
 

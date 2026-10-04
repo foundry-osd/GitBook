@@ -8,7 +8,7 @@ Choose the intended [deployment profile](../deployment-profiles.md) before start
 
 Resolve every blocking readiness item before starting. Checks cover Windows ADK and Windows PE, architecture, language, boot-image source, output paths, USB target, media options, drivers, networking, runtime configuration, secrets, customization, and Windows Autopilot.
 
-[Domain Join](../domain-join/README.md) also checks active-mode metadata and catalog/default compatibility. Zero Touch requires its context-matching account password and usable existing General protection. Interactive adds no media-password prerequisite. Readiness does not establish live AD connectivity or account permissions.
+[Domain Join](../domain-join/README.md) also checks active-mode metadata and catalog/default compatibility. Zero-touch requires its context-matching account password and usable existing General protection. Interactive adds no media-password prerequisite. Readiness does not establish live AD connectivity or account permissions.
 
 <figure>
   <img src="../../.gitbook/assets/foundry-osd-media-01-readiness-overview.png" alt="Foundry OSD media creation readiness overview">

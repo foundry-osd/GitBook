@@ -18,7 +18,7 @@
     * [Zero-touch hardware hash upload](foundry-osd/autopilot/zero-touch-hardware-hash.md)
     * [Interactive hardware hash upload](foundry-osd/autopilot/interactive-hardware-hash.md)
   * [Domain Join](foundry-osd/domain-join/README.md)
-    * [Zero Touch Domain Join](foundry-osd/domain-join/zero-touch.md)
+    * [Zero-touch Domain Join](foundry-osd/domain-join/zero-touch.md)
     * [Interactive Domain Join](foundry-osd/domain-join/interactive.md)
   * [Windows customization](foundry-osd/customization/README.md)
     * [Operating system](foundry-osd/customization/operating-system.md)

@@ -1,6 +1,6 @@
 # Domain Join during deployment
 
-Use media configured for [Interactive](../foundry-osd/domain-join/interactive.md) or [Zero Touch](../foundry-osd/domain-join/zero-touch.md) Domain Join. Obtain the intended domain, destination and unique computer name from the administrator. Installed Windows needs domain DNS, controller access and the appropriate account permissions.
+Use media configured for [Interactive](../foundry-osd/domain-join/interactive.md) or [Zero-touch](../foundry-osd/domain-join/zero-touch.md) Domain Join. Obtain the intended domain, destination and unique computer name from the administrator. Installed Windows needs domain DNS, controller access and the appropriate account permissions.
 
 ## Review the target and Windows
 
@@ -15,14 +15,14 @@ The dialog preparation does not contact AD. Valid syntax and successful unlock d
 
 For Interactive mode, **Domain join** asks for **Domain DNS name**, **Account (DOMAIN\user or user@domain)** and **Password**. A prefilled domain remains editable.
 
-For Zero Touch, use the existing Protected deployment unlock. The encrypted account/password are checked against their authored domain/account context. There is no new password prompt; the dialog appears only for enabled destination selection.
+For Zero-touch, use the existing Protected deployment unlock. The encrypted account/password are checked against their authored domain/account context. There is no new password prompt; the dialog appears only for enabled destination selection.
 
 | Destination policy | Technician action |
 | --- | --- |
 | Compatible catalog with selection enabled | Choose a listed **Organizational unit**. The authored default is preselected; **Continue** requires a selected row. |
 | Compatible catalog with selection disabled | No destination editor. The configured default is fixed; without a default, use Windows' default destination. |
 | Interactive without a compatible catalog | Enter **OU distinguished name (optional)** inside the submitted domain, or leave it empty. |
-| Zero Touch without selection | No dialog; use the authored default or Windows' default destination. |
+| Zero-touch without selection | No dialog; use the authored default or Windows' default destination. |
 
 Changing an interactive domain clears destination input and suppresses incompatible catalog choices. A compatible catalog does not allow arbitrary typed destinations. Select **Continue**, then review the actual domain and destination in **Confirm disk erase**. Account and password are not included in the summary or confirmation. **Cancel** leaves deployment unstarted.
 

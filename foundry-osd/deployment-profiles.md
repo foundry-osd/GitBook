@@ -55,7 +55,7 @@ This action does not remove exported files, copies on the shared folder, origina
 
 ### Domain credentials
 
-[Zero Touch Domain Join](domain-join/zero-touch.md) passwords belong to the active profile's canonical domain/account context. **Remember passwords** can retain them locally using the existing protected revision/key storage. Turning remembering off stops future retention without clearing the current session; **Clear saved passwords and access** also clears current passwords and synchronization access.
+[Zero-touch Domain Join](domain-join/zero-touch.md) passwords belong to the active profile's canonical domain/account context. **Remember passwords** can retain them locally using the existing protected revision/key storage. Turning remembering off stops future retention without clearing the current session; **Clear saved passwords and access** also clears current passwords and synchronization access.
 
 Ordinary `.foundryprofile` exports always omit the direct domain password, even with **Include passwords and confidential files** selected. Connection and recovery files use that same export rule. They may still carry shared-revision access keys: possession of the file and its password can grant access to shared secrets.
 

@@ -1,6 +1,6 @@
 # Domain Join
 
-Use **Domain Join** to join installed Windows to an Active Directory domain before OOBE. Choose [Interactive Domain Join](interactive.md) when a technician supplies credentials for each deployment, or [Zero Touch Domain Join](zero-touch.md) when protected media supplies them.
+Use **Domain Join** to join installed Windows to an Active Directory domain before OOBE. Choose [Interactive Domain Join](interactive.md) when a technician supplies credentials for each deployment, or [Zero-touch Domain Join](zero-touch.md) when protected media supplies them.
 
 Exactly one Domain Join or [Windows Autopilot](../autopilot/README.md) mode can be active. Open the intended page and choose **Enable**. Confirm replacement if another mode is active. **Disable** excludes joining from new media while retaining nonsecret configuration. Credentials are cleared when their domain, account or active-mode ownership changes.
 
@@ -15,13 +15,13 @@ Exactly one Domain Join or [Windows Autopilot](../autopilot/README.md) mode can 
 
 Both pages support the same optional catalog. Use a DNS domain such as `corp.example.test`, a display label such as `Workstations`, and a distinguished name such as `OU=Workstations,DC=corp,DC=example,DC=test`.
 
-1. Enter **Target DNS domain**. It is required for Zero Touch and for a catalog; Interactive without a catalog may leave it for the technician.
+1. Enter **Target DNS domain**. It is required for Zero-touch and for a catalog; Interactive without a catalog may leave it for the technician.
 2. Under **Add a destination manually**, enter **Display label** and **OU distinguished name**, then choose **Add destination**. The DN must belong to the target domain. The catalog holds at most 1,024 destinations.
 3. Alternatively, use [explicit discovery and import](#discover-and-import-destinations).
 4. Choose **Default destination (optional)**, or **Clear default** to leave the destination unset.
 5. Enable **Allow destination selection during deployment** if technicians should choose among the catalog rows. A default is preselected; without one, a listed choice is required before continuing.
 
-With selection disabled, the configured default is fixed. With no default, Windows uses its default domain account location; a reused account is left in its current location. A compatible catalog restricts technicians to authored choices. Interactive deployment without a compatible catalog instead offers an optional typed DN. Zero Touch does not offer freeform destinations.
+With selection disabled, the configured default is fixed. With no default, Windows uses its default domain account location; a reused account is left in its current location. A compatible catalog restricts technicians to authored choices. Interactive deployment without a compatible catalog instead offers an optional typed DN. Zero-touch does not offer freeform destinations.
 
 Changing the authored domain clears the default and disables selection, but retains catalog rows. Remove or correct rows from the previous domain before creating media. Removing the default row clears the default; removing the last row also clears catalog selection.
 
