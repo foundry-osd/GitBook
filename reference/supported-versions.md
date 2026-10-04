@@ -46,7 +46,7 @@ Keep deployment media and its package content together, and choose scripts and i
 
 [Domain Join](../foundry-osd/domain-join/README.md) has no published minimum release yet. These draft guides describe the current implementation; x64/ARM64 compilation and portable tests do not establish native Windows Setup or disposable-domain acceptance.
 
-Active domain media requires a domain-capable PostInstall runtime (capability 2); an older runtime cannot execute that plan. A domain-capable runtime continues to support legacy plans. Use matching media/target architecture and validate the complete workflow before rollout.
+Update Foundry OSD and recreate ISO media or update the USB boot image when adopting Domain Join or other new deployment features. Use matching media/target architecture and validate the complete workflow before rollout.
 
 Known unsupported edition IDs are `Core`, `CoreN`, `CoreSingleLanguage` and `CoreCountrySpecific` (Home family). They skip joining with a warning while Windows installation continues. Recognized eligible IDs are `Professional`, `ProfessionalN`, `Education`, `EducationN`, `Enterprise` and `EnterpriseN`; eligibility alone does not prove successful joining. Missing/unfamiliar edition IDs remain Unknown pending image/native inspection.
 

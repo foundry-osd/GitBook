@@ -10,6 +10,7 @@ Exactly one Domain Join or [Windows Autopilot](../autopilot/README.md) mode can 
 
 ## Before configuring
 
+- Update Foundry OSD and create or update the boot media to include the Domain Join configuration and current runtimes.
 - Arrange domain DNS and writable domain-controller access from installed Windows. A saved OU catalog can be authored offline; it does not make joining available offline. Connect's Internet readiness does not establish AD readiness.
 - Ask the AD administrator to provide an account with the required join, reuse, directory-read and destination-placement permissions. Discovery and configuration validation do not audit those permissions.
 - Choose a unique [concrete computer name](../customization/machine-naming.md). A [custom answer file](../customization/unattend.md) must supply exactly one valid applicable `specialize` computer name and contain no `Microsoft-Windows-UnattendedJoin` component.
