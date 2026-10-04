@@ -29,6 +29,8 @@ With selection disabled, the configured default is fixed. With no default, Windo
 
 Changing the authored domain clears the default and disables selection, but retains catalog rows. Remove or correct rows from the previous domain before creating media. Removing the default row clears the default; removing the last row also clears catalog selection.
 
+A retained catalog that no longer matches the target domain is an editing draft. Repair the mismatch before saving a named-profile checkpoint, exporting the profile or creating media. Activating a named profile restores its last valid checkpoint.
+
 ## Discover and import destinations
 
 1. Use an authoring computer already joined to the intended AD domain and connect it to that directory.
