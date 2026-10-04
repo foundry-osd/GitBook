@@ -5,7 +5,7 @@ Choose this mode when protected deployment media should supply the join credenti
 ## Prepare protected media
 
 1. In [General configuration](../general.md#protected-deployment), enable **Protected deployment** and supply its existing media password.
-2. Open **Domain Join > Zero Touch Domain Join** and choose **Activate**. Confirm replacement if another Domain Join or Autopilot mode is active.
+2. Open **Domain Join > Zero-Touch** and choose **Enable**. Confirm replacement if another Domain Join or Autopilot mode is active.
 3. Enter **Target DNS domain**, then **Account (DOMAIN\user or user@domain)** and **Account password** under **Domain credentials**. Use an administrator-provided account such as `CORP\deployment-join` for `corp.example.test`.
 4. Optionally [add or import destinations](README.md#configure-destinations). Choose a default and enable **Allow destination selection during deployment** only if technician selection is wanted.
 5. Resolve all readiness messages and [create or update media](../media/README.md).
@@ -16,12 +16,12 @@ The automatic password is encrypted using the existing Protected deployment key.
 **Screenshot required**
 
 - **File:** `foundry-osd-domain-join-zero-touch-01-readiness.png`
-- **Capture:** Show activated Zero Touch Domain Join, credential field labels without credentials, readiness and the optional destination policy.
+- **Capture:** Show enabled Zero Touch Domain Join, credential field labels without credentials, readiness and the optional destination policy.
 {% endhint %}
 
 ## Keep credentials associated with the correct profile
 
-Changing the domain, account or active mode clears the entered password. Re-enter it for the reviewed identity. **Deactivate** excludes joining from new media and clears domain credentials while retaining nonsecret settings.
+Changing the domain, account or active mode clears the entered password. Re-enter it for the reviewed identity. **Disable** excludes joining from new media and clears domain credentials while retaining nonsecret settings.
 
 [Remember passwords](../deployment-profiles.md#domain-credentials) can retain the password with a local profile. Ordinary `.foundryprofile` exports always omit the direct domain password, even with **Include passwords and confidential files** selected. An imported automatic profile remains structurally valid, but media creation needs the password and usable General protection on that PC.
 

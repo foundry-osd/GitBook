@@ -4,20 +4,20 @@ Choose this mode for shared deployment media when technicians should enter a dom
 
 ## Prepare the media
 
-1. Open **Domain Join > Interactive Domain Join** and choose **Activate**. If prompted, confirm replacement of the active Domain Join or Autopilot mode.
+1. Open **Domain Join > Interactive** and choose **Enable**. If prompted, confirm replacement of the active Domain Join or Autopilot mode.
 2. Enter **Target DNS domain** to prefill the deployment dialog. You may leave it blank when no catalog is configured.
 3. Optionally [add or import destinations](README.md#configure-destinations). A catalog requires its matching target domain. Set a default and decide whether to allow technician selection.
 4. Resolve readiness messages, then [create or update media](../media/README.md).
 
 Interactive joining introduces no media-password prerequisite and stores no join password in the media. Other enabled options, including custom answer files, may independently require [Protected deployment](../general.md#protected-deployment).
 
-Choose **Deactivate** to exclude joining from newly created media. Nonsecret settings remain available for later activation.
+Choose **Disable** to exclude joining from newly created media. Nonsecret settings remain available for later activation.
 
 {% hint style="warning" %}
 **Screenshot required**
 
 - **File:** `foundry-osd-domain-join-interactive-01-configuration.png`
-- **Capture:** Show the activated Interactive Domain Join page, target DNS domain, readiness and destination policy with sanitized demonstration data.
+- **Capture:** Show the enabled Interactive Domain Join page, target DNS domain, readiness and destination policy with sanitized demonstration data.
 {% endhint %}
 
 ## Deploy a target
