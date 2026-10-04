@@ -8,6 +8,8 @@ In **Settings > General**, use **Export diagnostics** to save a sanitized archiv
 
 Use **Advanced: export raw logs** only when requested by a trusted support contact, and review the sensitive-data warning before sharing the archive. See [Export diagnostics](../foundry-osd/settings.md#export-diagnostics).
 
+In the unreleased Domain Join implementation, recognized quoted/escaped credential values are masked in sanitized logs, and `credentials.bin` is unconditionally excluded by basename before reading in sanitized and raw exports. The export still selects only desktop top-level `Foundry*.log` files; it does not retrieve target payloads or PostInstall evidence. Unknown/unlabelled secrets and arbitrarily renamed payloads are not a redaction guarantee.
+
 Remote diagnostics supplement local logs and support archives. Keep local evidence when investigating a failure: remote delivery can have gaps, and external-tool log files are not automatically uploaded. See [Telemetry and privacy](../reference/telemetry-and-privacy.md#remote-error-diagnostics).
 
 ## Find application logs in PostHog
@@ -38,6 +40,7 @@ If records are missing, check consent, application version, network access, the 
 - Selected Windows release, edition, language, and architecture.
 - Selected driver pack.
 - Autopilot method, without credentials or tenant secrets.
+- For unreleased Domain Join, safe join/placement/membership/restart/cleanup states and allowlisted failure codes. Keep native API, LDAP client/transport and directory server result codes distinct; omit arbitrary directory diagnostics and credentials.
 
 ## Windows PE log location
 
@@ -121,3 +124,19 @@ For [Post-installation](../foundry-osd/customization/post-installation.md), coll
 | Execution results and saved progress | `%SystemRoot%\Temp\Foundry\State\PreOobe`, including `execution-result.json` |
 
 Desktop diagnostic export does not automatically collect target-machine logs. PostInstall does not send a separate remote telemetry stream. Review raw script output and installer logs before sharing them; they may contain secrets that automatic masking cannot remove reliably.
+
+## Domain Join evidence (unreleased)
+
+For domain work successfully staged by Deploy, collect from the installed Windows target:
+
+| Evidence | Location |
+| --- | --- |
+| Independent domain outcome | `%SystemRoot%\Temp\Foundry\State\PreOobe\domain-join-result.json` |
+| Execution journal and saved restart/progress | `%SystemRoot%\Temp\Foundry\State\PreOobe\execution-result.json` |
+| Existing PostInstall log | `%SystemRoot%\Temp\Foundry\Logs\PreOobe\Foundry.PostInstall.log` and relevant rotated logs |
+
+The domain result records expected domain/name/destination, independent phase states, allowlisted failure codes and correctly attributed numeric errors, restart and cleanup. It contains no account/password or arbitrary exception text. These expected identities can still be sensitive; redact them before sharing. The worker phase receipt at `State\PreOobe\domain-join-phase.json` is execution evidence, not an instruction to restart or retry mutations manually.
+
+If Deploy skipped joining before staging, collect its summary and deployment logs instead. No installed domain result is manufactured for that skip. Separate local membership from OU placement/readback, and keep **Unknown**, **Unverified** and **Cleanup Pending** outcomes visible in the report. See [Domain Join troubleshooting](domain-join.md).
+
+Never attach `%SystemRoot%\Temp\Foundry\Payloads\DomainJoin\<operation-id>\credentials.bin`. It is temporary plaintext authentication material, even though its filename uses `.bin`. An administrator must confirm no active worker remains before removing a leftover. Desktop export and remote diagnostics do not automatically collect these target files.

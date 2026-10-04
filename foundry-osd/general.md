@@ -46,6 +46,7 @@ Validate custom drivers on representative hardware before using the media in pro
 | Autopilot certificate credentials for zero-touch upload, including the PFX file and its password | Yes |
 | Autopilot JSON profiles | Yes |
 | Custom Windows answer files | Yes |
+| Zero Touch Domain Join account password (unreleased) | Yes; existing protection is required |
 | Embedded Wi-Fi passwords, wired and Wi-Fi certificate PFX passwords, and network certificate private keys | No |
 
 Foundry Connect uses embedded network credentials before Foundry Deploy asks for the technician password, so automatic network setup remains available. Anyone who can read the ISO or USB can recover those network credentials, even when Protected deployment is enabled. Restrict access to the media and use dedicated network credentials that can be revoked.
@@ -53,6 +54,8 @@ Foundry Connect uses embedded network credentials before Foundry Deploy asks for
 Foundry accepts passwords from 8 characters and recommends at least 12 characters. Use a unique password for each set of deployment media and store it using the organization’s approved credential-management process.
 
 Protected deployment does not encrypt the complete ISO, USB drive, Windows image, or files staged into the installed Windows system.
+
+[Zero Touch Domain Join (unreleased)](domain-join/zero-touch.md) reuses this media password and Deploy's existing unlock session. [Interactive Domain Join](domain-join/interactive.md) introduces no protection prerequisite; custom answer files and other enabled features retain their own requirements. Domain credentials become a restricted temporary plaintext payload on the target for installed-Windows joining; see [credential lifetime and cleanup](../reference/security-and-credentials.md#domain-credentials-unreleased).
 
 When Protected deployment is disabled, Autopilot JSON profiles remain readable on the media and other embedded deployment credentials can be recovered without a technician password. Treat possession of unprotected media as access to all embedded deployment information.
 

@@ -63,6 +63,12 @@ If a composed name cannot be generated because a required hardware value is unav
 
 The preview uses representative values. Foundry Deploy resolves actual hardware values at deployment startup and applies casing and separators to the same component rules used in the preview. For random text, a random value is generated with the configured length during deployment startup.
 
+## Domain Join (unreleased)
+
+[Domain Join](../domain-join/README.md) uses the final validated Windows name to identify the AD computer account. Review it before disk confirmation, particularly when reusing an existing account.
+
+A [custom answer file](unattend.md) overrides native naming and must contain exactly one acceptable concrete name in its applicable `Microsoft-Windows-Shell-Setup` `specialize` component. Missing, wildcard, invalid or multiple applicable names fail the domain requirement. The native fallback table above does not repair custom XML. Verify the expected name again after the controlled domain restart.
+
 ## Upload the computer name to Autopilot
 
 Enable **Upload computer name to Autopilot** to assign the final computer name confirmed in Foundry Deploy to the Windows Autopilot device record. This works with both **Manual** and **Composed** naming, including any changes made by the deployment operator. The uploaded value is the same final name used for Windows setup; the Foundry OSD preview and initial value are not uploaded separately.

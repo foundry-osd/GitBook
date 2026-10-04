@@ -11,6 +11,7 @@ Confirm:
 - Driver pack.
 - Firmware options.
 - Windows Autopilot method and, for zero-touch hardware hash upload, the configured group tag.
+- Domain Join mode, authored domain and default destination when configured (unreleased).
 - Optional features and other deployment customization.
 
 <figure>
@@ -23,6 +24,8 @@ When the media includes [custom answer files](../foundry-osd/customization/unatt
 ## Start deployment
 
 Start only when every value is correct. Foundry opens **Confirm disk erase** before crossing the destructive boundary. Verify the disk number, model, bus, size, and selected operating system before accepting.
+
+Unreleased [Domain Join](domain-join.md) gathers interactive credentials or a permitted catalog choice at launch before this confirmation. The earlier wizard summary shows authored defaults; confirmation appends the actual prepared domain/destination or known unsupported-edition skip. Account and password are not included. Cancelling the domain dialog never reaches destructive confirmation.
 
 {% hint style="danger" %}
 Accepting the confirmation allows Foundry to clean and repartition the selected disk. Existing data on that disk will be lost.
@@ -76,3 +79,5 @@ For [custom images](../foundry-osd/customization/custom-windows-images.md), veri
 ## Post-installation preparation
 
 Foundry checks required [Post-installation](../foundry-osd/customization/post-installation.md) content and its runtime before preparing the target disk. Keep the complete ISO or USB media available until staging finishes. Successful staging does not prove first-boot actions succeeded; continue through [deployment verification](verify-deployment.md).
+
+For unreleased Domain Join, preparation stages joining for installed Windows. Edition or applied-image composition incompatibility can warn and skip domain work while installation continues; pre-staging skips remain in Deploy's summary/logs. Review later join, placement, restart, membership and cleanup results separately. Runtime compatibility, protected staging and unrelated destructive/integrity checks retain their existing failure policy.

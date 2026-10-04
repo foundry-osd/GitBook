@@ -17,7 +17,7 @@ A profile contains your deployment settings and, depending on your choices, pass
 
 Foundry saves changes automatically after a short pause and when you close the app. New local profiles start with **Remember passwords** enabled; existing profiles keep their saved choice.
 
-If Foundry asks you to complete a password or select a missing file, do so before switching profiles or closing the app. Your current changes stay on screen, and the last successfully saved settings remain available. A new profile can start with incomplete inputs, but later saves with **Remember passwords** enabled require those inputs to be complete.
+If Foundry asks you to complete a password or select a missing file, do so before switching profiles or closing the app. Your current changes stay on screen, and the last successfully saved settings remain available. A new profile can start with incomplete inputs, but later saves with **Remember passwords** enabled normally require those inputs to be complete. An omitted Domain Join password is the unreleased exception described [below](#domain-credentials-unreleased).
 
 If saving or switching fails, Foundry keeps the current profile selected. Resolve the reported problem and try again. If saving fails while closing, cancel closing to fix it; choosing **Close** leaves you with the last successfully saved settings.
 
@@ -30,7 +30,7 @@ These options control different things:
 | Option | What it does |
 | --- | --- |
 | Remember passwords | Saves supported deployment passwords and selected confidential files with this profile on this PC. |
-| Include passwords and confidential files | Includes available passwords and selected confidential files when you export or share the configuration. |
+| Include passwords and confidential files | Includes supported available passwords and selected confidential files when you export or share. Direct Domain Join passwords are always omitted from portable exports; encrypted shared revisions use a separate path. |
 | Remember this connection on this PC | Lets Foundry reconnect to the shared configuration after restarting, without asking you to restore access. |
 
 Turning **Remember passwords** off stops saving passwords with future changes. Passwords already entered remain usable until the current session ends. Your separately remembered synchronization connection is also kept. To clear both, use **Clear saved passwords and access** beside the switch.
@@ -39,7 +39,7 @@ Saved profiles are protected for your Windows account on this PC using Windows C
 
 When Foundry first brings your existing settings into a profile, **Remember passwords** starts enabled and saves supported passwords and selected files that are available. An existing profile's choice is preserved.
 
-Supported passwords include Wi-Fi, Protected deployment, OOBE local accounts, and selected network or Autopilot PFX certificates. Complete required fields and matching confirmations. For an intentionally blank OOBE password, use its explicit password choice. Missing passwords are not filled from another profile.
+Supported local retention includes Wi-Fi, Protected deployment, OOBE local accounts, selected network or Autopilot PFX certificates, and active automatic Domain Join credentials (unreleased). Complete required fields and matching confirmations. For an intentionally blank OOBE password, use its explicit password choice. Missing passwords are not filled from another profile.
 
 Microsoft sign-in sessions are not transferred. Sign in again when an Autopilot task requires it. An imported Autopilot configuration with a valid saved registration can use its matching PFX certificate without a new sign-in. If that file was omitted, select the matching certificate and enter its password on this PC. A different or expired certificate must be resolved before creating media.
 
@@ -53,6 +53,16 @@ If Foundry reports that cleanup is incomplete, resolve the reported problem and 
 
 This action does not remove exported files, copies on the shared folder, original source files, or existing deployment media.
 
+### Domain credentials (unreleased)
+
+[Zero Touch Domain Join](domain-join/zero-touch.md) passwords belong to the active profile's canonical domain/account context. **Remember passwords** can retain them locally using the existing protected revision/key storage. Turning remembering off stops future retention without clearing the current session; **Clear saved passwords and access** also clears current passwords and synchronization access.
+
+Ordinary `.foundryprofile` exports always omit the direct domain password, even with **Include passwords and confidential files** selected. Connection and recovery files use that same export rule. They may still carry shared-revision access keys: possession of the file and its password can grant access to shared secrets.
+
+Encrypted shared revisions may include the domain password when confidential inputs are explicitly included. A settings-only update can preserve an existing local password only for the same profile and matching active automatic domain/account context. Changed context, unavailable/deleted credentials or another profile cannot borrow it. Changing domain/account or leaving automatic mode clears the current domain password.
+
+An omitted-secret automatic profile can be saved/imported with **Remember passwords** enabled; domain omission alone does not require disabling it. The configuration is structurally valid, but creating automatic media remains blocked until the password and usable existing General protection are supplied. Profile retention and portable export are separate choices.
+
 ## Export an encrypted package
 
 1. Select the profile you want to transfer.
@@ -62,7 +72,7 @@ This action does not remove exported files, copies on the shared folder, origina
 
 With the option off, the file contains settings without saved passwords or attached confidential files. Autopilot JSON entered in the configuration is still part of those settings; review it before sharing.
 
-With the option on, Foundry includes available files selected in the configuration, such as custom answer files, wired or enterprise Wi-Fi XML profiles, and network or Autopilot PFX certificates. Missing files cannot be included.
+With the option on, Foundry includes available files selected in the configuration, such as custom answer files, wired or enterprise Wi-Fi XML profiles, and network or Autopilot PFX certificates. Missing files cannot be included. The direct Domain Join password is always omitted; domain/account/catalog metadata remains.
 
 An export supports up to **64 attached files**, **4 MiB per file**, and **8 MiB of attached files in total**. The complete configuration, including attachments, must fit within **16 MiB**. Transfer Windows images, driver collections, and generated media separately.
 
@@ -75,7 +85,7 @@ Send the file password through a separate trusted channel. Anyone who can open t
 3. Review the configuration name, included-file and password counts, and any missing-file notices.
 4. Review **Remember passwords** and confirm that you want to use the imported settings.
 
-**Remember passwords** is selected by default for a complete import. If passwords or files are missing, leave it unchecked, import the settings, supply the missing inputs, and then enable it.
+**Remember passwords** is selected by default for a complete import. If other required passwords or files are missing, leave it unchecked, import the settings, supply the missing inputs, and then enable it. Domain Join password omission alone can be imported with remembering enabled; supply that password and General protection before creating automatic media.
 
 Import creates an independent local copy. To keep it synchronized with a shared configuration, use **Set up synchronization… > Connect to a shared configuration** instead, even if the file you selected is a connection file.
 
@@ -101,6 +111,8 @@ OneDrive, Dropbox, and other cloud-synchronized folders are not supported. If yo
 
 If Foundry asks for missing passwords or files, complete them before sharing confidential inputs.
 
+For unreleased Domain Join, this shared-revision path may include the password. The connection file itself omits the direct password but provides keys for shared access; see [domain credential rules](#domain-credentials-unreleased).
+
 If that configuration folder already exists, choose **Connect** and select its connection file, or choose **Choose another name**. Existing files are not overwritten. Renaming the configuration later does not move its shared folder.
 
 If sharing is interrupted, restore access to the folder and choose **Synchronize** on the same profile. Keep the folder and Foundry's local data intact while retrying. If you did not choose **Remember this connection on this PC**, keep Foundry open until the connection file is available; otherwise, you may be unable to reconnect after restarting.
@@ -114,7 +126,7 @@ If sharing is interrupted, restore access to the folder and choose **Synchronize
 5. Review the current shared settings, included-file and password counts, and remembering options.
 6. Continue to use the reviewed configuration. If another PC changes it before you finish, Foundry shows an updated preview for you to confirm.
 
-As with importing, **Remember passwords** is selected for complete configurations. If inputs are missing, connect first, supply them, and then enable it. Choose **Remember this connection on this PC** separately to reconnect automatically after restarting.
+As with importing, **Remember passwords** is selected for complete configurations. If other required inputs are missing, connect first, supply them, and then enable it. Domain password omission alone does not prevent remembering the settings. Choose **Remember this connection on this PC** separately to reconnect automatically after restarting.
 
 If the suggested folder cannot be reached, browse to the connection file through a server address that works on this PC and check the suggested folder again. You can correct the folder before continuing. Select the configuration's own folder, not its parent share.
 

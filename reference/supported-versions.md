@@ -41,3 +41,13 @@ The [custom image workflow](../foundry-osd/customization/custom-windows-images.m
 [Post-installation](../foundry-osd/customization/post-installation.md) supports x64 and ARM64 targets. Bootstrap prepares PostInstall for the boot media architecture; you do not need to install .NET on the target. Use boot media matching the target Windows architecture. Deploy checks runtime compatibility before preparing the disk.
 
 Keep deployment media and its package content together, and choose scripts and installers compatible with the target Windows image and architecture. Test the complete workflow on representative hardware before rollout.
+
+## Domain Join (unreleased)
+
+[Domain Join](../foundry-osd/domain-join/README.md) has no published minimum release yet. These draft guides describe the current implementation; x64/ARM64 compilation and portable tests do not establish native Windows Setup or disposable-domain acceptance.
+
+Active domain media requires a domain-capable PostInstall runtime (capability 2); an older runtime cannot execute that plan. A domain-capable runtime continues to support legacy plans. Use matching media/target architecture and validate the complete workflow before rollout.
+
+Known unsupported edition IDs are `Core`, `CoreN`, `CoreSingleLanguage` and `CoreCountrySpecific` (Home family). They skip joining with a warning while Windows installation continues. Recognized eligible IDs are `Professional`, `ProfessionalN`, `Education`, `EducationN`, `Enterprise` and `EnterpriseN`; eligibility alone does not prove successful joining. Missing/unfamiliar edition IDs remain Unknown pending image/native inspection.
+
+Installed Windows needs online access to domain DNS and a writable controller, along with administrator-delegated join/reuse/read/placement permissions. Offline catalog authoring does not provide offline joining. Custom answer files and applied images must meet [domain composition/name requirements](../foundry-deploy/domain-join.md#review-the-target-and-windows).

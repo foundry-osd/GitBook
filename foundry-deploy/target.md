@@ -12,6 +12,8 @@ When the media enables custom answer files, choose one in **Answer file** or sel
 
 Review the selected file in the summary and confirmation. Missing files, an invalid default, architecture mismatches, and known Autopilot conflicts can block deployment. Foundry does not silently switch to native settings. See [custom answer-file preparation and compatibility](../foundry-osd/customization/unattend.md).
 
+For [Domain Join (unreleased)](domain-join.md), the selected file must supply one valid concrete applicable `specialize` name and no `Microsoft-Windows-UnattendedJoin` component. Foundry uses that inspected name; native wizard naming does not fill a missing or wildcard custom name. Resolve the compatibility error before confirmation.
+
 ## Set the computer name
 
 The following naming rules apply when using native Foundry settings.

@@ -36,6 +36,12 @@ When using [Post-installation](../foundry-osd/customization/post-installation.md
 
 Verify that the installed applications work after cleanup. If they need source files for repair or updates, confirm that those files remain available. Keep the [PostInstall results and logs](../troubleshooting/logs-and-support.md#postinstall-diagnostics) when investigating a problem.
 
+## Domain Join (unreleased)
+
+A successful Deploy session confirms domain-work staging only. Follow PostInstall through its controlled restart, then verify the expected Windows name and local AD domain membership. Review the requested OU and directory readback independently: local membership alone does not prove placement or policy application.
+
+Inspect [the domain result and execution journal](../troubleshooting/logs-and-support.md#domain-join-evidence-unreleased). Successful join with failed placement still restarts and verifies. **Unknown** mutations are never automatically repeated and stay Unknown even if membership later succeeds; **Unverified** needs administrator confirmation. Resolve warned outcomes and **Cleanup Pending** before organizational handoff. A known WinPE skip has only Deploy's summary/logs. See [Domain Join troubleshooting](../troubleshooting/domain-join.md).
+
 ## Automatic Windows activation
 
 For standard RETAIL deployments of supported Windows Home and Pro editions, Foundry automatically attempts to activate Windows after reboot using a compatible OEM product key stored in the device firmware. Online activation requires Internet access and a valid key for the installed Windows edition.
