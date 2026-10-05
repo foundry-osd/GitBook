@@ -18,7 +18,7 @@ Both pages share the same optional OU list. Use a DNS domain such as `corp.examp
 1. Enter **Domain name**. It is required for Zero-touch and whenever you list OUs; Interactive without listed OUs may leave it for the technician.
 2. Under **OU actions**, choose **Add OU**. Enter **Display name** and **Distinguished name**, then choose **Add OU** in the dialog. The DN must name an organizational unit inside that domain, so it starts with `OU=`; a container such as `CN=Computers` is not accepted. A refused entry is explained in the dialog so you can correct it. You can list up to 1,024 OUs.
 3. Alternatively, [import OUs from the domain](#find-and-import-ous).
-4. Choose **Default OU**, or **Clear** to leave no default.
+4. Choose **Default OU**, or leave it empty to have no default.
 5. Enable **Let technicians choose the OU** if technicians should choose among the listed OUs. A default is preselected; without one, a listed choice is required before continuing.
 
 With selection disabled, the configured default is fixed. With no default, Windows uses its default domain account location; a reused account is left in its current location. When an OU list applies, technicians can only pick from it. Interactive deployment without a usable OU list offers an optional typed DN instead. Zero-touch never accepts a typed OU.
