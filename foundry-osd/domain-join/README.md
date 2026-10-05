@@ -25,7 +25,7 @@ With selection disabled, the configured default is fixed. With no default, Windo
 
 Changing the authored domain clears the default and disables selection, but retains catalog rows. Select rows from the previous domain under **Destinations** and choose **Remove selected**, or correct the domain, before creating media. Removing the default row clears the default; removing the last row also clears catalog selection.
 
-A retained catalog that no longer matches the target domain is an editing draft. Repair the mismatch before saving a named-profile checkpoint, exporting the profile or creating media. Activating a named profile restores its last valid checkpoint.
+A retained catalog that no longer matches the target domain is an editing draft. While Domain Join is enabled, repair the mismatch before saving a named-profile checkpoint, exporting the profile or creating media. A disabled Domain Join mode does not block them. Activating a named profile restores its last valid checkpoint.
 
 ## Discover and import destinations
 
