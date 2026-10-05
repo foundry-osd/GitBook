@@ -43,7 +43,7 @@ In Foundry Deploy:
 2. Select a Windows release, language, edition, and license channel.
 3. Select a compatible driver pack.
 4. Configure Windows Autopilot when JSON profile or zero-touch upload media displays that step. Interactive upload runs later during Windows OOBE.
-5. Review the summary and start deployment. For Domain Join, supply [conditional credentials/destination input](../foundry-deploy/domain-join.md) before disk confirmation.
+5. Review the summary and start deployment. For Domain Join, supply [conditional credentials and OU input](../foundry-deploy/domain-join.md) before disk confirmation.
 6. Verify the success page before rebooting.
 
 For Domain Join, Deploy success means staging. Follow installed-Windows joining and its controlled restart, then verify local membership, requested OU placement and cleanup before handoff.

@@ -1,22 +1,22 @@
 # Zero-touch Domain Join
 
-Choose this mode when protected deployment media should supply the join credentials. An optional destination picker can still require technician input.
+Choose this mode when protected deployment media should supply the join credentials. Technician OU choice, if enabled, still requires input.
 
 ## Prepare protected media
 
 1. In [General configuration](../general.md#protected-deployment), enable **Protected deployment** and supply its existing media password.
 2. Open **Domain Join > Zero-Touch** and choose **Enable**. Confirm replacement if another Domain Join or Autopilot mode is active.
 3. Enter **Domain name**, then **Account (DOMAIN\user or user@domain)** and **Password** under **Join account**. Use an administrator-provided account such as `CORP\deployment-join` for `corp.example.test`.
-4. Optionally [add or import destinations](README.md#configure-destinations). Choose a default and enable **Let technicians choose the OU** only if technician selection is wanted.
+4. Optionally [add or import OUs](README.md#configure-organizational-units). Choose a default and enable **Let technicians choose the OU** only if technician selection is wanted.
 5. Resolve all readiness messages and [create or update media](../media/README.md).
 
-The automatic password is encrypted using the existing Protected deployment key. Deploy uses the existing unlock session; there is no additional media password or domain-password prompt. Without a destination picker, no Domain join dialog is introduced. With a picker, the domain is read-only and the credential editors are hidden; the technician must choose a catalog row before continuing.
+The automatic password is encrypted using the existing Protected deployment key. Deploy uses the existing unlock session; there is no additional media password or domain-password prompt. Without technician OU choice, no Domain join dialog appears. With it, the domain is read-only and the credential fields are hidden; the technician must choose an OU before continuing.
 
 {% hint style="warning" %}
 **Screenshot required**
 
 - **File:** `foundry-osd-domain-join-zero-touch-01-readiness.png`
-- **Capture:** Show enabled Zero-touch Domain Join, credential field labels without credentials, readiness and the optional destination policy.
+- **Capture:** Show enabled Zero-touch Domain Join, credential field labels without credentials, validation messages and the Organizational units section.
 {% endhint %}
 
 ## Keep credentials associated with the correct profile
@@ -31,6 +31,6 @@ Recreate or update media after credential changes. Profile edits do not change m
 
 ## Verify deployment
 
-Follow [Domain Join in Deploy](../../foundry-deploy/domain-join.md). Installed Windows needs online domain-controller access even when media has an offline OU catalog. Review joining, placement and post-restart membership separately.
+Follow [Domain Join in Deploy](../../foundry-deploy/domain-join.md). Installed Windows needs online domain-controller access even when the media carries an OU list. Review joining, placement and post-restart membership separately.
 
 Credentials become a restricted temporary plaintext target payload for the child operation. See [credential lifetime and cleanup](../../reference/security-and-credentials.md#domain-credentials); cleanup warnings require administrator review before handoff.

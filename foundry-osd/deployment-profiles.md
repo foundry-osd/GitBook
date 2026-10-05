@@ -72,7 +72,7 @@ An omitted-secret automatic profile can be saved/imported with **Remember passwo
 
 With the option off, the file contains settings without saved passwords or attached confidential files. Autopilot JSON entered in the configuration is still part of those settings; review it before sharing.
 
-With the option on, Foundry includes available files selected in the configuration, such as custom answer files, wired or enterprise Wi-Fi XML profiles, and network or Autopilot PFX certificates. Missing files cannot be included. The direct Domain Join password is always omitted; domain/account/catalog metadata remains.
+With the option on, Foundry includes available files selected in the configuration, such as custom answer files, wired or enterprise Wi-Fi XML profiles, and network or Autopilot PFX certificates. Missing files cannot be included. The direct Domain Join password is always omitted; the domain name, account and OU list remain.
 
 An export supports up to **64 attached files**, **4 MiB per file**, and **8 MiB of attached files in total**. The complete configuration, including attachments, must fit within **16 MiB**. Transfer Windows images, driver collections, and generated media separately.
 

@@ -16,24 +16,24 @@ Restart states and cleanup states are recorded separately from these phases. A c
 ## Media is not ready or input is rejected
 
 - For Zero-touch, supply the context-matching domain password and a usable existing [General protection password](../foundry-osd/general.md#protected-deployment). Imported portable profiles deliberately omit the direct domain password.
-- For Interactive without a catalog, enter the domain at launch. A typed optional OU DN must parse and belong to that domain.
-- For a compatible enabled catalog picker, choose a listed OU. Without a default, a selection is required. Changing the interactive domain clears earlier destination input and suppresses an incompatible catalog.
-- Correct retained catalog rows after an authored domain change. Discovery reads the authoring computer's AD domain using the current Windows identity; it does not test deployment-account permissions. Manual entries remain available when discovery fails.
+- For Interactive without listed OUs, enter the domain at launch. A typed optional OU DN must parse and belong to that domain.
+- When technician choice is enabled, choose a listed OU. Without a default, a selection is required. Changing the interactive domain clears the earlier OU input and hides listed OUs from another domain.
+- Correct the listed OUs after changing the domain name. The search reads the authoring computer's AD domain using the current Windows identity; it does not test deployment-account permissions. You can still add OUs manually when the search fails.
 - For a custom answer file, supply one valid concrete applicable `specialize` name and remove conflicting `Microsoft-Windows-UnattendedJoin` configuration. Foundry does not fill a missing custom name from the wizard. Review arbitrary commands separately; not every scripted conflict can be detected.
 
 Known Windows Home-family editions skip joining and continue installation. Unfamiliar/missing edition metadata needs image/native inspection. Applied-image conflicts can also skip domain work. See [supported-version limits](../reference/supported-versions.md#domain-join).
 
 ## Joining fails
 
-Check installed-Windows network drivers, domain DNS, controller reachability and system time. Connect's Internet check does not confirm AD connectivity, and a saved OU catalog does not provide offline joining. Readiness checks are bounded; restore connectivity before arranging a new controlled attempt.
+Check installed-Windows network drivers, domain DNS, controller reachability and system time. Connect's Internet check does not confirm AD connectivity, and an OU list does not provide offline joining. Readiness checks are bounded; restore connectivity before arranging a new controlled attempt.
 
 Ask the AD administrator to confirm the account's delegated join/reuse and directory permissions. Reuse can be restricted by Windows domain-join hardening even when a new account can be created. Review Microsoft's [KB5020276 domain-join hardening guidance](https://support.microsoft.com/en-us/servicing/os/windows/2022/10/kb5020276-netjoin-domain-join-hardening-changes) with the administrator. Foundry follows Windows' reuse decision and does not bypass hardening or delete/recreate the existing account.
 
-## Joined but destination is wrong or unverified
+## Joined but the OU is wrong or unverified
 
 Review **Join** and **Placement** independently. Successful joining still requires the controlled restart even when placement fails; the console can report **Domain joined; target OU placement failed**.
 
-Confirm the requested DN exists and the account can read the object/destination and perform the required same-domain placement. Existing-account moves preserve the captured GUID and require identity proof. No visible pre-join account is not proof that an account is absent, so an unproven existing object is not moved automatically.
+Confirm the requested DN exists and the account can read the object and the OU and perform the required same-domain placement. Existing-account moves preserve the captured GUID and require identity proof. No visible pre-join account is not proof that an account is absent, so an unproven existing object is not moved automatically.
 
 **Unverified** can mean the placement response was acknowledged but directory readback could not confirm it. **Unknown** can mean a mutation response was lost. Have the administrator inspect the intended computer object, its GUID and actual parent. Later local domain membership does not prove OU placement, directory readback or policy application succeeded.
 

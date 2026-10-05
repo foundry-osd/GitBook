@@ -135,7 +135,7 @@ For domain work successfully staged by Deploy, collect from the installed Window
 | Execution journal and saved restart/progress | `%SystemRoot%\Temp\Foundry\State\PreOobe\execution-result.json` |
 | Existing PostInstall log | `%SystemRoot%\Temp\Foundry\Logs\PreOobe\Foundry.PostInstall.log` and relevant rotated logs |
 
-The domain result records expected domain/name/destination, independent phase states, allowlisted failure codes and correctly attributed numeric errors, restart and cleanup. It contains no account/password or arbitrary exception text. These expected identities can still be sensitive; redact them before sharing. The worker phase receipt at `State\PreOobe\domain-join-phase.json` is execution evidence, not an instruction to restart or retry mutations manually.
+The domain result records expected domain, computer name and OU, independent phase states, allowlisted failure codes and correctly attributed numeric errors, restart and cleanup. It contains no account/password or arbitrary exception text. These expected identities can still be sensitive; redact them before sharing. The worker phase receipt at `State\PreOobe\domain-join-phase.json` is execution evidence, not an instruction to restart or retry mutations manually.
 
 If Deploy skipped joining before staging, collect its summary and deployment logs instead. No installed domain result is manufactured for that skip. Separate local membership from OU placement/readback, and keep **Unknown**, **Unverified** and **Cleanup Pending** outcomes visible in the report. See [Domain Join troubleshooting](domain-join.md).
 

@@ -11,7 +11,7 @@ Confirm:
 - Driver pack.
 - Firmware options.
 - Windows Autopilot method and, for zero-touch hardware hash upload, the configured group tag.
-- Domain Join mode, authored domain and default destination when configured.
+- Domain Join mode, authored domain and default OU when configured.
 - Optional features and other deployment customization.
 
 <figure>
@@ -25,7 +25,7 @@ When the media includes [custom answer files](../foundry-osd/customization/unatt
 
 Start only when every value is correct. Foundry opens **Confirm disk erase** before crossing the destructive boundary. Verify the disk number, model, bus, size, and selected operating system before accepting.
 
-[Domain Join](domain-join.md) gathers interactive credentials or a permitted catalog choice at launch before this confirmation. The earlier wizard summary shows authored defaults; confirmation appends the actual prepared domain/destination or known unsupported-edition skip. Account and password are not included. Cancelling the domain dialog never reaches destructive confirmation.
+[Domain Join](domain-join.md) gathers interactive credentials or a permitted OU choice at launch before this confirmation. The earlier wizard summary shows authored defaults; confirmation appends the actual prepared domain and OU or known unsupported-edition skip. Account and password are not included. Cancelling the domain dialog never reaches destructive confirmation.
 
 {% hint style="danger" %}
 Accepting the confirmation allows Foundry to clean and repartition the selected disk. Existing data on that disk will be lost.
