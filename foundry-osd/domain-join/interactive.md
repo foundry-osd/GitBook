@@ -5,7 +5,7 @@ Choose this mode for shared deployment media when technicians should enter a dom
 ## Prepare the media
 
 1. Open **Domain Join > Interactive** and choose **Enable**. If prompted, confirm replacement of the active Domain Join or Autopilot mode.
-2. Enter **Target DNS domain** to prefill the deployment dialog. You may leave it blank when no catalog is configured.
+2. Enter **Domain name** to prefill the deployment dialog. You may leave it blank when no catalog is configured.
 3. Optionally [add or import destinations](README.md#configure-destinations). A catalog requires its matching target domain. Set a default and decide whether to allow technician selection.
 4. Resolve readiness messages, then [create or update media](../media/README.md).
 
@@ -22,7 +22,7 @@ Choose **Disable** to exclude joining from newly created media. Nonsecret settin
 
 ## Deploy a target
 
-Before disk-erasure confirmation, Deploy opens **Domain join**. Enter **Domain DNS name**, **Account (DOMAIN\user or user@domain)** and **Password**. For example, an administrator may supply `CORP\deployment-join` for `corp.example.test`; obtain the password through the approved credential process.
+Before disk-erasure confirmation, Deploy opens **Domain join**. Enter **Domain name**, **Account (DOMAIN\user or user@domain)** and **Password**. For example, an administrator may supply `CORP\deployment-join` for `corp.example.test`; obtain the password through the approved credential process.
 
 If the compatible catalog picker is enabled, select a listed **Organizational unit**. The configured default starts selected, and **Continue** requires a selection. A catalog with selection disabled uses its fixed default or the default domain destination.
 

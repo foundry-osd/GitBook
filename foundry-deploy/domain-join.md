@@ -13,7 +13,7 @@ The dialog preparation does not contact AD. Valid syntax and successful unlock d
 
 ## Supply interactive input or select a destination
 
-For Interactive mode, **Domain join** asks for **Domain DNS name**, **Account (DOMAIN\user or user@domain)** and **Password**. A prefilled domain remains editable.
+For Interactive mode, **Domain join** asks for **Domain name**, **Account (DOMAIN\user or user@domain)** and **Password**. A prefilled domain remains editable.
 
 For Zero-touch, use the existing Protected deployment unlock. The encrypted account/password are checked against their authored domain/account context. There is no new password prompt; the dialog appears only for enabled destination selection.
 

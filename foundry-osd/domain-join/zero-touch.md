@@ -6,8 +6,8 @@ Choose this mode when protected deployment media should supply the join credenti
 
 1. In [General configuration](../general.md#protected-deployment), enable **Protected deployment** and supply its existing media password.
 2. Open **Domain Join > Zero-Touch** and choose **Enable**. Confirm replacement if another Domain Join or Autopilot mode is active.
-3. Enter **Target DNS domain**, then **Account (DOMAIN\user or user@domain)** and **Account password** under **Domain credentials**. Use an administrator-provided account such as `CORP\deployment-join` for `corp.example.test`.
-4. Optionally [add or import destinations](README.md#configure-destinations). Choose a default and enable **Allow destination selection during deployment** only if technician selection is wanted.
+3. Enter **Domain name**, then **Account (DOMAIN\user or user@domain)** and **Password** under **Join account**. Use an administrator-provided account such as `CORP\deployment-join` for `corp.example.test`.
+4. Optionally [add or import destinations](README.md#configure-destinations). Choose a default and enable **Let technicians choose the OU** only if technician selection is wanted.
 5. Resolve all readiness messages and [create or update media](../media/README.md).
 
 The automatic password is encrypted using the existing Protected deployment key. Deploy uses the existing unlock session; there is no additional media password or domain-password prompt. Without a destination picker, no Domain join dialog is introduced. With a picker, the domain is read-only and the credential editors are hidden; the technician must choose a catalog row before continuing.

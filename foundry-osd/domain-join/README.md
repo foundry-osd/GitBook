@@ -15,26 +15,26 @@ Exactly one Domain Join or [Windows Autopilot](../autopilot/README.md) mode can 
 
 Both pages support the same optional catalog. Use a DNS domain such as `corp.example.test`, a display label such as `Workstations`, and a distinguished name such as `OU=Workstations,DC=corp,DC=example,DC=test`.
 
-1. Enter **Target DNS domain**. It is required for Zero-touch and for a catalog; Interactive without a catalog may leave it for the technician.
-2. Expand **Destinations**. Under **Add a destination manually**, enter **Display label** and **OU distinguished name**, then choose **Add destination**. The DN must belong to the target domain. The catalog holds at most 1,024 destinations.
+1. Enter **Domain name**. It is required for Zero-touch and for a catalog; Interactive without a catalog may leave it for the technician.
+2. Expand **Organizational units**. Under **Add an OU manually**, enter **Display name** and **Distinguished name**, then choose **Add OU**. The DN must belong to the target domain. The catalog holds at most 1,024 destinations.
 3. Alternatively, use [explicit discovery and import](#discover-and-import-destinations).
-4. Choose **Default destination (optional)**, or **Clear default** to leave the destination unset.
-5. Enable **Allow destination selection during deployment** if technicians should choose among the catalog rows. A default is preselected; without one, a listed choice is required before continuing.
+4. Choose **Default OU**, or **Clear** to leave the destination unset.
+5. Enable **Let technicians choose the OU** if technicians should choose among the catalog rows. A default is preselected; without one, a listed choice is required before continuing.
 
 With selection disabled, the configured default is fixed. With no default, Windows uses its default domain account location; a reused account is left in its current location. A compatible catalog restricts technicians to authored choices. Interactive deployment without a compatible catalog instead offers an optional typed DN. Zero-touch does not offer freeform destinations.
 
-Changing the authored domain clears the default and disables selection, but retains catalog rows. Select rows from the previous domain under **Destinations** and choose **Remove selected**, or correct the domain, before creating media. Removing the default row clears the default; removing the last row also clears catalog selection.
+Changing the authored domain clears the default and disables selection, but retains catalog rows. Select rows from the previous domain under **Organizational units** and choose **Remove selected**, or correct the domain, before creating media. Removing the default row clears the default; removing the last row also clears catalog selection.
 
 A retained catalog that no longer matches the target domain is an editing draft. While Domain Join is enabled, repair the mismatch before saving a named-profile checkpoint, exporting the profile or creating media. A disabled Domain Join mode does not block them. Activating a named profile restores its last valid checkpoint.
 
 ## Discover and import destinations
 
 1. Use an authoring computer already joined to the intended AD domain and connect it to that directory.
-2. Under **Import from the computer domain**, choose **Discover destinations**.
-3. Review the displayed computer domain and preview. Select the rows to retain, then choose **Import selected destinations**. Discovery alone does not change the saved catalog.
+2. Under **Import OUs from this computer's domain**, choose **Find OUs**.
+3. Review the displayed computer domain and preview. Select the rows to retain, then choose **Add selected OUs**. Discovery alone does not change the saved catalog.
 4. Review the merged catalog and default. Existing manual rows and the default are preserved; duplicate DNs are not added again. An empty target domain is populated from the import; a different target/catalog domain must be corrected first.
 
-Discovery selects the computer's actual AD domain, using your current Windows identity to read it. The signed-in user's domain is not the domain selector. Requests and preview size are bounded; an incomplete preview is labelled as such. Use **Cancel discovery** if needed. Manual destinations remain available when discovery is unavailable.
+Discovery selects the computer's actual AD domain, using your current Windows identity to read it. The signed-in user's domain is not the domain selector. Requests and preview size are bounded; an incomplete preview is labelled as such. Use **Cancel search** if needed. Manual destinations remain available when discovery is unavailable.
 
 {% hint style="warning" %}
 **Screenshot required**
