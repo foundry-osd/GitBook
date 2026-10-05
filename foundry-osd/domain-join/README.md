@@ -23,7 +23,7 @@ Both pages support the same optional catalog. Use a DNS domain such as `corp.exa
 
 With selection disabled, the configured default is fixed. With no default, Windows uses its default domain account location; a reused account is left in its current location. A compatible catalog restricts technicians to authored choices. Interactive deployment without a compatible catalog instead offers an optional typed DN. Zero-touch does not offer freeform destinations.
 
-Changing the authored domain clears the default and disables selection, but retains catalog rows. Remove or correct rows from the previous domain before creating media. Removing the default row clears the default; removing the last row also clears catalog selection.
+Changing the authored domain clears the default and disables selection, but retains catalog rows. Select rows from the previous domain under **Destinations** and choose **Remove selected**, or correct the domain, before creating media. Removing the default row clears the default; removing the last row also clears catalog selection.
 
 A retained catalog that no longer matches the target domain is an editing draft. Repair the mismatch before saving a named-profile checkpoint, exporting the profile or creating media. Activating a named profile restores its last valid checkpoint.
 
@@ -31,7 +31,7 @@ A retained catalog that no longer matches the target domain is an editing draft.
 
 1. Use an authoring computer already joined to the intended AD domain and connect it to that directory.
 2. Under **Import from the computer domain**, choose **Discover destinations**.
-3. Review the displayed computer domain and preview. Check the rows to retain, then choose **Import selected destinations**. Discovery alone does not change the saved catalog.
+3. Review the displayed computer domain and preview. Select the rows to retain, then choose **Import selected destinations**. Discovery alone does not change the saved catalog.
 4. Review the merged catalog and default. Existing manual rows and the default are preserved; duplicate DNs are not added again. An empty target domain is populated from the import; a different target/catalog domain must be corrected first.
 
 Discovery selects the computer's actual AD domain, using your current Windows identity to read it. The signed-in user's domain is not the domain selector. Requests and preview size are bounded; an incomplete preview is labelled as such. Use **Cancel discovery** if needed. Manual destinations remain available when discovery is unavailable.
@@ -40,7 +40,7 @@ Discovery selects the computer's actual AD domain, using your current Windows id
 **Screenshot required**
 
 - **File:** `foundry-osd-domain-join-01-destination-catalog.png`
-- **Capture:** Show the destination catalog, optional default, selection checkbox and explicitly selected discovery preview using sanitized demonstration data.
+- **Capture:** Show the destination catalog, optional default, selection toggle and explicitly selected discovery preview using sanitized demonstration data.
 {% endhint %}
 
 ## Build and verify
