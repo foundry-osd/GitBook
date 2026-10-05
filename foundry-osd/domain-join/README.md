@@ -16,7 +16,7 @@ Exactly one Domain Join or [Windows Autopilot](../autopilot/README.md) mode can 
 Both pages share the same optional OU list. Use a DNS domain such as `corp.example.test`, a display name such as `Workstations`, and a distinguished name such as `OU=Workstations,DC=corp,DC=example,DC=test`.
 
 1. Enter **Domain name**. It is required for Zero-touch and whenever you list OUs; Interactive without listed OUs may leave it for the technician.
-2. Expand **Organizational units**. Under **Add an OU manually**, enter **Display name** and **Distinguished name**, then choose **Add OU**. The DN must belong to that domain. You can list up to 1,024 OUs.
+2. Expand **Organizational units**. Under **Add an OU manually**, enter **Display name** and **Distinguished name**, then choose **Add OU**. The DN must name an organizational unit inside that domain, so it starts with `OU=`; a container such as `CN=Computers` is not accepted. You can list up to 1,024 OUs.
 3. Alternatively, use [search and import](#find-and-import-ous).
 4. Choose **Default OU**, or **Clear** to leave no default.
 5. Enable **Let technicians choose the OU** if technicians should choose among the listed OUs. A default is preselected; without one, a listed choice is required before continuing.

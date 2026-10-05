@@ -16,7 +16,7 @@ Restart states and cleanup states are recorded separately from these phases. A c
 ## Media is not ready or input is rejected
 
 - For Zero-touch, supply the context-matching domain password and a usable existing [General protection password](../foundry-osd/general.md#protected-deployment). Imported portable profiles deliberately omit the direct domain password.
-- For Interactive without listed OUs, enter the domain in the Domain join step. A typed optional OU DN must parse and belong to that domain.
+- For Interactive without listed OUs, enter the domain in the Domain join step. A typed optional OU DN must name an organizational unit (it starts with `OU=`) inside that domain; a container such as `CN=Computers` is not accepted.
 - When technician choice is enabled, choose a listed OU. Without a default, a selection is required. Changing the interactive domain clears the earlier OU input and hides listed OUs from another domain.
 - Correct the listed OUs after changing the domain name. The search reads the authoring computer's AD domain using the current Windows identity; it does not test deployment-account permissions. You can still add OUs manually when the search fails.
 - For a custom answer file, supply one valid concrete applicable `specialize` name and remove conflicting `Microsoft-Windows-UnattendedJoin` configuration. Foundry does not fill a missing custom name from the wizard. Review arbitrary commands separately; not every scripted conflict can be detected.
@@ -32,6 +32,8 @@ Ask the AD administrator to confirm the account's delegated join/reuse and direc
 ## Joined but the OU is wrong or unverified
 
 Review **Join** and **Placement** independently. Successful joining still requires the controlled restart even when placement fails; the console can report **Domain joined; target OU placement failed**.
+
+If the requested OU does not exist in the directory, Foundry still joins the computer, in the domain's default location, and reports placement as failed with the code `OrganizationalUnitNotFound`. The console shows **Domain joined in the default location; target OU not found**. Correct the OU in Foundry OSD, then move the computer account with the administrator.
 
 Confirm the requested DN exists and the account can read the object and the OU and perform the required same-domain placement. Existing-account moves preserve the captured GUID and require identity proof. No visible pre-join account is not proof that an account is absent, so an unproven existing object is not moved automatically.
 

@@ -23,7 +23,7 @@ For Zero-touch, use the existing Protected deployment unlock. The encrypted acco
 | --- | --- |
 | OU list with technician choice enabled | Choose a listed **Organizational unit**. The default OU is preselected; **Next** requires a selection. |
 | OU list with technician choice disabled | No OU field. The configured default is fixed; without a default, use the domain's default location. |
-| Interactive without a usable OU list | Enter **OU distinguished name (optional)** inside the entered domain, or leave it empty. |
+| Interactive without a usable OU list | Enter **OU distinguished name (optional)**, starting with `OU=` and inside the entered domain, or leave it empty. |
 | Zero-touch without technician choice | No step; the default OU or the domain's default location is used. |
 
 Changing the domain in Interactive mode hides listed OUs that belong to another domain and offers the typed OU field instead. When an OU list applies, a typed OU is not accepted.
@@ -43,7 +43,7 @@ Deploy stages the operation-owned credential payload and execution records. Its 
 
 In installed Windows, PostInstall runs joining and placement after deferred drivers and networking, before the remaining built-ins and custom actions. When joining succeeds, it requests a controlled restart even if OU placement fails, then verifies the expected local name and domain without credentials.
 
-A selected OU is used for a new account. A safely identified reused account is moved within the same domain without deletion/recreation, preserving its GUID. If the worker cannot prove the object's identity or the OU, it reports a separate placement warning rather than moving an unproven account. Without an OU, it does not relocate a reused account.
+A selected OU is used for a new account. A safely identified reused account is moved within the same domain without deletion/recreation, preserving its GUID. If the worker cannot prove the object's identity or the OU, it reports a separate placement warning rather than moving an unproven account. Without an OU, it does not relocate a reused account. If the requested OU no longer exists, the computer is still joined, in the domain's default location, and placement is reported as failed.
 
 ## Confirm the result
 
