@@ -45,6 +45,8 @@ In installed Windows, PostInstall runs joining and placement after deferred driv
 
 A selected OU is used for a new account. A safely identified reused account is moved within the same domain without deletion/recreation, preserving its GUID. If the worker cannot prove the object's identity or the OU, it reports a separate placement warning rather than moving an unproven account. Without an OU, it does not relocate a reused account. If the requested OU no longer exists, the computer is still joined, in the domain's default location, and placement is reported as failed.
 
+When Deploy stages a join with the answer file Foundry generates, it also hides the Windows account screens in OOBE, so setup ends on the sign-in screen where a domain account is used. No local account is required for this; add one on the [OOBE page](../foundry-osd/customization/oobe.md) if you want local access. An imported [custom answer file](../foundry-osd/customization/unattend.md) keeps control of its own OOBE settings.
+
 ## Confirm the result
 
 Check [deployment verification](verify-deployment.md#domain-join) and [domain outcome evidence](../troubleshooting/logs-and-support.md#domain-join-evidence). Joining, OU placement/directory readback, local membership, restart and credential cleanup have independent outcomes.
