@@ -16,7 +16,7 @@ Exactly one Domain Join or [Windows Autopilot](../autopilot/README.md) mode can 
 Both pages support the same optional catalog. Use a DNS domain such as `corp.example.test`, a display label such as `Workstations`, and a distinguished name such as `OU=Workstations,DC=corp,DC=example,DC=test`.
 
 1. Enter **Target DNS domain**. It is required for Zero-touch and for a catalog; Interactive without a catalog may leave it for the technician.
-2. Under **Add a destination manually**, enter **Display label** and **OU distinguished name**, then choose **Add destination**. The DN must belong to the target domain. The catalog holds at most 1,024 destinations.
+2. Expand **Destinations**. Under **Add a destination manually**, enter **Display label** and **OU distinguished name**, then choose **Add destination**. The DN must belong to the target domain. The catalog holds at most 1,024 destinations.
 3. Alternatively, use [explicit discovery and import](#discover-and-import-destinations).
 4. Choose **Default destination (optional)**, or **Clear default** to leave the destination unset.
 5. Enable **Allow destination selection during deployment** if technicians should choose among the catalog rows. A default is preselected; without one, a listed choice is required before continuing.
