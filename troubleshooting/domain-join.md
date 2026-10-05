@@ -16,7 +16,7 @@ Restart states and cleanup states are recorded separately from these phases. A c
 ## Media is not ready or input is rejected
 
 - For Zero-touch, supply the context-matching domain password and a usable existing [General protection password](../foundry-osd/general.md#protected-deployment). Imported portable profiles deliberately omit the direct domain password.
-- For Interactive without listed OUs, enter the domain at launch. A typed optional OU DN must parse and belong to that domain.
+- For Interactive without listed OUs, enter the domain in the Domain join step. A typed optional OU DN must parse and belong to that domain.
 - When technician choice is enabled, choose a listed OU. Without a default, a selection is required. Changing the interactive domain clears the earlier OU input and hides listed OUs from another domain.
 - Correct the listed OUs after changing the domain name. The search reads the authoring computer's AD domain using the current Windows identity; it does not test deployment-account permissions. You can still add OUs manually when the search fails.
 - For a custom answer file, supply one valid concrete applicable `specialize` name and remove conflicting `Microsoft-Windows-UnattendedJoin` configuration. Foundry does not fill a missing custom name from the wizard. Review arbitrary commands separately; not every scripted conflict can be detected.

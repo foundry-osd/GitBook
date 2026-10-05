@@ -10,7 +10,7 @@ Choose this mode when protected deployment media should supply the join credenti
 4. Optionally [add or import OUs](README.md#configure-organizational-units). Choose a default and enable **Let technicians choose the OU** only if technician selection is wanted.
 5. Resolve all readiness messages and [create or update media](../media/README.md).
 
-The automatic password is encrypted using the existing Protected deployment key. Deploy uses the existing unlock session; there is no additional media password or domain-password prompt. Without technician OU choice, no Domain join dialog appears. With it, the domain is read-only and the credential fields are hidden; the technician must choose an OU before continuing.
+The automatic password is encrypted using the existing Protected deployment key. Deploy uses the existing unlock session; there is no additional media password or domain-password prompt. Without technician OU choice, the Deploy wizard shows no Domain join step. With it, the step shows the domain name as read-only and no credential fields; the technician must choose an OU before continuing.
 
 {% hint style="warning" %}
 **Screenshot required**

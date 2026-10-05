@@ -6,31 +6,35 @@ Use media configured for [Interactive](../foundry-osd/domain-join/interactive.md
 
 1. Confirm the [target disk and final computer name](target.md). Native naming uses Foundry's validated name. A custom answer file must contain exactly one valid concrete `ComputerName` in an applicable `Microsoft-Windows-Shell-Setup` `specialize` component, and no `Microsoft-Windows-UnattendedJoin` component. Missing, wildcard, invalid or multiple names cannot supply this identity.
 2. Select the intended Windows image and edition. Known Home-family editions skip Domain Join with a warning while installation continues; unfamiliar or missing edition metadata is deferred to image/native inspection.
-3. Review the wizard summary's authored domain and default OU. It precedes deployment-time input and does not reflect an OU chosen later in the launch dialog.
-4. Start deployment to prepare domain input before **Confirm disk erase**.
+3. Complete the **Domain join** step when the wizard shows it, as described below.
+4. On **Summary**, review the **Domain join** category: it shows the domain name and the OU the join will use. Choose its edit action to return to the step.
 
-The dialog preparation does not contact AD. Valid syntax and successful unlock do not prove that the supplied account can join or place the computer.
+The wizard does not contact AD. Valid syntax and a successful unlock do not prove that the supplied account can join or place the computer.
 
-## Supply interactive input or select an OU
+## Complete the Domain join step
 
-For Interactive mode, **Domain join** asks for **Domain name**, **Account (DOMAIN\user or user@domain)** and **Password**. A prefilled domain remains editable.
+The **Domain join** step sits between **Drivers** and **Summary**. It appears only when there is something to enter or choose, and **Next** stays unavailable until the inputs are valid.
 
-For Zero-touch, use the existing Protected deployment unlock. The encrypted account/password are checked against their authored domain/account context. There is no new password prompt; the dialog appears only for enabled technician OU choice.
+For Interactive mode, enter **Domain name**, **Account (DOMAIN\user or user@domain)** and **Password**. A domain name set in Foundry OSD is prefilled and remains editable. An invalid domain name or account is flagged under its field.
+
+For Zero-touch, use the existing Protected deployment unlock. The encrypted account and password are checked against the domain and account they were saved for. There is no password prompt; the step appears only when technician OU choice is enabled, and then shows the domain name as read-only with the OU choice.
 
 | OU configuration | Technician action |
 | --- | --- |
-| OU list with technician choice enabled | Choose a listed **Organizational unit**. The authored default is preselected; **Continue** requires a selected row. |
+| OU list with technician choice enabled | Choose a listed **Organizational unit**. The default OU is preselected; **Next** requires a selection. |
 | OU list with technician choice disabled | No OU field. The configured default is fixed; without a default, use the domain's default location. |
-| Interactive without a usable OU list | Enter **OU distinguished name (optional)** inside the submitted domain, or leave it empty. |
-| Zero-touch without selection | No dialog; use the authored default or the domain's default location. |
+| Interactive without a usable OU list | Enter **OU distinguished name (optional)** inside the entered domain, or leave it empty. |
+| Zero-touch without technician choice | No step; the default OU or the domain's default location is used. |
 
-Changing the domain in Interactive mode clears the OU input and hides listed OUs that belong to another domain. When an OU list applies, a typed OU is not accepted. Select **Continue**, then review the actual domain and OU in **Confirm disk erase**. Account and password are not included in the summary or confirmation. **Cancel** leaves deployment unstarted.
+Changing the domain in Interactive mode hides listed OUs that belong to another domain and offers the typed OU field instead. When an OU list applies, a typed OU is not accepted.
+
+The account and password never appear in the summary or in **Confirm disk erase**. The password is kept only in memory while you finish the wizard and is cleared once deployment starts. Known Home-family editions skip the step; the summary then says the edition cannot join a domain.
 
 {% hint style="warning" %}
 **Screenshot required**
 
 - **File:** `foundry-deploy-domain-join-01-interactive-ou.png`
-- **Capture:** Show the Domain join dialog and optional OU distinguished name field shown when no OU list applies using sanitized demonstration data, with credential fields empty.
+- **Capture:** Show the Domain join wizard step in Interactive mode with the OU choice, using sanitized demonstration data and empty credential fields.
 {% endhint %}
 
 ## Follow staging and first boot

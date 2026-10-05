@@ -27,7 +27,7 @@ The [Windows PE bootstrap](../reference/bootstrap.md) prepares this session and 
 - Driver pack selection.
 - Firmware and Windows Autopilot options when configured.
 
-[Domain Join input](../foundry-deploy/domain-join.md) is gathered at launch before disk-erasure confirmation. Interactive asks for account/password and a permitted OU; automatic uses the existing unlock session and optional OU choice.
+[Domain Join input](../foundry-deploy/domain-join.md) is entered in a wizard step before the summary. Interactive asks for the account, password and a permitted OU; Zero-touch uses the existing unlock session and an optional OU choice.
 
 ## Phase 4: Apply and configure Windows
 

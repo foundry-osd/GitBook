@@ -30,5 +30,6 @@ Keep deployment media under your control. Packages without a catalog hash retain
 2. [Select Windows](operating-system.md).
 3. [Select a driver pack](driver-pack.md).
 4. Configure Windows Autopilot when JSON profile or zero-touch upload media requires a deployment-time choice. Interactive upload runs later during Windows OOBE and does not add this wizard step.
-5. [Review and deploy](review-and-deploy.md). Domain Join media collects [conditional launch input](domain-join.md#supply-interactive-input-or-select-an-ou) before disk-erasure confirmation; it does not add a standalone wizard page.
-6. [Verify deployment](verify-deployment.md).
+5. Complete the [Domain join step](domain-join.md#complete-the-domain-join-step) when the wizard shows it. It appears before the summary on Domain Join media that needs credentials or an OU choice from the technician.
+6. [Review and deploy](review-and-deploy.md).
+7. [Verify deployment](verify-deployment.md).

@@ -25,7 +25,7 @@ When the media includes [custom answer files](../foundry-osd/customization/unatt
 
 Start only when every value is correct. Foundry opens **Confirm disk erase** before crossing the destructive boundary. Verify the disk number, model, bus, size, and selected operating system before accepting.
 
-[Domain Join](domain-join.md) gathers interactive credentials or a permitted OU choice at launch before this confirmation. The earlier wizard summary shows authored defaults; confirmation appends the actual prepared domain and OU or known unsupported-edition skip. Account and password are not included. Cancelling the domain dialog never reaches destructive confirmation.
+The [Domain join step](domain-join.md#complete-the-domain-join-step) collects interactive credentials or a permitted OU choice before the summary. The summary's **Domain join** category and this confirmation show the domain name and OU, or that a known unsupported edition skips the join. Account and password are not included.
 
 {% hint style="danger" %}
 Accepting the confirmation allows Foundry to clean and repartition the selected disk. Existing data on that disk will be lost.

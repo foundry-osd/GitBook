@@ -33,7 +33,7 @@ Review the [Protected deployment scope](../foundry-osd/general.md#protected-depl
 - [Zero-touch upload](../foundry-osd/autopilot/zero-touch-hardware-hash.md) credentials can be recovered from media created without Protected deployment.
 - Non-empty [OOBE local account passwords](../foundry-osd/customization/oobe.md#password-protection) require Protected deployment under Foundry's security policy and are encrypted in the deployment configuration. During Windows Setup, they are written to `unattend.xml` using reversible encoding, not encryption. Treat that answer file and its copies as sensitive data.
 - Protected deployment does not encrypt the complete ISO, USB drive, Windows image, or data staged into the installed Windows system.
-- [Zero-touch Domain Join](../foundry-osd/domain-join/zero-touch.md) requires the existing General protection key and Deploy unlock session. [Interactive mode](../foundry-osd/domain-join/interactive.md) collects credentials at launch and adds no media-password prerequisite.
+- [Zero-touch Domain Join](../foundry-osd/domain-join/zero-touch.md) requires the existing General protection key and Deploy unlock session. [Interactive mode](../foundry-osd/domain-join/interactive.md) collects credentials in the Deploy wizard and adds no media-password prerequisite.
 
 If media is lost, stolen, or copied without authorization, revoke embedded credentials where applicable and recreate the media. Do not rely on the technician password as a substitute for physical media controls.
 
