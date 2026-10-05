@@ -16,8 +16,8 @@ Exactly one Domain Join or [Windows Autopilot](../autopilot/README.md) mode can 
 Both pages share the same optional OU list. Use a DNS domain such as `corp.example.test`, a display name such as `Workstations`, and a distinguished name such as `OU=Workstations,DC=corp,DC=example,DC=test`.
 
 1. Enter **Domain name**. It is required for Zero-touch and whenever you list OUs; Interactive without listed OUs may leave it for the technician.
-2. Expand **Organizational units**. Under **Add an OU manually**, enter **Display name** and **Distinguished name**, then choose **Add OU**. The DN must name an organizational unit inside that domain, so it starts with `OU=`; a container such as `CN=Computers` is not accepted. You can list up to 1,024 OUs.
-3. Alternatively, use [search and import](#find-and-import-ous).
+2. Under **OU actions**, choose **Add OU**. Enter **Display name** and **Distinguished name**, then choose **Add OU** in the dialog. The DN must name an organizational unit inside that domain, so it starts with `OU=`; a container such as `CN=Computers` is not accepted. A refused entry is explained in the dialog so you can correct it. You can list up to 1,024 OUs.
+3. Alternatively, [import OUs from the domain](#find-and-import-ous).
 4. Choose **Default OU**, or **Clear** to leave no default.
 5. Enable **Let technicians choose the OU** if technicians should choose among the listed OUs. A default is preselected; without one, a listed choice is required before continuing.
 
@@ -30,17 +30,17 @@ Listed OUs that no longer match the domain name are an editing draft. While Doma
 ## Find and import OUs
 
 1. Use an authoring computer already joined to the intended AD domain and connect it to that directory.
-2. Under **Import OUs from this computer's domain**, choose **Find OUs**.
-3. Review the displayed computer domain and the results. Select the OUs to keep, then choose **Add selected OUs**. Searching alone does not change the saved OU list.
-4. Review the resulting OU list and default. OUs added manually and the default are preserved; duplicate DNs are not added again. An empty domain name is filled in from the import; if the domain name or the listed OUs belong to another domain, correct that first.
+2. Under **OU actions**, choose **Import from domain**.
+3. In the dialog that lists the OUs found, select the ones to keep, then choose **Add selected OUs**. No OU is selected by default, and **Cancel** leaves the saved OU list unchanged.
+4. Review the resulting **Organizational units** list and the default. OUs added manually and the default are preserved; duplicate DNs are not added again. An empty domain name is filled in from the import; if the domain name or the listed OUs belong to another domain, correct that first.
 
-The search uses the computer's actual AD domain, using your current Windows identity to read it. The signed-in user's domain is not the domain selector. Requests and result size are bounded; incomplete results are labelled as such. Use **Cancel search** if needed. You can still add OUs manually when the search is unavailable.
+The search uses the computer's actual AD domain, using your current Windows identity to read it. The signed-in user's domain is not the domain selector. Requests and result size are bounded; the dialog says when only some of the OUs could be listed. While the search runs, the same button becomes **Cancel search**. You can still add OUs manually when the search is unavailable.
 
 {% hint style="warning" %}
 **Screenshot required**
 
 - **File:** `foundry-osd-domain-join-01-organizational-units.png`
-- **Capture:** Show the OU list, default OU, technician choice toggle and selected search results using sanitized demonstration data.
+- **Capture:** Show the OU actions, default OU, technician choice toggle and the OU list using sanitized demonstration data.
 {% endhint %}
 
 ## Build and verify
