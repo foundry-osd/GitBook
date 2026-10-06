@@ -1,6 +1,8 @@
 # Windows ADK and Windows PE
 
-Foundry OSD requires the Windows ADK `10.1.26100` release, revision `2454` or later, with a matching Windows PE Add-on and the required files for the selected architecture to build deployment media.
+Foundry OSD requires the Windows ADK `10.1.26100` release, revision `9457` or later, with a matching Windows PE Add-on and the required files for the selected architecture to build deployment media.
+
+Earlier revisions, including `10.1.26100.2454`, are reported as incompatible. The ADK setup action then uninstalls the installed ADK and Windows PE Add-on before it installs the supported release.
 
 ## What Foundry checks
 
@@ -32,7 +34,7 @@ The ADK page detects:
 </figure>
 
 {% hint style="info" %}
-The automatic installation downloads and installs Windows ADK `10.1.26100.2454` first, followed by Windows PE Add-on `10.1.26100.2454`.
+The automatic installation downloads and installs Windows ADK `10.1.26100.9457` first, followed by Windows PE Add-on `10.1.26100.9457`.
 {% endhint %}
 
 ## Repair Windows PE readiness
@@ -40,7 +42,7 @@ The automatic installation downloads and installs Windows ADK `10.1.26100.2454` 
 The readiness details show whether the WinPE files are available for **x64** and **ARM64**. The separate media creation capability indicates whether the ADK and WinPE prerequisites are met. Missing files for one architecture block that target; a complete other architecture remains available.
 
 - If the matching add-on is already installed but files are missing, use its installer to **Repair** it.
-- If its version differs from the ADK, uninstall the Windows PE Add-on first, then install the matching `10.1.26100.2454` add-on from [Microsoft's ADK downloads](https://learn.microsoft.com/windows-hardware/get-started/adk-install).
+- If its version differs from the ADK, uninstall the Windows PE Add-on first, then install the matching `10.1.26100.9457` add-on from [Microsoft's ADK downloads](https://learn.microsoft.com/windows-hardware/get-started/adk-install).
 - Restart Foundry after repairing or replacing the add-on outside the app so it checks the installation again.
 
 Foundry's ordinary install action is for missing components. Repair or replacement of a registered add-on is performed through its installer.
