@@ -13,7 +13,7 @@
 
 1. Confirm Internet access and administrative permissions.
 2. Complete any other Windows Installer operation.
-3. Install Windows ADK `10.1.26100.2454` before Windows PE Add-on `10.1.26100.2454`.
+3. Install Windows ADK `10.1.26100.9457` before Windows PE Add-on `10.1.26100.9457`.
 4. Restart Foundry OSD and refresh detection.
 
 ## Foundry OSD cannot reach online services

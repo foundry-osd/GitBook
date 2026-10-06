@@ -9,11 +9,11 @@ Recreate ISO media or [update an existing USB drive](../foundry-osd/media/update
 ## Administrator workstation
 
 - Windows 10 or Windows 11.
-- Windows ADK `10.1.26100.2454`.
-- Windows PE Add-on `10.1.26100.2454`.
+- Windows ADK `10.1.26100.9457`.
+- Windows PE Add-on `10.1.26100.9457`.
 
 {% hint style="warning" %}
-Do not substitute another ADK or Windows PE Add-on version. Use `10.1.26100.2454` for both components.
+Do not substitute another ADK or Windows PE Add-on version. Use `10.1.26100.9457` for both components.
 {% endhint %}
 
 ## Windows deployment media
