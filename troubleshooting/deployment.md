@@ -57,7 +57,6 @@ With ISO or USB overflow to target storage, some image checks finish after disk 
 - Confirm that the complete ISO or USB created with the boot image is still attached. Imported scripts and packages are stored outside `boot.wim`.
 - With a [PXE boot image](../foundry-osd/media/pxe-deployment.md#post-installation-content), imported content is not delivered. Attach the matching media, or disable the actions that use imported content and recreate the boot image.
 - Do not combine a boot image with content from a different media build.
-- With a Foundry Deploy release up to 26.10.7.1, a boot image without its media also fails when only built-in tasks are required. Later releases require the media only for imported content.
 
 ## Deployment stops with an error
 

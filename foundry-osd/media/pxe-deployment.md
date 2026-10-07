@@ -64,8 +64,4 @@ Imported [Post-installation](../customization/post-installation.md) content is s
 
 Built-in tasks, Command line actions without imported content, and Restart Windows actions need nothing from the media. They run when only the boot image is available.
 
-{% hint style="info" %}
-This requires a Foundry Deploy release later than 26.10.7.1. Earlier releases stop before disk preparation with **Post-installation preparation failed** whenever a built-in task is required, even when no content was imported.
-{% endhint %}
-
 To use imported content with a PXE boot, keep the complete generated ISO attached to the target, or provide its matching Foundry USB cache media, until deployment finishes. Do not mix the boot image and content from different media builds. Foundry does not download this content from an HTTP or SMB share. When required content is missing, deployment stops before the target disk is prepared; see [Post-installation preparation fails](../../troubleshooting/deployment.md#post-installation-preparation-fails). This does not provide a supported PXE delivery path.
