@@ -75,4 +75,4 @@ For [custom images](../foundry-osd/customization/custom-windows-images.md), veri
 
 ## Post-installation preparation
 
-Foundry checks required [Post-installation](../foundry-osd/customization/post-installation.md) content and its runtime before preparing the target disk. Keep the complete ISO or USB media available until staging finishes. Successful staging does not prove first-boot actions succeeded; continue through [deployment verification](verify-deployment.md).
+Foundry checks required [Post-installation](../foundry-osd/customization/post-installation.md) content and its runtime before preparing the target disk. When actions use imported scripts or packages, keep the complete ISO or USB media available until staging finishes. If this check fails, see [Post-installation preparation fails](../troubleshooting/deployment.md#post-installation-preparation-fails). Successful staging does not prove first-boot actions succeeded; continue through [deployment verification](verify-deployment.md).

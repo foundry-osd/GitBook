@@ -50,6 +50,14 @@ Record the failed step and follow the reported action:
 
 With ISO or USB overflow to target storage, some image checks finish after disk preparation. A successful source-access check does not guarantee that the complete download or later image verification will succeed. See [checks before disk preparation](../foundry-deploy/review-and-deploy.md#checks-before-disk-preparation).
 
+## Post-installation preparation fails
+
+**Post-installation preparation failed** appears before **Prepare target disk**, so the target has not been erased by that deployment attempt. Foundry could not find or verify [Post-installation](../foundry-osd/customization/post-installation.md) content that the configuration requires. The deployment log records the specific reason.
+
+- Confirm that the complete ISO or USB created with the boot image is still attached. Imported scripts and packages are stored outside `boot.wim`.
+- With a [PXE boot image](../foundry-osd/media/pxe-deployment.md#post-installation-content), imported content is not delivered. Attach the matching media, or disable the actions that use imported content and recreate the boot image.
+- Do not combine a boot image with content from a different media build.
+
 ## Deployment stops with an error
 
 1. Record the failed step exactly as displayed.

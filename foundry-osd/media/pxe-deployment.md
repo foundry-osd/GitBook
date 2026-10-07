@@ -41,10 +41,27 @@ Resolve driver, architecture, firmware, or network compatibility issues in the I
 
 Re-import `sources\boot.wim` whenever the Foundry OSD ISO is regenerated. Keep the previous boot image available until the replacement has passed PXE boot and runtime validation on representative clients.
 
+## What the boot image carries
+
+A PXE server delivers only `sources\boot.wim`. Content that Foundry OSD stores elsewhere on the ISO or USB does not reach the target.
+
+| Content | Location | With the boot image alone |
+| --- | --- | --- |
+| Deployment settings, including network, Autopilot, answer file, naming, OOBE, optional feature, app removal, and AI component choices | Inside `boot.wim` | Delivered |
+| [Post-installation](../customization/post-installation.md) built-in tasks, Command line actions without imported content, and Restart Windows actions | Inside `boot.wim` | Delivered |
+| Post-installation PowerShell scripts, Software installers, and Command line actions with imported content | Outside `boot.wim` | Not delivered |
+| [Custom Windows images](../customization/custom-windows-images.md) | Outside `boot.wim` | Not delivered |
+
+Windows images, driver packs, and the Foundry Deploy and PostInstall applications that are downloaded during deployment still require the network access listed in [Before you begin](#before-you-begin). Validate every enabled customization on a representative client before wider deployment.
+
 ## Custom image payloads
 
 [Custom Windows images](../customization/custom-windows-images.md) are external to `sources\boot.wim`. Copying that boot image alone does not transfer custom images or their manifest. This feature does not provide a supported PXE delivery path for custom WIMs; use the complete generated ISO or USB media.
 
 ## Post-installation content
 
-Copying `sources\boot.wim` to a PXE server does not transfer the external [Post-installation](../customization/post-installation.md) manifest or packages. Built-in tasks can require this manifest even when custom actions are disabled and no packages were imported. Keep the complete generated ISO attached to the target, or provide its matching Foundry USB cache media, until deployment finishes. Do not mix the boot image and content from different media builds. Missing required content blocks deployment; Foundry does not download it from an HTTP or SMB share. This does not provide a supported PXE delivery path.
+Imported [Post-installation](../customization/post-installation.md) content is stored on the ISO or USB, outside `sources\boot.wim`, so a PXE server does not deliver it. This affects every PowerShell script and Software action, and Command line actions that use imported content.
+
+Built-in tasks, Command line actions without imported content, and Restart Windows actions need nothing from the media. They run when only the boot image is available.
+
+To use imported content with a PXE boot, keep the complete generated ISO attached to the target, or provide its matching Foundry USB cache media, until deployment finishes. Do not mix the boot image and content from different media builds. Foundry does not download this content from an HTTP or SMB share. When required content is missing, deployment stops before the target disk is prepared; see [Post-installation preparation fails](../../troubleshooting/deployment.md#post-installation-preparation-fails). This does not provide a supported PXE delivery path.
