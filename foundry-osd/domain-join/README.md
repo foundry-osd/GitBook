@@ -36,7 +36,7 @@ Select a domain under **Domains**. The **Organizational units** card then shows 
 
 Without technician choice, each domain's default OU is fixed. With no default, Windows uses that domain's default location; a reused account is left where it is. When a domain lists OUs, technicians can only pick from them. In Interactive mode, a domain without listed OUs offers an optional typed DN instead. Zero-touch never accepts a typed OU.
 
-**Remove** deletes the selected OUs; removing a default OU clears that domain's default.
+**Edit** changes the display name of the selected OU, for example to show technicians a clearer name than the one imported from the directory. The distinguished name stays the same, the OU stays the default when it was, and a later import keeps your name. **Remove** deletes the selected OUs; removing a default OU clears that domain's default.
 
 Both tables are sorted by name; select a column header to sort differently.
 
