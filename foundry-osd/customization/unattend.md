@@ -23,7 +23,7 @@ Validate the answer file with Windows System Image Manager for the target Window
 1. Open **Customization > Unattend** in Foundry OSD and enable the feature using the switch in the page header. Its controls remain disabled while the feature is off. The documentation button beside the switch opens this guide.
 2. Import one or more XML files. Review the validation results and give each file a recognizable display label.
 3. Choose a default file, or keep **Use Foundry settings** as the default.
-4. Enable [Protected deployment](../general.md#protected-deployment) and enter the media password. Protection is required for every custom file, even one that appears to contain no credentials.
+4. Enable [Password protection](../general.md#password-protection) and enter the deployment password. Protection is required for every custom file, even one that appears to contain no credentials.
 5. Return to **Start**, resolve readiness errors, and [create deployment media](../media/README.md).
 
 <figure>
@@ -63,16 +63,19 @@ Foundry validates the selected file before preparing the target disk. After appl
 | Autopilot JSON profile or interactive registration | Known incompatible settings block deployment. Use a compatible file or change the authored Autopilot configuration. |
 | Hardware hash upload from WinPE | Registration can continue. A successful upload does not guarantee Autopilot enrollment. |
 | Upload computer name to Autopilot | Skipped because Foundry does not manage the final computer name. See [Machine naming](machine-naming.md#upload-the-computer-name-to-autopilot). |
+| Domain Join | Requires exactly one fixed `ComputerName` in the `specialize` pass of `Microsoft-Windows-Shell-Setup`, and no `Microsoft-Windows-UnattendedJoin` component. Foundry joins the domain under that name. |
 
 A custom file does not disable every other Foundry feature. Test the file together with all enabled deployment options; do not assume arbitrary conflicts will be detected or resolved automatically.
 
 Foundry detects known XML conflicts but cannot predict arbitrary scripts. Arrange access to scripts referenced by the file; importing XML does not bundle those external files or execute its commands in WinPE.
 
+For [Domain Join](../domain-join/README.md), a missing computer name, a `*` wildcard or several names are refused before the deployment starts; Foundry does not take the name from the wizard. Remove any `Microsoft-Windows-UnattendedJoin` component, and review your own commands that rename the computer or join a domain. Custom answer files still require Password protection.
+
 Custom commands that replace setup hooks, restart Windows independently or change enrollment and package state can disrupt [Post-installation](post-installation.md#custom-answer-files). Test the complete combination before production use.
 
 ## Protect sensitive content
 
-The complete custom file is encrypted on deployment media using the existing Protected deployment key. Protection does not extend to the original source file or the decrypted copy Windows needs on the target.
+The complete custom file is encrypted on deployment media using the existing Password protection key. Protection does not extend to the original source file or the decrypted copy Windows needs on the target.
 
 Treat Panther answer files and their copies as sensitive. Windows password hiding is reversible, and custom commands or extensions can contain secrets that Windows will not automatically remove. Do not attach raw XML to support reports.
 
@@ -87,10 +90,11 @@ Do not remove the target answer file before `oobeSystem` has consumed it. Arrang
 | Default file is missing from the catalog | In Foundry OSD, choose an available default or **Use Foundry settings**, then rebuild media. An invalid catalog default blocks deployment even if another runtime choice is available. |
 | File is incompatible with selected Windows | Use a file with supported components for that architecture and validate it against the target image. |
 | Autopilot conflict | Remove the incompatible settings from the source and refresh it, or change Autopilot configuration before rebuilding. |
+| Domain Join conflict or invalid computer name | Correct the computer name in the `specialize` pass and remove the conflicting join component, refresh the source and create the media again. See [Domain Join troubleshooting](../../troubleshooting/domain-join.md). |
 | Deployment succeeds but Windows setup fails | Inspect Windows setup diagnostics without exposing secrets. Check the file against the selected image and test its commands and setup-hook dependencies. |
 
 After deployment, [verify Windows through first boot and OOBE](../../foundry-deploy/verify-deployment.md). A successful Foundry deployment does not confirm that Windows has consumed every answer-file setting.
 
 ## Custom images
 
-Enabled answer files also apply to [custom Windows images](custom-windows-images.md). Foundry does not add an image-specific answer-file compatibility scan. Verify that your answer file is suitable for the image, its architecture, and the remaining customizations.
+Enabled answer files also apply to [custom Windows images](custom-windows-images.md). Verify that your answer file is suitable for the image, its architecture, and the remaining customizations. For Domain Join, Foundry checks the applied image before preparing the join: an image that already contains a join component, or no single computer name, makes Foundry skip the join with a warning in the deployment summary. See [Domain Join troubleshooting](../../troubleshooting/domain-join.md#media-is-not-ready-or-input-is-rejected).

@@ -2,6 +2,8 @@
 
 Foundry supports three Autopilot workflows. Choose the method that matches the organization’s provisioning and security model.
 
+[Domain Join](../domain-join/README.md) is the alternative to Windows Autopilot. Enabling it replaces the active Autopilot mode, and enabling an Autopilot mode replaces Domain Join; Foundry asks for confirmation. Create the media again after switching.
+
 ## Choose a method
 
 ### JSON profile

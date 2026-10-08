@@ -19,12 +19,12 @@ All profiles retained in Foundry OSD are included in media created for the JSON 
 
 ## Protect the profile on deployment media
 
-Enable **Protected deployment** from [General configuration](../general.md) before creating the media when the retained Autopilot profiles must not remain readable on the ISO or USB drive.
+Enable **Password protection** from [General configuration](../general.md) before creating the media when the retained Autopilot profiles must not remain readable on the ISO or USB drive.
 
 When protection is enabled, Foundry stores every retained profile on the deployment media using AES-256-GCM encryption. Readable JSON files are not stored alongside the encrypted profiles. Foundry Deploy asks for the technician password, unlocks the deployment key, and decrypts the selected profile before staging it in the Windows installation.
 
 {% hint style="warning" %}
-Without Protected deployment, every retained Autopilot JSON profile is stored in readable form on the deployment media. Restrict access to the ISO or USB drive and recreate the media if it is lost or copied without authorization.
+Without Password protection, every retained Autopilot JSON profile is stored in readable form on the deployment media. Restrict access to the ISO or USB drive and recreate the media if it is lost or copied without authorization.
 {% endhint %}
 
 ## Expected result

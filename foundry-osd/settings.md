@@ -12,6 +12,8 @@ The application language changes the Foundry interface. Choose the Windows PE an
 
 Choose **Export diagnostics** to create a support archive with sensitive information filtered out. Your original log files are unchanged.
 
+The export collects only the desktop application's top-level `Foundry*.log` files, not the logs written on deployed computers. For Domain Join, recognized credential values are masked in sanitized output, and the temporary `credentials.bin` file is never read or included. See [which files to collect on the deployed computer](../troubleshooting/logs-and-support.md#domain-join-evidence).
+
 Use **Advanced: export raw logs** only when a support contact requests it. Raw logs can contain passwords, identifiers, paths, and network details. Review the warning and destination before sharing them. See [Logs and support](../troubleshooting/logs-and-support.md) for help collecting and sharing diagnostic information.
 
 ## Appearance
@@ -45,6 +47,8 @@ Select a configuration from the list to apply it immediately. Expand the card to
 </figure>
 
 See [Deployment profiles](deployment-profiles.md) for step-by-step instructions, the differences between remembering and sharing passwords, and help with connection files or conflicting changes.
+
+For Zero-touch Domain Join, see [how join passwords are kept, exported and shared](deployment-profiles.md#domain-credentials). **Include passwords and confidential files** never adds them to a `.foundryprofile` export.
 
 ## Proxy
 

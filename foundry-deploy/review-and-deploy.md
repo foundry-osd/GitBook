@@ -11,6 +11,7 @@ Confirm:
 - Driver pack.
 - Firmware options.
 - Windows Autopilot method and, for zero-touch hardware hash upload, the configured group tag.
+- Domain Join: the domain and the OU the computer will join.
 - Optional features and other deployment customization.
 
 <figure>
@@ -23,6 +24,8 @@ When the media includes [custom answer files](../foundry-osd/customization/unatt
 ## Start deployment
 
 Start only when every value is correct. Foundry opens **Confirm disk erase** before crossing the destructive boundary. Verify the disk number, model, bus, size, and selected operating system before accepting.
+
+The [Domain join step](domain-join.md#complete-the-domain-join-step) comes before the summary. The summary's **Domain join** category shows the domain and the OU the join will use, or says that the selected Windows edition cannot join a domain. The account and the password are never shown.
 
 {% hint style="danger" %}
 Accepting the confirmation allows Foundry to clean and repartition the selected disk. Existing data on that disk will be lost.
@@ -76,3 +79,5 @@ For [custom images](../foundry-osd/customization/custom-windows-images.md), veri
 ## Post-installation preparation
 
 Foundry checks required [Post-installation](../foundry-osd/customization/post-installation.md) content and its runtime before preparing the target disk. When actions use imported scripts or packages, keep the complete ISO or USB media available until staging finishes. If this check fails, see [Post-installation preparation fails](../troubleshooting/deployment.md#post-installation-preparation-fails). Successful staging does not prove first-boot actions succeeded; continue through [deployment verification](verify-deployment.md).
+
+For Domain Join, a successful deployment means the join has been prepared; it runs after the restart, in installed Windows. When the Windows edition or the image is not compatible, Foundry skips the join with a warning in the summary and the installation continues. Check the outcome as described in [Domain Join during deployment](domain-join.md#what-happens-in-windows).

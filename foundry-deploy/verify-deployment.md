@@ -36,6 +36,12 @@ When using [Post-installation](../foundry-osd/customization/post-installation.md
 
 Verify that the installed applications work after cleanup. If they need source files for repair or updates, confirm that those files remain available. Keep the [PostInstall results and logs](../troubleshooting/logs-and-support.md#postinstall-diagnostics) when investigating a problem.
 
+## Domain Join
+
+A successful deployment only means the join was prepared. After the restart, check the line that starts with `Domain -` in the Foundry console, then sign in with a domain account. Being a member of the domain does not prove that the computer account is in the intended OU: confirm it with your Active Directory administrator.
+
+When the join, the placement or the membership is not **Succeeded**, or when **Cleanup** stays **Pending**, resolve it before handing over the computer; see [Domain Join troubleshooting](../troubleshooting/domain-join.md). If Deploy skipped the join because of the Windows edition or the image, only the deployment summary mentions it.
+
 ## Automatic Windows activation
 
 For standard RETAIL deployments of supported Windows Home and Pro editions, Foundry automatically attempts to activate Windows after reboot using a compatible OEM product key stored in the device firmware. Online activation requires Internet access and a valid key for the installed Windows edition.

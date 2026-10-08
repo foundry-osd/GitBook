@@ -41,3 +41,13 @@ The [custom image workflow](../foundry-osd/customization/custom-windows-images.m
 [Post-installation](../foundry-osd/customization/post-installation.md) supports x64 and ARM64 targets. Bootstrap prepares PostInstall for the boot media architecture; you do not need to install .NET on the target. Use boot media matching the target Windows architecture. Deploy checks runtime compatibility before preparing the disk.
 
 Keep deployment media and its package content together, and choose scripts and installers compatible with the target Windows image and architecture. Test the complete workflow on representative hardware before rollout.
+
+## Domain Join
+
+[Domain Join](../foundry-osd/domain-join/README.md) is available on x64 and ARM64 for Windows editions that can join a domain.
+
+Use media that matches the architecture of the computer, and test the complete workflow before a rollout.
+
+Pro, Education and Enterprise editions, including their N variants, can join a domain. Home editions (`Core`, `CoreN`, `CoreSingleLanguage`, `CoreCountrySpecific`) cannot: Foundry skips the join with a warning and the installation continues. For an edition Foundry does not recognize, the decision is made from the applied image.
+
+Installed Windows must reach the domain's DNS and a writable domain controller, and the join account must be allowed to join computers, reuse existing computer accounts and place computers in the listed OUs. Custom answer files and custom images must meet the [Domain Join requirements](../troubleshooting/domain-join.md#media-is-not-ready-or-input-is-rejected).

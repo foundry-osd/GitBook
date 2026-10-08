@@ -8,6 +8,8 @@ In **Settings > General**, use **Export diagnostics** to save a sanitized archiv
 
 Use **Advanced: export raw logs** only when requested by a trusted support contact, and review the sensitive-data warning before sharing the archive. See [Export diagnostics](../foundry-osd/settings.md#export-diagnostics).
 
+For Domain Join, recognized credential values are masked in sanitized logs, and a file named `credentials.bin` is never read or included, in sanitized and raw exports alike. The export still collects only the desktop application's top-level `Foundry*.log` files, not the files written on deployed computers. A secret that Foundry cannot recognize is not masked.
+
 Remote diagnostics supplement local logs and support archives. Keep local evidence when investigating a failure: remote delivery can have gaps, and external-tool log files are not automatically uploaded. See [Telemetry and privacy](../reference/telemetry-and-privacy.md#remote-error-diagnostics).
 
 ## Find application logs in PostHog
@@ -38,6 +40,7 @@ If records are missing, check consent, application version, network access, the 
 - Selected Windows release, edition, language, and architecture.
 - Selected driver pack.
 - Autopilot method, without credentials or tenant secrets.
+- For Domain Join, the states of the join, placement, membership, restart and cleanup, with the `failureCode` and the numeric error codes. Do not include accounts, passwords or other directory details.
 
 ## Windows PE log location
 
@@ -121,3 +124,19 @@ For [Post-installation](../foundry-osd/customization/post-installation.md), coll
 | Execution results and saved progress | `%SystemRoot%\Temp\Foundry\State\PreOobe`, including `execution-result.json` |
 
 Desktop diagnostic export does not automatically collect target-machine logs. PostInstall does not send a separate remote telemetry stream. Review raw script output and installer logs before sharing them; they may contain secrets that automatic masking cannot remove reliably.
+
+## Domain Join evidence
+
+When the join was prepared by Deploy, collect these files from the deployed computer:
+
+| Evidence | Location |
+| --- | --- |
+| Outcome of the join | `%SystemRoot%\Temp\Foundry\State\PreOobe\domain-join-result.json` |
+| Progress of all post-installation actions | `%SystemRoot%\Temp\Foundry\State\PreOobe\execution-result.json` |
+| Post-installation log | `%SystemRoot%\Temp\Foundry\Logs\PreOobe\Foundry.PostInstall.log` and its rotated files |
+
+The result file contains the expected domain, computer name and OU, the state of each part of the join, a reason for each failure and numeric error codes. It contains no account, no password and no free-form error text. Remove the names before sharing if they are sensitive.
+
+If Deploy skipped the join because of the Windows edition or the image, these files do not exist: collect the deployment summary and the deployment logs instead. See [Domain Join troubleshooting](domain-join.md).
+
+Never attach `%SystemRoot%\Temp\Foundry\Payloads\DomainJoin\<operation-id>\credentials.bin`: it contains the join account and password. Foundry does not collect files from deployed computers by itself.

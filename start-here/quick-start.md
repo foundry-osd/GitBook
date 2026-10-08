@@ -14,13 +14,14 @@ See [Windows ADK and Windows PE](../foundry-osd/adk.md).
 
 ## 3. Review general configuration
 
-Open **General configuration** and confirm the deployment settings. Review the [Protected deployment scope](../foundry-osd/general.md#protected-deployment) and enable it for the deployment data you need to protect. Embedded network credentials remain accessible without the technician password. Follow the organization’s removable-media policy for every deployment image.
+Open **General configuration** and confirm the deployment settings. Review the [Password protection scope](../foundry-osd/general.md#password-protection) and enable it for the deployment data you need to protect. Embedded network credentials remain accessible without the technician password. Follow the organization’s removable-media policy for every deployment image.
 
 ## 4. Configure only what you need
 
 - Add Wi-Fi or Ethernet 802.1X settings when the target cannot use an open wired network.
 - Choose Windows customization options required by the organization.
 - Configure Windows Autopilot only when the device must be registered or receive a profile.
+- Alternatively, configure [Domain Join](../foundry-osd/domain-join/README.md). It replaces the active Autopilot mode. Zero-touch Domain Join requires Password protection; Interactive does not.
 
 ## 5. Create deployment media
 
@@ -42,5 +43,8 @@ In Foundry Deploy:
 2. Select a Windows release, language, edition, and license channel.
 3. Select a compatible driver pack.
 4. Configure Windows Autopilot when JSON profile or zero-touch upload media displays that step. Interactive upload runs later during Windows OOBE.
-5. Review the summary and start deployment.
-6. Verify the success page before rebooting.
+5. For Domain Join, complete the [Domain join step](../foundry-deploy/domain-join.md) when the wizard shows it.
+6. Review the summary and start deployment.
+7. Verify the success page before rebooting.
+
+For Domain Join, a successful deployment means the join was prepared. It runs after the restart; check that the computer joined the domain before handing it over.

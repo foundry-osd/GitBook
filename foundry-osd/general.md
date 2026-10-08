@@ -36,9 +36,9 @@ Validate custom drivers on representative hardware before using the media in pro
   <figcaption>Configure platform, Windows PE, deployment completion, and driver settings.</figcaption>
 </figure>
 
-## Protected deployment
+## Password protection
 
-**Protected deployment** requires a technician password before Foundry Deploy initializes. Enable it to protect the following deployment data on generated media:
+**Password protection** requires a technician password before Foundry Deploy initializes. Turn it on and enter the **Deployment password** to protect the following deployment data on generated media:
 
 | Data | Protected by the technician password |
 | --- | --- |
@@ -46,15 +46,18 @@ Validate custom drivers on representative hardware before using the media in pro
 | Autopilot certificate credentials for zero-touch upload, including the PFX file and its password | Yes |
 | Autopilot JSON profiles | Yes |
 | Custom Windows answer files | Yes |
+| Zero-touch Domain Join accounts and passwords | Yes; Password protection is required |
 | Embedded Wi-Fi passwords, wired and Wi-Fi certificate PFX passwords, and network certificate private keys | No |
 
-Foundry Connect uses embedded network credentials before Foundry Deploy asks for the technician password, so automatic network setup remains available. Anyone who can read the ISO or USB can recover those network credentials, even when Protected deployment is enabled. Restrict access to the media and use dedicated network credentials that can be revoked.
+Foundry Connect uses embedded network credentials before Foundry Deploy asks for the technician password, so automatic network setup remains available. Anyone who can read the ISO or USB can recover those network credentials, even when Password protection is enabled. Restrict access to the media and use dedicated network credentials that can be revoked.
 
 Foundry accepts passwords from 8 characters and recommends at least 12 characters. Use a unique password for each set of deployment media and store it using the organization’s approved credential-management process.
 
-Protected deployment does not encrypt the complete ISO, USB drive, Windows image, or files staged into the installed Windows system.
+Password protection does not encrypt the complete ISO, USB drive, Windows image, or files staged into the installed Windows system.
 
-When Protected deployment is disabled, Autopilot JSON profiles remain readable on the media and other embedded deployment credentials can be recovered without a technician password. Treat possession of unprotected media as access to all embedded deployment information.
+[Zero-touch Domain Join](domain-join/zero-touch.md) requires Password protection: the join accounts are unlocked with the same technician password, without a separate prompt. [Interactive Domain Join](domain-join/interactive.md) does not require it. See [how domain credentials are handled](../reference/security-and-credentials.md#domain-credentials).
+
+When Password protection is disabled, Autopilot JSON profiles remain readable on the media and other embedded deployment credentials can be recovered without a technician password. Treat possession of unprotected media as access to all embedded deployment information.
 
 {% hint style="warning" %}
 If you no longer have the technician password, recreate the media with a new password.

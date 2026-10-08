@@ -6,6 +6,8 @@ Use 1–15 ASCII letters, numbers, or hyphens, and avoid a name containing only 
 
 In the composed naming workflow, a missing hardware value or firmware placeholder also prevents generation. If editing is allowed, enter a valid complete name. Otherwise, correct the naming configuration and refresh the media. See [machine naming](../foundry-osd/customization/machine-naming.md) for naming requirements and editing options.
 
+For Domain Join with a custom answer file, the file must set exactly one fixed computer name in its `specialize` pass; Foundry does not replace a missing or `*` name. See [Domain Join troubleshooting](domain-join.md#media-is-not-ready-or-input-is-rejected).
+
 ## Target disk is unavailable
 
 - Confirm the storage controller is supported in Windows PE.
@@ -75,3 +77,5 @@ For [custom images](../foundry-osd/customization/custom-windows-images.md), chec
 ## Post-installation interruption
 
 For [Post-installation](../foundry-osd/customization/post-installation.md), distinguish WinPE staging from the later Windows sequence. Planned restarts resume from saved progress. An interrupted action, missing or damaged execution records, or an installer-owned restart stops the sequence without automatically retrying the action. Preserve the results and logs before deciding whether to redeploy. **Cleanup pending** means some temporary content could not yet be safely removed.
+
+[Domain Join](domain-join.md#interrupted-work-or-restart-is-pending) is an exception: when the join is interrupted, Foundry reports a warning, does not try the join again, and continues after the restart.

@@ -47,6 +47,19 @@ Counts are capped at 1,000 and describe the configuration captured for the media
 
 Action names, commands, arguments, file names, paths, content hashes, and script contents are excluded. **Settings > Enable telemetry** controls this collection.
 
+### Domain Join
+
+When telemetry is enabled, [Domain Join](../foundry-osd/domain-join/README.md) uses the existing media-creation and deployment events:
+
+| Event | Domain Join information |
+| --- | --- |
+| `osd:boot_media_finished` | `domain_join_enabled`, `domain_join_mode` (`disabled`, `interactive` or `zero_touch`), `domain_join_domain_count`, `domain_join_shared_account_used`, `domain_join_ou_count`, and `domain_join_default_ou_set`. |
+| `deploy:session_finished` | `deploy_domain_join_enabled`, `deploy_domain_join_mode`, `deploy_domain_join_domain_source` and `deploy_domain_join_ou_source` (each `none`, `default`, `selected` or `typed`), and `deploy_domain_join_status` (`disabled`, `pending`, `staged`, `skipped_unsupported_edition` or `skipped_image_composition`). |
+
+A disabled mode reports zero domains, zero OUs and no default, even when a draft is saved. The domain count is capped at 32. The OU count is the total across domains, and the default OU flag is set when any domain has one. The deployment status describes how far Foundry Deploy took the join; `staged` means the join was handed to installed Windows. Joining, OU placement and membership verification run later in Windows and are not reported, so telemetry does not show whether a computer actually joined the domain.
+
+Domain names, account names, passwords, OU names, distinguished names, and computer names are excluded.
+
 ## Remote error diagnostics
 
 **Enable remote diagnostics** controls operational logs and exception reports sent to PostHog. This preference is separate from anonymous product telemetry, applies immediately to new diagnostic records, and is written to newly created media for Foundry Bootstrap, Foundry Connect, and Foundry Deploy. Changing it does not update existing media.
