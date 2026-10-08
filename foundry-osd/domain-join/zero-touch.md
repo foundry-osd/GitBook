@@ -25,7 +25,7 @@ Each join password is encrypted using the existing Protected deployment key, onc
 
 ## Keep credentials associated with the correct profile
 
-A password belongs to its account. Changing an account, removing the last domain that uses it, or changing the active mode clears its password; renaming a domain does not. Re-enter the password for the reviewed account. **Disable** excludes joining from new media and clears domain credentials while retaining nonsecret settings.
+A password belongs to its account. Changing an account or removing the last domain that uses it clears its password; renaming a domain, switching to Interactive and choosing **Disable** do not, so returning to Zero-touch needs no retyping. Passwords kept this way are written only to Zero-touch media. **Disable** excludes joining from new media while retaining the settings and their passwords.
 
 [Remember passwords](../deployment-profiles.md#domain-credentials) can retain the password of each join account with a local profile. Ordinary `.foundryprofile` exports always omit the direct domain password, even with **Include passwords and confidential files** selected. An imported automatic profile remains structurally valid, but media creation needs the password and usable General protection on that PC.
 

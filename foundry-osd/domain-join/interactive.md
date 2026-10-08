@@ -9,7 +9,7 @@ Choose this mode for shared deployment media when technicians should enter a dom
 3. Optionally [add or import OUs](README.md#list-the-ous-of-a-domain) for each domain. Set a default OU and decide whether technicians can choose.
 4. Resolve readiness messages, then [create or update media](../media/README.md).
 
-Interactive joining introduces no media-password prerequisite and stores no join password in the media. Other enabled options, including custom answer files, may independently require [Protected deployment](../general.md#protected-deployment).
+Interactive joining introduces no media-password prerequisite and stores no join password in the media. Accounts and passwords entered on the Zero-touch page stay in the profile for a later switch back, but are never written to Interactive media. Other enabled options, including custom answer files, may independently require [Protected deployment](../general.md#protected-deployment).
 
 Choose **Disable** to exclude joining from newly created media. Nonsecret settings remain available for later activation.
 

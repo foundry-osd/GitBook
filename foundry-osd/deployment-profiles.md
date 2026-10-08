@@ -55,11 +55,11 @@ This action does not remove exported files, copies on the shared folder, origina
 
 ### Domain credentials
 
-[Zero-touch Domain Join](domain-join/zero-touch.md) passwords belong to the active profile's canonical domain/account context. **Remember passwords** can retain them locally using the existing protected revision/key storage. Turning remembering off stops future retention without clearing the current session; **Clear saved passwords and access** also clears current passwords and synchronization access.
+[Zero-touch Domain Join](domain-join/zero-touch.md) passwords belong to their join account in the active profile. **Remember passwords** can retain them locally using the existing protected revision/key storage. Turning remembering off stops future retention without clearing the current session; **Clear saved passwords and access** also clears current passwords and synchronization access.
 
 Ordinary `.foundryprofile` exports always omit the direct domain password, even with **Include passwords and confidential files** selected. Connection and recovery files use that same export rule. They may still carry shared-revision access keys: possession of the file and its password can grant access to shared secrets.
 
-Encrypted shared revisions may include the domain password when confidential inputs are explicitly included. A settings-only update can preserve an existing local password only for the same profile and matching active automatic domain/account context. Changed context, unavailable/deleted credentials or another profile cannot borrow it. Changing domain/account or leaving automatic mode clears the current domain password.
+Encrypted shared revisions may include the domain password when confidential inputs are explicitly included. A settings-only update can preserve an existing local password only for the same profile and the same join account. A changed account, unavailable/deleted credentials or another profile cannot borrow it. Changing or removing an account clears its password; changing the mode does not.
 
 An omitted-secret automatic profile can be saved/imported with **Remember passwords** enabled; domain omission alone does not require disabling it. The configuration is structurally valid, but creating automatic media remains blocked until the password and usable existing General protection are supplied. Profile retention and portable export are separate choices.
 

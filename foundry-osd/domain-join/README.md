@@ -2,7 +2,7 @@
 
 Use **Domain Join** to join installed Windows to an Active Directory domain before OOBE. Choose [Interactive Domain Join](interactive.md) when a technician supplies credentials for each deployment, or [Zero-touch Domain Join](zero-touch.md) when protected media supplies them.
 
-Exactly one Domain Join or [Windows Autopilot](../autopilot/README.md) mode can be active. Open the intended page and choose **Enable**. Confirm replacement if another mode is active. **Disable** excludes joining from new media while retaining nonsecret configuration. A join password is cleared when its account changes, is no longer used, or the active mode changes.
+Exactly one Domain Join or [Windows Autopilot](../autopilot/README.md) mode can be active. Open the intended page and choose **Enable**. Confirm replacement if another mode is active. **Disable** excludes joining from new media while retaining the configuration. A join password stays with its account: it is cleared when the account changes or leaves the configuration, not when the mode changes or joining is disabled.
 
 ## Before configuring
 
