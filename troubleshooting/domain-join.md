@@ -15,10 +15,12 @@ Restart states and cleanup states are recorded separately from these phases. A c
 
 ## Media is not ready or input is rejected
 
-- For Zero-touch, supply the context-matching domain password and a usable existing [General protection password](../foundry-osd/general.md#protected-deployment). Imported portable profiles deliberately omit the direct domain password.
-- For Interactive without listed OUs, enter the domain in the Domain join step. A typed optional OU DN must name an organizational unit (it starts with `OU=`) inside that domain; a container such as `CN=Computers` is not accepted.
-- When technician choice is enabled, choose a listed OU. Without a default, a selection is required. Changing the interactive domain clears the earlier OU input and hides listed OUs from another domain.
-- Correct the listed OUs after changing the domain name. The search reads the authoring computer's AD domain using the current Windows identity; it does not test deployment-account permissions. You can still add OUs manually when the search fails.
+- For Zero-touch, check the **Status** column of the Domains table: every listed domain needs a qualified account, shared or dedicated, with its password, and a usable existing [General protection password](../foundry-osd/general.md#protected-deployment). Imported portable profiles deliberately omit the join passwords.
+- When the media lists domains, the technician joins one of them; another domain cannot be typed. For Interactive without listed domains, enter the domain in the Domain join step.
+- A typed optional OU DN is offered only for a domain without listed OUs. It must name an organizational unit (it starts with `OU=`) inside that domain; a container such as `CN=Computers` is not accepted.
+- When technician choice of the OU is enabled and the retained domain lists OUs, choose one. Without a default, a selection is required. Changing the domain replaces the OU choices with those of the new domain.
+- A domain's name cannot be changed while it lists OUs. Remove its OUs first, or add the new domain and remove the old one.
+- The OU search reads the selected domain using the current Windows identity; it does not test the join account's permissions. It fails for a domain this computer cannot reach or that does not trust your account. You can still add OUs manually.
 - For a custom answer file, supply one valid concrete applicable `specialize` name and remove conflicting `Microsoft-Windows-UnattendedJoin` configuration. Foundry does not fill a missing custom name from the wizard. Review arbitrary commands separately; not every scripted conflict can be detected.
 
 Known Windows Home-family editions skip joining and continue installation. Unfamiliar/missing edition metadata needs image/native inspection. Applied-image conflicts can also skip domain work. See [supported-version limits](../reference/supported-versions.md#domain-join).

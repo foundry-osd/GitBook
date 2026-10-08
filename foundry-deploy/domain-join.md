@@ -15,18 +15,28 @@ The wizard does not contact AD. Valid syntax and a successful unlock do not prov
 
 The **Domain join** step sits between **Drivers** and **Summary**. It appears only when there is something to enter or choose, and **Next** stays unavailable until the inputs are valid.
 
-For Interactive mode, enter **Domain name**, **Account (DOMAIN\user or user@domain)** and **Password**. A domain name set in Foundry OSD is prefilled and remains editable. An invalid domain name or account is flagged under its field.
+The **Domain name** field depends on the media:
 
-For Zero-touch, use the existing Protected deployment unlock. The encrypted account and password are checked against the domain and account they were saved for. There is no password prompt; the step appears only when technician OU choice is enabled, and then shows the domain name as read-only with the OU choice.
-
-| OU configuration | Technician action |
+| Media | Technician action |
 | --- | --- |
-| OU list with technician choice enabled | Choose a listed **Organizational unit**. The default OU is preselected; **Next** requires a selection. |
-| OU list with technician choice disabled | No OU field. The configured default is fixed; without a default, use the domain's default location. |
-| Interactive without a usable OU list | Enter **OU distinguished name (optional)**, starting with `OU=` and inside the entered domain, or leave it empty. |
-| Zero-touch without technician choice | No step; the default OU or the domain's default location is used. |
+| Several domains listed and technician choice enabled | Choose a listed domain. The default domain is preselected. |
+| One domain listed, or technician choice disabled | No action. The default domain is shown read-only. |
+| Interactive with no domain listed | Type the domain name. An invalid name is flagged under the field. |
 
-Changing the domain in Interactive mode hides listed OUs that belong to another domain and offers the typed OU field instead. When an OU list applies, a typed OU is not accepted.
+For Interactive mode, also enter **Account (DOMAIN\user or user@domain)** and **Password**. An invalid account is flagged under its field. Changing the domain keeps what you typed.
+
+For Zero-touch, use the existing Protected deployment unlock. The encrypted account and password of the retained domain are checked against the domain and account they were saved for. There is no password prompt; the step appears only when the technician has a domain or an OU to choose.
+
+The OU follows the retained domain and resets to that domain's default when the domain changes:
+
+| OU configuration of the retained domain | Technician action |
+| --- | --- |
+| OUs listed and technician choice enabled | Choose a listed **Organizational unit**. The default OU is preselected; **Next** requires a selection. |
+| OUs listed and technician choice disabled | No OU field. The domain's default is fixed; without a default, the domain's default location is used. |
+| No OU listed, Interactive | Enter **OU distinguished name (optional)**, starting with `OU=` and inside that domain, or leave it empty. |
+| No OU listed, Zero-touch | No OU field; the domain's default location is used. |
+
+A domain that lists OUs never accepts a typed OU.
 
 The account and password never appear in the summary or in **Confirm disk erase**. The password is kept only in memory while you finish the wizard and is cleared once deployment starts. Known Home-family editions skip the step; the summary then says the edition cannot join a domain.
 
@@ -34,7 +44,7 @@ The account and password never appear in the summary or in **Confirm disk erase*
 **Screenshot required**
 
 - **File:** `foundry-deploy-domain-join-01-interactive-ou.png`
-- **Capture:** Show the Domain join wizard step in Interactive mode with the OU choice, using sanitized demonstration data and empty credential fields.
+- **Capture:** Show the Domain join wizard step in Interactive mode with the domain list and the OU choice, using sanitized demonstration data and empty credential fields.
 {% endhint %}
 
 ## Follow staging and first boot

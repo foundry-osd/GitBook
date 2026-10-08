@@ -39,7 +39,7 @@ If media is lost, stolen, or copied without authorization, revoke embedded crede
 
 ## Domain credentials
 
-Domain passwords are context-bound to the active domain/account. Local **Remember passwords** and encrypted shared revisions can retain them under their respective choices. Ordinary portable exports always omit the direct domain password, including when confidential inputs are selected. Connection/recovery files also omit it, but shared-access keys can grant access to secrets in revisions. Follow [profile retention and sharing rules](../foundry-osd/deployment-profiles.md#domain-credentials).
+In Foundry OSD a join password belongs to its account, shared or dedicated. On media, each domain carries its own encrypted copy bound to that domain and that account, so it cannot be used for another domain. Local **Remember passwords** and encrypted shared revisions can retain them under their respective choices. Ordinary portable exports always omit the direct domain password, including when confidential inputs are selected. Connection/recovery files also omit it, but shared-access keys can grant access to secrets in revisions. Follow [profile retention and sharing rules](../foundry-osd/deployment-profiles.md#domain-credentials).
 
 Deploy stages a temporary plaintext binary payload at `%SystemRoot%\Temp\Foundry\Payloads\DomainJoin\<operation-id>\credentials.bin`. The operation directory has protected inheritance and permits SYSTEM and Administrators before the file is created. Joining is its only sensitive consumer; later membership verification uses no join credentials. Target access controls and physical security remain necessary.
 
