@@ -28,7 +28,9 @@ Known Windows Home-family editions skip joining and continue installation. Unfam
 
 ## Windows asks who will use the device
 
-The computer has joined the domain, but setup stops on **Who's going to use this device?** instead of the sign-in screen. Windows client editions only skip that page when the answer file creates a local account. On the [OOBE page](../foundry-osd/customization/oobe.md), add a local account, then create or update the media; enabling the built-in Administrator account alone is not enough. The Domain Join pages warn while no local account is configured. With a [custom answer file](../foundry-osd/customization/unattend.md), create the account in that file.
+Setup ends on the sign-in screen only after Foundry has verified that the computer is a member of the domain. When it stops on **Who's going to use this device?** instead, the join failed or could not be verified: create a local account to reach the desktop, then follow [Joining fails](#joining-fails) and review the join result.
+
+The page also appears with a [custom answer file](../foundry-osd/customization/unattend.md) that creates no account, because that file keeps control of its own OOBE settings. Create the account in that file.
 
 ## Joining fails
 
