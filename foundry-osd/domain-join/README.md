@@ -31,8 +31,8 @@ Listed OUs that no longer match the domain name are an editing draft. While Doma
 
 1. Use an authoring computer already joined to the intended AD domain and connect it to that directory.
 2. Under **OU actions**, choose **Import from domain**.
-3. In the dialog that lists the OUs found, select the ones to keep, then choose **Add selected OUs**. No OU is selected by default, and **Cancel** leaves the saved OU list unchanged.
-4. Review the resulting **Organizational units** list and the default. OUs added manually and the default are preserved; duplicate DNs are not added again. An empty domain name is filled in from the import; if the domain name or the listed OUs belong to another domain, correct that first.
+3. In the dialog that lists the OUs found, select the ones to keep, then choose **Add selected OUs**. OUs already in your list are not offered again, no OU is selected by default, and **Cancel** leaves the saved OU list unchanged.
+4. Review the resulting **Organizational units** list and the default. The list is sorted by display name; select a column header to sort it differently. OUs added manually and the default are preserved; duplicate DNs are not added again. An empty domain name is filled in from the import; if the domain name or the listed OUs belong to another domain, correct that first.
 
 The search uses the computer's actual AD domain, using your current Windows identity to read it. The signed-in user's domain is not the domain selector. Requests and result size are bounded; the dialog says when only some of the OUs could be listed. While the search runs, the same button becomes **Cancel search**. You can still add OUs manually when the search is unavailable.
 
