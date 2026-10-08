@@ -10,6 +10,7 @@ Exactly one Domain Join or [Windows Autopilot](../autopilot/README.md) mode can 
 - Ask the AD administrator to provide an account with the required join, reuse, directory-read and OU-placement permissions. Discovery and configuration validation do not audit those permissions.
 - Choose a unique [concrete computer name](../customization/machine-naming.md). A [custom answer file](../customization/unattend.md) must supply exactly one valid applicable `specialize` computer name and contain no `Microsoft-Windows-UnattendedJoin` component.
 - Review [edition and runtime requirements](../../reference/supported-versions.md#domain-join). Known Windows Home-family editions skip joining with a warning while Windows installation continues.
+- Configure a local account on the [OOBE page](../customization/oobe.md): the built-in Administrator account or an additional local account. Without one, Windows asks to create an account at the end of setup even though the computer has joined the domain. The Domain Join pages show a warning in that case; it does not block media creation.
 
 ## List the domains
 

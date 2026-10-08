@@ -26,6 +26,10 @@ Restart states and cleanup states are recorded separately from these phases. A c
 
 Known Windows Home-family editions skip joining and continue installation. Unfamiliar/missing edition metadata needs image/native inspection. Applied-image conflicts can also skip domain work. See [supported-version limits](../reference/supported-versions.md#domain-join).
 
+## Windows asks who will use the device
+
+The computer has joined the domain, but setup stops on **Who's going to use this device?** instead of the sign-in screen. Windows client editions only skip that page when the answer file creates a local account. On the [OOBE page](../foundry-osd/customization/oobe.md), enable the built-in Administrator account or add a local account, then create or update the media. The Domain Join pages warn while no local account is configured. With a [custom answer file](../foundry-osd/customization/unattend.md), create the account in that file.
+
 ## Joining fails
 
 Check installed-Windows network drivers, domain DNS, controller reachability and system time. Connect's Internet check does not confirm AD connectivity, and an OU list does not provide offline joining. Readiness checks are bounded; restore connectivity before arranging a new controlled attempt.
