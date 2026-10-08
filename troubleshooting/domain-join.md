@@ -32,8 +32,8 @@ Each part of the outcome (join, placement in the OU, membership) has its own sta
 | Message or symptom | What to do |
 | --- | --- |
 | A domain shows a missing password or account in **Status** | Select the domain and choose **Edit**, or complete the **Shared join account** card. Each domain needs an account written as `DOMAIN\user` or `user@domain`, with its password. |
-| Password protection is required | Zero-touch needs [Protected deployment](../foundry-osd/general.md#protected-deployment): enable it on the General page and set the technician password. |
-| At least one domain is required | Zero-touch needs one listed domain or more. Interactive can list none. |
+| Turn on password protection on the General page and set the deployment password | Zero-touch needs [Password protection](../foundry-osd/general.md#password-protection). Turn it on in **General configuration** and enter the **Deployment password**. |
+| Add at least one domain | Zero-touch needs one listed domain or more. Interactive can list none. |
 | The passwords are empty after importing a profile | A `.foundryprofile` export never contains the join passwords. Enter them again, and set the technician password on this PC. |
 | A domain cannot be renamed | Its name is locked while it lists OUs. Remove its OUs first, or add the new domain and remove the old one. |
 | An OU is refused | The distinguished name must be an organizational unit of the selected domain: it starts with `OU=` and ends with that domain's `DC=` parts. A container such as `CN=Computers` is not accepted. |

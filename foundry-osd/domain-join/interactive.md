@@ -9,7 +9,7 @@ Choose this mode when the media must not carry domain credentials: the technicia
 3. Optionally [add or import OUs](README.md#list-the-ous-of-a-domain) for each domain. A single OU is always used; with several, technicians choose one and the default is preselected.
 4. Resolve the messages shown on the page, then [create or update the media](../media/README.md).
 
-Interactive Domain Join does not need [Protected deployment](../general.md#protected-deployment) and writes no join account or password to the media. Accounts and passwords entered on the Zero-touch page stay in your configuration for a later switch back, but are never written to Interactive media. Other options you enable, such as custom answer files, may still require Protected deployment.
+Interactive Domain Join does not need [Password protection](../general.md#password-protection) and writes no join account or password to the media. Accounts and passwords entered on the Zero-touch page stay in your configuration for a later switch back, but are never written to Interactive media. Other options you enable, such as custom answer files, may still require Password protection.
 
 Choose **Disable** to remove the join from new media. Your settings stay available for later.
 

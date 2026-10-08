@@ -61,14 +61,14 @@ Foundry does not configure AutoLogon and does not request account passwords duri
 
 ## Password protection
 
-Non-empty local account passwords require [Protected deployment](../general.md#protected-deployment). This is a Foundry security requirement, not a Windows Setup requirement. Foundry keeps authoring passwords only for the current session and encrypts them in the deployment configuration written to the media.
+Non-empty local account passwords require [Password protection](../general.md#password-protection). This is a Foundry security requirement, not a Windows Setup requirement. Foundry keeps authoring passwords only for the current session and encrypts them in the deployment configuration written to the media.
 
 During deployment, Foundry decrypts the passwords for Windows Setup and writes them to `unattend.xml` using reversible encoding with `PlainText=false`. This hides the values but does not encrypt them. Treat answer files and their copies as sensitive data; media protection does not provide end-to-end encryption of the Windows Setup answer file. See [Microsoft's guidance on hidden answer-file passwords](https://learn.microsoft.com/en-us/windows-hardware/customize/desktop/wsim/hide-sensitive-data-in-an-answer-file).
 
-If a predefined account password is enabled while Protected deployment is disabled, Foundry blocks media creation and marks both **OOBE** and **Password protection** as needing attention. Enable Protected deployment and configure its technician password, or turn off the predefined account password to use an intentional blank password.
+If a predefined account password is enabled while Password protection is disabled, Foundry blocks media creation and marks both **OOBE** and **Password protection** as needing attention. Enable Password protection and configure its technician password, or turn off the predefined account password to use an intentional blank password.
 
 Foundry saves whether each account requires a predefined password, but it never saves the password itself in the authoring configuration. After restarting Foundry OSD, re-enter and confirm every required account password before creating deployment media. Foundry marks the OOBE configuration as needing attention until those passwords are available again.
 
 The **Accounts** header shows **Needs attention** even when collapsed if an account setting is invalid, a required password is missing, or deployment protection is required. Autopilot only causes this attention indicator when additional local accounts are also configured. The Standard-only warning is advisory and does not block media creation.
 
-Blank passwords do not require Protected deployment because no password secret is stored. Apply the organization's password and device-access policies before using this option.
+Blank passwords do not require Password protection because no password secret is stored. Apply the organization's password and device-access policies before using this option.

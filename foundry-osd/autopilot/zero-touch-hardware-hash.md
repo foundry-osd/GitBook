@@ -88,9 +88,9 @@ Use a dedicated application registration for Foundry deployment media. Do not re
 
 Foundry places the certificate PFX and its PFX password in the deployment configuration. Both values are encrypted with AES-256-GCM, which also detects whether the encrypted data has been modified.
 
-Enable **Protected deployment** from [General configuration](../general.md) before creating the media.
+Enable **Password protection** from [General configuration](../general.md) before creating the media.
 
-Foundry generates a random 256-bit deployment key for each media-creation operation. When Protected deployment is enabled:
+Foundry generates a random 256-bit deployment key for each media-creation operation. When Password protection is enabled:
 
 1. Foundry derives a key from the deployment password using PBKDF2-HMAC-SHA-256, 600,000 iterations, and a random 128-bit salt.
 2. The password-derived key protects the random deployment key with AES-256-GCM.
@@ -102,10 +102,10 @@ AES-GCM uses a unique 96-bit nonce and a 128-bit authentication tag for each enc
 A copied ISO or USB drive therefore cannot reveal the PFX private key through the stored deployment key alone; the deployment password must also be obtained or recovered. This protection no longer applies after an authorized technician unlocks the media and Foundry Deploy starts using the credential.
 
 {% hint style="warning" %}
-Protected deployment does not encrypt the entire ISO, USB drive, or Windows installation content. It protects access to Foundry Deploy and the deployment secrets stored in its configuration.
+Password protection does not encrypt the entire ISO, USB drive, or Windows installation content. It protects access to Foundry Deploy and the deployment secrets stored in its configuration.
 {% endhint %}
 
-If Protected deployment is disabled, the PFX and its password remain encrypted, but the deployment key is stored on the media so that deployment can start without a password. Anyone who obtains the media must therefore be treated as having access to its embedded deployment credentials.
+If Password protection is disabled, the PFX and its password remain encrypted, but the deployment key is stored on the media so that deployment can start without a password. Anyone who obtains the media must therefore be treated as having access to its embedded deployment credentials.
 
 Use a unique password of at least 12 characters for deployment media. Foundry accepts passwords from 8 characters, but warns when fewer than 12 characters are used. The password is not stored on the media. If it is lost, recreate the media.
 

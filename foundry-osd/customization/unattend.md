@@ -23,7 +23,7 @@ Validate the answer file with Windows System Image Manager for the target Window
 1. Open **Customization > Unattend** in Foundry OSD and enable the feature using the switch in the page header. Its controls remain disabled while the feature is off. The documentation button beside the switch opens this guide.
 2. Import one or more XML files. Review the validation results and give each file a recognizable display label.
 3. Choose a default file, or keep **Use Foundry settings** as the default.
-4. Enable [Protected deployment](../general.md#protected-deployment) and enter the media password. Protection is required for every custom file, even one that appears to contain no credentials.
+4. Enable [Password protection](../general.md#password-protection) and enter the deployment password. Protection is required for every custom file, even one that appears to contain no credentials.
 5. Return to **Start**, resolve readiness errors, and [create deployment media](../media/README.md).
 
 <figure>
@@ -69,13 +69,13 @@ A custom file does not disable every other Foundry feature. Test the file togeth
 
 Foundry detects known XML conflicts but cannot predict arbitrary scripts. Arrange access to scripts referenced by the file; importing XML does not bundle those external files or execute its commands in WinPE.
 
-For [Domain Join](../domain-join/README.md), a missing computer name, a `*` wildcard or several names are refused before the deployment starts; Foundry does not take the name from the wizard. Remove any `Microsoft-Windows-UnattendedJoin` component, and review your own commands that rename the computer or join a domain. Custom answer files still require Protected deployment.
+For [Domain Join](../domain-join/README.md), a missing computer name, a `*` wildcard or several names are refused before the deployment starts; Foundry does not take the name from the wizard. Remove any `Microsoft-Windows-UnattendedJoin` component, and review your own commands that rename the computer or join a domain. Custom answer files still require Password protection.
 
 Custom commands that replace setup hooks, restart Windows independently or change enrollment and package state can disrupt [Post-installation](post-installation.md#custom-answer-files). Test the complete combination before production use.
 
 ## Protect sensitive content
 
-The complete custom file is encrypted on deployment media using the existing Protected deployment key. Protection does not extend to the original source file or the decrypted copy Windows needs on the target.
+The complete custom file is encrypted on deployment media using the existing Password protection key. Protection does not extend to the original source file or the decrypted copy Windows needs on the target.
 
 Treat Panther answer files and their copies as sensitive. Windows password hiding is reversible, and custom commands or extensions can contain secrets that Windows will not automatically remove. Do not attach raw XML to support reports.
 

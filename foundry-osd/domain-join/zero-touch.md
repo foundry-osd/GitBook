@@ -1,10 +1,10 @@
 # Zero-touch Domain Join
 
-Choose this mode when the media should carry the join account, so technicians do not type domain credentials. The credentials are protected by the technician password of [Protected deployment](../general.md#protected-deployment).
+Choose this mode when the media should carry the join account, so technicians do not type domain credentials. The credentials are protected by the technician password of [Password protection](../general.md#password-protection).
 
 ## Prepare the media
 
-1. In [General configuration](../general.md#protected-deployment), enable **Protected deployment** and set the technician password. Zero-touch Domain Join cannot be used without it.
+1. In [General configuration](../general.md#password-protection), turn on **Password protection** and enter the **Deployment password**. Zero-touch Domain Join cannot be used without it.
 2. Open **Domain Join > Zero-Touch** and choose **Enable**. Confirm the replacement if another Domain Join or Autopilot mode is active.
 3. Under **Shared join account**, enter the **Account**, as `DOMAIN\user` or `user@domain`, and its **Password**. Every domain uses this account unless you give it its own. Use an account provided by your Active Directory administrator, such as `CORP\deployment-join`.
 4. Under **Domains**, [add each domain](README.md#list-the-domains). To join a domain with a different account, choose **Use a dedicated account** in the domain dialog and enter that account and its password.

@@ -39,7 +39,7 @@ Saved profiles are protected for your Windows account on this PC using Windows C
 
 When Foundry first brings your existing settings into a profile, **Remember passwords** starts enabled and saves supported passwords and selected files that are available. An existing profile's choice is preserved.
 
-Supported passwords include Wi-Fi, Protected deployment, OOBE local accounts, selected network or Autopilot PFX certificates, and Domain Join accounts. Complete required fields and matching confirmations. For an intentionally blank OOBE password, use its explicit password choice. Missing passwords are not filled from another profile.
+Supported passwords include Wi-Fi, the deployment password, OOBE local accounts, selected network or Autopilot PFX certificates, and Domain Join accounts. Complete required fields and matching confirmations. For an intentionally blank OOBE password, use its explicit password choice. Missing passwords are not filled from another profile.
 
 Microsoft sign-in sessions are not transferred. Sign in again when an Autopilot task requires it. An imported Autopilot configuration with a valid saved registration can use its matching PFX certificate without a new sign-in. If that file was omitted, select the matching certificate and enter its password on this PC. A different or expired certificate must be resolved before creating media.
 
@@ -203,7 +203,7 @@ Custom drivers remain local. Keep the selected driver folder focused on the targ
 
 Foundry cleans up its temporary copies after the build. If cleanup is interrupted, it retries when you restart or prepare another build.
 
-Protect the media separately using [Protected deployment](general.md#protected-deployment) and the [deployment media security guidance](../reference/security-and-credentials.md). Recreate media when its included passwords or deployment settings change.
+Protect the media separately using [Password protection](general.md#password-protection) and the [deployment media security guidance](../reference/security-and-credentials.md). Recreate media when its included passwords or deployment settings change.
 
 ## Custom image references
 
