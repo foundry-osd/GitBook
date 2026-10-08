@@ -11,7 +11,7 @@ Configure:
 - Windows PE language.
 - Windows PE time zone.
 
-The selected Windows PE language remains unavailable until Windows ADK and Windows PE Add-on `10.1.26100.2454` are ready.
+The selected Windows PE language remains unavailable until Windows ADK and Windows PE Add-on `10.1.26100.9457` are ready.
 
 ### Windows PE time zone
 

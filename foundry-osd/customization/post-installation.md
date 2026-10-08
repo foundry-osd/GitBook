@@ -146,7 +146,7 @@ After a planned restart, the console restores completed results and indicates th
 
 Foundry keeps imported scripts and packages in a local library. [Profiles](../deployment-profiles.md) share action settings, but do not include those files. On another PC, import the same files and folder structure to restore missing content.
 
-Required packages are included on the generated USB or ISO, outside `boot.wim`. Keep the complete media available until deployment finishes. A PXE boot image alone is insufficient; see [PXE deployment](../media/pxe-deployment.md#post-installation-content).
+Required packages are included on the generated USB or ISO, outside `boot.wim`. Keep the complete media available until deployment finishes. A PXE boot image alone does not carry them, so PowerShell scripts, Software installers and commands that use imported content cannot run from it. Built-in tasks, commands without imported content and restarts do not need the media; see [PXE deployment](../media/pxe-deployment.md#post-installation-content).
 
 [Bootstrap](../../reference/bootstrap.md#postinstall-preparation) prepares PostInstall automatically at startup. No separate installation or manual runtime selection is needed. Standard release media requires Internet access for this step, even with a previous download in the cache.
 
