@@ -23,7 +23,7 @@ Choose **Disable** to remove the join from new media. Your settings stay availab
 The Deploy wizard shows a **Domain join** step before **Summary**:
 
 1. **Domain name**: choose it when the media lists several domains. With one listed domain it is shown and cannot be changed; with none, type it.
-2. **Account** and **Password**: enter the join account, as `DOMAIN\user` or `user@domain`, and its password. For example, an administrator may supply `CORP\deployment-join` for `corp.example.test`.
+2. **Account** and **Password**: enter the join account, as `DOMAIN\user` or `user@domain`, and its password. For example, an administrator may supply `djoin@corp.contoso.com` for `corp.contoso.com`.
 3. **Organizational unit**: choose one when the domain lists several; the default, if you set one, is preselected. A domain that lists a single OU uses it without asking. For a domain without listed OUs, **OU distinguished name (optional)** accepts an OU of that domain; leave it empty to use the domain's default location.
 
 Changing the domain replaces the OU choices with those of the new domain and keeps the account and password already typed.

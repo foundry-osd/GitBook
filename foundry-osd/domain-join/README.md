@@ -27,7 +27,7 @@ Both pages share the same lists. One media can serve several domains; during dep
 
 Under **Domains**:
 
-1. Choose **Add**, enter the **Domain name** (a DNS name such as `corp.example.test`), then choose **Add domain**. In Zero-touch the dialog also asks which account joins that domain; see [Zero-touch Domain Join](zero-touch.md). You can list up to 32 domains.
+1. Choose **Add**, enter the **Domain name** (a DNS name such as `corp.contoso.com`), then choose **Add domain**. In Zero-touch the dialog also asks which account joins that domain; see [Zero-touch Domain Join](zero-touch.md). You can list up to 32 domains.
 2. The first domain you add becomes the default. To change it, select another domain and choose **Set as default**.
 
 What happens during deployment depends on how many domains you list:
@@ -44,7 +44,7 @@ What happens during deployment depends on how many domains you list:
 
 Select a domain under **Domains**. The **Organizational units** card then shows the OUs of that domain only.
 
-1. Choose **Add**, enter a **Display name** such as `Workstations` and a **Distinguished name** such as `OU=Workstations,DC=corp,DC=example,DC=test`, then choose **Add OU**. The distinguished name must be an organizational unit of the selected domain, so it starts with `OU=`; a container such as `CN=Computers` is not accepted. If the entry is refused, the dialog explains why so you can correct it. You can list up to 1,024 OUs per domain.
+1. Choose **Add**, enter a **Display name** such as `Workstations` and a **Distinguished name** such as `OU=Workstations,DC=corp,DC=contoso,DC=com`, then choose **Add OU**. The distinguished name must be an organizational unit of the selected domain, so it starts with `OU=`; a container such as `CN=Computers` is not accepted. If the entry is refused, the dialog explains why so you can correct it. You can list up to 1,024 OUs per domain.
 2. Alternatively, [import OUs from the domain](#find-and-import-ous).
 3. When a domain lists several OUs, select one and choose **Set as default** to preselect it for technicians. **Clear default** returns to no preselection.
 

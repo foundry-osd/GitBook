@@ -6,7 +6,7 @@ Choose this mode when the media should carry the join account, so technicians do
 
 1. In [General configuration](../general.md#password-protection), turn on **Password protection** and enter the **Deployment password**. Zero-touch Domain Join cannot be used without it.
 2. Open **Domain Join > Zero-Touch** and choose **Enable**. Confirm the replacement if another Domain Join or Autopilot mode is active.
-3. Under **Shared join account**, enter the **Account**, as `DOMAIN\user` or `user@domain`, and its **Password**. Every domain uses this account unless you give it its own. Use an account provided by your Active Directory administrator, such as `CORP\deployment-join`.
+3. Under **Shared join account**, enter the **Account**, as `DOMAIN\user` or `user@domain`, and its **Password**. Every domain uses this account unless you give it its own. Use an account provided by your Active Directory administrator, such as `djoin@corp.contoso.com`.
 4. Under **Domains**, [add each domain](README.md#list-the-domains). To join a domain with a different account, choose **Use a dedicated account** in the domain dialog and enter that account and its password.
 5. Optionally [add or import OUs](README.md#list-the-ous-of-a-domain) for each domain.
 6. Resolve the messages shown on the page, then [create or update the media](../media/README.md).

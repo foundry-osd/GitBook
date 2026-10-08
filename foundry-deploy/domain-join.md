@@ -20,7 +20,7 @@ The **Domain join** step sits between **Drivers** and **Summary**. It appears on
 | --- | --- |
 | Several domains listed | Choose the domain. The default is preselected. |
 | One domain listed | Nothing. The domain is shown and cannot be changed. |
-| Interactive media with no domain listed | Type the domain name, such as `corp.example.test`. |
+| Interactive media with no domain listed | Type the domain name, such as `corp.contoso.com`. |
 
 **Account and password**
 
