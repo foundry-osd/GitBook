@@ -63,13 +63,13 @@ Foundry validates the selected file before preparing the target disk. After appl
 | Autopilot JSON profile or interactive registration | Known incompatible settings block deployment. Use a compatible file or change the authored Autopilot configuration. |
 | Hardware hash upload from WinPE | Registration can continue. A successful upload does not guarantee Autopilot enrollment. |
 | Upload computer name to Autopilot | Skipped because Foundry does not manage the final computer name. See [Machine naming](machine-naming.md#upload-the-computer-name-to-autopilot). |
-| Domain Join | Requires exactly one valid concrete `ComputerName` in an applicable `Microsoft-Windows-Shell-Setup` `specialize` component, with no `Microsoft-Windows-UnattendedJoin` component. Foundry uses that inspected name for the domain operation. |
+| Domain Join | Requires exactly one fixed `ComputerName` in the `specialize` pass of `Microsoft-Windows-Shell-Setup`, and no `Microsoft-Windows-UnattendedJoin` component. Foundry joins the domain under that name. |
 
 A custom file does not disable every other Foundry feature. Test the file together with all enabled deployment options; do not assume arbitrary conflicts will be detected or resolved automatically.
 
 Foundry detects known XML conflicts but cannot predict arbitrary scripts. Arrange access to scripts referenced by the file; importing XML does not bundle those external files or execute its commands in WinPE.
 
-For [Domain Join](../domain-join/README.md), a missing, wildcard, invalid or multiple applicable computer name fails the concrete-name requirement before launch confirmation. Foundry does not fill it from the native wizard name. Resolve explicit join-component conflicts and review any custom rename/join commands yourself. This does not relax the protection requirement for custom XML.
+For [Domain Join](../domain-join/README.md), a missing computer name, a `*` wildcard or several names are refused before the deployment starts; Foundry does not take the name from the wizard. Remove any `Microsoft-Windows-UnattendedJoin` component, and review your own commands that rename the computer or join a domain. Custom answer files still require Protected deployment.
 
 Custom commands that replace setup hooks, restart Windows independently or change enrollment and package state can disrupt [Post-installation](post-installation.md#custom-answer-files). Test the complete combination before production use.
 
@@ -90,11 +90,11 @@ Do not remove the target answer file before `oobeSystem` has consumed it. Arrang
 | Default file is missing from the catalog | In Foundry OSD, choose an available default or **Use Foundry settings**, then rebuild media. An invalid catalog default blocks deployment even if another runtime choice is available. |
 | File is incompatible with selected Windows | Use a file with supported components for that architecture and validate it against the target image. |
 | Autopilot conflict | Remove the incompatible settings from the source and refresh it, or change Autopilot configuration before rebuilding. |
-| Domain Join conflict or invalid custom name | Correct the applicable `specialize` name and conflicting join components, refresh the source and rebuild media. See [Domain Join troubleshooting](../../troubleshooting/domain-join.md). |
+| Domain Join conflict or invalid computer name | Correct the computer name in the `specialize` pass and remove the conflicting join component, refresh the source and create the media again. See [Domain Join troubleshooting](../../troubleshooting/domain-join.md). |
 | Deployment succeeds but Windows setup fails | Inspect Windows setup diagnostics without exposing secrets. Check the file against the selected image and test its commands and setup-hook dependencies. |
 
 After deployment, [verify Windows through first boot and OOBE](../../foundry-deploy/verify-deployment.md). A successful Foundry deployment does not confirm that Windows has consumed every answer-file setting.
 
 ## Custom images
 
-Enabled answer files also apply to [custom Windows images](custom-windows-images.md). Verify that your answer file is suitable for the image, its architecture, and the remaining customizations. The Domain Join workflow specifically inspects applied-image composition before credential staging. An embedded join component or ambiguous applicable name can skip domain work with a deployment warning; inspect the [Deploy outcome](../../foundry-deploy/domain-join.md#follow-staging-and-first-boot). This does not establish compatibility for arbitrary image settings or commands.
+Enabled answer files also apply to [custom Windows images](custom-windows-images.md). Verify that your answer file is suitable for the image, its architecture, and the remaining customizations. For Domain Join, Foundry checks the applied image before preparing the join: an image that already contains a join component, or no single computer name, makes Foundry skip the join with a warning in the deployment summary. See [Domain Join troubleshooting](../../troubleshooting/domain-join.md#media-is-not-ready-or-input-is-rejected).

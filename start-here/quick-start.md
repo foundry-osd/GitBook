@@ -21,7 +21,7 @@ Open **General configuration** and confirm the deployment settings. Review the [
 - Add Wi-Fi or Ethernet 802.1X settings when the target cannot use an open wired network.
 - Choose Windows customization options required by the organization.
 - Configure Windows Autopilot only when the device must be registered or receive a profile.
-- Alternatively, configure [Domain Join](../foundry-osd/domain-join/README.md). It replaces active Autopilot provisioning. Only Zero-touch adds the existing General protection prerequisite; Interactive adds none.
+- Alternatively, configure [Domain Join](../foundry-osd/domain-join/README.md). It replaces the active Autopilot mode. Zero-touch Domain Join requires Protected deployment; Interactive does not.
 
 ## 5. Create deployment media
 
@@ -47,4 +47,4 @@ In Foundry Deploy:
 6. Review the summary and start deployment.
 7. Verify the success page before rebooting.
 
-For Domain Join, Deploy success means staging. Follow installed-Windows joining and its controlled restart, then verify local membership, requested OU placement and cleanup before handoff.
+For Domain Join, a successful deployment means the join was prepared. It runs after the restart; check that the computer joined the domain before handing it over.

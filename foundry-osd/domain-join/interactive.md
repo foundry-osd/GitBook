@@ -1,33 +1,37 @@
 # Interactive Domain Join
 
-Choose this mode for shared deployment media when technicians should enter a domain account and password for each target.
+Choose this mode when the media must not carry domain credentials: the technician enters a domain account and its password during each deployment.
 
 ## Prepare the media
 
-1. Open **Domain Join > Interactive** and choose **Enable**. If prompted, confirm replacement of the active Domain Join or Autopilot mode.
-2. Optionally [list the domains](README.md#list-the-domains) technicians may join. With at least one domain listed, the technician joins one of them and cannot type another; with none, the technician types the domain during deployment.
+1. Open **Domain Join > Interactive** and choose **Enable**. Confirm the replacement if another Domain Join or Autopilot mode is active.
+2. Optionally [list the domains](README.md#list-the-domains) technicians may join. With at least one domain listed, the technician joins one of them and cannot type another; with none, the technician types the domain name during deployment.
 3. Optionally [add or import OUs](README.md#list-the-ous-of-a-domain) for each domain. A single OU is always used; with several, technicians choose one and the default is preselected.
-4. Resolve readiness messages, then [create or update media](../media/README.md).
+4. Resolve the messages shown on the page, then [create or update the media](../media/README.md).
 
-Interactive joining introduces no media-password prerequisite and stores no join password in the media. Accounts and passwords entered on the Zero-touch page stay in the profile for a later switch back, but are never written to Interactive media. Other enabled options, including custom answer files, may independently require [Protected deployment](../general.md#protected-deployment).
+Interactive Domain Join does not need [Protected deployment](../general.md#protected-deployment) and writes no join account or password to the media. Accounts and passwords entered on the Zero-touch page stay in your configuration for a later switch back, but are never written to Interactive media. Other options you enable, such as custom answer files, may still require Protected deployment.
 
-Choose **Disable** to exclude joining from newly created media. Nonsecret settings remain available for later activation.
+Choose **Disable** to remove the join from new media. Your settings stay available for later.
 
 {% hint style="warning" %}
 **Screenshot required**
 
 - **File:** `foundry-osd-domain-join-interactive-01-configuration.png`
-- **Capture:** Show the enabled Interactive Domain Join page with the Domains card and the Organizational units card of the selected domain, using sanitized demonstration data.
+- **Capture:** Show the enabled Interactive Domain Join page with two domains in the Domains card and the Organizational units card of the selected domain listing at least two OUs, using sanitized demonstration data.
 {% endhint %}
 
-## Deploy a target
+## What the technician does
 
-The Deploy wizard shows a **Domain join** step before **Summary**. Choose the **Domain name** when the media lists several; otherwise the domain is shown, or typed when the media lists none. Enter **Account (DOMAIN\user or user@domain)** and **Password**. For example, an administrator may supply `CORP\deployment-join` for `corp.example.test`; obtain the password through the approved credential process.
+The Deploy wizard shows a **Domain join** step before **Summary**:
 
-If the retained domain lists several OUs, select a listed **Organizational unit**. That domain's default, if it has one, starts selected, and **Next** requires a selection. A domain that lists a single OU uses it without asking.
+1. **Domain name**: choose it when the media lists several domains. With one listed domain it is shown and cannot be changed; with none, type it.
+2. **Account** and **Password**: enter the join account, as `DOMAIN\user` or `user@domain`, and its password. For example, an administrator may supply `CORP\deployment-join` for `corp.example.test`.
+3. **Organizational unit**: choose one when the domain lists several; the default, if you set one, is preselected. A domain that lists a single OU uses it without asking. For a domain without listed OUs, **OU distinguished name (optional)** accepts an OU of that domain; leave it empty to use the domain's default location.
 
-For a domain without listed OUs, **OU distinguished name (optional)** accepts an OU inside that domain. Leave it empty to use the domain's default location. Changing the domain replaces the OU choices with those of the new domain and keeps the account and password you typed.
+Changing the domain replaces the OU choices with those of the new domain and keeps the account and password already typed.
 
-Review the domain name and OU in the summary's **Domain join** category before starting. See [technician steps and outcome verification](../../foundry-deploy/domain-join.md).
+{% hint style="info" %}
+The wizard does not contact the domain, so a mistyped password is not detected at this step. It shows later, in installed Windows, as a failed join.
+{% endhint %}
 
-Installed Windows must reach the domain controller when PostInstall runs. A successful WinPE deployment only confirms staging. Keep [safe outcome evidence](../../troubleshooting/logs-and-support.md#domain-join-evidence) if joining or placement reports a warning.
+The technician reviews the domain and the OU in the **Domain join** category of the summary before starting. See [Domain Join during deployment](../../foundry-deploy/domain-join.md) for the full procedure and for how to check the outcome.

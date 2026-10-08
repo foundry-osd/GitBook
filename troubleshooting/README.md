@@ -8,8 +8,8 @@ Start with the stage where the workflow stopped.
 | Ethernet, Wi-Fi, DHCP, or Foundry Connect | [Network and Foundry Connect](network.md) |
 | Target, Windows, drivers, or deployment execution | [Windows deployment](deployment.md) |
 | Profile staging or hardware hash upload | [Windows Autopilot](autopilot.md) |
-| AD joining, OU placement, membership or domain credential cleanup | [Domain Join](domain-join.md) |
+| Joining the domain, OU placement or leftover join credentials | [Domain Join](domain-join.md) |
 
 Before changing configuration, record the visible status, failed step, complete error message, device model, media version, and selected workflow. Then collect [logs and support information](logs-and-support.md).
 
-For domain work, collect independent phase states and safe numeric error codes from [domain outcome evidence](logs-and-support.md#domain-join-evidence), without the credential payload or account/password.
+For Domain Join, collect the result file and the log listed in [Domain Join evidence](logs-and-support.md#domain-join-evidence). Never include the `credentials.bin` file, an account or a password.

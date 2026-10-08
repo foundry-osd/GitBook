@@ -1,39 +1,56 @@
 # Zero-touch Domain Join
 
-Choose this mode when protected deployment media should supply the join credentials. Listing several domains, or several OUs for a domain, still asks the technician to choose among them.
+Choose this mode when the media should carry the join account, so technicians do not type domain credentials. The credentials are protected by the technician password of [Protected deployment](../general.md#protected-deployment).
 
-## Prepare protected media
+## Prepare the media
 
-1. In [General configuration](../general.md#protected-deployment), enable **Protected deployment** and supply its existing media password.
-2. Open **Domain Join > Zero-Touch** and choose **Enable**. Confirm replacement if another Domain Join or Autopilot mode is active.
-3. Under **Shared join account**, enter **Account (DOMAIN\user or user@domain)** and **Password**. Every domain uses this account unless you give it its own. Use an administrator-provided account such as `CORP\deployment-join`.
+1. In [General configuration](../general.md#protected-deployment), enable **Protected deployment** and set the technician password. Zero-touch Domain Join cannot be used without it.
+2. Open **Domain Join > Zero-Touch** and choose **Enable**. Confirm the replacement if another Domain Join or Autopilot mode is active.
+3. Under **Shared join account**, enter the **Account**, as `DOMAIN\user` or `user@domain`, and its **Password**. Every domain uses this account unless you give it its own. Use an account provided by your Active Directory administrator, such as `CORP\deployment-join`.
 4. Under **Domains**, [add each domain](README.md#list-the-domains). To join a domain with a different account, choose **Use a dedicated account** in the domain dialog and enter that account and its password.
-5. Optionally [add or import OUs](README.md#list-the-ous-of-a-domain) for each domain. For a deployment without any technician input, list one domain and at most one OU.
-6. Resolve all readiness messages and [create or update media](../media/README.md).
+5. Optionally [add or import OUs](README.md#list-the-ous-of-a-domain) for each domain.
+6. Resolve the messages shown on the page, then [create or update the media](../media/README.md).
 
 The **Status** column of the Domains table says what each domain still needs: **Ready**, or for example a missing password. Problems with the shared account are shown under that account.
-
-Each join password is encrypted using the existing Protected deployment key, once per domain, so a password written for one domain cannot be used for another. Deploy uses the existing unlock session; there is no additional media password or domain-password prompt. With one domain and at most one OU listed for it, the Deploy wizard shows no Domain join step. With several domains, or several OUs for the retained domain, the step shows those choices and no credential fields.
 
 {% hint style="warning" %}
 **Screenshot required**
 
 - **File:** `foundry-osd-domain-join-zero-touch-01-readiness.png`
-- **Capture:** Show enabled Zero-touch Domain Join: the Shared join account card without credentials, the Domains table with its Status column, and the Organizational units card.
+- **Capture:** Show the enabled Zero-touch Domain Join page: the Shared join account card with a demonstration account and a masked password, the Domains table with one domain using the shared account and one using a dedicated account, both Ready, and the Organizational units card.
 {% endhint %}
 
-## Keep credentials associated with the correct profile
+## What the technician sees
 
-A password belongs to its account. Changing an account or removing the last domain that uses it clears its password; renaming a domain, switching to Interactive and choosing **Disable** do not, so returning to Zero-touch needs no retyping. Passwords kept this way are written only to Zero-touch media. **Disable** excludes joining from new media while retaining the settings and their passwords.
+During deployment the technician unlocks the media with the technician password, as for any protected media. There is no prompt for the domain account or its password.
 
-[Remember passwords](../deployment-profiles.md#domain-credentials) can retain the password of each join account with a local profile. Ordinary `.foundryprofile` exports always omit the direct domain password, even with **Include passwords and confidential files** selected. An imported automatic profile remains structurally valid, but media creation needs the password and usable General protection on that PC.
+| Media | Domain join step in the Deploy wizard |
+| --- | --- |
+| One domain, and at most one OU for it | Not shown. The deployment asks nothing about the domain. |
+| Several domains | Shown, to choose the domain. The default is preselected. |
+| Several OUs for the domain being joined | Shown, to choose the OU. The default, if you set one, is preselected. |
 
-Encrypted shared revisions use a separate sharing path and may retain domain credentials when confidential inputs are explicitly included. Connection and recovery files omit the direct password, but their shared-access keys can grant access to secrets in those revisions. Restrict those files and their passwords accordingly.
+See [Domain Join during deployment](../../foundry-deploy/domain-join.md).
 
-Recreate or update media after credential changes. Profile edits do not change media already distributed or a build already running.
+## Passwords and profiles
 
-## Verify deployment
+A password belongs to its account, whether shared or dedicated:
 
-Follow [Domain Join in Deploy](../../foundry-deploy/domain-join.md). Installed Windows needs online domain-controller access even when the media carries an OU list. Review joining, placement and post-restart membership separately.
+- Changing an account, or removing the last domain that uses a dedicated account, clears its password.
+- Renaming a domain, switching to Interactive and choosing **Disable** keep the passwords, so returning to Zero-touch needs no retyping. Kept passwords are only ever written to Zero-touch media.
 
-Credentials become a restricted temporary plaintext target payload for the child operation. See [credential lifetime and cleanup](../../reference/security-and-credentials.md#domain-credentials); cleanup warnings require administrator review before handoff.
+On the media, each domain has its own encrypted copy of its account and password. A copy written for one domain cannot be used to join another.
+
+With [deployment profiles](../deployment-profiles.md#domain-credentials):
+
+- **Remember passwords** keeps the join passwords with the profile on this PC.
+- A `.foundryprofile` export never contains the join passwords, even with **Include passwords and confidential files** selected. After importing such a profile on another PC, enter the join passwords and set the technician password there before creating media.
+- An encrypted shared revision can contain the join passwords when you choose to include confidential content. Restrict access to its connection and recovery files and to their passwords accordingly.
+
+Create or update the media again after changing an account or a password. Media already created keeps the credentials it was built with.
+
+## Check the result
+
+The join runs after Windows is installed and needs the domain to be reachable at that moment. Follow [Domain Join during deployment](../../foundry-deploy/domain-join.md#what-happens-in-windows) to check that the computer joined the domain and reached the intended OU.
+
+During deployment, the credentials of the domain being joined are copied to the target disk, in a folder that only SYSTEM and administrators can read. They are used once in installed Windows and then deleted. See [how domain credentials are handled](../../reference/security-and-credentials.md#domain-credentials).

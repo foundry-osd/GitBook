@@ -38,9 +38,9 @@ Verify that the installed applications work after cleanup. If they need source f
 
 ## Domain Join
 
-A successful Deploy session confirms domain-work staging only. Follow PostInstall through its controlled restart, then verify the expected Windows name and local AD domain membership. Review the requested OU and directory readback independently: local membership alone does not prove placement or policy application.
+A successful deployment only means the join was prepared. After the restart, check the line that starts with `Domain -` in the Foundry console, then sign in with a domain account. Being a member of the domain does not prove that the computer account is in the intended OU: confirm it with your Active Directory administrator.
 
-Inspect [the domain result and execution journal](../troubleshooting/logs-and-support.md#domain-join-evidence). Successful join with failed placement still restarts and verifies. **Unknown** mutations are never automatically repeated and stay Unknown even if membership later succeeds; **Unverified** needs administrator confirmation. Resolve warned outcomes and **Cleanup Pending** before organizational handoff. A known WinPE skip has only Deploy's summary/logs. See [Domain Join troubleshooting](../troubleshooting/domain-join.md).
+When the join, the placement or the membership is not **Succeeded**, or when **Cleanup** stays **Pending**, resolve it before handing over the computer; see [Domain Join troubleshooting](../troubleshooting/domain-join.md). If Deploy skipped the join because of the Windows edition or the image, only the deployment summary mentions it.
 
 ## Automatic Windows activation
 

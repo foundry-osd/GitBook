@@ -44,7 +44,7 @@ After the first boot into installed Windows, Foundry runs the following before O
 | --- | --- |
 | 1 | Install deferred driver packages, such as supported Lenovo EXE and Surface MSI packages. Drivers injected offline are already installed during deployment. |
 | 2 | Import configured certificates and wired/Wi-Fi profiles. |
-| 3 | Domain Join: join and independently place the computer account, perform a controlled restart when required, then verify local membership without credentials. |
+| 3 | Domain Join: join the domain and place the computer in its OU, restart Windows once when the join succeeded, then check that the computer is a member of the domain. |
 | 4 | Remove selected Copilot and AI Hub application packages. Other AI settings may already have been applied during deployment. |
 | 5 | Remove the selected provisioned AppX packages. |
 | 6 | Attempt OEM activation when eligible. This is skipped for custom answer files and volume-licensed deployments. |
@@ -53,7 +53,7 @@ After the first boot into installed Windows, Foundry runs the following before O
 
 Required restarts can occur during this sequence. A planned restart resumes the remaining work; any deferred restart is handled before final cleanup. The interactive Autopilot assistant remains separate and appears during OOBE when configured.
 
-The [Domain Join workflow](../domain-join/README.md) runs when active even without custom actions. Successful joining still restarts and verifies when OU placement fails. [Local membership and placement](../../troubleshooting/domain-join.md) are independent outcomes.
+[Domain Join](../domain-join/README.md) runs whenever it is enabled, even without custom actions. See [what happens in Windows](../../foundry-deploy/domain-join.md#what-happens-in-windows).
 
 ## Prepare content
 
@@ -109,7 +109,7 @@ PowerShell scripts must return a failure explicitly when appropriate. Non-termin
 
 **Continue on error** is disabled by default: a failure stops later actions and prevents a successful handoff to OOBE. Enabling it permits later actions after an ordinary, fully observed failure, recording the sequence as completed with errors. It does not allow execution to continue when Foundry cannot determine whether an action finished safely, or after an installer-owned restart.
 
-Domain Join has a specific warning-and-continue policy for join, placement, controlled domain interruption and domain-only credential-cleanup failures. Uncertain join/move mutations are never automatically repeated. Unrelated uncertain actions, journal integrity and other sensitive-cleanup failures retain their stop policy. Review [domain results and pending cleanup](../../troubleshooting/domain-join.md) before handoff.
+A failed join or OU placement does not stop the other actions: Foundry reports a warning and continues, and it never repeats a join by itself. Check the outcome with [Domain Join troubleshooting](../../troubleshooting/domain-join.md) before handing over the computer.
 
 Keep secrets out of command arguments and normal output. Profile encryption does not make arbitrary script output or installer logs safe to share.
 
@@ -125,7 +125,7 @@ Installer exit code `1641` means the installer initiated its own restart. Foundr
 
 After a planned restart, Foundry resumes from its saved progress. If power is lost while an action is running, Foundry does not automatically retry that action. Missing or damaged execution records also stop the sequence. Inspect the results and logs before deciding whether to redeploy; scripts and installers are not necessarily safe to repeat.
 
-For domain operations, validated recovery can warn and continue without replaying joining or placement, with a conservative controlled restart when mutation may remain active. An earlier **Unknown** remains Unknown after read-only membership confirmation. Domain-only cleanup can remain Pending through finalization; see [domain recovery guidance](../../troubleshooting/domain-join.md#interrupted-work-or-restart-is-pending).
+If the computer is interrupted during the join, Foundry does not try the join again after the restart; it only checks whether the computer is a member of the domain. See [interrupted work](../../troubleshooting/domain-join.md#interrupted-work-or-restart-is-pending).
 
 If an interrupted process might still be using files, Foundry retains them and reports cleanup as pending. This does not retry the interrupted action.
 

@@ -65,9 +65,9 @@ The preview uses representative values. Foundry Deploy resolves actual hardware 
 
 ## Domain Join
 
-[Domain Join](../domain-join/README.md) uses the final validated Windows name to identify the AD computer account. Review it before disk confirmation, particularly when reusing an existing account.
+[Domain Join](../domain-join/README.md) uses the computer name to find or create the computer account in the domain. Check it before confirming the disk erase, especially when a machine is redeployed under an existing name.
 
-A [custom answer file](unattend.md) overrides native naming and must contain exactly one acceptable concrete name in its applicable `Microsoft-Windows-Shell-Setup` `specialize` component. Missing, wildcard, invalid or multiple applicable names fail the domain requirement. The native fallback table above does not repair custom XML. Verify the expected name again after the controlled domain restart.
+With a [custom answer file](unattend.md), the name comes from the file: it must set exactly one fixed computer name in the `specialize` pass of `Microsoft-Windows-Shell-Setup`. A missing name, a `*` wildcard or several names are refused, and the naming rules on this page do not apply.
 
 ## Upload the computer name to Autopilot
 

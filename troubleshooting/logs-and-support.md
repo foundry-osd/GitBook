@@ -8,7 +8,7 @@ In **Settings > General**, use **Export diagnostics** to save a sanitized archiv
 
 Use **Advanced: export raw logs** only when requested by a trusted support contact, and review the sensitive-data warning before sharing the archive. See [Export diagnostics](../foundry-osd/settings.md#export-diagnostics).
 
-For Domain Join, recognized quoted/escaped credential values are masked in sanitized logs, and `credentials.bin` is unconditionally excluded by basename before reading in sanitized and raw exports. The export still selects only desktop top-level `Foundry*.log` files; it does not retrieve target payloads or PostInstall evidence. Unknown/unlabelled secrets and arbitrarily renamed payloads are not a redaction guarantee.
+For Domain Join, recognized credential values are masked in sanitized logs, and a file named `credentials.bin` is never read or included, in sanitized and raw exports alike. The export still collects only the desktop application's top-level `Foundry*.log` files, not the files written on deployed computers. A secret that Foundry cannot recognize is not masked.
 
 Remote diagnostics supplement local logs and support archives. Keep local evidence when investigating a failure: remote delivery can have gaps, and external-tool log files are not automatically uploaded. See [Telemetry and privacy](../reference/telemetry-and-privacy.md#remote-error-diagnostics).
 
@@ -40,7 +40,7 @@ If records are missing, check consent, application version, network access, the 
 - Selected Windows release, edition, language, and architecture.
 - Selected driver pack.
 - Autopilot method, without credentials or tenant secrets.
-- For Domain Join, safe join/placement/membership/restart/cleanup states and allowlisted failure codes. Keep native API, LDAP client/transport and directory server result codes distinct; omit arbitrary directory diagnostics and credentials.
+- For Domain Join, the states of the join, placement, membership, restart and cleanup, with the `failureCode` and the numeric error codes. Do not include accounts, passwords or other directory details.
 
 ## Windows PE log location
 
@@ -127,16 +127,16 @@ Desktop diagnostic export does not automatically collect target-machine logs. Po
 
 ## Domain Join evidence
 
-For domain work successfully staged by Deploy, collect from the installed Windows target:
+When the join was prepared by Deploy, collect these files from the deployed computer:
 
 | Evidence | Location |
 | --- | --- |
-| Independent domain outcome | `%SystemRoot%\Temp\Foundry\State\PreOobe\domain-join-result.json` |
-| Execution journal and saved restart/progress | `%SystemRoot%\Temp\Foundry\State\PreOobe\execution-result.json` |
-| Existing PostInstall log | `%SystemRoot%\Temp\Foundry\Logs\PreOobe\Foundry.PostInstall.log` and relevant rotated logs |
+| Outcome of the join | `%SystemRoot%\Temp\Foundry\State\PreOobe\domain-join-result.json` |
+| Progress of all post-installation actions | `%SystemRoot%\Temp\Foundry\State\PreOobe\execution-result.json` |
+| Post-installation log | `%SystemRoot%\Temp\Foundry\Logs\PreOobe\Foundry.PostInstall.log` and its rotated files |
 
-The domain result records expected domain, computer name and OU, independent phase states, allowlisted failure codes and correctly attributed numeric errors, restart and cleanup. It contains no account/password or arbitrary exception text. These expected identities can still be sensitive; redact them before sharing. The worker phase receipt at `State\PreOobe\domain-join-phase.json` is execution evidence, not an instruction to restart or retry mutations manually.
+The result file contains the expected domain, computer name and OU, the state of each part of the join, a reason for each failure and numeric error codes. It contains no account, no password and no free-form error text. Remove the names before sharing if they are sensitive.
 
-If Deploy skipped joining before staging, collect its summary and deployment logs instead. No installed domain result is manufactured for that skip. Separate local membership from OU placement/readback, and keep **Unknown**, **Unverified** and **Cleanup Pending** outcomes visible in the report. See [Domain Join troubleshooting](domain-join.md).
+If Deploy skipped the join because of the Windows edition or the image, these files do not exist: collect the deployment summary and the deployment logs instead. See [Domain Join troubleshooting](domain-join.md).
 
-Never attach `%SystemRoot%\Temp\Foundry\Payloads\DomainJoin\<operation-id>\credentials.bin`. It is temporary plaintext authentication material, even though its filename uses `.bin`. An administrator must confirm no active worker remains before removing a leftover. Desktop export and remote diagnostics do not automatically collect these target files.
+Never attach `%SystemRoot%\Temp\Foundry\Payloads\DomainJoin\<operation-id>\credentials.bin`: it contains the join account and password. Foundry does not collect files from deployed computers by itself.

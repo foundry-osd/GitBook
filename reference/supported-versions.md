@@ -44,10 +44,10 @@ Keep deployment media and its package content together, and choose scripts and i
 
 ## Domain Join
 
-[Domain Join](../foundry-osd/domain-join/README.md) supports eligible Windows editions on x64 and ARM64 targets.
+[Domain Join](../foundry-osd/domain-join/README.md) is available on x64 and ARM64 for Windows editions that can join a domain.
 
-Use matching media/target architecture and validate the complete workflow before rollout.
+Use media that matches the architecture of the computer, and test the complete workflow before a rollout.
 
-Known unsupported edition IDs are `Core`, `CoreN`, `CoreSingleLanguage` and `CoreCountrySpecific` (Home family). They skip joining with a warning while Windows installation continues. Recognized eligible IDs are `Professional`, `ProfessionalN`, `Education`, `EducationN`, `Enterprise` and `EnterpriseN`; eligibility alone does not prove successful joining. Missing/unfamiliar edition IDs remain Unknown pending image/native inspection.
+Pro, Education and Enterprise editions, including their N variants, can join a domain. Home editions (`Core`, `CoreN`, `CoreSingleLanguage`, `CoreCountrySpecific`) cannot: Foundry skips the join with a warning and the installation continues. For an edition Foundry does not recognize, the decision is made from the applied image.
 
-Installed Windows needs online access to domain DNS and a writable controller, along with administrator-delegated join/reuse/read/placement permissions. Preparing an OU list offline does not provide offline joining. Custom answer files and applied images must meet [domain composition/name requirements](../foundry-deploy/domain-join.md#review-the-target-and-windows).
+Installed Windows must reach the domain's DNS and a writable domain controller, and the join account must be allowed to join computers, reuse existing computer accounts and place computers in the listed OUs. Custom answer files and custom images must meet the [Domain Join requirements](../troubleshooting/domain-join.md#media-is-not-ready-or-input-is-rejected).

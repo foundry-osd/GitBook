@@ -11,7 +11,7 @@ Confirm:
 - Driver pack.
 - Firmware options.
 - Windows Autopilot method and, for zero-touch hardware hash upload, the configured group tag.
-- Domain Join mode, authored domain and default OU when configured.
+- Domain Join: the domain and the OU the computer will join.
 - Optional features and other deployment customization.
 
 <figure>
@@ -25,7 +25,7 @@ When the media includes [custom answer files](../foundry-osd/customization/unatt
 
 Start only when every value is correct. Foundry opens **Confirm disk erase** before crossing the destructive boundary. Verify the disk number, model, bus, size, and selected operating system before accepting.
 
-The [Domain join step](domain-join.md#complete-the-domain-join-step) collects interactive credentials or a permitted OU choice before the summary. The summary's **Domain join** category and this confirmation show the domain name and OU, or that a known unsupported edition skips the join. Account and password are not included.
+The [Domain join step](domain-join.md#complete-the-domain-join-step) comes before the summary. The summary's **Domain join** category shows the domain and the OU the join will use, or says that the selected Windows edition cannot join a domain. The account and the password are never shown.
 
 {% hint style="danger" %}
 Accepting the confirmation allows Foundry to clean and repartition the selected disk. Existing data on that disk will be lost.
@@ -80,4 +80,4 @@ For [custom images](../foundry-osd/customization/custom-windows-images.md), veri
 
 Foundry checks required [Post-installation](../foundry-osd/customization/post-installation.md) content and its runtime before preparing the target disk. When actions use imported scripts or packages, keep the complete ISO or USB media available until staging finishes. If this check fails, see [Post-installation preparation fails](../troubleshooting/deployment.md#post-installation-preparation-fails). Successful staging does not prove first-boot actions succeeded; continue through [deployment verification](verify-deployment.md).
 
-For Domain Join, preparation stages joining for installed Windows. Edition or applied-image composition incompatibility can warn and skip domain work while installation continues; pre-staging skips remain in Deploy's summary/logs. Review later join, placement, restart, membership and cleanup results separately. Runtime compatibility, protected staging and unrelated destructive/integrity checks retain their existing failure policy.
+For Domain Join, a successful deployment means the join has been prepared; it runs after the restart, in installed Windows. When the Windows edition or the image is not compatible, Foundry skips the join with a warning in the summary and the installation continues. Check the outcome as described in [Domain Join during deployment](domain-join.md#what-happens-in-windows).

@@ -9,7 +9,7 @@ Use **Foundry OSD** on an administrator workstation to:
 - Install or validate Windows ADK and Windows PE components.
 - Configure networking and deployment behavior.
 - Select Windows customization options.
-- Choose optional Windows Autopilot or [Domain Join](../foundry-osd/domain-join/README.md) provisioning; only one mode can be active.
+- Choose Windows Autopilot or [Domain Join](../foundry-osd/domain-join/README.md) when required; only one of them can be active.
 - Create or update ISO and USB media.
 
 ## Phase 2: Establish network readiness
@@ -27,7 +27,7 @@ The [Windows PE bootstrap](../reference/bootstrap.md) prepares this session and 
 - Driver pack selection.
 - Firmware and Windows Autopilot options when configured.
 
-[Domain Join input](../foundry-deploy/domain-join.md) is entered in a wizard step before the summary. Interactive asks for the account, password and a permitted OU; Zero-touch uses the existing unlock session and an optional OU choice.
+[Domain Join](../foundry-deploy/domain-join.md) adds a wizard step before the summary when there is something to enter or choose: the account and password on Interactive media, and the domain or the OU when the media lists several.
 
 ## Phase 4: Apply and configure Windows
 
@@ -39,7 +39,7 @@ Review the completion state, deployment summary, and any reported error. Reboot 
 
 ## Phase 6: Verify installed-Windows work
 
-Follow staged [Post-installation](../foundry-osd/customization/post-installation.md) through first boot, controlled restarts and OOBE. Domain Join runs after drivers/networking and verifies local membership after its required restart. Check OU placement/readback and credential cleanup separately. WinPE success establishes staging, not completed membership. Review [warnings and outcomes](../foundry-deploy/verify-deployment.md#domain-join) before handoff.
+After the restart, Windows setup runs the [post-installation](../foundry-osd/customization/post-installation.md) actions before the first sign-in. Domain Join runs there, restarts Windows once, then checks that the computer is a member of the domain. A successful deployment in WinPE only means the join was prepared. Check the [outcome](../foundry-deploy/verify-deployment.md#domain-join) before handing over the computer.
 
 <figure>
   <img
@@ -47,7 +47,7 @@ Follow staged [Post-installation](../foundry-osd/customization/post-installation
     alt="Foundry deployment workflow from media authoring through network readiness, Windows deployment, verification, and reboot"
   >
   <figcaption>
-    Foundry OSD authors deployment media, Foundry Connect establishes network readiness, and Foundry Deploy applies Windows. Verify staged first-boot work after reboot.
+    Foundry OSD authors deployment media, Foundry Connect establishes network readiness, and Foundry Deploy applies Windows. The post-installation actions, including Domain Join, run after the restart.
   </figcaption>
 </figure>
 
