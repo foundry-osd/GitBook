@@ -1,6 +1,6 @@
 # Zero-touch Domain Join
 
-Choose this mode when protected deployment media should supply the join credentials. Technician choice of the domain or the OU, if enabled, still requires input.
+Choose this mode when protected deployment media should supply the join credentials. Listing several domains, or several OUs for a domain, still asks the technician to choose among them.
 
 ## Prepare protected media
 
@@ -8,13 +8,12 @@ Choose this mode when protected deployment media should supply the join credenti
 2. Open **Domain Join > Zero-Touch** and choose **Enable**. Confirm replacement if another Domain Join or Autopilot mode is active.
 3. Under **Shared join account**, enter **Account (DOMAIN\user or user@domain)** and **Password**. Every domain uses this account unless you give it its own. Use an administrator-provided account such as `CORP\deployment-join`.
 4. Under **Domains**, [add each domain](README.md#list-the-domains). To join a domain with a different account, choose **Use a dedicated account** in the domain dialog and enter that account and its password.
-5. Optionally [add or import OUs](README.md#list-the-ous-of-a-domain) for each domain, and set a default OU.
-6. Turn on **Technicians can choose** on a card only if technician selection of the domain or of the OU is wanted.
-7. Resolve all readiness messages and [create or update media](../media/README.md).
+5. Optionally [add or import OUs](README.md#list-the-ous-of-a-domain) for each domain. For a deployment without any technician input, list one domain and at most one OU.
+6. Resolve all readiness messages and [create or update media](../media/README.md).
 
 The **Status** column of the Domains table says what each domain still needs: **Ready**, or for example a missing password. Problems with the shared account are shown under that account.
 
-Each join password is encrypted using the existing Protected deployment key, once per domain, so a password written for one domain cannot be used for another. Deploy uses the existing unlock session; there is no additional media password or domain-password prompt. Without technician choice, the Deploy wizard shows no Domain join step and joins the default domain. With it, the step shows the domain and OU choices and no credential fields.
+Each join password is encrypted using the existing Protected deployment key, once per domain, so a password written for one domain cannot be used for another. Deploy uses the existing unlock session; there is no additional media password or domain-password prompt. With one domain and at most one OU listed for it, the Deploy wizard shows no Domain join step. With several domains, or several OUs for the retained domain, the step shows those choices and no credential fields.
 
 {% hint style="warning" %}
 **Screenshot required**

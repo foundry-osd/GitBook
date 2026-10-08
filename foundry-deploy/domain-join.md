@@ -19,20 +19,20 @@ The **Domain name** field depends on the media:
 
 | Media | Technician action |
 | --- | --- |
-| Several domains listed and technician choice enabled | Choose a listed domain. The default domain is preselected. |
-| One domain listed, or technician choice disabled | No action. The default domain is shown read-only. |
+| Several domains listed | Choose a listed domain. The default domain is preselected. |
+| One domain listed | No action. The domain is shown read-only. |
 | Interactive with no domain listed | Type the domain name. An invalid name is flagged under the field. |
 
 For Interactive mode, also enter **Account (DOMAIN\user or user@domain)** and **Password**. An invalid account is flagged under its field. Changing the domain keeps what you typed.
 
 For Zero-touch, use the existing Protected deployment unlock. The encrypted account and password of the retained domain are checked against the domain and account they were saved for. There is no password prompt; the step appears only when the technician has a domain or an OU to choose.
 
-The OU follows the retained domain and resets to that domain's default when the domain changes:
+The OU follows the retained domain and resets when the domain changes:
 
 | OU configuration of the retained domain | Technician action |
 | --- | --- |
-| OUs listed and technician choice enabled | Choose a listed **Organizational unit**. The default OU is preselected; **Next** requires a selection. |
-| OUs listed and technician choice disabled | No OU field. The domain's default is fixed; without a default, the domain's default location is used. |
+| Several OUs listed | Choose a listed **Organizational unit**. The default OU, if the domain has one, is preselected; **Next** requires a selection. |
+| One OU listed | No OU field. That OU is used. |
 | No OU listed, Interactive | Enter **OU distinguished name (optional)**, starting with `OU=` and inside that domain, or leave it empty. |
 | No OU listed, Zero-touch | No OU field; the domain's default location is used. |
 

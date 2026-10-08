@@ -19,7 +19,8 @@ Under **Domains**:
 
 1. Choose **Add**, enter the **Domain name** (a DNS name such as `corp.example.test`), then confirm. In Zero-touch the dialog also asks which account joins that domain; see [Zero-touch Domain Join](zero-touch.md). You can list up to 32 domains.
 2. The first domain you add becomes the default. To change it, select another domain and choose **Set as default**.
-3. Turn on **Technicians can choose** if technicians should pick the domain during deployment. When it is off, every deployment joins the default domain.
+
+With one domain listed, every deployment joins it. With several, technicians choose the domain during deployment and the default is preselected. To keep a deployment free of that choice, list a single domain.
 
 **Edit** changes the selected domain. Its name can be changed only while it lists no OUs; remove them first, or add a new domain. **Remove** deletes the selected domain together with its OUs; removing the default moves the default to the first remaining domain.
 
@@ -31,10 +32,17 @@ Select a domain under **Domains**. The **Organizational units** card then shows 
 
 1. Choose **Add**, enter a **Display name** such as `Workstations` and a **Distinguished name** such as `OU=Workstations,DC=corp,DC=example,DC=test`, then confirm. The DN must name an organizational unit inside the selected domain, so it starts with `OU=`; a container such as `CN=Computers` is not accepted. A refused entry is explained in the dialog so you can correct it. You can list up to 1,024 OUs per domain.
 2. Alternatively, [import OUs from the domain](#find-and-import-ous).
-3. To set the domain's default OU, select one OU and choose **Set as default**. **Clear default** returns to no default.
-4. Turn on **Technicians can choose** if technicians should pick among the listed OUs. This setting applies to every domain that lists OUs.
+3. When a domain lists several OUs, select one and choose **Set as default** to preselect it for technicians. **Clear default** returns to no preselection.
 
-Without technician choice, each domain's default OU is fixed. With no default, Windows uses that domain's default location; a reused account is left where it is. When a domain lists OUs, technicians can only pick from them. In Interactive mode, a domain without listed OUs offers an optional typed DN instead. Zero-touch never accepts a typed OU.
+The number of OUs a domain lists decides what happens during deployment:
+
+| OUs listed for the domain | Result |
+| --- | --- |
+| None | Windows uses the domain's default location; a reused account is left where it is. In Interactive mode the technician may type an OU DN instead. Zero-touch never accepts a typed OU. |
+| One | That OU is always used. It is shown as the default and needs no choice. |
+| Several | Technicians choose one of them during deployment. The default, if set, is preselected; without one they must pick. |
+
+To keep a deployment free of that choice, list at most one OU for the domain.
 
 **Edit** changes the display name of the selected OU, for example to show technicians a clearer name than the one imported from the directory. The distinguished name stays the same, the OU stays the default when it was, and a later import keeps your name. **Remove** deletes the selected OUs; removing a default OU clears that domain's default.
 
