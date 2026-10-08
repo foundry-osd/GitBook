@@ -44,12 +44,15 @@ Changing the domain replaces the OU choices with those of the new domain.
 The wizard does not contact the domain. A mistyped account or password is accepted here and only shows later, in installed Windows, as a failed join.
 {% endhint %}
 
-{% hint style="warning" %}
-**Screenshot required**
+<figure>
+  <img src="../.gitbook/assets/foundry-deploy-domain-join-01-interactive-ou.png" alt="Domain join step of Foundry Deploy on Interactive media with the domain list, empty account and password fields and the OU list">
+  <figcaption>Interactive media: choose the domain, enter the join account and its password, then choose the OU.</figcaption>
+</figure>
 
-- **File:** `foundry-deploy-domain-join-01-interactive-ou.png`
-- **Capture:** Show the Domain join wizard step on Interactive media that lists two domains and at least two OUs for the selected domain: the domain list, empty account and password fields, and the OU list, using sanitized demonstration data.
-{% endhint %}
+<figure>
+  <img src="../.gitbook/assets/foundry-deploy-domain-join-02-zero-touch-ou.png" alt="Domain join step of Foundry Deploy on Zero-touch media with the domain list and the OU list only">
+  <figcaption>Zero-touch media: only the domain and the OU are left to choose.</figcaption>
+</figure>
 
 ## Review and start
 

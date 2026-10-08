@@ -13,12 +13,10 @@ Choose this mode when the media should carry the join account, so technicians do
 
 The **Status** column of the Domains table says what each domain still needs: **Ready**, or for example a missing password. Problems with the shared account are shown under that account.
 
-{% hint style="warning" %}
-**Screenshot required**
-
-- **File:** `foundry-osd-domain-join-zero-touch-01-readiness.png`
-- **Capture:** Show the enabled Zero-touch Domain Join page: the Shared join account card with a demonstration account and a masked password, the Domains table with one domain using the shared account and one using a dedicated account, both Ready, and the Organizational units card.
-{% endhint %}
+<figure>
+  <img src="../../.gitbook/assets/foundry-osd-domain-join-zero-touch-01-readiness.png" alt="Zero-touch Domain Join page with a shared join account, three domains marked Ready and the OUs of the selected domain">
+  <figcaption>Each domain uses the shared account or its own, and shows Ready when nothing is missing.</figcaption>
+</figure>
 
 ## What the technician sees
 

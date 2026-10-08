@@ -9,6 +9,11 @@ Use **Domain Join** to join the computer to an Active Directory domain during de
 
 Only one of Zero-touch Domain Join, Interactive Domain Join and the [Windows Autopilot](../autopilot/README.md) modes can be active. Open the page you want and choose **Enable**; Foundry asks for confirmation when it replaces another active mode. **Disable** removes the join from new media and keeps your settings.
 
+<figure>
+  <img src="../../.gitbook/assets/foundry-osd-domain-join-01-overview-empty.png" alt="Zero-touch Domain Join page before it is enabled, with the Enable button and empty Domains and Organizational units cards">
+  <figcaption>A Domain Join page before it is enabled: choose Enable, then list the domains and their OUs.</figcaption>
+</figure>
+
 ## Before configuring
 
 - **Network.** The join happens in installed Windows and needs the domain at that moment: the computer must reach the domain's DNS and a domain controller. Listing OUs in advance does not make an offline join possible, and the Internet check in Foundry Connect does not test access to the domain.
@@ -69,13 +74,6 @@ Instead of typing distinguished names, you can read them from the domain.
 4. Review the resulting list and the default.
 
 The search uses your Windows account, not the join account, so it does not prove that the join account can use these OUs. When the domain holds more OUs than the search can return, the dialog says that only some of them are listed. If the domain cannot be searched, add the OUs manually.
-
-{% hint style="warning" %}
-**Screenshot required**
-
-- **File:** `foundry-osd-domain-join-01-organizational-units.png`
-- **Capture:** Show a Domain Join page with two domains in the Domains card and the Organizational units card of the selected domain listing at least two OUs, one of them marked as default, using sanitized demonstration data.
-{% endhint %}
 
 ## Existing computer accounts
 

@@ -13,12 +13,10 @@ Interactive Domain Join does not need [Password protection](../general.md#passwo
 
 Choose **Disable** to remove the join from new media. Your settings stay available for later.
 
-{% hint style="warning" %}
-**Screenshot required**
-
-- **File:** `foundry-osd-domain-join-interactive-01-configuration.png`
-- **Capture:** Show the enabled Interactive Domain Join page with two domains in the Domains card and the Organizational units card of the selected domain listing at least two OUs, using sanitized demonstration data.
-{% endhint %}
+<figure>
+  <img src="../../.gitbook/assets/foundry-osd-domain-join-interactive-01-configuration.png" alt="Interactive Domain Join page listing three domains and the OUs of the selected domain">
+  <figcaption>Interactive mode lists domains and OUs only; no account or password is stored.</figcaption>
+</figure>
 
 ## What the technician does
 
