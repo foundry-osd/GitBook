@@ -131,7 +131,7 @@ Problems met when Foundry Deploy opens and in its wizard, up to the **Deploy** b
 | --- | --- |
 | "The selected answer file is unavailable, invalid, or incompatible with the selected Windows architecture. Choose another file or rebuild the media." | One message for several cases: no part of the file applies to the architecture of the selected Windows image; the copy on the media is missing, damaged or cannot be decrypted; or, on Domain Join media, the file does not set exactly one fixed computer name or contains a `Microsoft-Windows-UnattendedJoin` component |
 | "The configured default answer file is missing. Rebuild the boot media." | The media configuration names a default answer file that is not on the media |
-| "This answer file conflicts with the configured Autopilot enrollment mode. Choose another file or change the media configuration." | The media uses Windows Autopilot with a JSON profile or the interactive upload, and the file contains a setting that prevents enrollment, such as a local account, automatic logon or a skipped OOBE. See [the settings that block Windows Autopilot](../../foundry-osd/customization/unattend.md#settings-that-block-windows-autopilot) |
+| "This answer file conflicts with the configured Autopilot enrollment mode. Choose another file or change the media configuration." | The media uses Windows Autopilot with a JSON profile or the interactive upload, and the file contains a setting that prevents enrollment, such as a local account, automatic logon or a skipped OOBE. See [the settings that block Windows Autopilot](../../foundry-osd/customization/unattend/answer-file-rules.md#settings-that-block-windows-autopilot) |
 
 **Fix:**
 

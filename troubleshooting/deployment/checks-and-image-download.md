@@ -30,7 +30,7 @@ On this page the disk may or may not have been erased. With an ISO, or a USB dri
 
 **Where:** **Validate answer file**, the first step of a deployment that uses a custom answer file. Disk not erased. The message is in English.
 
-**Cause:** this step runs a check the wizard does not run. When the deployment has work to do after the restart, Foundry adds its own command to the answer file, and the file must follow [the rules for that](../../foundry-osd/customization/unattend.md#when-foundry-adds-its-command). Selecting the same file again fails again.
+**Cause:** this step runs a check the wizard does not run. When the deployment has work to do after the restart, Foundry adds its own command to the answer file, and the file must follow [the rules for that](../../foundry-osd/customization/unattend/answer-file-rules.md#when-foundry-adds-its-command). Selecting the same file again fails again.
 
 <details>
 <summary>What each message means, for the administrator</summary>

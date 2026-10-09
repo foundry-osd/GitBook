@@ -186,7 +186,7 @@ A failed step stops the deployment with "The selected firmware content is unavai
 
 1. Keep the deployment media connected until **Deployment complete**.
 2. For a custom image, the administrator removes the answer file from the reference installation and captures the image again. See [Custom Windows images](../../foundry-osd/customization/custom-windows-images.md).
-3. For a custom answer file, the administrator checks it against [the rules Foundry needs to add its command](../../foundry-osd/customization/unattend.md#when-foundry-adds-its-command).
+3. For a custom answer file, the administrator checks it against [the rules Foundry needs to add its command](../../foundry-osd/customization/unattend/answer-file-rules.md#when-foundry-adds-its-command).
 4. Deploy again.
 
 **Collect:** the standard set. Do not attach the answer file.

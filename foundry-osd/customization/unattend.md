@@ -12,7 +12,7 @@ Use **Customization > Unattend** to put your own Windows answer files on the dep
 ## Before you start
 
 - Turn on [Password protection](../general.md#password-protection). It is required for every custom answer file, even one without credentials.
-- Write each file for the Windows architecture, edition and version you deploy, and validate it with Windows System Image Manager against that image.
+- Write each file for the Windows architecture, edition and version you deploy, and validate it with Windows System Image Manager against that image. It must also follow the [Answer file rules](unattend/answer-file-rules.md).
 - Read [What a custom answer file overrides](#what-a-custom-answer-file-overrides): the computer name, Windows activation and the OOBE settings (OOBE is the series of Windows first-run screens) no longer come from Foundry.
 
 ## Import answer files
@@ -45,51 +45,14 @@ On **Target device** in Foundry Deploy, **Answer file** lists **Use Foundry sett
 | [OOBE](oobe.md) page, including privacy choices and local accounts | Not applied. |
 | **Upload computer name to Autopilot** | Skipped. The hardware hash upload continues; only the deployment log mentions it. |
 | Automatic Windows activation | Not attempted. |
-| Windows Autopilot with a JSON profile or the interactive upload | The deployment is refused when the file contains one of the [blocking settings](#settings-that-block-windows-autopilot). |
+| Windows Autopilot with a JSON profile or the interactive upload | The deployment is refused when the file contains one of the [blocking settings](unattend/answer-file-rules.md#settings-that-block-windows-autopilot). |
 | Zero-touch hardware hash upload | Not refused. Foundry Deploy warns that the upload does not guarantee enrollment. |
 | Domain Join | Still runs. The file must set exactly one fixed `ComputerName` in the `specialize` pass of `Microsoft-Windows-Shell-Setup` and contain no `Microsoft-Windows-UnattendedJoin` component. |
 | Everything else: [Post-installation](post-installation.md), AppX removals, AI components, optional features, drivers, network profiles | Still applied. Your settings and commands can conflict with them; Foundry does not detect that. |
 
 ## Rules for the file
 
-Foundry checks the format of a file when you import it, and its architecture on **Target device** in Foundry Deploy, once Windows is chosen: at least one component must apply to that Windows image.
-
-<details>
-<summary>Rules checked at import</summary>
-
-| Rule | Detail |
-| --- | --- |
-| Size and format | Valid Windows answer-file XML of at most 4 MiB, without DTD or external entity. |
-| Passes | Only `specialize` and `oobeSystem`. A non-empty `windowsPE`, `offlineServicing`, `generalize`, `auditSystem` or `auditUser` pass, a non-empty `servicing` element, or a reseal to audit mode is refused. Foundry removes nothing for you. |
-| Components | At least one component with settings. `processorArchitecture` is `amd64`, `arm64`, `x86`, `arm`, `neutral` or `*`. |
-
-</details>
-
-### When Foundry adds its command
-
-Foundry adds one command to the deployment copy whenever the deployment has work to do after the restart: Post-installation actions, AppX or AI component removals, a driver pack installed after the restart, network profiles copied to Windows, or Domain Join.
-
-<details>
-<summary>Where the command goes, and what the file must allow</summary>
-
-The command goes at the end of the `RunSynchronous` list of the `Microsoft-Windows-Deployment` component in the `specialize` pass, with an `Order` one more than the highest in that list. Your `specialize` commands therefore run before Foundry's work and your `oobeSystem` commands after it. The file must have:
-
-- at most one `<settings pass="specialize">` block, not marked `wasPassProcessed`;
-- in that block, at most one `Microsoft-Windows-Deployment` component, whose `processorArchitecture` is exactly that of the deployed Windows (`amd64` or `arm64`);
-- at most one `RunSynchronous` list in that component, where every `Order` is a different whole number from 1 to 500 and the highest is below 500;
-- no command of your own that is described as `Foundry PostInstall` or that calls `\Runtime\PreOobe\Launch.cmd`.
-
-</details>
-
-These rules are checked only in Foundry Deploy, in the **Validate answer file** step, before the disk is erased. A file that repeats `Microsoft-Windows-Deployment` for `amd64` and `arm64` is imported without error and refused there.
-
-### Settings that block Windows Autopilot
-
-With Windows Autopilot in **JSON profile** or **Interactive** mode, Foundry Deploy refuses a file that contains any of these. Foundry OSD only warns at import.
-
-- `AutoLogon` with `Enabled` set to true in `Microsoft-Windows-Shell-Setup`.
-- In the `oobeSystem` pass of `Microsoft-Windows-Shell-Setup`: any `LocalAccount` under `UserAccounts`, or `SkipMachineOOBE`, `SkipUserOOBE`, `HideOnlineAccountScreens` or `HideLocalAccountScreen` set to true under `OOBE`.
-- In the `specialize` pass of `Microsoft-Windows-UnattendedJoin`: a `JoinDomain` value under `Identification`, or `AccountData` under `Identification/Provisioning`.
+Read [Answer file rules](unattend/answer-file-rules.md) before you write a file. It gives the rules checked at import, [where Foundry adds its own command](unattend/answer-file-rules.md#when-foundry-adds-its-command) when the deployment has work to do after the restart, and [the settings that block Windows Autopilot](unattend/answer-file-rules.md#settings-that-block-windows-autopilot).
 
 ## Check the result
 
@@ -100,7 +63,6 @@ With Windows Autopilot in **JSON profile** or **Interactive** mode, Foundry Depl
 
 - Only imported files are offered in Foundry Deploy. Scripts that your commands call are not put on the media, and Foundry does not install language resources the file asks for.
 - The deployment copy stays on the target device as `C:\Windows\Panther\unattend.xml`, secrets included. Windows needs it until the `oobeSystem` pass is over, and Foundry does not delete it. See [Security and credentials](../../reference/security-and-credentials.md).
-- With a [custom Windows image](custom-windows-images.md) that already contains an answer file under `Windows\Panther\Unattend`, a deployment that needs Foundry's command stops after the disk is erased. Remove that file from the image before you capture it.
 
 ## If something goes wrong
 
@@ -109,28 +71,15 @@ Messages in Foundry OSD, on the Unattend page:
 | Message | What to do |
 | --- | --- |
 | "Enable deployment media password protection in General configuration to use custom answer files." | Turn on [Password protection](../general.md#password-protection). |
-| "Use valid Windows answer-file XML no larger than 4 MiB...", "Only specialize and oobeSystem settings are supported..." or "The file must declare a supported architecture..." | The file breaks one of the [rules checked at import](#rules-for-the-file). Correct it and import again. |
+| "Use valid Windows answer-file XML no larger than 4 MiB...", "Only specialize and oobeSystem settings are supported..." or "The file must declare a supported architecture..." | The file breaks one of the [rules checked at import](unattend/answer-file-rules.md#rules-checked-at-import). Correct it and import again. |
 | "Missing default - choose a replacement" | The default file was removed. Choose another file or **Use Foundry settings** under **Deployment default**. |
-
-<details>
-<summary>Source check messages</summary>
-
-| Message | What to do |
-| --- | --- |
-| "Some sources are missing, changed, or invalid. Refresh or remove these entries before creating media." | Read the line under each file in the list: it carries one of the messages below. |
-| "The source changed. Use Refresh source to accept the updated file before creating media." | Select the file, then **Refresh source**. |
-| "The source could not be read. Check that the file still exists and is accessible." | Restore the file or the access to its folder, then **Check sources**, or remove the entry. |
-| "Source validation timed out. Check access to the source location and try again." | The source did not answer within 15 seconds, for example on a network share. Restore access, then **Check sources**. |
-| "Two source checks are still waiting for file access. Restore the unavailable source locations, then check sources again." | Two earlier checks are still blocked on an unreachable location. Restore access or remove those entries. |
-| "This source now duplicates another imported file. Remove this entry and choose the existing file instead." | After a refresh, two entries have the same content. Remove one. |
-
-</details>
+| "Some sources are missing, changed, or invalid. Refresh or remove these entries before creating media." | See [Source check messages](unattend/answer-file-rules.md#source-check-messages). |
 
 In Foundry Deploy, a refused file is explained in [A message under Answer file](../../troubleshooting/deployment/before-deployment-starts.md#answer-file-rejected) and a deployment that stops on **Validate answer file** in [Answer file validation](../../troubleshooting/deployment/checks-and-image-download.md#validate-answer-file). Failures in Windows Setup are in [After the restart troubleshooting](../../troubleshooting/after-the-restart.md#windows-setup).
 
 ## Related
 
+- [Answer file rules](unattend/answer-file-rules.md)
 - [Select the target](../../foundry-deploy/target.md)
-- [Post-installation](post-installation.md)
 - [After the restart troubleshooting](../../troubleshooting/after-the-restart.md)
 - [Security and credentials](../../reference/security-and-credentials.md)
