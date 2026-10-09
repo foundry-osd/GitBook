@@ -29,7 +29,7 @@ Once a configuration is [shared or connected](../deployment-profiles.md#create-a
 | **Needs attention**, **Unable to synchronize** | Something is missing, or the check failed. | Read the message under the card |
 | **Not configured** | The configuration is not shared. | Nothing |
 
-Your changes stay on this PC whatever the status, and are sent at the next check that succeeds. Each message under the card has its entry in [Foundry OSD application troubleshooting](../../troubleshooting/foundry-osd.md).
+Your changes stay on this PC whatever the status, and are sent at the next check that succeeds. Each message under the card has its entry in [Settings backup and sync troubleshooting](../../troubleshooting/foundry-osd/settings-backup-and-sync.md).
 
 ## Resolve a conflict
 
@@ -68,4 +68,4 @@ After a deletion, no configuration is selected: the pages show default values an
 
 - [Settings backup and sync](../deployment-profiles.md)
 - [Export and import](export-and-import.md)
-- [Foundry OSD application troubleshooting](../../troubleshooting/foundry-osd.md)
+- [Settings backup and sync troubleshooting](../../troubleshooting/foundry-osd/settings-backup-and-sync.md)

@@ -56,7 +56,7 @@ The imported configuration is added to the list and becomes the one in use. The 
 
 The file limits apply to every save, not only to an export. Beyond them, saving and synchronization also stop with "Couldn't complete this action. Check the file, its password, your access permissions, and your network connection."
 
-- A wrong password or a damaged file gives that same message. The configuration in use is not changed.
+- A wrong password or a damaged file gives [that same message](../../troubleshooting/foundry-osd/settings-backup-and-sync.md#could-not-complete). The configuration in use is not changed.
 - A file written by a newer Foundry OSD is refused with "Foundry can't open this settings format. Update Foundry and try again." A file from an older version is accepted.
 - To follow a shared configuration, do not import its connection file. Use **Connect to a shared configuration**, described in [Settings backup and sync](../deployment-profiles.md).
 
@@ -64,4 +64,4 @@ The file limits apply to every save, not only to an export. Beyond them, saving 
 
 - [Settings backup and sync](../deployment-profiles.md)
 - [Sync and conflicts](sync-and-conflicts.md)
-- [Foundry OSD application troubleshooting](../../troubleshooting/foundry-osd.md)
+- [Settings backup and sync troubleshooting](../../troubleshooting/foundry-osd/settings-backup-and-sync.md)

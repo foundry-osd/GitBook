@@ -69,4 +69,4 @@ The shared configuration is added to the list and becomes the one in use.
 - [Export and import](deployment-profiles/export-and-import.md)
 - [Sync and conflicts](deployment-profiles/sync-and-conflicts.md)
 - [Security and credentials](../reference/security-and-credentials.md)
-- [Foundry OSD application troubleshooting](../troubleshooting/foundry-osd.md)
+- [Settings backup and sync troubleshooting](../troubleshooting/foundry-osd/settings-backup-and-sync.md)
