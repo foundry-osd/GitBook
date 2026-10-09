@@ -1,106 +1,56 @@
-# Windows PE bootstrap
+# Windows PE startup
 
-Foundry Bootstrap prepares the Windows PE session, starts Foundry Connect, and launches Foundry Deploy after Connect succeeds. Use this page to follow startup progress or investigate a problem before the deployment wizard appears.
+When a target device starts from deployment media, a console titled **Foundry Bootstrap** prepares Windows PE, opens Foundry Connect, then downloads and opens Foundry Deploy. You only watch it: this page says what each line means and which waits are normal.
 
 <figure>
-  <img src="../.gitbook/assets/shared-bootstrap-01-download-progress.png" alt="Foundry Bootstrap showing startup stages and Foundry Connect download progress">
-  <figcaption>Follow startup stages and payload download progress in the Windows PE console.</figcaption>
+  <img src="../.gitbook/assets/shared-bootstrap-01-download-progress.png" alt="Foundry Bootstrap console with five startup stages and a download progress bar">
+  <figcaption>The five stages, the current action with its progress bar, and the elapsed time.</figcaption>
 </figure>
 
-## Boot media preparation
+## What you see, in order
 
-Foundry OSD includes Bootstrap in every ISO and USB boot image at `X:\Foundry\Bootstrap\Foundry.Bootstrap.exe`. Windows PE runs `wpeinit` before launching it.
+The console lists five stages. Each goes from **Waiting** to **In progress**, then **Done**. The line under the list says what is happening now.
 
-During media creation, release provisioning downloads the Bootstrap archive for the selected architecture from GitHub. Runtime downloads in the same media build use one release snapshot. If a required asset is missing or invalid, media creation fails with an error.
+| Stage | Line under the list | What happens |
+| --- | --- | --- |
+| **Environment** | "Preparing network access" | Windows PE starts its wired and Wi-Fi services. |
+| **Network connection** | "Preparing Foundry Connect", then "Waiting for Foundry Connect" | Foundry Connect opens. The stage stays **In progress** until you continue from [Foundry Connect](README.md). |
+| **Clock and time zone** | "Preparing the system clock and time zone" | The clock is set from the Internet and the time zone is applied. |
+| **Deployment files** | "Preparing the deployment application", then "Preparing Foundry PostInstall" | Foundry Deploy and the post-installation application are downloaded. The status reads **Downloading**, **Verifying**, then **Extracting**, with a progress bar. |
+| **Deployment application** | "Starting Foundry Deploy" | Foundry Deploy opens. |
 
-Local development provisioning uses a supplied archive or publishes the local project. It does not fall back to a GitHub download when the local Bootstrap payload cannot be prepared.
+Startup is complete when the last stage shows **Ready** and the line under the list reads "Continue in Foundry Deploy." The console window stays open.
 
-Bootstrap stays in the boot image while Connect, Deploy and PostInstall use their runtime caches. To refresh Bootstrap, [recreate or update the boot media](../reference/supported-versions.md#application-and-boot-media-updates).
+## Waits that are normal
 
-## Startup progress
+- **Network connection**: up to 5 seconds on "Preparing Foundry Connect" when the device has no network yet, then as long as you need in Foundry Connect.
+- **Clock and time zone**: up to 50 seconds on a network that filters the clock and time zone lookups (five lookups of 10 seconds).
+- **Deployment files**: it depends on the connection. A download can run for 15 minutes and is tried 3 times.
+- **Deployment application**: up to 2 minutes before the Foundry Deploy window appears.
 
-Bootstrap clears the interactive console once and updates five stage rows in place:
+On a device with no cable, the console cannot reach the Internet before Foundry Connect. Two yellow lines can then appear and stay until the end:
 
-| Stage | What happens |
-| --- | --- |
-| Environment | Selects the x64 or ARM64 runtime and storage location, then prepares wired authentication and supported wireless services. |
-| Network connection | Resolves Foundry Connect, starts it, and waits for the network workflow to finish. |
-| Clock and time zone | Attempts to correct the clock and configure the time zone after Connect succeeds. |
-| Deployment files | Prepares Foundry Deploy and PostInstall. On release-provisioned USB media, also checks for a Connect runtime update. |
-| Deployment application | Launches Foundry Deploy and waits for its startup acknowledgement. |
+- "Warning: Internet clock could not be resolved. Boot will continue without clock correction."
+- "Warning: Online runtime verification failed. Continuing with the original application provisioned on the boot media."
 
-{% hint style="info" %}
-**Clock synchronization**
+Both are expected on a Wi-Fi-only device. **Environment** and **Network connection** end with **Done (warning)**, and the final screen adds a `Session:` line and a `Log:` line. No action is needed when the last stage ends with **Ready**.
 
-Bootstrap attempts clock synchronization before Connect with a total budget of two seconds. If networking is unavailable or the attempt fails, startup continues into Connect normally. After Connect succeeds, Bootstrap retries clock synchronization if it is still unverified, then applies the configured time zone. This early attempt does not perform time-zone detection or change Connect's network-readiness requirements.
-{% endhint %}
+## What needs Internet access
 
-Text statuses identify waiting, in-progress, completed, failed, and cancelled work. Stage labels remain white, while statuses use green for completion, cyan for active work, yellow for warnings or cancellation, and red for failure. Each started stage shows its duration in grey. Downloads have a dedicated progress line with transferred data, a bar, and a percentage when the total size is available; total elapsed time remains visible throughout startup. Archive verification and native ZIP extraction show measured progress bars. Cache replacement uses an activity indicator because directory moves do not provide a byte-based percentage.
+- **Foundry Connect** is on the media and starts without a network.
+- **Foundry Deploy** is not on the media. It is downloaded from GitHub at every start, with the post-installation application. Without access to GitHub, startup stops at **Deployment files**.
+- On a USB drive, **Deployment files** can also download a newer Foundry Connect for the next start.
 
-Warnings remain visible after their stage completes. The final subtitle identifies readiness, cancellation, or failure. The result retains a warning summary and provides the log location when attention is needed. Normal cancellation without warnings does not display a diagnostic footer. If the console is too small, output is redirected, or cursor positioning is unavailable, Bootstrap uses plain sequential output.
+See [Network endpoints](../reference/network-endpoints.md) for the hosts and [What each media type carries](../foundry-osd/media/README.md#what-each-media-type-carries) for the content of the media.
 
-A warning describes a recoverable issue; startup can continue. A failure identifies the affected stage and displays the diagnostic session ID and log location.
+## When the clock and the time zone are set
 
-The final ready message confirms that Deploy initialized its services and displayed a usable interface. A deployment password prompt counts as a usable interface; readiness does not mean that deployment has started or finished.
+Both are set at **Clock and time zone**, after Foundry Connect. The time zone comes from the [Windows PE time zone](../foundry-osd/general.md#windows-pe-time-zone) setting of the media. With automatic detection, it is the time zone of the public IP address of the network, and UTC when the lookup gets no answer.
 
-Closing or cancelling Foundry Connect stops the boot workflow; it does not bypass network readiness. A Connect startup or configuration failure also prevents Deploy from launching. See [Network readiness](network-readiness.md) for the technician workflow.
+## If startup stops
 
-## Startup confirmation
+A stage that shows **Failed** or **Cancelled** ends the startup, and the line under the list gives the reason. Find that text in [Windows PE startup troubleshooting](../troubleshooting/windows-pe-startup.md).
 
-Connect and Deploy acknowledge managed startup, configuration loading, and UI readiness. Bootstrap waits up to two minutes for the first usable UI. After Connect acknowledges readiness, its network workflow can continue for as long as the technician needs; successful completion is still required before Deploy starts.
+## Next step
 
-If readiness is not confirmed within two minutes, Bootstrap stops with a timeout and preserves the last acknowledged stage. The application may still be running. Bootstrap does not kill or restart it, so inspect the screen and logs before trying another launch.
-
-Payloads without a compatible startup capability manifest keep process-only observation. Bootstrap shows a warning and reports readiness as unverified. An invalid manifest stops startup instead of silently bypassing confirmation. Recreate the media or refresh the affected runtime cache when investigating invalid startup metadata.
-
-When an application reports a startup failure, Bootstrap allows up to five seconds for the child to exit so it can recover the diagnostic record. It does not terminate the child if that wait expires.
-
-An exit before Deploy handoff is a startup failure, even if a ready message was written just before it exited. Once Bootstrap confirms the handoff, later deployment errors belong to Deploy.
-
-## Cache and connectivity
-
-A volume labelled **Foundry Cache** takes precedence for runtime storage. Otherwise, Bootstrap uses `X:\Foundry\Runtime` in temporary Windows PE storage.
-
-Bootstrap verifies applications before launching them. Application updates saved on the USB drive require online verification at each boot before they can run.
-
-When online verification is unavailable, Foundry uses the verified original application included when the media was created, if one is available. You may therefore see an older application version while offline. Standard media includes Foundry Connect, which lets you establish networking. Foundry Deploy and PostInstall normally require a network connection unless they were also included during media creation.
-
-A cache does not guarantee a fully offline deployment. Connect still requires its connectivity checks to succeed, and the selected Windows, drivers, catalogs, or Autopilot workflow may require additional services. If neither a verified original nor a verified download is available, boot stops before the affected application launches.
-
-[Recreate or update your boot media](../reference/supported-versions.md#application-and-boot-media-updates) with the current Foundry release to get this protection. Copying newer applications onto an existing USB drive is not sufficient.
-
-Debug-provisioned runtimes skip the normal release update lookup. Record whether the media uses release or debug content when reporting a startup problem.
-
-If startup stops because an application cannot be verified, preserve the [startup logs](../troubleshooting/logs-and-support.md#windows-pe-log-location) before restarting if you need support. Then:
-
-1. Reconnect the device to the network and check that its date and time are correct.
-2. Restart the device and try again.
-3. If startup still fails, recreate the media with the current Foundry release.
-
-## Collect startup evidence
-
-Record the last console stage, the displayed result, and the diagnostic session ID. Bootstrap, Connect, and Deploy share that ID so their log entries can be matched across the same boot.
-
-Start with `FoundryBootstrap.log`, then collect the affected application's log. See [Windows PE log location](../troubleshooting/logs-and-support.md#windows-pe-log-location) for filenames, cache copies, and the information to preserve before rebooting.
-
-Each supervised launch also has a `Startup\<launch-id>` directory under its diagnostic session directory. `status.json` contains the last startup acknowledgement. When remote diagnostics permit it, `startup-failure.json` preserves a sanitized child exception for recovery. A terminating crash may leave minimal evidence in `startup-terminated.txt`. These files supplement the application logs.
-
-If Bootstrap does not display any progress, inspect `X:\Foundry\Logs\FoundryBootstrap.Launcher.log`. The Windows command launcher records the launch attempt and exit code even when the .NET runtime cannot start.
-
-Bootstrap reports a product event only when startup fails. Remote application logs and Error Tracking reports are controlled separately from product telemetry. Delivery starts after network and clock preparation, with a bounded attempt when startup stops earlier. See [Bootstrap reporting](../reference/telemetry-and-privacy.md#bootstrap-reporting) for consent, pending records, and delivery limits.
-
-{% hint style="info" %}
-**Application logging**
-
-Bootstrap sends emitted application logs to PostHog after remote-diagnostics consent is known. Earlier startup failures and internal delivery-health warnings remain local. Logs keep their original timestamps and process sequence, with recognized authentication secrets masked in both local and remote output. Events captured before successful clock synchronization use PostHog's receipt time for indexing and retain their raw time in `diagnostics.original_timestamp`; later synchronization does not change their captured clock state. See [timestamp handling](../reference/telemetry-and-privacy.md#application-logs). Pending logs can be retried after a restart if their storage survives; data held only in memory or on `X:` is lost on reboot. Foundry's PostHog logs are automatically deleted after 7 days. Local files follow separate retention rules.
-{% endhint %}
-
-For refreshing existing media, see [Application and boot media updates](../reference/supported-versions.md#application-and-boot-media-updates).
-
-## PostInstall preparation
-
-[Post-installation](../foundry-osd/customization/post-installation.md) runs after the target starts Windows. Bootstrap prepares it automatically during **Deployment files**, before opening the deployment wizard. You do not need to download or select it yourself.
-
-Standard release media requires Internet access to download or verify PostInstall, even when a previous download is cached. It follows the same [cache and connectivity rules](#cache-and-connectivity) as Deploy.
-
-Debug media uses the locally prepared PostInstall application. In both modes, keep the complete deployment media available until deployment finishes so Foundry can copy your scripts and application packages to Windows.
+[Network readiness](network-readiness.md) describes what to do in Foundry Connect.

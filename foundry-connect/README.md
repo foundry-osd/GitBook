@@ -1,29 +1,35 @@
 # Foundry Connect
 
-Foundry Connect runs in Windows PE before deployment. It reports network state and allows the technician to establish connectivity required by Foundry Deploy.
+Foundry Connect opens after the startup console on a target device started from deployment media. It gets the device online in Windows PE and holds the startup until Internet access is confirmed, because Foundry Deploy is downloaded next.
 
-## Runtime sequence
+Most of the time you do nothing. With a cable and DHCP, or with a network profile that the administrator put on the media, the header changes from **Waiting for network** to **Network ready** by itself.
 
-1. Boot the target device from Foundry deployment media.
-2. Wait for Windows PE and Foundry Connect to initialize.
-3. Review Ethernet status.
-4. Select and connect to Wi-Fi when Wi-Fi provisioning was enabled during media creation and wired access is unavailable.
-5. Continue after Foundry reports network readiness.
+## Continue to Foundry Deploy
 
-Foundry Connect may continue automatically after readiness is established. The interface shows the connection state, configuration source, refresh timing, and latest update.
+**Network ready** means that the device received an answer from the Internet. It does not prove that every site needed later is reachable. See [Network readiness](network-readiness.md) for the exact test.
 
-After Foundry Connect completes, the bootstrap applies the [Windows PE time zone](../foundry-osd/general.md#windows-pe-time-zone). It uses the manual choice from the media configuration, or detects the time zone from the network's public IP address when **Automatic** is selected. Automatic detection falls back to **UTC** when no supported time zone can be resolved.
-
-{% hint style="info" %}
-**Clock synchronization**
-
-Bootstrap attempts clock synchronization before Connect, with a two-second total budget. Connect still starts if networking is unavailable. Bootstrap retries after Connect establishes readiness if the clock remains unverified. Connect logs captured before synchronization keep their raw original time and appear in PostHog at server receipt time. See [Bootstrap startup](windows-pe-startup.md#startup-progress) and [log timestamp handling](../reference/telemetry-and-privacy.md#application-logs).
-{% endhint %}
-
-Readiness confirms that an active network path and at least one configured connectivity probe succeeded. It does not verify every catalog, download, Microsoft, or organization-specific endpoint required later by Foundry Deploy.
+When **Network ready** appears, Foundry Connect shows **Continuing automatically in 10s** and counts down, then closes and the startup continues. Select **Continue** to skip the wait. If the connection drops during the countdown, the countdown is cancelled and starts again at the next **Network ready**.
 
 {% hint style="warning" %}
-Closing Foundry Connect aborts the bootstrap workflow. It does not bypass network readiness or continue to Foundry Deploy.
+Do not close Foundry Connect to get past it. Closing the window cancels the startup: Foundry Deploy does not open. See ["Boot was cancelled. Deployment will not continue."](../troubleshooting/windows-pe-startup.md#boot-was-cancelled.-deployment-will-not-continue.) to start again.
 {% endhint %}
 
-See [Network readiness](network-readiness.md) for status details.
+## Menus
+
+| Menu | Use it to |
+| --- | --- |
+| **Theme**, **Language** | Change the appearance or the display language of Foundry Connect. |
+| **Tools > Refresh status** | Check the network now instead of waiting for the next automatic check. Foundry Connect checks every 10 seconds. |
+| **Tools > Export diagnostics...** | Save the logs to the USB drive for support. See [Export logs from Foundry Connect and Foundry Deploy](../troubleshooting/logs-and-support.md#export-logs-from-foundry-connect-and-foundry-deploy). |
+| **Tools > Export raw diagnostics...** | Save unfiltered logs, which can contain credentials and network names. Use it only when a support contact you trust asks for it. |
+
+The version of Foundry Connect is shown at the top right of the window.
+
+## Where to go next
+
+| I want to | Go to |
+| --- | --- |
+| Understand the console that appears before Foundry Connect | [Windows PE startup](windows-pe-startup.md) |
+| Connect to Wi-Fi, or read a status on screen | [Network readiness](network-readiness.md) |
+| Fix a device that stays on **Waiting for network** | [Network and Foundry Connect troubleshooting](../troubleshooting/network.md) |
+| Continue after **Network ready** | [Foundry Deploy](../foundry-deploy/README.md) |
