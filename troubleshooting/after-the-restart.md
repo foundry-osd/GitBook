@@ -10,7 +10,9 @@ Answer-file and staging failures in Foundry Deploy are in [Windows deployment tr
 
 | What you see | Go to |
 | --- | --- |
-| A message under **Answer file** on **Target device** | [Windows deployment troubleshooting](deployment.md) |
+| "The selected answer file is unavailable, invalid, or incompatible..." | [Windows deployment troubleshooting](deployment.md) |
+| "This answer file conflicts with the configured Autopilot enrollment mode..." | [Windows deployment troubleshooting](deployment.md) |
+| "The configured default answer file is missing. Rebuild the boot media." | [Windows deployment troubleshooting](deployment.md) |
 | The deployment stops on **Validate answer file** | [Windows deployment troubleshooting](deployment.md) |
 | "Post-installation staging failed..." | [Windows deployment troubleshooting](deployment.md) |
 
@@ -37,7 +39,7 @@ Domain Join results are in [Domain Join troubleshooting](domain-join.md). Other 
 
 ## Reach the files
 
-Every file named below is on the Windows volume of the deployed device, under `C:\Windows\Temp\Foundry`. Read them on that device once Windows is reachable, as an administrator: the folders are restricted to administrators. Foundry does not control what Windows Setup shows after a stop, so this page cannot promise that Windows gets that far.
+The files named below are on the Windows volume of the deployed device: Foundry's under `C:\Windows\Temp\Foundry`, the Windows Setup logs and the answer file under `C:\Windows\Panther`. Read them on that device once Windows is reachable, as an administrator: Foundry's folders are restricted to administrators. Foundry does not control what Windows Setup shows after a stop, so this page cannot promise that Windows gets that far.
 
 ## No Foundry Post-installation console appears
 
@@ -58,18 +60,20 @@ Every file named below is on the Windows volume of the deployed device, under `C
 - **Cause:** by design. The result of every line is saved in `execution-result.json`.
 - **Fix:** on the deployed device, once Windows is reachable:
   1. Open `C:\Windows\Temp\Foundry\State\PreOobe\execution-result.json` and read the top-level `status`: `Succeeded`, `CompletedWithErrors` (warnings), `Failed` or `Interrupted` (stopped).
-  2. Under `actions`, find each entry whose `status` is `Failed` and read its `exitCode` and `failureCode`.
-  3. Find the name behind its identifier: see [Find the log of an action](#find-the-log-of-an-action).
-  4. Go to the section for its `failureCode`.
+  2. If that `status` is `Interrupted`, `unsafeActionId` names the action that was cut short; its own entry still reads `Running`. Go to [Interrupted](#an-action-shows-interrupted).
+  3. Otherwise, under `actions`, find each entry whose `status` is `Failed` and read its `exitCode` and `failureCode`.
+  4. Find the name behind its identifier: see [Find the log of an action](#find-the-log-of-an-action).
+  5. Go to the section for its `failureCode`.
 
 | `failureCode` | Section |
 | --- | --- |
 | `process_exit_code` | [Exit code](#an-action-shows-failed-with-an-exit-code) |
-| `execution_uncertain` | [Timeout or 1641](#action-uncertain), or [Interrupted](#an-action-shows-interrupted) |
+| `execution_uncertain` | [Timeout or 1641](#action-uncertain) |
 | `entry_point_missing`, `working_directory_missing` | The script, the installer or the working directory is no longer in the content, for example because an earlier action that shares it moved or deleted it. |
 | `process_start_failed` | Windows could not start the program, for example an installer built for another architecture. |
 | `process_failed`, `appx_inventory_truncated`, `activation_failed`, `cleanup_uncertain` | [Foundry task](#a-foundry-task-shows-failed) |
-| No failed entry | [No failed action](#the-sequence-stops-and-no-action-shows-failed) |
+| No failed entry, top-level `status` `Interrupted` | [Interrupted](#an-action-shows-interrupted) |
+| No failed entry, top-level `status` `Failed` | [No failed action](#the-sequence-stops-and-no-action-shows-failed) |
 
 - **Collect:** the `State\PreOobe` and `Logs\PreOobe` folders. Read the warning in [Find the log of an action](#find-the-log-of-an-action) before you share them.
 
@@ -112,7 +116,7 @@ Every file named below is on the Windows volume of the deployed device, under `C
 - **Fix:**
   1. Check on the device whether the work of the action was done, then redeploy.
   2. Have the administrator replace the restart by a **Restart Windows** action or a restart exit code. See [Post-installation](../foundry-osd/customization/post-installation.md#restarts).
-- **Collect:** `execution-result.json`, where `status` is `Interrupted` and `unsafeActionId` names the action.
+- **Collect:** `execution-result.json`, where the top-level `status` is `Interrupted` and `unsafeActionId` names the action.
 
 ## The sequence stops and no action shows Failed
 
@@ -146,7 +150,7 @@ Every file named below is on the Windows volume of the deployed device, under `C
 
 ## "Post-installation completed with warnings. Review the execution result and logs." <a href="#completed-with-warnings" id="completed-with-warnings"></a>
 
-- **Where:** the status line, in yellow, with `Warnings:` above 0 on the line below. Windows Setup continues after the 10-second countdown.
+- **Where:** the status line, in yellow, with `Warnings:` above 0 in the summary line below. Windows Setup continues after the 10-second countdown.
 - **Cause:** one or more of these.
   - An action with **Continue on error** failed.
   - A network profile or a certificate was not imported, or an AppX package was not removed.

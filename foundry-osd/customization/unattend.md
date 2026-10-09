@@ -30,7 +30,7 @@ Foundry saves the path of each file, not its content: keep the source files in p
 | **Check sources** | Every file | Checks that each source is still readable, valid and unchanged. It does not accept a changed file. |
 | **Refresh source** | The selected file | Reads the file again and accepts its new content. Use it after you edit a source file. |
 
-A missing, changed or invalid source blocks media creation.
+A missing, changed or invalid source blocks media creation. **Remove** takes the selected file off the list; the source file is not deleted.
 
 ## What the technician sees
 

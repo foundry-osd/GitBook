@@ -97,14 +97,10 @@ Foundry saves its progress before each planned restart and resumes at the next a
 Do not pass passwords, keys or tokens as arguments. The full command line of every action is saved in `C:\Windows\Temp\Foundry\State\PreOobe\plan.json` and its output in `C:\Windows\Temp\Foundry\Logs\PreOobe`. Both stay on the device after deployment.
 {% endhint %}
 
-## What the technician sees
-
-After the restart, the **Foundry Post-installation** console lists Foundry's setup tasks, then your actions under the names you gave them, then `Cleanup`. Script output is not shown. [After the restart](../../foundry-deploy/after-the-restart.md) explains each line, the restarts and the hand-over.
-
 ## Check the result
 
 - On the page, no warning bar is shown and every enabled action has **Available** or **Not required** under **Content status**.
-- On a test device, every action shows `[Succeeded]` and the console reports `Post-installation completed.`
+- On a test device, after the restart, the **Foundry Post-installation** console lists Foundry's setup tasks, then your actions under the names you gave them, then `Cleanup`. Every action shows `[Succeeded]` and the console reports `Post-installation completed.` Script output is not shown: [After the restart](../../foundry-deploy/after-the-restart.md) explains each line and the restarts.
 
 ## Limits
 
