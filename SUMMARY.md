@@ -63,6 +63,8 @@
     * [The device does not start](troubleshooting/deployment/device-does-not-start.md)
   * [After the restart](troubleshooting/after-the-restart.md)
   * [Windows Autopilot](troubleshooting/autopilot.md)
+    * [During deployment](troubleshooting/autopilot/during-deployment.md)
+    * [After the restart](troubleshooting/autopilot/after-the-restart.md)
   * [Domain Join](troubleshooting/domain-join.md)
   * [Logs and support information](troubleshooting/logs-and-support.md)
 * [Reference](reference/README.md)
