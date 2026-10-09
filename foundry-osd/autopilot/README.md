@@ -19,7 +19,7 @@ Foundry can prepare a device for Windows Autopilot in three ways: copy an Autopi
 | Who signs in on the device | Nobody | Nobody | The technician, with a code typed on another device |
 | What you prepare | One or more profiles | A tenant connection, a certificate and the ADK Deployment Tools | Nothing: you only enable the mode |
 | What the media carries | Every profile in the list | The certificate and its password | No tenant data and no secret |
-| Step in Foundry Deploy | **Autopilot**: choose the profile | **Autopilot**: choose the group tag | None |
+| Step in the Foundry Deploy wizard | **Autopilot**: choose the profile | **Autopilot**: choose the group tag | No wizard step |
 | Group tag | Not used | A tag already used in the tenant | A tag already used in the tenant, or a new one |
 | **Upload computer name to Autopilot** | Not available | Available | Available |
 

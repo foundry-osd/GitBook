@@ -6,12 +6,12 @@
 **Screenshot required**
 
 - **File:** `foundry-osd-autopilot-zero-touch-01-readiness.png`
-- **Capture:** Show the **Zero-touch hardware hash upload** page of a release build, connected, with **Status** at **Ready**, one certificate in **Provisioned certificates** and "Certificate ready for boot media generation." under **Boot media certificate**. Use a demonstration tenant, and hide the whole **Tenant ID** and **Client ID** values, the **Thumbprint** and the **Certificate ID**.
+- **Capture:** Show the **Zero-touch hardware hash upload** page of a release build, connected, with **Status** at **Ready**, one certificate in **Provisioned certificates** and "Certificate ready for boot media generation." under **Boot media certificate**. Use demonstration identifiers for the tenant and the certificate, and hide the whole **Tenant ID** and **Client ID** values, the **Thumbprint** and the **Certificate ID**.
 {% endhint %}
 
 ## Before you start
 
-- **An administrator account** that can create app registrations and enterprise applications in your tenant and grant admin consent. You sign in with it on the workstation only.
+- **An account for the sign-in on the workstation.** With it, Foundry OSD creates an app registration and an enterprise application in your tenant and grants admin consent for one permission. Check with your tenant administrator which account may do this.
 - **The Deployment Tools of the Windows ADK.** Media creation takes `oa3tool.exe` from them. See [ADK](../adk.md).
 - **A safe place for the certificate file and its password**, such as a password vault.
 - **Password protection, recommended.** This mode works without it, but anyone who holds the media can then use the certificate it carries. See [Password protection](../general.md#password-protection).
@@ -48,19 +48,21 @@ Foundry OSD keeps the tenant, the app registration and the default group tag. It
 
 Before you create media in a later session, open **Windows Autopilot > Zero-Touch**, select **Select PFX**, choose the file and type **PFX password**. You do not sign in again while the certificate is valid.
 
-## Replace or remove a certificate
-
-A certificate cannot be extended. Before it expires, select **Connect tenant**, create a new certificate, then create or update every media that must keep uploading.
-
-To withdraw a certificate, for example after losing media, select **Connect tenant**, select its row in **Provisioned certificates**, then **Remove certificate**, and confirm. Media built with a removed or expired certificate no longer uploads; the deployment itself still completes.
-
 <details>
 
-<summary>Use a certificate created outside Foundry</summary>
+<summary>Renew, remove or bring your own certificate</summary>
 
-1. Do steps 1 and 2 above so that the app registration exists.
+These actions need a connected page: the button of **Tenant connection** reads **Disconnect tenant** when it is. Otherwise select **Connect tenant**.
+
+**Renew.** A certificate cannot be extended. Before it expires, create a new certificate, then create or update every media that must keep uploading.
+
+**Remove.** To withdraw a certificate, for example after losing media, select its row in **Provisioned certificates**, then **Remove certificate**, and confirm. Media built with a removed or expired certificate no longer uploads; the deployment itself still completes.
+
+**Bring your own certificate.**
+
+1. Do steps 1 and 2 of the procedure above so that the app registration exists.
 2. In the Microsoft Entra admin center, upload the public certificate (`.cer`, `.pem` or `.crt`) to the app registration `Foundry OSD Autopilot Registration`, with exactly `Foundry OSD Autopilot Registration` as its description. Foundry lists only certificates with this description. See [Add and manage application credentials in Microsoft Entra ID](https://learn.microsoft.com/en-us/entra/identity-platform/how-to-add-credentials).
-3. In Foundry OSD, select **Connect tenant** again, after **Disconnect tenant** if the page is still connected. The certificate appears in **Provisioned certificates**.
+3. In Foundry OSD, reconnect: select **Disconnect tenant** if the page is connected, then **Connect tenant**. The certificate appears in **Provisioned certificates**.
 4. Select **Select PFX**, choose the password-protected PFX that holds the private key and type **PFX password**.
 
 Foundry checks that the PFX opens with the password, contains a private key, has not expired and matches a listed certificate. Never upload the PFX itself to Microsoft Entra.
@@ -69,7 +71,7 @@ Foundry checks that the PFX opens with the password, contains a private key, has
 
 ## What the technician sees
 
-Foundry Deploy shows an **Autopilot** step where the technician can change the group tag. The upload runs near the end of the deployment, in the step **Register Autopilot device**, and waits up to 10 minutes for the device to appear in your tenant. A failed upload does not fail the deployment. See [Windows Autopilot step](../../foundry-deploy/autopilot.md).
+Foundry Deploy shows an **Autopilot** step where the technician can change the group tag. The upload runs near the end of the deployment, in the step **Register Autopilot device**, and waits up to 10 minutes for the device to appear in your tenant. Most failures of the hardware hash capture or upload only skip that step, and the deployment still completes. Three capture failures, about a Windows file named `PCPKsp.dll` that is missing or unusable, stop the deployment. See [Windows Autopilot step](../../foundry-deploy/autopilot.md).
 
 ## Check the result
 
@@ -80,8 +82,8 @@ Foundry Deploy shows an **Autopilot** step where the technician can change the g
 
 - **Group tags come from the tenant.** The lists in Foundry OSD and Foundry Deploy hold only tags already carried by a Windows Autopilot device of your tenant. Nobody can type a new tag in this mode.
 - **None clears a tag.** A device already registered with a group tag loses it when it is deployed with **None**.
-- **An existing registration keeps its hash.** For a serial number that is already registered, Foundry updates the group tag and the name, not the stored hardware hash. After a motherboard replacement, delete the old registration first.
-- **The hardware hash stays on the device**, in `C:\Windows\Temp\Foundry\Logs\AutopilotHash`, with the result files of the upload.
+- **An existing registration keeps its hash.** For a serial number that is already registered, Foundry updates the group tag and the name, not the stored hardware hash. After a motherboard replacement, delete the old registration first: see [Windows Autopilot motherboard replacement](https://learn.microsoft.com/en-us/autopilot/autopilot-motherboard-replacement).
+- **The hardware hash stays on the device** after the deployment, in the folder described under [Evidence files](../../troubleshooting/autopilot/during-deployment.md#evidence-files).
 - To send the computer name as well, turn on **Upload computer name to Autopilot** on [Machine naming](../customization/machine-naming.md).
 
 ## Related

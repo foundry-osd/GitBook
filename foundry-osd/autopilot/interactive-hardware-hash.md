@@ -1,18 +1,18 @@
 # Interactive hardware hash upload
 
-**Interactive hardware hash upload** lets the technician register the device in Windows Autopilot with their own account. After the restart, a Foundry window opens at the start of Windows setup; the technician signs in with a code on another device and uploads the hardware hash. The deployment media carries no tenant data and no secret.
+**Interactive hardware hash upload** lets the technician register the device in Windows Autopilot with their own account. After the restart, a Foundry window opens at the start of Windows setup (OOBE); the technician signs in with a code on another device and uploads the hardware hash. The deployment media carries no tenant data and no secret.
 
 <figure>
   <img src="../../.gitbook/assets/foundry-osd-autopilot-interactive-01-configuration.png" alt="Interactive hardware hash upload page of Foundry OSD with the Disable button and a picture of the sign-in window">
-  <figcaption>The page has one control, <strong>Enable</strong>. Its picture shows the window the technician gets; the code in it is an example.</figcaption>
+  <figcaption>The page has one control, the <strong>Enable</strong> or <strong>Disable</strong> button in the header. Its picture shows the window the technician gets; the code in it is an example.</figcaption>
 </figure>
 
 ## Before you start
 
 Foundry OSD cannot test any of these from the workstation. Check them with one real deployment.
 
-- **A technician account in your tenant.** The window signs the technician in to Foundry's own Microsoft Entra application and asks for one delegated Microsoft Graph permission, `DeviceManagementServiceConfig.ReadWrite.All`. Your tenant decides who may consent to that application and which Intune role may import Windows Autopilot devices: ask your tenant administrator.
-- **Sign-in with a code on another device.** The technician opens `https://microsoft.com/devicelogin` on a phone or another computer. If your tenant restricts this kind of sign-in, the technician cannot authenticate.
+- **A technician account in your tenant.** The window signs the technician in to Foundry's own Microsoft Entra application and asks for one delegated Microsoft Graph permission, `DeviceManagementServiceConfig.ReadWrite.All`. Foundry does not check that the account may use it. Check with your tenant administrator that this application and this account are allowed to register Windows Autopilot devices.
+- **Sign-in with a code on another device.** The technician opens `https://microsoft.com/devicelogin` on a phone or another computer. Check with your tenant administrator that this kind of sign-in is allowed.
 - **Network after the restart.** The window runs in installed Windows, not in Windows PE. The device must then reach the Microsoft sign-in and Microsoft Graph hosts listed in [Network endpoints](../../reference/network-endpoints.md).
 
 ## Configure interactive upload
@@ -35,7 +35,7 @@ Foundry Deploy shows no **Autopilot** step in this mode; the deployment only run
 ## Limits
 
 - **The device restarts before you can check the tenant.** Foundry waits up to 15 minutes for the device to be listed, not for a profile to be assigned. Windows setup can therefore start again before your tenant has assigned a profile.
-- **None clears a tag.** A device already registered with a group tag loses it when the technician uploads with **None**.
+- **The technician chooses the group tag**, including **None**. [Windows Autopilot step](../../foundry-deploy/autopilot.md) says what each choice does to a device that is already registered.
 - **The window opens once.** After a successful upload it does not open again on that installation.
 - **The window is in English**, whatever the language of Windows.
 - **The window needs the command prompt of Windows setup.** It opens it with Shift+F10 to come to the front; if that prompt is not available in your image, the window does not appear.
