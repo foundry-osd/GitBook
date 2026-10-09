@@ -54,7 +54,7 @@ Import the same `.wim` file again, under a name that is not yet used. Foundry OS
 
 A captured image should contain `Windows\System32\Recovery\winre.wim`. Before you capture the reference device, run `reagentc /disable` on it, so that Windows moves the recovery image back to that folder.
 
-Without the file, Foundry Deploy shows "Step skipped." for the **Configure Windows recovery** and **Install recovery drivers** steps. The deployment completes, and the deployed Windows has no recovery environment.
+Without the file, Foundry Deploy marks the **Configure Windows recovery** and **Install recovery drivers** steps as skipped in its **Steps** list. Pointing at either step shows the reason: "The applied Windows image does not contain winre.wim." The deployment completes, and the deployed Windows has no recovery environment.
 
 ## Limits
 

@@ -59,7 +59,7 @@ Foundry Deploy applies the changes in Windows PE, in the **Configure Windows fea
 | **Disable**, and the image does not know the feature | Counted as "already satisfied". |
 | **Enable**, and the image knows the feature but no longer contains its files | The deployment stops, except for the .NET Framework 3.5 features below. |
 
-The step ends with "Windows optional features configured (\<number> changed, \<number> already satisfied, \<number> unavailable)." An "unavailable" count above zero means a feature you asked for was not turned on, although the deployment succeeded. The Foundry Deploy log then contains "Skipped \<number> unavailable Windows optional feature enable action(s)." When no feature needed a change, the step shows "Step skipped."
+The step ends with "Windows optional features configured (\<number> changed, \<number> already satisfied, \<number> unavailable)." An "unavailable" count above zero means a feature you asked for was not turned on, although the deployment succeeded. The Foundry Deploy log then contains "Skipped \<number> unavailable Windows optional feature enable action(s)." When no feature needed a change, the **Steps** list marks the step as skipped, and pointing at it shows the same line with 0 changed.
 
 ## Limits
 
