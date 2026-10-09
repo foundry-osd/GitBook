@@ -53,6 +53,7 @@
   * [After the restart](foundry-deploy/after-the-restart.md)
 * [Troubleshooting](troubleshooting/README.md)
   * [Foundry OSD application](troubleshooting/foundry-osd.md)
+    * [Settings backup and sync](troubleshooting/foundry-osd/settings-backup-and-sync.md)
   * [Media creation](troubleshooting/media-creation.md)
     * [USB drive and device start](troubleshooting/media-creation/usb-drive-and-device-start.md)
   * [Windows PE startup](troubleshooting/windows-pe-startup.md)
