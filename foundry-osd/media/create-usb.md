@@ -38,11 +38,14 @@ The dialog tells you what is on the disk before anything is erased:
 | Line of the dialog | What it tells you |
 | --- | --- |
 | "This will erase disk \<number>: \<name> (\<size>)." | The disk that will be erased. |
-| "Volumes on this disk:", then one line per volume: "\<letter>: \<label> (\<file system>), \<size> used of \<size>" | The drive letter, the label, the file system and the space in use of each volume Windows can read, as they were when the list was last refreshed. A volume can have no letter, and one without a label reads "No name". |
-| "No readable volume on this disk." | Shown in place of the list when Windows can read no volume on the disk. |
-| "Everything on this disk will be lost. Continue only if this is the intended USB drive." | The last line, above the buttons. |
+| "Volumes on this disk:", then one line per volume: "\<letter>: \<label> (\<file system>), \<size> used of \<size>" | The drive letter, the label, the file system and the space in use of each volume Windows can read. Foundry OSD reads the disk again just before it opens the dialog. A volume can have no letter, and one without a label reads "No name". |
+| "This disk has no partition." | Shown in place of the list when the disk is blank. |
+| "Windows cannot read the volumes on this disk. It may still contain data." | Shown in place of the list when the disk has partitions that Windows cannot read, such as a locked BitLocker drive or a disk formatted for another operating system, or when the disk could not be read. Treat the disk as holding data. |
+| "Everything on this disk will be lost. Continue only if this is the intended USB disk." | The last line, above the buttons. |
 
-A volume with data you did not expect, such as a backup, means the wrong disk is selected: select **Cancel**.
+A volume with data you did not expect, such as a backup, means the wrong disk is selected: select **Cancel**. The same goes for the line saying that Windows cannot read the volumes, unless you know why.
+
+If the disk was removed or replaced since you selected it, the dialog does not open and Foundry OSD shows "The USB drive identity is missing, ambiguous or has changed. Refresh the USB drive list and select the drive again."
 
 ## USB target options
 
