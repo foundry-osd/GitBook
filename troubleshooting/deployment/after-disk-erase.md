@@ -3,14 +3,15 @@
 Failures and skipped steps from **Prepare target disk** to the end of the deployment.
 
 {% hint style="danger" %}
-On this page the disk has been erased. Its previous content cannot be recovered and the device may not start. Collect the evidence before you turn the device off, then [deploy again](../deployment.md#deploy-again).
+On this page the disk has been erased, unless an entry says otherwise. Its previous content cannot be recovered and the device may not start. Collect the evidence before you turn the device off, then [deploy again](../deployment.md#deploy-again).
 {% endhint %}
 
 **Collect** refers to the standard set of [What to collect](../deployment.md#what-to-collect).
 
 | Failed step or symptom | Go to |
 | --- | --- |
-| **Prepare target disk** | [Disk partitioning failed](#disk-partitioning-failed) |
+| **Prepare target disk** with "Disk partitioning failed ..." | [Disk partitioning failed](#disk-partitioning-failed) |
+| **Prepare target disk** with any other message | The disk has not been erased: see [Checks and image download](checks-and-image-download.md) |
 | **Download Windows image** or **Check Windows image**, listed below **Prepare target disk** | [Checks and image download](checks-and-image-download.md) |
 | **Apply Windows image** | [Image apply failed](#image-apply-failed) |
 | **Configure Windows boot** | [Boot configuration failed](#boot-configuration-failed) |

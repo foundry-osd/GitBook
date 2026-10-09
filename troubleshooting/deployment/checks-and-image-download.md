@@ -31,6 +31,9 @@ On this page the disk may or may not have been erased. With an ISO, or a USB dri
 
 **Cause:** this step runs a check the wizard does not run. When the deployment has work to do after the restart, Foundry adds its own command to the answer file, and the file must follow [the rules for that](../../foundry-osd/customization/unattend.md#when-foundry-adds-its-command). Selecting the same file again fails again.
 
+<details>
+<summary>What each message means, for the administrator</summary>
+
 | Message | What is wrong in the file |
 | --- | --- |
 | "The answer file contains duplicate specialize passes." | More than one `specialize` pass |
@@ -40,7 +43,10 @@ On this page the disk may or may not have been erased. With an ISO, or a USB dri
 | "RunSynchronous orders must be unique integers from 1 through 500." | An `Order` value is missing, repeated or out of range |
 | "No RunSynchronous order remains after the existing commands." | A command already uses `Order` 500 |
 | "The answer file contains duplicate Foundry post-installation commands.", "The existing Foundry command conflicts with automatic post-installation integration.", or another message naming the Foundry command | The file already contains Foundry's command. Remove it |
-| "The custom answer-file computer name differs from the computer name confirmed for the domain join." | Domain Join: the name in the file is not the one shown in the wizard. See [Domain Join troubleshooting](../domain-join.md) |
+
+</details>
+
+On Domain Join media, "The custom answer-file computer name differs from the computer name confirmed for the domain join." means the name in the file is not the one shown in the wizard: see [Domain Join troubleshooting](../domain-join.md).
 
 If the step shows "The selected answer file is unavailable, invalid, or incompatible with the selected Windows architecture." instead, the file could not be read again from the media: check that the deployment media is still connected.
 

@@ -47,14 +47,14 @@ From then on, keep the device powered, the network connected and the deployment 
 - **Capture:** Show the progress page of a release build during **Apply Windows image**: the computer name, the **Session** block, the progress ring, the current step with its percentage, the **Steps** list with completed, running and pending steps and at least one skipped step, the step counter and the **Cancel** button. Hide the IP and MAC addresses.
 {% endhint %}
 
-The progress page shows the computer name, the overall percentage, the current step and its own progress, and a counter such as "Step: 7 of 20". **Session** shows the network addresses, **Start time** and **Elapsed time**. **Steps** lists every step of this deployment with an icon next to its name. No word names the state: point at a step to read its result, or the reason it was skipped, in a tooltip.
+The progress page shows the computer name, the overall percentage, the current step and its own progress, and a counter such as "Step: 7 of 20". **Session** shows the network addresses, **Start time** and **Elapsed time**. **Steps** lists every step of this deployment with an icon next to its name. Each state has its own icon and no word names it: point at a step to read its result, or the reason it was skipped, in a tooltip.
 
-| Step state | Icon | Meaning |
-| --- | --- | --- |
-| Completed | Green check mark | The step did its work. A step named "Stage ..." or "Prepare ..." only prepared work that runs in Windows after the restart. |
-| Skipped | Information sign in the accent colour | The step had nothing to do, or could not do optional work, and the deployment continues. Read the reason. |
-| Failed | Red error sign | The deployment stopped at this step. See [Verify deployment](verify-deployment.md). |
-| Cancelled | Cross | You cancelled while this step was running. |
+| Step state | Meaning |
+| --- | --- |
+| Completed | The step did its work. A step named "Stage ..." or "Prepare ..." only prepared work that runs in Windows after the restart. |
+| Skipped | The step had nothing to do, or could not do optional work, and the deployment continues. Read the reason. |
+| Failed | The deployment stopped at this step. See [Verify deployment](verify-deployment.md). |
+| Cancelled | You cancelled while this step was running. |
 
 The number of steps depends on the media configuration and can change while the deployment runs, for example when no driver is found. It does not measure the remaining time.
 
