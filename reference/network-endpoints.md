@@ -25,7 +25,7 @@ Notes on this table:
 - GitHub redirects the download of a release file from `github.com` to a host under `githubusercontent.com`.
 - `go.microsoft.com` only redirects to the installers. Microsoft chooses the final download host; it is not fixed by Foundry. If the download is blocked although `go.microsoft.com` is allowed, look in your proxy log for the host that the redirect points to. The same applies to what the Microsoft installers download while they run.
 - Driver addresses come from the catalog. Those of Dell, HP and the Intel Wi-Fi driver all use HTTPS today.
-- The Foundry OSD installer is built to download and install the Microsoft runtimes that are missing, so keep the workstation online during setup. See [Download and install](../start-here/download.md).
+- The Foundry OSD installer can need Internet access for the Microsoft runtimes it requires: see [Download and install](../start-here/download.md#install-foundry-osd).
 
 ## Target device in Windows PE
 

@@ -33,7 +33,7 @@
 
 ## Check the result
 
-When a policy action is on, the **Configure AI policies** step of Foundry Deploy completes and the log contains "Offline AI policies configured." With only **Remove Copilot+ AI Hub** on, the **Steps** list marks that step as skipped, with the reason "Offline customization disabled.", because the app is removed after the restart. After the restart, the Foundry Post-installation console lists the task `Remove AI components`, and the removal is recorded in:
+When a policy action is on, the **Configure AI policies** step of Foundry Deploy completes and the log contains "Offline AI policies configured." With only **Remove Copilot+ AI Hub** on, **Steps** has no **Configure AI policies** step, because that app is removed after the restart. After the restart, the Foundry Post-installation console lists the task `Remove AI components`, and the removal is recorded in:
 
 ```text
 C:\Windows\Temp\Foundry\Logs\PreOobe\appx-servicing.log

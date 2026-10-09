@@ -74,6 +74,9 @@ Foundry adds nothing to your command: enter silent and no-restart switches yours
 
 Foundry waits for every process an action starts, not only the first one. An updater, a tray application or the installed application left running holds the action until its timeout.
 
+<details>
+<summary>What Foundry does with each result</summary>
+
 | Result of an action | What Foundry does | With **Continue on error** |
 | --- | --- | --- |
 | Exit code in the success list | Runs the next action. | No effect |
@@ -83,6 +86,8 @@ Foundry waits for every process an action starts, not only the first one. An upd
 | Exit code 1641: the installer started its own restart | Marks the action failed and stops. | Still stops |
 
 Each list accepts up to 32 codes, zero or positive, and never 1641. A script that ends with a negative code always fails, and a PowerShell script must end with `exit <code>` to report a failure.
+
+</details>
 
 ## Restarts
 

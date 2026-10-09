@@ -76,7 +76,7 @@ A download that fails on a connection error or a temporary server error is retri
 <details>
 <summary>Every step, in order, with its condition</summary>
 
-The order below is the one used when the Windows image is checked before the disk is erased. On the other route, **Prepare target disk** comes before **Download Windows image**. Until **Check deployment setup** has finished, **Steps** always lists **Prepare target disk** first; the list is then put in the order that applies. The "Failed step: ..." line of the error screen uses the names below, with two exceptions noted in the table.
+The order below is the one used when the Windows image is checked before the disk is erased. On the other route, **Prepare target disk** comes before **Download Windows image**. For a catalog image, **Steps** lists **Prepare target disk** before **Download Windows image** until **Check deployment setup** has finished; the list is then put in the order that applies. The "Failed step: ..." line of the error screen uses the names below, with two exceptions noted in the table.
 
 | Step | Runs when | If it is skipped |
 | --- | --- | --- |
@@ -96,7 +96,7 @@ The order below is the one used when the Windows image is checked before the dis
 | **Extract firmware update**, **Stage firmware update** | A firmware update was found | Not skipped |
 | **Set computer name** | **Use Foundry settings** is selected | Not skipped |
 | **Configure Windows setup** | **Use Foundry settings** is selected and the administrator customized Windows setup | Not skipped |
-| **Configure AI policies** | The administrator configured AI component settings | Not skipped |
+| **Configure AI policies** | The administrator turned on an AI component action other than **Remove Copilot+ AI Hub** | Not skipped |
 | **Configure Windows features** | The administrator configured optional features | Every feature was already in the requested state, or is not available in this image |
 | **Prepare setup tasks** | Something must run after the restart: application or AI component removal, a driver installer, network profiles, automatic activation, Domain Join or post-installation actions | "No post-installation tasks are required." |
 | **Configure Windows recovery** | Always | The applied image contains no `winre.wim`. The deployment continues and the device has no Windows Recovery Environment |

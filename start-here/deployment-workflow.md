@@ -55,6 +55,6 @@ By default the device restarts 10 seconds after a successful deployment. The adm
 
 ## 6. Finish after the restart
 
-The device starts the installed Windows. Before the first sign-in, Foundry's post-installation step runs its built-in tasks, then the administrator's [post-installation](../foundry-osd/customization/post-installation.md) actions, and performs the Domain Join when one is configured. The interactive Windows Autopilot upload, when it is used, asks the technician to sign in during this phase.
+The device starts the installed Windows. Before the first sign-in, Foundry's post-installation step runs its built-in tasks, including the Domain Join when one is configured, then the administrator's [post-installation](../foundry-osd/customization/post-installation.md) actions. The interactive Windows Autopilot upload, when it is used, asks the technician to sign in during this phase.
 
 A successful result in phase 5 means that Windows is installed and that this work is prepared, not that it has run. [After the restart](../foundry-deploy/after-the-restart.md) describes what appears on screen and how to check the outcome.

@@ -51,6 +51,10 @@ Below the tables, **Default image source in Foundry Deploy** decides which sourc
 
 Import the same `.wim` file again, under a name that is not yet used. Foundry OSD recognizes the image by the SHA-256 hash of the WIM, and the existing row keeps its name, inclusion and defaults. This is not guaranteed for an image converted from `install.esd`, because the conversion writes a new WIM file.
 
+## Add an image to a USB drive by hand
+
+On a Foundry USB drive created with this page **Enabled**, you can copy more `.wim` files directly into `Cache\OperatingSystems\Custom\` on the **Foundry Cache** volume. Foundry Deploy offers up to 256 of them under their file name, next to the included images, and an update of the drive keeps them. This does not work with an ISO, and such a file cannot be the preferred image.
+
 ## Capture an image that keeps Windows recovery
 
 A captured image should contain `Windows\System32\Recovery\winre.wim`. Before you capture the reference device, run `reagentc /disable` on it, so that Windows moves the recovery image back to that folder.

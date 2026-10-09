@@ -7,6 +7,7 @@ This is the shortest path from an empty workstation to one deployed test device.
 - A workstation and a test device that meet the [Requirements](requirements.md).
 - A USB drive of at least 16 GB, or a virtual machine that can start from an ISO file.
 - A test device whose disk can be erased, connected to a network with Internet access. Ethernet is the simplest choice.
+- A test device that starts in UEFI mode. For a virtual machine, choose UEFI firmware (generation 2 in Hyper-V): a device that starts in legacy BIOS mode is deployed but does not start the installed Windows.
 
 ## 1. Install and open Foundry OSD
 
@@ -43,7 +44,7 @@ Skip this step for a first test on Ethernet. Each feature is independent:
 
 1. Open **Start**.
 2. Fix every item marked **Needs attention**.
-3. Select **Create ISO**, or connect the USB drive, select it and select **Create USB**.
+3. Select **Create ISO**, or connect the USB drive, select **Refresh**, select the drive and select **Create USB**.
 
 {% hint style="danger" %}
 **Create USB** erases the selected drive. Check the disk and the volumes listed in the confirmation before you continue.

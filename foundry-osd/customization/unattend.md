@@ -69,12 +69,17 @@ Foundry checks the format of a file when you import it, and its architecture on 
 
 Foundry adds one command to the deployment copy whenever the deployment has work to do after the restart: Post-installation actions, AppX or AI component removals, a driver pack installed after the restart, network profiles copied to Windows, or Domain Join.
 
+<details>
+<summary>Where the command goes, and what the file must allow</summary>
+
 The command goes at the end of the `RunSynchronous` list of the `Microsoft-Windows-Deployment` component in the `specialize` pass, with an `Order` one more than the highest in that list. Your `specialize` commands therefore run before Foundry's work and your `oobeSystem` commands after it. The file must have:
 
 - at most one `<settings pass="specialize">` block, not marked `wasPassProcessed`;
 - in that block, at most one `Microsoft-Windows-Deployment` component, whose `processorArchitecture` is exactly that of the deployed Windows (`amd64` or `arm64`);
 - at most one `RunSynchronous` list in that component, where every `Order` is a different whole number from 1 to 500 and the highest is below 500;
 - no command of your own that is described as `Foundry PostInstall` or that calls `\Runtime\PreOobe\Launch.cmd`.
+
+</details>
 
 These rules are checked only in Foundry Deploy, in the **Validate answer file** step, before the disk is erased. A file that repeats `Microsoft-Windows-Deployment` for `amd64` and `arm64` is imported without error and refused there.
 

@@ -46,7 +46,7 @@ Points to know:
 
 - Two indexes can carry the same edition name. The index number is what Foundry installs.
 - Keep the drive that holds the image connected until the deployment ends.
-- A WIM file added to the USB drive after Foundry Deploy opened is found when you select **Windows catalog** and then **Custom image** again.
+- A WIM file [added to the USB drive by hand](../foundry-osd/customization/custom-windows-images.md#add-an-image-to-a-usb-drive-by-hand) after Foundry Deploy opened is found when you select **Windows catalog** and then **Custom image** again.
 - The administrator's catalog restrictions do not filter custom images.
 - Foundry does not attempt automatic activation for a custom image.
 

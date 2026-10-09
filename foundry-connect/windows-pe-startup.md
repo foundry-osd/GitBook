@@ -16,7 +16,7 @@ Each of the five stages goes from **Waiting** to **In progress**, then **Done**.
 | **Environment** | "Preparing network access" | Windows PE starts its wired and Wi-Fi services. |
 | **Network connection** | "Preparing Foundry Connect", then "Waiting for Foundry Connect" | Foundry Connect opens. When GitHub is reachable, its latest release is used: downloaded, or taken from a USB drive that already holds it. The stage stays **In progress** until you continue from [Foundry Connect](README.md). |
 | **Clock and time zone** | "Preparing the system clock and time zone" | The clock is set from the Internet and the time zone is applied. |
-| **Deployment files** | "Preparing the deployment application", then "Preparing Foundry PostInstall" | Foundry Deploy and the post-installation application are downloaded, or taken from the USB drive. |
+| **Deployment files** | "Preparing the deployment application", then "Preparing Foundry PostInstall" | Foundry Deploy and the post-installation application are downloaded, or taken from the USB drive. On a USB drive, the latest Foundry Connect is also fetched here and kept for the next start. |
 | **Deployment application** | "Starting Foundry Deploy" | Foundry Deploy opens. |
 
 During a download, the status reads **Downloading**, **Verifying**, then **Extracting**, with a progress bar. Startup is complete when the last stage shows **Ready** and the line under the list reads "Continue in Foundry Deploy."

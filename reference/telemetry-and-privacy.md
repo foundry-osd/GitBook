@@ -39,7 +39,7 @@ Values are switches, counts or fixed choices. No name, path or text you typed is
 | --- | --- |
 | Result | ISO or USB, creation or update; success or failure; duration; an identifier of the operation |
 | Failure | Name of the step that failed; kind, reason and code of the failure, each from a fixed list; name of the tool that failed and its exit code. Empty when the creation succeeds |
-| Media | Architecture; Windows PE language; standard or Wi-Fi boot image; Secure Boot signature; USB partition style and format mode; whether the Foundry Connect and Foundry Deploy applications put on the media are release builds |
+| Media | Architecture; Windows PE language; standard or Wi-Fi boot image; Secure Boot signature; USB partition style and format mode; whether the Foundry applications that the media uses are release builds |
 | Drivers | Whether Dell, HP or a custom driver folder is used |
 | General | Whether Password protection is on; restart mode and delay; whether a Windows PE time zone is set |
 | Network | Whether any network option is on. Ethernet 802.1X: whether it is on, whether a profile is set, whether a certificate is required and whether one is set. Wi-Fi: whether it is on, whether a profile, a network name, a passphrase, an enterprise profile and an enterprise certificate are set, whether a certificate is required, and the security type. Whether profiles and private keys are kept for the installed Windows, overall and for each of Ethernet and Wi-Fi |

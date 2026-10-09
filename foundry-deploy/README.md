@@ -2,8 +2,11 @@
 
 Foundry Deploy is the wizard that installs Windows on the target device. It opens in Windows PE once [Foundry Connect](../foundry-connect/README.md) reports that the network is ready.
 
-{% hint style="danger" %}
-Deployment erases the disk you select. Nothing is erased while you are in the wizard: the erase starts only after you select **Deploy** and accept **Confirm disk erase**.
+{% hint style="warning" %}
+**Screenshot required**
+
+- **File:** `foundry-deploy-welcome-01-start.png`
+- **Capture:** Show the **Welcome** screen of a release build once the components are loaded, with **Start deployment** available and the menu bar (**Theme**, **Language**, **Tools**, **About**). No **Debug** menu.
 {% endhint %}
 
 ## Before you start
@@ -12,6 +15,10 @@ Deployment erases the disk you select. Nothing is erased while you are in the wi
 - Disconnect storage that must not be erased.
 - Have the Deployment password ready when the administrator protected the media.
 - Keep the deployment media connected until Foundry Deploy shows **Deployment complete**.
+
+{% hint style="danger" %}
+Deployment erases the disk you select. Nothing is erased while you are in the wizard: the erase starts only after you select **Deploy** and accept **Confirm disk erase**.
+{% endhint %}
 
 ## Open Foundry Deploy
 

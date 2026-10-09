@@ -10,11 +10,8 @@ Foundry OSD is a Windows deployment tool: you prepare deployment media on a work
 
 | I want to ... | Go to |
 | --- | --- |
-| Start from the beginning | [Get started](start-here/README.md) |
-| Check that my workstation, media and devices are suitable | [Requirements](start-here/requirements.md) |
-| Install Foundry OSD on my workstation | [Download and install](start-here/download.md) |
+| Start from the beginning: requirements, installation, how a deployment works | [Get started](start-here/README.md) |
 | Create my first media and deploy one test device | [Quick start](start-here/quick-start.md) |
-| Understand what happens from media creation to first sign-in | [Deployment workflow](start-here/deployment-workflow.md) |
 | Configure networking, Windows Autopilot, Domain Join or Windows customization | [Foundry OSD](foundry-osd/README.md) |
 | Connect a device that has started from the media | [Foundry Connect](foundry-connect/README.md) |
 | Choose the disk, Windows and drivers, then deploy | [Foundry Deploy](foundry-deploy/README.md) |
