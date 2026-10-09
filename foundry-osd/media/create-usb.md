@@ -21,7 +21,7 @@ Creating a USB drive erases every partition of the selected drive. Copy elsewher
 
 1. Connect the drive, open **Start**, and select **Refresh** in the **USB target** card.
 2. Select the drive in the list. An entry reads, for example, "Disk 4 - USB SanDisk 3.2Gen1 (114.6 GB)".
-3. Expand the card and set the two options below.
+3. Expand the card and set the two [USB target options](#usb-target-options).
 4. Select **Create USB**. If the button reads **Update USB**, the drive already is a Foundry USB drive: see [Update a USB drive](update-usb.md).
 5. If a dialog titled **Update Foundry OSD before creating boot media** opens, apply the update first or select **Create anyway**.
 6. Read the **Format USB target** dialog. It names the disk number, the name and the size of the drive that will be erased. Select **Format and create USB** only if they are the ones you expect.
@@ -34,10 +34,12 @@ Creating a USB drive erases every partition of the selected drive. Copy elsewher
 - **Capture:** Show the **Format USB target** dialog over the **Start** page, with its message naming a demonstration disk and the **Format and create USB** and **Cancel** buttons.
 {% endhint %}
 
+## USB target options
+
 | Option | Choices | Default |
 | --- | --- | --- |
 | **USB partition style** | **GPT** or **MBR**. Keep **GPT** for UEFI devices. Choose **MBR** only for a device that does not offer the GPT drive in its boot menu. With `arm64`, only **GPT** is offered. | **GPT** |
-| **USB format mode** | **Quick format** or **Full format**. A full format writes the whole of both partitions and takes much longer. | **Quick format** |
+| **USB format mode** | **Quick format** or **Full format**, applied to both partitions. A full format takes much longer. | **Quick format** |
 
 Foundry OSD remembers both choices for the next drive.
 
