@@ -118,7 +118,7 @@ The files named below are on the Windows volume of the deployed device: Foundry'
 - **Cause:** a script ran `shutdown /r` or `Restart-Computer`, an installer restarted Windows without returning 1641, or the power was cut. Foundry cannot know whether the action finished and does not run it again.
 - **Fix:**
   1. Check on the device whether the work of the action was done, then redeploy.
-  2. Have the administrator replace the restart by a **Restart Windows** action or a restart exit code. See [Post-installation](../foundry-osd/customization/post-installation.md#restarts).
+  2. Have the administrator replace the restart by a **Restart Windows** action or a restart exit code. See [Post-installation](../foundry-osd/customization/post-installation/how-actions-run.md#restarts).
 - **Collect:** `execution-result.json`, where the top-level `status` is `Interrupted` and `unsafeActionId` names the action.
 
 ## The sequence stops and no action shows Failed <a href="#no-failed-action" id="no-failed-action"></a>
