@@ -86,7 +86,7 @@ Foundry does not check that the file is an Autopilot profile: a valid JSON file 
 - **Fix:** select **Disconnect tenant**, then **Connect tenant**, and try again. Save the PFX to a folder you can write to.
 - **Collect:** the line "Autopilot hardware hash certificate creation failed." or "Autopilot hardware hash certificate retirement failed."
 
-**If you did not keep the PFX password:** Foundry OSD shows it once and never displays it again, even when it saves it with the configuration. With the page connected, select the certificate in **Provisioned certificates**, then **Remove certificate**, then **Create certificate**, and store the PFX file and its password before you close the dialog.
+**If you did not keep the PFX password:** Foundry OSD shows the generated password in the **Certificate ready** dialog, and you closed it without storing the password. With the page connected, select the certificate in **Provisioned certificates**, then **Remove certificate**, then **Create certificate**, and store the PFX file and its password before you close the dialog.
 
 ## A group tag you expect is not offered <a href="#group-tag-not-offered" id="group-tag-not-offered"></a>
 
