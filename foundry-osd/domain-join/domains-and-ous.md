@@ -10,7 +10,7 @@ The Zero-touch and Interactive Domain Join pages share two lists: the **Domains*
 ## Before you start
 
 - Select **Enable** on **Domain Join > Zero-Touch** or **Domain Join > Interactive**. Both pages edit the same lists.
-- Have the DNS name of each domain, such as `corp.contoso.com`, and the distinguished name of each OU: its full path in the directory, such as `OU=Workstations,DC=corp,DC=contoso,DC=com`.
+- Have the DNS name of each domain, such as `corp.contoso.com`, and the distinguished name of each OU, such as `OU=Workstations,DC=corp,DC=contoso,DC=com`.
 
 ## Configure the domains
 
@@ -18,7 +18,7 @@ The Zero-touch and Interactive Domain Join pages share two lists: the **Domains*
 2. Enter the **Domain name**, then select **Add domain**. A NetBIOS name such as `CONTOSO` is refused. On the Zero-touch Domain Join page the dialog also asks which join account the domain uses.
 3. Repeat for each domain. The first one is the default; to change it, select another domain and select **Set as default**.
 
-**Edit** changes the selected domain. **Remove** deletes it with its OUs, and the first remaining domain becomes the default if needed.
+**Edit** changes the selected domain; its name can change only while it lists no OU. **Remove** deletes it with its OUs, and the first remaining domain becomes the default if needed.
 
 ## Configure the OUs of a domain
 
@@ -67,7 +67,6 @@ When a computer account with the same name already exists in the domain, for exa
 
 - 32 domains, and 1,024 OUs per domain.
 - The same domain cannot be listed twice; case and a trailing dot are ignored.
-- A domain that lists OUs cannot be renamed. Remove its OUs first, or add the new domain and remove the old one.
 
 ## Related
 

@@ -22,7 +22,7 @@
 5. Check that every domain shows **Ready** in **Status**, and that no message remains under **Shared join account** or under **Domains**.
 6. Open **Start** and create or update the media.
 
-**Ready** only covers the account and password of that domain. Missing Password protection is reported under **Shared join account**, and an empty list under **Domains**: either one blocks media creation even when every domain is **Ready**.
+**Ready** only covers the account and password of that domain. Missing Password protection is reported under **Shared join account**, and an empty list under **Domains** ("Add at least one domain."): either one blocks media creation even when every domain is **Ready**.
 
 A password belongs to its account: if you change an account, enter its password again. In **Edit**, an empty password keeps the current one.
 

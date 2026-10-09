@@ -11,7 +11,7 @@ On media prepared for Domain Join, Foundry Deploy shows a **Domain join** step b
 
 ## Before you start
 
-- Know the domain and the OU of the device and, on interactive media, the join account and its password.
+- On interactive media, have the join account and its password.
 - Check the computer name on [Target device](target.md): it identifies the computer account, and a device redeployed under the same name reuses its account.
 
 ## Complete the step
@@ -43,7 +43,7 @@ If the deployment does not start, see [Domain Join troubleshooting](../troublesh
 
 A deployment that succeeds in Windows PE has prepared the join, not performed it.
 
-1. Keep power and network connected: the join needs a domain controller that installed Windows can reach, and Windows restarts once more after a successful join.
+1. Keep power and network connected: installed Windows must reach a domain controller, and it restarts once more after a successful join.
 2. In the **Foundry Post-installation** console, read the two lines that start with `Domain -` and `Restart:` once **Membership** is no longer `NotStarted`. [After the restart](after-the-restart.md) explains each value. The join is complete when they read:
 
     ```text
