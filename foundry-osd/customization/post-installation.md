@@ -1,165 +1,137 @@
 # Post-installation
 
-Use **Customization > Post-installation** to run your own scripts, commands and application installers after Windows installation and before OOBE. The separate [OOBE page](oobe.md) configures the Windows first-run experience.
-
-Foundry runs selected built-in tasks first, then your enabled actions in the order shown, followed by cleanup. Built-in tasks cannot be moved or deleted from the custom action list. The interactive Autopilot registration assistant runs separately during OOBE.
-
-To add Windows, driver or BIOS updates, provide your own script or vendor package as a custom action.
+Use **Customization > Post-installation** to run your own scripts, commands and installers on the target device after Windows is installed and before the first sign-in. Your actions run in the order of the list, after Foundry's own setup tasks.
 
 <figure>
-  <img src="../../.gitbook/assets/foundry-osd-post-installation-01-ordered-actions.png" alt="Foundry OSD Post-installation page showing five enabled actions: two software installations, a restart, a PowerShell script and a command line">
-  <figcaption>Manage custom actions and their execution order from the Post-installation page.</figcaption>
+  <img src="../../.gitbook/assets/foundry-osd-post-installation-01-ordered-actions.png" alt="Foundry OSD Post-installation page with five enabled actions in order: two software installations, a restart, a PowerShell script and a command line">
+  <figcaption>Actions run from top to bottom. Content status shows whether the imported files are still in the local library.</figcaption>
 </figure>
 
-## Add and order actions
+## Before you start
 
-1. Enable the page using its header switch.
-2. Select **Add action** in the CommandBar and choose **PowerShell script (.ps1)**, **Command line**, **Software (.exe/.msi)** or **Restart Windows**.
-3. Give the action a recognizable name. For scripts and applications, import a file or a folder containing all required files.
-4. Select the script or installer and enter its arguments. For **Command line**, enter the complete command; imported content is optional. Leave **Working directory** empty to use the imported content folder.
-5. Review the execution settings and **Command preview**, then select **Save**. For **Restart Windows**, set the delay in seconds; `0` restarts immediately.
-6. Select a row and use **Move up**, **Move down**, **Edit action**, **Enable/Disable** or **Remove**.
-7. Resolve missing-content or validation messages before creating media.
+- Every script and installer must run to the end without a prompt. Actions run as SYSTEM, with no signed-in user, no window and no keyboard input.
+- Actions that use imported files need the complete ISO or USB drive during deployment. A PXE boot image alone does not carry them: see [what each media type carries](../media/README.md#what-each-media-type-carries).
+- Use content built for the Windows architecture you deploy, x64 or ARM64.
 
-When the page is enabled, add at least one enabled action and resolve any validation or missing-content messages before creating media. Restart actions and commands without imported files do not need package content.
+## Configure actions
 
-Disabling the page keeps your configuration but excludes custom actions from newly created media. Selected built-in tasks still run.
+1. Open **Customization > Post-installation** and turn on the switch in the page header.
+2. Select **Add action**, then **PowerShell script (.ps1)**, **Command line**, **Software (.exe/.msi)** or **Restart Windows**.
+3. Enter a **Name**. The technician sees it in the console after the restart.
+4. Under **Package content**, select **Import file** or **Import folder**. Content is optional for **Command line** and not used by **Restart Windows**.
+5. Fill in the fields of the action type, then read **Command preview**: it is the command Foundry will run.
+6. Review **Execution settings** and select **Save**.
+7. Select a row, then use **Move up** and **Move down** to set the order. **Edit action**, **Disable** or **Enable**, and **Remove** also act on the selected row.
 
-Removing an action deletes its cached content only when no remaining action or saved local profile uses it. Original source files are never deleted. If cached files cannot be removed, Foundry reports the problem.
+| Action type | What Foundry runs | Fields |
+| --- | --- | --- |
+| **PowerShell script (.ps1)** | `powershell.exe` (Windows PowerShell 5.1), your **PowerShell arguments**, `-File "<script>"`, then your **Script arguments** | **Script or installer path (relative to content)**, **PowerShell arguments**, **Script arguments** |
+| **Command line** | `cmd.exe /c "<your command>"` | **Command line**, one line with its arguments |
+| **Software (.exe/.msi)** | The EXE followed by your arguments, or `msiexec.exe /i "<installer>"` followed by them | **Script or installer path (relative to content)**, **Arguments or MSI properties**, **Generate installation log** (MSI only) |
+| **Restart Windows** | A restart, then the next action | **Restart delay (seconds)**, 0 to 86400, default 0 |
 
-To update a package, edit its action and import the changed source again. **Refresh** checks cached content availability; it does not import changes from the original source folder.
+Foundry adds nothing to your command: no silent switch, no `/norestart`, no PowerShell option. Enter them yourself, for example `/qn /norestart` for an MSI. A PowerShell script runs only if the execution policy of the deployed Windows allows it; enter `-NoProfile -ExecutionPolicy Bypass` in **PowerShell arguments** so the action does not depend on that policy.
 
-| Action | Configuration |
-| --- | --- |
-| PowerShell script (.ps1) | A `.ps1` file and optional sibling content, executed by Windows PowerShell 5.1. You supply host arguments and script arguments separately. |
-| Command line | A command interpreted by `cmd.exe`; optionally import files it needs. |
-| Software (.exe/.msi) | An EXE or MSI with your arguments, properties or transforms. Foundry supplies only the executable path or `msiexec.exe /i` launch command, plus optional MSI logging. Installer type is detected from the selected file and is read-only. |
-| Restart Windows | An explicit restart at this position, optionally preceded by a countdown, followed by resumption at the next action. No process arguments or timeout. |
+| Execution setting | What it does | Default |
+| --- | --- | --- |
+| **Timeout (seconds)** | Longest time the action and every process it starts may run. 1 to 86400. | 1800 |
+| **Success exit codes (comma-separated)** | Exit codes that mean the action succeeded. | 0 |
+| **Restart-required exit codes (comma-separated)** | Exit codes that mean success, with a restart needed before the next action. | Empty; 3010 for a new **Software (.exe/.msi)** action |
+| **Continue on error** | Runs the next actions when this one ends with an unexpected exit code. | Off |
+| **Defer restart** | Postpones a requested restart until the next **Restart Windows** action or the end of the sequence. | Off |
 
-## Execution order
+{% hint style="warning" %}
+**Screenshot required**
 
-After the first boot into installed Windows, Foundry runs the following before OOBE. Only tasks required by the deployment configuration are included.
-
-| Order | Task |
-| --- | --- |
-| 1 | Install deferred driver packages, such as supported Lenovo EXE and Surface MSI packages. Drivers injected offline are already installed during deployment. |
-| 2 | Import configured certificates and wired/Wi-Fi profiles. |
-| 3 | Domain Join: join the domain and place the computer in its OU, restart Windows once when the join succeeded, then check that the computer is a member of the domain. |
-| 4 | Remove selected Copilot and AI Hub application packages. Other AI settings may already have been applied during deployment. |
-| 5 | Remove the selected provisioned AppX packages. |
-| 6 | Attempt OEM activation when eligible. This is skipped for custom answer files and volume-licensed deployments. |
-| 7 | Run your enabled custom actions in the order shown, including any Restart Windows actions. |
-| 8 | Perform cleanup of temporary deployment content, retaining execution results and logs. |
-
-Required restarts can occur during this sequence. A planned restart resumes the remaining work; any deferred restart is handled before final cleanup. The interactive Autopilot assistant remains separate and appears during OOBE when configured.
-
-[Domain Join](../domain-join/README.md) runs whenever it is enabled, even without custom actions. See [what happens in Windows](../../foundry-deploy/domain-join.md#what-happens-in-windows).
+- **File:** `foundry-osd-post-installation-02-action-dialog.png`
+- **Capture:** Show the **Add action** dialog for a **Software (.exe/.msi)** action with an imported MSI: name, installer type, package content, installer path, arguments, **Generate installation log**, the execution settings and the command preview.
+{% endhint %}
 
 ## Prepare content
 
-Import a complete folder when the installer needs transforms, CAB files, configuration, scripts or other binaries. Preserve their relative paths. A single-file import includes only that file.
+Import a folder when the script or installer needs other files, such as a transform or a CAB file. Relative paths are kept. **Import file** takes that one file only.
 
-For example:
+- Leave **Working directory (relative; empty uses content root)** empty to run from the root of the imported content, or enter a folder that exists inside it. Refer to imported files by a path relative to that folder. A **Command line** action without content runs from a temporary folder.
+- `{ContentRoot}` and `{LogRoot}` in **Command preview** stand for folders chosen during deployment. You cannot type them in your arguments.
+- Foundry copies the content to its library in `%LOCALAPPDATA%\Foundry\Packages\PreOobe` and never changes your source. To pick up a new version, select **Edit action** and import again. **Refresh** only checks that the library copy is still there.
+- The content is deleted from the target device when the sequence ends. An application that needs its source for repair must copy it elsewhere itself.
 
-```text
-ExampleApplication/
-  ExampleApplication.msi
-  Organization.mst
-  Data1.cab
-```
+<details>
+<summary>Import limits</summary>
 
-Create a **Software (.exe/.msi)** action, import that folder, choose `ExampleApplication.msi`, verify the detected **MSI** type, and add the property `TRANSFORMS="Organization.mst"` if that transform is supported by the package. Keep the working directory empty to use the content root. Supply any required silent installation and no-restart options yourself, for example `/qn /norestart` for an MSI. Foundry does not add or enforce these switches. Enable **Generate installation log** to append `/l*v "{LogRoot}\ExampleApplication.log"`. This option is off by default and available only for MSI installers; EXE logging arguments depend on the vendor.
+| Limit | Value |
+| --- | --- |
+| Path of a file inside the imported folder | 110 characters; 255 per name |
+| Full path of a source file | 259 characters |
+| Files and folders in one import | 10,000 files and 10,000 folders |
+| Names | No `< > : " \| ? *`, no trailing dot or space, no reserved device name such as `CON` or `COM1` |
+| Links | No symbolic link or junction, in the content or in the path that leads to it |
+| Empty folder | A folder without any file is refused |
+| Location | Not inside the Foundry library, and not a folder that contains it |
+| Size | No fixed limit; the drive that holds the library needs enough free space |
 
-An example sequence is:
+</details>
 
-1. A PowerShell action that performs your prerequisite configuration.
-2. The application action above.
-3. A Restart action.
-4. A Command line action that performs your final machine configuration.
+## How actions run
 
-Packages must be suitable for unattended machine installation. EXE silent and no-reboot options depend on the vendor; Foundry cannot infer them. Installers must wait for their work to complete and return a meaningful exit code. Do not launch an independent background installer and immediately report success.
+Foundry waits for every process an action starts, not only the first one. An updater, a tray application or the installed application left running holds the action until its timeout.
 
-You are responsible for choosing scripts and installers compatible with the target Windows architecture. Choose content suitable for every device that will use this configuration.
+| Result of an action | What Foundry does | With **Continue on error** |
+| --- | --- | --- |
+| Exit code in the success list | Runs the next action. | No effect |
+| Exit code in the restart list | Restarts Windows, or defers the restart, then runs the next action. | No effect |
+| Any other exit code | Marks the action failed, skips the remaining actions and stops. | Runs the remaining actions and ends with warnings |
+| Timeout reached | Ends every process of the action and marks it failed, even when the first process returned 0. The result is uncertain, so the sequence stops. | Still stops |
+| Exit code 1641: the installer started its own restart | Marks the action failed and stops. | Still stops |
 
-Actions using identical imported content share a working copy on the target. File changes made by an earlier action remain visible to later actions, including after planned restarts. They do not change the authoring cache.
+Each list accepts up to 32 codes, zero or positive, and never 1641. A script that ends with a negative code always fails, and a PowerShell script must end with `exit <code>` to report a failure.
 
-Imported content is temporary and is removed from the target during cleanup. If an application needs source files for repair or later updates, provide a permanent source as part of your package.
+## Restarts
 
-## Arguments and installer logs
+Never let a script or an installer restart Windows itself. An action that was running when Windows restarted is marked interrupted, is not run again, and stops the sequence. Instead:
 
-Review **Command preview** before saving. Foundry preserves your arguments without adding quiet mode, profile suppression, execution-policy overrides or restart suppression. You are responsible for valid arguments, unattended execution and preventing installer-owned restarts.
+- add a **Restart Windows** action where the restart must happen, or
+- pass the installer's no-restart option and declare its code in **Restart-required exit codes**.
 
-- **PowerShell arguments** go before `-File "<script>"`; **Script arguments** go after it. For example, enter `-NoProfile -ExecutionPolicy Bypass` in the first field only if your script requires those host options.
-- **Command line** supplies the complete command to `cmd.exe /c`. Include its arguments in the same field.
-- **Software (.exe/.msi)** appends your arguments to the selected executable or `msiexec.exe /i "<installer>"`.
+Foundry saves its progress before each planned restart and resumes at the next action.
 
-For **Command line**, **Package content (optional)** accepts any file type needed by that command. For example, import `settings.reg` and enter `reg import settings.reg`. Importing content alone does not run it. Importing a single `.cmd` or `.bat` file fills an empty command field with the filename, without adding quotes; an existing command is never overwritten. Review the command and add any required arguments or quoting before saving. Leave **Working directory** empty to run from the imported content folder.
+{% hint style="warning" %}
+Do not pass passwords, keys or tokens as arguments. The full command line of every action is saved in `C:\Windows\Temp\Foundry\State\PreOobe\plan.json` and its output in `C:\Windows\Temp\Foundry\Logs\PreOobe`. Both stay on the device after deployment.
+{% endhint %}
 
-Commands and argument fields must each contain a single line. Use a script file for multiple commands. `{ContentRoot}` and `{LogRoot}` in the preview stand for paths selected during deployment; they are not variables that Foundry expands in your arguments. Use paths relative to the configured working directory when referencing imported files.
+## What the technician sees
 
-**Generate installation log** adds MSI verbose logging using the installer name, for example `ExampleApplication.log`. Each action has its own log folder. Leave the checkbox off if you supply your own logging arguments. Foundry records script and command output regardless of this option; see [PostInstall diagnostics](../../troubleshooting/logs-and-support.md#postinstall-diagnostics).
+After the restart, the **Foundry Post-installation** console lists Foundry's setup tasks, then your actions under the names you gave them, then `Cleanup`. Script output is not shown. [After the restart](../../foundry-deploy/after-the-restart.md) explains each line, the restarts and the hand-over.
 
-## Execution and error policy
+## Check the result
 
-Actions run as SYSTEM during Windows setup. There is no signed-in user profile, guaranteed mapped drive or interactive desktop. Scripts requiring PowerShell 7 must arrange their own supported execution environment; Foundry uses Windows PowerShell 5.1 for PowerShell actions.
+- On the page, no warning bar is shown and every enabled action has **Available** or **Not required** under **Content status**.
+- On a test device, every action ends with `[Succeeded]` and the console ends with `Post-installation completed.`
 
-The default timeout is 1,800 seconds; the supported range is 1–86,400 seconds. Success defaults to exit code `0`. Applications also recognize `3010` as success requiring a controlled restart. Scripts and commands recognize additional restart codes only when you configure them. Success and restart lists must not overlap.
+## Limits
 
-PowerShell scripts must return a failure explicitly when appropriate. Non-terminating PowerShell errors and failed native commands do not always become a failed process exit code automatically.
+- 1,000 actions. A name has 1 to 256 characters. Each command or argument field is one line of up to 8,191 characters.
+- With the page turned off, your actions are kept but left out of new media. Foundry's own setup tasks still run.
+- Imported files are not part of a [configuration](../deployment-profiles.md). On another workstation the action shows **Missing** until you import the same content there.
+- With a [custom answer file](unattend.md), Foundry adds the command that starts this sequence to the deployment copy of the file.
 
-**Continue on error** is disabled by default: a failure stops later actions and prevents a successful handoff to OOBE. Enabling it permits later actions after an ordinary, fully observed failure, recording the sequence as completed with errors. It does not allow execution to continue when Foundry cannot determine whether an action finished safely, or after an installer-owned restart.
+## If something goes wrong
 
-A failed join or OU placement does not stop the other actions: Foundry reports a warning and continues, and it never repeats a join by itself. Check the outcome with [Domain Join troubleshooting](../../troubleshooting/domain-join.md) before handing over the computer.
+| What you see in Foundry OSD | What to do |
+| --- | --- |
+| "Content import failed. Check access, available space, file names and path lengths." | One message for every import limit. Shorten paths, copy the content to a plain local folder or free space, then import again. The Foundry OSD log names the limit, for example `PreOobe.InvalidPackagePath`. |
+| "Add an enabled action or disable Post-installation." | Enable an action or turn the page off. |
+| "Import the missing content for "\<name\>"." | Select **Edit action**, import the same file or folder, then **Save**. |
+| "Edit "\<name\>" to correct its settings." | Open the action; the invalid field shows its own message. |
+| "The configuration changed while you were editing. Open the action again." | The configuration was replaced while the dialog was open, for example by a sync. Reopen the action. |
+| "The action was removed, but its cached content could not be deleted." | Nothing to do. The files stay in the library. |
+| "Final media creation failed. Custom Windows image media preparation failed." with `PreOobe.InsufficientMediaSpace` | The content does not fit on the data partition of the USB drive, even when no custom image is configured. Free space on it or recreate the USB drive. |
+| The same message with `PreOobe.PackageContentChanged` | A file in the library no longer matches what was imported. Import the content again. |
 
-Keep secrets out of command arguments and normal output. Profile encryption does not make arbitrary script output or installer logs safe to share.
+Failures on the target device are in [After the restart troubleshooting](../../troubleshooting/after-the-restart.md).
 
-## Restarts and interrupted deployments
+## Related
 
-Use a Restart action or an installer restart-required code. Suppress installer-owned restarts. Foundry saves progress and resumes the remaining work after Windows restarts.
-
-By default, a recognized restart-required result triggers a restart before the next action. **Defer restart** waits until the next explicit Restart or the end of the sequence. An explicit Restart runs even when no installer has requested one.
-
-For an explicit Restart action, **Restart delay (seconds)** accepts `0` to `86400`. The default `0` adds no delay. A positive value shows a live countdown after progress has been saved. This setting does not change restarts requested by installers or built-in tasks.
-
-Installer exit code `1641` means the installer initiated its own restart. Foundry stops the sequence in this case; configure the installer to let Foundry manage restarts instead.
-
-After a planned restart, Foundry resumes from its saved progress. If power is lost while an action is running, Foundry does not automatically retry that action. Missing or damaged execution records also stop the sequence. Inspect the results and logs before deciding whether to redeploy; scripts and installers are not necessarily safe to repeat.
-
-If the computer is interrupted during the join, Foundry does not try the join again after the restart; it only checks whether the computer is a member of the domain. See [interrupted work](../../troubleshooting/domain-join.md#interrupted-work-or-restart-is-pending).
-
-If an interrupted process might still be using files, Foundry retains them and reports cleanup as pending. This does not retry the interrupted action.
-
-## Follow progress in Windows Setup
-
-The **Foundry Post-installation** console shows the current action, progress, status and elapsed time. Colors distinguish running, successful and failed actions. Warnings and restart countdowns appear in yellow.
-
-<figure>
-  <img src="../../.gitbook/assets/shared-post-installation-01-console-progress.png" alt="Foundry Post-installation console running Google Chrome as action 4 of 5 before OOBE, with action statuses, elapsed times and a log path">
-  <figcaption>Follow the current action, completed results and elapsed times in the Post-installation console. Use the displayed log path to investigate an action.</figcaption>
-</figure>
-
-Like Bootstrap, the console uses English messages. Your custom action names appear as entered; the Foundry OSD configuration page remains translated. Script output and full command lines are not displayed in the progress screen; use the action logs for troubleshooting.
-
-After a planned restart, the console restores completed results and indicates that execution is resuming. After success or completion with warnings, the final results remain visible for 10 seconds with a **Continuing Windows Setup** countdown. Windows Setup then continues and manages any remaining setup restarts. This final pause is separate from an explicit Restart action's delay.
-
-## Cache, profiles and deployment media
-
-Foundry keeps imported scripts and packages in a local library. [Profiles](../deployment-profiles.md) share action settings, but do not include those files. On another PC, import the same files and folder structure to restore missing content.
-
-Required packages are included on the generated USB or ISO, outside `boot.wim`. Keep the complete media available until deployment finishes. A PXE boot image alone does not carry them, so PowerShell scripts, Software installers and commands that use imported content cannot run from it. Built-in tasks, commands without imported content and restarts do not need the media; see [PXE deployment](../media/pxe-deployment.md#post-installation-content).
-
-[Bootstrap](../../foundry-connect/windows-pe-startup.md#postinstall-preparation) prepares PostInstall automatically at startup. No separate installation or manual runtime selection is needed. Standard release media requires Internet access for this step, even with a previous download in the cache.
-
-Foundry copies the required files to Windows before the first boot. Your scripts may still need network access or other resources when they run.
-
-## Custom answer files
-
-Foundry automatically integrates Post-installation into the deployment copy of your [custom answer file](unattend.md) when needed. The imported original and your custom settings and command order are preserved. No manual launch command is required.
-
-Custom answer files are an advanced option: you remain responsible for their settings and commands. Resolve reported conflicts and test the complete deployment. After editing a source file, use **Refresh source** on the Unattend page before rebuilding media.
-
-## Verify and troubleshoot
-
-Successful WinPE staging is not proof of successful post-installation. Follow [Verify deployment](../../foundry-deploy/verify-deployment.md) through first boot, any planned restarts and OOBE.
-
-If an action fails, review the log path shown in the console and collect the [PostInstall diagnostics](../../troubleshooting/logs-and-support.md#postinstall-diagnostics) from the target PC. These logs are not included in Foundry OSD's diagnostic export. Remove sensitive information before sharing them.
+- [After the restart](../../foundry-deploy/after-the-restart.md)
+- [After the restart troubleshooting](../../troubleshooting/after-the-restart.md)
+- [Unattend (custom answer files)](unattend.md)
