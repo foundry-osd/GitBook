@@ -7,7 +7,7 @@ Start from the stage where the work stopped, or from what you see on screen. Eac
 | Stage | Where it happens | Go to |
 | --- | --- | --- |
 | Foundry OSD starts, installs the ADK, updates, or saves and syncs settings | Workstation, Foundry OSD | [Foundry OSD application](foundry-osd.md) |
-| Creating an ISO or a USB drive, and starting a device from it or from a PXE server | Workstation, Foundry OSD **Start** | [Media creation](media-creation.md) and its page [USB drive and device start](media-creation/usb-drive-and-device-start.md) |
+| Creating an ISO or a USB drive, and starting a device from it or from a PXE server | Workstation, Foundry OSD **Start**, then the target device | [Media creation](media-creation.md) and its page [USB drive and device start](media-creation/usb-drive-and-device-start.md) |
 | The device starts from the media, up to the first Foundry window | Target device, Windows PE | [Windows PE startup](windows-pe-startup.md) |
 | Getting an Ethernet or Wi-Fi connection | Target device, Foundry Connect | [Network and Foundry Connect](network.md) |
 | Choosing the disk, Windows and drivers, then installing Windows | Target device, Foundry Deploy | [Windows deployment](deployment.md), in four pages: [before the deployment starts](deployment/before-deployment-starts.md), [checks and image download](deployment/checks-and-image-download.md), [after the disk is erased](deployment/after-disk-erase.md), [the device does not start](deployment/device-does-not-start.md) |
@@ -33,7 +33,7 @@ Start from the stage where the work stopped, or from what you see on screen. Eac
 | The Foundry console after the restart shows a failed action or does not finish, or Windows is not activated | [After the restart](after-the-restart.md) |
 | The device is not registered in Windows Autopilot | [Windows Autopilot](autopilot.md) |
 | The device did not join the domain, or is in the wrong OU | [Domain Join](domain-join.md) |
-| "Diagnostics could not be exported. Check the log for details." | [Logs and support information](logs-and-support.md#export-failed) |
+| "Diagnostics could not be exported. Check the log for details." | On the target device: [Logs and support information](logs-and-support.md#export-failed). In Foundry OSD: [Diagnostics export failed](foundry-osd.md#export-failed) |
 
 ## Before you change anything
 

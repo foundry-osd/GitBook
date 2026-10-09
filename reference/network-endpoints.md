@@ -45,7 +45,7 @@ Notes on this table:
 Notes on this table:
 
 - Foundry downloads the Windows image from `dl.delivery.mp.microsoft.com` over HTTP (port 80), not HTTPS. A firewall that allows only port 443 to this host blocks the deployment.
-- Every start asks `api.github.com` which release to use. When GitHub cannot be reached, Foundry Connect starts from the media, then the startup stops before Foundry Deploy opens, because Foundry Deploy is not on the media. See [Windows PE startup](../foundry-connect/windows-pe-startup.md#what-needs-internet-access).
+- Every start asks `api.github.com` which release to use. When GitHub cannot be reached once the network is ready, the startup stops before Foundry Deploy opens, because Foundry Deploy is not on the media. See [Windows PE startup](../foundry-connect/windows-pe-startup.md#what-needs-internet-access).
 - Driver pack addresses come from the catalog and all use HTTPS today.
 - Microsoft Update Catalog returns the download address of each file, and Foundry uses it as given, so the protocol of that download is Microsoft's choice.
 
