@@ -1,14 +1,15 @@
 # Windows Autopilot troubleshooting
 
-Start from where the problem shows. This page covers what the administrator meets in Foundry OSD while preparing the media; two other pages cover the deployment and what follows the restart.
+This page covers what the administrator meets in Foundry OSD while preparing the media: a Windows Autopilot page, **Start**, or media creation. Two other pages cover the deployment and what follows the restart:
 
 | Where the problem shows | Go to |
 | --- | --- |
-| Foundry OSD: a Windows Autopilot page, **Start**, or media creation | [The index of this page](#on-this-page) |
 | Foundry Deploy: the **Autopilot** step of the wizard, or the Autopilot step in **Steps** | [During deployment](autopilot/during-deployment.md) |
 | Windows setup after the restart, or your tenant once the device is registered | [After the restart](autopilot/after-the-restart.md) |
 
 To know which mode is in use, read the **Windows Autopilot** card on **Start** in Foundry OSD, or **Provisioning method** under **Autopilot** on **Summary** in Foundry Deploy.
+
+Otherwise, find the message below.
 
 ## On this page <a href="#on-this-page" id="on-this-page"></a>
 
@@ -85,7 +86,7 @@ Foundry does not check that the file is an Autopilot profile: a valid JSON file 
 - **Fix:** select **Disconnect tenant**, then **Connect tenant**, and try again. Save the PFX to a folder you can write to.
 - **Collect:** the line "Autopilot hardware hash certificate creation failed." or "Autopilot hardware hash certificate retirement failed."
 
-**If you did not keep the PFX password:** Foundry shows it once and does not store it. With the page connected, select the certificate in **Provisioned certificates**, then **Remove certificate**, then **Create certificate**, and store the PFX file and its password before you close the dialog.
+**If you did not keep the PFX password:** Foundry OSD shows it once and never displays it again, even when it saves it with the configuration. With the page connected, select the certificate in **Provisioned certificates**, then **Remove certificate**, then **Create certificate**, and store the PFX file and its password before you close the dialog.
 
 ## A group tag you expect is not offered <a href="#group-tag-not-offered" id="group-tag-not-offered"></a>
 
@@ -116,7 +117,7 @@ Foundry does not check that the file is an Autopilot profile: a valid JSON file 
 | "Hardware hash upload is enabled but the app registration is not configured. Connect to the tenant from Autopilot." | Foundry OSD knows the tenant but holds no app registration for it. | Reconnect: select **Disconnect tenant** if the page is connected, then **Connect tenant**. |
 | "Hardware hash upload is enabled but the app client ID is missing. Reconnect to the tenant from Autopilot." | The saved app registration has no **Client ID**. | Reconnect: select **Disconnect tenant** if the page is connected, then **Connect tenant**. |
 | "Hardware hash upload is enabled but the app service principal is missing or not ready." | Foundry OSD holds no enterprise application for the app registration. | Reconnect: select **Disconnect tenant** if the page is connected, then **Connect tenant**. If a dialog opens, see ["Tenant onboarding requires attention"](#tenant-onboarding-requires-attention). |
-| "Hardware hash upload is enabled but no boot media PFX is selected." | No PFX is selected for this session. This is normal after you reopen Foundry OSD, select **Disconnect tenant** or change the certificate: the PFX path and its password are not kept. | Select **Select PFX** and type **PFX password**. If **Boot media certificate** is not shown, select **Connect tenant** first. |
+| "Hardware hash upload is enabled but no boot media PFX is selected." | No PFX is selected. This is normal after **Disconnect tenant** or a change of certificate, and after a restart of Foundry OSD when **Remember passwords** is off. | Select **Select PFX** and type **PFX password**. If **Boot media certificate** is not shown, select **Connect tenant** first. |
 | "Hardware hash upload is enabled but the boot media PFX password is missing." | A PFX is selected and **PFX password** is empty. | Type **PFX password**. |
 | "Hardware hash upload is enabled but the boot media PFX has not been validated." | The selected PFX could not be opened: the password is wrong, the file is missing or it is not a usable PFX. | Read the line under **Boot media certificate** and find it in the second table. |
 | "Hardware hash upload is enabled but the selected PFX does not match the active certificate." | The PFX opens, but it is not the PFX of a certificate listed for the app registration, or not the one used in the previous session. | Select the PFX saved when the certificate was created, or create a new certificate. |

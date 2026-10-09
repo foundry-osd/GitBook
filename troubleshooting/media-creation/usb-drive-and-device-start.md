@@ -67,7 +67,14 @@ A drive smaller than 16 GB is listed, but **Create USB** stays unavailable while
 
 ## "Failed to partition and format the USB disk." <a href="#usb-write" id="usb-write"></a>
 
-**Where:** **Operation complete** dialog, followed by the output of the Windows storage commands, such as "Timed out waiting for BOOT volume X: to become available." Other forms: "Failed to format the USB BOOT partition.", "Failed to copy WinPE media files to USB BOOT partition." and "USB verification failed: boot.wim not found.", with "BCD" or "EFI boot file" in place of "boot.wim".
+**Where:** **Operation complete** dialog. This entry covers these messages:
+
+| Message | When |
+| --- | --- |
+| "Failed to partition and format the USB disk." | While a new drive is created. It is followed by the output of the Windows storage commands, such as "Timed out waiting for BOOT volume X: to become available." |
+| "Failed to format the USB BOOT partition." | While a drive is updated |
+| "Failed to copy WinPE media files to USB BOOT partition." | While the boot files are copied |
+| "USB verification failed: boot.wim not found.", "USB verification failed: BCD not found." or "USB verification failed: EFI boot file not found." | When Foundry OSD checks the drive after writing it |
 
 **Cause:**
 

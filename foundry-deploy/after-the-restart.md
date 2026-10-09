@@ -100,4 +100,4 @@ The device is ready when:
 
 ## If the console stops or shows a failure
 
-[After the restart troubleshooting](../troubleshooting/after-the-restart.md) starts from what you saw and tells you which file to read.
+[After the restart troubleshooting](../troubleshooting/after-the-restart.md) starts from what you saw and tells you which file to read. If the device starts Foundry again instead of Windows, or does not start at all, see [Windows does not start after deployment](../troubleshooting/deployment/device-does-not-start.md).

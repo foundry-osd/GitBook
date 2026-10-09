@@ -102,7 +102,7 @@ A different case: when the import dialog opens with "Only some of the OUs could 
 | `ComputerNameMismatch` | That file does not set the computer name confirmed in Foundry Deploy. |
 
 - **Fix:** for `UnsupportedEdition`, redeploy with an edition that is not a Home edition: a Home edition cannot join a domain in Windows either. For the three other reasons, correct the image or the answer file and redeploy, or join the device manually as described in [The join failed](#join-failed).
-- **Collect:** the deployment log and `deployment-summary.json`, where `domainJoinStatus` is 3 (edition) or 4 (image) and `domainJoinSkipCode` is 0 to 3 in the order of the table.
+- **Collect:** the deployment log, whose `Domain joining skipped. Reason=<code>.` line names the reason, and `deployment-summary.json`.
 
 ## The console shows NotStarted and Pending <a href="#notstarted-and-pending" id="notstarted-and-pending"></a>
 
@@ -114,7 +114,7 @@ A different case: when the import dialog opens with "Only some of the OUs could 
 ## The join failed <a href="#join-failed" id="join-failed"></a>
 
 - **Where:** the console shows `Join: Failed`, `[Failed] Join domain and place computer` and "Post-installation completed with warnings. Review the execution result and logs." Unless a local account is configured, Windows then asks **Who's going to use this device?** Create a local account to reach the desktop.
-- **Cause:** open `%SystemRoot%\Temp\Foundry\State\PreOobe\domain-join-result.json`; while Windows setup is on screen, **Shift+F10** opens a command prompt. Under `join`, read `failureCode`, `nativeErrorCode` and `ldapErrorCode`.
+- **Cause:** open `C:\Windows\Temp\Foundry\State\PreOobe\domain-join-result.json`; while Windows setup is on screen, **Shift+F10** opens a command prompt. Under `join`, read `failureCode`, `nativeErrorCode` and `ldapErrorCode`.
 
 | Result file | Cause | Fix |
 | --- | --- | --- |
@@ -158,7 +158,7 @@ A different case: when the import dialog opens with "Only some of the OUs could 
 
 - **Where:** `Cleanup: Pending` after the join action has finished. Before that, `Pending` is normal.
 - **Cause:** the temporary file that holds the join account and password could not be deleted yet. Foundry tries again at the next start.
-- **Fix:** if it is still pending when setup has finished, have an administrator delete `%SystemRoot%\Temp\Foundry\Payloads\DomainJoin`. See [Security and credentials](../reference/security-and-credentials.md).
+- **Fix:** if it is still pending when setup has finished, have an administrator delete `C:\Windows\Temp\Foundry\Payloads\DomainJoin`. See [Security and credentials](../reference/security-and-credentials.md).
 - **Collect:** nothing. Never open, copy or attach the `credentials.bin` in that folder: it contains the join password.
 
 ## Reference <a href="#reference" id="reference"></a>
@@ -171,9 +171,9 @@ While Windows setup is on screen, **Shift+F10** opens a command prompt. The resu
 
 | File | Content |
 | --- | --- |
-| `%SystemRoot%\Temp\Foundry\State\PreOobe\domain-join-result.json` | State of each part, `failureCode`, numeric codes |
-| `%SystemRoot%\Temp\Foundry\Logs\PreOobe\Foundry.PostInstall.log` | Log of the post-installation actions, including the join |
-| `%SystemRoot%\Temp\Foundry\State\Deployment\deployment-summary.json` | What Foundry Deploy decided, including a skipped join |
+| `C:\Windows\Temp\Foundry\State\PreOobe\domain-join-result.json` | State of each part, `failureCode`, numeric codes |
+| `C:\Windows\Temp\Foundry\Logs\PreOobe\Foundry.PostInstall.log` | Log of the post-installation actions, including the join |
+| `C:\Windows\Temp\Foundry\State\Deployment\deployment-summary.json` | What Foundry Deploy decided, including a skipped join |
 
 </details>
 

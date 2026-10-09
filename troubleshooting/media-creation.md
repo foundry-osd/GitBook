@@ -1,16 +1,17 @@
 # Media creation troubleshooting
 
-Start from where the problem shows.
+This page covers what **Start** shows in Foundry OSD: a button that cannot be selected, a dialog, or a creation that ends with "Final media creation failed." Two kinds of problems are described elsewhere:
 
 | Where the problem shows | Go to |
 | --- | --- |
-| Foundry OSD, **Start**: a button that cannot be selected, a dialog, or a creation that ends with "Final media creation failed." | [The index of this page](#on-this-page) |
 | The USB drive: not listed, cannot be written or updated, or "Custom Windows image media preparation failed." A device that does not start from the media. A start from a PXE server | [USB drive and device start](media-creation/usb-drive-and-device-start.md) |
 | The **ADK** page, the proxy, updates, or an option of **General** | [Foundry OSD application troubleshooting](foundry-osd.md) |
 
 A failure on **Start** shows in a dialog titled **ISO creation is blocked** or **USB creation is blocked**, before anything is written, or in the **Operation complete** dialog, as "Final media creation failed." followed by the reason. Most reasons are in English whatever the language of Foundry OSD, and some are followed by the output of a Windows tool.
 
 The log is `%ProgramData%\Foundry\Logs\Foundry.log`; its line "Final boot media operation failed" names the failed step. Windows image errors are also in `%SystemRoot%\Logs\DISM\dism.log`. See [Log locations](logs-and-support.md#log-locations).
+
+Otherwise, find the message below.
 
 ## On this page <a href="#on-this-page" id="on-this-page"></a>
 
@@ -109,12 +110,20 @@ For the second form, Foundry OSD could not read the working folders: check that 
 
 ## "Failed to create WinPE workspace using copype.cmd." <a href="#adk-component" id="adk-component"></a>
 
-**Where:** **Operation complete** dialog. Other forms: "WinPE workspace was created but boot.wim was not found.", "The selected WinPE language pack was not found.", "The WinPE optional components folder was not found.", "The required '\<name\>' WinPE optional component was not found.", "OA3Tool executable was not found for the selected WinPE architecture.", "PCA2023 requires /bootex support in the WinPE workspace." and "PCA2023 USB creation requires BootEx EFI binaries in the WinPE workspace."
+**Where:** **Operation complete** dialog. This entry covers these messages:
 
-**Cause:**
+| Message | What it means |
+| --- | --- |
+| "Failed to create WinPE workspace using copype.cmd." | The ADK tool that builds the Windows PE working folder failed |
+| "WinPE workspace was created but boot.wim was not found." | The working folder was built without a boot image |
+| "The selected WinPE language pack was not found." | The language pack of the **WinPE boot language** is not in the Windows PE add-on |
+| "The WinPE optional components folder was not found." | The optional components of the Windows PE add-on are missing |
+| "The required '\<name\>' WinPE optional component was not found." | One component that Foundry adds to the boot image is missing |
+| "OA3Tool executable was not found for the selected WinPE architecture." | Zero-touch Windows Autopilot only: see [the entry of Windows Autopilot troubleshooting](autopilot.md#oa3tool-not-found) |
+| "PCA2023 requires /bootex support in the WinPE workspace." | The **Secure Boot** switch of **General** is on, which reads **PCA 2023**, and the installed ADK cannot produce media signed that way |
+| "PCA2023 USB creation requires BootEx EFI binaries in the WinPE workspace." | The same, for a USB drive |
 
-- A file of the Windows ADK or of the Windows PE add-on is missing or damaged for the architecture selected in **General**.
-- For the two PCA2023 messages: the **Secure Boot** switch of **General** is on, which reads **PCA 2023**, and the installed ADK cannot produce media signed that way.
+**Cause:** Except for the two PCA2023 messages, a file of the Windows ADK or of the Windows PE add-on is missing or damaged for the architecture selected in **General**.
 
 **Fix:**
 
@@ -125,9 +134,19 @@ For the second form, Foundry OSD could not read the working folders: check that 
 
 ## "Failed to retrieve the WinPE driver catalog." <a href="#download-failed" id="download-failed"></a>
 
-**Where:** **Operation complete** dialog. Other forms: "Failed to parse the WinPE driver catalog.", "Driver package download failed.", "Failed to download driver package.", "Failed to download the operating system catalog.", "Failed to acquire a verified Windows source package.", "Failed to prepare Foundry runtime payloads.", "Failed to provision Foundry runtime payloads." and "The transfer timed out. Check your connection and try again."
+**Where:** **Operation complete** dialog. This entry covers these messages:
 
-**Cause:** The workstation cannot reach a host this build needs, or a download received no data for two minutes.
+| Message | What could not be obtained |
+| --- | --- |
+| "Failed to retrieve the WinPE driver catalog." | The catalog of Windows PE drivers |
+| "Failed to parse the WinPE driver catalog." | The same catalog: what was received cannot be read |
+| "Driver package download failed." or "Failed to download driver package." | A **Dell** or **HP** driver set, or the Intel Wi-Fi driver |
+| "Failed to download the operating system catalog." | The catalog of Windows images, used for media with Wi-Fi or `arm64` |
+| "Failed to acquire a verified Windows source package." | The Windows 11 package that such media is built from |
+| "Failed to prepare Foundry runtime payloads." or "Failed to provision Foundry runtime payloads." | The Foundry applications that go on the media |
+| "The transfer timed out. Check your connection and try again." | Any of these downloads: no data arrived for two minutes |
+
+**Cause:** The workstation cannot reach a host this build needs.
 
 - The [catalogs](../reference/catalog.md) on `raw.githubusercontent.com` are needed only with **Dell** or **HP** drivers, Wi-Fi or `arm64`. A build can therefore fail the day after you turn on Wi-Fi.
 - The other hosts are GitHub and the download servers of Dell, HP and Microsoft.
@@ -142,55 +161,47 @@ For the second form, Foundry OSD could not read the working folders: check that 
 
 ## "Failed to prepare boot image dependencies from every matching operating system source." <a href="#package-refused" id="package-refused"></a>
 
-**Where:** **Operation complete** dialog. Other forms: "No Windows 11 24H2 Windows source matched the requested architecture and language.", "The cached Windows source package failed hash validation.", "Failed to extract driver package with bundled 7-Zip.", "Executable driver package was extracted with 7-Zip but no INF files were found.", "Unsupported driver package format." and "Failed to inject driver package into the mounted image."
+**Where:** **Operation complete** dialog. Media with Wi-Fi or `arm64` takes files from a Windows 11 package of several GB, chosen for the **Architecture** and the **WinPE boot language** of **General**.
 
-**Cause:**
+**Cause and fix**, by message:
 
-- Media with Wi-Fi or `arm64` takes files from a Windows 11 package of several GB, chosen for the **Architecture** and the **WinPE boot language** of **General**. No package exists for that language, or the downloaded one is damaged.
-- A downloaded **Dell** or **HP** driver package is damaged.
-- A driver of your **Custom driver folder** is refused by Windows PE.
-
-**Fix:**
-
-1. For "No Windows 11 24H2 Windows source matched...", choose a **WinPE boot language** in which Windows 11 is published.
-2. Otherwise, close Foundry OSD, delete `%ProgramData%\Foundry\Cache\WindowsSources` or `%ProgramData%\Foundry\Cache\WinPeDrivers`, and create the media again.
-3. If a custom driver is refused, remove the driver named in `dism.log` from the folder.
+| Message | Cause | Fix |
+| --- | --- | --- |
+| "Failed to prepare boot image dependencies from every matching operating system source." | No Windows 11 package could be prepared; the lines that follow name the reason | Follow the row of the reason |
+| "No Windows 11 24H2 Windows source matched the requested architecture and language." | No package exists for that architecture and language | Choose a **WinPE boot language** in which Windows 11 is published |
+| "The cached Windows source package failed hash validation." | The downloaded package is damaged | Close Foundry OSD, delete `%ProgramData%\Foundry\Cache\WindowsSources`, create the media again |
+| "Failed to extract driver package with bundled 7-Zip.", "Executable driver package was extracted with 7-Zip but no INF files were found." or "Unsupported driver package format." | A downloaded **Dell** or **HP** driver package is damaged or cannot be used | Close Foundry OSD, delete `%ProgramData%\Foundry\Cache\WinPeDrivers`, create the media again |
+| "Failed to inject driver package into the mounted image." | Windows PE refused a driver, downloaded or from your **Custom driver folder** | Remove the driver named in `dism.log` from the folder, or delete the driver cache as in the row above |
 
 **Collect:** `Foundry.log` and `dism.log`.
 
 ## "Custom drivers total at least \<size\>; the maximum is \<size\>." <a href="#too-large" id="too-large"></a>
 
-**Where:** **Operation complete** dialog. The full text is "Custom drivers total at least \<size\>; the maximum is \<size\>. Select only the network and storage drivers needed by Windows PE." Other forms: "Custom driver snapshots exceed the entry limit or contain a reparse point.", "The USB BOOT partition needs approximately \<size\>, but its capacity is \<size\>. Nothing has been erased or formatted. Reduce customizations or drivers, or create an ISO.", "The USB BOOT partition capacity could not be verified. Nothing has been erased or formatted. Check and reconnect the USB drive, then retry. Also check that the source files are accessible." and "A boot media file is \<size\>; FAT32 supports at most \<size\> per file. Reduce the boot image size or create an ISO."
+**Where:** **Operation complete** dialog.
 
-**Cause:**
+**Cause and fix**, by message:
 
-- The **Custom driver folder**, subfolders included, exceeds 2 GiB or 10,000 files and folders, or contains a junction or a symbolic link. The size shown is what was counted when the check stopped.
-- On a USB drive, the boot files do not fit the **BOOT** partition, which is 2 GiB whatever the size of the drive.
-
-**Fix:**
-
-1. Point **Custom driver folder** to a plain folder with only the network and storage drivers Windows PE needs, and turn off the **Driver options** you do not need.
-2. For the **BOOT** partition messages, you can instead [create an ISO](../foundry-osd/media/create-iso.md).
-3. For "could not be verified", reconnect the drive, select **Refresh** and start again.
+| Message | Cause | Fix |
+| --- | --- | --- |
+| "Custom drivers total at least \<size\>; the maximum is \<size\>. Select only the network and storage drivers needed by Windows PE." | The **Custom driver folder**, subfolders included, exceeds 2 GiB. The size shown is what was counted when the check stopped | Point **Custom driver folder** to a folder with only the network and storage drivers Windows PE needs |
+| "Custom driver snapshots exceed the entry limit or contain a reparse point." or "Custom driver snapshots do not follow reparse points." | The folder holds more than 10,000 files and folders, or contains a junction or a symbolic link | Use a plain folder without links |
+| "The USB BOOT partition needs approximately \<size\>, but its capacity is \<size\>. Nothing has been erased or formatted. Reduce customizations or drivers, or create an ISO." | The boot files do not fit the **BOOT** partition, which is 2 GiB whatever the size of the drive | Reduce the custom drivers, turn off the **Driver options** you do not need, or [create an ISO](../foundry-osd/media/create-iso.md) |
+| "A boot media file is \<size\>; FAT32 supports at most \<size\> per file. Reduce the boot image size or create an ISO." | One file of the media is larger than the FAT32 **BOOT** partition accepts | The same |
+| "The USB BOOT partition capacity could not be verified. Nothing has been erased or formatted. Check and reconnect the USB drive, then retry. Also check that the source files are accessible." | Foundry OSD could not measure the partition or the files to copy | Reconnect the drive, select **Refresh** and start again |
 
 **Collect:** Nothing.
 
 ## "Foundry could not replace the ISO file at \<path\>." <a href="#iso-failed" id="iso-failed"></a>
 
-**Where:** **Operation complete** dialog, at the end of an ISO creation. The full text is "Foundry could not replace the ISO file at \<path\>. The file may be mounted, attached to a virtual machine, open in another program, or read-only. Unmount or close it, or choose another output path, then try again." Another form is "Unexpected failure while creating WinPE ISO media.", followed by a technical text: read its first line.
+**Where:** **Operation complete** dialog, at the end of an ISO creation. The last three messages of the table follow "Unexpected failure while creating WinPE ISO media.": read the first line of the technical text under it.
 
-**Cause:**
+**Cause and fix**, by message:
 
-- First message: the previous ISO of the same name is in use and could not be replaced. It is intact.
-- "Insufficient free space for custom-image ISO staging and atomic output publication.": the working drive or the output drive lacks room. The wording mentions custom images even when you use none.
-- "The custom-image ISO exceeds the FAT32 output file-size limit.": the ISO exceeds 4 GiB and the output drive is FAT32.
-- "The ADK Oscdimg tool is required to create media containing custom images.": a tool of the ADK is missing.
-
-**Fix:**
-
-1. Eject the ISO in File Explorer or detach it from the virtual machine, or type another path in **ISO output**.
-2. Free space in `%ProgramData%\Foundry\Workspaces` and in the output folder.
-3. Save the ISO on an NTFS drive or a network share.
-4. Repair the ADK from the [ADK](../foundry-osd/adk.md) page.
+| Message | Cause | Fix |
+| --- | --- | --- |
+| "Foundry could not replace the ISO file at \<path\>. The file may be mounted, attached to a virtual machine, open in another program, or read-only. Unmount or close it, or choose another output path, then try again." | The previous ISO of the same name is in use and could not be replaced. It is intact | Eject the ISO in File Explorer or detach it from the virtual machine, or type another path in **ISO output** |
+| "Insufficient free space for custom-image ISO staging and atomic output publication." | The working drive or the output drive lacks room. The wording mentions custom images even when you use none | Free space in `%ProgramData%\Foundry\Workspaces` and in the output folder |
+| "The custom-image ISO exceeds the FAT32 output file-size limit." | The ISO exceeds 4 GiB and the output drive is FAT32 | Save the ISO on an NTFS drive or a network share |
+| "The ADK Oscdimg tool is required to create media containing custom images." | A tool of the ADK is missing | Repair the ADK from the [ADK](../foundry-osd/adk.md) page |
 
 **Collect:** The full text of the dialog and `Foundry.log`.

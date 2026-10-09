@@ -1,4 +1,4 @@
-# The device does not start
+# Windows does not start after deployment
 
 Foundry Deploy showed **Deployment complete**, the device restarted, and Windows does not start. The disk was erased and Windows was written to it.
 
@@ -7,6 +7,7 @@ Foundry Deploy showed **Deployment complete**, the device restarted, and Windows
 | Foundry starts again, the device starts PXE, or the firmware boot menu opens | [Returns to the deployment media](#returns-to-the-media) |
 | No boot device, a restart loop, or a stop error | [Does not start Windows](#does-not-start-windows) |
 | Windows starts and a Foundry console stops or shows a failure | [After the restart troubleshooting](../after-the-restart.md) |
+| The device does not start from the USB drive, the ISO or PXE, before any deployment | [The device does not start from the media](../media-creation/usb-drive-and-device-start.md#does-not-boot) |
 
 ## After the restart, the device returns to the deployment media <a href="#returns-to-the-media" id="returns-to-the-media"></a>
 

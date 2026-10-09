@@ -20,6 +20,7 @@ These failures happen in Foundry Deploy and are described with the other [Window
 
 | What you see | Go to |
 | --- | --- |
+| Foundry Deploy starts again, or Windows does not start at all | [Windows does not start after deployment](deployment/device-does-not-start.md) |
 | No console, or "Post-installation could not initialize..." | [No console](#no-console) |
 | The console closed before you could read it | [Console closed](#console-closed) |
 | "Post-installation stopped..." | [Sequence stopped](#post-installation-stopped) |
@@ -41,7 +42,7 @@ Domain Join results are in [Domain Join troubleshooting](domain-join.md). Other 
 
 ## Reach the files
 
-The files named below are on the Windows volume of the deployed device: Foundry's under `C:\Windows\Temp\Foundry`, the Windows Setup logs and the answer file under `C:\Windows\Panther`. Read them on that device once Windows is reachable, as an administrator: Foundry's folders are restricted to administrators. Foundry does not control what Windows Setup shows after a stop, so this page cannot promise that Windows gets that far.
+The files named below are on the Windows volume of the deployed device: Foundry's under `C:\Windows\Temp\Foundry`, the Windows Setup logs and the answer file under `C:\Windows\Panther`. While Windows setup is on screen, Shift+F10 opens a command prompt, unless your image disables it: use `type` or `notepad` to read a file. Otherwise read them once you can sign in, as an administrator: Foundry's folders are restricted to administrators. Foundry does not control what Windows Setup shows after a stop, so this page cannot promise that Windows gets that far.
 
 ## No Foundry Post-installation console appears <a href="#no-console" id="no-console"></a>
 

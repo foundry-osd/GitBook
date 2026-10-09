@@ -13,8 +13,9 @@ Use this section when Foundry Deploy refuses to continue, shows **Deployment fai
 | --- | --- | --- |
 | A password prompt, Foundry Deploy closing, or a wizard screen where **Next** or **Deploy** is unavailable | No | [Before the deployment starts](deployment/before-deployment-starts.md) |
 | "Failed step: Validate answer file", "Check deployment setup", "Download Windows image" or "Check Windows image", or "Prepare target disk" with any message other than "Disk partitioning failed ..." | Depends on the media: look at **Steps**. No for "Prepare target disk" | [Checks and image download](deployment/checks-and-image-download.md) |
-| "Failed step: Prepare target disk" with "Disk partitioning failed ...", or any later step, "Provision Autopilot", "System reboot", or a skipped step | Yes | [After the disk is erased](deployment/after-disk-erase.md) |
-| **Deployment complete**, then the device returns to the media or does not start Windows | Yes | [The device does not start](deployment/device-does-not-start.md) |
+| "Failed step: Prepare target disk" with "Disk partitioning failed ...", or any later step, "System reboot", or a skipped step | Yes | [After the disk is erased](deployment/after-disk-erase.md) |
+| "Failed step: Provision Autopilot", or a skipped Autopilot step | Yes | [Windows Autopilot troubleshooting during deployment](autopilot/during-deployment.md) |
+| **Deployment complete**, then the device returns to the media or does not start Windows | Yes | [Windows does not start after deployment](deployment/device-does-not-start.md) |
 | **Deployment cancelled**, or the device lost power | Look at **Steps** (after a cancellation) | [Deploy again after a failure](#deploy-again) |
 | The Foundry console after the restart fails, or Windows is not activated | Yes | [After the restart troubleshooting](after-the-restart.md) |
 | "Diagnostics could not be exported. Check the log for details." | Not relevant | [Logs and support information](logs-and-support.md#export-failed) |

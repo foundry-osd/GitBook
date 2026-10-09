@@ -58,6 +58,7 @@ If you deploy anyway, **Register Autopilot device** is skipped with the reason "
   1. For `PCPKsp.dll`, check that the Windows image you deploy contains `Windows\System32\PCPKsp.dll`, or deploy another image.
   2. For a missing tool, the administrator creates the media again.
   3. For the other reasons, read `OA3.log`. The interactive mode reads the hardware hash in installed Windows instead of Windows PE.
+  4. When the deployment stopped, it did not finish and the device is not registered: deploy again once the cause is corrected. For "could not be copied" and for a file that cannot be loaded, no specific fix is known: deploy again, and if it repeats, send the files below.
 - **Collect:** `autopilot-hash-upload-status.json` (`uploadState` is `CaptureFailed`, and `failureCode` names the case), `OA3.log` and `OA3.xml`.
 
 ## The Autopilot step fails for another reason <a href="#step-fails-other-reason" id="step-fails-other-reason"></a>

@@ -1,12 +1,14 @@
 # Foundry OSD application troubleshooting
 
-Start from where the problem shows.
+This page covers the Foundry OSD application itself: opening and closing it, the **ADK** page, the options of **General**, updates, the proxy and the diagnostics export. Three kinds of problems are described elsewhere:
 
 | Where the problem shows | Go to |
 | --- | --- |
-| Foundry OSD does not open or close, the **ADK** page, an option of **General**, an update, the proxy, an export | [The index of this page](#on-this-page) |
 | A message under the **Settings backup and sync** card of **Settings**, or in one of its dialogs: export, import, sharing, synchronization | [Settings backup and sync](foundry-osd/settings-backup-and-sync.md) |
+| A message on a Customization page | The "If something goes wrong" section of that page: [Custom Windows images](../foundry-osd/customization/custom-windows-images.md#if-something-goes-wrong), [Unattend](../foundry-osd/customization/unattend.md#if-something-goes-wrong), [Machine naming](../foundry-osd/customization/machine-naming.md#if-something-goes-wrong), [Post-installation](../foundry-osd/customization/post-installation.md#if-something-goes-wrong) |
 | **Start**, while media is being created | [Media creation](media-creation.md) |
+
+Otherwise, find what you see below.
 
 ## On this page <a href="#on-this-page" id="on-this-page"></a>
 

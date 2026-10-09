@@ -41,7 +41,7 @@ The device does not restart after a failure. Do this before you turn it off:
 4. In the menu bar, select **Tools > Export diagnostics...** to save the logs to the USB drive. See [Export logs from Foundry Connect and Foundry Deploy](../troubleshooting/logs-and-support.md#export-logs-from-foundry-connect-and-foundry-deploy).
 5. Find the failed step in [Windows deployment troubleshooting](../troubleshooting/deployment.md).
 
-Check where **Prepare target disk** sits in **Steps**. If the failed step is above it, the disk was not erased. If it is below, the disk was erased and the device may not start.
+Check where **Prepare target disk** sits in **Steps**. If the failed step is above it, the disk was not erased. If it is below, the disk was erased and the device may not start. If the failed step is **Prepare target disk** itself, the disk is intact unless the message starts with "Disk partitioning failed".
 
 Foundry Deploy cannot resume or roll back a failed deployment, and the error screen has no retry button. After correcting the cause, restart the device from the deployment media and go through the wizard again: this erases the disk again. Images and driver packs already downloaded to the USB drive's cache are verified and reused.
 

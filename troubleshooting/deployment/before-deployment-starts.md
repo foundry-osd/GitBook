@@ -165,7 +165,7 @@ Problems met when Foundry Deploy opens and in its wizard, up to the **Deploy** b
 
 | Message | Cause | Fix |
 | --- | --- | --- |
-| "No custom images were found. Attach the correct media or add a WIM to the documented USB folder." | The drive that holds the images is not connected | Connect the complete USB drive or ISO created with this boot image, then select **Windows catalog** and **Custom image** again |
+| "No custom images were found. Attach the correct media or add a WIM to the documented USB folder." | The drive that holds the images is not connected | Connect the complete USB drive or ISO created with this boot image, then select **Windows catalog** and **Custom image** again. The "documented USB folder" is `Cache\OperatingSystems\Custom\` on the **Foundry Cache** volume: see [Add an image to a USB drive by hand](../../foundry-osd/customization/custom-windows-images.md#add-an-image-to-a-usb-drive-by-hand) |
 | "The custom image manifest is missing, damaged, or does not match this boot media. Recreate the media or choose another source." | The image files and the boot image come from different media builds | The administrator recreates the media |
 | "The configured default image or index is unavailable. Choose an image and index explicitly." | The administrator's preferred image or index is not on this media | Select an image and an index yourself |
 | "The default image exists on more than one attached volume. Choose the source volume explicitly." | Two connected drives carry the same image | Select the one to use, or disconnect the other drive |
