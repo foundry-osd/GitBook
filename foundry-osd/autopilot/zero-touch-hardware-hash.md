@@ -28,7 +28,7 @@
 7. Create or update the deployment media from [Start](../media/README.md).
 
 {% hint style="warning" %}
-The password appears only in the **Certificate ready** dialog: "Foundry does not store the password and cannot show it again after this dialog closes." Foundry OSD can save it with the configuration, but never displays it again. If you lose it, remove the certificate and create another one.
+The password appears only in the **Certificate ready** dialog: "Foundry cannot show the password again after this dialog closes." Foundry OSD can save it with the configuration, but never displays it again. If you lose it, remove the certificate and create another one.
 {% endhint %}
 
 **Tenant readiness** has four rows:
