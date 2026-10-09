@@ -26,7 +26,7 @@ There is no folder to choose in Windows PE. Foundry writes the archive to the ro
 | **Export diagnostics...** | Both | Creates an archive in which the secrets Foundry recognizes are masked |
 | **Export raw diagnostics...** | Both | Creates the same archive without masking, after a confirmation |
 
-The Foundry Deploy archive contains its own log, the logs written by Windows PE startup and Foundry Connect during the same session, and, once the disk is prepared, the deployment logs and state files stored on the target disk. The Foundry Connect archive contains the logs of the Windows PE session. A file named `credentials.bin` is never included.
+The Foundry Deploy archive contains its own log, the logs written by Windows PE startup and Foundry Connect during the same session, and, once the disk is prepared, the deployment logs stored on the target disk. The `State` folder is not included: copy `deployment-summary.json` separately when you can reach it. The Foundry Connect archive contains the logs of the Windows PE session. A file named `credentials.bin` is never included.
 
 Use **Export raw diagnostics...** only when a support contact you trust asks for it. The confirmation says why: "Raw logs may contain credentials, identifiers, paths, network names, and other sensitive data."
 
@@ -90,6 +90,14 @@ The logs of the last deployment stay on the target disk until the next deploymen
 3. To read the target disk, connect it to another computer, or start the device from a Windows PE or recovery media that gives you a command prompt. Copy `Windows\Temp\Foundry\Logs` and `Windows\Temp\Foundry\State`, or `Foundry\Logs` and `Foundry\State` if the first folders do not exist.
 4. Then deploy again.
 
+## Post-installation evidence
+
+From the installed Windows, collect `C:\Windows\Temp\Foundry\Logs\PreOobe` and `C:\Windows\Temp\Foundry\State\PreOobe`. Script output and installer logs can contain secrets that masking does not catch: read them before sharing. What each file means is in [After the restart troubleshooting](after-the-restart.md).
+
+## Domain Join evidence
+
+From the installed Windows, collect `C:\Windows\Temp\Foundry\State\PreOobe\domain-join-result.json` and `C:\Windows\Temp\Foundry\Logs\PreOobe\Foundry.PostInstall.log`. The result file contains no account and no password. Never attach `credentials.bin`. How to read the result is in [Domain Join troubleshooting](domain-join.md).
+
 ## What to send
 
 - The Foundry OSD version, and whether the media was recreated after the last Foundry OSD update.
@@ -108,11 +116,3 @@ Read what you send. Masking covers only what Foundry recognizes. Remove password
 ## Open a support issue
 
 Search the [existing issues](https://github.com/foundry-osd/foundry/issues) first, then use the [bug report form](https://github.com/foundry-osd/foundry/issues/new?template=bug-report.yml). Describe the steps that lead to the problem, what you expected and what happened, and attach the items of [What to send](#what-to-send). Report a security vulnerability privately, as the repository's security policy explains, not in a public issue.
-
-## Post-installation evidence
-
-From the installed Windows, collect `C:\Windows\Temp\Foundry\Logs\PreOobe` and `C:\Windows\Temp\Foundry\State\PreOobe`. Script output and installer logs can contain secrets that masking does not catch: read them before sharing. What each file means is in [After the restart troubleshooting](after-the-restart.md).
-
-## Domain Join evidence
-
-From the installed Windows, collect `C:\Windows\Temp\Foundry\State\PreOobe\domain-join-result.json` and `C:\Windows\Temp\Foundry\Logs\PreOobe\Foundry.PostInstall.log`. The result file contains no account and no password. Never attach `credentials.bin`. How to read the result is in [Domain Join troubleshooting](domain-join.md).

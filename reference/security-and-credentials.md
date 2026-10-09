@@ -11,16 +11,23 @@ What **Password protection** covers, and what it does not, is explained on the [
 | Secret | On the media | On the deployed device | Removed |
 | --- | --- | --- | --- |
 | Deployment password | Not stored | Not copied | Not applicable |
-| Wi-Fi passwords, 802.1X certificates and their passwords | Recoverable, with or without Password protection: Foundry Connect needs them before any password is asked | Only with network profile roaming: copied to `C:\Windows\Temp\Foundry\Payloads\NetworkProfiles`. A certificate private key and its password are copied, in clear text, only when **Private-key material** shows **Included** | By Foundry, once the profiles are imported at the first start of Windows |
-| Local account passwords set in OOBE | Protected. Password protection is required | Written to `C:\Windows\Panther\unattend.xml` in the encoded form Windows expects, which is not encryption | Not removed by Foundry |
-| Custom answer files | Protected. Password protection is required | Written in clear text to `C:\Windows\Panther\unattend.xml` | Not removed by Foundry |
-| Autopilot JSON profiles | Protected with Password protection, readable without it | Copied to `C:\Windows\Provisioning\Autopilot\AutopilotConfigurationFile.json` | Not removed by Foundry |
-| Autopilot certificate (PFX and its password), zero-touch upload | Protected with Password protection, recoverable without it | Never written to disk: Foundry Deploy uses it in memory | Not applicable |
-| Device hardware hash | Never on the media | `C:\Windows\Temp\Foundry\Logs\AutopilotHash`, in `AutopilotHWID.csv` and `OA3.xml`. Foundry restricts the folder to SYSTEM and Administrators | Not removed by Foundry |
-| Domain Join account and password, zero-touch | Protected. Password protection is required | Copied, in clear text, to `C:\Windows\Temp\Foundry\Payloads\DomainJoin\<operation-id>\credentials.bin`, in a folder restricted to SYSTEM and Administrators | By Foundry, as soon as the join has used the file |
-| Domain Join account and password, interactive | Not on the media: the technician types them in Foundry Deploy | Same file as zero-touch | Same as zero-touch |
+| Wi-Fi passwords, 802.1X certificates and their passwords | Recoverable, with or without Password protection | Only with network profile roaming: `C:\Windows\Temp\Foundry\Payloads\NetworkProfiles` | By Foundry, once the profiles are imported at the first start of Windows |
+| Local account passwords set in OOBE | Protected. Password protection is required | `C:\Windows\Panther\unattend.xml`, encoded but not encrypted | Not removed by Foundry |
+| Custom answer files | Protected. Password protection is required | `C:\Windows\Panther\unattend.xml`, in clear text | Not removed by Foundry |
+| Autopilot JSON profiles | Protected with Password protection, readable without it | `C:\Windows\Provisioning\Autopilot\AutopilotConfigurationFile.json` | Not removed by Foundry |
+| Autopilot certificate (PFX and its password), zero-touch upload | Protected with Password protection, recoverable without it | Never written to disk | Not applicable |
+| Device hardware hash | Never on the media | `C:\Windows\Temp\Foundry\Logs\AutopilotHash` | Not removed by Foundry |
+| Join account and its password, zero-touch Domain Join | Protected. Password protection is required | `C:\Windows\Temp\Foundry\Payloads\DomainJoin\<operation-id>\credentials.bin`, in clear text | By Foundry, as soon as the join has used the file |
+| Join account and its password, interactive Domain Join | Not on the media: the technician types them in Foundry Deploy | Same file as zero-touch | Same as zero-touch |
 
-Interactive hardware hash upload places no secret on the media or on the device: the technician signs in with their own account when the upload runs.
+Details the table leaves out:
+
+- Network credentials stay recoverable because Foundry Connect needs them before any password is asked.
+- A network certificate private key and its password are copied to the device, in clear text, only when the **Private-key material** row of the deployment summary shows **Included**.
+- The hardware hash is in `AutopilotHWID.csv` and `OA3.xml`.
+- Foundry restricts the `AutopilotHash` and `DomainJoin` folders to SYSTEM and Administrators.
+- Foundry Deploy uses the Autopilot certificate in memory only.
+- Interactive hardware hash upload places no secret on the media or on the device: the technician signs in with their own account when the upload runs.
 
 {% hint style="warning" %}
 A file listed as "Not removed by Foundry" stays readable to local administrators of the deployed device. If it holds a secret, remove it with your own process once Windows setup has finished, and never attach it to a support request.
@@ -51,7 +58,7 @@ Zero-touch hardware hash upload uses two separate identities. The rights of the 
 
 Facts that follow from this:
 
-- The app registration is single-tenant. When Foundry creates it, it grants only the permission above. When Foundry adopts an existing registration with the same name, it leaves the permissions already there.
+- The app registration is single-tenant. When Foundry creates it, it grants only the permission above. When Foundry adopts an existing registration with the same name, it adds this permission if it is missing and never removes the permissions already there, so check them.
 - The media carries the tenant ID, the client ID of the app registration and the certificate PFX with its password. It carries no administrator credential and no sign-in token.
 - Foundry Deploy signs in as the app registration with the certificate private key. No technician signs in. The certificate is decrypted in memory and is not copied to the deployed device.
 - Anyone who obtains the PFX and its password can use the permission of the app registration until the certificate expires or is removed from the registration.
@@ -60,9 +67,9 @@ Facts that follow from this:
 
 How to create, renew and remove the certificate is described in [Zero-touch hardware hash upload](../foundry-osd/autopilot/zero-touch-hardware-hash.md).
 
-## Domain credentials
+## Join account
 
-During a deployment with Domain Join, Foundry Deploy writes the account and the password of the domain being joined to `credentials.bin` on the target disk, as listed in the table above. Foundry deletes the file as soon as the join has used it. If the deletion fails or the join was interrupted, the Foundry console after the restart shows the cleanup as **Pending**: see [Domain Join troubleshooting](../troubleshooting/domain-join.md).
+During a deployment with Domain Join, Foundry Deploy writes the join account and its password for the domain being joined to `credentials.bin` on the target disk, as listed in the table above. Foundry deletes the file as soon as the join has used it. If the deletion fails or the join was interrupted, the Foundry console after the restart shows the cleanup as **Pending**: see [Domain Join troubleshooting](../troubleshooting/domain-join.md).
 
 Diagnostic exports never include a file named `credentials.bin`. A copy saved under another name is not recognized, so do not copy or rename that file. How the join accounts are stored in Foundry OSD is described in [Domain Join](../foundry-osd/domain-join/README.md).
 
