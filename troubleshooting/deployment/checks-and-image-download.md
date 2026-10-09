@@ -75,13 +75,14 @@ If the step shows "The selected answer file is unavailable, invalid, or incompat
 **Cause:**
 
 - First message: the deployment needs scripts or packages that Foundry cannot find or verify. The USB drive or ISO was removed, is not the one created with this boot image, or its files were changed. A PXE boot image does not carry imported scripts and packages.
-- Second message: the program that runs the work planned after the restart is missing from the media and could not be downloaded either.
+- Second message: it appears only on media created with an older Foundry OSD. The startup console of current media prepares the post-installation application before Foundry Deploy opens, at the line "Preparing Foundry PostInstall"; older media does not, although it starts the latest Foundry Deploy. Foundry Deploy then downloads the application itself from GitHub, showing "Preparing post-installation components...", and that download failed.
 
 **Fix:**
 
-1. Connect the complete USB drive or ISO created together with the boot image, check the network connection, then restart from the media.
-2. Over PXE, connect the matching media, or have the administrator disable the actions that use imported content. See [Deploy with PXE](../../foundry-osd/media/pxe-deployment.md).
-3. If the message returns, the administrator recreates the media.
+1. First message: connect the complete USB drive or ISO created together with the boot image, then restart from the media.
+2. First message over PXE: connect the matching media, or have the administrator disable the actions that use imported content. See [Deploy with PXE](../../foundry-osd/media/pxe-deployment.md).
+3. Second message: check that the device still reaches GitHub (see [Network endpoints](../../reference/network-endpoints.md)), then restart from the media to try again.
+4. If either message returns, the administrator updates Foundry OSD and recreates the media. For the second message this removes the cause.
 
 **Collect:** the standard set. The log names the missing or changed item.
 
