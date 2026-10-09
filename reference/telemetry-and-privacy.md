@@ -53,7 +53,7 @@ Values are switches, counts or fixed choices. No name, path or text you typed is
 | OOBE | Whether it is on, and each choice: license terms, diagnostic data level, privacy screen, tailored experiences, advertising ID, speech recognition, inking and typing, location |
 | Post-installation | Whether it is on, the number of actions and of enabled actions (up to 1,000), and the count of each type: PowerShell script, command, software installation, restart |
 | Optional features | Whether it is on, the number of features set, to enable and to disable, the number of feature categories, and whether Windows source files are needed |
-| AppX removals | Whether it is on, the number of apps, and whether the selection matches one preset, several or none |
+| AppX removals | Whether it is on, the number of apps, and whether the selection matches one preset, several, or is a custom one |
 | AI components | Whether it is on, each of the eight options, and how many are chosen |
 
 </details>

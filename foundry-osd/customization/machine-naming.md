@@ -66,7 +66,7 @@ Plan for these cases:
 
 ## What the technician sees
 
-Foundry Deploy proposes the name on **Target device**, next to the device values it read. In **Manual** mode without a prefilled name, or when this page is **Disabled**, it proposes the name of the Windows already on the device, otherwise the Windows PE name such as `MININT-123ABC`, otherwise `PC`. The technician can change the name unless **Composed** is selected with **Allow name editing during deployment** off. See [Select the target](../../foundry-deploy/target.md).
+Foundry Deploy proposes the name on **Target device**, next to the device values it read. In **Manual** mode without a prefilled name, or when this page is **Disabled**, it proposes a default name, described in [Select the target](../../foundry-deploy/target.md#what-each-field-means). The technician can change the name unless **Composed** is selected with **Allow name editing during deployment** off.
 
 When a component cannot be used, Foundry Deploy shows its name followed by "Unavailable", for example "Asset tag: Unavailable", and proposes no name. The technician types one when editing is allowed. When the name is locked, the deployment cannot start: fix the value in the device firmware, or change this page and update the media.
 
@@ -92,4 +92,4 @@ When a component cannot be used, Foundry Deploy shows its name followed by "Unav
 - [Select the target](../../foundry-deploy/target.md)
 - [Windows Autopilot](../autopilot/README.md)
 - [Domain Join](../domain-join/README.md)
-- [Troubleshooting: Windows deployment](../../troubleshooting/deployment.md)
+- [A message under Computer name](../../troubleshooting/deployment/before-deployment-starts.md#computer-name), in Windows deployment troubleshooting

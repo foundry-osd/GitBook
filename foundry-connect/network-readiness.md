@@ -37,7 +37,7 @@ Nothing else is tested, and the test cannot be changed or skipped. **Network rea
 | **No Ethernet adapter detected.** | Windows PE sees no wired adapter: missing driver, or adapter disabled in the firmware. | Use Wi-Fi or another adapter. |
 | **No active link**, **Check the cable connection** | The adapter has no link. | Check the cable, the dock and the switch port. |
 | **Waiting for network configuration**, **Waiting for DHCP or static network configuration** | The link is up but the adapter has no IPv4 address. A failed 802.1X authentication may look the same. | Check DHCP on this network. |
-| **Connected**, **DHCP lease detected** or **Static network configuration detected** | The adapter has an IPv4 address. | If the header still waits: an **IPv4** value that starts with `169.254` means that no DHCP server answered. Any other address means that the network filters the test. |
+| **Connected**, **DHCP lease detected** or **Static network configuration detected** | The adapter has an IPv4 address. | If the header still waits: an **IPv4** value that starts with `169.254` means that no DHCP server answered. With any other address, the test itself gets no answer: see [Internet access has not been validated](../troubleshooting/network.md#internet-not-validated). |
 
 **Adapter**, **IPv4** and **Gateway** describe the wired adapter only. They show **Unavailable** when the device is connected over Wi-Fi.
 

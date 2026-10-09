@@ -1,6 +1,6 @@
 # Foundry Connect
 
-Foundry Connect opens after the startup console on a target device started from deployment media. It gets the device online in Windows PE and holds the startup until Internet access is confirmed, because the next stage needs GitHub to prepare Foundry Deploy.
+Foundry Connect opens after the startup console on a target device started from deployment media. It gets the device online in Windows PE and holds the startup until Internet access is confirmed, because the startup then needs GitHub to get Foundry Deploy.
 
 Most of the time you do nothing. With a cable and DHCP, or with a network profile that the administrator put on the media, the header changes from **Waiting for network** to **Network ready** by itself.
 

@@ -1,6 +1,6 @@
 # Windows PE startup
 
-When a target device starts from deployment media, a console titled **Foundry Bootstrap** prepares Windows PE, opens Foundry Connect, then downloads and opens Foundry Deploy. You only watch it: this page says what each line means and which waits are normal.
+When a target device starts from deployment media, a console titled **Foundry Bootstrap** prepares Windows PE, opens Foundry Connect, then gets Foundry Deploy and opens it. You only watch it: this page says what each line means and which waits are normal.
 
 <figure>
   <img src="../.gitbook/assets/shared-bootstrap-01-download-progress.png" alt="Foundry Bootstrap console with five startup stages and a download progress bar">
@@ -14,7 +14,7 @@ Each of the five stages goes from **Waiting** to **In progress**, then **Done**.
 | Stage | Line under the list | What happens |
 | --- | --- | --- |
 | **Environment** | "Preparing network access" | Windows PE starts its wired and Wi-Fi services. |
-| **Network connection** | "Preparing Foundry Connect", then "Waiting for Foundry Connect" | Foundry Connect opens, after a download of its latest release when GitHub is reachable. The stage stays **In progress** until you continue from [Foundry Connect](README.md). |
+| **Network connection** | "Preparing Foundry Connect", then "Waiting for Foundry Connect" | Foundry Connect opens. When GitHub is reachable, its latest release is used: downloaded, or taken from a USB drive that already holds it. The stage stays **In progress** until you continue from [Foundry Connect](README.md). |
 | **Clock and time zone** | "Preparing the system clock and time zone" | The clock is set from the Internet and the time zone is applied. |
 | **Deployment files** | "Preparing the deployment application", then "Preparing Foundry PostInstall" | Foundry Deploy and the post-installation application are downloaded, or taken from the USB drive. |
 | **Deployment application** | "Starting Foundry Deploy" | Foundry Deploy opens. |
@@ -38,10 +38,10 @@ Both are expected on a Wi-Fi-only device. The first two stages end with **Done (
 ## What needs Internet access
 
 - **Foundry Connect** is on the media and starts without a network. When GitHub is reachable before it opens, its latest release is used instead.
-- **Foundry Deploy** is never on the media. It is downloaded from GitHub with the post-installation application. An ISO downloads them at every start. A USB drive keeps the downloads on its **Foundry Cache** partition and repeats them only after a new release.
+- **Foundry Deploy** is never on the media. It is downloaded from GitHub with the post-installation application, which the media carries only with Domain Join. An ISO downloads them at every start. A USB drive keeps the downloads on its **Foundry Cache** partition and repeats them only after a new release.
 - **Every start needs an answer from `api.github.com`**, which names the release to use, even when the applications are already on the USB drive. Without it, startup stops at **Deployment files**.
 
-See [Network endpoints](../reference/network-endpoints.md) for the hosts and [What each media type carries](../foundry-osd/media/README.md#what-each-media-type-carries) for the content of the media.
+See [Network endpoints](../reference/network-endpoints.md) for the hosts. What the media carries, and where, is in [What each media type carries](../foundry-osd/media/README.md#what-each-media-type-carries).
 
 ## When the clock and the time zone are set
 

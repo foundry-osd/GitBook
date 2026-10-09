@@ -62,14 +62,13 @@ Facts that follow from this:
 - The media carries the tenant ID, the client ID of the app registration and the certificate PFX with its password. It carries no administrator credential and no sign-in token.
 - Foundry Deploy signs in as the app registration with the certificate private key. No technician signs in. The certificate is decrypted in memory and is not copied to the deployed device.
 - Anyone who obtains the PFX and its password can use the permission of the app registration until the certificate expires or is removed from the registration.
-- A certificate created by Foundry OSD is valid for 1, 3, 6 or 12 months. The default is 6 months.
-- Foundry OSD does not keep the PFX path or its password between sessions: you select the file and type the password again each time you open the application.
+- Foundry OSD does not keep the PFX path or its password between sessions.
 
-How to create, renew and remove the certificate is described in [Zero-touch hardware hash upload](../foundry-osd/autopilot/zero-touch-hardware-hash.md).
+How to create the certificate, choose its validity (12 months at most), select it again in a later session, renew it and remove it is described in [Zero-touch hardware hash upload](../foundry-osd/autopilot/zero-touch-hardware-hash.md).
 
 ## Join account
 
-During a deployment with Domain Join, Foundry Deploy writes the join account and its password for the domain being joined to `credentials.bin` on the target disk, as listed in the table above. Foundry deletes the file as soon as the join has used it. If the deletion fails or the join was interrupted, the Foundry console after the restart shows the cleanup as **Pending**: see [Domain Join troubleshooting](../troubleshooting/domain-join.md).
+During a deployment with Domain Join, Foundry Deploy writes the join account and its password for the domain being joined to `credentials.bin` on the target disk, as listed in the table above. Foundry deletes the file as soon as the join has used it. If the deletion fails or the join was interrupted, the Foundry console after the restart keeps showing `Cleanup: Pending`: see [Cleanup stays Pending](../troubleshooting/domain-join.md#cleanup-pending).
 
 Diagnostic exports never include a file named `credentials.bin`. A copy saved under another name is not recognized, so do not copy or rename that file. How the join accounts are stored in Foundry OSD is described in [Domain Join](../foundry-osd/domain-join/README.md).
 

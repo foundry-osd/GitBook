@@ -46,7 +46,7 @@ Select a time zone to skip the lookup, for example when the public IP address of
 Windows PE only needs drivers for the network and storage hardware it must use. Turn on **Dell** or **HP** for devices of those manufacturers, and add a **Custom driver folder** for anything else.
 
 - The folder must exist and contain `.inf` files, not packed installers.
-- Its total size, subfolders included, is limited to 2 GiB.
+- Its content, subfolders included, is limited to 2 GiB and to 10,000 files and folders, and must not contain a junction or a symbolic link.
 - With `arm64`, a USB drive is always created with the GPT partition style.
 
 ## Password protection

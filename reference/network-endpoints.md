@@ -8,7 +8,7 @@ Foundry OSD can use a proxy, set in [Settings](../foundry-osd/settings.md#proxy)
 
 | Host | Port and protocol | Used for | Required |
 | --- | --- | --- | --- |
-| `github.com`, `api.github.com`, `*.githubusercontent.com` | 443, HTTPS | Updates of Foundry OSD; download of Foundry Connect, Foundry Deploy and the post-installation components when media is created | Yes |
+| `github.com`, `api.github.com`, `*.githubusercontent.com` | 443, HTTPS | Updates of Foundry OSD; download of the Foundry applications that go on the media, when media is created | Yes |
 | `raw.githubusercontent.com` | 443, HTTPS | Catalog of Windows PE drivers and catalog of Windows releases | When the media uses Dell or HP drivers, Wi-Fi, or `arm64` |
 | `go.microsoft.com` | 443, HTTPS | Download of the Windows ADK and Windows PE add-on installers | Until the ADK is installed |
 | `dl.delivery.mp.microsoft.com` | 80, HTTP | Windows package from which the boot image is built | When the media uses Wi-Fi or `arm64` |
@@ -32,7 +32,7 @@ Notes on this table:
 | Host | Port and protocol | Used for | Required |
 | --- | --- | --- | --- |
 | `www.msftconnecttest.com`, `www.google.com` | 80, HTTP | Internet check by the Windows PE startup and Foundry Connect; clock correction | Yes, at least one of the two |
-| `api.github.com`, `github.com`, `*.githubusercontent.com` | 443, HTTPS | Current version of Foundry Connect, Foundry Deploy and the post-installation components | Recommended. See the note below. |
+| `api.github.com`, `github.com`, `*.githubusercontent.com` | 443, HTTPS | Release lookup at every start, and download of Foundry Connect, Foundry Deploy and the post-installation application | Yes. See the note below. |
 | `raw.githubusercontent.com` | 443, HTTPS | Catalogs of Windows releases and driver packs, read each time Foundry Deploy starts | Yes |
 | `dl.delivery.mp.microsoft.com` | 80, HTTP | Windows image | Yes, unless a custom Windows image is deployed |
 | `downloads.dell.com`, `ftp.hp.com`, `download.lenovo.com`, `download.microsoft.com` | 443, HTTPS | Driver packs for Dell, HP, Lenovo and Microsoft Surface | For the manufacturer of the driver pack selected |
@@ -45,7 +45,7 @@ Notes on this table:
 Notes on this table:
 
 - Foundry downloads the Windows image from `dl.delivery.mp.microsoft.com` over HTTP (port 80), not HTTPS. A firewall that allows only port 443 to this host blocks the deployment.
-- When GitHub cannot be reached, the startup continues with the applications stored on the media. A deployment that needs post-installation components that are not on the media then stops before the disk is erased.
+- Every start asks `api.github.com` which release to use. When GitHub cannot be reached, Foundry Connect starts from the media, then the startup stops before Foundry Deploy opens, because Foundry Deploy is not on the media. See [Windows PE startup](../foundry-connect/windows-pe-startup.md#what-needs-internet-access).
 - Driver pack addresses come from the catalog and all use HTTPS today.
 - Microsoft Update Catalog returns the download address of each file, and Foundry uses it as given, so the protocol of that download is Microsoft's choice.
 

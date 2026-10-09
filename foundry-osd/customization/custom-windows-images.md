@@ -41,6 +41,7 @@ Select an image row to list its indexes under **Selected image**, then use the c
 Below the tables, **Default image source in Foundry Deploy** decides which source Foundry Deploy shows first: **Foundry catalog**, the default, or **Custom Windows images**. Setting a preferred image does not change it. The technician then chooses the image and the index, with your preferred ones preselected: see [Select Windows](../../foundry-deploy/operating-system.md).
 
 - While the page is **Enabled**, Foundry OSD creates media only if at least one image is included and every included image shows the **Status** **Available**, even when the default source is **Foundry catalog**. To create media without custom images, switch the page off.
+- Each media creation starts with the stage "Verifying custom image sources…", which checks every included image again and takes time with large images.
 - Excluding or removing the preferred image clears the preference.
 - **Remove** deletes the library copy for every configuration: the others show the image as **Missing**. The original file and existing media are not changed.
 
@@ -55,6 +56,8 @@ Import the same `.wim` file again, under a name that is not yet used. Foundry OS
 A captured image should contain `Windows\System32\Recovery\winre.wim`. Before you capture the reference device, run `reagentc /disable` on it, so that Windows moves the recovery image back to that folder.
 
 Without the file, Foundry Deploy marks the **Configure Windows recovery** and **Install recovery drivers** steps as skipped in its **Steps** list. Pointing at either step shows the reason: "The applied Windows image does not contain winre.wim." The deployment completes, and the deployed Windows has no recovery environment.
+
+Also remove any answer file from `Windows\Panther\Unattend` on the reference device before you capture it. An image that carries one stops every deployment that has work to run after the restart: see ["Post-installation staging failed."](../../troubleshooting/deployment/after-disk-erase.md#post-installation-staging)
 
 ## Limits
 
@@ -84,9 +87,11 @@ Without the file, Foundry Deploy marks the **Configure Windows recovery** and **
 - **Cause:** no image is included, an included image shows **Missing**, the preferred image is excluded, or the preferred index no longer exists in the image.
 - **Fix:** include an image whose **Status** is **Available**, import a **Missing** image again, or select **Clear default**. To build media without custom images, switch the page off.
 
+A USB operation that ends with "Custom Windows image media preparation failed." is explained in [Content cannot be copied to the media](../../troubleshooting/media-creation/usb-drive-and-device-start.md#media-content). Messages under the image selectors of Foundry Deploy are in [Before the deployment starts](../../troubleshooting/deployment/before-deployment-starts.md#custom-image-selection).
+
 ## Related
 
 - [Select Windows](../../foundry-deploy/operating-system.md)
 - [Start: create deployment media](../media/README.md)
-- [Troubleshooting: Media creation](../../troubleshooting/media-creation.md)
-- [Troubleshooting: Windows deployment](../../troubleshooting/deployment.md)
+- [Media creation troubleshooting](../../troubleshooting/media-creation.md)
+- [Windows deployment troubleshooting](../../troubleshooting/deployment.md)

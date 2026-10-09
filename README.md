@@ -10,6 +10,8 @@ Foundry OSD is a Windows deployment tool: you prepare deployment media on a work
 
 | I want to ... | Go to |
 | --- | --- |
+| Start from the beginning | [Get started](start-here/README.md) |
+| Check that my workstation, media and devices are suitable | [Requirements](start-here/requirements.md) |
 | Install Foundry OSD on my workstation | [Download and install](start-here/download.md) |
 | Create my first media and deploy one test device | [Quick start](start-here/quick-start.md) |
 | Understand what happens from media creation to first sign-in | [Deployment workflow](start-here/deployment-workflow.md) |
@@ -21,7 +23,7 @@ Foundry OSD is a Windows deployment tool: you prepare deployment media on a work
 
 ## How Foundry works
 
-You work with three applications. Only the first one is installed; the other two are on the deployment media.
+You work with three applications. Only the first one is installed; the other two start on the target device from the deployment media.
 
 | Application | Runs on | Used by | What it does |
 | --- | --- | --- | --- |

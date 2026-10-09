@@ -50,7 +50,7 @@ For the content of the ISO next to the boot image, see [What each media type car
 ## Limits
 
 - The ISO grows by the size of the custom images and post-installation content you included. Allow the same room again in `%ProgramData%\Foundry\Workspaces` while it is built.
-- The custom driver folder is limited to 2 GiB and 10,000 files and folders.
+- The limits of the custom driver folder are in [General](../general.md#driver-options).
 
 ## Related
 

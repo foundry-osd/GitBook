@@ -38,9 +38,13 @@ The ISO file or USB drive created by Foundry OSD, from which a target device sta
 
 The password the technician types when Foundry Deploy starts, on media created with **Password protection** turned on.
 
+## Distinguished name
+
+The full path of an object in Active Directory, such as `OU=Workstations,DC=corp,DC=contoso,DC=com`. Foundry uses it to name an OU.
+
 ## Domain Join
 
-Making the deployed computer a member of an Active Directory domain.
+Making the target device a member of an Active Directory domain.
 
 ## Driver pack
 
@@ -101,6 +105,10 @@ Preboot Execution Environment: a way for a device to start from the network inst
 ## Specialize pass
 
 A phase of Windows Setup that runs once at the first start of the installed Windows, before OOBE. Foundry's post-installation step runs in it.
+
+## SYSTEM
+
+The built-in Windows account with full rights on the device. Post-installation actions run as SYSTEM, with no signed-in user.
 
 ## Target device
 

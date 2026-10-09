@@ -22,7 +22,7 @@ On this page the disk has been erased, unless an entry says otherwise. Its previ
 | **Configure Windows features** | [Optional features](#optional-features) |
 | "Post-installation staging failed. ..." | [Post-installation staging](#post-installation-staging) |
 | **Configure Windows recovery**, **Install recovery drivers**, **Hide recovery partition** | [Windows recovery](#windows-recovery) |
-| "Failed step: Provision Autopilot", or a skipped Autopilot step | [Windows Autopilot troubleshooting](../autopilot.md) |
+| "Failed step: Provision Autopilot", or a skipped Autopilot step | [Windows Autopilot troubleshooting during deployment](../autopilot/during-deployment.md) |
 | **Finalize deployment** completes with "... evidence retained at ..." | Collect the folder named in the note too: see [Log locations](../logs-and-support.md#log-locations) |
 | "Failed step: System reboot" | [Restart does not start](#restart-does-not-start) |
 
@@ -163,11 +163,13 @@ A failed step stops the deployment with "The selected firmware content is unavai
 
 | Message | Cause |
 | --- | --- |
+| "Setup-media image '\<path>' must contain exactly one image named 'Windows Setup Media'." | .NET Framework 3.5, or one of the four features that depend on it, is set to **Enable** and the deployment uses a custom Windows image, which does not carry their installation files |
 | "Matching NetFx3 source is unavailable. \<detail>" | .NET Framework 3.5 needs installation files that match the image exactly, and they are not available |
+| "Failed to enable Windows optional feature '\<name>'." followed by an exit code and the output of DISM | Windows refused to turn the feature on |
 | "Windows optional feature '\<name>' has a removed payload and no supported local source mapping." | The image does not contain the files of this feature |
 | "Windows optional feature verification failed for '\<name>'." | The feature was changed but Windows does not report the requested state |
 
-**Fix:** the administrator removes the feature from [Optional features](../../foundry-osd/customization/optional-features.md), or uses an image that contains it, then recreates or updates the media.
+**Fix:** the administrator sets the feature back to **Unchanged** on [Optional features](../../foundry-osd/customization/optional-features.md), or uses an image that contains it, then recreates or updates the media. For a custom image, turn the feature on inside the image before capturing it.
 
 **Collect:** the standard set, and the feature named in the message.
 

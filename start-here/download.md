@@ -1,6 +1,6 @@
 # Download and install
 
-Foundry OSD is installed on the administrator workstation from an MSI package. Foundry Connect and Foundry Deploy need no installation: Foundry OSD puts them on the deployment media it creates.
+Foundry OSD is installed on the administrator workstation from an MSI package. Foundry Connect and Foundry Deploy need no installation: the deployment media that Foundry OSD creates starts them on the target device.
 
 ## Choose an installer
 

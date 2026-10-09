@@ -46,7 +46,7 @@ Each row shows its value and one state: **Configured**, **Default**, **Disabled*
 
 | Content | ISO | USB drive | PXE boot image |
 | --- | --- | --- | --- |
-| Boot image `sources\boot.wim`: Windows PE, its drivers and your options | In the ISO | On the **BOOT** partition | The only file delivered |
+| Boot image `sources\boot.wim`: Windows PE, its drivers, the program behind the startup console and your options | In the ISO | On the **BOOT** partition | The only file delivered |
 | Foundry applications: Foundry Connect, which prepares the network, and Foundry Deploy, which installs Windows | Foundry Connect, and with Domain Join the post-installation application, are in the boot image. Foundry Deploy is not: it is downloaded at every start. | Foundry Connect, and with Domain Join the post-installation application, are in `Runtime\` on the cache partition, **Foundry Cache**. Foundry Deploy is downloaded at start and kept in `Runtime\`. | As for the ISO |
 | [Custom images](../customization/custom-windows-images.md) | In the ISO, in `Cache\OperatingSystems\Custom\` | Same folder on the cache partition | Not delivered |
 | [Post-installation](../customization/post-installation.md) content you imported | In the ISO, in `Cache\PreOobe\` | Same folder on the cache partition | Not delivered |
@@ -59,7 +59,11 @@ A USB drive has two partitions:
 | **BOOT** | FAT32, 2 GiB | Boot files and `sources\boot.wim` |
 | **Foundry Cache** | NTFS, rest of the drive | `Runtime\`, `Cache\OperatingSystems\`, `Cache\DriverPacks\`, `Cache\Firmware\`, `Cache\PreOobe\`, `Logs\` |
 
-At every start, the device asks GitHub for the latest release of these applications. Foundry Deploy and the post-installation application are downloaded, and a newer Foundry Connect is used in place of the copy on the media. If GitHub does not answer, the start goes on with the copies the media carries and stops when Foundry Deploy cannot be downloaded. A USB drive keeps the downloads in `Runtime\` and reuses them at later starts, once an online check confirms they are current. An [update](update-usb.md) of the drive writes Foundry Connect again and keeps the downloaded copy of Foundry Deploy.
+At every start, the device asks GitHub for the latest release of these applications. The latest Foundry Connect is used in place of the copy on the media, and Foundry Deploy and the post-installation application are downloaded. A USB drive keeps the downloads in `Runtime\` and reuses them at later starts, once an online check confirms they are current.
+
+If GitHub does not answer, Foundry Connect starts from the copy on the media. The start then stops before Foundry Deploy opens, because Foundry Deploy is never on the media; without Domain Join, neither is the post-installation application. [Windows PE startup](../../foundry-connect/windows-pe-startup.md) shows this sequence on the device.
+
+An [update](update-usb.md) of a USB drive writes again what the media carries and keeps the downloaded copy of Foundry Deploy.
 
 Each included custom image is stored as `Cache\OperatingSystems\Custom\<hash>\image.wim`. On a USB drive, Foundry Deploy also offers up to 256 `.wim` files that you copy yourself directly into `Cache\OperatingSystems\Custom\`; updates keep them.
 

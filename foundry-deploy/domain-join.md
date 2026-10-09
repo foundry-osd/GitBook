@@ -44,7 +44,7 @@ If the deployment does not start, see [Domain Join troubleshooting](../troublesh
 A deployment that succeeds in Windows PE has prepared the join, not performed it.
 
 1. Keep power and network connected: installed Windows must reach a domain controller, and it restarts once more after a successful join.
-2. Read the **Foundry Post-installation** console, which appears on screen by itself after the restart. Its two lines that start with `Domain -` and `Restart:` report the join; read them once **Membership** is no longer `NotStarted`. The join is complete when **Join**, **Placement** and **Membership** read `Succeeded`, **Restart** reads `Completed` and **Cleanup** reads `Disposed`. `Placement: Skipped` is normal when no OU applies. [After the restart](after-the-restart.md) explains each value.
+2. Read the **Foundry Post-installation** console, which appears on screen by itself after the restart. Its two lines that start with `Domain -` and `Restart:` report the join. [Domain Join lines](after-the-restart.md#domain-join-lines) shows what they read when the join is complete, and when to read them.
 3. Look at the first screen after setup. What it proves depends on the media; the administrator who created it knows which case applies.
     - No local account and no custom answer file: the Windows sign-in screen means the join is confirmed, and **Who's going to use this device?** means it failed or could not be confirmed.
     - A local account configured on [OOBE](../foundry-osd/customization/oobe.md), or a custom answer file: the first screen proves nothing. Rely on the console lines.

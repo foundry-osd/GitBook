@@ -27,7 +27,7 @@ All data on the selected disk is lost when the deployment starts. Size alone doe
 | Field | What it means |
 | --- | --- |
 | **Answer file** | With a custom file, the screen shows "Windows uses the selected answer file. Foundry keeps your settings and adds its post-installation command when the deployment needs one." The file then sets the computer name and the Windows setup options. See [what a custom answer file overrides](../foundry-osd/customization/unattend.md#what-a-custom-answer-file-overrides). |
-| **Computer name** | 1 to 15 letters, digits or hyphens, and not digits only. The administrator can pre-fill it from the serial number or other device data: see [Machine naming](../foundry-osd/customization/machine-naming.md). |
+| **Computer name** | 1 to 15 letters, digits or hyphens, and not digits only. The administrator can pre-fill it from the serial number or other device data: see [Machine naming](../foundry-osd/customization/machine-naming.md). Otherwise Foundry Deploy proposes the name of the Windows already on the device, or else the Windows PE name, such as `MININT-123ABC`, or else `PC`. |
 | **Target disk** | One line per internal disk: number, model, size, bus. Disks connected over USB are not listed. A line ending in **Blocked: system disk**, **Blocked: boot disk**, **Blocked: read-only** or **Blocked: offline** cannot be used. |
 | **Apply firmware updates** | Foundry looks for a system firmware update for this device in Microsoft Update Catalog and adds it to the installed Windows, which applies it after the restart. Checked by default. On a virtual machine it is cleared and marked **Not available on virtual machines**. |
 

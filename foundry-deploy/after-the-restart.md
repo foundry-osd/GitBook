@@ -62,6 +62,8 @@ Domain - Join: Succeeded; Placement: Succeeded; Membership: Succeeded
 Restart: Completed; Cleanup: Disposed
 ```
 
+Both lines are on screen from the first second, reading `Join: NotStarted; Placement: NotStarted; Membership: NotStarted` and `Restart: NotRequired; Cleanup: Pending`. That is normal: read them after the restart that follows the join, once `Membership` is no longer `NotStarted`.
+
 `Placement: Skipped` is normal when no OU was requested. A yellow line below them names what to follow up. For any other value at the end, see [Domain Join troubleshooting](../troubleshooting/domain-join.md).
 
 <details>
@@ -72,7 +74,7 @@ Restart: Completed; Cleanup: Disposed
 | `Join` | The device joined the domain. A failed join does not stop the rest of the sequence. |
 | `Placement` | The computer account is in the requested OU. `Skipped` when no OU was requested. |
 | `Membership` | Checked after the restart: the device belongs to the expected domain under the expected name. |
-| `Restart` | The restart that follows the join: `Required`, `Requested`, then `Completed`. |
+| `Restart` | The restart that follows the join: `NotRequired` at first, then `Required`, `Requested` and `Completed`. |
 | `Cleanup` | `Disposed` once the temporary copy of the join credentials is deleted, `Pending` until then. |
 
 </details>
@@ -92,8 +94,9 @@ With the interactive hardware hash upload, the Autopilot window opens later, on 
 The device is ready when:
 
 - the status line was `Post-installation completed.`, or you have checked every warning;
-- with Domain Join, the checks of the [Domain Join step](domain-join.md) pass;
-- Windows shows its sign-in screen or its first setup screen.
+- with Domain Join, the checks of the [Domain Join step](domain-join.md#before-you-hand-over-the-device) pass;
+- Windows shows its sign-in screen or its first setup screen;
+- the computer name, the local accounts, the network and, when used, the Windows Autopilot registration are the expected ones. With a custom answer file, check its settings too: Foundry cannot tell whether Windows applied them.
 
 ## If the console stops or shows a failure
 

@@ -19,7 +19,7 @@ Use this page when the wired deployment network only admits devices that authent
   ```
 
   Replace `Ethernet` with the interface name shown by the first command. The second command writes one `.xml` file into the folder.
-- **A profile that authenticates the computer by itself.** Nothing in Windows PE can ask for a user name and password. A profile that expects typed credentials cannot authenticate. Use computer authentication, typically with a certificate (EAP-TLS).
+- **A profile that authenticates the device by itself.** Nothing in Windows PE can ask for a user name and password. A profile that expects typed credentials cannot authenticate. Use computer authentication, typically with a certificate (EAP-TLS).
 - **The certificate file, if the profile needs one**: a root CA certificate (`.cer` or `.crt`), or a client certificate with its private key (`.pfx`) and its password.
 
 ## Configure wired 802.1X
@@ -36,7 +36,7 @@ The certificate field has one label for two uses. The file type decides what Fou
 | File you select | What happens in Windows PE |
 | --- | --- |
 | `.cer` or `.crt` | The certificate is added to the trusted root certification authorities. |
-| `.pfx` or `.p12` | The client certificate and its private key are imported into the personal store of the computer, using **PFX password**. |
+| `.pfx` or `.p12` | The client certificate and its private key are imported into the personal store of the local computer, using **PFX password**. |
 
 ## What the technician sees
 

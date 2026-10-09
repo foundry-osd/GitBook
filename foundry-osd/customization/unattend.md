@@ -30,7 +30,7 @@ Foundry saves the path of each file, not its content: keep the source files in p
 | **Check sources** | Every file | Checks that each source is still readable, valid and unchanged. It does not accept a changed file. |
 | **Refresh source** | The selected file | Reads the file again and accepts its new content. Use it after you edit a source file. |
 
-A missing, changed or invalid source blocks media creation. **Remove** takes the selected file off the list; the source file is not deleted.
+A missing, changed or invalid source blocks media creation. **Remove** takes the selected file off the list; the source file is not deleted. If it was the default, choose another one under **Deployment default** before you create media.
 
 ## What the technician sees
 
@@ -121,7 +121,7 @@ Messages in Foundry OSD, on the Unattend page:
 
 </details>
 
-Failures in Foundry Deploy are in [Windows deployment troubleshooting](../../troubleshooting/deployment.md); failures in Windows Setup are in [After the restart troubleshooting](../../troubleshooting/after-the-restart.md).
+In Foundry Deploy, a refused file is explained in [A message under Answer file](../../troubleshooting/deployment/before-deployment-starts.md#answer-file-rejected) and a deployment that stops on **Validate answer file** in [Answer file validation](../../troubleshooting/deployment/checks-and-image-download.md#validate-answer-file). Failures in Windows Setup are in [After the restart troubleshooting](../../troubleshooting/after-the-restart.md#windows-setup).
 
 ## Related
 
