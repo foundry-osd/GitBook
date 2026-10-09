@@ -1,53 +1,54 @@
 # Supported versions
 
-## Application and boot media updates
+This page lists what Foundry runs on and what it deploys. Foundry OSD checks most of these rules itself and reports the one that is not met.
 
-Updating Foundry OSD does not rewrite media already distributed. [Bootstrap](../foundry-connect/windows-pe-startup.md#cache-and-connectivity) can obtain newer release runtimes during startup, so existing media may run a newer Deploy application without being rebuilt. Check the running application version; an older or debug-provisioned runtime does not gain release support from a catalog update alone.
+## Support matrix
 
-Recreate ISO media or [update an existing USB drive](../foundry-osd/media/update-usb.md) when you need to refresh embedded Bootstrap, configuration, or bundled assets. Test runtime and media updates before production use.
+| Component | Supported | Notes |
+| --- | --- | --- |
+| Foundry OSD | The latest published release | Foundry OSD updates itself. See [Settings](../foundry-osd/settings.md#update-app). |
+| Administrator workstation | Windows 10 version 1809 (build 17763) or later, and Windows 11, on x64 or ARM64 | One installer per architecture. See [Download and install](../start-here/download.md). |
+| Windows ADK and Windows PE add-on | Version `10.1.26100.9457` or a later revision of `10.1.26100` | See [Windows ADK](#windows-adk) below. |
+| Deployment media | x64 or ARM64 | The architecture is chosen in [General](../foundry-osd/general.md) and must match the target device. |
+| USB drive | 16 GB or larger | Smaller drives are refused. |
+| Windows installed from the catalog | Windows 11 24H2, 25H2 and 26H2 | 26H2 is proposed by default. Windows 10 is not offered. |
+| Custom Windows images | Images you import yourself | See [Custom Windows images](../foundry-osd/customization/custom-windows-images.md). |
 
-## Administrator workstation
+Microsoft ends servicing of each Windows 11 release at a different date for each edition. See [Windows 11 release information](https://learn.microsoft.com/en-us/windows/release-health/windows11-release-information).
 
-- Windows 10 or Windows 11.
-- Windows ADK `10.1.26100.9457`.
-- Windows PE Add-on `10.1.26100.9457`.
+## Windows 11 editions
 
-{% hint style="warning" %}
-Do not substitute another ADK or Windows PE Add-on version. Use `10.1.26100.9457` for both components.
-{% endhint %}
+| Edition | Licensing | Architectures |
+| --- | --- | --- |
+| Home, Home N, Home Single Language | Retail | x64, ARM64 |
+| Home China | Retail | x64 |
+| Pro, Pro N, Education, Education N | Retail or volume | x64, ARM64 |
+| Enterprise, Enterprise N | Volume | x64, ARM64 |
 
-## Windows deployment media
+What Foundry Deploy actually offers on a device also depends on the [catalog](catalog.md) content of the day and on the limits the administrator set in [OS selection](../foundry-osd/customization/operating-system.md).
 
-Available Windows releases, languages, editions, architectures, and license channels depend on the current [operating-system catalog](catalog.md), the running Deploy version, and any restrictions configured during media authoring. The catalog can update independently of the application.
+## Windows ADK
 
-{% hint style="info" %}
-**Supported Windows releases**
+Foundry OSD builds media with the Windows ADK for Windows 11, version 24H2, and its Windows PE add-on. It accepts an installation when all three conditions are true:
 
-Foundry supports Windows 11 24H2, 25H2, and 26H2 for catalog deployments, with 26H2 as the default. Microsoft's servicing dates differ by edition, as listed in [Windows 11 release information](https://learn.microsoft.com/en-us/windows/release-health/windows11-release-information).
+| Condition | Rule |
+| --- | --- |
+| ADK release | The version starts with `10.1.26100`. |
+| ADK revision | The fourth number is `9457` or higher, for example `10.1.26100.9457`. |
+| Windows PE add-on | Its version is exactly the version of the installed ADK. |
 
-Existing media needs a Deploy runtime that supports 26H2 to select it. When an older profile allows only releases that are no longer available, Deploy automatically falls back to supported catalog releases for the deployment architecture. If any allowed release remains available, that restriction stays in effect. See [Select Windows](../foundry-deploy/operating-system.md).
-{% endhint %}
+What Foundry OSD reports for other installations:
 
-## Hardware
+| Installed ADK | Reported as |
+| --- | --- |
+| `10.1.26100` with a revision below `9457`, or any earlier release | **ADK version is unsupported** |
+| A release newer than `10.1.26100` | **ADK version is unsupported** |
+| A supported ADK with an add-on of another version, or with missing files | **Windows PE Add-on needs repair** |
 
-Network, storage, and platform support depends on Windows PE compatibility and available driver packages. Validate deployment media on representative hardware before production use.
+The [ADK](../foundry-osd/adk.md) page installs version `10.1.26100.9457` of both components and replaces an unsupported version for you.
 
-## Custom WIMs
+## Related
 
-The [custom image workflow](../foundry-osd/customization/custom-windows-images.md) accepts readable WIM metadata without a Windows version, edition, or architecture allowlist. This is not a support guarantee for every image. Deployment tools, firmware, drivers, and selected customizations still have their own requirements.
-
-## PostInstall runtime compatibility
-
-[Post-installation](../foundry-osd/customization/post-installation.md) supports x64 and ARM64 targets. Bootstrap prepares PostInstall for the boot media architecture; you do not need to install .NET on the target. Use boot media matching the target Windows architecture. Deploy checks runtime compatibility before preparing the disk.
-
-Keep deployment media and its package content together, and choose scripts and installers compatible with the target Windows image and architecture. Test the complete workflow on representative hardware before rollout.
-
-## Domain Join
-
-[Domain Join](../foundry-osd/domain-join/README.md) is available on x64 and ARM64 for Windows editions that can join a domain.
-
-Use media that matches the architecture of the computer, and test the complete workflow before a rollout.
-
-Pro, Education and Enterprise editions, including their N variants, can join a domain. Home editions (`Core`, `CoreN`, `CoreSingleLanguage`, `CoreCountrySpecific`) cannot: Foundry skips the join with a warning and the installation continues. For an edition Foundry does not recognize, the decision is made from the applied image.
-
-Installed Windows must reach the domain's DNS and a writable domain controller, and the join account must be allowed to join computers, reuse existing computer accounts and place computers in the listed OUs. Custom answer files and custom images must meet the [Domain Join requirements](../troubleshooting/domain-join.md#media-is-not-ready-or-input-is-rejected).
+- [Requirements](../start-here/requirements.md)
+- [Network endpoints](network-endpoints.md)
+- [Catalogs](catalog.md)
