@@ -69,7 +69,7 @@ A different case: when the import dialog opens with "Only some of the OUs could 
 - **Where:** Foundry Deploy, when you select a custom answer file on **Target device** and when you start the deployment.
 - **Cause:** the message does not name Domain Join. On Domain Join media it also means that the file does not set exactly one valid computer name in its `specialize` pass, or contains a `Microsoft-Windows-UnattendedJoin` component.
 - **Fix:** select another file, or correct it in Foundry OSD and create the media again. See [Unattend](../foundry-osd/customization/unattend.md#what-a-custom-answer-file-overrides).
-- **Collect:** the answer file, with its secrets removed, and `FoundryDeploy.log`.
+- **Collect:** the name of the selected file and `FoundryDeploy.log`. Do not attach the answer file.
 
 ## "The domain join information is missing or not valid. Deployment has not started." <a href="#join-information-not-valid" id="join-information-not-valid"></a>
 
@@ -83,7 +83,7 @@ A different case: when the import dialog opens with "Only some of the OUs could 
 - **Where:** Foundry Deploy, during the deployment.
 - **Cause:**
   - "The custom answer-file computer name differs from the computer name confirmed for the domain join.": the answer file changed after you confirmed.
-  - "Post-installation staging failed. Verify the runtime, payloads and Windows answer file before retrying.": the answer file of the applied image, `Windows\Panther\unattend.xml`, could not be read. The same message has causes unrelated to Domain Join: see [After the restart troubleshooting](after-the-restart.md).
+  - "Post-installation staging failed. Verify the runtime, payloads and Windows answer file before retrying.": the answer file of the applied image, `Windows\Panther\unattend.xml`, could not be read. The same message has causes unrelated to Domain Join: see [Windows deployment](deployment.md).
 - **Fix:** create the media again, or correct the answer file in the custom image, then redeploy.
 - **Collect:** `FoundryDeploy.log`.
 
@@ -101,7 +101,7 @@ A different case: when the import dialog opens with "Only some of the OUs could 
 | `AmbiguousComputerName` | That file sets more than one computer name. |
 | `ComputerNameMismatch` | That file does not set the computer name confirmed in Foundry Deploy. |
 
-- **Fix:** correct the image or the answer file and redeploy, or join the device manually as described in [The join failed](#the-join-failed).
+- **Fix:** for `UnsupportedEdition`, redeploy with an edition that is not a Home edition: a Home edition cannot join a domain in Windows either. For the three other reasons, correct the image or the answer file and redeploy, or join the device manually as described in [The join failed](#the-join-failed).
 - **Collect:** the deployment log and `deployment-summary.json`, where `domainJoinStatus` is 3 (edition) or 4 (image) and `domainJoinSkipCode` is 0 to 3 in the order of the table.
 
 ## The console shows NotStarted and Pending
@@ -140,14 +140,11 @@ A different case: when the import dialog opens with "Only some of the OUs could 
 ## Joined, but not in the intended OU
 
 - **Where:** a yellow line under the two `Domain` lines. The join succeeded and Windows still restarts.
-- **Cause and fix by message:**
-
-| Console message | Cause | Fix |
-| --- | --- | --- |
-| "Domain joined in the default location; target OU not found" | The OU does not exist in the directory. | Correct the OU in Foundry OSD, and have the computer account moved. |
-| "Domain joined; target OU placement failed" | The directory refused the move, usually for lack of permission on the OU, or the existing account could not be confirmed as the same computer. | Give `directoryResultCode` from the `placement` object to the administrator. |
-| "Domain joined; target OU placement not confirmed" | The move was requested but its result could not be read back. | Have the administrator check where the account is. |
-
+- **Cause:**
+  - "Domain joined in the default location; target OU not found": the OU does not exist in the directory.
+  - "Domain joined; target OU placement failed": the directory refused the move, usually for lack of permission on the OU, or the existing account could not be confirmed as the same computer.
+  - "Domain joined; target OU placement not confirmed": the move was requested but its result could not be read back.
+- **Fix:** have the Active Directory administrator check where the computer account is and move it to the intended OU. For an OU that was not found, also correct it in Foundry OSD and create the media again. For a refused move, give the administrator the `directoryResultCode` found under `placement` in the result file.
 - **Collect:** `domain-join-result.json`.
 
 ## "Domain join outcome unknown; membership is checked after restart" <a href="#join-outcome-unknown" id="join-outcome-unknown"></a>
