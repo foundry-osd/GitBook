@@ -104,29 +104,39 @@ Foundry does not check that the file is an Autopilot profile: a valid JSON file 
 ## Start blocks media creation for a Windows Autopilot reason
 
 - **Where:** **Start**, on the row of the active mode in the **Windows Autopilot** card, and in the **ISO creation is blocked** or **USB creation is blocked** dialog.
-- **Cause and fix:** find the message in the first table. For a PFX message, the line under **Boot media certificate** on **Windows Autopilot > Zero-Touch** says more: see the second table.
+- **Cause and fix:** find the message in the first table. The fixes of the zero-touch messages are done on **Windows Autopilot > Zero-Touch**, where the line under **Boot media certificate** says more about a PFX: see the second table.
 - **Collect:** the Foundry OSD log, if the message stays after the fix.
 
 | Message on **Start** | Cause | Fix |
 | --- | --- | --- |
 | "Autopilot uses an unsupported provisioning mode." | The saved configuration names a mode that this version of Foundry OSD does not know. | Open the Windows Autopilot page of the mode you want and select the button of its header until it reads **Disable**. |
 | "Autopilot JSON profile mode is enabled but no valid default profile is selected." | **Imported profiles** is empty, or nothing is chosen in **Default profile**. | On **JSON profile**, import or download a profile and choose it in **Default profile**. |
-| "Hardware hash upload is enabled but settings are missing."<br>"Hardware hash upload is enabled but the tenant connection is missing. Connect to the tenant from Autopilot."<br>"Hardware hash upload is enabled but the app registration is not configured. Connect to the tenant from Autopilot."<br>"Hardware hash upload is enabled but the app client ID is missing. Reconnect to the tenant from Autopilot." | **Zero-Touch** is enabled, but its page was never connected to a tenant or the saved connection is incomplete. | On **Zero-Touch**, select **Disconnect tenant** if the page is connected, then **Connect tenant**. Create a certificate if none is listed. |
-| "Hardware hash upload is enabled but the app service principal is missing or not ready." | Foundry OSD holds no enterprise application for the app registration. | Reconnect in the same way. If a dialog opens, see ["Tenant onboarding requires attention"](#tenant-onboarding-requires-attention). |
-| "Hardware hash upload is enabled but no boot media PFX is selected."<br>"Hardware hash upload is enabled but the boot media PFX password is missing."<br>"Hardware hash upload is enabled but the boot media PFX has not been validated."<br>"Hardware hash upload is enabled but the boot media PFX expiration could not be validated." | No usable PFX is selected for this session. Foundry OSD does not keep the PFX path or its password when it closes, when you select **Disconnect tenant** or when the selected certificate changes: the first message is normal after you reopen the app. | On **Zero-Touch**, select **Select PFX**, choose the file and type **PFX password**. If **Boot media certificate** is not shown, select **Connect tenant** first. |
-| "Hardware hash upload is enabled but the selected PFX does not match the active certificate."<br>"Hardware hash upload is enabled but the selected PFX does not match an app registration certificate."<br>"Hardware hash upload is enabled but the selected certificate thumbprint is missing."<br>"Hardware hash upload is enabled but the selected certificate expiration is missing." | The PFX opens, but it is not the PFX of a certificate that Foundry OSD knows for the app registration, or the saved record of that certificate is incomplete. | Reconnect, then select the PFX saved when the certificate was created. If **Provisioned certificates** does not list its certificate, create a new one. |
-| "Hardware hash upload is enabled but the selected boot media PFX has expired."<br>"Hardware hash upload is enabled but the selected certificate has expired. Select a valid certificate before creating boot media." | The certificate is past its expiration. | With the page connected, create a new certificate and remove the expired one. Then create or update every media built with it. |
+| "Hardware hash upload is enabled but settings are missing." | Nothing is configured on **Zero-Touch** yet. | Select **Connect tenant**, then create a certificate. |
+| "Hardware hash upload is enabled but the tenant connection is missing. Connect to the tenant from Autopilot." | The page was never connected to a tenant. | Select **Connect tenant**, then create a certificate. |
+| "Hardware hash upload is enabled but the app registration is not configured. Connect to the tenant from Autopilot." | Foundry OSD knows the tenant but holds no app registration for it. | Reconnect: select **Disconnect tenant** if the page is connected, then **Connect tenant**. |
+| "Hardware hash upload is enabled but the app client ID is missing. Reconnect to the tenant from Autopilot." | The saved app registration has no **Client ID**. | Reconnect: select **Disconnect tenant** if the page is connected, then **Connect tenant**. |
+| "Hardware hash upload is enabled but the app service principal is missing or not ready." | Foundry OSD holds no enterprise application for the app registration. | Reconnect: select **Disconnect tenant** if the page is connected, then **Connect tenant**. If a dialog opens, see ["Tenant onboarding requires attention"](#tenant-onboarding-requires-attention). |
+| "Hardware hash upload is enabled but no boot media PFX is selected." | No PFX is selected for this session. This is normal after you reopen Foundry OSD, select **Disconnect tenant** or change the certificate: the PFX path and its password are not kept. | Select **Select PFX** and type **PFX password**. If **Boot media certificate** is not shown, select **Connect tenant** first. |
+| "Hardware hash upload is enabled but the boot media PFX password is missing." | A PFX is selected and **PFX password** is empty. | Type **PFX password**. |
+| "Hardware hash upload is enabled but the boot media PFX has not been validated." | The selected PFX could not be opened: the password is wrong, the file is missing or it is not a usable PFX. | Read the line under **Boot media certificate** and find it in the second table. |
+| "Hardware hash upload is enabled but the selected PFX does not match the active certificate." | The PFX opens, but it is not the PFX of a certificate listed for the app registration, or not the one used in the previous session. | Select the PFX saved when the certificate was created, or create a new certificate. |
+| "Hardware hash upload is enabled but the boot media PFX expiration could not be validated." | Foundry OSD holds no expiration date for the selected PFX. | Select **Select PFX** and choose the file again. |
+| "Hardware hash upload is enabled but the selected boot media PFX has expired." | The certificate in the PFX is past its expiration. | With the page connected, create a new certificate and remove the expired one. |
+| "Hardware hash upload is enabled but the selected PFX does not match an app registration certificate." | Foundry OSD has no record of the certificate that the PFX belongs to. | Reconnect, then select the PFX again. If **Provisioned certificates** does not list its certificate, create a new one. |
+| "Hardware hash upload is enabled but the selected certificate thumbprint is missing." | The saved record of the selected certificate is incomplete. | Reconnect, then select the PFX again. |
+| "Hardware hash upload is enabled but the selected certificate expiration is missing." | The saved record of the selected certificate has no expiration date. | Reconnect, then select the PFX again. |
+| "Hardware hash upload is enabled but the selected certificate has expired. Select a valid certificate before creating boot media." | The certificate registered in the app registration is past its expiration. | With the page connected, create a new certificate and remove the expired one. Then create or update every media built with it. |
 
-| Line under **Boot media certificate** | Cause and fix |
-| --- | --- |
-| "Select the matching password-protected PFX before creating boot media." | No PFX is selected. Select **Select PFX** and type **PFX password**. |
-| "The selected PFX file no longer exists." | The file was moved, or its drive is not connected. Select it again. |
-| "Enter the PFX password." | The password box is empty. |
-| "The selected PFX could not be opened with the provided password." | The password is wrong, or the file is not a PFX. |
-| "The selected PFX does not contain private key material." | The file holds the certificate without its private key. Select the PFX saved when the certificate was created. |
-| "The PFX certificate thumbprint does not match the selected app registration certificate." | The PFX belongs to none of the certificates in **Provisioned certificates**. A certificate you uploaded yourself is listed only when its description is exactly `Foundry OSD Autopilot Registration`. |
-| "Select a PFX that matches an app registration certificate." | No certificate is chosen for the media yet. Select the PFX of a listed certificate. |
-| "The selected certificate has expired. Create or select a valid certificate before creating boot media." | The certificate is past its expiration. Create a new one. |
+| Line under **Boot media certificate** | Cause | Fix |
+| --- | --- | --- |
+| "Select the matching password-protected PFX before creating boot media." | No PFX is selected. | Select **Select PFX** and type **PFX password**. |
+| "The selected PFX file no longer exists." | The file was moved, or its drive is not connected. | Select the file again. |
+| "Enter the PFX password." | The password box is empty. | Type the password stored with this PFX. |
+| "The selected PFX could not be opened with the provided password." | The password is wrong, or the file is not a PFX. | Type the password stored with this PFX, or select the right file. |
+| "The selected PFX does not contain private key material." | The file holds the certificate without its private key. | Select the PFX saved when the certificate was created. |
+| "The PFX certificate thumbprint does not match the selected app registration certificate." | The PFX belongs to none of the certificates in **Provisioned certificates**. A certificate you uploaded yourself is listed only when its description is exactly `Foundry OSD Autopilot Registration`. | Select the PFX of a listed certificate, or correct the description in Microsoft Entra and reconnect. |
+| "Select a PFX that matches an app registration certificate." | No certificate is chosen for the media yet. | Select the PFX of a listed certificate. |
+| "The selected certificate has expired. Create or select a valid certificate before creating boot media." | The certificate is past its expiration. | Create a new certificate. |
 
 ## Media creation is blocked by additional local accounts
 

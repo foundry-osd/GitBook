@@ -10,7 +10,9 @@ In **Steps**, the Autopilot step is named **Copy Autopilot profile**, **Register
 | "No embedded Autopilot profiles were found on this media." | [No profile on the media](#no-embedded-profiles) |
 | A group tag is missing from the **Group tag** list | [A group tag you expect is not offered](../autopilot.md#a-group-tag-you-expect-is-not-offered) |
 | "Hardware hash upload unavailable", or "Autopilot hardware hash upload skipped because ..." | [Upload unavailable](#hardware-hash-upload-unavailable) |
-| "Failed step: Provision Autopilot", or "Autopilot hardware hash capture failed: ..." | [Capture failed](#hardware-hash-capture-failed) |
+| "Failed step: Provision Autopilot" and, under **View error details**, "Autopilot hardware hash capture failed: ..." | [Capture failed](#hardware-hash-capture-failed) |
+| "Failed step: Provision Autopilot" with another reason under **View error details** | [Another reason](#the-autopilot-step-fails-for-another-reason) |
+| **Register Autopilot device** is skipped with "Autopilot hardware hash capture failed: ..." | [Capture failed](#hardware-hash-capture-failed) |
 | "Autopilot hardware hash upload skipped: ..." | [Upload skipped](#hardware-hash-upload-skipped) |
 | "Imported Autopilot device did not appear ...", "Autopilot hardware hash import failed: ...", "The hardware hash is visible in Windows Autopilot, but ..." or "Multiple Windows Autopilot devices matched ..." | [Other results of the upload](#hardware-hash-upload-skipped) |
 
@@ -58,6 +60,20 @@ If you deploy anyway, **Register Autopilot device** is skipped with the reason "
   3. For the other reasons, read `OA3.log`. The interactive mode reads the hardware hash in installed Windows instead of Windows PE.
 - **Collect:** `autopilot-hash-upload-status.json` (`uploadState` is `CaptureFailed`, and `failureCode` names the case), `OA3.log` and `OA3.xml`.
 
+## The Autopilot step fails for another reason
+
+- **Where:** **Deployment failed**, "Failed step: Provision Autopilot", in any of the three modes. Select **View error details** to read the reason. Windows is already on the disk.
+- **Cause:**
+  - "Selected Autopilot profile file was not found: '\<path>'." (JSON profile mode): the profile chosen in the wizard is no longer on the media.
+  - "Autopilot is enabled but no profile was selected." (JSON profile mode).
+  - "Failed to resolve the target Autopilot directory." (JSON profile mode).
+  - "Target Windows partition is unavailable for Autopilot staging.", "... for Autopilot hardware hash upload." or "... for interactive Autopilot registration assistant staging.": Foundry Deploy no longer has the Windows partition of the target disk.
+- **Fix:**
+  1. Check that the deployment media is still connected, then deploy again.
+  2. For a profile message, the administrator checks **Imported profiles** and **Default profile** on **Windows Autopilot > JSON profile**, then creates the media again.
+  3. For a partition message, see [Windows deployment troubleshooting](../deployment.md).
+- **Collect:** the text of **View error details** and `FoundryDeploy.log`.
+
 ## "Autopilot hardware hash upload skipped: \<reason>" <a href="#hardware-hash-upload-skipped" id="hardware-hash-upload-skipped"></a>
 
 - **Where:** step **Register Autopilot device**, skipped. The deployment completes and the device is not registered.
@@ -80,7 +96,7 @@ If you deploy anyway, **Register Autopilot device** is skipped with the reason "
   4. To register this device without deploying again, import `AutopilotHWID.csv` in your tenant.
 - **Collect:** `AutopilotUploadResult.json` (`failureCode` and `message`) and `FoundryDeploy.log`.
 
-**Other results of the upload.** The same step is also skipped with one of these reasons once Microsoft has accepted the hardware hash. The upload window of the interactive mode shows the same messages, with a wait of 15 minutes instead of 10.
+**Other results of the upload.** The same step is also skipped with one of these reasons after the import request was sent. The upload window of the interactive mode shows the same messages, with a wait of 15 minutes instead of 10.
 
 | Reason | Meaning | Fix |
 | --- | --- | --- |
