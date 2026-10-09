@@ -1,6 +1,6 @@
 # Unattend (custom answer files)
 
-Use **Customization > Unattend** to put your own Windows answer files on the deployment media. The technician picks one in Foundry Deploy, and Windows then uses it instead of the answer file Foundry generates. Foundry keeps the file's settings and adds its post-installation command to the deployment copy when the deployment needs one.
+Use **Customization > Unattend** to put your own Windows answer files on the deployment media. The technician picks one in Foundry Deploy, and Windows then uses it instead of the answer file Foundry generates. Foundry keeps the file's settings. When the deployment needs one, it adds its post-installation command to the deployment copy, the copy of your file that Foundry Deploy writes to the target device.
 
 {% hint style="warning" %}
 **Screenshot required**
@@ -13,7 +13,7 @@ Use **Customization > Unattend** to put your own Windows answer files on the dep
 
 - Turn on [Password protection](../general.md#password-protection). It is required for every custom answer file, even one without credentials.
 - Write each file for the Windows architecture, edition and version you deploy, and validate it with Windows System Image Manager against that image.
-- Read [What a custom answer file overrides](#what-a-custom-answer-file-overrides): the computer name, the OOBE page and Windows activation no longer come from Foundry.
+- Read [What a custom answer file overrides](#what-a-custom-answer-file-overrides): the computer name, Windows activation and the OOBE settings (OOBE is the series of Windows first-run screens) no longer come from Foundry.
 
 ## Import answer files
 
@@ -23,15 +23,14 @@ Use **Customization > Unattend** to put your own Windows answer files on the dep
 4. Under **Deployment default**, choose the file selected by default in Foundry Deploy, or keep **Use Foundry settings**.
 5. Return to **Start** and [create the media](../media/README.md).
 
-Foundry saves the path and a fingerprint of each file, not its content. Keep the source files where they are until the media is created. The media carries encrypted copies and no longer needs them.
+Foundry saves the path of each file, not its content: keep the source files in place until the media is created.
 
 | Button | Applies to | What it does |
 | --- | --- | --- |
 | **Check sources** | Every file | Checks that each source is still readable, valid and unchanged. It does not accept a changed file. |
-| **Refresh source** | The selected file | Reads the file again, validates it and accepts its new content. The display name and the default are kept. |
-| **Remove** | The selected file | Removes it from the list. The source file is not deleted. |
+| **Refresh source** | The selected file | Reads the file again and accepts its new content. Use it after you edit a source file. |
 
-After you edit a source file, select **Refresh source** for it. A missing, changed or invalid source blocks media creation.
+A missing, changed or invalid source blocks media creation.
 
 ## What the technician sees
 
@@ -68,16 +67,16 @@ Foundry checks the format of a file when you import it, and its architecture on 
 
 ### When Foundry adds its command
 
-Foundry adds one command to the deployment copy whenever the deployment has work to do after the restart: enabled Post-installation actions, AppX removals, AI component removal, a driver pack installed after the restart, network profiles copied to Windows, or Domain Join. Your imported file is not changed.
+Foundry adds one command to the deployment copy whenever the deployment has work to do after the restart: Post-installation actions, AppX or AI component removals, a driver pack installed after the restart, network profiles copied to Windows, or Domain Join.
 
-The command is appended to the `RunSynchronous` list of the `Microsoft-Windows-Deployment` component in the `specialize` pass, with the next free `Order`. Your own `specialize` commands therefore run before Foundry's setup tasks and Post-installation actions, and your `oobeSystem` commands run after them. For this to work, the file must have:
+The command goes at the end of the `RunSynchronous` list of the `Microsoft-Windows-Deployment` component in the `specialize` pass, with an `Order` one more than the highest in that list. Your `specialize` commands therefore run before Foundry's work and your `oobeSystem` commands after it. The file must have:
 
 - at most one `<settings pass="specialize">` block, not marked `wasPassProcessed`;
 - in that block, at most one `Microsoft-Windows-Deployment` component, whose `processorArchitecture` is exactly that of the deployed Windows (`amd64` or `arm64`);
 - at most one `RunSynchronous` list in that component, where every `Order` is a different whole number from 1 to 500 and the highest is below 500;
 - no command of your own that is described as `Foundry PostInstall` or that calls `\Runtime\PreOobe\Launch.cmd`.
 
-These rules are not checked at import, nor when the technician selects the file. Foundry Deploy checks them in the **Validate answer file** step, before the disk is erased. A file that repeats `Microsoft-Windows-Deployment` for `amd64` and `arm64` is imported without error and refused there.
+These rules are checked only in Foundry Deploy, in the **Validate answer file** step, before the disk is erased. A file that repeats `Microsoft-Windows-Deployment` for `amd64` and `arm64` is imported without error and refused there.
 
 ### Settings that block Windows Autopilot
 
@@ -85,19 +84,17 @@ With Windows Autopilot in **JSON profile** or **Interactive** mode, Foundry Depl
 
 - `AutoLogon` with `Enabled` set to true in `Microsoft-Windows-Shell-Setup`.
 - In the `oobeSystem` pass of `Microsoft-Windows-Shell-Setup`: any `LocalAccount` under `UserAccounts`, or `SkipMachineOOBE`, `SkipUserOOBE`, `HideOnlineAccountScreens` or `HideLocalAccountScreen` set to true under `OOBE`.
-- In the `specialize` pass of `Microsoft-Windows-UnattendedJoin`: a `JoinDomain` value or `AccountData` under `Identification`.
+- In the `specialize` pass of `Microsoft-Windows-UnattendedJoin`: a `JoinDomain` value under `Identification`, or `AccountData` under `Identification/Provisioning`.
 
 ## Check the result
 
 - In Foundry OSD, every file shows "Source validated." and no warning bar is displayed.
-- On a test device, select the file, let the deployment finish, and confirm in Windows that the settings of the file were applied. A successful deployment does not prove it: Foundry cannot tell whether Windows accepted every setting.
+- On a test device, deploy with the file and confirm in Windows that its settings were applied. Foundry cannot tell whether Windows accepted them.
 
 ## Limits
 
-- Scripts and files that your commands call are not put on the media. Make them reachable from the target device yourself.
-- Foundry does not find answer files on a USB drive at deployment time; only imported files are offered.
-- Foundry does not install the language resources a file asks for, and does not convert components to another architecture.
-- The deployment copy stays on the target device as `C:\Windows\Panther\unattend.xml`, with everything your file contains. Windows needs it until the `oobeSystem` pass is over, and Foundry adds no command to delete it. See [Security and credentials](../../reference/security-and-credentials.md).
+- Only imported files are offered in Foundry Deploy. Scripts that your commands call are not put on the media, and Foundry does not install language resources the file asks for.
+- The deployment copy stays on the target device as `C:\Windows\Panther\unattend.xml`, secrets included. Windows needs it until the `oobeSystem` pass is over, and Foundry does not delete it. See [Security and credentials](../../reference/security-and-credentials.md).
 - With a [custom Windows image](custom-windows-images.md) that already contains an answer file under `Windows\Panther\Unattend`, a deployment that needs Foundry's command stops after the disk is erased. Remove that file from the image before you capture it.
 
 ## If something goes wrong
@@ -107,18 +104,24 @@ Messages in Foundry OSD, on the Unattend page:
 | Message | What to do |
 | --- | --- |
 | "Enable deployment media password protection in General configuration to use custom answer files." | Turn on [Password protection](../general.md#password-protection). |
-| "Use valid Windows answer-file XML no larger than 4 MiB, without DTDs or external entities. Validate the file with Windows SIM." | The file is not valid XML, is too large, or does not have the Windows `unattend` root element. Correct it and import again. |
-| "Only specialize and oobeSystem settings are supported. Remove other nonempty passes, offline servicing instructions, or audit-mode resealing." | Remove the passes listed under [Rules for the file](#rules-for-the-file). A complete `Autounattend.xml` usually needs this. |
-| "The file must declare a supported architecture and contain component settings applicable to it." | Add at least one component with settings and a supported `processorArchitecture`. |
+| "Use valid Windows answer-file XML no larger than 4 MiB...", "Only specialize and oobeSystem settings are supported..." or "The file must declare a supported architecture..." | The file breaks one of the [rules checked at import](#rules-for-the-file). Correct it and import again. |
+| "Missing default - choose a replacement" | The default file was removed. Choose another file or **Use Foundry settings** under **Deployment default**. |
+
+<details>
+<summary>Source check messages</summary>
+
+| Message | What to do |
+| --- | --- |
 | "Some sources are missing, changed, or invalid. Refresh or remove these entries before creating media." | Read the line under each file in the list: it carries one of the messages below. |
 | "The source changed. Use Refresh source to accept the updated file before creating media." | Select the file, then **Refresh source**. |
 | "The source could not be read. Check that the file still exists and is accessible." | Restore the file or the access to its folder, then **Check sources**, or remove the entry. |
 | "Source validation timed out. Check access to the source location and try again." | The source did not answer within 15 seconds, for example on a network share. Restore access, then **Check sources**. |
 | "Two source checks are still waiting for file access. Restore the unavailable source locations, then check sources again." | Two earlier checks are still blocked on an unreachable location. Restore access or remove those entries. |
 | "This source now duplicates another imported file. Remove this entry and choose the existing file instead." | After a refresh, two entries have the same content. Remove one. |
-| "Missing default - choose a replacement" | The default file was removed. Choose another file or **Use Foundry settings** under **Deployment default**. |
 
-Failures in Foundry Deploy and in Windows Setup are in [After the restart troubleshooting](../../troubleshooting/after-the-restart.md).
+</details>
+
+Failures in Foundry Deploy are in [Windows deployment troubleshooting](../../troubleshooting/deployment.md); failures in Windows Setup are in [After the restart troubleshooting](../../troubleshooting/after-the-restart.md).
 
 ## Related
 
