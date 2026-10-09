@@ -111,6 +111,13 @@ Add a screenshot when it clarifies:
 
 Do not add screenshots that merely repeat an obvious instruction or provide no additional context.
 
+## Placement
+
+- On a page that describes a screen, place the main screenshot near the top, right after the opening sentence, so the reader sees the screen without scrolling.
+- Show the whole screen in a normal, filled-in state.
+- Add a second screenshot only next to a step that is hard to follow without it, such as a confirmation dialog, an error screen or a sign-in code.
+- Pages that describe no screen, such as reference and landing pages, carry no screenshot.
+
 ## Capture requirements
 
 - Capture only the relevant application area.
