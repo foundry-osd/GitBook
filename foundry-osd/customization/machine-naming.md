@@ -1,89 +1,93 @@
 # Machine naming
 
-Use Machine naming to define how a computer name is selected during deployment.
-
-<figure>
-  <img src="../../.gitbook/assets/foundry-osd-customization-machine-naming-01-configuration.png" alt="Foundry OSD machine naming configuration">
-  <figcaption>Choose a naming mode and configure the ordered components used to build the computer name.</figcaption>
-</figure>
-
-## Naming requirements
-
-Use 1–15 ASCII characters containing letters, numbers, or hyphens. Windows Setup rejects names containing only digits. Underscores are not supported by Foundry's naming rules.
-
-For a numeric serial number, add fixed text such as `PC-` and limit the serial component to 12 characters so the result fits the 15-character limit. Truncation can remove the letters from an otherwise alphanumeric serial number, so check the complete result. Foundry rejects numeric-only final names before deployment confirmation.
+**Machine naming** decides the computer name Foundry Deploy proposes for each device: a name the technician types, or a name built from device data such as the serial number.
 
 {% hint style="warning" %}
-Choose a naming method that prevents duplicate names and matches directory, inventory, and device-management requirements.
+**Screenshot required**
+
+- **File:** `foundry-osd-customization-machine-naming-01-configuration.png`
+- **Capture:** Show the Machine naming page switched to Enabled in Composed mode with a Fixed text and a Serial number component, the Preview, the Allow name editing during deployment card and the Upload computer name to Autopilot card. Use a released build.
 {% endhint %}
 
 ## Configure naming
 
-1. Open **Customization > Machine naming**.
-2. Enable machine naming.
-3. Select **Manual** to let the deployment operator enter the complete name. You can optionally provide an initial value.
-4. Select **Composed** to build the name from ordered components. Each component type can be used once:
-   - Fixed text
-   - Serial number
-   - Manufacturer
-   - Model
-   - Asset tag
-   - System UUID
-   - Random text
-5. Configure each component:
-   - Enter the value for **Fixed text**.
-   - For **Random text**, choose a length from 1 to 15 characters.
-   - For device-data components, choose a maximum length from 1 to 15 characters and whether truncation keeps characters from the left or right. **Serial number** keeps characters from the right by default.
-6. Use the arrow buttons to reorder components or the delete button to remove one. **Add component** becomes unavailable when no unused component can fit within the remaining budget.
-7. Select either **No separator** or **Hyphen**, then choose whether to preserve, uppercase, or lowercase letters.
-8. Keep the configured maximum within the 15-character budget shown on the page. Separators count toward this limit.
-9. Decide whether the deployment operator can edit the complete generated name.
-10. Return to **Start** and confirm customization readiness.
+A computer name has 1 to 15 characters: letters, digits and hyphens. Foundry removes every other character, and refuses a name made only of digits.
 
-## How Foundry Deploy selects the name
+1. Open **Customization > Machine naming** and turn the switch at the top right to **Enabled**.
+2. Under **Naming mode**, choose **Manual** or **Composed**.
 
-The name shown in the Foundry Deploy wizard depends on the Machine naming configuration:
+**Manual**: the technician types the name in Foundry Deploy. To prefill it, enter a name in the **Manual** box.
 
-| Configuration | Name shown in the wizard |
-| --- | --- |
-| **Composed** | The name generated from the configured components and the device's hardware values. |
-| **Manual** with an initial value | The configured initial value. |
-| **Manual** without an initial value | The first available fallback name described below. |
-| Machine naming disabled or not configured | The first available fallback name described below. |
+**Composed**: Foundry Deploy builds the name from components, in the order of the list. Each type can be used once.
 
-When a fallback is required, Foundry Deploy uses the first valid name available in this order:
+1. Under **Name components**, choose a type and select **Add component**. Foundry OSD adds **Serial number** for you the first time.
+2. Set each component: its text, or its length from 1 to 15 and the end to keep.
+3. Reorder the components with the arrow buttons, or remove one with the delete button.
+4. Choose the **Separator**, **None** or **Hyphen (-)**, and the **Letter casing**: **Preserve**, **Uppercase** or **Lowercase**.
+5. Check **Preview** and its counter, for example `9 / 15`. Component lengths and separators cannot add up to more than 15. **Add component** is unavailable when nothing more fits.
+6. **Allow name editing during deployment** is on by default: the technician can replace the generated name. Turn it off to lock the name.
 
-1. The computer name from the Windows installation already present on the device.
-2. The current WinPE computer name, which is usually similar to `MININT-123ABC`.
-3. `PC` if neither previous name is available or valid.
+| Component | Value used on the device | Default length |
+| --- | --- | --- |
+| **Fixed text** | The text you type, `PC` by default. | Length of the text |
+| **Serial number** | Serial number from the firmware. | 15, **Keep characters from the right** |
+| **Manufacturer** | Manufacturer name, shortened to `HP`, `Dell`, `Lenovo` or `Microsoft` for these vendors. | 15 |
+| **Model** | Model name from the firmware. | 15 |
+| **Asset tag** | Asset tag from the firmware. | 15 |
+| **System UUID** | Firmware UUID, hyphens included. | 15 |
+| **Random text** | Random capital letters and digits, drawn again at each start of Foundry Deploy. | 6 |
 
-The name remains editable in the wizard unless **Composed** mode is configured to prevent editing. When editing is allowed, the operator can replace the entire generated name with any name that meets the length and character requirements above. The replacement does not have to match the configured components, casing, or separators.
+Components other than **Serial number** start with **Keep characters from the left**. A default length is reduced to what still fits.
 
-If a composed name cannot be generated because a required hardware value is unavailable or contains a known firmware placeholder, Foundry Deploy displays an error without selecting a fallback name. When editing is allowed, entering a valid complete name clears the naming error and allows deployment to continue. When the name is locked, the error blocks deployment; correct the device data or update the naming configuration and recreate or update the media.
+## How device values become a name
 
-The preview uses representative values. Foundry Deploy resolves actual hardware values at deployment startup and applies casing and separators to the same component rules used in the preview. For random text, a random value is generated with the configured length during deployment startup.
+Foundry Deploy reads each value from the device, removes every character that is not a letter, a digit or a hyphen, then cuts the result to the component's length. It joins the components with the separator and applies the letter casing last.
 
-## Domain Join
+| Component | Value on the device | Length, end kept | Result |
+| --- | --- | --- | --- |
+| **Model** | `OptiPlex 7010 (SFF)` | 8, left | `OptiPlex` |
+| **Manufacturer** | `Dell Inc.` | 15, left | `Dell` |
+| **Serial number** | `AB12 34567X` | 6, right | `34567X` |
+| **System UUID** | `11111111-2222-3333-4444-555555555555` | 10, left | `11111111-2` |
+| **System UUID** | the same UUID | 12, right | `555555555555` |
+| **Asset tag** | `No Asset Tag` | 15, left | `NoAssetTag` |
 
-[Domain Join](../domain-join/README.md) uses the computer name to find or create the computer account in the domain. Check it before confirming the disk erase, especially when a machine is redeployed under an existing name.
+With **Fixed text** `PC`, **Serial number** (6, right), **Hyphen (-)** and **Uppercase**, that device is named `PC-34567X`.
 
-With a [custom answer file](unattend.md), the name comes from the file: it must set exactly one fixed computer name in the `specialize` pass of `Microsoft-Windows-Shell-Setup`. A missing name, a `*` wildcard or several names are refused, and the naming rules on this page do not apply.
+Plan for these cases:
+
+- **The preview uses sample values, not your hardware.** Its sample UUID has no hyphens, a real one has four. For **System UUID**, keep 12 characters from the right: that part has no hyphen.
+- **The left end of a serial number** is often a prefix shared by a whole batch. Keep the right end.
+- **Placeholder values give duplicate names.** Foundry Deploy refuses an empty value, `Unknown`, `Default string`, `To Be Filled By O.E.M.` and a UUID made only of zeros or of the letter F. Any other filler, such as `No Asset Tag`, counts as a real value.
+- **A serial number made only of digits** cannot be a name on its own. Add a **Fixed text** component that contains a letter.
+- **Random text changes at every deployment.** A redeployed device gets a new name.
+
+## What the technician sees
+
+Foundry Deploy proposes the name on **Target device**, next to the device values it read. In **Manual** mode without a prefilled name, or when this page is **Disabled**, it proposes the name of the Windows already on the device, otherwise the Windows PE name such as `MININT-123ABC`, otherwise `PC`. The technician can change the name unless **Composed** is selected with **Allow name editing during deployment** off. See [Select the target](../../foundry-deploy/target.md).
+
+When a component cannot be used, Foundry Deploy shows its name followed by "Unavailable", for example "Asset tag: Unavailable", and proposes no name. The technician types one when editing is allowed. When the name is locked, the deployment cannot start: fix the value in the device firmware, or change this page and update the media.
 
 ## Upload the computer name to Autopilot
 
-Enable **Upload computer name to Autopilot** to assign the final computer name confirmed in Foundry Deploy to the Windows Autopilot device record. This works with both **Manual** and **Composed** naming, including any changes made by the deployment operator. The uploaded value is the same final name used for Windows setup; the Foundry OSD preview and initial value are not uploaded separately.
+**Upload computer name to Autopilot** assigns the name confirmed in Foundry Deploy to the Windows Autopilot device. The switch is off by default and is available only when Machine naming and a hardware hash upload method are both enabled. See [Windows Autopilot](../autopilot/README.md).
 
-1. Enable machine naming on **Customization > Machine naming**.
-2. Enable either [Zero-touch hardware hash upload](../autopilot/zero-touch-hardware-hash.md) or [Interactive hardware hash upload](../autopilot/interactive-hardware-hash.md) under **Windows Autopilot**.
-3. Return to **Machine naming** and turn on the switch in the **Upload computer name to Autopilot** card.
-4. Create or update the deployment media to include the setting.
+## How this works with other features
 
-The switch is off by default. It is available only while machine naming and one of these hardware hash upload methods are enabled. A JSON profile alone does not support name upload. Configure this option in Foundry OSD; Foundry Deploy and the OOBE registration assistant have no separate switch.
+- **Domain Join** uses the confirmed name to find or create the computer account. See [Domain Join](../domain-join/README.md).
+- **A custom answer file** sets the computer name itself, and this page does not apply. See [What a custom answer file overrides](unattend.md#what-a-custom-answer-file-overrides).
 
-Foundry assigns the name after the device becomes visible in Autopilot. Zero-touch upload performs this step during deployment in WinPE. Interactive upload carries the confirmed name into the OOBE assistant, which assigns it after registration. The option also applies to an existing Autopilot registration; when it is off, Foundry leaves that record's assigned name unchanged.
+## If something goes wrong
 
-When a [custom answer file](unattend.md) is selected, Foundry does not manage the final Windows computer name and skips the Autopilot name assignment with an explanation in the deployment logs. If name assignment fails, review the reported Autopilot result and logs before handing over the device; a successful hardware hash upload alone does not confirm that the name was assigned.
+### "Review the component settings. The maximum computer name length is 15 characters."
 
-{% hint style="info" %}
-Autopilot assigned computer names apply to Microsoft Entra join scenarios. They do not control naming for Microsoft Entra hybrid join. See the [AssignedComputerName documentation](https://www.powershellgallery.com/packages/Get-WindowsAutoPilotInfo/3.8/Content/Get-WindowsAutopilotInfo.ps1).
-{% endhint %}
+- **Where:** under the name box or the component list. **Start** shows **Machine naming** as **Needs attention**.
+- **Cause:** any invalid setting, not only the length: a prefilled name made only of digits, **Composed** without a component, an empty **Fixed text**, or lengths and separators that add up to more than 15.
+- **Fix:** correct that setting. The message disappears and **Start** shows **Configured**.
+
+## Related
+
+- [Select the target](../../foundry-deploy/target.md)
+- [Windows Autopilot](../autopilot/README.md)
+- [Domain Join](../domain-join/README.md)
+- [Troubleshooting: Windows deployment](../../troubleshooting/deployment.md)
