@@ -1,67 +1,55 @@
 # Deploy with PXE
 
-PXE is not officially supported as a Foundry OSD media output. Foundry OSD does not configure or manage PXE, DHCP, TFTP, or third-party PXE server infrastructure.
+Foundry OSD does not create PXE media and does not configure a PXE server. You can still start devices from a PXE server you already run, by importing the boot image of a Foundry ISO into it. This use is not officially supported: the PXE server, DHCP and TFTP stay the responsibility of their administrator.
 
-{% hint style="warning" %}
-Use this workaround only with an existing, working PXE environment. PXE configuration, operation, and support remain the responsibility of the PXE infrastructure owner.
-{% endhint %}
+## What a PXE boot image delivers
 
-## Before you begin
+A PXE server sends one file to the device, `sources\boot.wim`. Everything Foundry OSD stores next to that file on an ISO or a USB drive stays behind.
 
-Confirm that you have:
+| Delivered with the boot image | Not delivered |
+| --- | --- |
+| Windows PE with its drivers, and Foundry Connect | [Custom Windows images](../customization/custom-windows-images.md) |
+| Every option of your configuration: network, Windows Autopilot, Domain Join, computer name, OOBE, answer file, optional features, AppX removals, AI components | [Post-installation](../customization/post-installation.md) actions that use imported files: every **PowerShell script (.ps1)** and **Software (.exe/.msi)** action, and a **Command line** action with imported content |
+| Post-installation actions that need no imported file: **Command line** without content and **Restart Windows** | A cache: each deployment downloads Windows and the driver pack again |
 
-- An existing PXE environment that supports importing and starting WIM boot images.
-- Permission to import, configure, and advertise boot images on the PXE server.
-- A client architecture and firmware mode compatible with the Foundry OSD ISO and PXE environment.
-- Any WinPE network drivers required by the target hardware included when the ISO is created.
-- Network access from Windows PE to the services required by [Foundry Connect](../../foundry-connect/README.md) and [Foundry Deploy](../../foundry-deploy/README.md).
+Foundry OSD says the same on the two pages concerned: "Not available with PXE boot. Custom images require the full ISO or USB media." and "Actions that use imported files are not available with PXE boot. They require the full ISO or USB media."
+
+As with an ISO, Foundry Deploy is downloaded when the device starts. The full comparison is in [What each media type carries](README.md#what-each-media-type-carries).
+
+## Before you start
+
+- A PXE server that can import and start a WIM boot image, and the right to add a boot image to it.
+- Target devices of the same architecture as the ISO, `x64` or `arm64`.
+- The network drivers the devices need in Windows PE, added in [General](../general.md) before the ISO is created.
+- Internet access from Windows PE to the hosts in [Network endpoints](../../reference/network-endpoints.md).
 
 ## Prepare the boot image
 
-1. [Create an ISO](create-iso.md) and validate that it boots on representative hardware or a virtual machine.
-2. Mount the validated ISO.
-3. Locate `sources\boot.wim` on the mounted ISO.
-4. Copy `sources\boot.wim` to a location accessible to the PXE administrator.
-5. Import the copied WIM as a boot image into the existing PXE server.
-6. Configure and advertise the boot image according to the PXE vendor documentation.
+1. [Create an ISO](create-iso.md) and start one test device or virtual machine from it.
+2. Open the ISO in File Explorer and copy `sources\boot.wim`.
+3. Import the copy as a boot image in your PXE server and publish it, following the documentation of that server.
 
-## Validate the deployment
+Take the file from an ISO, never from a Foundry USB drive: the boot image of a USB drive does not contain Foundry Connect, which is stored on its cache partition.
 
-1. Boot a representative client from the imported image.
-2. Confirm that Windows PE obtains the required network access.
-3. Confirm that [Foundry Connect](../../foundry-connect/README.md) starts and reports network readiness.
-4. Continue and confirm that [Foundry Deploy](../../foundry-deploy/README.md) starts.
-5. Complete one representative end-to-end deployment.
-6. Confirm that Foundry Deploy reports successful completion.
-7. Complete the relevant [post-boot checks](../../foundry-deploy/verify-deployment.md).
+## Check the result
 
-Resolve driver, architecture, firmware, or network compatibility issues in the ISO and PXE environment before wider deployment.
+1. Start a test device from the network.
+2. Check that Foundry Connect opens and reports the network as ready, then that Foundry Deploy opens.
+3. Run one complete deployment and the [post-deployment checks](../../foundry-deploy/verify-deployment.md).
 
-## Maintain the boot image
+## Keep the boot image up to date
 
-Re-import `sources\boot.wim` whenever the Foundry OSD ISO is regenerated. Keep the previous boot image available until the replacement has passed PXE boot and runtime validation on representative clients.
+Each time you create the ISO again, import its `sources\boot.wim` again. Keep the previous boot image on the PXE server until the new one has started a test device.
 
-## What the boot image carries
+## Use imported content with a PXE start
 
-A PXE server delivers only `sources\boot.wim`. Content that Foundry OSD stores elsewhere on the ISO or USB does not reach the target.
+If a deployment must use imported post-installation content, attach to the device the complete ISO the boot image was copied from, for example as virtual media, and leave it attached until the deployment ends. Foundry Deploy looks for the content on every drive of the device and accepts only the content of that same ISO. It does not download it from a web server or a network share.
 
-| Content | Location | With the boot image alone |
-| --- | --- | --- |
-| Deployment settings, including network, Autopilot, answer file, naming, OOBE, optional feature, app removal, and AI component choices | Inside `boot.wim` | Delivered |
-| [Post-installation](../customization/post-installation.md) built-in tasks, Command line actions without imported content, and Restart Windows actions | Inside `boot.wim` | Delivered |
-| Post-installation PowerShell scripts, Software installers, and Command line actions with imported content | Outside `boot.wim` | Not delivered |
-| [Custom Windows images](../customization/custom-windows-images.md) | Outside `boot.wim` | Not delivered |
+Without that media, the deployment stops before the disk is erased, with "Post-installation preparation failed. Check the deployment log for details.". See [Media creation troubleshooting](../../troubleshooting/media-creation.md).
 
-Windows images, driver packs, and the Foundry Deploy and PostInstall applications that are downloaded during deployment still require the network access listed in [Before you begin](#before-you-begin). Validate every enabled customization on a representative client before wider deployment.
+## Related
 
-## Custom image payloads
-
-[Custom Windows images](../customization/custom-windows-images.md) are external to `sources\boot.wim`. Copying that boot image alone does not transfer custom images or their manifest. This feature does not provide a supported PXE delivery path for custom WIMs; use the complete generated ISO or USB media.
-
-## Post-installation content
-
-Imported [Post-installation](../customization/post-installation.md) content is stored on the ISO or USB, outside `sources\boot.wim`, so a PXE server does not deliver it. This affects every PowerShell script and Software action, and Command line actions that use imported content.
-
-Built-in tasks, Command line actions without imported content, and Restart Windows actions need nothing from the media. They run when only the boot image is available.
-
-To use imported content with a PXE boot, keep the complete generated ISO attached to the target, or provide its matching Foundry USB cache media, until deployment finishes. Do not mix the boot image and content from different media builds. Foundry does not download this content from an HTTP or SMB share. When required content is missing, deployment stops before the target disk is prepared; see [Post-installation preparation fails](../../troubleshooting/deployment.md#post-installation-preparation-fails). This does not provide a supported PXE delivery path.
+- [Create an ISO](create-iso.md)
+- [Start: create deployment media](README.md)
+- [Windows PE startup](../../foundry-connect/windows-pe-startup.md)
+- [Media creation troubleshooting](../../troubleshooting/media-creation.md)
