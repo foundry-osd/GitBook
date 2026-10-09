@@ -11,7 +11,7 @@
 
 ## Before you start
 
-- **An account for the sign-in on the workstation.** With it, Foundry OSD creates an app registration and an enterprise application in your tenant and grants admin consent for one permission. Check with your tenant administrator which account may do this.
+- **An account for the sign-in on the workstation.** With it, Foundry OSD creates an app registration and an enterprise application in your tenant and grants admin consent for one permission. Check with your tenant administrator which account may do this: the permissions the sign-in asks for are listed under [Windows Autopilot credentials](../../reference/security-and-credentials.md#windows-autopilot-credentials).
 - **The Deployment Tools of the Windows ADK.** Media creation takes `oa3tool.exe` from them. See [ADK](../adk.md).
 - **A safe place for the certificate file and its password**, such as a password vault.
 - **Password protection, recommended.** This mode works without it, but anyone who holds the media can then use the certificate it carries. See [Password protection](../general.md#password-protection).
@@ -28,7 +28,7 @@
 7. Create or update the deployment media from [Start](../media/README.md).
 
 {% hint style="warning" %}
-The password appears only in the **Certificate ready** dialog: "Foundry does not store the password and cannot show it again after this dialog closes." If you lose it, remove the certificate and create another one.
+The password appears only in the **Certificate ready** dialog: "Foundry does not store the password and cannot show it again after this dialog closes." Foundry OSD can save it with the configuration, but never displays it again. If you lose it, remove the certificate and create another one.
 {% endhint %}
 
 **Tenant readiness** has four rows:
@@ -42,11 +42,11 @@ The password appears only in the **Certificate ready** dialog: "Foundry does not
 
 A permission, consent or enterprise application problem has no row of its own: a dialog titled **Tenant onboarding requires attention** names it after the sign-in.
 
-## Select the certificate again in a later session
+## If the certificate is no longer selected
 
-Foundry OSD keeps the tenant, the app registration and the default group tag. It does not keep the PFX path or its password: both last until you close the app or select **Disconnect tenant**.
+Foundry OSD keeps the tenant, the app registration and the default group tag. While **Remember passwords** is on, which is the default, it also saves a copy of the PFX and its password with the configuration, so the certificate is still selected when you start the app again: see [What is remembered](../deployment-profiles.md#what-is-remembered).
 
-Before you create media in a later session, open **Windows Autopilot > Zero-Touch**, select **Select PFX**, choose the file and type **PFX password**. You do not sign in again while the certificate is valid.
+The certificate is no longer selected after **Disconnect tenant**, when **Remember passwords** is off, or in a configuration that came from another PC without its passwords and confidential files. Then open **Windows Autopilot > Zero-Touch**, select **Select PFX**, choose the file and type **PFX password**. You do not sign in again while the certificate is valid.
 
 <details>
 

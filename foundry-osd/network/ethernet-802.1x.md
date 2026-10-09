@@ -53,7 +53,7 @@ When authentication fails, no error is shown: the **Ethernet** card simply does 
 
 - One profile file and one certificate file. You cannot supply both a root CA file and a client `.pfx` file. From a `.pfx` file, Foundry Connect imports the client certificate only: the issuing CA is not added to the trusted roots.
 - Foundry OSD checks that the files exist. It does not check the content of the profile or the PFX password. A mistake shows only in Windows PE.
-- Foundry OSD does not keep the **PFX password** when you close it, and the files are readable on the media. See [What goes on the media](README.md#what-goes-on-the-media).
+- The files are readable on the media, and Foundry OSD keeps the **PFX password** between sessions only while **Remember passwords** is on. See [What goes on the media](README.md#what-goes-on-the-media).
 
 ## Related
 

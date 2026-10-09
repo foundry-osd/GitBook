@@ -69,7 +69,7 @@ Foundry Connect shows a **Wi-Fi** list and, for the embedded profile, a **Provis
 
 - One embedded profile per media.
 - Enterprise profiles: one certificate file, not a root CA file and a client `.pfx` file together. From a `.pfx` file only the client certificate is imported, not its issuing CA. Foundry OSD checks neither the PFX password nor the content of a **WPA2/WPA3 Enterprise** profile: a mistake shows only in Windows PE.
-- The **Passphrase** and the **PFX password** are not kept when Foundry OSD closes, and both can be recovered from the media. See [What goes on the media](README.md#what-goes-on-the-media).
+- The **Passphrase** and the **PFX password** can be recovered from the media, and Foundry OSD keeps them between sessions only while **Remember passwords** is on. See [What goes on the media](README.md#what-goes-on-the-media).
 
 ## Related
 

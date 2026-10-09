@@ -25,9 +25,19 @@ The ISO output path, the custom driver folder and the telemetry choices belong t
 
 | Control | What it does |
 | --- | --- |
-| **Remember passwords** | Saves the passwords and the confidential files you selected (answer files, network profiles, certificates) for your Windows account on this PC. On by default. When off, they are lost when you close the app. |
+| **Remember passwords** | Saves the passwords and a copy of the confidential files you selected with the configuration, for your Windows account on this PC. On by default. The table below says what happens when it is off. |
 | **Include passwords and confidential files** | Offered when you export or share. Puts them in the exported file or the shared folder. |
 | **Clear saved passwords and access** | Removes the saved passwords, the saved confidential files and the access to the shared folder, and turns off **Remember passwords** and **Automatic sync**. The options stay. Then type the passwords and select the files again, and use **Restore access**. |
+
+What you find when you start Foundry OSD again:
+
+| Item | **Remember passwords** on | **Remember passwords** off |
+| --- | --- | --- |
+| Deployment password, passwords of the local accounts of OOBE, passwords of the join accounts, Wi-Fi **Passphrase**, **PFX password** of a network certificate and of the Windows Autopilot certificate | Restored | Empty: type them again before you create media |
+| Answer files, network profile files and network certificate files | Restored from the saved copy. The original files are no longer needed | Only their path is kept: the files must still be where you selected them |
+| PFX file of the Windows Autopilot certificate | Restored from the saved copy | Not selected: select it again on **Windows Autopilot > Zero-Touch** |
+
+The sign-in to your tenant on the Windows Autopilot pages is never saved. Where the saved copy is stored and how it is protected is in [Security and credentials](../reference/security-and-credentials.md#saved-on-the-workstation).
 
 A shared configuration carries the passwords of the join accounts of [zero-touch Domain Join](domain-join/zero-touch.md) only when **Include passwords and confidential files** was selected when it was shared. Size limits are in [Export and import](deployment-profiles/export-and-import.md).
 

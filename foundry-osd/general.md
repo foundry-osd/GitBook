@@ -68,7 +68,7 @@ The password must have at least 8 characters; Foundry OSD recommends 12, or a pa
 Network credentials are not protected because Foundry Connect uses them before the password is asked. Anyone who holds the media can read them. Password protection does not encrypt the whole ISO file or USB drive either.
 {% endhint %}
 
-Foundry OSD keeps the Deployment password only while it is open, unless **Remember passwords** is on in [Settings backup and sync](deployment-profiles.md). If the fields are empty when you come back, type the password again. If you lose the password of existing media, create the media again with a new one.
+Foundry OSD saves the Deployment password with the configuration while **Remember passwords** is on, which is the default; with it off, the password lasts until you close the app. See [What is remembered](deployment-profiles.md#what-is-remembered). If the fields are empty when you come back, type the password again. If you lose the password of existing media, create the media again with a new one.
 
 ## Check the result
 

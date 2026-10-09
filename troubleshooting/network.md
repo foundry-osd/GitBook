@@ -77,7 +77,7 @@ Foundry Connect writes its log to `X:\Foundry\Logs\FoundryConnect.log`. To take 
   2. The network refused the device: certificate unknown to the authentication server, certificate not valid at the date of the device clock, or a profile that expects a typed user name and password.
 - **Fix:**
   1. Export the logs and open `FoundryConnect.log` on another computer. Search for `FailureCode=wired_`.
-  2. `wired_certificate_import_failed`: in Foundry OSD, select the certificate again, retype the **PFX password**, and recreate the media. The password is not kept when Foundry OSD closes.
+  2. `wired_certificate_import_failed`: in Foundry OSD, select the certificate again, retype the **PFX password**, and recreate the media. The password is empty after a restart of Foundry OSD when **Remember passwords** is off.
   3. `wired_profile_import_failed`: export the profile again from a computer that authenticates on this network, and recreate the media.
   4. `wired_profile_template_missing`: recreate the media.
   5. No `wired_` line: the imports worked and the network refused the device. Check the date and time in the firmware, then the log of the authentication server. Windows PE cannot correct its clock before the device is online.

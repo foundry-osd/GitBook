@@ -47,6 +47,21 @@ A file listed as "Not removed by Foundry" stays readable to local administrators
 
 The Deployment password is never written to the media. Once a technician has typed it, Foundry Deploy can use the secrets for the rest of that session.
 
+## Saved on the workstation
+
+Foundry OSD saves each configuration for your Windows account, under `%LocalAppData%\Foundry\Profiles`. What the saved configuration contains depends on **Remember passwords**, which is on by default. What you find at the next start is listed in [What is remembered](../foundry-osd/deployment-profiles.md#what-is-remembered).
+
+| Item | Value |
+| --- | --- |
+| With **Remember passwords** on | The saved configuration holds the Deployment password, the passwords of local accounts and join accounts, the Wi-Fi passphrase, the PFX passwords, and a copy of the confidential files: answer files, network profiles, network certificates and the Windows Autopilot PFX |
+| With **Remember passwords** off | The saved configuration holds the options only: no password and no copy of a file |
+| Encryption | AES-256-GCM, with a random 256-bit key for each saved version |
+| Where the key is | Windows Credential Manager, for your Windows account on this PC. Another Windows account, or a copy of the folder on another PC, cannot open the configuration |
+| While a configuration is in use | Its saved files are written, not encrypted, to `%LocalAppData%\Foundry\Profiles\Staging`, a folder that only your Windows account can open. Foundry OSD deletes them when it closes, or at its next start |
+| To remove what is saved | **Clear saved passwords and access**, in [Settings backup and sync](../foundry-osd/deployment-profiles.md#what-is-remembered) |
+
+An exported file and a shared folder are protected differently, by a password you choose: see [Export and import](../foundry-osd/deployment-profiles/export-and-import.md).
+
 ## Windows Autopilot credentials
 
 Zero-touch hardware hash upload uses two separate identities. The rights of the first are never available to the media.
@@ -62,15 +77,15 @@ Facts that follow from this:
 - The media carries the tenant ID, the client ID of the app registration and the certificate PFX with its password. It carries no administrator credential and no sign-in token.
 - Foundry Deploy signs in as the app registration with the certificate private key. No technician signs in. The certificate is decrypted in memory and is not copied to the deployed device.
 - Anyone who obtains the PFX and its password can use the permission of the app registration until the certificate expires or is removed from the registration.
-- Foundry OSD does not keep the PFX path or its password between sessions.
+- On the workstation, Foundry OSD keeps a copy of the PFX and its password with the configuration while **Remember passwords** is on: see [Saved on the workstation](#saved-on-the-workstation).
 
-How to create the certificate, choose its validity (12 months at most), select it again in a later session, renew it and remove it is described in [Zero-touch hardware hash upload](../foundry-osd/autopilot/zero-touch-hardware-hash.md).
+How to create the certificate, choose its validity (12 months at most), select it again, renew it and remove it is described in [Zero-touch hardware hash upload](../foundry-osd/autopilot/zero-touch-hardware-hash.md).
 
 ## Join account
 
 During a deployment with Domain Join, Foundry Deploy writes the join account and its password for the domain being joined to `credentials.bin` on the target disk, as listed in the table above. Foundry deletes the file as soon as the join has used it. If the deletion fails or the join was interrupted, the Foundry console after the restart keeps showing `Cleanup: Pending`: see [Cleanup stays Pending](../troubleshooting/domain-join.md#cleanup-pending).
 
-Diagnostic exports never include a file named `credentials.bin`. A copy saved under another name is not recognized, so do not copy or rename that file. How the join accounts are stored in Foundry OSD is described in [Domain Join](../foundry-osd/domain-join/README.md).
+Diagnostic exports never include a file named `credentials.bin`. A copy saved under another name is not recognized, so do not copy or rename that file. How the join accounts are kept in Foundry OSD is described in [Saved on the workstation](#saved-on-the-workstation).
 
 ## Recommended practices
 
