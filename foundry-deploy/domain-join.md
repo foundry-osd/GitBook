@@ -44,15 +44,10 @@ If the deployment does not start, see [Domain Join troubleshooting](../troublesh
 A deployment that succeeds in Windows PE has prepared the join, not performed it.
 
 1. Keep power and network connected: installed Windows must reach a domain controller, and it restarts once more after a successful join.
-2. In the **Foundry Post-installation** console, read the two lines that start with `Domain -` and `Restart:` once **Membership** is no longer `NotStarted`. [After the restart](after-the-restart.md) explains each value. The join is complete when they read:
-
-    ```text
-    Domain - Join: Succeeded; Placement: Succeeded; Membership: Succeeded
-    Restart: Completed; Cleanup: Disposed
-    ```
-
-    `Placement: Skipped` is normal when no OU applies.
-3. Look at the first screen after setup. Without a local account in the configuration, the Windows sign-in screen means the join is confirmed, and **Who's going to use this device?** means it failed or could not be confirmed. With a local account configured on [OOBE](../foundry-osd/customization/oobe.md), the sign-in screen appears in both cases, and a custom answer file decides its own screens: rely on the console lines.
+2. Read the **Foundry Post-installation** console, which appears on screen by itself after the restart. Its two lines that start with `Domain -` and `Restart:` report the join; read them once **Membership** is no longer `NotStarted`. The join is complete when **Join**, **Placement** and **Membership** read `Succeeded`, **Restart** reads `Completed` and **Cleanup** reads `Disposed`. `Placement: Skipped` is normal when no OU applies. [After the restart](after-the-restart.md) explains each value.
+3. Look at the first screen after setup. What it proves depends on the media; the administrator who created it knows which case applies.
+    - No local account and no custom answer file: the Windows sign-in screen means the join is confirmed, and **Who's going to use this device?** means it failed or could not be confirmed.
+    - A local account configured on [OOBE](../foundry-osd/customization/oobe.md), or a custom answer file: the first screen proves nothing. Rely on the console lines.
 4. Sign in with a domain account, and have your Active Directory administrator confirm that the computer account is in the intended OU.
 
 For any other value or a yellow line under the two lines, see [Domain Join troubleshooting](../troubleshooting/domain-join.md).

@@ -11,7 +11,7 @@
 
 - Turn on [Password protection](../general.md#password-protection) on **General** and set the **Deployment password**. This mode cannot be used without it.
 - Get a join account from your Active Directory administrator, written as `DOMAIN\user` or `user@domain`, and its password.
-- Check the requirements common to both modes in [Domain Join](README.md).
+- The device must reach a domain controller when the join runs, after the restart. The Windows edition must not be a Home edition, and each device needs its own computer name.
 
 ## Configure
 
@@ -24,7 +24,7 @@
 
 **Ready** only covers the account and password of that domain. Missing Password protection is reported under **Shared join account**, and an empty list under **Domains** ("Add at least one domain."): either one blocks media creation even when every domain is **Ready**.
 
-A password belongs to its account: if you change an account, enter its password again. In **Edit**, an empty password keeps the current one.
+A password belongs to its account: if you change an account, enter its password again. When you select **Edit** under **Domains** for a domain that has a dedicated account, an empty password keeps the current one.
 
 ## What the technician sees
 
@@ -32,17 +32,18 @@ The technician unlocks the media with the Deployment password and is never asked
 
 ## Check the result
 
-- On **Start**, the Domain Join entry reads **Configured**, not **Needs attention**.
+- On **Start**, **Zero-Touch** under **Domain Join** reads **Configured**, not **Needs attention**.
 - On a deployed device, follow the hand-over checks of the [Domain Join step](../../foundry-deploy/domain-join.md).
 
 ## Limits
 
 - Media keeps the accounts and passwords it was created with. Create or update it after you change one.
-- A join password is limited to 2,560 bytes: 2,560 characters when none is accented.
+- A join password is limited to 2,560 bytes: 2,560 characters if all are plain ASCII; other characters count 2 to 4 bytes.
 - A configuration exported to a file never contains the join passwords. See [Settings backup and sync](../deployment-profiles.md).
 
 ## Related
 
+- [Domain Join](README.md): the two modes and their requirements
 - [Domains and OUs](domains-and-ous.md)
 - [Security and credentials](../../reference/security-and-credentials.md)
 - [Domain Join troubleshooting](../../troubleshooting/domain-join.md)

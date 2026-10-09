@@ -10,7 +10,7 @@
 ## Before you start
 
 - Make sure technicians have a join account, written as `DOMAIN\user` or `user@domain`, and its password.
-- Check the requirements common to both modes in [Domain Join](README.md).
+- The device must reach a domain controller when the join runs, after the restart. The Windows edition must not be a Home edition, and each device needs its own computer name.
 
 This mode does not need Password protection.
 
@@ -29,7 +29,7 @@ Foundry Deploy does not contact the domain, so a mistyped password only shows af
 
 ## Check the result
 
-- On **Start**, the Domain Join entry reads **Configured**.
+- On **Start**, **Interactive** under **Domain Join** reads **Configured**.
 - On a deployed device, follow the hand-over checks of the [Domain Join step](../../foundry-deploy/domain-join.md).
 
 ## Limits
@@ -38,5 +38,6 @@ No join account or password is written to interactive media, including the ones 
 
 ## Related
 
+- [Domain Join](README.md): the two modes and their requirements
 - [Domains and OUs](domains-and-ous.md)
 - [Domain Join troubleshooting](../../troubleshooting/domain-join.md)

@@ -9,7 +9,7 @@ Two modes differ in who supplies the join account.
 | Join account | Stored on the media, encrypted with the Deployment password | Typed by the technician at each deployment |
 | [Password protection](../general.md#password-protection) | Required | Not required |
 | Domains listed in Foundry OSD | At least one | Optional; with none, the technician types the domain name |
-| OU typed by the technician | Never | Allowed for a domain that lists no OU |
+| Organizational unit (OU) typed by the technician | Never | Allowed for a domain that lists no OU |
 
 Both modes share the same lists of [domains and OUs](domains-and-ous.md). The technician's side is the [Domain Join step](../../foundry-deploy/domain-join.md) of Foundry Deploy; failures are in [Domain Join troubleshooting](../../troubleshooting/domain-join.md).
 
