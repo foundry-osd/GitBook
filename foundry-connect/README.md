@@ -1,6 +1,6 @@
 # Foundry Connect
 
-Foundry Connect opens after the startup console on a target device started from deployment media. It gets the device online in Windows PE and holds the startup until Internet access is confirmed, because Foundry Deploy is downloaded next.
+Foundry Connect opens after the startup console on a target device started from deployment media. It gets the device online in Windows PE and holds the startup until Internet access is confirmed, because the next stage needs GitHub to prepare Foundry Deploy.
 
 Most of the time you do nothing. With a cable and DHCP, or with a network profile that the administrator put on the media, the header changes from **Waiting for network** to **Network ready** by itself.
 
@@ -11,7 +11,7 @@ Most of the time you do nothing. With a cable and DHCP, or with a network profil
 When **Network ready** appears, Foundry Connect shows **Continuing automatically in 10s** and counts down, then closes and the startup continues. Select **Continue** to skip the wait. If the connection drops during the countdown, the countdown is cancelled and starts again at the next **Network ready**.
 
 {% hint style="warning" %}
-Do not close Foundry Connect to get past it. Closing the window cancels the startup: Foundry Deploy does not open. See ["Boot was cancelled. Deployment will not continue."](../troubleshooting/windows-pe-startup.md#boot-was-cancelled.-deployment-will-not-continue.) to start again.
+Do not close Foundry Connect to get past it. Closing the window cancels the startup: Foundry Deploy does not open. See ["Boot was cancelled. Deployment will not continue."](../troubleshooting/windows-pe-startup.md#boot-cancelled) to start again.
 {% endhint %}
 
 ## Menus

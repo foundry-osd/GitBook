@@ -50,7 +50,7 @@ Turn on **Include private-key certificate material** only when Windows must keep
 
 When Wi-Fi roaming is on, a network that the technician joins by typing a passphrase in Foundry Connect is roamed too. Leave roaming off when that passphrase must not stay on the device.
 
-A failed import does not stop the deployment. See [The roamed profile does not connect after deployment](../../troubleshooting/network.md#the-roamed-profile-does-not-connect-after-deployment).
+A failed import does not stop the deployment. See [The roamed profile does not connect after deployment](../../troubleshooting/network.md#roamed-profile-does-not-connect).
 
 ## Before you create media
 

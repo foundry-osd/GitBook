@@ -42,11 +42,11 @@ The certificate field has one label for two uses. The file type decides what Fou
 
 Nothing to do. When it starts, Foundry Connect imports the certificate, adds the wired profile and asks the first Ethernet adapter to reconnect. When authentication succeeds, the **Ethernet** card shows **Connected**.
 
-When authentication fails, no error is shown: the **Ethernet** card stays on **Waiting for network configuration**. See [Wired 802.1X does not authenticate](../../troubleshooting/network.md#wired-802.1x-does-not-authenticate-and-no-error-is-shown).
+When authentication fails, no error is shown: the **Ethernet** card simply does not get a usable address. It may stay on **Waiting for network configuration**, or show **Connected** with an address that starts with `169.254`. See [Wired 802.1X does not authenticate](../../troubleshooting/network.md#wired-authentication-fails).
 
 ## Check the result
 
-- In Foundry OSD, a green check mark appears next to **Ethernet 802.1X** in the navigation pane, and **Start** does not report "Network configuration is not ready."
+- In Foundry OSD, **Start** does not report "Network configuration is not ready."
 - On a device connected to a production switch port, the **Ethernet** card in Foundry Connect shows **Connected**, then the header shows **Network ready**.
 
 ## Limits
