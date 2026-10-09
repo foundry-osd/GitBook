@@ -47,7 +47,7 @@ Each row shows its value and one state: **Configured**, **Default**, **Disabled*
 | Content | ISO | USB drive | PXE boot image |
 | --- | --- | --- | --- |
 | Boot image `sources\boot.wim`: Windows PE, its drivers and your options | In the ISO | On the **BOOT** partition | The only file delivered |
-| Foundry applications | Foundry Connect is in the boot image. Foundry Deploy is downloaded at each start. | Foundry Connect is in `Runtime\` on the cache partition. Foundry Deploy is downloaded at start and kept there. | As for the ISO |
+| Foundry applications | Foundry Connect is in the boot image. Foundry Deploy and the post-installation application are downloaded at each start. | Foundry Connect is in `Runtime\` on the cache partition. Foundry Deploy and the post-installation application are downloaded at start and kept there. | As for the ISO |
 | [Custom images](../customization/custom-windows-images.md) | In the ISO, in `Cache\OperatingSystems\Custom\` | Same folder on the cache partition | Not delivered |
 | [Post-installation](../customization/post-installation.md) content you imported | In the ISO, in `Cache\PreOobe\` | Same folder on the cache partition | Not delivered |
 | Cache of downloaded Windows images and driver packs | None: every deployment downloads again | On the cache partition, kept by updates | None |
@@ -59,9 +59,12 @@ A USB drive has two partitions:
 | **BOOT** | FAT32, 2 GiB | Boot files and `sources\boot.wim` |
 | **Foundry Cache** | NTFS, rest of the drive | `Runtime\`, `Cache\OperatingSystems\`, `Cache\DriverPacks\`, `Cache\Firmware\`, `Cache\PreOobe\`, `Logs\` |
 
+- With Domain Join enabled, the post-installation application is also placed on the media, next to Foundry Connect.
+- Each included custom image is stored as `Cache\OperatingSystems\Custom\<hash>\image.wim`. On a USB drive, Foundry Deploy also offers up to 256 `.wim` files that you copy yourself directly into `Cache\OperatingSystems\Custom\`; updates keep them.
+
 ## While media is being created
 
-An **Operation in progress** dialog shows each stage, and the rest of the app is locked until it closes. Its title changes to **Operation complete** with the result, for example "The ISO media was created successfully.".
+An **Operation in progress** dialog shows each stage, and the rest of the app is locked until it closes. With custom images, "Verifying custom image sources…" checks every included image, which takes time with large images. Its title changes to **Operation complete** with the result, for example "The ISO media was created successfully.".
 
 **Cancel** stops the operation. Downloads stop at once; a disk or image operation already started finishes first, so keep Foundry OSD open and the USB drive connected until the dialog reads "Media creation cancelled." A cancelled or failed ISO build keeps the previous file. A cancelled USB operation does not restore the drive: create or update it again.
 
