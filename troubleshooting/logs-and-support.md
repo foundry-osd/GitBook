@@ -1,142 +1,118 @@
 # Logs and support information
 
-Collect evidence before rebooting, recreating media, or starting another deployment.
+Collect the logs before you restart the device, recreate the media or deploy again. In Windows PE the logs live in memory and disappear at the restart, and a new deployment erases the logs left on the target disk.
 
-## Foundry OSD diagnostic export
+| Where you are | Do this |
+| --- | --- |
+| In Foundry Connect or Foundry Deploy, on the target device | [Export logs from Foundry Connect and Foundry Deploy](#export-logs-from-foundry-connect-and-foundry-deploy). If it fails, see [the export error](#export-failed) |
+| In Foundry OSD, on the workstation | [Export diagnostics from Foundry OSD](#export-diagnostics-from-foundry-osd) |
+| In Windows after the restart | Copy the folders listed in [Log locations](#log-locations) |
+| In front of a device that no longer starts | [Collect logs from a device that does not start](#collect-logs-from-a-device-that-does-not-start) |
 
-In **Settings > General**, use **Export diagnostics** to save a sanitized archive of the desktop application's logs. The export does not modify the source logs or collect logs from a separate Windows PE deployment.
+## Export logs from Foundry Connect and Foundry Deploy
 
-Use **Advanced: export raw logs** only when requested by a trusted support contact, and review the sensitive-data warning before sharing the archive. See [Export diagnostics](../foundry-osd/settings.md#export-diagnostics).
+Both applications have a **Tools** menu in their menu bar. It stays available on the error screen.
 
-For Domain Join, recognized credential values are masked in sanitized logs, and a file named `credentials.bin` is never read or included, in sanitized and raw exports alike. The export still collects only the desktop application's top-level `Foundry*.log` files, not the files written on deployed computers. A secret that Foundry cannot recognize is not masked.
+1. Keep the Foundry USB drive connected. If the device started from an ISO or over PXE, insert a USB flash drive.
+2. Select **Tools > Export diagnostics...**.
+3. Read the path shown in the **Diagnostics exported** window. The archive is named `FoundrySupport-Foundry.Deploy-<date and time>.zip` or `FoundrySupport-Foundry.Connect-<date and time>.zip`.
 
-Remote diagnostics supplement local logs and support archives. Keep local evidence when investigating a failure: remote delivery can have gaps, and external-tool log files are not automatically uploaded. See [Telemetry and privacy](../reference/telemetry-and-privacy.md#remote-error-diagnostics).
+There is no folder to choose in Windows PE. Foundry writes the archive to the root of the **Foundry Cache** volume of the USB drive, or, without one, to the first removable volume it finds.
 
-## Find application logs in PostHog
+| Menu item | Application | What it does |
+| --- | --- | --- |
+| **Open log file** | Foundry Deploy | Opens the current log in Notepad. Also available in the **Error details** window |
+| **Refresh status** | Foundry Connect | Checks the network again. It does not export anything |
+| **Export diagnostics...** | Both | Creates an archive in which the secrets Foundry recognizes are masked |
+| **Export raw diagnostics...** | Both | Creates the same archive without masking, after a confirmation |
 
-**Foundry's PostHog logs are retained for 7 days, then automatically deleted.** Preserve evidence needed for a longer investigation before it expires. This retention does not delete local files or set the retention of Error Tracking reports.
+The Foundry Deploy archive contains its own log, the logs written by Windows PE startup and Foundry Connect during the same session, and, once the disk is prepared, the deployment logs and state files stored on the target disk. The Foundry Connect archive contains the logs of the Windows PE session. A file named `credentials.bin` is never included.
 
-Check the installed application and media versions when comparing local and remote records.
+Use **Export raw diagnostics...** only when a support contact you trust asks for it. The confirmation says why: "Raw logs may contain credentials, identifiers, paths, network names, and other sensitive data."
 
-1. Confirm **Enable remote diagnostics** was enabled in Foundry OSD or in the configuration used to create the affected media. **Enable telemetry** is not required for Logs.
-2. In PostHog Logs, select the time range covering the incident and the application service: `foundry_bootstrap`, `foundry_connect`, `foundry_deploy`, or `foundry_osd`. For Windows PE logs created before clock synchronization, include the time when network access returned and PostHog received them.
-3. Include Trace, Debug, Info, Warn, Error, and Fatal. A zero count can simply mean no events at that level match the selected range.
-4. Use the diagnostic session and available operation context to follow the workflow. Bootstrap, Connect, and Deploy share a session for the same boot.
-5. Match the event identifier and original timestamp with the local record. If `diagnostics.clock_synchronized` is `false`, `diagnostics.timestamp_source` is `ingestion`: PostHog uses server receipt time for indexing while `diagnostics.original_timestamp` preserves the raw creation time. The flag reflects capture time, even if the clock was corrected before upload. Synchronized events and Foundry OSD use their creation time, although PostHog can replace an indexed timestamp more than 24 hours from ingestion and preserve the submitted value in `$originalTimestamp`. Use the process sequence to resolve ordering within one process when the system clock was corrected. See [timestamp handling](../reference/telemetry-and-privacy.md#application-logs).
+## "Diagnostics could not be exported. Check the log for details." <a href="#export-failed" id="export-failed"></a>
 
-Repeated messages are expected and are not rate limited by their content. Retries can create duplicate records with the same stable event identifier if the server accepted a batch but its response was lost.
+**Where:** the **Diagnostics export failed** window, after **Export diagnostics...** or **Export raw diagnostics...**.
 
-If records are missing, check consent, application version, network access, the selected time range, and local delivery-health warnings. Each queue is limited to 4,096 records or 50 MiB; overflow removes its oldest records. Reboot recovery requires storage that survives, such as the Foundry Cache volume. Startup failures before consent is readable and internal delivery-health warnings remain local. Enabling diagnostics later does not backfill local files recorded while diagnostics were disabled. See [Delivery and retention](../reference/telemetry-and-privacy.md#delivery-and-retention) for queue locations and storage limits.
+**Cause:** Foundry found no place to write the archive. The device started from an ISO or over PXE and has no USB flash drive, or the USB drive is full or write-protected. A USB hard disk does not count unless it carries a **Foundry Cache** volume.
 
-## Information to record
+**Fix:**
 
-- Foundry application and media version.
-- Device manufacturer and model.
-- Current application: Foundry OSD, Foundry Bootstrap, Foundry Connect, Foundry Deploy, or Foundry PostInstall.
-- Diagnostic session ID, when available, to match Bootstrap, Connect, and Deploy logs from the same boot.
-- Current or failed workflow stage.
-- Complete error message.
-- Network state and connection type.
-- Selected Windows release, edition, language, and architecture.
-- Selected driver pack.
-- Autopilot method, without credentials or tenant secrets.
-- For Domain Join, the states of the join, placement, membership, restart and cleanup, with the `failureCode` and the numeric error codes. Do not include accounts, passwords or other directory details.
+1. Insert a USB flash drive with free space and wait a few seconds.
+2. Select **Tools > Export diagnostics...** again.
 
-## Windows PE log location
+**Collect:** if the export still fails, use **Tools > Open log file** in Foundry Deploy and photograph the last lines.
 
-Foundry Bootstrap, Foundry Connect, and Foundry Deploy initially write logs under:
+## Log locations
 
-```text
-X:\Foundry\Logs
-```
+`X:` is the Windows PE memory disk. `<cache>` is the **Foundry Cache** volume of a Foundry USB drive. `<target>` is the Windows partition of the target disk as seen from Windows PE; in the installed Windows it is `C:`.
 
-The active files are `FoundryBootstrap.log`, `FoundryConnect.log`, and `FoundryDeploy.log`. Collect any rotated files covering the failure as well. For a failure before the deployment wizard appears, start with the [bootstrap stage and outcome](../foundry-connect/windows-pe-startup.md).
+| Written by | Location | Files |
+| --- | --- | --- |
+| Foundry OSD | Workstation: `%ProgramData%\Foundry\Logs`, or `%LOCALAPPDATA%\Foundry\Logs` when the first cannot be written | `Foundry.log` |
+| Foundry OSD, ADK installation | Workstation: `%ProgramData%\Foundry\Logs\Adk` | One `.log` per setup stage |
+| Windows PE startup | Windows PE: `X:\Foundry\Logs` | `FoundryBootstrap.log`, `FoundryBootstrap.Launcher.log` |
+| Foundry Connect | Windows PE: `X:\Foundry\Logs` | `FoundryConnect.log` |
+| Foundry Deploy | Windows PE: `X:\Foundry\Logs` | `FoundryDeploy.log` |
+| Windows PE session copy | USB drive: `<cache>:\Logs\<session-id>` | Copies of the Windows PE logs, and a `Startup` folder |
+| Deployment in progress | Target disk: `<target>:\Foundry\Logs\Deployment` and `<target>:\Foundry\State\Deployment` | Deployment logs, `deployment-state.json` |
+| Deployment finished | Installed Windows: `C:\Windows\Temp\Foundry\Logs\Deployment` and `C:\Windows\Temp\Foundry\State\Deployment` | Deployment logs, `deployment-summary.json` |
+| Post-installation | Installed Windows: `C:\Windows\Temp\Foundry\Logs\PreOobe` and `C:\Windows\Temp\Foundry\State\PreOobe` | `Foundry.PostInstall.log`, one folder per action, `execution-result.json` |
+| Autopilot hardware hash upload | Installed Windows: `C:\Windows\Temp\Foundry\Logs\AutopilotHash` | Upload status and result files |
+| Interactive Autopilot window | Installed Windows: `C:\Windows\Temp\Foundry\Logs\AutopilotRegistration` | Registration logs |
 
-The Bootstrap log records runtime source and cache decisions, stage durations, accepted child startup acknowledgements, clock correction, and time-zone outcomes. Detailed diagnostics remain in the log while the console shows a compact progress summary.
+Things to know:
 
-`FoundryBootstrap.Launcher.log` records the Bootstrap launch attempt and process exit code. Collect it if no Bootstrap progress or application log appears.
+- Each log keeps a few older files next to it. Collect those that cover the time of the failure.
+- The copy on the USB drive is made when the drive has a cache volume and is not guaranteed to be complete. Check that the files are there.
+- The deployment logs move from `<target>:\Foundry` to `<target>:\Windows\Temp\Foundry` at the end of the deployment, and also after a failure or a cancellation once the disk has been prepared. If Foundry reports that evidence was retained at another path, collect that path too.
+- `deployment-summary.json` lists every step with its result and the reason of each skipped step.
+- For a failure before the first Foundry window, see [Windows PE startup troubleshooting](windows-pe-startup.md).
 
-When a **Foundry Cache** volume is available, the bootstrap attempts to copy session logs to `<cache-drive>:\Logs\<session-id>`. Copying is best effort, so check that the files are present. Deploy can write additional logs after the bootstrap has finished.
+## Export diagnostics from Foundry OSD
 
-Supervised startup evidence is stored under `<cache-drive>:\Logs\<session-id>\Startup\<launch-id>` when a cache is available, or `X:\Foundry\Logs\<session-id>\Startup\<launch-id>` otherwise. Collect `status.json`, any remaining `startup-failure.json`, and `startup-terminated.txt` alongside the logs. A failure record can disappear after Bootstrap transfers it into its pending diagnostic journal; this does not confirm remote delivery. See [Startup confirmation](../foundry-connect/windows-pe-startup.md#startup-confirmation).
+1. In Foundry OSD, open **Settings > General**.
+2. On **Export diagnostics**, select **Export...** and choose a folder.
+3. Send the archive `FoundrySupport-Foundry.OSD-<date and time>.zip`.
 
-`X:` is temporary Windows PE storage. Copy relevant logs to persistent storage before rebooting; files on `X:` do not survive a reboot.
+The archive contains the Foundry OSD logs with recognized secrets masked. The original logs are not changed. It does not contain the ADK installation logs or anything from a target device: add those yourself when they matter.
 
-## Applied Windows log location
+**Advanced: export raw logs...** creates the same archive without masking. Use it only when a support contact you trust asks for it.
 
-After a successful diagnostic transfer to the target Windows installation, deployment logs are stored in:
+When **Enable remote diagnostics** is on, Foundry also sends application logs to the Foundry project. They do not replace the files above: attach local evidence to a support request. See [Telemetry and privacy](../reference/telemetry-and-privacy.md).
 
-```text
-<target-drive>:\Windows\Temp\Foundry\Logs\Deployment
-```
+## Collect logs from a device that does not start
 
-After the deployed operating system starts, this is normally:
+The logs of the last deployment stay on the target disk until the next deployment erases it.
 
-```text
-C:\Windows\Temp\Foundry\Logs\Deployment
-```
+1. Do not deploy again yet.
+2. If the USB drive was connected during the failed deployment, look in `<cache>:\Logs` on another computer: the Windows PE session may have been copied there.
+3. To read the target disk, connect it to another computer, or start the device from a Windows PE or recovery media that gives you a command prompt. Copy `Windows\Temp\Foundry\Logs` and `Windows\Temp\Foundry\State`, or `Foundry\Logs` and `Foundry\State` if the first folders do not exist.
+4. Then deploy again.
 
-Other diagnostic categories under `C:\Windows\Temp\Foundry\Logs` include:
+## What to send
 
-```text
-Bootstrap
-PreOobe
-AutopilotHash
-AutopilotRegistration
-```
-
-Startup evidence copied from the Foundry Cache session is retained under `Logs\Bootstrap\Startup` within the same root.
-
-Deployment state and the deployment summary are stored under `C:\Windows\Temp\Foundry\State\Deployment`. First-boot execution results are in `State\PreOobe`, and the interactive Autopilot assistant keeps its state in `State\AutopilotRegistration` under the same Foundry root.
-
-If diagnostic transfer fails, Foundry preserves the source workspace and reports the available diagnostic location. Collect that location as well; the presence of the final directory alone does not prove that every file was transferred.
-
-## First-boot files and cleanup
-
-Post-deployment files remain under `%SystemRoot%\Temp\Foundry`. `Runtime` contains the first-boot helpers, `Payloads` holds their inputs, `State` records execution and completion, `Logs` holds diagnostics, and `Work` is reserved for operation-specific temporary files. These directories are created when needed.
-
-A successful Windows PE deployment does not mean first-boot work has completed. Foundry records first-boot outcomes and input disposal separately. In the PostInstall workflow, planned restarts resume from saved progress, while interrupted actions are not automatically retried. Inspect the results and logs before deciding whether to redeploy. Keep the runtime, state, and diagnostics when investigating an incomplete first boot. Do not treat them as unused files solely because no Foundry process is running.
-
-In the PostInstall workflow, cleanup removes temporary deployment payloads. It also removes the Lenovo `Drivers` directory on the Windows volume when Foundry recorded ownership of that directory. Execution records and diagnostics are retained. If a process may still be using files, cleanup can remain pending; investigate before deleting those files manually.
-
-If the first-boot runner does not start, also collect:
-
-```text
-C:\Windows\Panther\UnattendGC\Setupact.log
-```
+- The Foundry OSD version, and whether the media was recreated after the last Foundry OSD update.
+- The application and the stage: Foundry OSD, Windows PE startup, Foundry Connect, Foundry Deploy, or the console after the restart.
+- The exact message and, for Foundry Deploy, the "Failed step: ..." line.
+- The device manufacturer and model, and the media type: USB drive, ISO or PXE.
+- The Windows version, edition, language and architecture, and the driver source selected.
+- The connection type: Ethernet or Wi-Fi, with or without 802.1X or a proxy.
+- The Autopilot method or the Domain Join mode, when used.
+- The exported archive, and whether the problem happens again on newly created media.
 
 {% hint style="warning" %}
-Review collected files before sharing them. Remove credentials, tokens, certificates, hardware hashes, tenant identifiers, network secrets, and other sensitive information.
+Read what you send. Masking covers only what Foundry recognizes. Remove passwords, tokens, certificates, hardware hashes, tenant identifiers, serial numbers and internal network names that remain, and never attach an answer file or a file named `credentials.bin`.
 {% endhint %}
 
 ## Open a support issue
 
-Provide reproduction steps, expected result, actual result, failed stage, sanitized logs, and whether the problem reproduces on newly created media.
+Search the [existing issues](https://github.com/foundry-osd/foundry/issues) first, then use the [bug report form](https://github.com/foundry-osd/foundry/issues/new?template=bug-report.yml). Describe the steps that lead to the problem, what you expected and what happened, and attach the items of [What to send](#what-to-send). Report a security vulnerability privately, as the repository's security policy explains, not in a public issue.
 
-## PostInstall diagnostics
+## Post-installation evidence
 
-For [Post-installation](../foundry-osd/customization/post-installation.md), collect these files from the target Windows installation:
-
-| Evidence | Location |
-| --- | --- |
-| Runtime log | `%SystemRoot%\Temp\Foundry\Logs\PreOobe\Foundry.PostInstall.log` |
-| Action output and optional installer logs | Action folders under `%SystemRoot%\Temp\Foundry\Logs\PreOobe` |
-| Execution results and saved progress | `%SystemRoot%\Temp\Foundry\State\PreOobe`, including `execution-result.json` |
-
-Desktop diagnostic export does not automatically collect target-machine logs. PostInstall does not send a separate remote telemetry stream. Review raw script output and installer logs before sharing them; they may contain secrets that automatic masking cannot remove reliably.
+From the installed Windows, collect `C:\Windows\Temp\Foundry\Logs\PreOobe` and `C:\Windows\Temp\Foundry\State\PreOobe`. Script output and installer logs can contain secrets that masking does not catch: read them before sharing. What each file means is in [After the restart troubleshooting](after-the-restart.md).
 
 ## Domain Join evidence
 
-When the join was prepared by Deploy, collect these files from the deployed computer:
-
-| Evidence | Location |
-| --- | --- |
-| Outcome of the join | `%SystemRoot%\Temp\Foundry\State\PreOobe\domain-join-result.json` |
-| Progress of all post-installation actions | `%SystemRoot%\Temp\Foundry\State\PreOobe\execution-result.json` |
-| Post-installation log | `%SystemRoot%\Temp\Foundry\Logs\PreOobe\Foundry.PostInstall.log` and its rotated files |
-
-The result file contains the expected domain, computer name and OU, the state of each part of the join, a reason for each failure and numeric error codes. It contains no account, no password and no free-form error text. Remove the names before sharing if they are sensitive.
-
-If Deploy skipped the join because of the Windows edition or the image, these files do not exist: collect the deployment summary and the deployment logs instead. See [Domain Join troubleshooting](domain-join.md).
-
-Never attach `%SystemRoot%\Temp\Foundry\Payloads\DomainJoin\<operation-id>\credentials.bin`: it contains the join account and password. Foundry does not collect files from deployed computers by itself.
+From the installed Windows, collect `C:\Windows\Temp\Foundry\State\PreOobe\domain-join-result.json` and `C:\Windows\Temp\Foundry\Logs\PreOobe\Foundry.PostInstall.log`. The result file contains no account and no password. Never attach `credentials.bin`. How to read the result is in [Domain Join troubleshooting](domain-join.md).
