@@ -2,12 +2,10 @@
 
 **Custom Windows images** adds your own Windows images, from a WIM file or an ISO, to the deployment media, so the technician can deploy them instead of an image downloaded from the Foundry catalog.
 
-{% hint style="warning" %}
-**Screenshot required**
-
-- **File:** `foundry-osd-custom-images-01-library.png`
-- **Capture:** Show the Custom Windows images page switched to Enabled with the PXE warning under the title, the command bar, one image with Included Yes and Status Available, its indexes under Selected image, and Default image source in Foundry Deploy. Use a released build.
-{% endhint %}
+<figure>
+  <img src="../../.gitbook/assets/foundry-osd-custom-images-01-library.png" alt="Foundry OSD Custom Windows images page with the command bar, one included image, its three indexes under Selected image and the Default image source in Foundry Deploy setting">
+  <figcaption>The image library, the indexes of the selected image, and the source Foundry Deploy shows first. The current page also shows a PXE warning under its title.</figcaption>
+</figure>
 
 ## Before you start
 
@@ -40,7 +38,7 @@ Select an image row to list its indexes under **Selected image**, then use the c
 | **Set default index** | Includes the image and marks the selected index row as **Preferred index**. |
 | **Clear default** | Clears the preferred image and index. |
 
-Below the tables, **Default image source in Foundry Deploy** decides which source Foundry Deploy shows first: **Foundry catalog**, the default, or **Custom Windows images**. Setting a preferred image does not change it.
+Below the tables, **Default image source in Foundry Deploy** decides which source Foundry Deploy shows first: **Foundry catalog**, the default, or **Custom Windows images**. Setting a preferred image does not change it. The technician then chooses the image and the index, with your preferred ones preselected: see [Select Windows](../../foundry-deploy/operating-system.md).
 
 - While the page is **Enabled**, Foundry OSD creates media only if at least one image is included and every included image shows the **Status** **Available**, even when the default source is **Foundry catalog**. To create media without custom images, switch the page off.
 - Excluding or removing the preferred image clears the preference.
@@ -56,16 +54,12 @@ Import the same `.wim` file again, under a name that is not yet used. Foundry OS
 
 A captured image should contain `Windows\System32\Recovery\winre.wim`. Before you capture the reference device, run `reagentc /disable` on it, so that Windows moves the recovery image back to that folder.
 
-Without the file, Foundry Deploy skips the **Configure Windows recovery** and **Install recovery drivers** steps. The deployment completes, and the deployed Windows has no recovery environment.
-
-## What the technician sees
-
-In Foundry Deploy, the technician chooses the image source, then the image and the index to apply. Your preferred image and index are preselected. See [Select Windows](../../foundry-deploy/operating-system.md).
+Without the file, Foundry Deploy shows "Step skipped." for the **Configure Windows recovery** and **Install recovery drivers** steps. The deployment completes, and the deployed Windows has no recovery environment.
 
 ## Limits
 
 - 256 images in the library, 1,024 indexes per image, 200 characters per name.
-- Foundry OSD checks that it can read the image, not that the image deploys or suits your other customizations. Versions, editions and architectures are not limited to those of the Foundry catalog, and [OS selection](operating-system.md) does not filter custom images.
+- Foundry OSD checks that it can read the image, not that the image deploys or suits your other customizations. Versions, editions and architectures are not limited to those of the Foundry catalog.
 - .NET Framework 3.5 cannot be turned on in a custom image during deployment. See the limits of [Optional features](optional-features.md).
 - For where the images sit on an ISO or a USB drive, see [What each media type carries](../media/README.md#what-each-media-type-carries).
 
@@ -74,7 +68,7 @@ In Foundry Deploy, the technician chooses the image source, then the image and t
 ### "The image operation failed. Check the source, available space, and Foundry logs."
 
 - **Where:** the import dialog, or the top of the page after an action.
-- **Cause:** one message covers every failure: an ISO without `sources\install.wim` or `sources\install.esd`; too little free space; an ISO that cannot be mounted; a library that already holds 256 images; a source or a `%LOCALAPPDATA%` folder reached through a junction or a symbolic link; an image in use by a media build when you select **Remove**.
+- **Cause:** one message covers every failure. The three you can act on: an ISO without `sources\install.wim` or `sources\install.esd`, too little free space, or an image in use by a media build when you select **Remove**.
 - **Fix:** check the source and the free space, then try again. The last "Custom image import failed.", "Custom image preview failed." or "Custom image library operation failed." entry in the log gives the exact cause.
 - **Collect:** `%ProgramData%\Foundry\Logs\Foundry.log`. See [Logs and support information](../../troubleshooting/logs-and-support.md).
 

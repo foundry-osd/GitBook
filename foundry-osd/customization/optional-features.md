@@ -11,8 +11,8 @@
 
 1. Open **Customization > Optional features** and turn the switch at the top right to **Enabled**.
 2. Find the feature. Expand a category, or type in the search box: it matches the display name or the DISM feature name, such as `NetFx3`.
-3. Open the menu on the feature's row and choose a state.
-4. Before you choose **Enable**, read the line under the feature name. It gives the availability and warnings such as "Requires compatible virtualization hardware and firmware settings."
+3. Read the line under the feature name. It gives the availability and warnings such as "Requires compatible virtualization hardware and firmware settings."
+4. Open the menu on the feature's row and choose a state.
 5. Create or update the deployment media.
 
 | State | Effect on the deployed Windows |
@@ -59,7 +59,7 @@ Foundry Deploy applies the changes in Windows PE, in the **Configure Windows fea
 | **Disable**, and the image does not know the feature | Counted as "already satisfied". |
 | **Enable**, and the image knows the feature but no longer contains its files | The deployment stops, except for the .NET Framework 3.5 features below. |
 
-The step ends with "Windows optional features configured (\<number> changed, \<number> already satisfied, \<number> unavailable)." An "unavailable" count above zero means a feature you asked for was not turned on, although the deployment succeeded. The Foundry Deploy log then contains "Skipped \<number> unavailable Windows optional feature enable action(s)."
+The step ends with "Windows optional features configured (\<number> changed, \<number> already satisfied, \<number> unavailable)." An "unavailable" count above zero means a feature you asked for was not turned on, although the deployment succeeded. The Foundry Deploy log then contains "Skipped \<number> unavailable Windows optional feature enable action(s)." When no feature needed a change, the step shows "Step skipped."
 
 ## Limits
 

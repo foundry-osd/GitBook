@@ -45,7 +45,7 @@ The **Profile** box summarizes the selection: **None**, the name of the group wh
 
 ## What happens on the device
 
-Foundry removes the apps at the first start of Windows, before the first sign-in and before any [Post-installation](post-installation.md) action. The removal runs even when the Post-installation page is off.
+Foundry removes the apps at the first start of Windows, before the first sign-in, even when the Post-installation page is off. See [When each customization is applied](README.md#when-each-customization-is-applied).
 
 - **What is removed.** Foundry removes the provisioned package, which is the copy Windows installs for each new user. It does so before anyone signs in.
 - **An app the image does not contain is skipped.** Nothing is reported for it.

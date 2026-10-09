@@ -2,12 +2,10 @@
 
 **OOBE** sets what Windows asks during its first-run setup, the out-of-box experience: the license terms page, the privacy choices, and the local accounts Foundry creates. In the app, the page is titled **Out-of-Box Experience**.
 
-{% hint style="warning" %}
-**Screenshot required**
-
-- **File:** `foundry-osd-customization-oobe-01-options.png`
-- **Capture:** Show the Out-of-Box Experience page switched to Enabled with the Accounts section expanded (Built-in Administrator account, Additional local accounts with one demonstration account, Skip account creation during OOBE) and the first options below it. Use a released build and no real user name.
-{% endhint %}
+<figure>
+  <img src="../../.gitbook/assets/foundry-osd-customization-oobe-01-options.png" alt="Foundry OSD Out-of-Box Experience page with the Accounts section collapsed and the eight setup and privacy options below it">
+  <figcaption>The eight setup and privacy options with their default values. Local accounts are in the Accounts section, collapsed here.</figcaption>
+</figure>
 
 ## Configure OOBE
 
@@ -18,13 +16,13 @@
 
 | Option | Default | Effect on the deployed Windows |
 | --- | --- | --- |
-| **Skip license terms** | On | Windows does not show the Microsoft Software License Terms page. |
+| **Skip license terms** | **Enabled** | Windows does not show the Microsoft Software License Terms page. |
 | **Diagnostic data** | **Required** | Sets the diagnostic data level to **Required**, **Optional** or **Off**. **Off** is honored only by the Windows editions that support it; the others fall back to **Required**. |
-| **Hide privacy setup** | On | Windows does not show the privacy choices page at the first sign-in. |
-| **Tailored experiences** | Off | When off, Windows does not use diagnostic data for personalized tips, ads and recommendations. |
-| **Advertising ID** | Off | When off, apps cannot use the Windows advertising ID. |
-| **Online speech recognition** | Off | When off, Microsoft cloud-based speech recognition is turned off. |
-| **Inking and typing diagnostics** | Off | When off, optional inking and typing diagnostic data is not collected. |
+| **Hide privacy setup** | **Enabled** | Windows does not show the privacy choices page at the first sign-in. |
+| **Tailored experiences** | **Disabled** | When **Disabled**, Windows does not use diagnostic data for personalized tips, ads and recommendations. |
+| **Advertising ID** | **Disabled** | When **Disabled**, apps cannot use the Windows advertising ID. |
+| **Online speech recognition** | **Disabled** | When **Disabled**, Microsoft cloud-based speech recognition is turned off. |
+| **Inking and typing diagnostics** | **Disabled** | When **Disabled**, optional inking and typing diagnostic data is not collected. |
 | **Location access** | **User controlled** | **User controlled** leaves location to the user. **Force off** denies location access to apps. |
 
 Foundry Deploy writes these choices into the installed Windows in Windows PE, in the **Configure Windows setup** step. The privacy choices are written as policies: a Group Policy or Intune setting applied later replaces them.
@@ -33,10 +31,10 @@ Foundry Deploy writes these choices into the installed Windows in Windows PE, in
 
 Expand **Accounts** on the page.
 
-- **Built-in Administrator account** (off by default) enables the Windows built-in Administrator account.
+- **Built-in Administrator account** (**Disabled** by default) enables the Windows built-in Administrator account.
 - **Additional local accounts**: select **Add account**, then enter the **Username** and choose the **Account type**, **Standard** or **Administrator**. Use **Edit** and **Remove** on an account row to change it.
 
-Each account has a **Set a password** switch, on by default. Leave it on and enter the password twice, or turn it off to give the account a blank password. Avoid a blank password on an administrator account.
+Each account has a **Set a password** switch, **Enabled** by default. Leave it on and enter the password twice, or turn it off to give the account a blank password. Avoid a blank password on an administrator account.
 
 A username has at most 256 characters, cannot contain `" / \ [ ] : ; | = , + * ? < > % @`, cannot end with a period or a space, and must be unique. The names `Administrator`, `DefaultAccount`, `Guest`, `HelpAssistant`, `NONE`, `WDAGUtilityAccount` and `WSIAccount` are reserved.
 
@@ -46,7 +44,7 @@ A username has at most 256 characters, cannot contain `" / \ [ ] : ; | = , + * ?
 - **With only the built-in Administrator account**, Windows still shows its own account creation pages.
 - Foundry does not configure automatic sign-in.
 
-If every account is **Standard** and the built-in Administrator account is off, the page warns: "Only standard accounts are configured. Ensure another administrator account or management method is available." The warning does not block media creation.
+If every account is **Standard** and the built-in Administrator account is **Disabled**, the page warns: "Only standard accounts are configured. Ensure another administrator account or management method is available." The warning does not block media creation.
 
 ### Password protection
 

@@ -2,30 +2,34 @@
 
 **Machine naming** decides the computer name Foundry Deploy proposes for each device: a name the technician types, or a name built from device data such as the serial number.
 
-{% hint style="warning" %}
-**Screenshot required**
-
-- **File:** `foundry-osd-customization-machine-naming-01-configuration.png`
-- **Capture:** Show the Machine naming page switched to Enabled in Composed mode with a Fixed text and a Serial number component, the Preview, the Allow name editing during deployment card and the Upload computer name to Autopilot card. Use a released build.
-{% endhint %}
+<figure>
+  <img src="../../.gitbook/assets/foundry-osd-customization-machine-naming-01-configuration.png" alt="Foundry OSD Machine naming page in Composed mode with a Fixed text and a Random text component, the separator, letter casing and preview controls, and Allow name editing during deployment">
+  <figcaption>Composed mode: the components in order, and the preview of the resulting name. The Upload computer name to Autopilot card sits below this area.</figcaption>
+</figure>
 
 ## Configure naming
 
 A computer name has 1 to 15 characters: letters, digits and hyphens. Foundry removes every other character, and refuses a name made only of digits.
 
 1. Open **Customization > Machine naming** and turn the switch at the top right to **Enabled**.
-2. Under **Naming mode**, choose **Manual** or **Composed**.
+2. Under **Naming mode**, choose **Manual** or **Composed**, then follow the matching section.
 
-**Manual**: the technician types the name in Foundry Deploy. To prefill it, enter a name in the **Manual** box.
+### Manual
 
-**Composed**: Foundry Deploy builds the name from components, in the order of the list. Each type can be used once.
+The technician types the name in Foundry Deploy. To prefill it, enter a name in the **Manual** box.
+
+### Composed
+
+Foundry Deploy builds the name from components, in the order of the list. Each type can be used once.
 
 1. Under **Name components**, choose a type and select **Add component**. Foundry OSD adds **Serial number** for you the first time.
 2. Set each component: its text, or its length from 1 to 15 and the end to keep.
 3. Reorder the components with the arrow buttons, or remove one with the delete button.
-4. Choose the **Separator**, **None** or **Hyphen (-)**, and the **Letter casing**: **Preserve**, **Uppercase** or **Lowercase**.
-5. Check **Preview** and its counter, for example `9 / 15`. Component lengths and separators cannot add up to more than 15. **Add component** is unavailable when nothing more fits.
-6. **Allow name editing during deployment** is on by default: the technician can replace the generated name. Turn it off to lock the name.
+4. In the two lists beside **Add component**, choose the separator, **None** or **Hyphen (-)**, and the letter casing: **Preserve**, **Uppercase** or **Lowercase**.
+5. Check the preview on the right of that row. Component lengths and separators cannot add up to more than 15, and **Add component** is unavailable when nothing more fits.
+6. **Allow name editing during deployment** is **Enabled** by default: the technician can replace the generated name. Turn it off to lock the name.
+
+In a wide window, the row also shows the labels **Separator**, **Letter casing** and **Preview**, and a counter such as `9 / 15` after the preview.
 
 | Component | Value used on the device | Default length |
 | --- | --- | --- |
@@ -35,7 +39,7 @@ A computer name has 1 to 15 characters: letters, digits and hyphens. Foundry rem
 | **Model** | Model name from the firmware. | 15 |
 | **Asset tag** | Asset tag from the firmware. | 15 |
 | **System UUID** | Firmware UUID, hyphens included. | 15 |
-| **Random text** | Random capital letters and digits, drawn again at each start of Foundry Deploy. | 6 |
+| **Random text** | Random capital letters and digits, drawn again at each start of Foundry Deploy: a redeployed device gets a new name. | 6 |
 
 Components other than **Serial number** start with **Keep characters from the left**. A default length is reduced to what still fits.
 
@@ -57,10 +61,8 @@ With **Fixed text** `PC`, **Serial number** (6, right), **Hyphen (-)** and **Upp
 Plan for these cases:
 
 - **The preview uses sample values, not your hardware.** Its sample UUID has no hyphens, a real one has four. For **System UUID**, keep 12 characters from the right: that part has no hyphen.
-- **The left end of a serial number** is often a prefix shared by a whole batch. Keep the right end.
 - **Placeholder values give duplicate names.** Foundry Deploy refuses an empty value, `Unknown`, `Default string`, `To Be Filled By O.E.M.` and a UUID made only of zeros or of the letter F. Any other filler, such as `No Asset Tag`, counts as a real value.
 - **A serial number made only of digits** cannot be a name on its own. Add a **Fixed text** component that contains a letter.
-- **Random text changes at every deployment.** A redeployed device gets a new name.
 
 ## What the technician sees
 
@@ -70,7 +72,7 @@ When a component cannot be used, Foundry Deploy shows its name followed by "Unav
 
 ## Upload the computer name to Autopilot
 
-**Upload computer name to Autopilot** assigns the name confirmed in Foundry Deploy to the Windows Autopilot device. The switch is off by default and is available only when Machine naming and a hardware hash upload method are both enabled. See [Windows Autopilot](../autopilot/README.md).
+**Upload computer name to Autopilot** assigns the name confirmed in Foundry Deploy to the Windows Autopilot device. The switch is **Disabled** by default and is available only when Machine naming and a hardware hash upload method are both enabled. See [Windows Autopilot](../autopilot/README.md).
 
 ## How this works with other features
 

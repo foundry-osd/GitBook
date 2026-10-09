@@ -12,10 +12,10 @@
 ## Configure the Windows choices
 
 1. Open **Customization > OS selection**.
-2. Turn the switch at the top right to **Enabled**. Until you do, every control is unavailable and the media carries no restriction.
+2. Turn the switch at the top right to **Enabled**. Until you do, every control is unavailable and the media carries no restriction. On **Start**, **OS selection** now shows **Configured**.
 3. Expand a group and tick the values the technician may choose.
 4. In the **Preselected ...** box of the same group, choose the value selected by default, or keep **Automatic**.
-5. Create or update the deployment media. On **Start**, **OS selection** then shows **Configured**.
+5. Create or update the deployment media.
 
 | Group | Allowed values | Default value |
 | --- | --- | --- |
@@ -27,8 +27,8 @@
 Three rules apply to every group:
 
 - **An empty list means all.** A list with nothing ticked offers every supported value.
-- **A single value forces the default.** When exactly one value is ticked, it becomes the preselected value and the **Preselected ...** box is locked. Foundry Deploy locks that list too.
-- **Automatic** leaves the choice to Foundry: version 26H2, edition Pro, license channel Retail.
+- **A single value forces the default.** When exactly one value is ticked, it becomes the preselected value and the **Preselected ...** box of that group is locked, except **Preselected Windows update level**. Foundry Deploy locks that list too.
+- **Automatic** leaves the choice to Foundry: version 26H2, edition Pro, license channel Retail. For the language, Foundry Deploy chooses on the device: see [Select Windows](../../foundry-deploy/operating-system.md).
 
 ### Preselected Windows update level
 

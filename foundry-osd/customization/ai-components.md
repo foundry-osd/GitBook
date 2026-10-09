@@ -28,12 +28,12 @@
 ## What happens on the device
 
 - **Policies and the service setting** are written into the installed Windows in Windows PE, in the **Configure AI policies** step, after Windows is applied to the disk.
-- **The two apps** are removed at the first start of Windows, before the first sign-in and before any [Post-installation](post-installation.md) action, even when the Post-installation page is off. Foundry removes the provisioned package, as [AppX removals](appx-removals.md) does. An app the image does not contain is skipped, and a failed removal is recorded as a warning without stopping the deployment.
+- **The two apps** are removed at the first start of Windows, before the first sign-in, even when the Post-installation page is off. See [When each customization is applied](README.md#when-each-customization-is-applied). Foundry removes the provisioned package, as [AppX removals](appx-removals.md) does. An app the image does not contain is skipped, and a failed removal is recorded as a warning without stopping the deployment.
 - **A later policy wins.** A Group Policy or Intune setting applied after deployment replaces the policies Foundry wrote.
 
 ## Check the result
 
-In Foundry Deploy, the **Configure AI policies** step completes and the log contains "Offline AI policies configured." After the restart, the Foundry Post-installation console lists the task `Remove AI components`, and the removal is recorded in:
+When a policy action is on, the **Configure AI policies** step of Foundry Deploy completes and the log contains "Offline AI policies configured." With only **Remove Copilot+ AI Hub** on, that step shows "Step skipped." After the restart, the Foundry Post-installation console lists the task `Remove AI components`, and the removal is recorded in:
 
 ```text
 C:\Windows\Temp\Foundry\Logs\PreOobe\appx-servicing.log
