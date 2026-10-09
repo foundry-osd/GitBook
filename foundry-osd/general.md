@@ -23,7 +23,7 @@ The [ADK](adk.md) page must report **ADK is ready**. Until then **General** cann
 | --- | --- | --- |
 | **Architecture and signature** | Processor architecture of the media: `x64` or `arm64`. It must match the target devices. | `x64` |
 | **Secure Boot** | Certificate that signs the boot files: **PCA 2023** when on, **PCA 2011** when off. | **PCA 2023** |
-| **WinPE boot language** | Language of Windows PE, among the language packs installed with the Windows PE add-on. | Chosen when the page opens: the language of Foundry OSD when its pack is installed, otherwise the first one available |
+| **WinPE boot language** | Language of Windows PE, among the language packs installed with the Windows PE add-on. | Keeps your earlier choice. On first use: the language of Foundry OSD when its pack is installed, otherwise the first one available |
 | **Windows PE time zone** | Time zone used in Windows PE. See below. | **Automatic** |
 | **Automatic restart** | Restarts the device after a successful deployment. | On |
 | **Restart delay** | Seconds before that restart, from 0 to 3600. 0 restarts at once. | 10 |
@@ -33,11 +33,11 @@ The [ADK](adk.md) page must report **ADK is ready**. Until then **General** cann
 
 ### Secure Boot
 
-Keep **PCA 2023**. Switch to **PCA 2011** only if a target device with Secure Boot turned on refuses to start the media, which can happen when its firmware does not yet trust Microsoft's 2023 certificate. Create the media again after a change.
+Keep **PCA 2023** unless you have a reason to change it. Foundry does not check the firmware of your devices: whether a device accepts media signed with the 2023 certificate depends on its firmware, as described in Microsoft's [Secure Boot certificate guidance](https://aka.ms/getsecureboot). If a target device with Secure Boot turned on does not start the media, creating the media again with **PCA 2011** is a test worth making.
 
 ### Windows PE time zone
 
-With **Automatic**, Foundry looks up the time zone from the public IP address of the deployment network, once Foundry Connect has confirmed Internet access. If the lookup fails, Windows PE uses UTC. The services contacted are listed in [Network endpoints](../reference/network-endpoints.md).
+With **Automatic**, Foundry looks up the time zone on the target device, from the public IP address of the deployment network, once Foundry Connect has confirmed Internet access. If the lookup fails, Windows PE uses UTC. The services contacted are listed in [Network endpoints](../reference/network-endpoints.md).
 
 Select a time zone to skip the lookup, for example when the public IP address of the site is located in another region. This option affects Windows PE only, not the installed Windows.
 

@@ -10,7 +10,7 @@ Foundry needs a Windows workstation to create the deployment media, the media it
 | Administrator rights | Foundry OSD always runs elevated. Windows shows a UAC prompt at every start, and an account that cannot approve it cannot open the app. |
 | Free disk space | At least 20 GB free on the Windows system drive, and on the drive of the ISO file when you create an ISO. Foundry OSD checks this before it builds media. |
 | Windows ADK and Windows PE add-on | A supported version of both. Foundry OSD installs them for you from its [ADK](../foundry-osd/adk.md) page; the accepted versions are in [Supported versions](../reference/supported-versions.md#windows-adk). |
-| Microsoft runtimes | .NET 10 Desktop Runtime, Microsoft Edge WebView2 Runtime and Microsoft Visual C++ Redistributable 14.4. The installer adds the missing ones. |
+| Microsoft runtimes | .NET 10 Desktop Runtime, Microsoft Edge WebView2 Runtime and Microsoft Visual C++ Redistributable 14.4. The installer is built to download and install the ones that are missing, so keep the workstation online during setup. |
 | Internet access | To GitHub and Microsoft download sites, directly or through a proxy. See [Network endpoints](../reference/network-endpoints.md). |
 
 ## Deployment media
@@ -19,7 +19,7 @@ Choose one output, or both:
 
 | Output | Requirement |
 | --- | --- |
-| USB drive | 16 GB or larger. Foundry OSD refuses a smaller drive and erases the drive it creates. |
+| USB drive | 16 GB or larger. Foundry OSD refuses a smaller drive. Creating the media erases the drive. |
 | ISO file | A destination with at least 20 GB free. Use it for virtual machines, remote management consoles or [PXE](../foundry-osd/media/pxe-deployment.md). |
 
 [Start: create deployment media](../foundry-osd/media/README.md) explains what each output carries.

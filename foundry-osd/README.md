@@ -31,13 +31,13 @@ The bottom of the pane holds five more items:
 | **About** | Shows the version, the release notes, the contributors and the licenses. |
 | **Settings** | Opens the [Settings](settings.md) of the application itself. |
 
-Each configuration page also has a **Documentation** button at the top right that opens the page of this site about that screen.
+Each configuration page also has a **Documentation** button on the right of its header that opens the page of this site about that screen.
 
 ## Home
 
 **Home** summarizes the state of the workstation. Its four tiles are shortcuts: **Open ADK**, **Configure media** (opens **General**), **Review and start** (opens **Start**) and **Open documentation**.
 
-Under **Media readiness status**, three steps named **ADK**, **General** and **Start** each show **Ready** or **Needs attention**. While the ADK is not ready, **General** and **Start** show **Requires ADK**. The **ADK** card gives the installed version and the state of the Windows PE add-on. The **Configuration** card gives the architecture, the Windows PE language, the Secure Boot signature and the drivers chosen in **General**.
+Under **Media readiness status**, the **ADK** step shows **Ready** or the status of the ADK page, such as **ADK is not installed**. The **General** and **Start** steps show **Ready**, **Needs attention** or, while the ADK is not ready, **Requires ADK**. The **ADK** card gives the installed version and the state of the Windows PE add-on. The **Configuration** card gives the architecture, the Windows PE language, the Secure Boot signature and the drivers chosen in **General**.
 
 ## Status badges
 
@@ -46,7 +46,7 @@ A small colored badge can appear to the right of an item. Point at it to read it
 | Badge text | Shown on | Meaning |
 | --- | --- | --- |
 | **ADK ready** / **ADK not ready** | **ADK** | Whether Foundry OSD can create media. |
-| **Configured** | Network and Customization pages | The settings of the page are valid and the media will use them. |
+| **Configured** | Network and Customization pages | The settings of the page are valid, or left at their defaults, and the media will use them. |
 | **Active provisioning mode** | Windows Autopilot and Domain Join pages | This method is the one the media will use. |
 | **Needs attention** | Any page, including **General** | The feature is turned on but something is missing. Media creation is blocked until you fix it. |
 

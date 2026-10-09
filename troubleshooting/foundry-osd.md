@@ -33,14 +33,14 @@ Foundry OSD writes its log to `%ProgramData%\Foundry\Logs\Foundry.log` and keeps
 **Cause:**
 
 - The Windows elevation (UAC) prompt was declined, or the account cannot approve it. Foundry OSD only runs elevated.
-- A startup error. The log then contains "Foundry process bootstrap failed.", "Foundry WinUI launch failed." or "Unhandled WinUI exception.".
+- A startup error.
 
 **Fix:**
 
 1. Start Foundry OSD again and approve the prompt with an administrator account.
 2. If the window still does not appear, run the latest MSI again. See [Download and install](../start-here/download.md).
 
-**Collect:** `Foundry.log`.
+**Collect:** `Foundry.log`. A startup error is recorded as "Foundry process bootstrap failed.", "Foundry WinUI launch failed." or "Unhandled WinUI exception.".
 
 ## Most pages are grayed out <a href="#grayed-out" id="grayed-out"></a>
 
@@ -201,7 +201,7 @@ If only the architecture you do not use is incomplete, you can ignore the warnin
 
 **Where:** **Update** item at the bottom of the navigation pane, after you closed and reopened Foundry OSD.
 
-**Cause:** A second Foundry OSD window was open, so the update was not installed on closing or at startup.
+**Cause:** A second Foundry OSD window was open, so the update was not installed when you closed Foundry OSD. At the next start it is offered again as **Apply update**.
 
 **Fix:** Close every Foundry OSD window, or select **Apply update**.
 
@@ -242,7 +242,7 @@ If only the architecture you do not use is incomplete, you can ignore the warnin
 
 **Fix:**
 
-1. Type the proxy address as a host name or a URL without a path, for example `proxy.contoso.com`, and the port separately.
+1. Type the proxy address as a host name or a URL without a path, for example `proxy.contoso.com`, and the port in the **Port** field.
 2. Choose the **Authentication** your proxy expects.
 3. Check with your network team that the three hosts are allowed. See [Network endpoints](../reference/network-endpoints.md).
 

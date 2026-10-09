@@ -41,9 +41,9 @@ Use **Proxy** when the workstation reaches the Internet through a proxy. These s
 
 1. Choose a **Proxy method**: **Use Windows settings (recommended)**, **Manual proxy** or **No proxy (direct connection)**.
 2. For **Manual proxy** only, fill in:
-   - **Proxy server**: the address and the port (default 8080, from 1 to 65535). An address without `http://` or `https://` is treated as `http://`.
+   - **Proxy server**: the address, and the **Port** in its own field (default 8080, from 1 to 65535). An address without `http://` or `https://` is treated as `http://`.
    - **Bypass local addresses** (on by default) and **Bypass list**, for hosts to reach directly, separated by semicolons.
-   - **Authentication**: **Use current Windows credentials**, **No authentication** or **Username and password**. Credentials you type are stored in Windows Credential Manager.
+   - **Authentication**: **Use current Windows credentials**, **No authentication** or **Username and password**. With the last one, **Proxy credentials** asks for **Username**, **Password** and **Domain (optional)**, and stores them in Windows Credential Manager.
 3. Select **Test connection**. Foundry OSD tries `github.com`, `login.microsoftonline.com` and `graph.microsoft.com`, for up to 15 seconds each.
 4. Select **Apply**.
 
@@ -77,7 +77,7 @@ The **Update app** page shows **Installed version**, the available or latest ver
 
 If you start a media creation while an update is known, a dialog titled **Update Foundry OSD before creating boot media** offers **Apply update** (or **View update** while it is still downloading), **Create anyway** and **Cancel**. Applying first is the safe choice: the media then carries the latest fixes.
 
-An update is not installed on closing while a second Foundry OSD window is open. Close every window, or select **Apply update**.
+An update is not installed on closing while a second Foundry OSD window is open. See [The update stays on "Apply update"](../troubleshooting/foundry-osd.md#update-stays).
 
 ## Related
 
