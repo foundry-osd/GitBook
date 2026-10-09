@@ -40,3 +40,5 @@ Each feature has its own prerequisites, listed on its page:
 
 - [Windows Autopilot](../foundry-osd/autopilot/README.md): a Microsoft Entra tenant with Microsoft Intune, and rights that depend on the method you choose.
 - [Domain Join](../foundry-osd/domain-join/README.md): an Active Directory domain that the device can reach after the restart, and a join account allowed to join computers.
+
+Next: [Download and install](download.md).

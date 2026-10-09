@@ -17,7 +17,7 @@ Download Foundry OSD only from the official `foundry-osd/foundry` GitHub reposit
 
 ## Install Foundry OSD
 
-1. Check the [Requirements](requirements.md).
+1. Check that the workstation meets the [Requirements](requirements.md), if you have not done so yet.
 2. Run the MSI that matches the workstation processor. It installs Foundry OSD for all users of the workstation.
 3. Approve the Windows elevation (UAC) prompt.
 4. Foundry OSD needs three Microsoft runtimes. The installer is built to download and install the ones that are missing, so keep the workstation online during setup:
