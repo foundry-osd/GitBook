@@ -24,15 +24,19 @@ On **Summary**, the last step of the wizard, you check every choice, start the d
 
 To change a value, select **Edit** on its category, correct the step, then select **Return to summary**.
 
-A **Status** row in a category is a problem to solve before or after you select **Deploy**: for example "\<manufacturer>: no matching model or version" under **Drivers**, or the reason the launch was refused under **Target device**. See [Windows deployment troubleshooting](../troubleshooting/deployment.md).
+A **Status** row under **Target device**, **Drivers** or **Domain join** reports something that blocks **Deploy**, or the reason **Deploy** returned you to the summary: for example "\<manufacturer>: no matching model or version" under **Drivers**. See [Before the deployment starts](../troubleshooting/deployment/before-deployment-starts.md). Under **Windows customization**, **Status** only says whether anything is configured.
 
 ## Start the deployment
+
+{% hint style="danger" %}
+Selecting **Yes** in **Confirm disk erase** erases the disk it names. This is the point of no return for the data on that disk.
+{% endhint %}
 
 1. Select **Deploy**.
 2. Read **Confirm disk erase**. It names the disk number, model, bus and size, and the operating system to install.
 3. Select **Yes** only if the disk is the right one. **No** returns to the summary and changes nothing.
 
-**Accepting the confirmation is the point of no return for the data on that disk.** From then on, keep the device powered, the network connected and the deployment media in place until the deployment ends.
+From then on, keep the device powered, the network connected and the deployment media in place until the deployment ends.
 
 ## Follow progress
 
@@ -40,17 +44,17 @@ A **Status** row in a category is a problem to solve before or after you select 
 **Screenshot required**
 
 - **File:** `foundry-deploy-progress-01-running.png`
-- **Capture:** Show the progress page of a release build during **Apply Windows image**: the computer name, the **Session** block, the progress ring, the current step with its percentage, the **Steps** list with completed, running and pending steps, the step counter and the **Cancel** button. Hide the IP and MAC addresses.
+- **Capture:** Show the progress page of a release build during **Apply Windows image**: the computer name, the **Session** block, the progress ring, the current step with its percentage, the **Steps** list with completed, running and pending steps and at least one skipped step, the step counter and the **Cancel** button. Hide the IP and MAC addresses.
 {% endhint %}
 
-The progress page shows the computer name, the overall percentage, the current step and its own progress, and a counter such as "Step: 7 of 20". **Session** shows the network addresses, **Start time** and **Elapsed time**. **Steps** lists every step of this deployment with an icon for its state. Point at a step to read its result or the reason it was skipped.
+The progress page shows the computer name, the overall percentage, the current step and its own progress, and a counter such as "Step: 7 of 20". **Session** shows the network addresses, **Start time** and **Elapsed time**. **Steps** lists every step of this deployment with an icon next to its name. No word names the state: point at a step to read its result, or the reason it was skipped, in a tooltip.
 
-| Step state | Meaning |
-| --- | --- |
-| Completed | The step did its work. A step named "Stage ..." or "Prepare ..." only prepared work that runs in Windows after the restart. |
-| Skipped | The step had nothing to do, or could not do optional work, and the deployment continues. Read the reason. |
-| Failed | The deployment stopped at this step. See [Verify deployment](verify-deployment.md). |
-| Cancelled | You cancelled while this step was running. |
+| Step state | Icon | Meaning |
+| --- | --- | --- |
+| Completed | Green check mark | The step did its work. A step named "Stage ..." or "Prepare ..." only prepared work that runs in Windows after the restart. |
+| Skipped | Information sign in the accent colour | The step had nothing to do, or could not do optional work, and the deployment continues. Read the reason. |
+| Failed | Red error sign | The deployment stopped at this step. See [Verify deployment](verify-deployment.md). |
+| Cancelled | Cross | You cancelled while this step was running. |
 
 The number of steps depends on the media configuration and can change while the deployment runs, for example when no driver is found. It does not measure the remaining time.
 
@@ -65,21 +69,21 @@ Checking a large cached image takes time, especially on a slow USB drive. The st
 
 ### Automatic retries
 
-A download that fails on a connection error or a temporary server error is retried up to five times, ten seconds apart, before the step fails. Each attempt starts the file again from the beginning. A download that receives no data for two minutes stops with "The transfer timed out. Check your connection and try again." A certificate error is not retried.
+A download that fails on a connection error or a temporary server error is retried up to five times, ten seconds apart, before the step fails; a certificate error is not retried. What each download message means is in [Checks and image download](../troubleshooting/deployment/checks-and-image-download.md).
 
 ## Deployment steps
 
 <details>
 <summary>Every step, in order, with its condition</summary>
 
-The order below is the one used when the Windows image is checked before the disk is erased. On the other route, **Prepare target disk** comes before **Download Windows image**.
+The order below is the one used when the Windows image is checked before the disk is erased. On the other route, **Prepare target disk** comes before **Download Windows image**. Until **Check deployment setup** has finished, **Steps** always lists **Prepare target disk** first; the list is then put in the order that applies. The "Failed step: ..." line of the error screen uses the names below, with two exceptions noted in the table.
 
 | Step | Runs when | If it is skipped |
 | --- | --- | --- |
 | **Validate answer file** | A custom answer file is selected | Not skipped |
 | **Check deployment setup** | Always | Not skipped |
 | **Download Windows image** | A catalog image is selected | The image was in the cache and passed verification |
-| **Resolve custom image** | A custom image is selected. Replaces **Download Windows image** | Always shown as skipped: the image is read from the deployment media |
+| **Resolve custom image** | A custom image is selected. Replaces **Download Windows image**; the error screen still names it "Download Windows image" | Always shown as skipped: the image is read from the deployment media |
 | **Check Windows image** | Always | Not skipped |
 | **Prepare target disk** | Always. Erases and partitions the disk | Not skipped |
 | **Apply Windows image** | Always | Not skipped |
@@ -98,7 +102,7 @@ The order below is the one used when the Windows image is checked before the dis
 | **Configure Windows recovery** | Always | The applied image contains no `winre.wim`. The deployment continues and the device has no Windows Recovery Environment |
 | **Install recovery drivers** | Drivers were added to Windows before the restart | Same reason as **Configure Windows recovery** |
 | **Hide recovery partition** | Always | Not skipped |
-| **Copy Autopilot profile**, **Register Autopilot device** or **Prepare Autopilot assistant** | Autopilot is enabled. The name depends on the method | See [Windows Autopilot step](autopilot.md) |
+| **Copy Autopilot profile**, **Register Autopilot device** or **Prepare Autopilot assistant** | Autopilot is enabled. The name depends on the method. The error screen names all three "Provision Autopilot" | See [Windows Autopilot step](autopilot.md) |
 | **Finalize deployment** | Always | Not skipped |
 
 </details>
@@ -109,6 +113,6 @@ An image captured without `winre.wim` deploys correctly but leaves the device wi
 
 Select **Cancel** on the progress page, or close the window. There is no confirmation. Foundry shows "Cancellation requested. Waiting for the current operation to finish safely." and stops at once during a download or a check. Any other step finishes first.
 
-Cancelling does not undo anything. If **Prepare target disk** already ran, the screen says "Deployment stopped. The target disk may contain an incomplete installation." and the device may not start. Foundry Deploy does not restart the device after a cancellation and cannot resume: to deploy again, restart the device from the deployment media.
+Cancelling does not undo anything. The screen then says "Deployment stopped. The target disk may contain an incomplete installation." whatever the moment of the cancellation. The disk was erased only if **Prepare target disk** had already run: check **Steps**. Foundry Deploy does not restart the device after a cancellation and cannot resume: to deploy again, restart the device from the deployment media.
 
 Next: [Verify deployment](verify-deployment.md).

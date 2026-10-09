@@ -55,6 +55,6 @@ A notice next to the version number, "New version available. Update Foundry OSD 
 
 | What you see | Go to |
 | --- | --- |
-| The password is refused, or Foundry Deploy closes as soon as it opens | [Windows deployment troubleshooting](../troubleshooting/deployment.md) |
-| **Next** stays unavailable on **Target device** | [Windows deployment troubleshooting](../troubleshooting/deployment.md) |
+| The password is refused, or Foundry Deploy closes as soon as it opens | [Before the deployment starts](../troubleshooting/deployment/before-deployment-starts.md) |
+| **Next** stays unavailable on **Target device** | [Before the deployment starts](../troubleshooting/deployment/before-deployment-starts.md) |
 | **Deployment failed** | [Verify deployment](verify-deployment.md), then [Windows deployment troubleshooting](../troubleshooting/deployment.md) |

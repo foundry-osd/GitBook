@@ -54,6 +54,6 @@ How custom images are added to the media is described in [Custom Windows images]
 
 ## If something stops you
 
-A message under the image selectors, such as "The configured default image or index is unavailable. Choose an image and index explicitly.", blocks **Next** until you select an image and an index yourself. This message and the others are explained in [Windows deployment troubleshooting](../troubleshooting/deployment.md).
+A message under the image selectors, such as "The configured default image or index is unavailable. Choose an image and index explicitly.", blocks **Next** until you select an image and an index yourself. This message and the others are explained in [Before the deployment starts](../troubleshooting/deployment/before-deployment-starts.md).
 
 Next: [Select a driver pack](driver-pack.md).

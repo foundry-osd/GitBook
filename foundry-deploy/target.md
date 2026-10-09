@@ -52,6 +52,6 @@ The disk is converted to GPT and Windows is set up for UEFI boot. Just before er
 - An error message appears under **Answer file** or **Computer name**.
 - **Next** stays unavailable.
 
-Each case has an entry in [Windows deployment troubleshooting](../troubleshooting/deployment.md).
+Each case has an entry in [Before the deployment starts](../troubleshooting/deployment/before-deployment-starts.md).
 
 Next: [Select Windows](operating-system.md).

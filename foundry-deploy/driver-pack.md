@@ -37,7 +37,7 @@ When Foundry pre-selects a manufacturer, the model matches the device. When you 
 | A pack Foundry can unpack: Dell, HP, and any `.cab` or `.zip` pack | The same four steps. The drivers are in Windows before the restart. |
 | A pack that is an installer: Lenovo `.exe`, Surface `.msi` | **Download driver pack**, then **Stage driver installer**. The installer runs in Windows after the restart, before your organization's post-installation actions. |
 
-The search and the download need the network. Manufacturer packs are large, so allow time for the download. A pack already present in the USB drive's cache is verified and reused instead of downloaded.
+The search and the download need the network. Manufacturer packs are large, so allow time for the download. A pack already present in the [cache of the USB drive](../foundry-osd/media/README.md#what-each-media-type-carries), where Foundry keeps downloaded images and packs between deployments, is verified and reused instead of downloaded.
 
 If Microsoft Update Catalog cannot be reached, or returns no driver for the device, **Download driver pack** is skipped and the deployment continues without those drivers. The step shows the reason, for example "Microsoft Update Catalog is not reachable; skipping driver lookup." Check the step before you hand over the device: without a storage or network driver, Windows may not start or may have no network.
 
@@ -48,6 +48,6 @@ For a custom image, Foundry matches packs to the Windows release of the image bu
 - The summary shows "\<manufacturer>: no matching model or version" and **Deploy** stays unavailable.
 - **Download driver pack**, **Extract driver pack** or **Stage driver installer** fails.
 
-Both are covered in [Windows deployment troubleshooting](../troubleshooting/deployment.md). The catalogs themselves are described in [Catalogs](../reference/catalog.md).
+The first is covered in [Before the deployment starts](../troubleshooting/deployment/before-deployment-starts.md), the second in [After the disk is erased](../troubleshooting/deployment/after-disk-erase.md). The catalogs themselves are described in [Catalogs](../reference/catalog.md).
 
 Next: the [Windows Autopilot step](autopilot.md) or the [Domain Join step](domain-join.md) when the wizard shows one, otherwise [Review and deploy](review-and-deploy.md).
