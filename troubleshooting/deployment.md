@@ -5,7 +5,7 @@ Use this section when Foundry Deploy refuses to continue, shows **Deployment fai
 ## Start here
 
 1. On the **Deployment failed** screen, note the step on the "Failed step: ..." line and select **View error details** to read the complete message.
-2. Look at **Steps**. If the failed step is above **Prepare target disk**, the disk was not erased. If it is below, the disk was erased. If it is **Prepare target disk** itself, only "Disk partitioning failed ..." means the erase had started.
+2. Look at **Steps**. If the failed step is above **Prepare target disk**, the disk was not erased. If it is below, the disk was erased. If it is **Prepare target disk** itself, only "Disk partitioning failed ..." means the erase had started; with any other message, including "No drive letter is available ...", the disk is intact.
 3. Open the page for your case from the table below. Each page starts with an index of its messages.
 4. Collect the evidence before you turn the device off: logs kept in Windows PE memory are lost at the restart.
 

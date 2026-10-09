@@ -1,6 +1,6 @@
 # Checks and image download
 
-Failures of the first deployment steps: **Validate answer file**, **Check deployment setup**, **Download Windows image** (**Resolve custom image** for a custom image) and **Check Windows image**.
+Failures of the first deployment steps: **Validate answer file**, **Check deployment setup**, **Download Windows image** (**Resolve custom image** for a custom image) and **Check Windows image**, and the failures of **Prepare target disk** that happen before the erase.
 
 {% hint style="warning" %}
 On this page the disk may or may not have been erased. With an ISO, or a USB drive whose cache cannot hold the image, **Download Windows image** and **Check Windows image** run after **Prepare target disk**. Look at **Steps**: a failed step listed below **Prepare target disk** means the disk is erased.
@@ -22,6 +22,7 @@ On this page the disk may or may not have been erased. With an ISO, or a USB dri
 | "A secure connection could not be established. ..." | [Secure connection](#secure-connection) |
 | "The downloaded Windows image failed hash verification. ..." | [Image verification failed](#image-verification-failed) |
 | "Deployment readiness could not be confirmed. ..." | [Readiness not confirmed](#readiness-not-confirmed) |
+| "No drive letter is available for deployment partitions." | [No drive letter](#no-drive-letter) |
 | "Checking cache..." for a long time | [Cache check is slow](#cache-check-is-slow) |
 | "The disk identity is missing, ambiguous or has changed. ..." | [Before the deployment starts](before-deployment-starts.md#disk-identity) |
 
@@ -178,7 +179,7 @@ If the step shows "The selected answer file is unavailable, invalid, or incompat
 
 ## "A secure connection could not be established. Check the device date and time and the trusted certificates in your boot media, including any HTTPS proxy certificate." <a href="#secure-connection" id="secure-connection"></a>
 
-**Where:** **Check deployment setup** or any download step. This error is not retried.
+**Where:** **Check deployment setup**, **Prepare target disk** (before the erase) or any download step. This error is not retried.
 
 **Cause:**
 
@@ -214,6 +215,16 @@ If the step shows "The selected answer file is unavailable, invalid, or incompat
 **Fix:** reconnect the deployment media, check its connector or port, then restart from it and deploy again.
 
 **Collect:** the standard set.
+
+## "No drive letter is available for deployment partitions." <a href="#no-drive-letter" id="no-drive-letter"></a>
+
+**Where:** **Prepare target disk**, before anything is written. Disk not erased.
+
+**Cause:** Foundry needs free drive letters for the partitions it is about to create, and every letter from D to Z is in use.
+
+**Fix:** disconnect storage and card readers you do not need, then restart from the deployment media and deploy again.
+
+**Collect:** the standard set, and the list of drives connected to the device.
 
 ## "Checking cache..." stays on screen for a long time <a href="#cache-check-is-slow" id="cache-check-is-slow"></a>
 

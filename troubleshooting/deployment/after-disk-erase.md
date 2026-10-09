@@ -34,8 +34,6 @@ The error screen names the Autopilot step "Provision Autopilot". **Steps** shows
 
 **Cause:** DiskPart could not clean, convert or format the disk: a failing disk, a hardware write protection, a locked self-encrypting drive, or a RAID volume the controller does not let Windows PE repartition.
 
-The same step can show "No drive letter is available for deployment partitions." when every drive letter is in use. With this message the disk has not been touched: disconnect storage and card readers you do not need, then deploy again.
-
 **Fix:**
 
 1. Read the DiskPart output in **View error details** to see which operation failed.
