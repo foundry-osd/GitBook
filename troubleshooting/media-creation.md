@@ -1,41 +1,32 @@
 # Media creation troubleshooting
 
-Use this page when Foundry OSD does not let you create an ISO or a USB drive, when a creation ends with "Final media creation failed.", or when the media does not start a device. For the ADK, the proxy, updates and the options of **General**, see [Foundry OSD application troubleshooting](foundry-osd.md).
+Use this page when Foundry OSD does not let you create an ISO or a USB drive, when a creation ends with "Final media creation failed.", or when the media does not start a device. For the ADK page, the proxy, updates and the options of **General**, see [Foundry OSD application troubleshooting](foundry-osd.md).
 
-A failure shows in one of two places:
+A failure shows in a dialog titled **ISO creation is blocked** or **USB creation is blocked**, before anything is written, or in the **Operation complete** dialog, as "Final media creation failed." followed by the reason. Most reasons are in English whatever the language of Foundry OSD, and some are followed by the output of a Windows tool.
 
-- A dialog titled **ISO creation is blocked** or **USB creation is blocked**, before anything is written.
-- The **Operation complete** dialog, as "Final media creation failed." followed by the reason. Most reasons are in English whatever the language of Foundry OSD, and some are followed by the raw output of a Windows tool.
-
-Foundry OSD writes its log to `%ProgramData%\Foundry\Logs\Foundry.log`; the line "Final boot media operation failed" carries the failed step. Windows image errors are also in `%SystemRoot%\Logs\DISM\dism.log`. See [Log locations](logs-and-support.md#log-locations).
+The log is `%ProgramData%\Foundry\Logs\Foundry.log`; its line "Final boot media operation failed" names the failed step. Windows image errors are also in `%SystemRoot%\Logs\DISM\dism.log`. See [Log locations](logs-and-support.md#log-locations).
 
 ## Find your symptom
 
 | What you see | Go to section |
 | --- | --- |
-| **Create ISO** or **Create USB** cannot be selected | [The button stays unavailable](#button-unavailable) |
-| A dialog offering **Create anyway** | [Update Foundry OSD before creating boot media](#update-advisory) |
+| **Create ISO** or **Create USB** cannot be selected, or a dialog lists reasons | [The button stays unavailable](#button-unavailable) |
+| A dialog offering **Create anyway** | [Update Foundry OSD](#update-advisory) |
 | "Not enough disk space to create the boot image..." | [Not enough disk space](#not-enough-disk-space) |
-| "WinPE servicing is blocked..." | [An earlier image cleanup has no confirmed completion](#servicing-blocked) |
-| "Windows blocked access to the WinPE image files..." | [Windows blocked access](#access-blocked) |
-| "Failed to create WinPE workspace using copype.cmd.", or a component "was not found" | [An ADK component is missing](#adk-component) |
-| "PCA2023 requires /bootex support..." | [PCA2023 requires /bootex support](#bootex) |
-| "Failed to mount boot.wim." or "Failed to commit..." | [The boot image cannot be mounted or saved](#mount-failed) |
-| "Failed to retrieve...", "Failed to download...", "Failed to prepare Foundry runtime payloads." | [A catalog or a download cannot be reached](#download-failed) |
-| "The transfer timed out..." | [The transfer timed out](#timed-out) |
-| A message about the Windows source for a Wi-Fi or `arm64` build | [The Windows package for the boot image is refused](#windows-source) |
-| A driver package that cannot be extracted or injected | [A driver cannot be added](#driver-failed) |
-| "Custom drivers total at least..." or "...exceed the entry limit..." | [The custom driver folder is too large](#drivers-too-large) |
-| "Foundry could not replace the ISO file..." | [The ISO file cannot be replaced](#iso-locked) |
-| "Unexpected failure while creating WinPE ISO media." | [Unexpected failure while creating the ISO](#iso-unexpected) |
+| "WinPE servicing is blocked..." | [Image cleanup not confirmed](#servicing-blocked) |
+| "Windows blocked access to the WinPE image files...", "Failed to mount boot.wim." | [Image files are locked](#access-blocked) |
+| "Failed to create WinPE workspace using copype.cmd.", a component "was not found", "PCA2023 requires..." | [The ADK lacks a component](#adk-component) |
+| "Failed to retrieve...", "Failed to download...", "The transfer timed out..." | [A download fails](#download-failed) |
+| A Windows source or driver package that is refused | [A downloaded package is refused](#package-refused) |
+| "Custom drivers total at least...", "The USB BOOT partition needs approximately..." | [Drivers or boot files are too large](#too-large) |
+| "Foundry could not replace the ISO file...", "Unexpected failure while creating WinPE ISO media." | [The ISO cannot be written](#iso-failed) |
 | The USB drive is not in the list | [The USB drive is not listed](#usb-not-listed) |
-| "The USB drive identity is missing, ambiguous or has changed..." or "...no longer safe to modify..." | [The USB drive changed](#usb-identity) |
-| "The USB BOOT partition needs approximately..." | [The boot files do not fit](#boot-capacity) |
+| "The USB drive identity is missing, ambiguous or has changed..." | [The USB drive changed](#usb-identity) |
 | "Failed to partition and format the USB disk." or another USB write failure | [The USB drive cannot be written](#usb-write) |
-| "Selected USB media is not a Foundry USB media." or "...did not return assigned drive letters." | [The USB drive cannot be updated](#usb-update) |
-| "Custom Windows image media preparation failed." | [Content cannot be copied to the USB drive](#usb-content) |
-| The device does not start from the media | [The device does not start from the media](#does-not-boot) |
-| After a PXE start, "Post-installation preparation failed..." | [PXE: post-installation preparation failed](#pxe) |
+| "Selected USB media is not a Foundry USB media." | [The USB drive cannot be updated](#usb-update) |
+| "Custom Windows image media preparation failed." | [Content cannot be copied to the media](#media-content) |
+| The device does not start from the media | [The device does not start](#does-not-boot) |
+| After a PXE start, "Post-installation preparation failed..." | [PXE start](#pxe) |
 
 ## The button stays unavailable <a href="#button-unavailable" id="button-unavailable"></a>
 
@@ -43,27 +34,27 @@ Foundry OSD writes its log to `%ProgramData%\Foundry\Logs\Foundry.log`; the line
 
 **Cause:**
 
-- A row is marked **Needs attention**. The bar at the top reads **Readiness items needing action:** with a number.
+- A row is marked **Needs attention**; the bar at the top reads **Readiness items needing action:** with a number.
 - For **Create ISO**: the **ISO output** path is empty or does not end with `.iso`.
 - For **Create USB**: no drive is selected, or the drive is smaller than 16 GB.
 
 **Fix:**
 
-1. Expand each group and select the **Review** button of every row marked **Needs attention**. For a **Windows Autopilot** row, see [Windows Autopilot troubleshooting](autopilot.md); for a **General** row, see [Foundry OSD application troubleshooting](foundry-osd.md).
+1. In each group, select the **Review** button of every row marked **Needs attention** and complete that page.
 2. Type a path that ends with `.iso`, or select **Browse**.
 3. Select a USB drive of 16 GB or more.
 
-If the state changes between your click and the start, the same causes appear in a dialog titled **ISO creation is blocked** or **USB creation is blocked**, for example "ISO output path must end with .iso." or "The selected USB target is too small. Use a USB key of at least 16 GB.".
+If something changes between your click and the start, a dialog titled **ISO creation is blocked** or **USB creation is blocked** lists the same reasons, for example "ISO output path must end with .iso." or "Deploy configuration generation is not ready.". For the latter with Windows Autopilot, see [Windows Autopilot troubleshooting](autopilot.md).
 
 **Collect:** Nothing.
 
 ## "Update Foundry OSD before creating boot media" <a href="#update-advisory" id="update-advisory"></a>
 
-**Where:** Dialog shown when you select **Create ISO**, **Create USB** or **Update USB**. It names the version in use and the version available.
+**Where:** Dialog shown when you select **Create ISO**, **Create USB** or **Update USB**.
 
 **Cause:** A newer Foundry OSD is available. This is advice, not a failure.
 
-**Fix:** Select **Apply update** to install it and restart Foundry OSD, then create the media. The button reads **View update** while the update is not ready to be applied; it opens the update page of **Settings**. **Create anyway** creates the media with the current version; **Cancel** does nothing.
+**Fix:** Select **Apply update**, or **View update** while the update is not ready, then create the media with the new version. **Create anyway** uses the current version.
 
 **Collect:** Nothing.
 
@@ -71,221 +62,141 @@ If the state changes between your click and the start, the same causes appear in
 
 **Where:** Dialog **ISO creation is blocked** or **USB creation is blocked**. A second form is "The available disk space for boot image creation could not be verified on \<volume\>. Check that the location is accessible and try again."
 
-**Cause:** Before every creation, Foundry OSD requires 20 GB free on each drive that holds one of these locations:
+**Cause:** Before every creation, Foundry OSD requires 20 GB free on each drive that holds `%ProgramData%\Foundry`, `%LocalAppData%\Foundry`, `%TEMP%` or `%SystemRoot%\Temp`, and on the drive of the ISO file.
 
-- `%ProgramData%\Foundry\Workspaces`, and `%ProgramData%\Foundry\Cache` when the media uses Wi-Fi, `arm64`, or **Dell** or **HP** drivers
-- `%LocalAppData%\Foundry\BuildSnapshots`
-- `%TEMP%` and `%SystemRoot%\Temp`
-- the folder of the ISO file, for an ISO
-
-**Fix:**
-
-1. Free space on the volume named in the message.
-2. For an ISO, choose an output folder on a drive with 20 GB free, or check that the network share answers.
+**Fix:** Free space on the volume named in the message. For an ISO, you can also choose another output folder, or check that the network share answers.
 
 **Collect:** `Foundry.log`, line "Boot media creation was blocked by local storage validation".
 
 ## "WinPE servicing is blocked because an earlier image cleanup has no confirmed completion." <a href="#servicing-blocked" id="servicing-blocked"></a>
 
-**Where:** **Operation complete** dialog, at the start of a creation. The message goes on with "Retained operation: '\<folder\>'. Cleanup marker: '\<file\>'. Preserve this workspace until cleanup can be verified." and a numbered procedure.
+**Where:** **Operation complete** dialog, at the start of a creation, followed by "Retained operation: '\<folder\>'. Cleanup marker: '\<file\>'. Preserve this workspace until cleanup can be verified." and a numbered procedure.
 
-**Cause:** During an earlier creation, Windows did not confirm that the boot image was unmounted: the DISM command exceeded 15 minutes, or Foundry OSD was closed while it ran. Foundry OSD keeps that working folder under `%ProgramData%\Foundry\Workspaces` and refuses to service another image until the old one is released.
+**Cause:** During an earlier creation, Windows did not confirm that the boot image was unmounted: the DISM command exceeded 15 minutes, or Foundry OSD was closed while it ran. Foundry OSD keeps that working folder and services no other image until the old one is released.
 
-At the start of each creation, Foundry OSD first tries to recover by itself:
+Each creation first tries to recover: the block is lifted if Windows no longer reports the image as mounted; otherwise Foundry OSD discards the image once, which can take 15 minutes. You see the message only when both fail, so try once more first.
 
-- If Windows no longer reports the image as mounted, the block is lifted and the old folder is deleted.
-- If the image is still mounted, Foundry OSD discards it once, which can take up to 15 minutes.
-
-You see this message only when both fail. Each new attempt runs this recovery again, so try once more before the manual procedure.
-
-**Fix:** The dialog shows the procedure, with the real path. If another Foundry media operation is still running, let it finish and start the operation again. Otherwise, recover manually:
+**Fix:** The dialog gives the procedure with the real path. If another Foundry media operation is still running, let it finish and start the operation again. Otherwise, recover manually:
 
 1. Restart Windows.
 2. From an elevated command prompt, run: `dism /Unmount-Image /MountDir:"<mount path>" /Discard`
 3. Run: `dism /Cleanup-Mountpoints`
 4. Start the operation again.
 
-At that start, Foundry OSD finds the image released and removes the block.
+When the dialog says that the cleanup marker does not name a mount directory, it shows other steps: after the restart, run `dism /Get-MountedImageInfo`, discard each mount directory listed inside the retained operation, run `dism /Cleanup-Mountpoints`, delete the cleanup marker file, then start again.
 
-When the dialog starts with "The cleanup marker does not name a mount directory inside this operation, so the cleanup cannot be verified automatically.", it shows five steps instead:
-
-1. Restart Windows.
-2. From an elevated command prompt, run: `dism /Get-MountedImageInfo`
-3. For each mount directory listed inside the retained operation, run: `dism /Unmount-Image /MountDir:<mount directory> /Discard`
-4. Run: `dism /Cleanup-Mountpoints`
-5. Delete the cleanup marker file, then start the operation again.
-
-Do not delete the retained folder yourself while an image may still be mounted in it.
-
-A rarer form, "WinPE servicing is blocked because retained operation cleanup could not be safely inspected.", means Foundry OSD could not examine `%ProgramData%\Foundry\Workspaces`. The dialog adds the reason.
+Do not delete the retained folder yourself.
 
 **Collect:** The full text of the dialog, `Foundry.log` and `dism.log`.
 
 ## "Windows blocked access to the WinPE image files. Security software or another tool may be locking them. Add a security software exclusion for \<folder\>, close tools that mount images, restart the computer, and try again. Details are in \<log\> and \<log\>." <a href="#access-blocked" id="access-blocked"></a>
 
-**Where:** **Operation complete** dialog, while the working folder is created or the boot image is mounted.
+**Where:** **Operation complete** dialog. Related forms, followed by the output of DISM: "Failed to mount boot.wim.", "Failed to commit mounted boot.wim changes." and "Failed to discard mounted boot.wim changes."
 
 **Cause:**
 
 - Antivirus or endpoint protection software scans or locks files under `%ProgramData%\Foundry`.
-- Another imaging tool has an image mounted or a handle open on the same files.
+- Another program has the working folder open or an image mounted.
 
 **Fix:**
 
 1. Add an exclusion for `%ProgramData%\Foundry` in your security software.
-2. Close other tools that mount Windows images, and File Explorer windows opened in that folder.
-3. Restart the workstation and create the media again.
-
-**Collect:** The two logs named in the message: `Foundry.log` and `dism.log`.
-
-## "Failed to create WinPE workspace using copype.cmd." <a href="#adk-component" id="adk-component"></a>
-
-**Where:** **Operation complete** dialog. Other forms: "WinPE workspace was created but boot.wim was not found.", "The selected WinPE language pack was not found.", "The WinPE optional components folder was not found.", "The required '\<name\>' WinPE optional component was not found.", and, with zero-touch Windows Autopilot, "OA3Tool executable was not found for the selected WinPE architecture."
-
-**Cause:** A file of the Windows ADK or of the Windows PE add-on is missing or damaged for the architecture selected in **General**.
-
-**Fix:**
-
-1. Open the [ADK](../foundry-osd/adk.md) page and repair or reinstall the components it reports.
-2. If the page reports **ADK is ready**, check that the architecture selected in **General** is the one you intend, then create the media again.
-
-**Collect:** `Foundry.log`, and the text shown after the message.
-
-## "PCA2023 requires /bootex support in the WinPE workspace." <a href="#bootex" id="bootex"></a>
-
-**Where:** **Operation complete** dialog. For a USB drive: "PCA2023 USB creation requires BootEx EFI binaries in the WinPE workspace."
-
-**Cause:** **Secure Boot** is on in **General**, which signs the boot files with **PCA 2023**, and the installed ADK cannot produce such media.
-
-**Fix:**
-
-1. Install the ADK version given in [Windows ADK](../reference/supported-versions.md#windows-adk) from the [ADK](../foundry-osd/adk.md) page.
-2. Or turn **Secure Boot** off in **General** to use **PCA 2011**.
-
-**Collect:** `Foundry.log`.
-
-## "Failed to mount boot.wim." <a href="#mount-failed" id="mount-failed"></a>
-
-**Where:** **Operation complete** dialog, followed by the output of DISM. Other forms: "Failed to commit mounted boot.wim changes." and "Failed to discard mounted boot.wim changes."
-
-**Cause:** DISM could not mount, save or release the boot image, most often because another program uses the working folder.
-
-**Fix:**
-
-1. Close File Explorer windows, terminals and imaging tools that use `%ProgramData%\Foundry\Workspaces`.
-2. Create the media again.
-3. If the next attempt reports ["WinPE servicing is blocked..."](#servicing-blocked), follow that section.
+2. Close imaging tools, terminals and File Explorer windows opened in that folder.
+3. Restart the workstation and create the media again. If it then reports "WinPE servicing is blocked...", see [the previous entry](#servicing-blocked).
 
 **Collect:** `Foundry.log` and `dism.log`.
 
-## "Failed to retrieve the WinPE driver catalog." <a href="#download-failed" id="download-failed"></a>
+## "Failed to create WinPE workspace using copype.cmd." <a href="#adk-component" id="adk-component"></a>
 
-**Where:** **Operation complete** dialog. Other forms: "Failed to parse the WinPE driver catalog.", "Driver package download failed.", "Failed to download driver package.", "Failed to download the operating system catalog.", "Failed to acquire a verified Windows source package.", "Failed to prepare Foundry runtime payloads." and "Failed to provision Foundry runtime payloads."
+**Where:** **Operation complete** dialog. Other forms: "WinPE workspace was created but boot.wim was not found.", "The selected WinPE language pack was not found.", "The WinPE optional components folder was not found.", "The required '\<name\>' WinPE optional component was not found.", "OA3Tool executable was not found for the selected WinPE architecture.", "PCA2023 requires /bootex support in the WinPE workspace." and "PCA2023 USB creation requires BootEx EFI binaries in the WinPE workspace."
 
-**Cause:** The workstation cannot reach a host that this build needs:
+**Cause:**
 
-- The catalogs on `raw.githubusercontent.com`, needed only when the media uses **Dell** or **HP** drivers, Wi-Fi or `arm64`. A build can therefore fail the day after you turn on Wi-Fi.
-- The download servers of Dell, HP or Microsoft.
-- GitHub, for the Foundry applications.
+- A file of the Windows ADK or of the Windows PE add-on is missing or damaged for the architecture selected in **General**.
+- For the two PCA2023 messages: **Secure Boot** is on in **General**, and the installed ADK cannot produce media signed with **PCA 2023**.
 
 **Fix:**
 
-1. Open **Settings** > **Proxy**, set the proxy of your network and select **Test connection**, then **Apply**.
-2. Allow the hosts of the workstation listed in [Network endpoints](../reference/network-endpoints.md).
+1. Open the [ADK](../foundry-osd/adk.md) page and repair or reinstall what it reports. The accepted version is in [Windows ADK](../reference/supported-versions.md#windows-adk).
+2. For the PCA2023 messages, you can instead turn **Secure Boot** off in [General](../foundry-osd/general.md) to sign with **PCA 2011**.
+
+**Collect:** `Foundry.log`, and the text shown after the message.
+
+## "Failed to retrieve the WinPE driver catalog." <a href="#download-failed" id="download-failed"></a>
+
+**Where:** **Operation complete** dialog. Other forms: "Failed to parse the WinPE driver catalog.", "Driver package download failed.", "Failed to download driver package.", "Failed to download the operating system catalog.", "Failed to acquire a verified Windows source package.", "Failed to prepare Foundry runtime payloads.", "Failed to provision Foundry runtime payloads." and "The transfer timed out. Check your connection and try again."
+
+**Cause:** The workstation cannot reach a host this build needs, or a download received no data for two minutes.
+
+- The [catalogs](../reference/catalog.md) on `raw.githubusercontent.com` are needed only with **Dell** or **HP** drivers, Wi-Fi or `arm64`. A build can therefore fail the day after you turn on Wi-Fi.
+- The other hosts are GitHub and the download servers of Dell, HP and Microsoft.
+
+**Fix:**
+
+1. Open **Settings** > **Proxy**, set the proxy of your network, select **Test connection**, then **Apply**.
+2. Allow the workstation hosts listed in [Network endpoints](../reference/network-endpoints.md).
 3. Create the media again. Files already downloaded are reused.
 
 **Collect:** `Foundry.log`.
 
-## "The transfer timed out. Check your connection and try again." <a href="#timed-out" id="timed-out"></a>
+## "Failed to prepare boot image dependencies from every matching operating system source." <a href="#package-refused" id="package-refused"></a>
 
-**Where:** **Operation complete** dialog.
-
-**Cause:** A download received no data for two minutes. There is no limit on the total duration while data keeps arriving.
-
-**Fix:**
-
-1. Check the connection and the proxy of the workstation, and its free disk space.
-2. Create the media again.
-
-**Collect:** `Foundry.log`.
-
-## "No Windows 11 24H2 Windows source matched the requested architecture and language." <a href="#windows-source" id="windows-source"></a>
-
-**Where:** **Operation complete** dialog, only for media that uses Wi-Fi or `arm64`. Another form is "Failed to prepare boot image dependencies from every matching operating system source.", followed by lines such as "The cached Windows source package failed hash validation." or "The selected operating system image does not contain winre.wim."
-
-**Cause:** These builds take files from a Windows 11 package of several GB, chosen in the [catalog](../reference/catalog.md) for the **Architecture** and the **WinPE boot language** of **General**.
-
-- First message: no package exists for that language.
-- Second form: the downloaded package could not be used, for example because it is damaged.
-
-**Fix:**
-
-1. For the first message, choose in **General** a **WinPE boot language** that Windows 11 is published in.
-2. For the second form, close Foundry OSD, delete `%ProgramData%\Foundry\Cache\WindowsSources`, and create the media again.
-
-**Collect:** `Foundry.log`.
-
-## "Failed to extract driver package with bundled 7-Zip." <a href="#driver-failed" id="driver-failed"></a>
-
-**Where:** **Operation complete** dialog. Other forms: "Executable driver package was extracted with 7-Zip but no INF files were found.", "Unsupported driver package format." and "Failed to inject driver package into the mounted image."
+**Where:** **Operation complete** dialog. Other forms: "No Windows 11 24H2 Windows source matched the requested architecture and language.", "The cached Windows source package failed hash validation.", "Failed to extract driver package with bundled 7-Zip.", "Executable driver package was extracted with 7-Zip but no INF files were found.", "Unsupported driver package format." and "Failed to inject driver package into the mounted image."
 
 **Cause:**
 
+- Media with Wi-Fi or `arm64` takes files from a Windows 11 package of several GB, chosen for the **Architecture** and the **WinPE boot language** of **General**. No package exists for that language, or the downloaded one is damaged.
 - A downloaded **Dell** or **HP** driver package is damaged.
 - A driver of your **Custom driver folder** is refused by Windows PE.
 
 **Fix:**
 
-1. Close Foundry OSD, delete `%ProgramData%\Foundry\Cache\WinPeDrivers`, and create the media again.
-2. If the failure concerns the custom folder, remove the driver named in `dism.log` from it.
+1. For "No Windows 11 24H2 Windows source matched...", choose a **WinPE boot language** in which Windows 11 is published.
+2. Otherwise, close Foundry OSD, delete `%ProgramData%\Foundry\Cache\WindowsSources` or `%ProgramData%\Foundry\Cache\WinPeDrivers`, and create the media again.
+3. If a custom driver is refused, remove the driver named in `dism.log` from the folder.
 
 **Collect:** `Foundry.log` and `dism.log`.
 
-## "Custom drivers total at least \<size\>; the maximum is \<size\>. Select only the network and storage drivers needed by Windows PE." <a href="#drivers-too-large" id="drivers-too-large"></a>
+## "Custom drivers total at least \<size\>; the maximum is \<size\>. Select only the network and storage drivers needed by Windows PE." <a href="#too-large" id="too-large"></a>
 
-**Where:** **Operation complete** dialog. A second form is "Custom driver snapshots exceed the entry limit or contain a reparse point."
-
-**Cause:** The **Custom driver folder** of **General**, subfolders included, exceeds 2 GiB or 10,000 files and folders, or contains a junction or a symbolic link. The size in the message is what was counted when the check stopped; the folder can be larger.
-
-**Fix:** Point **Custom driver folder** to a plain folder that holds only the network and storage drivers Windows PE needs.
-
-**Collect:** Nothing.
-
-## "Foundry could not replace the ISO file at \<path\>. The file may be mounted, attached to a virtual machine, open in another program, or read-only. Unmount or close it, or choose another output path, then try again." <a href="#iso-locked" id="iso-locked"></a>
-
-**Where:** **Operation complete** dialog, at the end of an ISO creation.
-
-**Cause:** The new ISO was built, but the previous file of the same name could not be replaced after three attempts. The previous file is intact.
-
-**Fix:**
-
-1. Eject the ISO in File Explorer, or detach it from the virtual machine that uses it.
-2. Or type another path in **ISO output**.
-3. Select **Create ISO** again.
-
-**Collect:** Nothing.
-
-## "Unexpected failure while creating WinPE ISO media." <a href="#iso-unexpected" id="iso-unexpected"></a>
-
-**Where:** **Operation complete** dialog, followed by a technical error text. Read its first line.
+**Where:** **Operation complete** dialog. Other forms: "Custom driver snapshots exceed the entry limit or contain a reparse point.", "The USB BOOT partition needs approximately \<size\>, but its capacity is \<size\>. Nothing has been erased or formatted. Reduce customizations or drivers, or create an ISO.", "The USB BOOT partition capacity could not be verified. Nothing has been erased or formatted. Check and reconnect the USB drive, then retry. Also check that the source files are accessible." and "A boot media file is \<size\>; FAT32 supports at most \<size\> per file. Reduce the boot image size or create an ISO."
 
 **Cause:**
 
-- "Insufficient free space for custom-image ISO staging and atomic output publication.": the working drive or the output drive lacks room for the ISO. The wording mentions custom images even when you use none.
-- "The custom-image ISO exceeds the FAT32 output file-size limit.": the ISO is larger than 4 GiB and the output drive is FAT32.
+- The **Custom driver folder**, subfolders included, exceeds 2 GiB or 10,000 files and folders, or contains a junction or a symbolic link. The size shown is what was counted when the check stopped.
+- On a USB drive, the boot files do not fit the **BOOT** partition, which is 2 GiB whatever the size of the drive.
+
+**Fix:**
+
+1. Point **Custom driver folder** to a plain folder with only the network and storage drivers Windows PE needs, and turn off the **Driver options** you do not need.
+2. For the **BOOT** partition messages, you can instead [create an ISO](../foundry-osd/media/create-iso.md).
+3. For "could not be verified", reconnect the drive, select **Refresh** and start again.
+
+**Collect:** Nothing.
+
+## "Foundry could not replace the ISO file at \<path\>. The file may be mounted, attached to a virtual machine, open in another program, or read-only. Unmount or close it, or choose another output path, then try again." <a href="#iso-failed" id="iso-failed"></a>
+
+**Where:** **Operation complete** dialog, at the end of an ISO creation. Another form is "Unexpected failure while creating WinPE ISO media.", followed by a technical text: read its first line.
+
+**Cause:**
+
+- First message: the previous ISO of the same name is in use and could not be replaced. It is intact.
+- "Insufficient free space for custom-image ISO staging and atomic output publication.": the working drive or the output drive lacks room. The wording mentions custom images even when you use none.
+- "The custom-image ISO exceeds the FAT32 output file-size limit.": the ISO exceeds 4 GiB and the output drive is FAT32.
 - "The ADK Oscdimg tool is required to create media containing custom images.": a tool of the ADK is missing.
 
 **Fix:**
 
-1. Free space in `%ProgramData%\Foundry\Workspaces` and in the output folder, or choose another output folder.
-2. Save the ISO on an NTFS drive or a network share.
-3. For the third text, repair or reinstall the ADK from the [ADK](../foundry-osd/adk.md) page.
+1. Eject the ISO in File Explorer or detach it from the virtual machine, or type another path in **ISO output**.
+2. Free space in `%ProgramData%\Foundry\Workspaces` and in the output folder.
+3. Save the ISO on an NTFS drive or a network share.
+4. Repair the ADK from the [ADK](../foundry-osd/adk.md) page.
 
 **Collect:** The full text of the dialog and `Foundry.log`.
 
 ## The USB drive is not listed <a href="#usb-not-listed" id="usb-not-listed"></a>
 
-**Where:** **Start**, **USB target** card. Under the title, the card reads "No USB drives were found.", "USB targets can be refreshed after ADK readiness is complete.", "USB target refresh failed." or "A required PowerShell USB query command failed."
+**Where:** **Start**, **USB target** card, which reads "No USB drives were found.", "USB targets can be refreshed after ADK readiness is complete.", "USB target refresh failed." or "A required PowerShell USB query command failed."
 
 **Cause:**
 
@@ -293,11 +204,7 @@ A rarer form, "WinPE servicing is blocked because retained operation cleanup cou
 - The drive is not connected through USB, is the system disk, or is reported by Windows as not removable, as some USB hard disks and SSD enclosures are.
 - The ADK is not ready, or the Windows storage commands failed.
 
-**Fix:**
-
-1. Select **Refresh**.
-2. Use a removable USB flash drive, on another port if needed.
-3. If the card names the ADK, open the [ADK](../foundry-osd/adk.md) page.
+**Fix:** Select **Refresh**. Use a removable USB flash drive, on another port if needed. If the card names the ADK, open the [ADK](../foundry-osd/adk.md) page.
 
 **Collect:** `Foundry.log` when the card reports a failure.
 
@@ -305,52 +212,31 @@ A rarer form, "WinPE servicing is blocked because retained operation cleanup cou
 
 **Where:** Dialog **USB creation is blocked**, or **Operation complete** dialog. A related form is "The selected USB drive is no longer safe to modify. Refresh the USB drive list and select another USB drive."
 
-**Cause:** Foundry OSD checks the drive again before it writes, and stops when it is not sure to hold the drive you selected:
+**Cause:** Foundry OSD checks the drive again before it writes, and stops when it is not sure to hold the drive you selected. Nothing has been erased.
 
-- The drive was unplugged, swapped or reconnected, so its disk number, name, serial number or size changed.
+- The drive was unplugged, swapped or reconnected.
 - Two identical drives without a serial number are connected.
-- For the second message: the disk is no longer a removable USB disk of 16 GB or more, or became a system disk.
+- Second message: the disk is no longer a removable USB disk of 16 GB or more.
 
-Nothing has been erased.
-
-**Fix:**
-
-1. Disconnect other USB drives of the same model.
-2. Select **Refresh**, select the drive again, and start again.
-3. Keep the drive connected until the end.
+**Fix:** Disconnect other USB drives of the same model, select **Refresh**, select the drive again, and keep it connected until the end.
 
 **Collect:** `Foundry.log`.
 
-## "The USB BOOT partition needs approximately \<size\>, but its capacity is \<size\>. Nothing has been erased or formatted. Reduce customizations or drivers, or create an ISO." <a href="#boot-capacity" id="boot-capacity"></a>
-
-**Where:** **Operation complete** dialog. Other forms: "The USB BOOT partition capacity could not be verified. Nothing has been erased or formatted. Check and reconnect the USB drive, then retry. Also check that the source files are accessible." and "A boot media file is \<size\>; FAT32 supports at most \<size\> per file. Reduce the boot image size or create an ISO."
-
-**Cause:** The boot files must fit the **BOOT** partition, which is 2 GiB whatever the size of the drive, and no file can exceed 4 GiB. Drivers added to Windows PE are the usual reason.
-
-**Fix:**
-
-1. Turn off the driver sets you do not need in **General** > **Driver options**, and reduce the **Custom driver folder**.
-2. Or [create an ISO](../foundry-osd/media/create-iso.md), which has no such limit.
-3. For the "could not be verified" form, reconnect the drive, select **Refresh** and start again.
-
-**Collect:** Nothing.
-
 ## "Failed to partition and format the USB disk." <a href="#usb-write" id="usb-write"></a>
 
-**Where:** **Operation complete** dialog, followed by the output of the Windows storage commands, for example "Timed out waiting for BOOT volume X: to become available." or "BOOT partition was created without a drive letter." Other forms: "Failed to format the USB BOOT partition.", "Failed to copy WinPE media files to USB BOOT partition." "USB verification failed: boot.wim not found.", "USB verification failed: BCD not found." and "USB verification failed: EFI boot file not found."
+**Where:** **Operation complete** dialog, followed by the output of the Windows storage commands, such as "Timed out waiting for BOOT volume X: to become available." Other forms: "Failed to format the USB BOOT partition.", "Failed to copy WinPE media files to USB BOOT partition." and "USB verification failed: boot.wim not found.", with "BCD" or "EFI boot file" in place of "boot.wim".
 
 **Cause:**
 
 - The drive is write-protected by a switch, or is failing.
-- A program uses the drive: a File Explorer window, an antivirus scan.
+- A program uses the drive, such as a File Explorer window or an antivirus scan.
 - Windows has no free drive letter to assign.
 
 **Fix:**
 
-1. Close the windows and programs that use the drive, and check its write-protection switch.
-2. Free a drive letter if all are in use.
-3. Start again. A drive that was being created is created again; a drive that was being updated is [updated](../foundry-osd/media/update-usb.md) again.
-4. If it fails again, use another USB port, then another drive.
+1. Close what uses the drive, check its write-protection switch, and free a drive letter if all are in use.
+2. Start again: a drive being created is created again, a drive being updated is [updated](../foundry-osd/media/update-usb.md) again.
+3. If it fails again, use another USB port, then another drive.
 
 **Collect:** The full text of the dialog and `Foundry.log`.
 
@@ -360,7 +246,7 @@ Nothing has been erased.
 
 **Cause:**
 
-- First message: the **BOOT** volume was renamed or reformatted, so the drive no longer has the layout Foundry OSD expects.
+- First message: the **BOOT** volume was renamed or reformatted.
 - Second message: the **Foundry Cache** volume has no drive letter in Windows.
 
 **Fix:**
@@ -370,19 +256,18 @@ Nothing has been erased.
 
 **Collect:** The full text of the dialog.
 
-## "Custom Windows image media preparation failed." <a href="#usb-content" id="usb-content"></a>
+## "Custom Windows image media preparation failed." <a href="#media-content" id="media-content"></a>
 
-**Where:** **Operation complete** dialog, followed by a second line. The message is used for custom images and for post-installation content alike.
+**Where:** **Operation complete** dialog of a USB operation, followed by a second line. The message is used for custom images and for post-installation content alike, even when you use no custom image.
 
-**Cause:**
+**Cause and fix, by second line:**
 
-- "The USB disk has insufficient capacity for BOOT, custom images and runtime payloads.": the drive is too small for the custom images and the post-installation content you included.
-- "A media input is on the target disk or its physical disk could not be verified.": a custom image or a post-installation file is stored on the USB drive being prepared.
-
-**Fix:**
-
-1. Use a larger drive, or include fewer [custom images](../foundry-osd/customization/custom-windows-images.md).
-2. Keep the source files on the workstation, not on the USB drive.
+| Second line | Cause | Fix |
+| --- | --- | --- |
+| "The USB disk has insufficient capacity for BOOT, custom images and runtime payloads." | The drive is too small for what you included. | Use a larger drive, or include fewer [custom images](../foundry-osd/customization/custom-windows-images.md) |
+| "The data volume has insufficient free space for the custom images and runtime payloads." or `PreOobe.InsufficientMediaSpace` | During an update, the cache partition lacks room. Content of earlier builds is never removed. | Free space on **Foundry Cache**, or create the drive again |
+| "A media input is on the target disk or its physical disk could not be verified." | A source file is stored on the USB drive being written. | Keep the sources on the workstation |
+| "A custom image input no longer matches its verified length and SHA256." or `PreOobe.PackageContentChanged` | A file of the local library changed after its import. | Import the image again, or the content again in **Edit action** of [Post-installation](../foundry-osd/customization/post-installation.md) |
 
 **Collect:** The full text of the dialog and `Foundry.log`.
 
@@ -390,10 +275,10 @@ Nothing has been erased.
 
 **Where:** Target device. The creation succeeded, but the device ignores the media, shows a Secure Boot error, or returns to its boot menu. Foundry shows nothing at this stage.
 
-**Cause:**
+**Cause:** Foundry cannot tell which one applies:
 
 - The **Architecture** of the media does not match the device: `x64` media on an ARM64 device, or the reverse.
-- The device has Secure Boot turned on and its firmware does not yet trust the **PCA 2023** certificate that signs the boot files.
+- The device has Secure Boot turned on and its firmware does not yet trust the **PCA 2023** certificate that signs the boot files. See **Secure Boot** in [General](../foundry-osd/general.md).
 - The firmware does not offer a USB drive with the chosen **USB partition style**.
 - A USB update was cancelled or failed, and **BOOT** is incomplete.
 
@@ -412,31 +297,13 @@ If a console titled **Foundry Bootstrap** appears, the device did start from the
 
 **Where:** Foundry Deploy, on a device started from a PXE server such as Windows Deployment Services, before the disk is erased. The deployment log contains "The referenced post-installation media generation is unavailable."
 
-**Cause:** A PXE server delivers only `sources\boot.wim`. The deployment has a [Post-installation](../foundry-osd/customization/post-installation.md) action that uses imported files, and those files stayed on the ISO.
+**Cause:** A PXE server delivers only `sources\boot.wim`. The deployment has a Post-installation action that uses imported files, and those files stayed on the ISO.
 
 **Fix:**
 
 1. Attach the complete ISO the boot image was copied from, and start the deployment again.
-2. Or, in Foundry OSD, disable the actions that use imported files, create the ISO again and import its new `sources\boot.wim` in the PXE server.
+2. Or disable the actions that use imported files in Foundry OSD, create the ISO again and import its new `sources\boot.wim` in the PXE server.
 
-See [Deploy with PXE](../foundry-osd/media/pxe-deployment.md) for what a PXE boot image delivers.
+See [Deploy with PXE](../foundry-osd/media/pxe-deployment.md).
 
 **Collect:** The Foundry Deploy log. See [Logs and support information](logs-and-support.md).
-
-## Folders Foundry OSD uses on the workstation
-
-<details>
-
-<summary>Working folders and downloads</summary>
-
-| Folder | Content | Can you delete it |
-| --- | --- | --- |
-| `%ProgramData%\Foundry\Workspaces` | One working folder per creation, removed at the end | No, Foundry OSD removes them |
-| `%ProgramData%\Foundry\Cache\WinPeDrivers` | Downloaded Dell and HP driver sets | Yes, while Foundry OSD is closed |
-| `%ProgramData%\Foundry\Cache\WindowsSources` | Windows 11 package for Wi-Fi and `arm64` builds | Yes, while Foundry OSD is closed |
-| `%ProgramData%\Foundry\Cache\Installers` | Setup files of the ADK and the Windows PE add-on | Yes, while Foundry OSD is closed |
-| `%ProgramData%\Foundry\Artifacts\Iso` | Default folder of the ISO file | Yes |
-
-Deleted downloads are fetched again by the next creation that needs them.
-
-</details>
