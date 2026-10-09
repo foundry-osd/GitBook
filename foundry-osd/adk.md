@@ -1,60 +1,66 @@
-# Windows ADK and Windows PE
+# ADK
 
-Foundry OSD requires the Windows ADK `10.1.26100` release, revision `9457` or later, with a matching Windows PE Add-on and the required files for the selected architecture to build deployment media.
-
-Earlier revisions, including `10.1.26100.2454`, are reported as incompatible. The ADK setup action then uninstalls the installed ADK and Windows PE Add-on before it installs the supported release.
-
-## What Foundry checks
-
-The ADK page detects:
-
-- Whether the Windows ADK is installed.
-- Whether the Windows PE Add-on is installed.
-- The installed ADK component version.
-- Whether the ADK meets the supported release and minimum revision.
-- Whether the installed Windows PE components match the ADK release and the image, optional-component and boot files are available for the selected architecture.
+The ADK page checks and installs the Windows ADK and the Windows PE add-on that Foundry needs to build media. Until it reports **ADK is ready**, every page except **Home**, **ADK** and **Settings** is disabled.
 
 <figure>
-  <img src="../.gitbook/assets/foundry-osd-adk-01-status-missing.png" alt="Foundry OSD showing missing Windows ADK and Windows PE Add-on components">
-  <figcaption>Foundry identifies each required component that is not ready.</figcaption>
+  <img src="../.gitbook/assets/foundry-osd-adk-01-status-missing.png" alt="ADK page of Foundry OSD on a workstation without the Windows ADK: red status bar, ADK setup card with its install button, and Readiness details">
+  <figcaption>On a new workstation the page reports that the ADK is not installed and offers one button to install both components.</figcaption>
 </figure>
 
-## Install missing components
+## Before you start
 
-1. Open **ADK** in Foundry OSD.
-2. Review the detected status and version information.
-3. Select the ADK setup action.
-4. Approve elevation when Windows requests administrator permission.
-5. Keep Foundry OSD open while the installer is downloaded and executed.
-6. Wait for Foundry to finish checking the component status.
+- The workstation needs Internet access to Microsoft's download site. A proxy set in [Settings](settings.md#proxy) is used for this download.
+- Let any other Windows installation finish first.
+
+## Install the components
+
+1. In the navigation pane, under **General**, open **ADK**.
+2. Read the status bar at the top of the page. The table below tells you what each status means.
+3. In the **ADK setup** card, select the button. Its label depends on what Foundry OSD found.
+4. If Windows shows an elevation prompt for the Microsoft installer, approve it.
+5. Wait. A dialog titled **Operation in progress** shows the current step and locks the window. The operation cannot be cancelled.
+6. When the dialog closes, check that the status bar shows **ADK is ready**.
 
 <figure>
-  <img src="../.gitbook/assets/foundry-osd-adk-02-install-button.png" alt="Foundry OSD automatic Windows ADK and Windows PE Add-on installation action">
-  <figcaption>Install the supported ADK and Windows PE Add-on directly from Foundry OSD.</figcaption>
+  <img src="../.gitbook/assets/foundry-osd-adk-02-setup-progress.png" alt="Operation in progress dialog over the ADK page while the Windows ADK Deployment Tools are being installed">
+  <figcaption>While setup runs, the dialog shows the step and the navigation pane is disabled.</figcaption>
 </figure>
 
-{% hint style="info" %}
-The automatic installation downloads and installs Windows ADK `10.1.26100.9457` first, followed by Windows PE Add-on `10.1.26100.9457`.
-{% endhint %}
+| Status | Button offered | What the button does |
+| --- | --- | --- |
+| **ADK is not installed** | **Install Windows ADK and Windows PE Add-on** | Downloads both installers, installs the ADK Deployment Tools, then the add-on. |
+| **ADK version is unsupported**, older version installed | **Upgrade Windows ADK and Windows PE Add-on** | Removes the installed add-on and ADK, then installs the supported version of both. |
+| **ADK version is unsupported**, newer version installed | **Downgrade Windows ADK and Windows PE Add-on** | Same as **Upgrade**: the newer ADK and add-on are removed first. |
+| **Windows PE Add-on is missing** | **Install Windows ADK and Windows PE Add-on** | Installs only the add-on; the ADK is left as it is. |
+| **Windows PE Add-on needs repair** | None | Repair or reinstall the add-on with Microsoft's installer, then restart Foundry OSD. See [troubleshooting](../troubleshooting/foundry-osd.md). |
 
-## Repair Windows PE readiness
+**Upgrade** is also offered when Windows still lists an ADK whose files are no longer on disk.
 
-The readiness details show whether the WinPE files are available for **x64** and **ARM64**. The separate media creation capability indicates whether the ADK and WinPE prerequisites are met. Missing files for one architecture block that target; a complete other architecture remains available.
+Which versions count as supported is stated once, in [Supported versions](../reference/supported-versions.md#windows-adk).
 
-- If the matching add-on is already installed but files are missing, use its installer to **Repair** it.
-- If its version differs from the ADK, uninstall the Windows PE Add-on first, then install the matching `10.1.26100.9457` add-on from [Microsoft's ADK downloads](https://learn.microsoft.com/windows-hardware/get-started/adk-install).
-- Restart Foundry after repairing or replacing the add-on outside the app so it checks the installation again.
+## Check the result
 
-Foundry's ordinary install action is for missing components. Repair or replacement of a registered add-on is performed through its installer.
+The **Readiness details** card shows four values:
 
-## When the page reports ready
+| Value | What to expect when ready |
+| --- | --- |
+| **Installed version** | The version of the installed ADK. |
+| **Required version policy** | The version Foundry OSD requires. |
+| **Windows PE Add-on** | **Windows PE Add-on installed**, followed by the state of each architecture, for example `(x64: WinPE files available, ARM64: WinPE files available)`. |
+| **Media creation capability** | **ISO and USB creation are available.** |
 
-Continue to [general configuration](general.md). WinPE language and media creation options remain blocked until the required components are ready.
+The **ADK** item in the navigation pane shows the badge **ADK ready** and the other pages become available. Continue with [General](general.md).
 
-## Installation does not complete
+When the files of only one architecture are missing, the page still reports **ADK is ready**, with a warning: you can create media for the complete architecture only.
 
-- Confirm that Foundry OSD is running with administrator permissions.
-- Confirm Internet access and proxy policy.
-- Close another ADK installer that may already be running.
-- Retry the action after Windows Installer completes any pending operation.
-- Review [media creation troubleshooting](../troubleshooting/media-creation.md) if detection remains incorrect after installation.
+## Limits
+
+- Foundry OSD installs only the Deployment Tools feature of the ADK, which is the part it uses.
+- The installers are downloaded once and kept in `%ProgramData%\Foundry\Cache\Installers`.
+- Foundry OSD does not repair an add-on that is installed but damaged; use Microsoft's installer.
+
+## Related
+
+- [Supported versions](../reference/supported-versions.md#windows-adk)
+- [Foundry OSD application troubleshooting](../troubleshooting/foundry-osd.md)
+- [General](general.md)
