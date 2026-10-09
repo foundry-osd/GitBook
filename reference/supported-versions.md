@@ -2,7 +2,7 @@
 
 ## Application and boot media updates
 
-Updating Foundry OSD does not rewrite media already distributed. [Bootstrap](bootstrap.md#cache-and-connectivity) can obtain newer release runtimes during startup, so existing media may run a newer Deploy application without being rebuilt. Check the running application version; an older or debug-provisioned runtime does not gain release support from a catalog update alone.
+Updating Foundry OSD does not rewrite media already distributed. [Bootstrap](../foundry-connect/windows-pe-startup.md#cache-and-connectivity) can obtain newer release runtimes during startup, so existing media may run a newer Deploy application without being rebuilt. Check the running application version; an older or debug-provisioned runtime does not gain release support from a catalog update alone.
 
 Recreate ISO media or [update an existing USB drive](../foundry-osd/media/update-usb.md) when you need to refresh embedded Bootstrap, configuration, or bundled assets. Test runtime and media updates before production use.
 

@@ -10,7 +10,7 @@ Download the latest Foundry OSD installer that matches the architecture of the W
 | ARM64 | Windows on Arm workstations | [Download the latest ARM64 MSI](https://github.com/foundry-osd/foundry/releases/latest/download/Foundry-win-arm64.msi) |
 
 {% hint style="info" %}
-Foundry Connect, Foundry Deploy and Foundry PostInstall do not require separate installation. Foundry OSD prepares the boot media, and [Bootstrap](../reference/bootstrap.md) prepares these applications automatically during startup.
+Foundry Connect, Foundry Deploy and Foundry PostInstall do not require separate installation. Foundry OSD prepares the boot media, and [Bootstrap](../foundry-connect/windows-pe-startup.md) prepares these applications automatically during startup.
 {% endhint %}
 
 ## Install Foundry OSD

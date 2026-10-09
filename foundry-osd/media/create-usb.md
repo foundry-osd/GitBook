@@ -43,4 +43,4 @@ Safely eject the drive, boot representative hardware, and confirm that Foundry C
 
 [Post-installation](../customization/post-installation.md) packages use the external data/cache volume. Source content must not reside on the USB disk being prepared. Foundry checks content, disk identity and combined capacity before erasure.
 
-[Bootstrap prepares PostInstall automatically at startup](../../reference/bootstrap.md#postinstall-preparation). Standard release media needs Internet access for this step, even if the application is already cached on the USB drive.
+[Bootstrap prepares PostInstall automatically at startup](../../foundry-connect/windows-pe-startup.md#postinstall-preparation). Standard release media needs Internet access for this step, even if the application is already cached on the USB drive.

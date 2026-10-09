@@ -19,7 +19,7 @@ Operating-system entries can include:
 
 The catalog targets Windows 11 24H2, 25H2, and 26H2. Windows 11 26H2 uses Microsoft's current dynamic media source. Windows 11 25H2 remains available from archived catalog sources; the dynamic endpoint supplies 26H2 and no longer refreshes 25H2 media.
 
-Catalog availability is separate from application support. Deploy must recognize a release before it can offer that release, even if its media is already published in the catalog. Older media can use a newer runtime when [Bootstrap updates it](bootstrap.md#cache-and-connectivity); verify the application actually running before relying on 26H2 support.
+Catalog availability is separate from application support. Deploy must recognize a release before it can offer that release, even if its media is already published in the catalog. Older media can use a newer runtime when [Bootstrap updates it](../foundry-connect/windows-pe-startup.md#cache-and-connectivity); verify the application actually running before relying on 26H2 support.
 
 See [Select Windows](../foundry-deploy/operating-system.md) for automatic fallback when none of the configured releases remains available.
 {% endhint %}

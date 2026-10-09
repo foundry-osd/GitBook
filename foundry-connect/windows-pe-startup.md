@@ -15,7 +15,7 @@ During media creation, release provisioning downloads the Bootstrap archive for 
 
 Local development provisioning uses a supplied archive or publishes the local project. It does not fall back to a GitHub download when the local Bootstrap payload cannot be prepared.
 
-Bootstrap stays in the boot image while Connect, Deploy and PostInstall use their runtime caches. To refresh Bootstrap, [recreate or update the boot media](supported-versions.md#application-and-boot-media-updates).
+Bootstrap stays in the boot image while Connect, Deploy and PostInstall use their runtime caches. To refresh Bootstrap, [recreate or update the boot media](../reference/supported-versions.md#application-and-boot-media-updates).
 
 ## Startup progress
 
@@ -43,7 +43,7 @@ A warning describes a recoverable issue; startup can continue. A failure identif
 
 The final ready message confirms that Deploy initialized its services and displayed a usable interface. A deployment password prompt counts as a usable interface; readiness does not mean that deployment has started or finished.
 
-Closing or cancelling Foundry Connect stops the boot workflow; it does not bypass network readiness. A Connect startup or configuration failure also prevents Deploy from launching. See [Network readiness](../foundry-connect/network-readiness.md) for the technician workflow.
+Closing or cancelling Foundry Connect stops the boot workflow; it does not bypass network readiness. A Connect startup or configuration failure also prevents Deploy from launching. See [Network readiness](network-readiness.md) for the technician workflow.
 
 ## Startup confirmation
 
@@ -67,7 +67,7 @@ When online verification is unavailable, Foundry uses the verified original appl
 
 A cache does not guarantee a fully offline deployment. Connect still requires its connectivity checks to succeed, and the selected Windows, drivers, catalogs, or Autopilot workflow may require additional services. If neither a verified original nor a verified download is available, boot stops before the affected application launches.
 
-[Recreate or update your boot media](supported-versions.md#application-and-boot-media-updates) with the current Foundry release to get this protection. Copying newer applications onto an existing USB drive is not sufficient.
+[Recreate or update your boot media](../reference/supported-versions.md#application-and-boot-media-updates) with the current Foundry release to get this protection. Copying newer applications onto an existing USB drive is not sufficient.
 
 Debug-provisioned runtimes skip the normal release update lookup. Record whether the media uses release or debug content when reporting a startup problem.
 
@@ -87,15 +87,15 @@ Each supervised launch also has a `Startup\<launch-id>` directory under its diag
 
 If Bootstrap does not display any progress, inspect `X:\Foundry\Logs\FoundryBootstrap.Launcher.log`. The Windows command launcher records the launch attempt and exit code even when the .NET runtime cannot start.
 
-Bootstrap reports a product event only when startup fails. Remote application logs and Error Tracking reports are controlled separately from product telemetry. Delivery starts after network and clock preparation, with a bounded attempt when startup stops earlier. See [Bootstrap reporting](telemetry-and-privacy.md#bootstrap-reporting) for consent, pending records, and delivery limits.
+Bootstrap reports a product event only when startup fails. Remote application logs and Error Tracking reports are controlled separately from product telemetry. Delivery starts after network and clock preparation, with a bounded attempt when startup stops earlier. See [Bootstrap reporting](../reference/telemetry-and-privacy.md#bootstrap-reporting) for consent, pending records, and delivery limits.
 
 {% hint style="info" %}
 **Application logging**
 
-Bootstrap sends emitted application logs to PostHog after remote-diagnostics consent is known. Earlier startup failures and internal delivery-health warnings remain local. Logs keep their original timestamps and process sequence, with recognized authentication secrets masked in both local and remote output. Events captured before successful clock synchronization use PostHog's receipt time for indexing and retain their raw time in `diagnostics.original_timestamp`; later synchronization does not change their captured clock state. See [timestamp handling](telemetry-and-privacy.md#application-logs). Pending logs can be retried after a restart if their storage survives; data held only in memory or on `X:` is lost on reboot. Foundry's PostHog logs are automatically deleted after 7 days. Local files follow separate retention rules.
+Bootstrap sends emitted application logs to PostHog after remote-diagnostics consent is known. Earlier startup failures and internal delivery-health warnings remain local. Logs keep their original timestamps and process sequence, with recognized authentication secrets masked in both local and remote output. Events captured before successful clock synchronization use PostHog's receipt time for indexing and retain their raw time in `diagnostics.original_timestamp`; later synchronization does not change their captured clock state. See [timestamp handling](../reference/telemetry-and-privacy.md#application-logs). Pending logs can be retried after a restart if their storage survives; data held only in memory or on `X:` is lost on reboot. Foundry's PostHog logs are automatically deleted after 7 days. Local files follow separate retention rules.
 {% endhint %}
 
-For refreshing existing media, see [Application and boot media updates](supported-versions.md#application-and-boot-media-updates).
+For refreshing existing media, see [Application and boot media updates](../reference/supported-versions.md#application-and-boot-media-updates).
 
 ## PostInstall preparation
 

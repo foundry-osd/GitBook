@@ -17,7 +17,7 @@ After Foundry Connect completes, the bootstrap applies the [Windows PE time zone
 {% hint style="info" %}
 **Clock synchronization**
 
-Bootstrap attempts clock synchronization before Connect, with a two-second total budget. Connect still starts if networking is unavailable. Bootstrap retries after Connect establishes readiness if the clock remains unverified. Connect logs captured before synchronization keep their raw original time and appear in PostHog at server receipt time. See [Bootstrap startup](../reference/bootstrap.md#startup-progress) and [log timestamp handling](../reference/telemetry-and-privacy.md#application-logs).
+Bootstrap attempts clock synchronization before Connect, with a two-second total budget. Connect still starts if networking is unavailable. Bootstrap retries after Connect establishes readiness if the clock remains unverified. Connect logs captured before synchronization keep their raw original time and appear in PostHog at server receipt time. See [Bootstrap startup](windows-pe-startup.md#startup-progress) and [log timestamp handling](../reference/telemetry-and-privacy.md#application-logs).
 {% endhint %}
 
 Readiness confirms that an active network path and at least one configured connectivity probe succeeded. It does not verify every catalog, download, Microsoft, or organization-specific endpoint required later by Foundry Deploy.

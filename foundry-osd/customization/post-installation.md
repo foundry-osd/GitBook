@@ -148,7 +148,7 @@ Foundry keeps imported scripts and packages in a local library. [Profiles](../de
 
 Required packages are included on the generated USB or ISO, outside `boot.wim`. Keep the complete media available until deployment finishes. A PXE boot image alone does not carry them, so PowerShell scripts, Software installers and commands that use imported content cannot run from it. Built-in tasks, commands without imported content and restarts do not need the media; see [PXE deployment](../media/pxe-deployment.md#post-installation-content).
 
-[Bootstrap](../../reference/bootstrap.md#postinstall-preparation) prepares PostInstall automatically at startup. No separate installation or manual runtime selection is needed. Standard release media requires Internet access for this step, even with a previous download in the cache.
+[Bootstrap](../../foundry-connect/windows-pe-startup.md#postinstall-preparation) prepares PostInstall automatically at startup. No separate installation or manual runtime selection is needed. Standard release media requires Internet access for this step, even with a previous download in the cache.
 
 Foundry copies the required files to Windows before the first boot. Your scripts may still need network access or other resources when they run.
 

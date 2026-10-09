@@ -33,4 +33,4 @@ The output can be a local path or an accessible UNC share. Foundry checks availa
 
 [Post-installation](../customization/post-installation.md) packages are included outside `boot.wim`, even when no custom Windows image is selected. They increase the ISO size and the temporary space needed to create it. Allow enough space for both the working files and the completed ISO, and use the complete ISO for deployment.
 
-[Bootstrap prepares PostInstall automatically at startup](../../reference/bootstrap.md#postinstall-preparation). Standard release media needs Internet access for this step.
+[Bootstrap prepares PostInstall automatically at startup](../../foundry-connect/windows-pe-startup.md#postinstall-preparation). Standard release media needs Internet access for this step.

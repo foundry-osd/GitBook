@@ -22,3 +22,5 @@ redirects:
   docs/technical/deployment-orchestrator: reference/README.md
   docs/configure/autopilot: foundry-osd/autopilot/README.md
   docs/deploy/autopilot-hash-upload: foundry-osd/autopilot/README.md
+  foundry-osd/home: foundry-osd/README.md
+  reference/bootstrap: foundry-connect/windows-pe-startup.md
