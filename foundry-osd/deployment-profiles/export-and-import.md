@@ -6,7 +6,7 @@
 **Screenshot required**
 
 - **File:** `foundry-osd-deployment-profiles-export-01-import-preview.png`
-- **Capture:** Show the **Import** preview dialog for a demonstration file: the configuration name, **Files included**, **Passwords and access keys included**, the line about missing files, the two warnings and the **Remember passwords** check box.
+- **Capture:** Show the whole **Import** preview dialog for a demonstration file, with its counts, the line about missing files and **Remember passwords**.
 {% endhint %}
 
 ## Export an encrypted file
@@ -35,7 +35,7 @@ Anyone who has the file and its password can read what it contains, certificate 
 4. Check **Remember passwords**. It is selected when the file is complete. When a password or a file is missing, leave it cleared: with it selected, the import stops with "Some passwords or source files are missing. Add them before saving or sharing passwords."
 5. Select **Continue**.
 
-The imported configuration is added to the list and becomes the one in use: its options replace those shown on every page. The configuration you were using is saved first and stays in the list.
+The imported configuration is added to the list and becomes the one in use. The preview says "This will replace the settings you are using.": it replaces what the pages show, and the configuration you were using is saved first and stays in the list.
 
 ## Complete the configuration on this PC
 

@@ -6,7 +6,7 @@ Once a configuration is [shared or connected](../deployment-profiles.md#create-a
 **Screenshot required**
 
 - **File:** `foundry-osd-deployment-profiles-sync-01-conflict.png`
-- **Capture:** Show the expanded **Settings backup and sync** card of a shared demonstration configuration with the status **Choose a version** and, under the card, the conflict bar with **Use the shared version**, **Use this PC's version** and **Duplicate**.
+- **Capture:** Show the expanded card of a shared demonstration configuration with the status **Choose a version** and the conflict bar under it.
 {% endhint %}
 
 ## When changes are sent and applied
@@ -60,9 +60,9 @@ After a deletion, no configuration is selected: the pages show default values an
 ## Look after the shared folder
 
 - Foundry OSD keeps the 20 most recent versions of the configuration and removes older ones itself.
-- Do not delete or edit files in the configuration folder, and do not roll it back to an earlier state, for example from a server snapshot. A PC that synchronized after that state stops with "The saved versions in the shared folder have changed unexpectedly. Restore from a backup you trust." Restore the folder from a backup made after the last synchronization of that PC. Without one, select **Disconnect** on the PC that holds the options to keep, and share again under a new name.
-- Update Foundry OSD on every PC together. Once a newer version publishes, older ones read "Foundry can't open this settings format. Update Foundry and try again."
-- To withdraw someone's access, share again under a new name, have the old folder removed, and change the passwords that were shared.
+- Do not delete or edit files in the configuration folder, and do not roll it back to an earlier state, for example from a server snapshot. A PC stops with "The saved versions in the shared folder have changed unexpectedly. Restore from a backup you trust." when the version it last synchronized is no longer in the folder. Restore the folder from a backup that still contains that version, that is, one made after that PC's last synchronization. Without such a backup, select **Disconnect** on the PC that holds the options to keep, and share again under a new name, because the old folder still exists.
+- Update Foundry OSD on every PC together. Once a newer version that changes the settings format publishes, older ones read "Foundry can't open this settings format. Update Foundry and try again."
+- Foundry OSD has no command to withdraw someone's access: access rests on the connection file, its password and the rights on the folder. As a precaution when someone leaves, share again under a new name, have the old folder removed, and change the passwords that were shared.
 
 ## Related
 

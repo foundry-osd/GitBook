@@ -8,7 +8,7 @@ With one PC and one set of options, skip this page: Foundry OSD creates a config
 **Screenshot required**
 
 - **File:** `foundry-osd-deployment-profiles-01-card.png`
-- **Capture:** Show the expanded **Settings backup and sync** card on the **Settings** page with a shared demonstration configuration selected: the configuration list, **More options**, **Import**, **Export**, **Synchronize** with its status and **Disconnect**, **Automatic sync**, and **Remember passwords** with **Clear saved passwords and access**.
+- **Capture:** Show the expanded **Settings backup and sync** card with a shared demonstration configuration selected, so that every button and switch of the card is visible.
 {% endhint %}
 
 ## Create and select a configuration
@@ -17,7 +17,7 @@ With one PC and one set of options, skip this page: Foundry OSD creates a config
 2. Select **More options** > **Duplicate**, type a **Configuration name** of at most 120 characters, and select **Continue**. The copy becomes the configuration in use.
 3. To change configuration later, choose it in the list of the card. Foundry OSD saves your pending changes, then loads the options of that configuration on every page.
 
-Changes are saved by themselves within a second, and when you close the app. **Duplicate**, **Import** and connecting to a shared configuration are the only ways to add a configuration.
+Changes are saved by themselves within a second, and when you close the app. **Duplicate**, **Import** and connecting to a shared configuration are the only ways to add a configuration; **More options** > **Rename** changes its name.
 
 The ISO output path, the custom driver folder and the telemetry choices belong to the PC, not to a configuration. Custom Windows images and post-installation packages also stay on each PC: a configuration only refers to them.
 
@@ -29,7 +29,7 @@ The ISO output path, the custom driver folder and the telemetry choices belong t
 | **Include passwords and confidential files** | Offered when you export or share. Puts them in the exported file or the shared folder. |
 | **Clear saved passwords and access** | Removes the saved passwords, the saved confidential files and the access to the shared folder, and turns off **Remember passwords** and **Automatic sync**. The options stay. Then type the passwords and select the files again, and use **Restore access**. |
 
-Passwords of the join accounts of [zero-touch Domain Join](domain-join/zero-touch.md) are never written to an exported file. A shared configuration carries them only when **Include passwords and confidential files** was selected when it was shared. Size limits are in [Export and import](deployment-profiles/export-and-import.md).
+A shared configuration carries the passwords of the join accounts of [zero-touch Domain Join](domain-join/zero-touch.md) only when **Include passwords and confidential files** was selected when it was shared. Size limits are in [Export and import](deployment-profiles/export-and-import.md).
 
 ## Share this configuration <a href="#create-a-shared-profile" id="create-a-shared-profile"></a>
 
@@ -45,7 +45,7 @@ The shared folder must meet these requirements:
 **Screenshot required**
 
 - **File:** `foundry-osd-deployment-profiles-02-share-dialog.png`
-- **Capture:** Show the **Share this configuration** dialog filled in with a demonstration name and a `\\server\share` path, the destination line under the folder field, both password fields, the two check boxes and the **Learn more** link.
+- **Capture:** Show the whole **Share this configuration** dialog, filled in with a demonstration name and a `\\server\share` path.
 {% endhint %}
 
 1. Select the configuration, expand the card, and select **Set up synchronization…** > **Share this configuration** > **Continue**.
