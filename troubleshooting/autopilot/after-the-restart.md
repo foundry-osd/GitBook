@@ -4,18 +4,18 @@ Use this page for the upload window of the interactive mode, which opens in Wind
 
 | What you see | Go to |
 | --- | --- |
-| The upload window does not open | [No window](#the-upload-window-does-not-open-after-the-restart) |
+| The upload window does not open | [No window](#no-upload-window) |
 | "Waiting for network connectivity." | [No network](#waiting-for-network-connectivity) |
 | "Authentication failed. Check logs for details." | [Sign-in refused](#authentication-failed) |
-| **Group tag** offers only **None** and **Custom** | [A group tag you expect is not offered](../autopilot.md#a-group-tag-you-expect-is-not-offered) |
+| **Group tag** offers only **None** and **Custom** | [A group tag you expect is not offered](../autopilot.md#group-tag-not-offered) |
 | "Upload failed. Check logs for details.", or another message after **Upload** | [Upload failed](#upload-failed) |
-| The computer name is not assigned in your tenant | [Name](#the-computer-name-is-not-assigned) |
-| The device is registered but Windows setup applies no Autopilot profile, or its group tag has disappeared | [No profile applied](#the-device-is-registered-but-no-autopilot-profile-applies) |
+| The computer name is not assigned in your tenant | [Name](#name-not-assigned) |
+| The device is registered but Windows setup applies no Autopilot profile, or its group tag has disappeared | [No profile applied](#no-profile-applied) |
 | A device whose motherboard was replaced keeps its old registration | [Limits of the zero-touch mode](../../foundry-osd/autopilot/zero-touch-hardware-hash.md) |
 
 The files named under **Collect** are described in [Evidence files](#evidence-files). In Windows setup, Shift+F10 opens a command prompt to read them.
 
-## The upload window does not open after the restart
+## The upload window does not open after the restart <a href="#no-upload-window" id="no-upload-window"></a>
 
 - **Where:** Windows setup, after a deployment in interactive mode.
 - **Cause:** the files of `C:\Windows\Temp\Foundry\Logs\AutopilotRegistration` tell which case applies.
@@ -61,7 +61,7 @@ An expired code is not an error: the window replaces it by itself and reads "Req
 
 After the wait began, the window shows the reason itself and **Upload** becomes available again. These messages ("Imported Autopilot device did not appear ...", "Autopilot import failed. ...", "The hardware hash is visible in Windows Autopilot, but ...", "Multiple Windows Autopilot devices matched ...") are explained under [Other results of the upload](during-deployment.md#hardware-hash-upload-skipped). For them, collect `registration-result.json` and `graph.log`.
 
-## The computer name is not assigned
+## The computer name is not assigned <a href="#name-not-assigned" id="name-not-assigned"></a>
 
 - **Where:** your tenant, after a deployment with one of the two upload modes.
 - **Cause:**
@@ -71,7 +71,7 @@ After the wait began, the window shows the reason itself and **Upload** becomes 
 - **Fix:** check the three points above. [Machine naming](../../foundry-osd/customization/machine-naming.md) lists the conditions of this option.
 - **Collect:** `FoundryDeploy.log`, and `AutopilotUploadResult.json` or `registration-result.json`.
 
-## The device is registered but no Autopilot profile applies
+## The device is registered but no Autopilot profile applies <a href="#no-profile-applied" id="no-profile-applied"></a>
 
 - **Where:** Windows setup, after a registration that succeeded.
 - **Cause:**
@@ -85,7 +85,7 @@ After the wait began, the window shows the reason itself and **Upload** becomes 
   3. With the zero-touch mode, the administrator can turn automatic restart off on [General](../../foundry-osd/general.md), so that you check the tenant before the device restarts.
 - **Collect:** `autopilot-hash-upload-status.json` or `registration-result.json`, which record the group tag that was sent.
 
-## Evidence files
+## Evidence files <a href="#evidence-files" id="evidence-files"></a>
 
 Never publish a tenant identifier, a sign-in code or a hardware hash in a support request.
 

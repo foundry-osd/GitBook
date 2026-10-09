@@ -5,9 +5,9 @@ Collect the logs before you restart the device, recreate the media or deploy aga
 | Where you are | Do this |
 | --- | --- |
 | In Foundry Connect or Foundry Deploy, on the target device | [Export logs from Foundry Connect and Foundry Deploy](#export-logs-from-foundry-connect-and-foundry-deploy). If it fails, see [the export error](#export-failed) |
-| In Foundry OSD, on the workstation | [Export diagnostics from Foundry OSD](#export-diagnostics-from-foundry-osd) |
+| In Foundry OSD, on the workstation | [Export diagnostics from Foundry OSD](#export-from-foundry-osd) |
 | In Windows after the restart | Copy the folders listed in [Log locations](#log-locations) |
-| In front of a device that no longer starts | [Collect logs from a device that does not start](#collect-logs-from-a-device-that-does-not-start) |
+| In front of a device that no longer starts | [Collect logs from a device that does not start](#device-does-not-start) |
 
 ## Export logs from Foundry Connect and Foundry Deploy
 
@@ -58,8 +58,8 @@ Use **Export raw diagnostics...** only when a support contact you trust asks for
 | Deployment in progress | Target disk: `<target>:\Foundry\Logs\Deployment` and `<target>:\Foundry\State\Deployment` | Deployment logs, `deployment-state.json` |
 | Deployment finished | Installed Windows: `C:\Windows\Temp\Foundry\Logs\Deployment` and `C:\Windows\Temp\Foundry\State\Deployment` | Deployment logs, `deployment-summary.json` |
 | Post-installation | Installed Windows: `C:\Windows\Temp\Foundry\Logs\PreOobe` and `C:\Windows\Temp\Foundry\State\PreOobe` | `Foundry.PostInstall.log`, one folder per action, `execution-result.json` |
-| Autopilot hardware hash upload | Installed Windows: `C:\Windows\Temp\Foundry\Logs\AutopilotHash` | Upload status and result files |
-| Interactive Autopilot window | Installed Windows: `C:\Windows\Temp\Foundry\Logs\AutopilotRegistration` | Registration logs |
+| Autopilot hardware hash upload | Installed Windows: `C:\Windows\Temp\Foundry\Logs\AutopilotHash` | Upload status and result files, listed in [Evidence files](autopilot/during-deployment.md#evidence-files) |
+| Interactive Autopilot window | Installed Windows: `C:\Windows\Temp\Foundry\Logs\AutopilotRegistration` | Registration logs, listed in [Evidence files](autopilot/after-the-restart.md#evidence-files) |
 
 Things to know:
 
@@ -69,7 +69,7 @@ Things to know:
 - `deployment-summary.json` lists every step with its result and the reason of each skipped step.
 - For a failure before the first Foundry window, see [Windows PE startup troubleshooting](windows-pe-startup.md).
 
-## Export diagnostics from Foundry OSD
+## Export diagnostics from Foundry OSD <a href="#export-from-foundry-osd" id="export-from-foundry-osd"></a>
 
 1. In Foundry OSD, open **Settings > General**.
 2. On **Export diagnostics**, select **Export...** and choose a folder.
@@ -81,7 +81,7 @@ The archive contains the Foundry OSD logs with recognized secrets masked. The or
 
 When **Enable remote diagnostics** is on, Foundry also sends application logs to the Foundry project. They do not replace the files above: attach local evidence to a support request. See [Telemetry and privacy](../reference/telemetry-and-privacy.md).
 
-## Collect logs from a device that does not start
+## Collect logs from a device that does not start <a href="#device-does-not-start" id="device-does-not-start"></a>
 
 The logs of the last deployment stay on the target disk until the next deployment erases it.
 
@@ -98,7 +98,7 @@ From the installed Windows, collect `C:\Windows\Temp\Foundry\Logs\PreOobe` and `
 
 From the installed Windows, collect `C:\Windows\Temp\Foundry\State\PreOobe\domain-join-result.json` and `C:\Windows\Temp\Foundry\Logs\PreOobe\Foundry.PostInstall.log`. The result file contains no account and no password. Never attach `credentials.bin`. How to read the result is in [Domain Join troubleshooting](domain-join.md).
 
-## What to send
+## What to send <a href="#what-to-send" id="what-to-send"></a>
 
 - The Foundry OSD version, and whether the media was recreated after the last Foundry OSD update.
 - The application and the stage: Foundry OSD, Windows PE startup, Foundry Connect, Foundry Deploy, or the console after the restart.

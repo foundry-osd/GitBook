@@ -24,7 +24,7 @@ Foundry Connect writes its log to `X:\Foundry\Logs\FoundryConnect.log`. To take 
 | The countdown disappears | [The countdown disappears](#countdown-disappears) |
 | "Network refresh failed" | [Network refresh failed](#network-refresh-failed) |
 | **Network ready**, then downloads fail | [Network ready, then downloads fail](#network-ready-downloads-fail) |
-| "Diagnostics export failed" | [Diagnostics export failed](#diagnostics-export-failed) |
+| "Diagnostics export failed" | ["Diagnostics could not be exported."](logs-and-support.md#export-failed) in Logs and support information |
 | A wrong time or time zone | [Wrong time or time zone](#wrong-time-or-time-zone) |
 | No network in the installed Windows | [The roamed profile does not connect](#roamed-profile-does-not-connect) |
 
@@ -216,15 +216,8 @@ Foundry Connect writes its log to `X:\Foundry\Logs\FoundryConnect.log`. To take 
 - **Fix:**
   1. Use a network without a sign-in page for deployments.
   2. Check that the network allows the hosts in [Network endpoints](../reference/network-endpoints.md).
-  3. See ["This boot stage could not be completed. Check the session log for details."](windows-pe-startup.md#boot-stage-not-completed) and [Windows deployment troubleshooting](deployment.md).
+  3. See ["This boot stage could not be completed. Check the session log for details."](windows-pe-startup.md#boot-stage-not-completed) for the startup console, and [Next stays unavailable on Target device](deployment/before-deployment-starts.md#next-unavailable) or [Download fails](deployment/checks-and-image-download.md#image-source-unavailable) for Foundry Deploy.
 - **Collect:** `FoundryBootstrap.log` and `FoundryDeploy.log`. See [Logs and support information](logs-and-support.md).
-
-## "Diagnostics export failed" <a href="#diagnostics-export-failed" id="diagnostics-export-failed"></a>
-
-- **Where:** A dialog after **Tools > Export diagnostics...**, with "Diagnostics could not be exported. Check the log for details."
-- **Cause:** In Windows PE, the export is written to the **Foundry Cache** partition of the USB drive or, without one, to the first removable drive. Neither exists, for example after a start from an ISO or from the network.
-- **Fix:** Plug in a USB drive, then export again.
-- **Collect:** Nothing.
 
 ## The time or the time zone is wrong in Windows PE <a href="#wrong-time-or-time-zone" id="wrong-time-or-time-zone"></a>
 

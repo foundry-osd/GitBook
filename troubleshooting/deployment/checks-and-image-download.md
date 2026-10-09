@@ -47,7 +47,7 @@ On this page the disk may or may not have been erased. With an ISO, or a USB dri
 
 </details>
 
-On Domain Join media, "The custom answer-file computer name differs from the computer name confirmed for the domain join." means the name in the file is not the one shown in the wizard: see [Domain Join troubleshooting](../domain-join.md).
+On Domain Join media, "The custom answer-file computer name differs from the computer name confirmed for the domain join." means the name in the file is no longer the one confirmed in the wizard: see [Domain Join troubleshooting](../domain-join.md#deployment-stops).
 
 If the step shows "The selected answer file is unavailable, invalid, or incompatible with the selected Windows architecture." instead, the file could not be read again from the media: check that the deployment media is still connected.
 
@@ -183,7 +183,7 @@ If the step shows "The selected answer file is unavailable, invalid, or incompat
 
 **Cause:**
 
-- The device clock is wrong, often because of a flat clock battery, so every certificate looks expired or not yet valid.
+- The device clock is wrong, for example because of a flat clock battery, so every certificate looks expired or not yet valid.
 - A proxy that inspects HTTPS presents a certificate Windows PE does not trust.
 
 **Fix:**

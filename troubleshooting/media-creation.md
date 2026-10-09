@@ -5,14 +5,14 @@ Start from where the problem shows.
 | Where the problem shows | Go to |
 | --- | --- |
 | Foundry OSD, **Start**: a button that cannot be selected, a dialog, or a creation that ends with "Final media creation failed." | [The index of this page](#on-this-page) |
-| The USB drive: not listed, cannot be written or updated. A device that does not start from the media. A start from a PXE server | [USB drive and device start](media-creation/usb-drive-and-device-start.md) |
+| The USB drive: not listed, cannot be written or updated, or "Custom Windows image media preparation failed." A device that does not start from the media. A start from a PXE server | [USB drive and device start](media-creation/usb-drive-and-device-start.md) |
 | The **ADK** page, the proxy, updates, or an option of **General** | [Foundry OSD application troubleshooting](foundry-osd.md) |
 
 A failure on **Start** shows in a dialog titled **ISO creation is blocked** or **USB creation is blocked**, before anything is written, or in the **Operation complete** dialog, as "Final media creation failed." followed by the reason. Most reasons are in English whatever the language of Foundry OSD, and some are followed by the output of a Windows tool.
 
 The log is `%ProgramData%\Foundry\Logs\Foundry.log`; its line "Final boot media operation failed" names the failed step. Windows image errors are also in `%SystemRoot%\Logs\DISM\dism.log`. See [Log locations](logs-and-support.md#log-locations).
 
-## On this page
+## On this page <a href="#on-this-page" id="on-this-page"></a>
 
 | What you see | Go to section |
 | --- | --- |
@@ -43,7 +43,7 @@ The log is `%ProgramData%\Foundry\Logs\Foundry.log`; its line "Final boot media 
 2. Type a path that ends with `.iso`, or select **Browse**.
 3. Select a USB drive of 16 GB or more. If the drive is not in the list, see [The USB drive is not listed](media-creation/usb-drive-and-device-start.md#usb-not-listed).
 
-If something changes between your click and the start, a dialog titled **ISO creation is blocked** or **USB creation is blocked** lists the same reasons, for example "ISO output path must end with .iso." or "Deploy configuration generation is not ready.". For the latter with Windows Autopilot, see [Windows Autopilot troubleshooting](autopilot.md).
+If something changes between your click and the start, a dialog titled **ISO creation is blocked** or **USB creation is blocked** lists the same reasons, for example "ISO output path must end with .iso." or "Deploy configuration generation is not ready.". For the latter with Windows Autopilot and local accounts, see [Media creation is blocked by additional local accounts](autopilot.md#local-accounts).
 
 **Collect:** Nothing.
 

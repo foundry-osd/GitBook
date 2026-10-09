@@ -51,4 +51,4 @@ C:\Windows\Temp\Foundry\Logs\PreOobe\appx-servicing.log
 - [AppX removals](appx-removals.md)
 - [Optional features](optional-features.md)
 - [Review and deploy](../../foundry-deploy/review-and-deploy.md)
-- [Troubleshooting: After the restart](../../troubleshooting/after-the-restart.md)
+- [After the restart troubleshooting](../../troubleshooting/after-the-restart.md)

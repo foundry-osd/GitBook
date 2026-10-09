@@ -115,7 +115,7 @@ Do not pass passwords, keys or tokens as arguments. The full command line of eve
 | "Content import failed. Check access, available space, file names and path lengths." | One message for every import limit. Shorten paths, copy the content to a plain local folder or free space, then import again. The Foundry OSD log names the limit, for example `PreOobe.InvalidPackagePath`. |
 | "Import the missing content for "\<name\>"." | Select **Edit action**, import the same file or folder, then **Save**. |
 | "The configuration changed while you were editing. Open the action again." | The configuration was replaced while the dialog was open, for example by a sync. Reopen the action. |
-| "Final media creation failed. Custom Windows image media preparation failed." with a code that starts with `PreOobe.` | The failure comes from Post-installation content, even when no custom image is configured. See [Media creation troubleshooting](../../troubleshooting/media-creation.md). |
+| "Final media creation failed. Custom Windows image media preparation failed." with a code that starts with `PreOobe.` | The failure comes from Post-installation content, even when no custom image is configured. See [Content cannot be copied to the media](../../troubleshooting/media-creation/usb-drive-and-device-start.md#media-content). |
 
 Failures on the target device are in [After the restart troubleshooting](../../troubleshooting/after-the-restart.md).
 

@@ -54,4 +54,4 @@ Eject the drive, start a test device from it, and check that Foundry Connect ope
 
 - [Create a USB drive](create-usb.md)
 - [What each media type carries](README.md#what-each-media-type-carries)
-- [Media creation troubleshooting](../../troubleshooting/media-creation.md)
+- [Media creation troubleshooting](../../troubleshooting/media-creation.md) and [USB drive and device start](../../troubleshooting/media-creation/usb-drive-and-device-start.md)

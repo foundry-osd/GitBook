@@ -19,7 +19,7 @@ Except for **Settings backup and sync**, these choices are stored for the workst
 | **Export diagnostics** | Shows the log folder, normally `%ProgramData%\Foundry\Logs`, as a link that opens it. **Export...** asks for a destination and creates an archive of the Foundry OSD logs with sensitive values masked. |
 | **Advanced: export raw logs...** | Creates the same archive without masking. Use it only when a support contact asks for it: raw logs can contain credentials, identifiers, paths and network names. |
 
-A dialog titled **Diagnostics exported** gives the path of the archive. The export does not include the logs of target devices; for those, see [Logs and support information](../troubleshooting/logs-and-support.md).
+A dialog titled **Diagnostics exported** gives the path of the archive. What the archive contains is described in [Export diagnostics from Foundry OSD](../troubleshooting/logs-and-support.md#export-from-foundry-osd). It does not include the logs of target devices: for those, see [Logs and support information](../troubleshooting/logs-and-support.md).
 
 ## Appearance
 

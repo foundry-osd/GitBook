@@ -70,4 +70,4 @@ C:\Windows\Temp\Foundry\Logs\PreOobe\appx-servicing.log
 - [AI components](ai-components.md)
 - [Post-installation](post-installation.md)
 - [After the restart](../../foundry-deploy/after-the-restart.md)
-- [Troubleshooting: After the restart](../../troubleshooting/after-the-restart.md)
+- [After the restart troubleshooting](../../troubleshooting/after-the-restart.md)

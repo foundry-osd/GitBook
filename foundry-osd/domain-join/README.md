@@ -22,7 +22,7 @@ These requirements apply to both modes.
 - **Network at join time.** The join runs in installed Windows, not in Windows PE. The device must then reach the domain's DNS servers and a domain controller. The Internet check in Foundry Connect does not test this.
 - **Join account.** Ask your Active Directory administrator for an account that may add computers to the domain, reuse an existing computer account when a device is redeployed under the same name, and move computer accounts to the OUs you list. Foundry does not check these permissions.
 - **Computer name.** Each device needs its own name, because the name identifies its computer account. See [Machine naming](../customization/machine-naming.md).
-- **Windows edition.** Windows Home editions cannot join a domain: Foundry skips the join and the installation continues. See [Supported versions](../../reference/supported-versions.md).
+- **Windows edition.** Windows Home editions cannot join a domain: Foundry skips the join and the installation continues. The editions are listed in [Supported versions](../../reference/supported-versions.md#windows-11-editions).
 - **Custom answer file.** It must meet extra rules when Domain Join is active. See [Unattend](../customization/unattend.md#what-a-custom-answer-file-overrides).
 
 Test the join on one device first: a wrong account or an unreachable domain only shows after Windows is installed.

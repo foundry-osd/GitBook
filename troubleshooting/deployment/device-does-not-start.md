@@ -33,7 +33,7 @@ Foundry Deploy showed **Deployment complete**, the device restarted, and Windows
 **Cause:**
 
 - The firmware starts in legacy BIOS (CSM) mode. Foundry always creates a GPT disk that starts in UEFI mode only.
-- Windows has no driver for the storage controller. This happens when **Driver source** was **None**, when Microsoft Update Catalog returned nothing, or when the pack is an installer that runs only once Windows has started (Lenovo `.exe`, Surface `.msi`).
+- Windows has no driver for the storage controller. This can happen when **Driver source** was **None**, when Microsoft Update Catalog returned nothing, or when the pack is an installer that runs only once Windows has started (Lenovo `.exe`, Surface `.msi`).
 - The firmware boot order was not updated: see [the previous entry](#returns-to-the-media).
 
 Foundry erases the whole disk, including encrypted volumes. It does not clear the TPM, remove boot entries left by the previous installation or change the Secure Boot settings.
@@ -45,4 +45,4 @@ Foundry erases the whole disk, including encrypted volumes. It does not clear th
 3. Deploy again with a manufacturer **Driver source**, or change the storage controller mode to one Windows supports without an extra driver.
 4. Remove old boot entries in the firmware setup if several entries named **Windows Boot Manager** exist.
 
-**Collect:** the firmware boot mode, the exact stop code, and the deployment logs left on the target disk: see [Collect logs from a device that does not start](../logs-and-support.md#collect-logs-from-a-device-that-does-not-start).
+**Collect:** the firmware boot mode, the exact stop code, and the deployment logs left on the target disk: see [Collect logs from a device that does not start](../logs-and-support.md#device-does-not-start).

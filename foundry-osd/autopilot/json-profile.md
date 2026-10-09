@@ -35,7 +35,7 @@ Foundry Deploy shows an **Autopilot** step with a **Profile** list. The default 
 
 ## Check the result
 
-- On **Start**, the **JSON profile** row of the **Windows Autopilot** card reads "Enabled: \<name> (\<folder>)". A row marked **Needs attention** gives the reason: see [Windows Autopilot troubleshooting](../../troubleshooting/autopilot.md).
+- On **Start**, the **JSON profile** row of the **Windows Autopilot** card reads "Enabled: \<name> (\<folder>)". A row marked **Needs attention** gives the reason: see [Start blocks media creation for a Windows Autopilot reason](../../troubleshooting/autopilot.md#start-blocked).
 - On a deployed device, the profile chosen in Foundry Deploy is in `C:\Windows\Provisioning\Autopilot\AutopilotConfigurationFile.json`.
 
 ## Limits

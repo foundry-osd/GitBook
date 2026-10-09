@@ -136,7 +136,7 @@ Problems met when Foundry Deploy opens and in its wizard, up to the **Deploy** b
 **Fix:**
 
 1. To deploy now, select another file in **Answer file**, or **Use Foundry settings** if your organization allows it.
-2. First and third message: the administrator corrects the source file, selects **Refresh source** in [Unattend](../../foundry-osd/customization/unattend.md) and recreates the media. For Domain Join media, see [Domain Join troubleshooting](../domain-join.md).
+2. First and third message: the administrator corrects the source file, selects **Refresh source** in [Unattend](../../foundry-osd/customization/unattend.md) and recreates the media. For Domain Join media, see [the same message in Domain Join troubleshooting](../domain-join.md#answer-file-refused).
 3. Missing default: the administrator chooses a file or **Use Foundry settings** under **Deployment default** on the same page, then recreates the media.
 
 **Collect:** the message and the name of the selected file. Do not attach the answer file: it can contain passwords.
@@ -198,6 +198,6 @@ Problems met when Foundry Deploy opens and in its wizard, up to the **Deploy** b
 1. **Target device**: correct the computer name, the [answer file](#answer-file-rejected) or the [disk](#disk-identity).
 2. **Drivers**: see [the driver pack entry](#no-matching-driver-pack).
 3. **Autopilot**: select a profile in the [Windows Autopilot step](../../foundry-deploy/autopilot.md).
-4. "The domain join information is missing or not valid. Deployment has not started.": see [Domain Join troubleshooting](../domain-join.md).
+4. "The domain join information is missing or not valid. Deployment has not started.": see [Domain Join troubleshooting](../domain-join.md#join-information-not-valid).
 
 **Collect:** the text of each **Status** row.

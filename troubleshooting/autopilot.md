@@ -10,7 +10,7 @@ Start from where the problem shows. This page covers what the administrator meet
 
 To know which mode is in use, read the **Windows Autopilot** card on **Start** in Foundry OSD, or **Provisioning method** under **Autopilot** on **Summary** in Foundry Deploy.
 
-## On this page
+## On this page <a href="#on-this-page" id="on-this-page"></a>
 
 **Collect** names a line of the Foundry OSD log: see [Log locations](logs-and-support.md#log-locations). Never send a PFX file, its password or a tenant identifier.
 
@@ -22,10 +22,10 @@ To know which mode is in use, read the **Windows Autopilot** card on **Start** i
 | "Tenant onboarding failed" | [Connection failed](#tenant-onboarding-failed) |
 | "Tenant onboarding requires attention", or **Status** stays **Not ready** | [Connection incomplete](#tenant-onboarding-requires-attention) |
 | "Certificate creation failed", "Certificate removal failed", or a PFX password you did not keep | [Certificates](#certificate-creation-failed) |
-| A group tag is missing from a list, in Foundry OSD, Foundry Deploy or the upload window | [Group tags](#a-group-tag-you-expect-is-not-offered) |
-| On **Start**, a sentence that starts with "Hardware hash upload is enabled but", "Autopilot JSON profile mode is enabled but" or "Autopilot uses an unsupported" | [Start](#start-blocks-media-creation-for-a-windows-autopilot-reason) |
-| A line under **Boot media certificate** other than "Certificate ready for boot media generation." | [Start](#start-blocks-media-creation-for-a-windows-autopilot-reason) |
-| "Deploy configuration generation is not ready." while Windows Autopilot and local accounts are configured | [Local accounts](#media-creation-is-blocked-by-additional-local-accounts) |
+| A group tag is missing from a list, in Foundry OSD, Foundry Deploy or the upload window | [Group tags](#group-tag-not-offered) |
+| On **Start**, a sentence that starts with "Hardware hash upload is enabled but", "Autopilot JSON profile mode is enabled but" or "Autopilot uses an unsupported" | [Start](#start-blocked) |
+| A line under **Boot media certificate** other than "Certificate ready for boot media generation." | [Start](#start-blocked) |
+| "Deploy configuration generation is not ready." while Windows Autopilot and local accounts are configured | [Local accounts](#local-accounts) |
 | "OA3Tool executable was not found for the selected WinPE architecture." | [OA3Tool](#oa3tool-not-found) |
 
 ## "Autopilot import failed" <a href="#autopilot-import-failed" id="autopilot-import-failed"></a>
@@ -87,7 +87,7 @@ Foundry does not check that the file is an Autopilot profile: a valid JSON file 
 
 **If you did not keep the PFX password:** Foundry shows it once and does not store it. With the page connected, select the certificate in **Provisioned certificates**, then **Remove certificate**, then **Create certificate**, and store the PFX file and its password before you close the dialog.
 
-## A group tag you expect is not offered
+## A group tag you expect is not offered <a href="#group-tag-not-offered" id="group-tag-not-offered"></a>
 
 - **Where:** **Default group tag** on **Windows Autopilot > Zero-Touch**, which then offers only **None**; **Group tag** in the **Autopilot** step of Foundry Deploy; **Group tag** in the upload window of the interactive mode, which then offers only **None** and **Custom**.
 - **Cause:**
@@ -101,7 +101,7 @@ Foundry does not check that the file is an Autopilot profile: a valid JSON file 
   4. In the upload window, choose **Custom** and type the tag. With **Custom** and an empty box, the device is uploaded without a tag.
 - **Collect:** the line that starts with "Autopilot group tag discovery failed" in the Foundry OSD log, with "Optional Autopilot group tag discovery" in `FoundryDeploy.log`, or with "Group tag discovery failed" in `registration.log`.
 
-## Start blocks media creation for a Windows Autopilot reason
+## Start blocks media creation for a Windows Autopilot reason <a href="#start-blocked" id="start-blocked"></a>
 
 - **Where:** **Start**, on the row of the active mode in the **Windows Autopilot** card, and in the **ISO creation is blocked** or **USB creation is blocked** dialog.
 - **Cause and fix:** find the message in the first table. The fixes of the zero-touch messages are done on **Windows Autopilot > Zero-Touch**, where the line under **Boot media certificate** says more about a PFX: see the second table.
@@ -138,12 +138,12 @@ Foundry does not check that the file is an Autopilot profile: a valid JSON file 
 | "Select a PFX that matches an app registration certificate." | No certificate is chosen for the media yet. | Select the PFX of a listed certificate. |
 | "The selected certificate has expired. Create or select a valid certificate before creating boot media." | The certificate is past its expiration. | Create a new certificate. |
 
-## Media creation is blocked by additional local accounts
+## Media creation is blocked by additional local accounts <a href="#local-accounts" id="local-accounts"></a>
 
 - **Where:** **Start**. The blocked dialog lists "Deploy configuration generation is not ready.", the **OOBE** row reads **Needs attention**, and the **OOBE** page shows "Autopilot cannot be combined with additional local accounts."
 - **Cause:** a Windows Autopilot mode is enabled and **OOBE** has additional local accounts.
 - **Fix:** remove the additional accounts on [OOBE](../foundry-osd/customization/oobe.md), or select **Disable** on the Windows Autopilot page.
-- **Collect:** nothing. The same line in the dialog has other causes: see [Media creation troubleshooting](media-creation.md).
+- **Collect:** nothing. The same line in the dialog has other causes: see [The button stays unavailable](media-creation.md#button-unavailable).
 
 ## "OA3Tool executable was not found for the selected WinPE architecture." <a href="#oa3tool-not-found" id="oa3tool-not-found"></a>
 

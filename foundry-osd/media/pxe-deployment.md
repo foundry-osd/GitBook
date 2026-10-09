@@ -45,11 +45,11 @@ Each time you create the ISO again, import its `sources\boot.wim` again. Keep th
 
 If a deployment must use imported post-installation content, attach to the device the complete ISO the boot image was copied from, for example as virtual media, and leave it attached until the deployment ends. Foundry Deploy looks for the content on every drive of the device and accepts only the content of that same ISO. It does not download it from a web server or a network share.
 
-Without that media, the deployment stops before the disk is erased, with "Post-installation preparation failed. Check the deployment log for details.". See [Media creation troubleshooting](../../troubleshooting/media-creation.md).
+Without that media, the deployment stops before the disk is erased, with "Post-installation preparation failed. Check the deployment log for details.". See [PXE start](../../troubleshooting/media-creation/usb-drive-and-device-start.md#pxe).
 
 ## Related
 
 - [Create an ISO](create-iso.md)
 - [Start: create deployment media](README.md)
 - [Windows PE startup](../../foundry-connect/windows-pe-startup.md)
-- [Media creation troubleshooting](../../troubleshooting/media-creation.md)
+- [USB drive and device start troubleshooting](../../troubleshooting/media-creation/usb-drive-and-device-start.md)

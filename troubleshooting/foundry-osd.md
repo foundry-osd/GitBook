@@ -11,7 +11,7 @@ This page covers problems with the Foundry OSD application on the administrator 
 | A red or yellow status bar on the **ADK** page | [ADK is not installed](#adk-not-installed), [version is unsupported](#adk-unsupported), [add-on is missing](#winpe-missing), [add-on needs repair](#winpe-repair) |
 | An ADK installation that ends with a message | [ADK operation failed](#adk-failed), [canceled](#adk-canceled), [finished with remaining requirements](#adk-remaining) |
 | A message on **General**, or **Start** blocked by a General option | [No language packs](#no-language-packs), [passwords](#matching-passwords), [custom driver folder](#driver-folder) |
-| An update that fails or is not installed | [Update check failed](#update-failed), [stays on Apply update](#update-stays), [check skipped](#update-skipped), [update dialog before media creation](#update-advisory) |
+| An update that fails or is not installed | [Update check failed](#update-failed), [stays on Apply update](#update-stays), [check skipped](#update-skipped), [update dialog before media creation](media-creation.md#update-advisory) |
 | A proxy test that fails | [Check the proxy settings, Connection failed](#proxy) |
 | Options back to their defaults | [Settings were reset](#settings-reset) |
 | An export, a link or a bug report that does not open | [Diagnostics export failed](#export-failed), [Documentation could not be opened](#docs-not-opened) |
@@ -108,7 +108,7 @@ If only the architecture you do not use is incomplete, you can ignore the warnin
 **Cause:**
 
 - An installer could not be downloaded: no Internet access, or a proxy that blocks Microsoft's download site.
-- A Microsoft installer ended with an error, often because another Windows installation was running.
+- A Microsoft installer ended with an error, for example because another Windows installation was running.
 
 **Fix:**
 
@@ -214,16 +214,6 @@ If only the architecture you do not use is incomplete, you can ignore the warnin
 **Cause:** Foundry OSD was copied from another computer or started from a folder, instead of being installed with the MSI.
 
 **Fix:** Install Foundry OSD with the MSI. See [Download and install](../start-here/download.md).
-
-**Collect:** Nothing.
-
-## "Update Foundry OSD before creating boot media" <a href="#update-advisory" id="update-advisory"></a>
-
-**Where:** Dialog shown on **Start** when you select **Create ISO**, **Create USB** or **Update USB**.
-
-**Cause:** A newer Foundry OSD is available. This is advice, not an error.
-
-**Fix:** Select **Apply update** to install it and restart Foundry OSD, then create the media. **View update** appears instead while the update is not downloaded yet. **Create anyway** builds the media with the current version.
 
 **Collect:** Nothing.
 

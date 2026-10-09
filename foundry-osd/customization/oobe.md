@@ -62,4 +62,4 @@ If every account is **Standard** and the built-in Administrator account is **Dis
 - [Password protection](../general.md#password-protection)
 - [Unattend](unattend.md)
 - [Review and deploy](../../foundry-deploy/review-and-deploy.md)
-- [Troubleshooting: Windows deployment](../../troubleshooting/deployment.md)
+- [Windows deployment troubleshooting](../../troubleshooting/deployment.md)
