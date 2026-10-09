@@ -1,25 +1,25 @@
 # Domain Join step
 
-On media prepared for Domain Join, Foundry Deploy shows a **Domain join** step between **Drivers** and **Summary**. You choose the domain and the organizational unit (OU) and, on Interactive media, enter the join account. The join itself runs later, in installed Windows, after the restart.
+On media prepared for Domain Join, Foundry Deploy shows a **Domain join** step between **Drivers** and **Summary**. You choose the domain and the organizational unit (OU) and, on interactive media, enter the join account. The join itself runs later, in installed Windows, after the restart.
 
 {% hint style="warning" %}
 **Screenshot required**
 
 - **File:** `foundry-deploy-domain-join-01-interactive-ou.png`
-- **Capture:** Show the **Domain join** step of a release build on Interactive media, with all four fields filled with demonstration values and **Next** available. The menu bar must not show a Debug menu.
+- **Capture:** Show the **Domain join** step of a release build on interactive media, with all four fields filled with demonstration values and **Next** available. The menu bar must not show a Debug menu.
 {% endhint %}
 
 ## Before you start
 
-- Know the domain and the OU of the device and, on Interactive media, the join account and its password.
+- Know the domain and the OU of the device and, on interactive media, the join account and its password.
 - Check the computer name on [Target device](target.md): it identifies the computer account, and a device redeployed under the same name reuses its account.
 
 ## Complete the step
 
-1. **Domain name**: choose the domain when the media lists several; the default is preselected. A single listed domain cannot be changed. On Interactive media that lists no domain, type its DNS name, such as `corp.contoso.com`.
-2. **Account (DOMAIN\user or user@domain)** and **Password**: on Interactive media, enter the join account and its password. Zero-touch media carries the account and does not show these fields.
+1. **Domain name**: choose the domain when the media lists several; the default is preselected. A single listed domain cannot be changed. On interactive media that lists no domain, type its DNS name, such as `corp.contoso.com`.
+2. **Account (DOMAIN\user or user@domain)** and **Password**: on interactive media, enter the join account and its password. Zero-touch media carries the account and does not show these fields.
 3. **Organizational unit**: choose the OU when the domain lists several; the default, if there is one, is preselected. A domain with a single OU uses it without asking.
-4. **OU distinguished name (optional)**: shown on Interactive media for a domain without listed OUs. Type an OU of that domain, starting with `OU=`, or leave it empty to use the domain's default location.
+4. **OU distinguished name (optional)**: shown on interactive media for a domain without listed OUs. Type an OU of that domain, starting with `OU=`, or leave it empty to use the domain's default location.
 5. Select **Next**. It stays unavailable while a required field is empty or a field shows a message.
 
 Changing the domain replaces the OU choices and keeps the account and password you typed.

@@ -15,7 +15,7 @@ The Zero-touch and Interactive Domain Join pages share two lists: the **Domains*
 ## Configure the domains
 
 1. Under **Domains**, select **Add**.
-2. Enter the **Domain name**, then select **Add domain**. A NetBIOS name such as `CONTOSO` is refused. On the Zero-touch page the dialog also asks which join account the domain uses.
+2. Enter the **Domain name**, then select **Add domain**. A NetBIOS name such as `CONTOSO` is refused. On the Zero-touch Domain Join page the dialog also asks which join account the domain uses.
 3. Repeat for each domain. The first one is the default; to change it, select another domain and select **Set as default**.
 
 **Edit** changes the selected domain. **Remove** deletes it with its OUs, and the first remaining domain becomes the default if needed.
@@ -55,7 +55,7 @@ The number of entries decides what Foundry Deploy asks on its [Domain Join step]
 
 | OUs listed for the domain | During deployment |
 | --- | --- |
-| None | The domain's default location is used. On Interactive media the technician may type an OU instead. |
+| None | The domain's default location is used. On interactive media the technician may type an OU instead. |
 | One | That OU is always used. |
 | Several | The technician chooses one. The default, if you set one, is preselected; otherwise the technician must choose. |
 

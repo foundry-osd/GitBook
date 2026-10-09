@@ -6,7 +6,7 @@ Find what you see, then go to its section. Sections follow the order of a deploy
 | --- | --- |
 | Foundry OSD does not save a domain or an OU | [Refused entry](#foundry-osd-refuses-a-domain-or-an-ou) |
 | **Import from domain** ends with a message | [Import](#import-from-domain-adds-no-ous) |
-| A domain is not **Ready** | [Readiness](#the-zero-touch-page-is-not-ready) |
+| A domain is not **Ready** | [Readiness](#the-zero-touch-domain-join-page-is-not-ready) |
 | **Next** unavailable, or no **Domain join** step | [Wizard step](#the-domain-join-step-does-not-let-you-continue) |
 | "The selected answer file is unavailable..." | [Answer file](#answer-file-refused) |
 | "The domain join information is missing..." | [No start](#join-information-not-valid) |
@@ -43,9 +43,9 @@ An OU that is already listed is not refused: the dialog closes and nothing is ad
 
 "Only some of the OUs could be listed. You can still add the ones shown." means the domain holds more than 4,096 OUs or answered partially.
 
-## The Zero-touch page is not ready
+## The Zero-touch Domain Join page is not ready
 
-- **Where:** **Domain Join > Zero-Touch**; **Start** reads **Needs attention**. The Interactive page has no **Status** column.
+- **Where:** **Domain Join > Zero-Touch**; **Start** reads **Needs attention**. The Interactive Domain Join page has no **Status** column.
 - **Cause and fix:**
   - **Status** shows "Enter the shared join account, or give this domain its own account.", "Enter the account as DOMAIN\user or user@domain." or "Enter the account password.", possibly cut with an ellipsis: complete **Shared join account**, or select the domain and select **Edit**. Join passwords are always empty after you import a configuration.
   - "Enter a valid account first, then check the password length.": the password was typed before a valid account, or exceeds 2,560 bytes, and was not kept. Correct the account, then type the password again.
@@ -57,8 +57,8 @@ An OU that is already listed is not refused: the dialog closes and nothing is ad
 - **Cause and fix:**
   - **Next** is unavailable: fill the required fields, choose an OU, and correct any field that shows a message.
   - Another domain cannot be typed: media that lists domains joins only those.
-  - No field to type an OU: it exists only on Interactive media, for a domain without listed OUs.
-  - The step is missing: expected on Zero-touch media with one domain and at most one OU, and for a Windows Home edition.
+  - No field to type an OU: it exists only on interactive media, for a domain without listed OUs.
+  - The step is missing: expected on zero-touch media with one domain and at most one OU, and for a Windows Home edition.
 
 ## "The selected answer file is unavailable, invalid, or incompatible with the selected Windows architecture. Choose another file or rebuild the media." <a href="#answer-file-refused" id="answer-file-refused"></a>
 
@@ -69,8 +69,8 @@ An OU that is already listed is not refused: the dialog closes and nothing is ad
 ## "The domain join information is missing or not valid. Deployment has not started." <a href="#join-information-not-valid" id="join-information-not-valid"></a>
 
 - **Where:** Foundry Deploy, when you start the deployment. Nothing has been erased.
-- **Cause:** the computer name is not valid, the join account on Zero-touch media could not be unlocked or decrypted, or the media is inconsistent.
-- **Fix:** check the computer name on **Target device**. On Zero-touch media, restart the device and enter the Deployment password again. If it repeats, create the media again.
+- **Cause:** the computer name is not valid, the join account on zero-touch media could not be unlocked or decrypted, or the media is inconsistent.
+- **Fix:** check the computer name on **Target device**. On zero-touch media, restart the device and enter the Deployment password again. If it repeats, create the media again.
 - **Collect:** `FoundryDeploy.log`, line `Domain join preparation failed before deployment start. FailureCode=<code>`.
 
 ## The deployment stops on the answer file
@@ -111,14 +111,14 @@ An OU that is already listed is not refused: the dialog closes and nothing is ad
 
 | Result file | Cause | Fix |
 | --- | --- | --- |
-| `DomainUnavailable` with `ldapErrorCode` 49, or `JoinFailed` with `nativeErrorCode` 1326 | The directory refused the account or its password. | Check them. On Zero-touch media, correct them and create the media again. |
+| `DomainUnavailable` with `ldapErrorCode` 49, or `JoinFailed` with `nativeErrorCode` 1326 | The directory refused the account or its password. | Check them. On zero-touch media, correct them and create the media again. |
 | `ReadinessTimeout` | No domain controller was found or reached for two minutes. With `nativeErrorCode` 1355, the domain name does not resolve. | Check the network driver, the connection and the DNS servers in installed Windows, and the domain name. |
 | `DomainUnavailable` with another code | A domain controller answered, but the directory sign-in failed, several computer accounts share the name, or the OU could not be read. | Give the codes to the Active Directory administrator. |
 | `JoinFailed` with `nativeErrorCode` 5 | The join account may not add computers. | Have its permissions reviewed. |
 | `JoinFailed` with `nativeErrorCode` 2224 or 2732 | A computer account with this name exists and the join account may not reuse it. | See [KB5020276](https://support.microsoft.com/en-us/servicing/os/windows/2022/10/kb5020276-netjoin-domain-join-hardening-changes), or choose another computer name. |
 | `JoinFailed` with another code | Windows refused the join. | Run `net helpmsg <code>` with the `nativeErrorCode`. |
 | `ComputerNameMismatch` | The computer name could not be read or applied. | Check Machine naming or the answer file. |
-| `CredentialUnavailable`, `ContextMismatch`, `Interrupted`, `WorkerTimeout` | The prepared account could not be read, or the join stopped before it changed anything. | Redeploy. If it repeats on Zero-touch media, create the media again. |
+| `CredentialUnavailable`, `ContextMismatch`, `Interrupted`, `WorkerTimeout` | The prepared account could not be read, or the join stopped before it changed anything. | Redeploy. If it repeats on zero-touch media, create the media again. |
 
 Foundry never repeats a join, so a wrong password cannot lock the account. After fixing the cause, redeploy, or join manually from **Settings > Accounts > Access work or school**.
 

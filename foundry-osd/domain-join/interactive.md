@@ -34,7 +34,7 @@ Foundry Deploy does not contact the domain, so a mistyped password only shows af
 
 ## Limits
 
-No join account or password is written to Interactive media, including the ones saved on the Zero-touch page.
+No join account or password is written to interactive media, including the ones saved on the Zero-touch Domain Join page.
 
 ## Related
 
