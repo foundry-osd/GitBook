@@ -50,7 +50,7 @@ Examples:
 
 ```text
 foundry-osd-adk-01-status-missing.png
-foundry-osd-adk-02-install-button.png
+foundry-osd-adk-02-setup-progress.png
 foundry-osd-media-create-usb-01-confirmation.png
 foundry-connect-network-readiness-01-ready.png
 foundry-deploy-operating-system-01-selection.png
@@ -73,8 +73,8 @@ Add a visible GitBook placeholder where a screenshot is expected but not yet ava
 {% hint style="warning" %}
 **Screenshot required**
 
-- **File:** `foundry-osd-adk-02-install-button.png`
-- **Capture:** Show the automatic ADK and Windows PE Add-on installation button before installation.
+- **File:** `foundry-osd-adk-02-setup-progress.png`
+- **Capture:** Show the **Operation in progress** dialog over the ADK page while the Windows ADK is being installed.
 {% endhint %}
 ```
 
@@ -88,11 +88,11 @@ Replace the marker with the final image before publication:
 ```html
 <figure>
   <img
-    src=".gitbook/assets/foundry-osd-adk-02-install-button.png"
-    alt="Automatic ADK installation button on the Foundry OSD ADK page"
+    src=".gitbook/assets/foundry-osd-adk-02-setup-progress.png"
+    alt="Operation in progress dialog over the ADK page while the Windows ADK is being installed"
   >
   <figcaption>
-    Install the supported ADK and Windows PE Add-on directly from Foundry OSD.
+    While setup runs, the dialog shows the step and the navigation pane is disabled.
   </figcaption>
 </figure>
 ```
