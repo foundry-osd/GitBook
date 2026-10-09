@@ -13,7 +13,7 @@ Create a USB drive that starts physical devices and keeps the Windows images and
 - The drive holds 16 GB or more. With a smaller drive selected, **Create USB** stays unavailable and no message is shown.
 
 {% hint style="danger" %}
-Creating a USB drive erases every partition of the selected disk. Foundry OSD lists every disk connected through USB except the Windows system or boot disk: an external hard disk or SSD, such as a backup disk, is listed too and can be selected. Check the disk number, name and size in the list and again in the **Format USB target** dialog before you confirm.
+Creating a USB drive erases every partition of the selected disk. Foundry OSD lists every disk connected through USB except the Windows system or boot disk: an external hard disk or SSD, such as a backup disk, is listed too and can be selected. Check the disk number, name and size in the list, then read the volumes that the **Format USB target** dialog lists before you confirm.
 {% endhint %}
 
 ## Create the drive
@@ -23,15 +23,26 @@ Creating a USB drive erases every partition of the selected disk. Foundry OSD li
 3. Expand the **USB target** card and set the two [USB target options](#usb-target-options).
 4. Select **Create USB**. If the button reads **Update USB**, the drive already is a Foundry USB drive: see [Update a USB drive](update-usb.md).
 5. If a dialog titled **Update Foundry OSD before creating boot media** opens, apply the update first or select **Create anyway**.
-6. Read the **Format USB target** dialog. It names the disk number, the name and the size of the drive that will be erased. Select **Format and create USB** only if they are the ones you expect.
+6. Read the **Format USB target** dialog, described below. Select **Format and create USB** only if the disk and its volumes are the ones you expect. **Cancel** is the default button, so pressing Enter erases nothing.
 7. Keep the drive connected until the dialog reads "USB media was created successfully. Boot volume: X:. Cache volume: Y:.", with the two drive letters.
 
 {% hint style="warning" %}
 **Screenshot required**
 
 - **File:** `foundry-osd-media-create-usb-01-confirmation.png`
-- **Capture:** Show the **Format USB target** dialog over the **Start** page, with its message naming a demonstration disk and the **Format and create USB** and **Cancel** buttons.
+- **Capture:** Show the **Format USB target** dialog over the **Start** page, with its message naming a demonstration disk, the "Volumes on this disk:" list with at least one volume, and the **Format and create USB** and **Cancel** buttons.
 {% endhint %}
+
+The dialog tells you what is on the disk before anything is erased:
+
+| Line of the dialog | What it tells you |
+| --- | --- |
+| "This will erase disk \<number>: \<name> (\<size>)." | The disk that will be erased. |
+| "Volumes on this disk:", then one line per volume: "\<letter>: \<label> (\<file system>), \<size> used of \<size>" | The drive letter, the label, the file system and the space in use of each volume Windows can read, as they were when the list was last refreshed. A volume can have no letter, and one without a label reads "No name". |
+| "No readable volume on this disk." | Shown in place of the list when Windows can read no volume on the disk. |
+| "Everything on this disk will be lost. Continue only if this is the intended USB drive." | The last line, above the buttons. |
+
+A volume with data you did not expect, such as a backup, means the wrong disk is selected: select **Cancel**.
 
 ## USB target options
 
@@ -66,4 +77,4 @@ The folders of the cache partition are listed in [What each media type carries](
 
 - [Update a USB drive](update-usb.md)
 - [Start: create deployment media](README.md)
-- [Media creation troubleshooting](../../troubleshooting/media-creation.md)
+- [Media creation troubleshooting](../../troubleshooting/media-creation.md) and [USB drive and device start](../../troubleshooting/media-creation/usb-drive-and-device-start.md)

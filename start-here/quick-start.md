@@ -46,7 +46,7 @@ Skip this step for a first test on Ethernet. Each feature is independent:
 3. Select **Create ISO**, or connect the USB drive, select it and select **Create USB**.
 
 {% hint style="danger" %}
-**Create USB** erases the selected drive. Check the disk name and size in the confirmation before you continue.
+**Create USB** erases the selected drive. Check the disk and the volumes listed in the confirmation before you continue.
 {% endhint %}
 
 Details: [Create an ISO](../foundry-osd/media/create-iso.md), [Create a USB drive](../foundry-osd/media/create-usb.md).
