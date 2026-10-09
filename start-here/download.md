@@ -1,30 +1,44 @@
-# Download Foundry OSD
+# Download and install
 
-Download the latest Foundry OSD installer that matches the architecture of the Windows administrator workstation.
+Foundry OSD is installed on the administrator workstation from an MSI package. Foundry Connect and Foundry Deploy need no installation: Foundry OSD puts them on the deployment media it creates.
 
 ## Choose an installer
 
-| Architecture | Use this installer for | Download |
-| --- | --- | --- |
-| x64 | Most Windows workstations with Intel or AMD processors | [Download the latest x64 MSI](https://github.com/foundry-osd/foundry/releases/latest/download/Foundry-win-x64.msi) |
-| ARM64 | Windows on Arm workstations | [Download the latest ARM64 MSI](https://github.com/foundry-osd/foundry/releases/latest/download/Foundry-win-arm64.msi) |
+| Workstation processor | Installer |
+| --- | --- |
+| x64 (Intel or AMD) | [Foundry-win-x64.msi](https://github.com/foundry-osd/foundry/releases/latest/download/Foundry-win-x64.msi) |
+| ARM64 (Windows on Arm) | [Foundry-win-arm64.msi](https://github.com/foundry-osd/foundry/releases/latest/download/Foundry-win-arm64.msi) |
 
-{% hint style="info" %}
-Foundry Connect, Foundry Deploy and Foundry PostInstall do not require separate installation. Foundry OSD prepares the boot media, and [Bootstrap](../foundry-connect/windows-pe-startup.md) prepares these applications automatically during startup.
+Both links always point to the latest release. Release notes, file digests and earlier versions are on the [Foundry releases](https://github.com/foundry-osd/foundry/releases) page.
+
+{% hint style="warning" %}
+Download Foundry OSD only from the official `foundry-osd/foundry` GitHub repository.
 {% endhint %}
 
 ## Install Foundry OSD
 
-1. Download the MSI for the workstation architecture.
-2. Run the downloaded installer.
-3. Approve elevation when Windows requests administrator permission.
-4. Open Foundry OSD after installation completes.
-5. Continue with [Requirements](requirements.md) and the [Quick start](quick-start.md).
+1. Check the [Requirements](requirements.md).
+2. Run the MSI that matches the workstation processor. It installs Foundry OSD for all users of the workstation.
+3. Approve the Windows elevation (UAC) prompt.
+4. Keep the workstation online during setup. Foundry OSD needs three Microsoft components, and the installer is built to download and install the ones that are missing:
+   - .NET 10 Desktop Runtime
+   - Microsoft Edge WebView2 Runtime
+   - Microsoft Visual C++ Redistributable 14.4
+5. Start Foundry OSD from the Start menu and continue with the [Quick start](quick-start.md).
 
-## Releases and verification
+## After installation
 
-Use [Foundry releases](https://github.com/foundry-osd/foundry/releases) to review release notes, asset digests, and previous versions.
+- Every start shows a UAC prompt. Foundry OSD always runs with administrator rights, so there is nothing to configure and no need to use "Run as administrator".
+- You install the MSI once. Foundry OSD then updates itself, as described in [Settings](../foundry-osd/settings.md#update-app).
+- The Windows ADK is installed from inside the app, on the [ADK](../foundry-osd/adk.md) page.
 
-{% hint style="warning" %}
-Download Foundry OSD only from the official `foundry-osd/foundry` GitHub repository. Verify the release and installer architecture before deployment use.
-{% endhint %}
+## Uninstall
+
+Remove Foundry OSD from the installed apps list in Windows Settings. Your data stays in two folders, which you can delete when you no longer need it:
+
+| Folder | Contents |
+| --- | --- |
+| `%ProgramData%\Foundry` | Application settings, logs, downloaded files, working folders and the default ISO output |
+| `%LocalAppData%\Foundry` | Your saved configurations, imported custom Windows images and post-installation packages |
+
+If Foundry OSD does not install or start, see [Foundry OSD application troubleshooting](../troubleshooting/foundry-osd.md).
