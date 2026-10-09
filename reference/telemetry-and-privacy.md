@@ -22,36 +22,56 @@ Telemetry is a small number of events, each sent at a precise moment:
 | Sent by | When | Content |
 | --- | --- | --- |
 | Foundry OSD | Once a day, when the app starts | Proxy method, and the authentication mode of a manual proxy |
-| Foundry OSD | When a media creation ends, whether it succeeded, failed or was cancelled | Result, duration, failed step, and the options chosen for the media (listed below) |
+| Foundry OSD | When a media creation ends, whether it succeeded, failed or was cancelled | Result, duration, failure details, and the options chosen for the media |
 | Windows PE startup | Only when the startup fails | Failure category, last stage reached, elapsed time, and which application failed to start |
-| Foundry Connect | When the network is ready | Connection type (Ethernet or Wi-Fi), what was available, Wi-Fi security type, whether 802.1X or a Wi-Fi profile was on the media |
-| Foundry Deploy | When a deployment ends | Result, duration, failed step; device manufacturer and model and whether it is a virtual machine; Windows release, build, architecture, language, edition and licensing; driver pack source, manufacturer and model; whether firmware updates were on; Windows Autopilot and Domain Join mode and state; restart setting |
+| Foundry Connect | When the network is ready | Connection type, what was available, Wi-Fi security type |
+| Foundry Deploy | When a deployment ends, whether it succeeded, failed or was cancelled | Result, duration, failure details; device manufacturer and model; the Windows, driver pack and options used |
 
-Every event also carries the application name and version, its language and architecture, a session identifier, and an anonymous installation identifier created at random by Foundry OSD.
+Every event also carries a format version, the application name and version, its build type, the environment it runs in, its language and architecture, a session identifier, and an anonymous installation identifier created at random by Foundry OSD. The two lists below give every field of each event.
 
 <details>
 
-<summary>Options reported when a media creation ends</summary>
+<summary>Fields reported when a media creation ends</summary>
 
 Values are switches, counts or fixed choices. No name, path or text you typed is included.
 
 | Area | What is reported |
 | --- | --- |
-| Media | ISO or USB, creation or update; architecture; Windows PE language; standard or Wi-Fi boot image; Secure Boot signature; USB partition style and format mode; where the Foundry applications put on the media came from |
+| Result | ISO or USB, creation or update; success or failure; duration; an identifier of the operation |
+| Failure | Name of the step that failed; kind, reason and code of the failure, each from a fixed list; name of the tool that failed and its exit code. Empty when the creation succeeds |
+| Media | Architecture; Windows PE language; standard or Wi-Fi boot image; Secure Boot signature; USB partition style and format mode; whether the Foundry Connect and Foundry Deploy applications put on the media are release builds |
 | Drivers | Whether Dell, HP or a custom driver folder is used |
 | General | Whether Password protection is on; restart mode and delay; whether a Windows PE time zone is set |
-| Network | Whether Ethernet 802.1X and Wi-Fi are on, whether a profile, a passphrase or a certificate is configured, the Wi-Fi security type, and whether profiles are kept for Windows |
+| Network | Whether any network option is on. Ethernet 802.1X: whether it is on, whether a profile is set, whether a certificate is required and whether one is set. Wi-Fi: whether it is on, whether a profile, a network name, a passphrase, an enterprise profile and an enterprise certificate are set, whether a certificate is required, and the security type. Whether profiles and private keys are kept for the installed Windows, overall and for each of Ethernet and Wi-Fi |
 | Windows Autopilot | Whether it is on, and the method |
-| Domain Join | Whether it is on, the method, the number of domains (up to 32) and OUs, whether a shared join account and a default OU are set |
-| OS selection | Number of allowed languages, releases, editions and licensing types, and whether a default is set for each |
-| Custom Windows images | Whether they are on, how many are included (up to 100), and whether the default is a catalog or a custom image |
+| Domain Join | Whether it is on, the method, the number of domains (up to 32) and of OUs, whether a shared join account is used, whether a default OU is set |
+| Customization | Whether any customization page is on |
+| OS selection | Whether it is on and whether anything is set; number of allowed languages, releases, editions and licensing types; whether a default is set for each of the four; the default update offset (0 to 11) |
+| Custom Windows images | Whether they are on, how many are included, and whether the default is a catalog or a custom image |
 | Unattend | Whether it is on, the number of answer files (up to 100), and whether the default is Foundry's settings or a custom file |
-| Machine naming | Whether it is on, the mode, the number and types of name components, separator, casing, truncation, and whether the technician may edit the name |
-| OOBE | Whether it is on, and each privacy choice: license terms, diagnostic data level, privacy screen, tailored experiences, advertising ID, speech recognition, inking and typing, location |
-| Post-installation | Whether it is on, the number of actions (up to 1,000), and the count of each type: PowerShell script, command, software installation, restart |
-| Optional features | Whether it is on, the number of features to enable and to disable, and whether a source folder is needed |
-| AppX removals | Whether it is on, the number of apps and the list preset used |
-| AI components | Whether it is on, and each option chosen |
+| Machine naming | Whether it is on, the mode, the number and types of name components, separator, casing, truncation directions, and whether the technician may edit the name |
+| OOBE | Whether it is on, and each choice: license terms, diagnostic data level, privacy screen, tailored experiences, advertising ID, speech recognition, inking and typing, location |
+| Post-installation | Whether it is on, the number of actions and of enabled actions (up to 1,000), and the count of each type: PowerShell script, command, software installation, restart |
+| Optional features | Whether it is on, the number of features set, to enable and to disable, the number of feature categories, and whether Windows source files are needed |
+| AppX removals | Whether it is on, the number of apps, and whether the selection matches one preset, several or none |
+| AI components | Whether it is on, each of the eight options, and how many are chosen |
+
+</details>
+
+<details>
+
+<summary>Fields reported by the other events</summary>
+
+| Event | What is reported |
+| --- | --- |
+| Foundry OSD, once a day | Proxy method; authentication mode of a manual proxy |
+| Windows PE startup failure | Failure category; last stage reached; elapsed time; which application failed, its exit code and how far its start went; version, release or development build, and architecture of that application |
+| Foundry Connect, network ready | Connection type (Ethernet or Wi-Fi); window layout; whether Ethernet and Wi-Fi were available; Wi-Fi security type and the origin of the Wi-Fi connection; whether Ethernet 802.1X and Wi-Fi were set on the media |
+| Foundry Deploy, result | Success, cancellation, duration, number of steps completed, an identifier of the operation; whether it was a test run and the session mode |
+| Foundry Deploy, failure | Name of the step and of the operation that failed; kind, code and reason of the failure |
+| Foundry Deploy, device | Manufacturer, model, and whether it is a virtual machine |
+| Foundry Deploy, Windows | Catalog or custom image; product, release, build, update month, architecture, language, edition, licensing, image index; Foundry's settings or a custom answer file |
+| Foundry Deploy, options | Driver pack source, manufacturer and model; whether firmware updates were on; Windows Autopilot: on or off, method, upload state, whether a group tag was chosen; Domain Join: on or off, method, how the domain and the OU were chosen, state; restart mode and delay |
 
 </details>
 
