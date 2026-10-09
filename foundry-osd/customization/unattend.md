@@ -23,7 +23,7 @@ Use **Customization > Unattend** to put your own Windows answer files on the dep
 4. Under **Deployment default**, choose the file selected by default in Foundry Deploy, or keep **Use Foundry settings**.
 5. Return to **Start** and [create the media](../media/README.md).
 
-Foundry saves the path of each file, not its content: keep the source files in place until the media is created.
+Keep the source files in place until the media is created. Whether Foundry also keeps a copy of them with your saved configuration depends on **Remember passwords**: see [what is remembered](../deployment-profiles.md#what-is-remembered).
 
 | Button | Applies to | What it does |
 | --- | --- | --- |
