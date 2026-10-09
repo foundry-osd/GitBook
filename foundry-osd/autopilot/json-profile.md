@@ -1,36 +1,52 @@
 # JSON profile
 
-Use a local Autopilot JSON profile when the deployment should stage profile settings without uploading the device hardware hash.
-
-## Configure the profile
-
-1. Open **Windows Autopilot > JSON profiles**.
-2. Import a supported local profile or connect to the tenant and download an available profile.
-3. Review the profile information displayed by Foundry OSD.
-4. Select the profile that Foundry Deploy should use by default.
-5. Return to **Start** and confirm Autopilot readiness.
+**JSON profile** places a Windows Autopilot profile in the installed Windows, as the file `AutopilotConfigurationFile.json`. Foundry does not upload the hardware hash in this mode: the device is not added to the Windows Autopilot devices of your tenant.
 
 <figure>
-  <img src="../../.gitbook/assets/foundry-osd-autopilot-json-profile-01-import.png" alt="Foundry OSD Windows Autopilot JSON profile import and selection controls">
-  <figcaption>Import or download profiles, then select the default profile for deployment.</figcaption>
+  <img src="../../.gitbook/assets/foundry-osd-autopilot-json-profile-01-import.png" alt="JSON profile page of Foundry OSD with the Profile actions, Default profile and Imported profiles cards">
+  <figcaption>Import or download profiles, then choose the default one.</figcaption>
 </figure>
 
-All profiles retained in Foundry OSD are included in media created for the JSON profile workflow. The selected profile is the default shown in Foundry Deploy; it does not limit which profiles are copied. Remove every profile that should not be distributed with the media.
+## Before you start
 
-## Protect the profile on deployment media
+- Have a profile to add, from one of two sources:
+  - a `.json` profile file on the workstation;
+  - an account that can read the Windows Autopilot deployment profiles of your tenant. **Download from tenant** signs you in and asks for the Microsoft Graph permissions `DeviceManagementServiceConfig.Read.All` and `User.Read`.
+- Decide whether the profiles may be readable on the media. They are stored as readable files unless **Password protection** is on. See [Password protection](../general.md#password-protection).
 
-Enable **Password protection** from [General configuration](../general.md) before creating the media when the retained Autopilot profiles must not remain readable on the ISO or USB drive.
+## Configure the profiles
 
-When protection is enabled, Foundry stores every retained profile on the deployment media using AES-256-GCM encryption. Readable JSON files are not stored alongside the encrypted profiles. Foundry Deploy asks for the technician password, unlocks the deployment key, and decrypts the selected profile before staging it in the Windows installation.
+1. Open **Windows Autopilot > JSON profile** and select **Enable**. The buttons of the page stay unavailable until you do.
+2. Add profiles under **Profile actions**:
+   - **Import profile**: choose a `.json` file. Foundry accepts a file that is not empty, is valid JSON and contains only ASCII characters. It does not check that the content is an Autopilot profile.
+   - **Download from tenant**: complete the sign-in in the browser. In **Select Autopilot profiles**, select the profiles to keep, then **Import**.
+3. Check the **Imported profiles** list: **Name**, **Source** (**Manual import** or **Tenant download**), **Imported** and **Folder**.
+4. In **Default profile**, choose the profile that Foundry Deploy preselects.
+5. Remove what must not travel with the media: select the rows, then **Remove selected**. Every profile in the list is copied to the media, not only the default one.
+6. Create or update the deployment media from [Start](../media/README.md).
 
-{% hint style="warning" %}
-Without Password protection, every retained Autopilot JSON profile is stored in readable form on the deployment media. Restrict access to the ISO or USB drive and recreate the media if it is lost or copied without authorization.
-{% endhint %}
+An imported file is named after its `Comment_File` value. Without one, it takes the file name, or the name of its folder when the file is called `AutopilotConfigurationFile.json`.
 
-## Expected result
+To replace a profile, download it again: the new copy replaces the old one. A file you changed and import again is added as a second entry, so remove the old entry.
 
-Foundry stages the profile selected in Foundry Deploy for the Windows installation. Hardware registration remains a separate administrative responsibility.
+## What the technician sees
 
-## Replace a profile
+Foundry Deploy shows an **Autopilot** step with a **Profile** list. The default profile is preselected and the technician can choose any other profile of the media. The deployment then runs the step **Copy Autopilot profile**. See [Windows Autopilot step](../../foundry-deploy/autopilot.md).
 
-Import the updated profile, select it, and recreate or update the deployment media. Remove every obsolete or unapproved profile before creating media because all retained profiles are included.
+## Check the result
+
+- On **Start**, the **JSON profile** row of the **Windows Autopilot** card reads "Enabled: \<name> (\<folder>)". A row marked **Needs attention** gives the reason: see [Windows Autopilot troubleshooting](../../troubleshooting/autopilot.md).
+- On a deployed device, the profile chosen in Foundry Deploy is in `C:\Windows\Provisioning\Autopilot\AutopilotConfigurationFile.json`.
+
+## Limits
+
+- A profile file with a non-ASCII character, such as an accented letter in a comment, is refused.
+- A profile downloaded from the tenant is written by Foundry from the settings of the tenant profile. It can differ from a file produced by another tool for the same profile.
+- The device is not registered: a group tag and **Upload computer name to Autopilot** do not apply to this mode.
+- The rules shared by the three modes are on [Windows Autopilot](README.md).
+
+## Related
+
+- [Windows Autopilot step](../../foundry-deploy/autopilot.md)
+- [Password protection](../general.md#password-protection)
+- [Windows Autopilot troubleshooting](../../troubleshooting/autopilot.md)
