@@ -29,7 +29,7 @@ As with an ISO, Foundry Deploy is downloaded when the device starts. The full co
 2. Open the ISO in File Explorer and copy `sources\boot.wim`.
 3. Import the copy as a boot image in your PXE server and publish it, following the documentation of that server.
 
-Take the file from an ISO, never from a Foundry USB drive: the boot image of a USB drive does not contain Foundry Connect, which is stored on its cache partition.
+Take the file from an ISO, not from a Foundry USB drive: the boot image of a USB drive does not contain Foundry Connect, which is stored on its cache partition.
 
 ## Check the result
 

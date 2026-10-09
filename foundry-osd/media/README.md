@@ -6,13 +6,13 @@ The **Start** page shows whether your configuration is ready, then creates an IS
 **Screenshot required**
 
 - **File:** `foundry-osd-media-01-readiness-overview.png`
-- **Capture:** Show the whole **Start** page of a released build with the five readiness groups (**General**, **Network**, **Windows Autopilot**, **Domain Join**, **Customization**), one group expanded with a row marked **Needs attention** and its **Review** button, the **ISO output**, **USB target** and **Create media** cards, and the current navigation pane.
+- **Capture:** Show the whole **Start** page with its five readiness groups, one of them expanded on a row marked **Needs attention**, and the three cards at the bottom.
 {% endhint %}
 
 ## Before you start
 
 - The [ADK](../adk.md) page reports **ADK is ready**. Until then **Start** cannot be opened.
-- 20 GB are free on the Windows drive. See [Limits](#limits).
+- 20 GB are free on each drive that holds `%ProgramData%\Foundry`, `%LocalAppData%\Foundry` or the Windows temporary folders, and on the drive of the ISO file. On most workstations this is the Windows drive.
 - With several saved configurations, the one you want is selected in [Settings backup and sync](../deployment-profiles.md).
 
 ## Read the readiness rows
@@ -47,7 +47,7 @@ Each row shows its value and one state: **Configured**, **Default**, **Disabled*
 | Content | ISO | USB drive | PXE boot image |
 | --- | --- | --- | --- |
 | Boot image `sources\boot.wim`: Windows PE, its drivers and your options | In the ISO | On the **BOOT** partition | The only file delivered |
-| Foundry applications | Foundry Connect is in the boot image. Foundry Deploy and the post-installation application are downloaded at each start. | Foundry Connect is in `Runtime\` on the cache partition. Foundry Deploy and the post-installation application are downloaded at start and kept there. | As for the ISO |
+| Foundry applications: Foundry Connect, which prepares the network, and Foundry Deploy, which installs Windows | Foundry Connect, and with Domain Join the post-installation application, are in the boot image. Foundry Deploy is not: it is downloaded at every start. | Foundry Connect, and with Domain Join the post-installation application, are in `Runtime\` on the cache partition, **Foundry Cache**. Foundry Deploy is downloaded at start and kept in `Runtime\`. | As for the ISO |
 | [Custom images](../customization/custom-windows-images.md) | In the ISO, in `Cache\OperatingSystems\Custom\` | Same folder on the cache partition | Not delivered |
 | [Post-installation](../customization/post-installation.md) content you imported | In the ISO, in `Cache\PreOobe\` | Same folder on the cache partition | Not delivered |
 | Cache of downloaded Windows images and driver packs | None: every deployment downloads again | On the cache partition, kept by updates | None |
@@ -59,21 +59,15 @@ A USB drive has two partitions:
 | **BOOT** | FAT32, 2 GiB | Boot files and `sources\boot.wim` |
 | **Foundry Cache** | NTFS, rest of the drive | `Runtime\`, `Cache\OperatingSystems\`, `Cache\DriverPacks\`, `Cache\Firmware\`, `Cache\PreOobe\`, `Logs\` |
 
-- With Domain Join enabled, the post-installation application is also placed on the media, next to Foundry Connect.
-- Each included custom image is stored as `Cache\OperatingSystems\Custom\<hash>\image.wim`. On a USB drive, Foundry Deploy also offers up to 256 `.wim` files that you copy yourself directly into `Cache\OperatingSystems\Custom\`; updates keep them.
+At every start, the device asks GitHub for the latest release of these applications. Foundry Deploy and the post-installation application are downloaded, and a newer Foundry Connect is used in place of the copy on the media. If GitHub does not answer, the start goes on with the copies the media carries and stops when Foundry Deploy cannot be downloaded. A USB drive keeps the downloads in `Runtime\` and reuses them at later starts, once an online check confirms they are current. An [update](update-usb.md) of the drive writes Foundry Connect again and keeps the downloaded copy of Foundry Deploy.
+
+Each included custom image is stored as `Cache\OperatingSystems\Custom\<hash>\image.wim`. On a USB drive, Foundry Deploy also offers up to 256 `.wim` files that you copy yourself directly into `Cache\OperatingSystems\Custom\`; updates keep them.
 
 ## While media is being created
 
-An **Operation in progress** dialog shows each stage, and the rest of the app is locked until it closes. With custom images, "Verifying custom image sources…" checks every included image, which takes time with large images. Its title changes to **Operation complete** with the result, for example "The ISO media was created successfully.".
+An **Operation in progress** dialog shows each stage and locks the rest of the app; its title becomes **Operation complete** with the result. **Cancel** stops the operation once the disk or image step in progress has finished: keep Foundry OSD open and the USB drive connected until the dialog reads "Media creation cancelled."
 
-**Cancel** stops the operation. Downloads stop at once; a disk or image operation already started finishes first, so keep Foundry OSD open and the USB drive connected until the dialog reads "Media creation cancelled." A cancelled or failed ISO build keeps the previous file. A cancelled USB operation does not restore the drive: create or update it again.
-
-## Limits
-
-- 20 GB free on the drives that hold `%ProgramData%`, your user profile and the Windows temporary folders, and on the drive of the ISO file.
-- A USB drive of 16 GB or more.
-- A custom driver folder of at most 2 GiB and 10,000 files and folders.
-- Boot files of at most 2 GiB on a USB drive. An ISO has no such limit.
+A cancelled or failed ISO build keeps the previous file. A cancelled USB operation does not restore the drive: create or update it again.
 
 ## Related
 

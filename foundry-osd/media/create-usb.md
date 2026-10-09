@@ -9,19 +9,18 @@ Create a USB drive that starts physical devices and keeps the Windows images and
 
 ## Before you start
 
-- No row of [Start](README.md) is marked **Needs attention**, and 20 GB are free on the Windows drive.
+- No row of [Start](README.md) is marked **Needs attention**, and 20 GB are free on the drives listed in [Start](README.md#before-you-start).
 - The drive holds 16 GB or more. With a smaller drive selected, **Create USB** stays unavailable and no message is shown.
-- The drive is a removable USB flash drive. Foundry OSD lists only disks connected through USB, and leaves out the system disk and any disk that Windows reports as not removable. A USB hard disk or SSD enclosure that Windows reports as a fixed disk is not listed.
 
 {% hint style="danger" %}
-Creating a USB drive erases every partition of the selected drive. Copy elsewhere anything you need from it first.
+Creating a USB drive erases every partition of the selected disk. Foundry OSD lists every disk connected through USB except the Windows system or boot disk: an external hard disk or SSD, such as a backup disk, is listed too and can be selected. Check the disk number, name and size in the list and again in the **Format USB target** dialog before you confirm.
 {% endhint %}
 
 ## Create the drive
 
 1. Connect the drive, open **Start**, and select **Refresh** in the **USB target** card.
 2. Select the drive in the list. An entry reads, for example, "Disk 4 - USB SanDisk 3.2Gen1 (114.6 GB)".
-3. Expand the card and set the two [USB target options](#usb-target-options).
+3. Expand the **USB target** card and set the two [USB target options](#usb-target-options).
 4. Select **Create USB**. If the button reads **Update USB**, the drive already is a Foundry USB drive: see [Update a USB drive](update-usb.md).
 5. If a dialog titled **Update Foundry OSD before creating boot media** opens, apply the update first or select **Create anyway**.
 6. Read the **Format USB target** dialog. It names the disk number, the name and the size of the drive that will be erased. Select **Format and create USB** only if they are the ones you expect.
@@ -38,7 +37,7 @@ Creating a USB drive erases every partition of the selected drive. Copy elsewher
 
 | Option | Choices | Default |
 | --- | --- | --- |
-| **USB partition style** | **GPT** or **MBR**. Keep **GPT** for UEFI devices. Choose **MBR** only for a device that does not offer the GPT drive in its boot menu. With `arm64`, only **GPT** is offered. | **GPT** |
+| **USB partition style** | **GPT** or **MBR**. Keep **GPT** unless you have a reason to change it. Foundry does not check the firmware of your devices: if a device does not offer the drive in its boot menu, creating the drive again with **MBR** is a test worth making. With `arm64`, only **GPT** is offered. | **GPT** |
 | **USB format mode** | **Quick format** or **Full format**, applied to both partitions. A full format takes much longer. | **Quick format** |
 
 Foundry OSD remembers both choices for the next drive.
@@ -61,7 +60,7 @@ The folders of the cache partition are listed in [What each media type carries](
 
 - The boot files must fit the 2 GiB **BOOT** partition, whatever the size of the drive. Foundry OSD checks this before it erases anything. If they do not fit, reduce the drivers or [create an ISO](create-iso.md).
 - Foundry OSD checks the identity of the drive again before it writes. If the drive was swapped or reconnected after you selected it, the operation stops and nothing is erased.
-- A drive that Foundry OSD recognizes as a Foundry USB drive can only be updated. To create it again, for example to change the partition style, first delete its partitions with Windows Disk Management.
+- A drive that Foundry OSD recognizes as a Foundry USB drive can only be updated: see [How Foundry recognizes the drive](update-usb.md#how-foundry-recognizes-the-drive). To create it again, for example to change the partition style, first delete its partitions with Windows Disk Management.
 
 ## Related
 

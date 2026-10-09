@@ -10,7 +10,7 @@ Create one `.iso` file to start virtual machines, to attach through a remote man
 ## Before you start
 
 - No row of [Start](README.md) is marked **Needs attention**.
-- 20 GB are free on the Windows drive and on the drive that receives the ISO.
+- 20 GB are free on the drives listed in [Start](README.md#before-you-start) and on the drive that receives the ISO.
 - The architecture, the language and the drivers of Windows PE are set in [General](../general.md).
 
 ## Create the ISO

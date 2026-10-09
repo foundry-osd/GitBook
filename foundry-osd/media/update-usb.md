@@ -13,7 +13,7 @@ Update a Foundry USB drive to apply your current options and the current Foundry
 
 ## Before you start
 
-- No row of [Start](README.md) is marked **Needs attention**, and 20 GB are free on the Windows drive.
+- No row of [Start](README.md) is marked **Needs attention**, and 20 GB are free on the drives listed in [Start](README.md#before-you-start).
 - Close File Explorer windows and other programs that use the drive.
 - Move away any file you copied to the **BOOT** volume yourself: it is erased.
 
@@ -21,7 +21,7 @@ Update a Foundry USB drive to apply your current options and the current Foundry
 
 1. Connect the drive, open **Start**, and select **Refresh** in the **USB target** card.
 2. Select the drive and check that the button reads **Update USB**. This label is the only sign that Foundry OSD recognized the drive.
-3. To format **BOOT** completely, expand the card and set **USB format mode** to **Full format**. The update then takes longer. **USB partition style** is ignored: an update never changes it.
+3. To format **BOOT** completely, expand the **USB target** card and set **USB format mode** to **Full format**. The update then takes longer. **USB partition style** is ignored: an update never changes it.
 4. Select **Update USB**.
 5. If a dialog titled **Update Foundry OSD before creating boot media** opens, apply the update first or select **Create anyway**.
 6. Keep the drive connected until the dialog reads "USB boot partition was updated successfully. Boot volume: X:. Cache volume: Y:.", with the two drive letters.
@@ -35,7 +35,7 @@ The drive must have an NTFS volume named `Foundry Cache` and its **BOOT** partit
 | Replaced | Kept |
 | --- | --- |
 | The whole **BOOT** partition: boot files and the boot image, with your current options | `Cache\OperatingSystems`, `Cache\DriverPacks` and `Cache\Firmware`: the downloads of earlier deployments |
-| The Foundry applications in `Runtime\` on the cache partition | `Logs\` and any file you copied to the cache partition |
+| Foundry Connect, and the post-installation application with Domain Join, in `Runtime\` on the cache partition | The copy of Foundry Deploy downloaded by an earlier start, `Logs\`, and any file you copied to the cache partition |
 | The custom images and post-installation content of the current configuration, added to the cache partition | Custom images and post-installation content written by earlier builds. They keep using space. |
 
 New custom images and post-installation content are copied before **BOOT** is formatted, and Foundry OSD checks first that the cache partition has room for them.
