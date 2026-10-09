@@ -1,62 +1,54 @@
 # Verify deployment
 
-Foundry Deploy finishes with a success or error state.
+A deployment ends on one of three screens: **Deployment complete**, **Deployment failed** or **Deployment cancelled**. This page tells you what to do on each one before the device restarts.
 
-## Success
+{% hint style="warning" %}
+**Screenshot required**
 
-Review the completion message and session summary when the configured reboot policy allows it. Foundry OSD can configure a manual reboot, an immediate automatic reboot, or an automatic reboot after a displayed countdown. Configure a manual reboot or sufficient delay before creating media when technicians must inspect results or collect logs.
-
-<figure>
-  <img src="../.gitbook/assets/foundry-deploy-verify-01-success.png" alt="Foundry Deploy success page with the reboot action">
-  <figcaption>Confirm deployment success before rebooting the device.</figcaption>
-</figure>
-
-After reboot:
-
-- Confirm that Windows starts from the target disk.
-- Confirm the expected computer name.
-- When local accounts are configured, verify the expected account type and password sign-in, including built-in Administrator activation if enabled.
-- Confirm network and required device drivers.
-- Verify Windows Autopilot registration or staged profile when configured.
-- Complete the organization’s acceptance checks before handoff.
-
-When using a [custom answer file](../foundry-osd/customization/unattend.md), verify that its settings and commands produced the intended Windows configuration and work with the other enabled Foundry options. Foundry success confirms deployment completed; it does not prove that Windows has consumed every setting. Keep the target Panther answer file until the required setup passes finish, then follow your sensitive-file cleanup process.
-
-{% hint style="info" %}
-**Review step outcomes**
-
-Review informational **Skipped** entries and their reasons as well as successful entries. A cache-related skip is expected reuse, but another skip can explain why requested optional work was not completed.
-
-**Stage driver installer**, **Stage firmware update**, **Prepare setup tasks**, and **Prepare Autopilot assistant** describe preparation. Confirm the corresponding driver, firmware, customization, or registration result after Windows starts. A successful Deploy session does not establish that those later actions succeeded.
+- **File:** `foundry-deploy-verify-01-success.png`
+- **Capture:** Show the **Deployment complete** screen of a release build with the restart countdown ("This computer will restart in ...") and the **Steps** list. Use a demonstration computer name and hide the IP and MAC addresses.
 {% endhint %}
 
-## Post-installation actions
+## Deployment complete
 
-When using [Post-installation](../foundry-osd/customization/post-installation.md), a successful Deploy session means Windows is ready to run those actions. Follow the Post-installation console through any planned restarts and confirm that Windows reaches OOBE. Review failed actions even when **Continue on error** allowed the sequence to finish. An interrupted action is not automatically retried.
+1. Look through **Steps** for skipped steps and point at each one to read its reason. A skipped **Download driver pack** or **Configure Windows recovery** changes what the device has after the restart: see [Deployment steps](review-and-deploy.md#deployment-steps).
+2. Remove the deployment media.
+3. Let the device restart, or select **Reboot**.
 
-Verify that the installed applications work after cleanup. If they need source files for repair or updates, confirm that those files remain available. Keep the [PostInstall results and logs](../troubleshooting/logs-and-support.md#postinstall-diagnostics) when investigating a problem.
+| What the screen says | What happens |
+| --- | --- |
+| "This computer will restart in \<n>s." | The device restarts by itself when the countdown ends. **Reboot** restarts it at once. |
+| "Remove the boot media, then select Reboot." | The administrator turned automatic restart off. Nothing happens until you select **Reboot**. |
 
-## Domain Join
+Automatic restart is on by default with a delay of 10 seconds. With a delay of 0 seconds the device restarts as soon as the deployment completes, and you cannot read the screen. The administrator changes both settings on the [General](../foundry-osd/general.md) page, and the **Completion** category of the summary shows them before you start.
 
-A successful deployment only means the join was prepared. After the restart, check the line that starts with `Domain -` in the Foundry console, then sign in with a domain account. Being a member of the domain does not prove that the computer account is in the intended OU: confirm it with your Active Directory administrator.
+A completed deployment means Windows is on the disk and the work planned for the first start is in place. It does not mean that work has run. Continue with [After the restart](after-the-restart.md).
 
-When the join, the placement or the membership is not **Succeeded**, or when **Cleanup** stays **Pending**, resolve it before handing over the computer; see [Domain Join troubleshooting](../troubleshooting/domain-join.md). If Deploy skipped the join because of the Windows edition or the image, only the deployment summary mentions it.
+## Deployment failed
 
-## Automatic Windows activation
+{% hint style="warning" %}
+**Screenshot required**
 
-For standard RETAIL deployments of supported Windows Home and Pro editions, Foundry automatically attempts to activate Windows after reboot using a compatible OEM product key stored in the device firmware. Online activation requires Internet access and a valid key for the installed Windows edition.
+- **File:** `foundry-deploy-verify-02-error.png`
+- **Capture:** Show the **Deployment failed** screen of a release build with the "Failed step: ..." line, the **View error details** button and the failed step marked in the **Steps** list. Hide the IP and MAC addresses.
+{% endhint %}
 
-Foundry preserves existing activation and explicitly configured licensing. It skips this attempt for VOLUME deployments and deployments using a custom answer file. An ordinary licensing failure does not stop Windows setup. In the PostInstall workflow, a timeout or an activation process whose completion cannot be confirmed stops the sequence for investigation. Before handing over the device, check **Settings > System > Activation** to confirm its activation status.
+The device does not restart after a failure. Do this before you turn it off:
 
-## Error
+1. Note the step named on the "Failed step: ..." line.
+2. Select **View error details**. The **Error details** window shows the complete message.
+3. Select **Copy** to copy the message, or **Open log file** to read the deployment log.
+4. In the menu bar, select **Tools > Export diagnostics...** to save the logs to the USB drive. See [Export logs from Foundry Connect and Foundry Deploy](../troubleshooting/logs-and-support.md#export-logs-from-foundry-connect-and-foundry-deploy).
+5. Find the failed step in [Windows deployment troubleshooting](../troubleshooting/deployment.md).
 
-The timeline identifies the failed deployment step. Select **View error details** on the error page to inspect the failure details.
+Check where **Prepare target disk** sits in **Steps**. If the failed step is above it, the disk was not erased. If it is below, the disk was erased and the device may not start.
 
-<figure>
-  <img src="../.gitbook/assets/foundry-deploy-verify-02-error.png" alt="Foundry Deploy error page showing the failed deployment step">
-  <figcaption>Record the failed step and error details before troubleshooting.</figcaption>
-</figure>
+Foundry Deploy cannot resume or roll back a failed deployment, and the error screen has no retry button. After correcting the cause, restart the device from the deployment media and go through the wizard again: this erases the disk again. Images and driver packs already downloaded to the USB drive's cache are verified and reused.
 
-Do not immediately retry a destructive deployment. Record the failed step and error, then collect [logs and support information](../troubleshooting/logs-and-support.md).
+## Deployment cancelled
 
-Foundry Deploy does not roll back or resume a failed deployment. A failure after disk preparation can leave the target partially deployed and unable to boot. After correcting the cause, retrying starts the destructive workflow from the beginning.
+The screen shows "Deployment stopped. The target disk may contain an incomplete installation." There is no restart and no error detail. Export the logs if you need them, then restart the device from the deployment media to start again. See [Cancel a deployment](review-and-deploy.md#cancel-a-deployment).
+
+## The restart does not start
+
+If the restart command fails, the success screen turns into **Deployment failed** with "Failed step: System reboot". Windows is installed. Export the logs, remove the deployment media and turn the device off and on.

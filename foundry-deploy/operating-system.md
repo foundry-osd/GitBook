@@ -1,49 +1,59 @@
 # Select Windows
 
-The Operating system step selects the Windows media applied to the target.
+On **Operating system**, the second step of the wizard, you choose the Windows image to install: one from the Windows catalog or, when the media provides them, a custom image.
 
-## Make a selection
+{% hint style="warning" %}
+**Screenshot required**
 
-When **Image source** is shown, choose **Windows catalog** for the steps below, or follow [Custom images](#custom-images). This selector appears when custom images are enabled on the media.
-
-1. Select the Windows release.
-2. Select available media for that release.
-3. Select the language.
-4. Select the edition.
-5. Select the license channel when more than one is available.
-
-<figure>
-  <img src="../.gitbook/assets/foundry-deploy-operating-system-01-selection.png" alt="Foundry Deploy Windows release, language, edition, and license selection">
-  <figcaption>Select a compatible Windows release, language, edition, and license channel.</figcaption>
-</figure>
-
-Available releases, languages, editions, architectures, and license channels depend on the current [operating-system catalog](../reference/catalog.md), the running Deploy version, and any restrictions configured during media authoring. The catalog can update independently of the application. Confirm that the selection matches licensing and application compatibility requirements.
-
-{% hint style="info" %}
-**Windows 11 releases and automatic fallback**
-
-Foundry supports Windows 11 24H2, 25H2, and 26H2.
-
-Deploy keeps the configured release restriction while any allowed release is available for the deployment architecture. If every allowed release is unavailable, Deploy automatically offers the supported releases available for that architecture. A profile allowing 25H2 and an unavailable release still offers only 25H2 when it is available.
-
-Deploy preserves a valid operator selection. When it needs an initial or replacement selection, it prefers an available configured default, then its supported default, 26H2, then the newest available supported release. Language, edition, and license-channel policies are evaluated independently. Confirm all selections before continuing.
-
-The running Deploy application must support 26H2; a catalog update alone cannot add that support to an older runtime. See [Application and boot media updates](../reference/supported-versions.md#application-and-boot-media-updates).
+- **File:** `foundry-deploy-operating-system-01-selection.png`
+- **Capture:** Show the **Operating system** step of a release build with **Image source** set to **Windows catalog** and the five fields filled in: **Version**, **Windows update**, **Language**, **Edition (Target)**, **License channel**.
 {% endhint %}
 
-## Custom images
+## Select a catalog image
 
-Media authored with [Custom Windows images](../foundry-osd/customization/custom-windows-images.md) enabled offers a custom image source alongside the catalog. The authoring profile can select the initial source and a preferred image/index; these remain separate choices.
+1. If **Image source** is shown, keep **Windows catalog**. The selector appears only when the administrator enabled custom images.
+2. In **Version**, select the Windows 11 release, for example 25H2.
+3. In **Windows update**, keep the entry marked **(Latest)** unless you need an earlier monthly update.
+4. In **Language**, select the Windows display language.
+5. In **Edition (Target)**, select the edition to install.
+6. In **License channel**, select **Retail** or **Volume**.
+7. Select **Next**.
 
-1. Choose **Custom image** under **Image source**.
-2. Select the image. Its source drive is shown beside its name.
-3. Select **Image index**, or confirm the preferred index already selected. An image with only one index selects it automatically.
-4. Review the index details before continuing to drivers.
+Each field narrows the next one, so set them from top to bottom.
 
-Selection uses the exact numeric WIM index. Identical edition names do not identify the same index.
+| Field | What it means |
+| --- | --- |
+| **Version** | The Windows 11 release. Foundry supports 24H2, 25H2 and 26H2: see [Supported versions](../reference/supported-versions.md). |
+| **Windows update** | The monthly update level of the image, named by month and year. The newest one is marked **(Latest)**. |
+| **Language** | Pre-selected from the administrator's default, then from the Windows PE language, then `en-US`. |
+| **License channel** | **Retail** or **Volume**. Foundry attempts automatic activation only for Retail images: see [After the restart](after-the-restart.md). |
 
-Below the image and index selectors, read-only fields show the selected index's version (including its revision), edition, architecture, and language. These values update when you select a different index.
+A field that is greyed out offers a single value: the administrator restricted it in [OS selection](../foundry-osd/customization/operating-system.md), or the catalog has only one choice.
 
-Foundry Deploy discovers images automatically at startup and when you choose **Custom image**. If you add a manual WIM to the USB cache during the session, switch to **Windows catalog**, then back to **Custom image** to discover it.
+{% hint style="warning" %}
+A restriction applies only while the catalog still contains one of the allowed values. If none of the allowed versions, languages, editions or license channels exists in the catalog for the current selection, Foundry Deploy offers every catalog value for that field instead of blocking the deployment. Check all five fields before you continue, and again in the summary.
+{% endhint %}
 
-The profile's enabled customizations apply to custom images. Catalog release restrictions do not determine which custom WIM can be used. Keep the source media connected throughout deployment, and resolve missing explicit preferences rather than expecting an automatic replacement. Internet access and Foundry Connect are still required.
+## Select a custom image <a href="#custom-images" id="custom-images"></a>
+
+1. In **Image source**, select **Custom image**.
+2. In **Image**, select the image. The drive it comes from is shown beside its name.
+3. In **Image index**, select the index to install. An image with a single index selects it for you.
+4. Check the read-only **Version**, **Edition**, **Architecture** and **Language** fields: they describe the selected index.
+5. Select **Next**.
+
+Points to know:
+
+- Two indexes can carry the same edition name. The index number is what Foundry installs.
+- Keep the drive that holds the image connected until the deployment ends.
+- A WIM file added to the USB drive after Foundry Deploy opened is found when you select **Windows catalog** and then **Custom image** again.
+- The administrator's catalog restrictions do not filter custom images.
+- Foundry does not attempt automatic activation for a custom image.
+
+How custom images are added to the media is described in [Custom Windows images](../foundry-osd/customization/custom-windows-images.md).
+
+## If something stops you
+
+A message under the image selectors, such as "The configured default image or index is unavailable. Choose an image and index explicitly.", blocks **Next** until you select an image and an index yourself. This message and the others are explained in [Windows deployment troubleshooting](../troubleshooting/deployment.md).
+
+Next: [Select a driver pack](driver-pack.md).
