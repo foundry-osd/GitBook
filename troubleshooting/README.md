@@ -24,10 +24,10 @@ Start from the stage where the work stopped, or from what you see on screen. Eac
 | The device does not start from the USB drive, the ISO or PXE | [Windows PE startup](windows-pe-startup.md) |
 | A console window stays open in Windows PE and no Foundry window appears | [Windows PE startup](windows-pe-startup.md) |
 | Foundry Connect does not report the network as ready | [Network and Foundry Connect](network.md) |
-| Foundry Deploy refuses the password, or closes as soon as it opens | [Windows deployment](deployment.md) |
-| No disk is offered, or **Next** or **Deploy** stays unavailable | [Windows deployment](deployment.md) |
+| Foundry Deploy refuses the password, or closes as soon as it opens | [Before the deployment starts](deployment/before-deployment-starts.md) |
+| No disk is offered, or **Next** or **Deploy** stays unavailable | [Before the deployment starts](deployment/before-deployment-starts.md) |
 | **Deployment failed** with a "Failed step: ..." line | [Windows deployment](deployment.md) |
-| After **Deployment complete**, the device returns to the media or does not start Windows | [Windows deployment](deployment.md) |
+| After **Deployment complete**, the device returns to the media or does not start Windows | [The device does not start](deployment/device-does-not-start.md) |
 | The Foundry console after the restart shows a failed action or does not finish | [After the restart](after-the-restart.md) |
 | The device is not registered in Windows Autopilot | [Windows Autopilot](autopilot.md) |
 | The device did not join the domain, or is in the wrong OU | [Domain Join](domain-join.md) |
