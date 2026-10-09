@@ -1,37 +1,57 @@
 # Update a USB drive
 
-Update existing Foundry USB media when configuration or runtime content changes.
+Update a Foundry USB drive to apply your current options and the current Foundry applications without erasing the Windows images and driver packs it has already downloaded.
 
-## Before updating
+<figure>
+  <img src="../../.gitbook/assets/foundry-osd-media-update-usb-01-action.png" alt="Start page with a Foundry USB drive selected and the highlighted Update USB button in place of Create USB">
+  <figcaption>When the selected drive is a Foundry USB drive, the button reads <strong>Update USB</strong> and is highlighted.</figcaption>
+</figure>
 
-- Confirm that the selected drive is Foundry deployment media.
-- Confirm that required offline cache content is stored outside the boot partition that Foundry updates.
-- Close applications that may be using files on the USB drive.
-- Review the current configuration because the update uses the active Foundry OSD settings.
+{% hint style="warning" %}
+**Update USB** asks for no confirmation. Once the build is ready, the **BOOT** partition is formatted and written again. Check the selected drive before you select the button.
+{% endhint %}
 
-If Foundry cannot confirm that the selected drive is still the same device, the update stops. Refresh the removable-device list, select the drive again, and retry. See [disk identity guidance](create-usb.md#if-the-disk-identity-cannot-be-confirmed) if the warning persists.
+## Before you start
 
-Foundry checks the prepared boot files against the existing BOOT partition's capacity before formatting it. If they do not fit or the capacity cannot be verified, the update stops before formatting. Reduce customizations or drivers, or [create an ISO](create-iso.md) when more space is needed. If capacity cannot be verified, check access to the source files, reconnect the USB drive, and retry.
+- No row of [Start](README.md) is marked **Needs attention**, and 20 GB are free on the drives listed in [Start](README.md#before-you-start).
+- Close File Explorer windows and other programs that use the drive.
+- Move away any file you copied to the **BOOT** volume yourself: it is erased.
 
 ## Update the drive
 
-1. Connect the existing Foundry USB drive.
-2. Open **Start** and select the correct target.
-3. Confirm Foundry recognizes the drive as existing Foundry media.
-4. Resolve readiness items.
-5. Select **Update USB**. Foundry refreshes the boot partition while preserving the cache partition.
-6. Keep the drive connected until the update completes.
-7. Test boot the updated media before production use.
+1. Connect the drive, open **Start**, and select **Refresh** in the **USB target** card.
+2. Select the drive and check that the button reads **Update USB**. This label is the only sign that Foundry OSD recognized the drive.
+3. To format **BOOT** completely, expand the **USB target** card and set **USB format mode** to **Full format**. The update then takes longer. **USB partition style** is ignored: an update never changes it.
+4. Select **Update USB**.
+5. If a dialog titled **Update Foundry OSD before creating boot media** opens, apply the update first or select **Create anyway**.
+6. Keep the drive connected until the dialog reads "USB boot partition was updated successfully. Boot volume: X:. Cache volume: Y:.", with the two drive letters.
 
-<figure>
-  <img src="../../.gitbook/assets/foundry-osd-media-update-usb-01-action.png" alt="Foundry OSD showing recognized deployment media and the Update USB action">
-  <figcaption>Update recognized Foundry USB media without rebuilding its cache partition or re-downloading cached Windows sources.</figcaption>
-</figure>
+## How Foundry recognizes the drive
 
-## Custom image content
+The drive must have an NTFS volume named `Foundry Cache` and its **BOOT** partition. If the cache volume was renamed, the button reads **Create USB**, and creating the drive erases everything, downloads included. If only **BOOT** was renamed or reformatted, the button still reads **Update USB** but the update stops with "Selected USB media is not a Foundry USB media.".
 
-When [custom images](../customization/custom-windows-images.md) are enabled, an update stages the current profile's new managed image content on the data partition and verifies capacity before refreshing BOOT. Keep enough free space for the new content as well as retained content. Manual WIMs and unrelated caches are preserved. Existing managed images are reused when their content matches. Old managed content may remain on the data partition and is not offered unless the current media manifest references it. If an update is interrupted, repeat it and validate the resulting media before use.
+## What an update replaces and what it keeps
 
-## Post-installation content
+| Replaced | Kept |
+| --- | --- |
+| The whole **BOOT** partition: boot files and the boot image, with your current options | `Cache\OperatingSystems`, `Cache\DriverPacks` and `Cache\Firmware`: the downloads of earlier deployments |
+| Foundry Connect, and the post-installation application with Domain Join, in `Runtime\` on the cache partition | The copy of Foundry Deploy downloaded by an earlier start, `Logs\`, and any file you copied to the cache partition |
+| The custom images and post-installation content of the current configuration, added to the cache partition | Custom images and post-installation content written by earlier builds. They keep using space. |
 
-Updating media includes the current configuration's required [Post-installation](../customization/post-installation.md) packages and settings. Allow space for new packages alongside content already on the data partition. Removing an action in Foundry OSD does not remove its old package from previously created media. Unrelated cached files are preserved. If an update is interrupted, repeat it and test the updated media before use.
+New custom images and post-installation content are copied before **BOOT** is formatted, and Foundry OSD checks first that the cache partition has room for them.
+
+## Check the result
+
+Eject the drive, start a test device from it, and check that Foundry Connect opens, then Foundry Deploy, with the options you changed.
+
+## Limits
+
+- The boot files must fit the existing **BOOT** partition. Foundry OSD checks this before it formats. If they do not fit, reduce the drivers or [create an ISO](create-iso.md).
+- An update cannot change the partition style or repair a damaged cache partition. Delete the partitions of the drive with Windows Disk Management, then [create the drive](create-usb.md) again.
+- A cancelled or failed update can leave **BOOT** incomplete. Run the update again before you use the drive.
+
+## Related
+
+- [Create a USB drive](create-usb.md)
+- [What each media type carries](README.md#what-each-media-type-carries)
+- [Media creation troubleshooting](../../troubleshooting/media-creation.md) and [USB drive and device start](../../troubleshooting/media-creation/usb-drive-and-device-start.md)

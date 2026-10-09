@@ -1,83 +1,118 @@
 # Review and deploy
 
-The Summary step is the final opportunity to validate the deployment choices.
+On **Summary**, the last step of the wizard, you check every choice, start the deployment and follow it to the end.
+
+{% hint style="warning" %}
+**Screenshot required**
+
+- **File:** `foundry-deploy-review-01-summary.png`
+- **Capture:** Show the **Deployment summary** page of a release build with its categories (**Target device**, **Operating system**, **Drivers**, **Autopilot**, **Windows customization**, **Network**, **Completion**), an **Edit** button and the **Deploy** button. Use a demonstration computer name.
+{% endhint %}
 
 ## Review the summary
 
-Confirm:
+| Category | Check |
+| --- | --- |
+| **Target device** | Answer file, computer name, target disk, firmware updates and the detected hardware |
+| **Operating system** | Release, edition, architecture, language, license channel and build, or the custom image and its index |
+| **Drivers** | Driver source and, for a manufacturer, the model and pack version |
+| **Autopilot** | Provisioning method and the profile or group tag |
+| **Domain join** | Domain and organizational unit. Listed only when the media uses Domain Join |
+| **Windows customization** | Windows setup options, application and AI component removal, optional features |
+| **Network** | Whether the Wi-Fi and wired 802.1X profiles are copied to Windows, and whether **Private-key material** is included |
+| **Completion** | **Restart behavior** and, for an automatic restart, **Restart delay** |
 
-- Target disk and computer name.
-- Windows release, language, edition, and license channel.
-- Driver pack.
-- Firmware options.
-- Windows Autopilot method and, for zero-touch hardware hash upload, the configured group tag.
-- Domain Join: the domain and the OU the computer will join.
-- Optional features and other deployment customization.
+To change a value, select **Edit** on its category, correct the step, then select **Return to summary**.
 
-<figure>
-  <img src="../.gitbook/assets/foundry-deploy-review-01-summary.png" alt="Foundry Deploy deployment summary before confirmation">
-  <figcaption>Review every deployment choice before starting the destructive operation.</figcaption>
-</figure>
+A **Status** row under **Target device**, **Drivers** or **Domain join** reports something that blocks **Deploy**, or the reason **Deploy** returned you to the summary: for example "\<manufacturer>: no matching model or version" under **Drivers**. See [Before the deployment starts](../troubleshooting/deployment/before-deployment-starts.md). Under **Windows customization**, **Status** only says whether anything is configured.
 
-When the media includes [custom answer files](../foundry-osd/customization/unattend.md), also review the selected **Answer file**. A custom file controls the computer name and OOBE settings; Foundry does not apply its native values for these settings.
-
-## Start deployment
-
-Start only when every value is correct. Foundry opens **Confirm disk erase** before crossing the destructive boundary. Verify the disk number, model, bus, size, and selected operating system before accepting.
-
-The [Domain join step](domain-join.md#complete-the-domain-join-step) comes before the summary. The summary's **Domain join** category shows the domain and the OU the join will use, or says that the selected Windows edition cannot join a domain. The account and the password are never shown.
+## Start the deployment
 
 {% hint style="danger" %}
-Accepting the confirmation allows Foundry to clean and repartition the selected disk. Existing data on that disk will be lost.
+Selecting **Yes** in **Confirm disk erase** erases the disk it names. This is the point of no return for the data on that disk.
 {% endhint %}
 
-Do not power off the device, disconnect required networking, or remove deployment media while Foundry is working.
+1. Select **Deploy**.
+2. Read **Confirm disk erase**. It names the disk number, model, bus and size, and the operating system to install.
+3. Select **Yes** only if the disk is the right one. **No** returns to the summary and changes nothing.
 
-## Checks before disk preparation
-
-Foundry checks the selected image settings, storage location and known space requirements before preparing the target disk.
-
-- **USB with enough usable cache space:** Foundry downloads or reuses the Windows image, checks its contents against the catalog hash when one is supplied, and verifies the selected edition before erasing the target. The prepared image is then used for deployment. Cache verification and downloads display their own progress.
-- **ISO, or USB when the image needs target-disk storage:** Foundry checks source access and the space requirements it can determine first. The complete download, file verification and edition check finish after the target disk is prepared. The progress page explains when image validation needs target storage.
-
-An error during the checks before disk preparation stops deployment before the target is erased. Correct the reported image, network or storage issue before retrying. See [deployment troubleshooting](../troubleshooting/deployment.md#checks-before-disk-preparation-fail).
-
-{% hint style="warning" %}
-These checks cannot guarantee that every later step will succeed. Network access can change, and additional space may be needed for extracted drivers, optional features and updates. When the image needs target-disk storage, an image failure can still occur after erasure. Keep a recovery option available.
-{% endhint %}
+From then on, keep the device powered, the network connected and the deployment media in place until the deployment ends.
 
 ## Follow progress
 
-The progress page reports the current step, its position in the deployment plan, and overall progress when the operation can be measured.
+{% hint style="warning" %}
+**Screenshot required**
 
-The timeline follows the selected deployment options and available storage. Disabled options and operations that do not apply are omitted. For example, custom answer-file validation and copying appear only when a custom file is selected; native computer-name and Windows Setup configuration are then omitted. Independent options such as AI policies, Windows features, and driver installation remain applicable when configured.
+- **File:** `foundry-deploy-progress-01-running.png`
+- **Capture:** Show the progress page of a release build during **Apply Windows image**: the computer name, the **Session** block, the progress ring, the current step with its percentage, the **Steps** list with completed, running and pending steps and at least one skipped step, the step counter and the **Cancel** button. Hide the IP and MAC addresses.
+{% endhint %}
 
-- **Succeeded** means the displayed action completed. **Stage driver installer**, **Stage firmware update**, **Prepare setup tasks**, and **Prepare Autopilot assistant** confirm preparation for later execution in Windows. **Prepare target disk** performs disk preparation immediately.
-- **Skipped** uses an informational indicator and includes a reason, such as an accepted cached file being reused or requested settings already being configured. Cache checks still run before reuse. Cached driver or firmware archives may still require extraction and installation.
-- **Failed** identifies an action that could not complete. Read its details before retrying.
-- **Cancelled** identifies an interrupted active action. Previously completed actions retain their results; unstarted actions are not marked successful.
+The progress page shows the computer name, the overall percentage, the current step and its own progress, and a counter such as "Step: 7 of 20". **Session** shows the network addresses, **Start time** and **Elapsed time**. **Steps** lists every step of this deployment with an icon next to its name. Each state has its own icon and no word names it: point at a step to read its result, or the reason it was skipped, in a tooltip.
 
-With usable USB storage, **Download Windows image** and **Check Windows image** run before **Prepare target disk**. With ISO media or USB fallback to target storage, they run after disk preparation. **Apply Windows image** and **Configure Windows boot** follow in both paths. The step count reflects applicable work and can be refined as hardware or available payloads are resolved; it is not an estimate of remaining time.
+| Step state | Meaning |
+| --- | --- |
+| Completed | The step did its work. A step named "Stage ..." or "Prepare ..." only prepared work that runs in Windows after the restart. |
+| Skipped | The step had nothing to do, or could not do optional work, and the deployment continues. Read the reason. |
+| Failed | The deployment stopped at this step. See [Verify deployment](verify-deployment.md). |
+| Cancelled | You cancelled while this step was running. |
 
-Driver and firmware downloads check USB cache capacity and write access separately from the Windows image. If that cache cannot accommodate the selected package, Foundry uses the prepared target disk. An existing selected file can provide reusable space, but its contents still undergo the usual cache verification.
+The number of steps depends on the media configuration and can change while the deployment runs, for example when no driver is found. It does not measure the remaining time.
 
-<figure>
-  <img src="../.gitbook/assets/foundry-deploy-progress-01-running.png" alt="Foundry Deploy showing the current deployment step and overall progress">
-  <figcaption>Follow the current step and overall deployment progress.</figcaption>
-</figure>
+### What is checked before the disk is erased
 
-## Cancel deployment
+**Prepare target disk** is the step that erases the disk. Everything listed above it in **Steps** runs first, and a failure there leaves the disk untouched. Foundry Deploy first checks the disk, the storage space it can calculate, the answer file and the post-installation content the media must carry.
 
-Select **Cancel** at the bottom right of the progress page. Foundry acknowledges the request and stops at a safe boundary. Downloads and cache checks can stop promptly; disk preparation, Windows servicing, and other changes already in progress may need to finish first. Keep the device powered on and the deployment media connected until Foundry reports that deployment was cancelled.
+- **USB drive with enough free cache space, or a custom image:** the Windows image is downloaded or reused and checked before **Prepare target disk**.
+- **ISO, or a USB drive whose cache cannot hold the image:** only access to the download source is checked first. **Download Windows image** and **Check Windows image** run after **Prepare target disk**, so a download or image problem can stop a deployment whose disk is already erased.
 
-Cancellation does not undo completed changes. If disk preparation has started, the target may contain an incomplete installation and may not boot. Collect the logs, then restart the workflow when ready; there is no resume operation. A cancelled deployment does not automatically reboot.
+Checking a large cached image takes time, especially on a slow USB drive. The step shows "Checking cache..." with a percentage: let it finish.
 
-## Review a custom image
+### Automatic retries
 
-For [custom images](../foundry-osd/customization/custom-windows-images.md), verify the image name and numeric WIM index as well as the target disk and customizations. Keep the source available until deployment completes. Source hash and metadata verification cannot guarantee that DISM will successfully apply every compressed resource or customization.
+A download that fails on a connection error or a temporary server error is retried up to five times, ten seconds apart, before the step fails; a certificate error is not retried. What each download message means is in [Checks and image download](../troubleshooting/deployment/checks-and-image-download.md).
 
-## Post-installation preparation
+## Deployment steps
 
-Foundry checks required [Post-installation](../foundry-osd/customization/post-installation.md) content and its runtime before preparing the target disk. When actions use imported scripts or packages, keep the complete ISO or USB media available until staging finishes. If this check fails, see [Post-installation preparation fails](../troubleshooting/deployment.md#post-installation-preparation-fails). Successful staging does not prove first-boot actions succeeded; continue through [deployment verification](verify-deployment.md).
+<details>
+<summary>Every step, in order, with its condition</summary>
 
-For Domain Join, a successful deployment means the join has been prepared; it runs after the restart, in installed Windows. When the Windows edition or the image is not compatible, Foundry skips the join with a warning in the summary and the installation continues. Check the outcome as described in [Domain Join during deployment](domain-join.md#what-happens-in-windows).
+The order below is the one used when the Windows image is checked before the disk is erased. On the other route, **Prepare target disk** comes before **Download Windows image**. For a catalog image, **Steps** lists **Prepare target disk** before **Download Windows image** until **Check deployment setup** has finished; the list is then put in the order that applies. The "Failed step: ..." line of the error screen uses the names below, with two exceptions noted in the table.
+
+| Step | Runs when | If it is skipped |
+| --- | --- | --- |
+| **Validate answer file** | A custom answer file is selected | Not skipped |
+| **Check deployment setup** | Always | Not skipped |
+| **Download Windows image** | A catalog image is selected | The image was in the cache and passed verification |
+| **Resolve custom image** | A custom image is selected. Replaces **Download Windows image**; the error screen still names it "Download Windows image" | Always shown as skipped: the image is read from the deployment media |
+| **Check Windows image** | Always | Not skipped |
+| **Prepare target disk** | Always. Erases and partitions the disk | Not skipped |
+| **Apply Windows image** | Always | Not skipped |
+| **Configure Windows boot** | Always | Not skipped |
+| **Copy answer file** | A custom answer file is selected | Not skipped |
+| **Download driver pack** | **Driver source** is not **None** | The pack was in the cache, or Microsoft Update Catalog was unreachable or had no driver: the deployment continues without those drivers |
+| **Extract driver pack**, **Install Windows drivers** | The drivers can be added to Windows before the restart | Removed from the list when Microsoft Update Catalog returned nothing |
+| **Stage driver installer** | The pack is an installer that runs after the restart (Lenovo `.exe`, Surface `.msi`) | Not skipped |
+| **Download firmware update** | **Apply firmware updates** is checked on a physical device | The device runs on battery, reports no firmware identifier, has no update in Microsoft Update Catalog, or the catalog is unreachable. Also when the update was in the cache |
+| **Extract firmware update**, **Stage firmware update** | A firmware update was found | Not skipped |
+| **Set computer name** | **Use Foundry settings** is selected | Not skipped |
+| **Configure Windows setup** | **Use Foundry settings** is selected and the administrator customized Windows setup | Not skipped |
+| **Configure AI policies** | The administrator turned on an AI component action other than **Remove Copilot+ AI Hub** | Not skipped |
+| **Configure Windows features** | The administrator configured optional features | Every feature was already in the requested state, or is not available in this image |
+| **Prepare setup tasks** | Something must run after the restart: application or AI component removal, a driver installer, network profiles, automatic activation, Domain Join or post-installation actions | "No post-installation tasks are required." |
+| **Configure Windows recovery** | Always | The applied image contains no `winre.wim`. The deployment continues and the device has no Windows Recovery Environment |
+| **Install recovery drivers** | Drivers were added to Windows before the restart | Same reason as **Configure Windows recovery** |
+| **Hide recovery partition** | Always | Not skipped |
+| **Copy Autopilot profile**, **Register Autopilot device** or **Prepare Autopilot assistant** | Autopilot is enabled. The name depends on the method. The error screen names all three "Provision Autopilot" | See [Windows Autopilot step](autopilot.md) |
+| **Finalize deployment** | Always | Not skipped |
+
+</details>
+
+An image captured without `winre.wim` deploys correctly but leaves the device without recovery tools. To keep them, the administrator captures the image with `Windows\System32\Recovery\winre.wim` still in place: see [Custom Windows images](../foundry-osd/customization/custom-windows-images.md).
+
+## Cancel a deployment
+
+Select **Cancel** on the progress page, or close the window. There is no confirmation. Foundry shows "Cancellation requested. Waiting for the current operation to finish safely." and stops at once during a download or a check. Any other step finishes first.
+
+Cancelling does not undo anything. The screen then says "Deployment stopped. The target disk may contain an incomplete installation." whatever the moment of the cancellation. The disk was erased only if **Prepare target disk** had already run: check **Steps**. Foundry Deploy does not restart the device after a cancellation and cannot resume: to deploy again, restart the device from the deployment media.
+
+Next: [Verify deployment](verify-deployment.md).

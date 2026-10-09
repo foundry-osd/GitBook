@@ -1,6 +1,6 @@
 # Foundry OSD documentation
 
-Foundry OSD helps Windows deployment teams prepare boot media, connect devices in Windows PE, and deploy Windows through a guided workflow.
+Foundry OSD is a Windows deployment tool: you prepare deployment media on a workstation, start a device from it, and Foundry installs Windows on that device through a guided workflow.
 
 <figure>
   <img src=".gitbook/assets/shared-overview-01-hero.png" alt="Foundry OSD">
@@ -8,21 +8,28 @@ Foundry OSD helps Windows deployment teams prepare boot media, connect devices i
 
 ## Choose your task
 
-- [Download Foundry OSD](start-here/download.md) for an x64 or ARM64 administrator workstation.
-- Follow the [quick start](start-here/quick-start.md) to configure an administrator workstation and create your first deployment media.
-- [Configure deployment media](foundry-osd/README.md) to define networking, Windows customization, and Windows Autopilot behavior.
-- [Connect a device](foundry-connect/README.md) after booting into Windows PE.
-- [Deploy Windows](foundry-deploy/README.md) by selecting a target disk, operating system, and driver pack.
-- [Troubleshoot a problem](troubleshooting/README.md) using stage-specific symptoms, evidence, and resolutions.
+| I want to ... | Go to |
+| --- | --- |
+| Start from the beginning: requirements, installation, how a deployment works | [Get started](start-here/README.md) |
+| Create my first media and deploy one test device | [Quick start](start-here/quick-start.md) |
+| Configure networking, Windows Autopilot, Domain Join or Windows customization | [Foundry OSD](foundry-osd/README.md) |
+| Connect a device that has started from the media | [Foundry Connect](foundry-connect/README.md) |
+| Choose the disk, Windows and drivers, then deploy | [Foundry Deploy](foundry-deploy/README.md) |
+| Fix a problem | [Troubleshooting](troubleshooting/README.md) |
+| Look up versions, network endpoints or privacy details | [Reference](reference/README.md) |
 
 ## How Foundry works
 
-Foundry uses three applications in one deployment lifecycle:
+You work with three applications. Only the first one is installed; the other two start on the target device from the deployment media.
 
-1. **Foundry OSD** runs on an administrator workstation and creates ISO or USB deployment media.
-2. **Foundry Connect** runs in Windows PE and verifies that the target device has usable network access.
-3. **Foundry Deploy** runs in Windows PE and guides the technician through Windows deployment.
+| Application | Runs on | Used by | What it does |
+| --- | --- | --- | --- |
+| Foundry OSD | Administrator workstation | Administrator | Holds your deployment settings and creates an ISO or a USB drive. |
+| Foundry Connect | Target device, in Windows PE | Technician | Checks that the device has network access, with Ethernet or Wi-Fi. |
+| Foundry Deploy | Target device, in Windows PE | Technician | Guides the choice of disk, Windows and drivers, then installs Windows. |
+
+Two components run without input from you: the Windows PE startup, which prepares Windows PE and starts Foundry Connect and Foundry Deploy, and the post-installation step, which finishes the configuration after the device restarts into Windows. [Deployment workflow](start-here/deployment-workflow.md) shows where each one fits.
 
 {% hint style="warning" %}
-Creating or updating USB media and deploying Windows can erase data. Verify the selected USB device and target disk before confirming a destructive operation.
+Creating a USB drive erases that drive, and deploying Windows erases the disk you select on the target device. Check both selections before you confirm.
 {% endhint %}

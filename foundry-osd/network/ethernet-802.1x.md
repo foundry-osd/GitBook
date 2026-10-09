@@ -1,30 +1,62 @@
 # Ethernet 802.1X
 
-Use Ethernet 802.1X configuration when the wired deployment network requires authenticated access.
+Use this page when the wired deployment network only admits devices that authenticate with 802.1X. Foundry puts a wired profile, and optionally a certificate, on the deployment media. Foundry Connect applies them at startup without asking the technician anything.
 
-## Configure wired authentication
+{% hint style="warning" %}
+**Screenshot required**
+
+- **File:** `foundry-osd-network-ethernet-01-profile-configuration.png`
+- **Capture:** Show the Ethernet 802.1X page enabled, with a **Profile template file** selected, **Import a trusted root CA certificate** turned on, the **Trusted root CA certificate file** path with its **PFX password** box, and **Windows profile roaming** expanded. Use demonstration file names.
+{% endhint %}
+
+## Before you start
+
+- **A wired profile exported as XML.** Foundry does not build the profile: the EAP method, the server validation and the credential source all come from this file. Export it on a Windows computer that already authenticates on this network:
+
+  ```
+  netsh lan show profiles
+  netsh lan export profile folder="C:\Temp" interface="Ethernet"
+  ```
+
+  Replace `Ethernet` with the interface name shown by the first command. The second command writes one `.xml` file into the folder.
+- **A profile that authenticates the device by itself.** Nothing in Windows PE can ask for a user name and password. A profile that expects typed credentials cannot authenticate. Use computer authentication, typically with a certificate (EAP-TLS).
+- **The certificate file, if the profile needs one**: a root CA certificate (`.cer` or `.crt`), or a client certificate with its private key (`.pfx`) and its password.
+
+## Configure wired 802.1X
 
 1. Open **Network > Ethernet 802.1X**.
-2. Enable wired 802.1X provisioning.
-3. Select or configure the required authentication profile.
-4. Add the trusted root CA certificate required to validate the authentication service.
-5. Choose whether the wired 802.1X profile should roam into Windows before OOBE.
-6. When certificate authentication is used, choose whether the PFX client certificate and its private key must also be copied into Windows.
-7. Review the configuration and return to **Start**.
+2. Turn on the switch at the top of the page, next to **Documentation**. It shows **Enabled** and unlocks the fields.
+3. In **Profile template file**, select **Browse** and choose the exported `.xml` file.
+4. If the profile needs a certificate, turn on **Import a trusted root CA certificate**. In **Trusted root CA certificate file**, select **Browse** and choose the file.
+5. For a `.pfx` file, type its password in **PFX password**. Leave the box empty for a `.cer` or `.crt` file.
+6. To keep the connection in the installed Windows, turn on **Windows profile roaming**. See [Windows profile roaming](README.md#windows-profile-roaming) for what is imported and when.
 
-<figure>
-  <img src="../../.gitbook/assets/foundry-osd-network-ethernet-01-profile-configuration.png" alt="Foundry OSD Ethernet 802.1X profile configuration">
-  <figcaption>Configure the wired authentication profile and trusted root certificate.</figcaption>
-</figure>
+The certificate field has one label for two uses. The file type decides what Foundry Connect does with it:
 
-## Windows profile roaming
+| File you select | What happens in Windows PE |
+| --- | --- |
+| `.cer` or `.crt` | The certificate is added to the trusted root certification authorities. |
+| `.pfx` or `.p12` | The client certificate and its private key are imported into the personal store of the local computer, using **PFX password**. |
 
-Enable **Roam network profiles to Windows** when the installed system must retain the wired 802.1X connection before OOBE. Foundry Deploy imports the profile into Windows during deployment.
+## What the technician sees
 
-For certificate-based profiles, **Include private-key certificate material** copies the configured PFX client certificate into the local-computer personal certificate store. Leave this disabled unless Windows requires the client certificate after WinPE, and apply the organization’s certificate rotation and revocation policy.
+Nothing to do. When it starts, Foundry Connect imports the certificate, adds the wired profile and asks the first Ethernet adapter to reconnect. When authentication succeeds, the **Ethernet** card shows **Connected**.
 
-## Validate the deployment path
+When authentication fails, no error is shown: the **Ethernet** card simply does not get a usable address. It may stay on **Waiting for network configuration**, or show **Connected** with an address that starts with `169.254`. See [Wired 802.1X does not authenticate](../../troubleshooting/network.md#wired-authentication-fails).
 
-Test with the switch port, VLAN, certificate chain, and target hardware used in production. A successful cable link does not guarantee authenticated network access.
+## Check the result
 
-If Foundry Connect remains at authentication or DHCP readiness, see [Network and Foundry Connect troubleshooting](../../troubleshooting/network.md).
+- In Foundry OSD, **Start** does not report "Network configuration is not ready."
+- On a device connected to a production switch port, the **Ethernet** card in Foundry Connect shows **Connected**, then the header shows **Network ready**.
+
+## Limits
+
+- One profile file and one certificate file. You cannot supply both a root CA file and a client `.pfx` file. From a `.pfx` file, Foundry Connect imports the client certificate only: the issuing CA is not added to the trusted roots.
+- Foundry OSD checks that the files exist. It does not check the content of the profile or the PFX password. A mistake shows only in Windows PE.
+- The files are readable on the media, and Foundry OSD keeps the **PFX password** between sessions only while **Remember passwords** is on. See [What goes on the media](README.md#what-goes-on-the-media).
+
+## Related
+
+- [Network](README.md)
+- [Network readiness in Foundry Connect](../../foundry-connect/network-readiness.md)
+- [Network and Foundry Connect troubleshooting](../../troubleshooting/network.md)

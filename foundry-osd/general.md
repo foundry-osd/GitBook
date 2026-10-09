@@ -1,70 +1,81 @@
-# General configuration
+# General
 
-Use General configuration to define deployment behavior shared by the generated media.
+The General page sets the options every deployment media needs: processor architecture, boot signature, Windows PE language and time zone, what happens when a deployment ends, an optional password, and extra drivers for Windows PE. The defaults suit a first test; open the page at least once before you create media.
 
-## Platform and Windows PE
+{% hint style="warning" %}
+**Screenshot required**
 
-Configure:
+- **File:** `foundry-osd-general-01-overview.png`
+- **Capture:** Show the whole **General** page with default values, the **Windows PE time zone** card set to **Automatic**, the cards collapsed, and the **Media creation** card with **Review and start** at the bottom.
+{% endhint %}
 
-- Target architecture.
-- Secure Boot signing compatibility, including CA 2023 when required by the deployment environment.
-- Windows PE language.
-- Windows PE time zone.
+## Before you start
 
-The selected Windows PE language remains unavailable until Windows ADK and Windows PE Add-on `10.1.26100.9457` are ready.
+The [ADK](adk.md) page must report **ADK is ready**. Until then **General** cannot be opened.
+
+## Configure the media
+
+1. In the navigation pane, under **General**, open **General**.
+2. Set the options below. Each change is saved at once; there is no save button.
+3. Select **Review and start** in the **Media creation** card to go to [Start](media/README.md).
+
+| Option | What it does | Default |
+| --- | --- | --- |
+| **Architecture and signature** | Processor architecture of the media: `x64` or `arm64`. It must match the target devices. | `x64` |
+| **Secure Boot** | Certificate that signs the boot files: **PCA 2023** when on, **PCA 2011** when off. | **PCA 2023** |
+| **WinPE boot language** | Language of Windows PE, among the language packs installed with the Windows PE add-on. | Keeps your earlier choice. On first use: the language of Foundry OSD when its pack is installed, otherwise the first one available |
+| **Windows PE time zone** | Time zone used in Windows PE. See below. | **Automatic** |
+| **Automatic restart** | Restarts the device after a successful deployment. | On |
+| **Restart delay** | Seconds before that restart, from 0 to 3600. 0 restarts at once. | 10 |
+| **Password protection** | Asks the technician for a password before deployment. See below. | Off |
+| **Driver options** | Adds the **Dell** or **HP** driver set for Windows PE to the boot image. | Both off |
+| **Custom driver folder** | Folder of extra `.inf` drivers to add to Windows PE. | Empty |
+
+### Secure Boot
+
+Keep **PCA 2023** unless you have a reason to change it. Foundry does not check the firmware of your devices: whether a device accepts media signed with the 2023 certificate depends on its firmware, as described in Microsoft's [Secure Boot certificate guidance](https://aka.ms/getsecureboot). If a target device with Secure Boot turned on does not start the media, creating the media again with **PCA 2011** is a test worth making.
 
 ### Windows PE time zone
 
-Keep **Automatic** to detect the time zone from the deployment network's public IP address after Foundry Connect establishes connectivity. Windows PE uses **UTC** if detection is unavailable or the result cannot be mapped to a supported time zone.
+With **Automatic**, Foundry looks up the time zone on the target device, from the public IP address of the deployment network, once Foundry Connect has confirmed Internet access. If the lookup fails, Windows PE uses UTC. The services contacted are listed in [Network endpoints](../reference/network-endpoints.md).
 
-Select a specific time zone to override automatic detection, for example when the network's public IP location differs from the deployment site. This setting applies only to the Windows PE session. Recreate or update the media after changing it.
+Select a time zone to skip the lookup, for example when the public IP address of the site is located in another region. This option affects Windows PE only, not the installed Windows.
 
-## Deployment completion
+### Driver options
 
-Choose whether Foundry Deploy reboots automatically after success and configure the displayed reboot delay when automatic reboot is enabled.
+Windows PE only needs drivers for the network and storage hardware it must use. Turn on **Dell** or **HP** for devices of those manufacturers, and add a **Custom driver folder** for anything else.
 
-## Drivers
-
-Enable the supported Dell or HP driver options required by the hardware fleet. Add a custom driver directory when Windows PE needs network or storage drivers that are not provided by the selected vendor options.
-
-Keep the total size of the custom driver directory, including subfolders, within 2 GiB for both USB and ISO creation. Select only the network and storage drivers needed by Windows PE. If the directory exceeds the limit, Foundry stops early and reports the size already found and the allowed maximum.
-
-Validate custom drivers on representative hardware before using the media in production.
-
-<figure>
-  <img src="../.gitbook/assets/foundry-osd-general-01-overview.png" alt="Foundry OSD General configuration page">
-  <figcaption>Configure platform, Windows PE, deployment completion, and driver settings.</figcaption>
-</figure>
+- The folder must exist and contain `.inf` files, not packed installers.
+- Its content, subfolders included, is limited to 2 GiB and to 10,000 files and folders, and must not contain a junction or a symbolic link.
+- With `arm64`, a USB drive is always created with the GPT partition style.
 
 ## Password protection
 
-**Password protection** requires a technician password before Foundry Deploy initializes. Turn it on and enter the **Deployment password** to protect the following deployment data on generated media:
+Turn on **Password protection** and type the **Deployment password** twice. This is the password the technician types when Foundry Deploy starts; without it, Foundry Deploy does not open.
 
-| Data | Protected by the technician password |
+The password must have at least 8 characters; Foundry OSD recommends 12, or a passphrase. **Review and start** stays disabled until the two entries match.
+
+| Data on the media | Protected by the Deployment password |
 | --- | --- |
-| OOBE local account passwords | Yes |
-| Autopilot certificate credentials for zero-touch upload, including the PFX file and its password | Yes |
-| Autopilot JSON profiles | Yes |
-| Custom Windows answer files | Yes |
-| Zero-touch Domain Join accounts and passwords | Yes; Password protection is required |
-| Embedded Wi-Fi passwords, wired and Wi-Fi certificate PFX passwords, and network certificate private keys | No |
-
-Foundry Connect uses embedded network credentials before Foundry Deploy asks for the technician password, so automatic network setup remains available. Anyone who can read the ISO or USB can recover those network credentials, even when Password protection is enabled. Restrict access to the media and use dedicated network credentials that can be revoked.
-
-Foundry accepts passwords from 8 characters and recommends at least 12 characters. Use a unique password for each set of deployment media and store it using the organization’s approved credential-management process.
-
-Password protection does not encrypt the complete ISO, USB drive, Windows image, or files staged into the installed Windows system.
-
-[Zero-touch Domain Join](domain-join/zero-touch.md) requires Password protection: the join accounts are unlocked with the same technician password, without a separate prompt. [Interactive Domain Join](domain-join/interactive.md) does not require it. See [how domain credentials are handled](../reference/security-and-credentials.md#domain-credentials).
-
-When Password protection is disabled, Autopilot JSON profiles remain readable on the media and other embedded deployment credentials can be recovered without a technician password. Treat possession of unprotected media as access to all embedded deployment information.
+| Passwords of local Windows accounts set in OOBE | Yes |
+| Windows Autopilot JSON profiles | Yes |
+| Certificate and its password for the zero-touch Windows Autopilot upload | Yes |
+| Custom answer files | Yes |
+| Join accounts and passwords of [zero-touch Domain Join](domain-join/zero-touch.md) | Yes. This method requires Password protection. |
+| Wi-Fi passwords, and certificates with their passwords for Wi-Fi and Ethernet 802.1X | No |
 
 {% hint style="warning" %}
-If you no longer have the technician password, recreate the media with a new password.
+Network credentials are not protected because Foundry Connect uses them before the password is asked. Anyone who holds the media can read them. Password protection does not encrypt the whole ISO file or USB drive either.
 {% endhint %}
 
-Do not include the password in documentation, issue reports, screenshots, or deployment notes.
+Foundry OSD saves the Deployment password with the configuration while **Remember passwords** is on, which is the default; with it off, the password lasts until you close the app. See [What is remembered](deployment-profiles.md#what-is-remembered). If the fields are empty when you come back, type the password again. If you lose the password of existing media, create the media again with a new one.
 
-## Review readiness
+## Check the result
 
-Return to **Start** after saving the required settings. General configuration appears in the readiness summary and must be valid before media creation begins.
+[Start](media/README.md) shows one row for each option of this page, from **Architecture** to **Driver options**, with the value you chose. None of them must be marked **Needs attention**.
+
+## Related
+
+- [Start: create deployment media](media/README.md)
+- [Security and credentials](../reference/security-and-credentials.md)
+- [Foundry OSD application troubleshooting](../troubleshooting/foundry-osd.md)

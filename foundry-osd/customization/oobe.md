@@ -1,74 +1,65 @@
-# Out-of-box experience
+# OOBE
 
-Use OOBE settings to control the Windows out-of-box experience after deployment.
-
-## Configure OOBE behavior
-
-1. Open **Customization > OOBE**.
-2. Review each available OOBE option.
-3. Enable only settings approved by the organization.
-4. Return to **Start** and confirm customization readiness.
+**OOBE** sets what Windows asks during its first-run setup, the out-of-box experience: the license terms page, the privacy choices, and the local accounts Foundry creates. In the app, the page is titled **Out-of-Box Experience**.
 
 <figure>
-  <img src="../../.gitbook/assets/foundry-osd-customization-oobe-01-options.png" alt="Foundry OSD Windows out-of-box experience options">
-  <figcaption>Select the OOBE behavior approved for the deployment standard.</figcaption>
+  <img src="../../.gitbook/assets/foundry-osd-customization-oobe-01-options.png" alt="Foundry OSD Out-of-Box Experience page with the Accounts section collapsed and the eight setup and privacy options below it">
+  <figcaption>The eight setup and privacy options with their default values. Local accounts are in the Accounts section, collapsed here.</figcaption>
 </figure>
 
-Test the result with the same Windows edition and provisioning method used in production. Windows release changes can alter OOBE behavior.
+## Configure OOBE
 
-## Configure local accounts
+1. Open **Customization > OOBE** and turn the switch at the top right to **Enabled**.
+2. Set the setup and privacy options below.
+3. Expand **Accounts** to add local accounts. See [Local accounts](#local-accounts).
+4. Create or update the deployment media.
 
-Foundry can prepare local accounts as part of the unattended Windows setup. Built-in Administrator settings remain available with Windows Autopilot. Foundry blocks combining additional local accounts with Autopilot because its current unattend provisioning method skips account creation and hides online account screens, which can interfere with enrollment. This is a Foundry compatibility restriction, not a general Windows prohibition on local accounts.
+| Option | Default | Effect on the deployed Windows |
+| --- | --- | --- |
+| **Skip license terms** | **Enabled** | Windows does not show the Microsoft Software License Terms page. |
+| **Diagnostic data** | **Required** | Sets the diagnostic data level to **Required**, **Optional** or **Off**. **Off** is honored only by the Windows editions that support it; the others fall back to **Required**. |
+| **Hide privacy setup** | **Enabled** | Windows does not show the privacy choices page at the first sign-in. |
+| **Tailored experiences** | **Disabled** | When **Disabled**, Windows does not use diagnostic data for personalized tips, ads and recommendations. |
+| **Advertising ID** | **Disabled** | When **Disabled**, apps cannot use the Windows advertising ID. |
+| **Online speech recognition** | **Disabled** | When **Disabled**, Microsoft cloud-based speech recognition is turned off. |
+| **Inking and typing diagnostics** | **Disabled** | When **Disabled**, optional inking and typing diagnostic data is not collected. |
+| **Location access** | **User controlled** | **User controlled** leaves location to the user. **Force off** denies location access to apps. |
 
-When Autopilot is enabled, remove any configured additional accounts or disable Autopilot before creating media. Existing accounts remain editable and removable. Validate Administrator activation and the complete enrollment flow with your organization's Autopilot profile before production deployment.
+Foundry Deploy writes these choices into the installed Windows in Windows PE, in the **Configure Windows setup** step. The privacy choices are written as policies: a Group Policy or Intune setting applied later replaces them.
 
-### Built-in Administrator
+## Local accounts
 
-Enable **Built-in Administrator** to activate the Windows built-in Administrator account. The **Set a password** option is enabled by default when the account is activated.
+Expand **Accounts** on the page.
 
-- Keep **Set a password** enabled and enter the same value in both fields to assign a predefined password.
-- Turn **Set a password** off to assign an intentional blank password. Turning it off clears any password entered during the current session.
+- **Built-in Administrator account** (**Disabled** by default) enables the Windows built-in Administrator account.
+- **Additional local accounts**: select **Add account**, then enter the **Username** and choose the **Account type**, **Standard** or **Administrator**. Use **Edit** and **Remove** on an account row to change it.
 
-Foundry enables this account during the Windows `specialize` phase using a PowerShell command embedded in `unattend.xml`. The command identifies the account by its SID ending in `-500`, so it works regardless of the Windows display language or account name. Windows applies its configured password through `UserAccounts/AdministratorPassword` during `oobeSystem`.
+Each account has a **Set a password** switch, **Enabled** by default. Leave it on and enter the password twice, or turn it off to give the account a blank password. Avoid a blank password on an administrator account.
 
-{% hint style="danger" %}
-A blank Administrator password provides substantially less protection. Use it only when the deployment standard explicitly requires it and the device is secured by other controls.
-{% endhint %}
+A username has at most 256 characters, cannot contain `" / \ [ ] : ; | = , + * ? < > % @`, cannot end with a period or a space, and must be unique. The names `Administrator`, `DefaultAccount`, `Guest`, `HelpAssistant`, `NONE`, `WDAGUtilityAccount` and `WSIAccount` are reserved.
 
-### Additional local accounts
+### What Windows does with the accounts
 
-Select **Add account** for each additional local account required on the device, then configure:
+- **With at least one additional account**, Windows skips its account creation pages and the online account pages. The read-only row **Skip account creation during OOBE** shows this.
+- **With only the built-in Administrator account**, Windows still shows its own account creation pages.
+- Foundry does not configure automatic sign-in.
 
-- A unique Windows local username.
-- The account type: **Standard user** or **Administrator**.
-- Whether to set a predefined password. **Set a password** is enabled by default for new accounts; turn it off to assign an intentional blank password.
+If every account is **Standard** and the built-in Administrator account is **Disabled**, the page warns: "Only standard accounts are configured. Ensure another administrator account or management method is available." The warning does not block media creation.
 
-Edit or remove an account from the account list before creating the deployment media.
+### Password protection
 
-Windows unattend account names cannot exceed 256 characters or contain `/`, `\`, `[`, `]`, `:`, `|`, `<`, `>`, `+`, `=`, `;`, `,`, `?`, `*`, `%`, or `@`. Foundry also rejects quotation marks, trailing periods or spaces, duplicate names, and reserved names such as `NONE` and the built-in Windows accounts. See the [Microsoft unattend username reference](https://learn.microsoft.com/en-us/windows-hardware/customize/desktop/unattend/microsoft-windows-shell-setup-useraccounts-localaccounts-localaccount-name).
+- **A predefined password needs a Deployment password.** Turn on [Password protection](../general.md#password-protection) on **General**. Without it, the **Accounts** section and **Start** show **Needs attention** and Foundry OSD cannot create media. A blank password does not need it.
+- **Passwords are saved with the configuration** when **Remember passwords** is on, which is the default. When it is off, enter them again each time you start Foundry OSD. See [Settings backup and sync](../deployment-profiles.md).
+- **On the device**, Windows Setup receives the password in its answer file, hidden but not encrypted. Treat copies of that file as sensitive. See [Security and credentials](../../reference/security-and-credentials.md).
 
-{% hint style="warning" %}
-If you configure only Standard accounts and leave built-in Administrator disabled, a clean installation may have no enabled administrator account. Foundry displays a non-blocking warning: enable built-in Administrator, add an Administrator account, or ensure another administration method is available.
-{% endhint %}
+## Limits
 
-## Account creation during OOBE
+- **A custom answer file replaces this whole page.** When the technician selects one, Foundry applies none of the options above, including the local accounts. See [What a custom answer file overrides](unattend.md#what-a-custom-answer-file-overrides).
+- **Windows Autopilot and additional local accounts exclude each other.** The page shows "Autopilot cannot be combined with additional local accounts." and **Add account** is unavailable. Existing accounts can still be edited or removed: remove them or turn Autopilot off. The built-in Administrator account stays available with Autopilot.
 
-When at least one additional local account is configured, Foundry automatically skips the OOBE account-creation flow. The indicator is read-only because this is a consequence of creating accounts through `UserAccounts/LocalAccounts` in the answer file, not a requirement of every account-provisioning method. Foundry also hides online account screens in this configuration. See [Microsoft's description of the account-creation behavior](https://learn.microsoft.com/en-us/windows-hardware/customize/desktop/unattend/microsoft-windows-shell-setup-autologon).
+## Related
 
-Enabling only the built-in Administrator account does not guarantee that Windows client OOBE will skip account creation. In that configuration, Windows may still show its normal account-creation experience.
-
-Foundry does not configure AutoLogon and does not request account passwords during deployment. It does not force every OOBE flow to end at the sign-in screen: Windows may proceed to the desktop when a user completes an interactive OOBE sign-in. See [Microsoft's OOBE sign-in walkthrough](https://learn.microsoft.com/en-us/entra/identity/devices/device-join-out-of-box).
-
-## Password protection
-
-Non-empty local account passwords require [Password protection](../general.md#password-protection). This is a Foundry security requirement, not a Windows Setup requirement. Foundry keeps authoring passwords only for the current session and encrypts them in the deployment configuration written to the media.
-
-During deployment, Foundry decrypts the passwords for Windows Setup and writes them to `unattend.xml` using reversible encoding with `PlainText=false`. This hides the values but does not encrypt them. Treat answer files and their copies as sensitive data; media protection does not provide end-to-end encryption of the Windows Setup answer file. See [Microsoft's guidance on hidden answer-file passwords](https://learn.microsoft.com/en-us/windows-hardware/customize/desktop/wsim/hide-sensitive-data-in-an-answer-file).
-
-If a predefined account password is enabled while Password protection is disabled, Foundry blocks media creation and marks both **OOBE** and **Password protection** as needing attention. Enable Password protection and configure its technician password, or turn off the predefined account password to use an intentional blank password.
-
-Foundry saves whether each account requires a predefined password, but it never saves the password itself in the authoring configuration. After restarting Foundry OSD, re-enter and confirm every required account password before creating deployment media. Foundry marks the OOBE configuration as needing attention until those passwords are available again.
-
-The **Accounts** header shows **Needs attention** even when collapsed if an account setting is invalid, a required password is missing, or deployment protection is required. Autopilot only causes this attention indicator when additional local accounts are also configured. The Standard-only warning is advisory and does not block media creation.
-
-Blank passwords do not require Password protection because no password secret is stored. Apply the organization's password and device-access policies before using this option.
+- [Password protection](../general.md#password-protection)
+- [Unattend](unattend.md)
+- [Review and deploy](../../foundry-deploy/review-and-deploy.md)
+- [Windows deployment troubleshooting](../../troubleshooting/deployment.md)

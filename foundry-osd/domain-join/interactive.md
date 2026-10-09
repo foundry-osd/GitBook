@@ -1,35 +1,43 @@
 # Interactive Domain Join
 
-Choose this mode when the media must not carry domain credentials: the technician enters a domain account and its password during each deployment.
-
-## Prepare the media
-
-1. Open **Domain Join > Interactive** and choose **Enable**. Confirm the replacement if another Domain Join or Autopilot mode is active.
-2. Optionally [list the domains](README.md#list-the-domains) technicians may join. With at least one domain listed, the technician joins one of them and cannot type another; with none, the technician types the domain name during deployment.
-3. Optionally [add or import OUs](README.md#list-the-ous-of-a-domain) for each domain. A single OU is always used; with several, technicians choose one and the default is preselected.
-4. Resolve the messages shown on the page, then [create or update the media](../media/README.md).
-
-Interactive Domain Join does not need [Password protection](../general.md#password-protection) and writes no join account or password to the media. Accounts and passwords entered on the Zero-touch page stay in your configuration for a later switch back, but are never written to Interactive media. Other options you enable, such as custom answer files, may still require Password protection.
-
-Choose **Disable** to remove the join from new media. Your settings stay available for later.
+**Interactive Domain Join** keeps the join account off the deployment media: the technician types the account and its password in Foundry Deploy at each deployment.
 
 <figure>
   <img src="../../.gitbook/assets/foundry-osd-domain-join-interactive-01-configuration.png" alt="Interactive Domain Join page listing three domains and the OUs of the selected domain">
-  <figcaption>Interactive mode lists domains and OUs only; no account or password is stored.</figcaption>
+  <figcaption>Interactive mode lists domains and OUs only. No account or password is stored.</figcaption>
 </figure>
 
-## What the technician does
+## Before you start
 
-The Deploy wizard shows a **Domain join** step before **Summary**:
+- Make sure technicians have a join account, written as `DOMAIN\user` or `user@domain`, and its password.
+- The device must reach a domain controller when the join runs, after the restart. The Windows edition must not be a Home edition, and each device needs its own computer name.
 
-1. **Domain name**: choose it when the media lists several domains. With one listed domain it is shown and cannot be changed; with none, type it.
-2. **Account** and **Password**: enter the join account, as `DOMAIN\user` or `user@domain`, and its password. For example, an administrator may supply `djoin@corp.contoso.com` for `corp.contoso.com`.
-3. **Organizational unit**: choose one when the domain lists several; the default, if you set one, is preselected. A domain that lists a single OU uses it without asking. For a domain without listed OUs, **OU distinguished name (optional)** accepts an OU of that domain; leave it empty to use the domain's default location.
+This mode does not need Password protection.
 
-Changing the domain replaces the OU choices with those of the new domain and keeps the account and password already typed.
+## Configure
 
-{% hint style="info" %}
-The wizard does not contact the domain, so a mistyped password is not detected at this step. It shows later, in installed Windows, as a failed join.
-{% endhint %}
+1. Open **Domain Join > Interactive** and select **Enable**. If another Domain Join or Windows Autopilot mode is active, confirm with **Change mode**.
+2. Optional: under **Domains**, select **Add**, enter the **Domain name**, such as `corp.contoso.com`, and select **Add domain**. Once a domain is listed, technicians can join only a listed domain; with none, they type the domain name.
+3. Optional: select a domain, then under **Organizational units** select **Add**, enter a **Display name** and the **Distinguished name** of the OU, such as `OU=Workstations,DC=corp,DC=contoso,DC=com`, and select **Add OU**. **Import from domain** reads the OUs from the directory instead.
+4. Open **Start** and create or update the media.
 
-The technician reviews the domain and the OU in the **Domain join** category of the summary before starting. See [Domain Join during deployment](../../foundry-deploy/domain-join.md) for the full procedure and for how to check the outcome.
+## What the technician sees
+
+At each deployment, the [Domain Join step](../../foundry-deploy/domain-join.md) of Foundry Deploy asks for the domain, the join account, its password and, when the domain lists several, the OU. For a domain without listed OUs, the technician may type an OU or leave it empty.
+
+Foundry Deploy does not contact the domain, so a mistyped password only shows after the restart, as a failed join.
+
+## Check the result
+
+- On **Start**, **Interactive** under **Domain Join** reads **Configured**.
+- On a deployed device, follow the hand-over checks of the [Domain Join step](../../foundry-deploy/domain-join.md).
+
+## Limits
+
+No join account or password is written to interactive media, including the ones saved on the Zero-touch Domain Join page.
+
+## Related
+
+- [Domain Join](README.md): the two modes and their requirements
+- [Domains and OUs](domains-and-ous.md)
+- [Domain Join troubleshooting](../../troubleshooting/domain-join.md)

@@ -1,35 +1,67 @@
 # Foundry Deploy
 
-Foundry Deploy runs in Windows PE after network readiness. It guides a technician through target selection and Windows deployment.
+Foundry Deploy is the wizard that installs Windows on the target device. It opens in Windows PE once [Foundry Connect](../foundry-connect/README.md) reports that the network is ready.
 
-## Before starting
+{% hint style="warning" %}
+**Screenshot required**
 
-- Confirm that the device is connected to power.
-- Confirm that required network services are reachable.
-- Disconnect storage devices that must not be selected accidentally.
-- Obtain the technician password when Password protection is enabled.
-- For [Domain Join](domain-join.md), have the join account and its password ready when the media is Interactive, and make sure the computer will reach the domain once Windows is installed.
+- **File:** `foundry-deploy-welcome-01-start.png`
+- **Capture:** Show the **Welcome** screen of a release build once the components are loaded, with **Start deployment** available and the menu bar (**Theme**, **Language**, **Tools**, **About**). No **Debug** menu.
+{% endhint %}
+
+## Before you start
+
+- Connect the device to AC power and keep it connected.
+- Disconnect storage that must not be erased.
+- Have the Deployment password ready when the administrator protected the media.
+- Keep the deployment media connected until Foundry Deploy shows **Deployment complete**.
 
 {% hint style="danger" %}
-Deployment erases and repartitions the selected target disk. Verify the target before starting.
+Deployment erases the disk you select. Nothing is erased while you are in the wizard: the erase starts only after you select **Deploy** and accept **Confirm disk erase**.
 {% endhint %}
 
-When Password protection is enabled, Foundry Deploy requests the technician password before initialization. Cancelling the prompt closes Foundry Deploy. Incorrect attempts can be retried, with a progressively longer delay of up to five seconds. If the password is lost, recreate the media in Foundry OSD.
+## Open Foundry Deploy
 
-Zero-touch Domain Join uses the same technician password; there is no separate prompt for the domain account. Interactive Domain Join does not require Password protection.
+1. If a **Protected deployment** window asks "Enter the technician password to continue.", type the Deployment password and select **Continue**. Media created without Password protection skips this window.
+2. Wait on the **Welcome** screen while it shows **Initializing components...**. Foundry Deploy detects the hardware, lists the disks and loads the Windows and driver catalogs.
+3. Select **Start deployment**.
 
-{% hint style="info" %}
-Foundry Deploy validates HTTPS server certificates. When the catalog supplies a file hash, Deploy checks downloaded files and rechecks cached files before reuse. For cached Windows images and OEM driver packs, **Checking cache...** shows the verification percentage and bytes processed. Allow extra time when using large files or slower USB drives. A cached file that fails verification is downloaded again with its own download progress; a replacement that also fails verification stops the affected step. See [download troubleshooting](../troubleshooting/deployment.md#download-fails).
-{% endhint %}
+A wrong password shows "The password is incorrect. Try again.". Each failed attempt adds one second of waiting before the next prompt, up to five seconds. **Cancel** closes Foundry Deploy. A lost password cannot be recovered: the administrator must recreate the media, as explained in [Password protection](../foundry-osd/general.md#password-protection).
 
-Keep deployment media under your control. Packages without a catalog hash retain compatibility support, but their contents cannot be verified against a catalog hash.
+## Wizard steps
 
-## Wizard sequence
+The wizard shows its steps across the top. Use **Next** and **Previous** to move between them.
 
-1. [Select the target](target.md).
-2. [Select Windows](operating-system.md).
-3. [Select a driver pack](driver-pack.md).
-4. Configure Windows Autopilot when JSON profile or zero-touch upload media requires a deployment-time choice. Interactive upload runs later during Windows OOBE and does not add this wizard step.
-5. Complete the [Domain join step](domain-join.md#complete-the-domain-join-step) when the wizard shows it. It appears before the summary when there is a domain account to enter, or a domain or an OU to choose.
-6. [Review and deploy](review-and-deploy.md).
-7. [Verify deployment](verify-deployment.md).
+| Step | What you do | Shown |
+| --- | --- | --- |
+| **Target device** | [Select the target](target.md): disk, computer name, answer file, firmware updates | Always |
+| **Operating system** | [Select Windows](operating-system.md) | Always |
+| **Drivers** | [Select a driver pack](driver-pack.md) | Always |
+| **Autopilot** | [Windows Autopilot step](autopilot.md) | Only when the media uses a JSON profile or zero-touch hardware hash upload |
+| **Domain join** | [Domain Join step](domain-join.md) | Only when there is a join account to enter, or a domain or an OU to choose |
+| **Summary** | [Review and deploy](review-and-deploy.md) | Always |
+
+After you start the deployment, continue with [Verify deployment](verify-deployment.md), then [After the restart](after-the-restart.md).
+
+## Menu bar
+
+The menu bar stays available on every screen, including the error screen.
+
+| Menu | Use it to |
+| --- | --- |
+| **Theme** | Switch between **System**, **Light** and **Dark** |
+| **Language** | Change the display language of Foundry Deploy |
+| **Tools** | Open or export the logs: **Open log file**, **Export diagnostics...**, **Export raw diagnostics...** |
+| **About** | Read the Foundry Deploy version |
+
+Use **Tools** before you restart a device whose deployment failed. See [Export logs from Foundry Connect and Foundry Deploy](../troubleshooting/logs-and-support.md#export-logs-from-foundry-connect-and-foundry-deploy).
+
+A notice next to the version number, "New version available. Update Foundry OSD and rebuild boot media." or "Update Foundry OSD and rebuild boot media.", means the media was created with an older Foundry OSD. You can still deploy. Tell the administrator, who updates Foundry OSD and then [recreates or updates the media](../foundry-osd/media/README.md).
+
+## If something stops you
+
+| What you see | Go to |
+| --- | --- |
+| The password is refused, or Foundry Deploy closes as soon as it opens | [Before the deployment starts](../troubleshooting/deployment/before-deployment-starts.md) |
+| **Next** stays unavailable on **Target device** | [Before the deployment starts](../troubleshooting/deployment/before-deployment-starts.md) |
+| **Deployment failed** | [Verify deployment](verify-deployment.md), then [Windows deployment troubleshooting](../troubleshooting/deployment.md) |

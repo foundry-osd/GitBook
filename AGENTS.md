@@ -35,7 +35,7 @@ Verification scope:
 Repository scope:
 - This repository contains Foundry documentation published with GitBook
 - Follow CONTRIBUTING.md and IMAGE_CONVENTIONS.md for documentation and image changes
-- Verify product behavior against the supported Foundry release and relevant source; label unreleased behavior explicitly rather than presenting main-branch changes as released
+- Verify product behavior against the Foundry `main` branch and relevant source; document behavior on `main` as released, without version notes
 - Write task-based guidance for administrators and deployment technicians
 - Keep canonical paths stable because Foundry uses them for contextual help
 - Add every published documentation page to SUMMARY.md; keep contributor and agent instructions outside published navigation

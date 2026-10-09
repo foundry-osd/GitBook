@@ -1,97 +1,53 @@
-# Domain Join during deployment
+# Domain Join step
 
-This page is for the technician who deploys a computer with media configured for [Interactive](../foundry-osd/domain-join/interactive.md) or [Zero-touch](../foundry-osd/domain-join/zero-touch.md) Domain Join.
+On media prepared for Domain Join, Foundry Deploy shows a **Domain join** step between **Drivers** and **Summary**. You choose the domain and the organizational unit (OU) and, on interactive media, enter the join account. The join itself runs later, in installed Windows, after the restart.
 
-The wizard only collects what the join needs. The join itself runs later, in installed Windows, and needs the domain to be reachable at that moment.
+{% hint style="warning" %}
+**Screenshot required**
+
+- **File:** `foundry-deploy-domain-join-01-interactive-ou.png`
+- **Capture:** Show the **Domain join** step of a release build on interactive media, with all four fields filled with demonstration values and **Next** available. The menu bar must not show a Debug menu.
+{% endhint %}
 
 ## Before you start
 
-- Know which domain and OU the computer belongs to, and its computer name. For Interactive media, also have the join account and its password.
-- Confirm the [target disk and computer name](target.md). The computer name identifies the computer account in the domain, so check it carefully when a machine is redeployed under the same name.
-- Select the intended Windows image and edition. Windows Home editions cannot join a domain: the wizard skips the step and the summary says so, while the installation continues.
+- On interactive media, have the join account and its password.
+- Check the computer name on [Target device](target.md): it identifies the computer account, and a device redeployed under the same name reuses its account.
 
-## Complete the Domain join step
+## Complete the step
 
-The **Domain join** step sits between **Drivers** and **Summary**. It appears only when there is something to enter or choose, and **Next** stays unavailable until the entries are valid.
+1. **Domain name**: choose the domain when the media lists several; the default is preselected. A single listed domain cannot be changed. On interactive media that lists no domain, type its DNS name, such as `corp.contoso.com`.
+2. **Account (DOMAIN\user or user@domain)** and **Password**: on interactive media, enter the join account and its password. Zero-touch media carries the account and does not show these fields.
+3. **Organizational unit**: choose the OU when the domain lists several; the default, if there is one, is preselected. A domain with a single OU uses it without asking.
+4. **OU distinguished name (optional)**: shown on interactive media for a domain without listed OUs. Type an OU of that domain, starting with `OU=`, or leave it empty to use the domain's default location.
+5. Select **Next**. It stays unavailable while a required field is empty or a field shows a message.
 
-**Domain name**
-
-| Media | What you do |
-| --- | --- |
-| Several domains listed | Choose the domain. The default is preselected. |
-| One domain listed | Nothing. The domain is shown and cannot be changed. |
-| Interactive media with no domain listed | Type the domain name, such as `corp.contoso.com`. |
-
-**Account and password**
-
-| Media | What you do |
-| --- | --- |
-| Interactive | Enter the **Account**, as `DOMAIN\user` or `user@domain`, and its **Password**. Changing the domain keeps what you typed. |
-| Zero-touch | Nothing. The media carries the account, unlocked by the technician password you entered at startup. |
-
-**Organizational unit**
-
-| OUs listed for the chosen domain | What you do |
-| --- | --- |
-| Several | Choose the **Organizational unit**. The default, if there is one, is preselected; **Next** requires a choice. |
-| One | Nothing. That OU is used. |
-| None, Interactive media | Optionally enter **OU distinguished name (optional)**, starting with `OU=` and inside that domain. Leave it empty to use the domain's default location. |
-| None, Zero-touch media | Nothing. The domain's default location is used. |
-
-Changing the domain replaces the OU choices with those of the new domain.
+Changing the domain replaces the OU choices and keeps the account and password you typed.
 
 {% hint style="info" %}
-The wizard does not contact the domain. A mistyped account or password is accepted here and only shows later, in installed Windows, as a failed join.
+Foundry Deploy does not contact the domain. A mistyped account or password is accepted here and only shows after the restart, as a failed join.
 {% endhint %}
 
-<figure>
-  <img src="../.gitbook/assets/foundry-deploy-domain-join-01-interactive-ou.png" alt="Domain join step of Foundry Deploy on Interactive media with the domain list, empty account and password fields and the OU list">
-  <figcaption>Interactive media: choose the domain, enter the join account and its password, then choose the OU.</figcaption>
-</figure>
+## When the step is not shown
 
-<figure>
-  <img src="../.gitbook/assets/foundry-deploy-domain-join-02-zero-touch-ou.png" alt="Domain join step of Foundry Deploy on Zero-touch media with the domain list and the OU list only">
-  <figcaption>Zero-touch media: only the domain and the OU are left to choose.</figcaption>
-</figure>
+- Zero-touch media with one domain and at most one OU for it leaves nothing to choose.
+- A Windows Home edition cannot join a domain. **Summary** and **Confirm disk erase** then say: "This Windows edition cannot join a domain. Windows installation continues without it."
 
-## Review and start
+## Review on Summary
 
-On **Summary**, the **Domain join** category shows the domain and the OU the join will use; choose its edit action to return to the step. The account and the password are never shown, neither here nor in **Confirm disk erase**.
+The **Domain join** category shows the **Domain name** and the **Organizational unit**; **Domain default location** means no OU applies. When the wizard has a **Domain join** step, **Edit** returns to it. The account and the password are never shown.
 
-When the deployment ends successfully in WinPE, the join has been prepared, not yet performed.
+If the deployment does not start, see [Domain Join troubleshooting](../troubleshooting/domain-join.md). Otherwise continue with [Review and deploy](review-and-deploy.md), and come back to the checks below after the restart.
 
-## What happens in Windows
+## Before you hand over the device
 
-After the restart, during Windows setup and before the first sign-in, a Foundry console shows the post-installation actions. The join runs after drivers and network settings are applied:
+A deployment that succeeds in Windows PE has prepared the join, not performed it.
 
-1. Foundry waits until a domain controller answers, for up to two minutes.
-2. It joins the computer to the domain with the join account. A refused account or password is not retried, so the account cannot be locked out.
-3. If an OU applies, the computer account is created in that OU. An account that already exists under the same name is reused and moved to the OU, without being deleted.
-4. When the join succeeds, Windows restarts once. Foundry then checks that the computer is a member of the expected domain under the expected name.
+1. Keep power and network connected: installed Windows must reach a domain controller, and it restarts once more after a successful join.
+2. Read the **Foundry Post-installation** console, which appears on screen by itself after the restart. Its two lines that start with `Domain -` and `Restart:` report the join. [Domain Join lines](after-the-restart.md#domain-join-lines) shows what they read when the join is complete, and when to read them.
+3. Look at the first screen after setup. What it proves depends on the media; the administrator who created it knows which case applies.
+    - No local account and no custom answer file: the Windows sign-in screen means the join is confirmed, and **Who's going to use this device?** means it failed or could not be confirmed.
+    - A local account configured on [OOBE](../foundry-osd/customization/oobe.md), or a custom answer file: the first screen proves nothing. Rely on the console lines.
+4. Sign in with a domain account, and have your Active Directory administrator confirm that the computer account is in the intended OU.
 
-The console summarizes the outcome on one line, for example:
-
-`Domain - Join: Succeeded; Placement: Succeeded; Membership: Succeeded; Restart: Completed; Cleanup: Disposed`
-
-| Part | Meaning |
-| --- | --- |
-| Join | The computer was added to the domain. |
-| Placement | The computer account is in the intended OU. **Skipped** when no OU applies. |
-| Membership | After the restart, Windows confirms it belongs to the expected domain. |
-| Restart | The restart required by the join. |
-| Cleanup | The temporary copy of the join credentials was deleted (**Disposed**). |
-
-A failed join or placement does not stop the installation: the remaining actions run and Windows setup continues.
-
-## What you see at the end
-
-| Outcome | First screen |
-| --- | --- |
-| The join is confirmed | The Windows sign-in screen. Sign in with a domain account. No local account is needed; add one on the [OOBE page](../foundry-osd/customization/oobe.md) of Foundry OSD if you want local access. |
-| The join failed or could not be confirmed | Windows asks **Who's going to use this device?** Create a local account to reach the desktop, then see [Domain Join troubleshooting](../troubleshooting/domain-join.md). |
-
-With a [custom answer file](../foundry-osd/customization/unattend.md), that file decides which setup screens and accounts appear; Foundry does not change them.
-
-## Before handing over the computer
-
-Check [deployment verification](verify-deployment.md#domain-join): sign in with a domain account, and confirm with your Active Directory administrator that the computer account is in the intended OU. If the console reported anything other than **Succeeded** for the join, the placement or the membership, see [Domain Join troubleshooting](../troubleshooting/domain-join.md).
+For any other value or a yellow line under the two lines, see [Domain Join troubleshooting](../troubleshooting/domain-join.md).
