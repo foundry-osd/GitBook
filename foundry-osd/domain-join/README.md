@@ -11,6 +11,8 @@ Two modes differ in who supplies the join account.
 | Domains listed in Foundry OSD | At least one | Optional; with none, the technician types the domain name |
 | Organizational unit (OU) typed by the technician | Never | Allowed for a domain that lists no OU |
 
+In both modes, the technician can choose **Do not join a domain** at a deployment, so the same media also deploys computers that stay outside the domain. The join remains the preselected choice, and no setting removes the other one.
+
 Start with the page of the mode you use: it carries the steps to enable it. Both modes share the same lists of domains and OUs, described in detail in [Domains and OUs](domains-and-ous.md). The technician's side is the [Domain Join step](../../foundry-deploy/domain-join.md) of Foundry Deploy; failures are in [Domain Join troubleshooting](../../troubleshooting/domain-join.md).
 
 Domain Join and [Windows Autopilot](../autopilot/README.md) exclude each other: enabling one mode asks you to confirm before it replaces the active one.

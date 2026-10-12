@@ -50,8 +50,10 @@ The number of entries decides what Foundry Deploy asks on its [Domain Join step]
 | Domains listed | During deployment |
 | --- | --- |
 | None (Interactive only) | The technician types the domain name. |
-| One | That domain is used and cannot be changed. |
+| One | That domain is preselected; no other domain can be chosen. |
 | Several | The technician chooses one. The default is preselected. |
+
+In every case the list also offers **Do not join a domain**, which deploys the computer outside the domain. It is never preselected.
 
 | OUs listed for the domain | During deployment |
 | --- | --- |

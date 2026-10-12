@@ -1,6 +1,6 @@
 # Domain Join step
 
-On media prepared for Domain Join, Foundry Deploy shows a **Domain join** step between **Drivers** and **Summary**. You choose the domain and the organizational unit (OU) and, on interactive media, enter the join account. The join itself runs later, in installed Windows, after the restart.
+On media prepared for Domain Join, Foundry Deploy shows a **Domain join** step between **Drivers** and **Summary**. You choose the domain and the organizational unit (OU) and, on interactive media, enter the join account. You can also [deploy the computer without joining a domain](#deploy-without-joining-a-domain). The join itself runs later, in installed Windows, after the restart.
 
 {% hint style="warning" %}
 **Screenshot required**
@@ -16,7 +16,7 @@ On media prepared for Domain Join, Foundry Deploy shows a **Domain join** step b
 
 ## Complete the step
 
-1. **Domain name**: choose the domain when the media lists several; the default is preselected. A single listed domain cannot be changed. On interactive media that lists no domain, type its DNS name, such as `corp.contoso.com`.
+1. **Domain name**: the list holds the domains of the media, and the default is preselected. On interactive media that lists no domain, keep **Join a domain** and type the DNS name of the domain, such as `corp.contoso.com`, in the field below.
 2. **Account (DOMAIN\user or user@domain)** and **Password**: on interactive media, enter the join account and its password. Zero-touch media carries the account and does not show these fields.
 3. **Organizational unit**: choose the OU when the domain lists several; the default, if there is one, is preselected. A domain with a single OU uses it without asking.
 4. **OU distinguished name (optional)**: shown on interactive media for a domain without listed OUs. Type an OU of that domain, starting with `OU=`, or leave it empty to use the domain's default location.
@@ -28,14 +28,23 @@ Changing the domain replaces the OU choices and keeps the account and password y
 Foundry Deploy does not contact the domain. A mistyped account or password is accepted here and only shows after the restart, as a failed join.
 {% endhint %}
 
+## Deploy without joining a domain
+
+The last entry of **Domain name** is **Do not join a domain**. Choose it to deploy this computer outside the domain, although the media is prepared for Domain Join.
+
+- The other fields disappear and **Next** is available.
+- Foundry Deploy prepares no join: Windows is installed as from media without Domain Join, and the checks in [Before you hand over the device](#before-you-hand-over-the-device) do not apply.
+- A password you already typed is erased. If you choose a domain again, type it again.
+
+**Do not join a domain** is never preselected: the computer joins the domain unless you choose otherwise.
+
 ## When the step is not shown
 
-- Zero-touch media with one domain and at most one OU for it leaves nothing to choose.
-- A Windows Home edition cannot join a domain. **Summary** and **Confirm disk erase** then say: "This Windows edition cannot join a domain. Windows installation continues without it."
+A Windows Home edition cannot join a domain, so the step is not shown. **Summary** and **Confirm disk erase** then say: "This Windows edition cannot join a domain. Windows installation continues without it."
 
 ## Review on Summary
 
-The **Domain join** category shows the **Domain name** and the **Organizational unit**; **Domain default location** means no OU applies. When the wizard has a **Domain join** step, **Edit** returns to it. The account and the password are never shown.
+The **Domain join** category shows the **Domain name** and the **Organizational unit**; **Domain default location** means no OU applies. It shows **Do not join a domain** when that is your choice. When the wizard has a **Domain join** step, **Edit** returns to it. The account and the password are never shown.
 
 If the deployment does not start, see [Domain Join troubleshooting](../troubleshooting/domain-join.md). Otherwise continue with [Review and deploy](review-and-deploy.md), and come back to the checks below after the restart.
 

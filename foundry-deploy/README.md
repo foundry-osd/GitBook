@@ -38,7 +38,7 @@ The wizard shows its steps across the top. Use **Next** and **Previous** to move
 | **Operating system** | [Select Windows](operating-system.md) | Always |
 | **Drivers** | [Select a driver pack](driver-pack.md) | Always |
 | **Autopilot** | [Windows Autopilot step](autopilot.md) | Only when the media uses a JSON profile or zero-touch hardware hash upload |
-| **Domain join** | [Domain Join step](domain-join.md) | Only when there is a join account to enter, or a domain or an OU to choose |
+| **Domain join** | [Domain Join step](domain-join.md) | Only when the media uses Domain Join and the Windows edition can join a domain |
 | **Summary** | [Review and deploy](review-and-deploy.md) | Always |
 
 After you start the deployment, continue with [Verify deployment](verify-deployment.md), then [After the restart](after-the-restart.md).

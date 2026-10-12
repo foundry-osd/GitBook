@@ -60,7 +60,8 @@ A different case: when the import dialog opens with "Only some of the OUs could 
   - **Next** is unavailable: a required field is empty, an OU is not chosen, or a field shows a message.
   - Another domain cannot be typed: media that lists domains joins only those.
   - No field to type an OU: it exists only on interactive media, for a domain without listed OUs.
-  - The step is missing: expected on zero-touch media with one domain and at most one OU, and for a Windows Home edition.
+  - The fields are missing: **Domain name** is set to **Do not join a domain**. Choose the domain to bring them back.
+  - The step is missing: expected for a Windows Home edition.
 - **Fix:** complete or correct the fields. For a domain or an OU the media does not offer, the administrator adds it in Foundry OSD and creates the media again.
 - **Collect:** what **Summary** shows under **Domain join**.
 
@@ -92,16 +93,17 @@ A different case: when the import dialog opens with "Only some of the OUs could 
 ## The join was skipped <a href="#join-skipped" id="join-skipped"></a>
 
 - **Where:** installed Windows. The **Foundry Post-installation** console shows no `Domain` lines, and `domain-join-result.json` does not exist.
-- **Cause:** Foundry Deploy decided that the join could not run. When the Windows edition you selected is known to be a Home edition, **Summary** and **Confirm disk erase** announce it before the start. In the other cases the decision is taken after the image is applied and nothing on screen says so; the deployment log has the line `Domain joining skipped. Reason=<code>.`
+- **Cause:** the technician chose **Do not join a domain**, or Foundry Deploy decided that the join could not run. The technician's choice is shown on **Summary** before the start. When the Windows edition you selected is known to be a Home edition, **Summary** and **Confirm disk erase** announce it before the start. In the other cases the decision is taken after the image is applied and nothing on screen says so. In every case the deployment log has the line `Domain joining skipped. Reason=<code>.`
 
 | Reason | Meaning |
 | --- | --- |
+| `DeclinedByTechnician` | **Do not join a domain** was chosen on the **Domain join** step. This is a choice, not a failure. |
 | `UnsupportedEdition` | The image is a Windows Home edition. Silent only when the edition was found after the image was applied. |
 | `EmbeddedDomainJoin` | The image's `Windows\Panther\unattend.xml` contains a `Microsoft-Windows-UnattendedJoin` component. |
 | `AmbiguousComputerName` | That file sets more than one computer name. |
 | `ComputerNameMismatch` | That file does not set the computer name confirmed in Foundry Deploy. |
 
-- **Fix:** for `UnsupportedEdition`, redeploy with an edition that is not a Home edition: a Home edition cannot join a domain in Windows either. For the three other reasons, correct the image or the answer file and redeploy, or join the device manually as described in [The join failed](#join-failed).
+- **Fix:** for `DeclinedByTechnician`, if the device should be in the domain, redeploy and choose the domain, or join the device manually as described in [The join failed](#join-failed). For `UnsupportedEdition`, redeploy with an edition that is not a Home edition: a Home edition cannot join a domain in Windows either. For the three other reasons, correct the image or the answer file and redeploy, or join the device manually.
 - **Collect:** the deployment log, whose `Domain joining skipped. Reason=<code>.` line names the reason, and `deployment-summary.json`.
 
 ## The console shows NotStarted and Pending <a href="#notstarted-and-pending" id="notstarted-and-pending"></a>

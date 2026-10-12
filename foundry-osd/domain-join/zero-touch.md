@@ -28,7 +28,7 @@ A password belongs to its account: if you change an account, enter its password 
 
 ## What the technician sees
 
-The technician unlocks the media with the Deployment password and is never asked for the join account. With one domain and at most one OU for it, Foundry Deploy asks nothing about the domain. Otherwise its [Domain Join step](../../foundry-deploy/domain-join.md) asks only for the domain or the OU.
+The technician unlocks the media with the Deployment password and is never asked for the join account. The [Domain Join step](../../foundry-deploy/domain-join.md) of Foundry Deploy shows the domain, with the default preselected, and asks for the OU only when the domain lists several. The technician can choose **Do not join a domain** instead.
 
 ## Check the result
 

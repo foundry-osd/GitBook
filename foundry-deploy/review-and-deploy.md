@@ -17,7 +17,7 @@ On **Summary**, the last step of the wizard, you check every choice, start the d
 | **Operating system** | Release, edition, architecture, language, license channel and build, or the custom image and its index |
 | **Drivers** | Driver source and, for a manufacturer, the model and pack version |
 | **Autopilot** | Provisioning method and the profile or group tag |
-| **Domain join** | Domain and organizational unit. Listed only when the media uses Domain Join |
+| **Domain join** | Domain and organizational unit, or **Do not join a domain**. Listed only when the media uses Domain Join |
 | **Windows customization** | Windows setup options, application and AI component removal, optional features |
 | **Network** | Whether the Wi-Fi and wired 802.1X profiles are copied to Windows, and whether **Private-key material** is included |
 | **Completion** | **Restart behavior** and, for an automatic restart, **Restart delay** |
