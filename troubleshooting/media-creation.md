@@ -74,7 +74,7 @@ If something changes between your click and the start, a dialog titled **ISO cre
 
 **Cause:** During an earlier creation, Windows did not confirm that the boot image was unmounted: the DISM command exceeded 15 minutes, or Foundry OSD was closed while it ran. Foundry OSD keeps that working folder and services no other image until the old one is released.
 
-Each creation first tries to recover: the block is lifted if Windows no longer reports the image as mounted; otherwise Foundry OSD discards the image once, which can take 15 minutes. You see the message only when both fail. The same recovery runs at each new creation, so one more attempt can succeed; allow up to 15 minutes for it.
+Each creation first tries to recover: the block is lifted if Windows no longer reports the image as mounted; otherwise Foundry OSD discards the image once, which can take 15 minutes. During that time the **Operation in progress** dialog stays on "Cleaning WinPE workspace." and shows "Discarding mounted image with DISM." with a percentage. You see the message only when both fail. The same recovery runs at each new creation, so one more attempt can succeed; allow up to 15 minutes for it.
 
 **Fix:** The dialog gives the procedure with the real path. If another Foundry media operation is still running, let it finish and start the operation again. Otherwise, recover manually:
 
