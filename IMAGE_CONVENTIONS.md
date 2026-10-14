@@ -141,10 +141,14 @@ Screenshots must not expose:
 
 Use sanitized demonstration data. Redact sensitive information before adding an image to the repository.
 
+## Site icon
+
+`shared-site-icon.png` is the 132 x 132 pixel icon uploaded as the site icon in the GitBook site customization settings. No page references it; keep it as the source for that setting and replace it in place when the Foundry logo changes.
+
 ## Maintenance
 
 - Replace an outdated image in place when its documentation purpose has not changed.
 - Rename an image only when its page or purpose changes.
-- Remove images that are no longer referenced.
+- Remove images that are no longer referenced, except the site icon.
 - Visible screenshot placeholders are allowed while the GitBook site remains private or in draft review.
 - Before public publication, replace every placeholder or explicitly approve the corresponding screenshot as non-blocking.
