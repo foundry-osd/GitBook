@@ -48,7 +48,7 @@ Each reason is explained in [Windows Autopilot troubleshooting during deployment
 Interactive mode only. After the restart, while Windows setup is still installing, the **Foundry Post-installation** console runs the line `Upload hardware hash to Windows Autopilot` and a window titled **Foundry OSD - Interactive hardware hash upload** opens in front of it. The window is in English. Windows setup waits until the window closes, for up to 60 minutes.
 
 <figure>
-  <img src="../.gitbook/assets/foundry-deploy-autopilot-02-device-code-sign-in.png" alt="Foundry OSD - Interactive hardware hash upload window showing a sign-in code and its countdown over the first Windows setup screen">
+  <img src="../.gitbook/assets/foundry-deploy-autopilot-02-device-code-sign-in.png" alt="Foundry OSD - Interactive hardware hash upload window showing a sign-in code and its countdown, in front of the Foundry Post-installation console during Windows setup">
   <figcaption>Enter the code on another device. The code shown here is an example.</figcaption>
 </figure>
 
