@@ -20,7 +20,7 @@ Create one `.iso` file to start virtual machines, to attach through a remote man
 3. Check that the bar at the top reads **Ready to create ISO media** or **Ready to create ISO and USB media**.
 4. Select **Create ISO**.
 5. If a dialog titled **Update Foundry OSD before creating boot media** opens, a newer version of the app is available. Apply the update first, or select **Create anyway**.
-6. Wait until the dialog reads "The ISO media was created successfully.", then select **Close**.
+6. Wait until the dialog is titled **ISO created** and reads "The ISO file was saved to:", followed by the path and the size of the file. Select **Open folder** to open its folder, or **Close**.
 
 ## Rules for the output path
 

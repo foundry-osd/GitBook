@@ -1,13 +1,13 @@
 # Media creation troubleshooting
 
-This page covers what **Start** shows in Foundry OSD: a button that cannot be selected, a dialog, or a creation that ends with "Final media creation failed." Two kinds of problems are described elsewhere:
+This page covers what **Start** shows in Foundry OSD: a button that cannot be selected, a dialog, or a creation that ends in a dialog titled **ISO creation failed**, **USB media creation failed** or **USB media update failed**. Two kinds of problems are described elsewhere:
 
 | Where the problem shows | Go to |
 | --- | --- |
 | The USB drive: not listed, cannot be written or updated, or "Custom Windows image media preparation failed." A device that does not start from the media. A start from a PXE server | [USB drive and device start](media-creation/usb-drive-and-device-start.md) |
 | The **ADK** page, the proxy, updates, or an option of **General** | [Foundry OSD application troubleshooting](foundry-osd.md) |
 
-A failure on **Start** shows in a dialog titled **ISO creation is blocked** or **USB creation is blocked**, before anything is written, or in the **Operation complete** dialog, as "Final media creation failed." followed by the reason. Most reasons are in English whatever the language of Foundry OSD, and some are followed by the output of a Windows tool.
+A failure on **Start** shows in a dialog titled **ISO creation is blocked** or **USB creation is blocked**, before anything is written, or in the failure dialog that ends the creation, titled **ISO creation failed**, **USB media creation failed** or **USB media update failed**. The failure dialog gives the reason, then the step that failed, such as "It failed during step 3 of 5: Customizing the boot image.", then "Details are in the log.", with an **Open log folder** button. Reasons that Foundry OSD recognizes are in the language of Foundry OSD. Any other reason follows "An unexpected error stopped media creation." and appears in English after "Technical details:", sometimes followed by the output of a Windows tool.
 
 The log is `%ProgramData%\Foundry\Logs\Foundry.log`; its line "Final boot media operation failed" names the failed step. Windows image errors are also in `%SystemRoot%\Logs\DISM\dism.log`. See [Log locations](logs-and-support.md#log-locations).
 
@@ -44,7 +44,7 @@ Otherwise, find the message below.
 2. Type a path that ends with `.iso`, or select **Browse**.
 3. Select a USB drive sold as 16 GB or more. If the drive is not in the list, see [The USB drive is not listed](media-creation/usb-drive-and-device-start.md#usb-not-listed).
 
-If something changes between your click and the start, a dialog titled **ISO creation is blocked** or **USB creation is blocked** lists the same reasons, for example "ISO output path must end with .iso." or "Deploy configuration generation is not ready.". For the latter with Windows Autopilot and local accounts, see [Media creation is blocked by additional local accounts](autopilot.md#local-accounts).
+If something changes between your click and the start, a dialog titled **ISO creation is blocked** or **USB creation is blocked** gives the reason, or "Resolve the following before creating media:" followed by a list of reasons, for example "ISO output path must end with .iso." or "Deploy configuration generation is not ready.". For the latter with Windows Autopilot and local accounts, see [Media creation is blocked by additional local accounts](autopilot.md#local-accounts).
 
 **Collect:** Nothing.
 
@@ -70,11 +70,11 @@ If something changes between your click and the start, a dialog titled **ISO cre
 
 ## "WinPE servicing is blocked because an earlier image cleanup has no confirmed completion." <a href="#servicing-blocked" id="servicing-blocked"></a>
 
-**Where:** **Operation complete** dialog, at the start of a creation, followed by "Retained operation: '\<folder\>'. Cleanup marker: '\<file\>'. Preserve this workspace until cleanup can be verified." and a numbered procedure. A second form is "WinPE servicing is blocked because retained operation cleanup could not be safely inspected."
+**Where:** Failure dialog, at the start of a creation, after "Technical details:", followed by "Retained operation: '\<folder\>'. Cleanup marker: '\<file\>'. Preserve this workspace until cleanup can be verified." and a numbered procedure. A second form is "WinPE servicing is blocked because retained operation cleanup could not be safely inspected."
 
 **Cause:** During an earlier creation, Windows did not confirm that the boot image was unmounted: the DISM command exceeded 15 minutes, or Foundry OSD was closed while it ran. Foundry OSD keeps that working folder and services no other image until the old one is released.
 
-Each creation first tries to recover: the block is lifted if Windows no longer reports the image as mounted; otherwise Foundry OSD discards the image once, which can take 15 minutes. During that time the **Operation in progress** dialog stays on "Cleaning WinPE workspace." and shows "Discarding mounted image with DISM." with a percentage. You see the message only when both fail. The same recovery runs at each new creation, so one more attempt can succeed; allow up to 15 minutes for it.
+Each creation first tries to recover: the block is lifted if Windows no longer reports the image as mounted; otherwise Foundry OSD discards the image once, which can take 15 minutes. During that time the dialog stays on step 1, "Preparing the workspace", and shows "Cleaning up files from a previous run…" or "Discarding an image left mounted by a previous run…" with a percentage. You see the message only when both fail. The same recovery runs at each new creation, so one more attempt can succeed; allow up to 15 minutes for it.
 
 **Fix:** The dialog gives the procedure with the real path. If another Foundry media operation is still running, let it finish and start the operation again. Otherwise, recover manually:
 
@@ -93,7 +93,7 @@ For the second form, Foundry OSD could not read the working folders: check that 
 
 ## "Windows blocked access to the WinPE image files." <a href="#access-blocked" id="access-blocked"></a>
 
-**Where:** **Operation complete** dialog. The full text is "Windows blocked access to the WinPE image files. Security software or another tool may be locking them. Add a security software exclusion for \<folder\>, close tools that mount images, restart the computer, and try again. Details are in \<log\> and \<log\>." Related forms, followed by the output of DISM: "Failed to mount boot.wim.", "Failed to commit mounted boot.wim changes." and "Failed to discard mounted boot.wim changes."
+**Where:** Failure dialog. The full text is "Windows blocked access to the WinPE image files. Security software or another tool may be locking them. Add a security software exclusion for \<folder\>, close tools that mount images, restart the computer, and try again. Details are in \<log\> and \<log\>." Related forms appear after "Technical details:", followed by the output of DISM: "Failed to mount boot.wim.", "Failed to commit mounted boot.wim changes." and "Failed to discard mounted boot.wim changes."
 
 **Cause:**
 
@@ -110,7 +110,7 @@ For the second form, Foundry OSD could not read the working folders: check that 
 
 ## "Failed to create WinPE workspace using copype.cmd." <a href="#adk-component" id="adk-component"></a>
 
-**Where:** **Operation complete** dialog. This entry covers these messages:
+**Where:** Failure dialog, after "Technical details:". This entry covers these messages:
 
 | Message | What it means |
 | --- | --- |
@@ -134,7 +134,7 @@ For the second form, Foundry OSD could not read the working folders: check that 
 
 ## "Failed to retrieve the WinPE driver catalog." <a href="#download-failed" id="download-failed"></a>
 
-**Where:** **Operation complete** dialog. This entry covers these messages:
+**Where:** Failure dialog. Except for "The transfer timed out...", the messages appear after "Technical details:". This entry covers these messages:
 
 | Message | What could not be obtained |
 | --- | --- |
@@ -161,7 +161,7 @@ For the second form, Foundry OSD could not read the working folders: check that 
 
 ## "Failed to prepare boot image dependencies from every matching operating system source." <a href="#package-refused" id="package-refused"></a>
 
-**Where:** **Operation complete** dialog. Media with Wi-Fi or `arm64` takes files from a Windows 11 package of several GB, chosen for the **Architecture** and the **WinPE boot language** of **General**.
+**Where:** Failure dialog, after "Technical details:". Media with Wi-Fi or `arm64` takes files from a Windows 11 package of several GB, chosen for the **Architecture** and the **WinPE boot language** of **General**.
 
 **Cause and fix**, by message:
 
@@ -177,7 +177,7 @@ For the second form, Foundry OSD could not read the working folders: check that 
 
 ## "Custom drivers total at least \<size\>; the maximum is \<size\>." <a href="#too-large" id="too-large"></a>
 
-**Where:** **Operation complete** dialog.
+**Where:** Failure dialog. The two "Custom driver snapshots" messages appear after "Technical details:".
 
 **Cause and fix**, by message:
 
@@ -193,7 +193,7 @@ For the second form, Foundry OSD could not read the working folders: check that 
 
 ## "Foundry could not replace the ISO file at \<path\>." <a href="#iso-failed" id="iso-failed"></a>
 
-**Where:** **Operation complete** dialog, at the end of an ISO creation. The last three messages of the table follow "Unexpected failure while creating WinPE ISO media.": read the first line of the technical text under it.
+**Where:** Failure dialog, at the end of an ISO creation. The last three messages of the table follow "Technical details: Unexpected failure while creating WinPE ISO media.": read the first line of the technical text under it.
 
 **Cause and fix**, by message:
 
