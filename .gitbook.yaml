@@ -18,9 +18,9 @@ redirects:
   docs/build-media/media-creation: foundry-osd/media/README.md
   docs/connect/network-readiness: foundry-connect/network-readiness.md
   docs/deploy/deployment-flow: foundry-deploy/README.md
-  docs/technical/post-winpe-handoff: foundry-deploy/verify-deployment.md
+  docs/technical/post-winpe-handoff: foundry-deploy/after-the-restart.md
   docs/technical/deployment-orchestrator: reference/README.md
   docs/configure/autopilot: foundry-osd/autopilot/README.md
-  docs/deploy/autopilot-hash-upload: foundry-osd/autopilot/README.md
+  docs/deploy/autopilot-hash-upload: foundry-deploy/autopilot.md
   foundry-osd/home: foundry-osd/README.md
   reference/bootstrap: foundry-connect/windows-pe-startup.md

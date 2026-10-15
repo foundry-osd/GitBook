@@ -4,7 +4,7 @@ On **Summary**, the last step of the wizard, you check every choice, start the d
 
 <figure>
   <img src="../.gitbook/assets/foundry-deploy-review-01-summary.png" alt="Deployment summary with the Target device, Operating system, Drivers, Autopilot, Windows customization, Network and Completion categories, Edit buttons and the Deploy button">
-  <figcaption>Each category sums up one step, and <strong>Edit</strong> returns to it.</figcaption>
+  <figcaption>Each category sums up one step or one media setting. <strong>Edit</strong> appears on the categories you can change in the wizard.</figcaption>
 </figure>
 
 ## Review the summary
@@ -22,7 +22,7 @@ On **Summary**, the last step of the wizard, you check every choice, start the d
 
 To change a value, select **Edit** on its category, correct the step, then select **Return to summary**.
 
-A **Status** row under **Target device**, **Drivers** or **Domain join** reports something that blocks **Deploy**, or the reason **Deploy** returned you to the summary: for example "\<manufacturer>: no matching model or version" under **Drivers**. See [Before the deployment starts](../troubleshooting/deployment/before-deployment-starts.md). Under **Windows customization**, **Status** only says whether anything is configured.
+A **Status** row under **Target device** or **Drivers** reports something that blocks **Deploy**, or the reason **Deploy** returned you to the summary: for example "\<manufacturer>: no matching model or version" under **Drivers**. See [Before the deployment starts](../troubleshooting/deployment/before-deployment-starts.md). Under **Domain join**, **Status** only says that this Windows edition cannot join a domain. Under **Windows customization**, **Status** only says whether anything is configured.
 
 ## Start the deployment
 
@@ -49,7 +49,7 @@ The progress page shows the computer name, the overall percentage, the current s
 | --- | --- | --- |
 | Not started | Empty circle | The step has not run yet. |
 | Running | Blue dot | The step is in progress. |
-| Completed | Green check mark in a circle | The step did its work. A step named "Stage ..." or "Prepare ..." only prepared work that runs in Windows after the restart. |
+| Completed | Green check mark in a circle | The step did its work. **Stage driver installer**, **Stage firmware update**, **Prepare setup tasks** and **Prepare Autopilot assistant** only prepared work that runs in Windows after the restart. |
 | Skipped | Blue "i" in a circle | The step had nothing to do, or could not do optional work, and the deployment continues. Read the reason. |
 | Failed | Red cross in a circle | The deployment stopped at this step. See [Verify deployment](verify-deployment.md). |
 | Cancelled | Cross without a circle | You cancelled while this step was running. |
@@ -61,7 +61,7 @@ The number of steps depends on the media configuration and can change while the 
 **Prepare target disk** is the step that erases the disk. Everything listed above it in **Steps** runs first, and a failure there leaves the disk untouched. Foundry Deploy first checks the disk, the storage space it can calculate, the answer file and the post-installation content the media must carry.
 
 - **USB drive with enough free cache space, or a custom image:** the Windows image is downloaded or reused and checked before **Prepare target disk**.
-- **ISO, or a USB drive whose cache cannot hold the image:** only access to the download source is checked first. **Download Windows image** and **Check Windows image** run after **Prepare target disk**, so a download or image problem can stop a deployment whose disk is already erased.
+- **ISO or PXE, or a USB drive whose cache cannot hold the image:** only access to the download source is checked first. **Download Windows image** and **Check Windows image** run after **Prepare target disk**, so a download or image problem can stop a deployment whose disk is already erased.
 
 Checking a large cached image takes time, especially on a slow USB drive. The step shows "Checking cache..." with a percentage: let it finish.
 

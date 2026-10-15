@@ -45,7 +45,7 @@ On **Target device** in Foundry Deploy, **Answer file** lists **Use Foundry sett
 | Automatic Windows activation | Not attempted. |
 | Windows Autopilot with a JSON profile or the interactive upload | The deployment is refused when the file contains one of the [blocking settings](unattend/answer-file-rules.md#settings-that-block-windows-autopilot). |
 | Zero-touch hardware hash upload | Not refused. Foundry Deploy warns that the upload does not guarantee enrollment. |
-| Domain Join | Still runs. The file must set exactly one fixed `ComputerName` in the `specialize` pass of `Microsoft-Windows-Shell-Setup` and contain no `Microsoft-Windows-UnattendedJoin` component. |
+| Domain Join | Still runs. The file must set exactly one fixed `ComputerName` in the `specialize` pass of `Microsoft-Windows-Shell-Setup` and contain no `Microsoft-Windows-UnattendedJoin` component. Otherwise Foundry Deploy skips the join without a message on screen and the deployment continues: see [The join was skipped](../../troubleshooting/domain-join.md#join-skipped). |
 | Everything else: [Post-installation](post-installation.md), AppX removals, AI components, optional features, drivers, network profiles | Still applied. Your settings and commands can conflict with them; Foundry does not detect that. |
 
 ## Rules for the file

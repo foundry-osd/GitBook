@@ -66,8 +66,8 @@ Values are switches, counts or fixed choices. No name, path or text you typed is
 | --- | --- |
 | Foundry OSD, once a day | Proxy method; authentication mode of a manual proxy |
 | Windows PE startup failure | Failure category; last stage reached; elapsed time; which application failed, its exit code and how far its start went; version, release or development build, and architecture of that application |
-| Foundry Connect, network ready | Connection type (Ethernet or Wi-Fi); window layout; whether Ethernet and Wi-Fi were available; Wi-Fi security type and the origin of the Wi-Fi connection; whether Ethernet 802.1X and Wi-Fi were set on the media |
-| Foundry Deploy, result | Success, cancellation, duration, number of steps completed, an identifier of the operation; whether it was a test run and the session mode |
+| Foundry Connect, network ready | Connection type (Ethernet or Wi-Fi); window layout; whether Ethernet and Wi-Fi were available; Wi-Fi security type and the origin of the Wi-Fi connection; whether Ethernet 802.1X and Wi-Fi were set on the media; ISO or USB media; release or development build of Foundry Connect |
+| Foundry Deploy, result | Success, cancellation, duration, number of steps completed, an identifier of the operation; whether it was a test run and the session mode; ISO or USB media; release or development build of Foundry Deploy |
 | Foundry Deploy, failure | Name of the step and of the operation that failed; kind, code and reason of the failure |
 | Foundry Deploy, device | Manufacturer, model, and whether it is a virtual machine |
 | Foundry Deploy, Windows | Catalog or custom image; product, release, build, update month, architecture, language, edition, licensing, image index; Foundry's settings or a custom answer file |

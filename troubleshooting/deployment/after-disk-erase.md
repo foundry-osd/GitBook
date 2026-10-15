@@ -17,7 +17,7 @@ On this page the disk has been erased, unless an entry says otherwise. Its previ
 | **Configure Windows boot** | [Boot configuration failed](#boot-configuration-failed) |
 | **Copy answer file**, **Set computer name**, **Configure Windows setup** | [Name or Windows setup](#name-or-windows-setup) |
 | **Download driver pack**, **Extract driver pack**, **Install Windows drivers**, **Stage driver installer** | [A driver pack step fails](#driver-pack-download) |
-| **Download driver pack** is skipped | [No driver from Microsoft Update Catalog](#no-driver-from-microsoft-update-catalog) |
+| **Download driver pack** is skipped with a reason about Microsoft Update Catalog | [No driver from Microsoft Update Catalog](#no-driver-from-microsoft-update-catalog) |
 | A firmware update step is skipped or fails | [Firmware update](#firmware-update) |
 | **Configure Windows features** | [Optional features](#optional-features) |
 | "Post-installation staging failed. ..." | [Post-installation staging](#post-installation-staging) |
@@ -126,6 +126,8 @@ A driver that Windows refuses does not fail **Install Windows drivers**: it is r
 - "Microsoft Update Catalog is not reachable; skipping driver lookup."
 - "Microsoft Update Catalog did not return any applicable driver payloads for the detected critical devices (DiskDrive, Net, SCSIAdapter)."
 - "No eligible critical Plug and Play devices (DiskDrive, Net, SCSIAdapter) were found for Microsoft Update Catalog driver lookup."
+
+"Driver pack resolved from cache." is not a problem: the pack already on the USB drive was checked and used.
 
 **Cause:** the catalog site is blocked, or it has no driver for the disks, storage controllers and network adapters of this model, the only device classes Foundry searches. No driver was added to Windows.
 

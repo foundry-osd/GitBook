@@ -37,7 +37,7 @@ Stop here if technicians join an open or passphrase network themselves. An enter
 | --- | --- |
 | **Open** | Nothing. |
 | **OWE (Opportunistic Wireless Encryption)** | Nothing. |
-| **WPA2/WPA3 Personal** (default) | **Passphrase**, 8 to 63 characters. |
+| **WPA2/WPA3 Personal** | **Passphrase**, 8 to 63 characters. |
 | **WPA2/WPA3 Enterprise** | The exported profile file. |
 | **WPA3 Enterprise (WPA3ENT)** | An exported profile whose authentication is `WPA3ENT`. |
 | **WPA3 Enterprise 192-bit (WPA3ENT192)** | An exported profile whose authentication is `WPA3ENT192`. |
@@ -48,8 +48,8 @@ For the three enterprise types, two more cards appear:
 - **Import a trusted root CA certificate**: turn it on if the profile needs a certificate. In **Trusted root CA certificate file**, select **Browse** and choose one file. A `.cer` or `.crt` file is added to the trusted root certification authorities of Windows PE. A `.pfx` file is imported as the client certificate with its private key: type its password in **PFX password**.
 
 <figure>
-  <img src="../../.gitbook/assets/foundry-osd-network-wifi-02-enterprise-profile.png" alt="Wi-Fi page with Security type WPA2/WPA3 Enterprise, an enterprise profile template, a trusted root CA certificate file with its PFX password, and Windows profile roaming">
-  <figcaption>With <strong>WPA2/WPA3 Enterprise</strong>, the profile template drives the connection.</figcaption>
+  <img src="../../.gitbook/assets/foundry-osd-network-wifi-02-enterprise-profile.png" alt="Wi-Fi page with Security type WPA2/WPA3 Enterprise, an enterprise profile template, a trusted root CA certificate file, the PFX password box, and Windows profile roaming">
+  <figcaption>With <strong>WPA2/WPA3 Enterprise</strong>, the profile template drives the connection. The PFX password only matters for a <code>.pfx</code> file.</figcaption>
 </figure>
 
 To keep the connection in the installed Windows, turn on **Windows profile roaming**, with or without an embedded profile. See [Windows profile roaming](README.md#windows-profile-roaming) for what is imported and when.

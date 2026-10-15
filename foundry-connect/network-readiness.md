@@ -4,7 +4,7 @@ Foundry Connect shows the state of the wired and wireless connections of the tar
 
 <figure>
   <img src="../.gitbook/assets/foundry-connect-network-readiness-01-ready.png" alt="Foundry Connect showing Network ready with the Continue button, the Ethernet card on Connected and the nearby Wi-Fi networks">
-  <figcaption>Once Internet access is validated, <strong>Continue</strong> opens Foundry Deploy.</figcaption>
+  <figcaption>Once Internet access is validated, <strong>Continue</strong> closes Foundry Connect and the startup continues to Foundry Deploy.</figcaption>
 </figure>
 
 ## Join a Wi-Fi network
@@ -37,7 +37,7 @@ Nothing else is tested, and the test cannot be changed or skipped. **Network rea
 | **Waiting for network configuration**, **Waiting for DHCP or static network configuration** | The link is up but the adapter has no IPv4 address. A failed 802.1X authentication may look the same. | Check DHCP on this network. |
 | **Connected**, **DHCP lease detected** or **Static network configuration detected** | The adapter has an IPv4 address. | If the header still waits: an **IPv4** value that starts with `169.254` means that no DHCP server answered. With any other address, the test itself gets no answer: see [Internet access has not been validated](../troubleshooting/network.md#internet-not-validated). |
 
-**Adapter**, **IPv4** and **Gateway** describe the wired adapter only. They show **Unavailable** when the device is connected over Wi-Fi.
+**Adapter**, **IPv4** and **Gateway** describe the wired adapter only. Over Wi-Fi they describe the unplugged wired adapter, or show **Unavailable** when the device has none.
 
 <details>
 

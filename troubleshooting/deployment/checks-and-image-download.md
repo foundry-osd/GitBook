@@ -3,7 +3,7 @@
 Failures of the first deployment steps: **Validate answer file**, **Check deployment setup**, **Download Windows image** (**Resolve custom image** for a custom image) and **Check Windows image**, and the failures of **Prepare target disk** that happen before the erase.
 
 {% hint style="warning" %}
-On this page the disk may or may not have been erased. With an ISO, or a USB drive whose cache cannot hold the image, **Download Windows image** and **Check Windows image** run after **Prepare target disk**. Look at **Steps**: a failed step listed below **Prepare target disk** means the disk is erased.
+On this page the disk may or may not have been erased. With an ISO or PXE, or a USB drive whose cache cannot hold the image, **Download Windows image** and **Check Windows image** run after **Prepare target disk**. Look at **Steps**: a failed step listed below **Prepare target disk** means the disk is erased.
 {% endhint %}
 
 **Collect** refers to the standard set of [What to collect](../deployment.md#what-to-collect). To start again, see [Deploy again after a failure](../deployment.md#deploy-again).

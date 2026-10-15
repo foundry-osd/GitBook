@@ -10,7 +10,7 @@ Create a USB drive that starts physical devices and keeps the Windows images and
 ## Before you start
 
 - No row of [Start](README.md) is marked **Needs attention**, and 20 GB are free on the drives listed in [Start](README.md#before-you-start).
-- The drive holds 16 GB or more. With a smaller drive selected, **Create USB** stays unavailable and no message is shown.
+- The drive shows 16 GB or more in the list. Foundry OSD counts 1 GB as 1,024 MB, so a drive sold as 16 GB shows less and is too small: use a 32 GB drive or larger. With a smaller drive selected, **Create USB** stays unavailable and no message is shown.
 
 {% hint style="danger" %}
 Creating a USB drive erases every partition of the selected disk. Foundry OSD lists every disk connected through USB except the Windows system or boot disk: an external hard disk or SSD, such as a backup disk, is listed too and can be selected. Check the disk number, name and size in the list, then read the volumes that the **Format USB target** dialog lists before you confirm.
@@ -72,7 +72,7 @@ The folders of the cache partition are listed in [What each media type carries](
 
 - The boot files must fit the 2 GiB **BOOT** partition, whatever the size of the drive. Foundry OSD checks this before it erases anything. If they do not fit, reduce the drivers or [create an ISO](create-iso.md).
 - Foundry OSD checks the identity of the drive again before it writes. If the drive was swapped or reconnected after you selected it, the operation stops and nothing is erased.
-- A drive that Foundry OSD recognizes as a Foundry USB drive can only be updated: see [How Foundry recognizes the drive](update-usb.md#how-foundry-recognizes-the-drive). To create it again, for example to change the partition style, first delete its partitions with Windows Disk Management.
+- A drive that Foundry OSD recognizes as a Foundry USB drive can only be updated: see [How Foundry recognizes the drive](update-usb.md#how-foundry-recognizes-the-drive). To create it again, for example to change the partition style, delete its **Foundry Cache** volume in Windows Disk Management, select **Refresh**, and check that the button reads **Create USB**. Creating the drive erases the whole disk, **BOOT** included.
 
 ## Related
 

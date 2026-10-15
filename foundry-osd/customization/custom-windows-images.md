@@ -59,7 +59,7 @@ On a Foundry USB drive created with this page **Enabled**, you can copy more `.w
 
 A captured image should contain `Windows\System32\Recovery\winre.wim`. Before you capture the reference device, run `reagentc /disable` on it, so that Windows moves the recovery image back to that folder.
 
-Without the file, Foundry Deploy marks the **Configure Windows recovery** and **Install recovery drivers** steps as skipped in its **Steps** list. Pointing at either step shows the reason: "The applied Windows image does not contain winre.wim." The deployment completes, and the deployed Windows has no recovery environment.
+Without the file, Foundry Deploy marks **Configure Windows recovery** as skipped in its **Steps** list, and **Install recovery drivers** too when that step is listed. Pointing at the step shows the reason: "The applied Windows image does not contain winre.wim." The deployment completes, and the deployed Windows has no recovery environment.
 
 Also remove any answer file from `Windows\Panther\Unattend` on the reference device before you capture it. An image that carries one stops every deployment that has work to run after the restart: see ["Post-installation staging failed."](../../troubleshooting/deployment/after-disk-erase.md#post-installation-staging)
 

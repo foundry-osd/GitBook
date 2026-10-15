@@ -18,6 +18,8 @@ Foundry OSD can use a proxy, set in [Settings](../foundry-osd/settings.md#proxy)
 | `login.microsoftonline.com`, `graph.microsoft.com` | 443, HTTPS | Sign-in to your tenant and Microsoft Graph requests from the Windows Autopilot pages | When you use Windows Autopilot |
 | `eu.i.posthog.com` | 443, HTTPS | Telemetry and remote diagnostics | Optional. See [Telemetry and privacy](telemetry-and-privacy.md). |
 | `docs.foundryosd.com` | 443, HTTPS | The **Documentation** buttons, opened in your browser | Optional |
+| Domain controllers of the domains you list | 389, LDAP | **Import from domain** on the Domain Join pages | When you import OUs |
+| The server of the shared folder | 445, SMB | Sharing, connecting and synchronizing in **Settings backup and sync** | When a configuration is shared |
 
 Notes on this table:
 

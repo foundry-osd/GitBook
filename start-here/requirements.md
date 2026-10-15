@@ -19,7 +19,7 @@ Choose one output, or both:
 
 | Output | Requirement |
 | --- | --- |
-| USB drive | 16 GB or larger. Foundry OSD refuses a smaller drive. Creating the media erases the drive. |
+| USB drive | 16 GB or larger, as Foundry OSD counts it (1 GB = 1,024 MB). A drive sold as 16 GB shows less and is refused: use a 32 GB drive or larger. Creating the media erases the drive. |
 | ISO file | A destination with at least 20 GB free. Use it for virtual machines, remote management consoles or [PXE](../foundry-osd/media/pxe-deployment.md). |
 
 [Start: create deployment media](../foundry-osd/media/README.md) explains what each output carries.

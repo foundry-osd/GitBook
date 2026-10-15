@@ -11,7 +11,7 @@ Use this page for the upload window of the interactive mode, which opens in Wind
 | "Upload failed. Check logs for details.", or another message after **Upload** | [Upload failed](#upload-failed) |
 | The computer name is not assigned in your tenant | [Name](#name-not-assigned) |
 | The device is registered but Windows setup applies no Autopilot profile, or its group tag has disappeared | [No profile applied](#no-profile-applied) |
-| A device whose motherboard was replaced keeps its old registration | [Limits of the zero-touch mode](../../foundry-osd/autopilot/zero-touch-hardware-hash.md) |
+| A device whose motherboard was replaced keeps its old registration | [Limits of the zero-touch mode](../../foundry-osd/autopilot/zero-touch-hardware-hash.md#limits) |
 
 The files named under **Collect** are described in [Evidence files](#evidence-files). In Windows setup, Shift+F10 opens a command prompt to read them.
 

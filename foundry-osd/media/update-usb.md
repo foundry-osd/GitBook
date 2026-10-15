@@ -47,7 +47,7 @@ Eject the drive, start a test device from it, and check that Foundry Connect ope
 ## Limits
 
 - The boot files must fit the existing **BOOT** partition. Foundry OSD checks this before it formats. If they do not fit, reduce the drivers or [create an ISO](create-iso.md).
-- An update cannot change the partition style or repair a damaged cache partition. Delete the partitions of the drive with Windows Disk Management, then [create the drive](create-usb.md) again.
+- An update cannot change the partition style or repair a damaged cache partition. Delete the **Foundry Cache** volume in Windows Disk Management, then [create the drive](create-usb.md) again: creating it erases the whole disk.
 - A cancelled or failed update can leave **BOOT** incomplete. Run the update again before you use the drive.
 
 ## Related

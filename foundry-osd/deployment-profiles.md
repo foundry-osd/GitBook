@@ -17,7 +17,7 @@ With one PC and one set of options, skip this page: Foundry OSD creates a config
 
 Changes are saved by themselves within a second, and when you close the app. **Duplicate**, **Import** and connecting to a shared configuration are the only ways to add a configuration; **More options** > **Rename** changes its name.
 
-The ISO output path, the custom driver folder and the telemetry choices belong to the PC, not to a configuration. Custom Windows images and post-installation packages also stay on each PC: a configuration only refers to them.
+The telemetry choices belong to the PC. The ISO output path and the custom driver folder are saved with each configuration on this PC, but they are never exported or synchronized: after an import or a connection, the ISO output path of this PC is kept and the custom driver folder is empty. Custom Windows images and post-installation packages also stay on each PC: a configuration only refers to them.
 
 ## What is remembered
 

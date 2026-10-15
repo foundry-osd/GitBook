@@ -33,7 +33,7 @@ Messages appear in the **Operation complete** dialog of Foundry OSD, as "Final m
 2. Connect the drive directly to a USB port of the workstation, another one if needed.
 3. If the card names the ADK, open the [ADK](../../foundry-osd/adk.md) page.
 
-A drive smaller than 16 GB is listed, but **Create USB** stays unavailable while it is selected.
+A drive that shows less than 16 GB in the list, which includes a drive sold as 16 GB, is listed, but **Create USB** stays unavailable while it is selected.
 
 **Collect:** `Foundry.log` when the card reports a failure.
 
@@ -59,7 +59,7 @@ A drive smaller than 16 GB is listed, but **Create USB** stays unavailable while
 
 - The drive was unplugged, swapped or reconnected.
 - Two identical drives without a serial number are connected.
-- Second message: the disk is no longer a USB disk of 16 GB or more, or has become the system or boot disk.
+- Second message: the disk no longer shows 16 GB or more, is no longer a USB disk, or has become the system or boot disk.
 
 **Fix:** Disconnect other USB drives of the same model, select **Refresh**, select the drive again, and keep it connected until the end.
 

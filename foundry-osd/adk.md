@@ -32,7 +32,7 @@ The ADK page checks and installs the Windows ADK and the Windows PE add-on that 
 | **ADK version is unsupported**, older version installed | **Upgrade Windows ADK and Windows PE Add-on** | Removes the installed add-on and ADK, then installs the supported version of both. |
 | **ADK version is unsupported**, newer version installed | **Downgrade Windows ADK and Windows PE Add-on** | Same as **Upgrade**: the newer ADK and add-on are removed first. |
 | **Windows PE Add-on is missing** | **Install Windows ADK and Windows PE Add-on** | Installs only the add-on; the ADK is left as it is. |
-| **Windows PE Add-on needs repair** | None | Repair or reinstall the add-on with Microsoft's installer, then restart Foundry OSD. See [troubleshooting](../troubleshooting/foundry-osd.md). |
+| **Windows PE Add-on needs repair** | None | Repair or reinstall the add-on with Microsoft's installer, then restart Foundry OSD. See ["Windows PE Add-on needs repair"](../troubleshooting/foundry-osd.md#winpe-repair). |
 
 **Upgrade** is also offered when Windows still lists an ADK whose files are no longer on disk.
 

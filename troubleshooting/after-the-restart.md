@@ -75,6 +75,7 @@ The files named below are on the Windows volume of the deployed device: Foundry'
 | `entry_point_missing`, `working_directory_missing` | The script, the installer or the working directory is no longer in the content, for example because an earlier action that shares it moved or deleted it. |
 | `process_start_failed` | Windows could not start the program, for example an installer built for another architecture. |
 | `process_failed`, `appx_inventory_truncated`, `activation_failed`, `cleanup_uncertain` | [Foundry task](#foundry-task-failed) |
+| `domain_join_warning`, `domain_membership_warning` | [Domain Join troubleshooting](domain-join.md) |
 | No failed entry, top-level `status` `Interrupted` | [Interrupted](#interrupted) |
 | No failed entry, top-level `status` `Failed` | [No failed action](#no-failed-action) |
 

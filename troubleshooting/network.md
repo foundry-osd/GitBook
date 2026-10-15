@@ -261,5 +261,7 @@ When a network step fails, `FoundryConnect.log` contains a line that starts with
 | `wifi_connect_request_failed` | Windows PE refused the connection request. |
 | `wifi_connect_timeout` | The network was not connected within 15 seconds. |
 | `no_wireless_adapter` | No wireless adapter is available. |
+| `wifi_disconnect_request_failed` | Windows PE refused the disconnect request. |
+| `wifi_disconnect_timeout` | The network was still connected after 15 seconds. |
 
 </details>

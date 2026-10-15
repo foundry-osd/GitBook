@@ -1,6 +1,6 @@
 # Foundry OSD
 
-Foundry OSD is the desktop application in which the administrator sets the options of a deployment and creates the media. This page is a tour of its window; the pages of this section then follow the navigation pane from top to bottom.
+Foundry OSD is the desktop application in which the administrator sets the options of a deployment and creates the media. This page is a tour of its window; the pages of this section then follow the order of the work: install the ADK, set the options, then create the media.
 
 <figure>
   <img src="../.gitbook/assets/foundry-osd-home-01-workflow.png" alt="Foundry OSD Home page with the navigation pane, the four action tiles, Media readiness status and the ADK and Configuration cards">

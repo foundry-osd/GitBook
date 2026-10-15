@@ -2,6 +2,8 @@
 
 Use this page for a message shown under the **Settings backup and sync** card of **Settings** in Foundry OSD, or in its export, import, share and connect dialogs; the rest of the application is in [Foundry OSD application troubleshooting](../foundry-osd.md).
 
+The sync status named in each section is shown for a shared configuration. For a configuration that is not shared, the status reads **Not configured** and the message under the card is what to look for.
+
 **Collect** names the Foundry OSD log, `%ProgramData%\Foundry\Logs\Foundry.log`: see [Log locations](../logs-and-support.md#log-locations). Never send a connection file, an exported configuration or their passwords.
 
 | What you see | Go to section |
@@ -20,7 +22,7 @@ Use this page for a message shown under the **Settings backup and sync** card of
 
 ## "Couldn't complete this action. Check the file, its password, your access permissions, and your network connection." <a href="#could-not-complete" id="could-not-complete"></a>
 
-**Where:** After an import, an export, a connection or a synchronization, under the **Settings backup and sync** card. Sync status: **Unable to synchronize**.
+**Where:** After an import, an export, a connection or a synchronization, under the **Settings backup and sync** card, or in the **Foundry settings** dialog when you close Foundry OSD and the settings could not be saved. Sync status: **Unable to synchronize**.
 
 **Cause:** One message covers several causes. The most frequent:
 

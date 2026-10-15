@@ -7,7 +7,7 @@ Settings holds the options of the Foundry OSD application itself: language, appe
   <figcaption><strong>Settings backup and sync</strong> is the third card. It has its own page.</figcaption>
 </figure>
 
-Except for **Settings backup and sync**, these choices are stored for the workstation, so they apply to every Windows account that uses Foundry OSD on it.
+Except for **Settings backup and sync**, these choices are stored for the workstation, so they apply to every Windows account that uses Foundry OSD on it. The proxy username and password are the exception: they are saved in Windows Credential Manager for your Windows account, so another account must type them again.
 
 ## General
 

@@ -28,7 +28,7 @@ A wrong password shows "The password is incorrect. Try again.". Each failed atte
 
 ## Wizard steps
 
-The wizard shows its steps across the top. Use **Next** and **Previous** to move between them.
+The wizard lists its steps on the left. Use **Next** and **Previous** to move between them.
 
 | Step | What you do | Shown |
 | --- | --- | --- |

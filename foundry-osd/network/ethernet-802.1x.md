@@ -3,8 +3,8 @@
 Use this page when the wired deployment network only admits devices that authenticate with 802.1X. Foundry puts a wired profile, and optionally a certificate, on the deployment media. Foundry Connect applies them at startup without asking the technician anything.
 
 <figure>
-  <img src="../../.gitbook/assets/foundry-osd-network-ethernet-01-profile-configuration.png" alt="Ethernet 802.1X page enabled with a profile template file, a trusted root CA certificate file with its PFX password, and Windows profile roaming expanded">
-  <figcaption>The profile template, the trusted root CA certificate, and Windows profile roaming with its private-key option.</figcaption>
+  <img src="../../.gitbook/assets/foundry-osd-network-ethernet-01-profile-configuration.png" alt="Ethernet 802.1X page enabled with a profile template file, a trusted root CA certificate file, the PFX password box, and Windows profile roaming expanded">
+  <figcaption>The profile template, the trusted root CA certificate, and Windows profile roaming with its private-key option. The PFX password and the private-key option only matter for a <code>.pfx</code> file.</figcaption>
 </figure>
 
 ## Before you start

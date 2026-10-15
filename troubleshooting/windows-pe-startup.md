@@ -41,9 +41,9 @@ The reason is the line under the list of stages. On a failure, the console also 
 
 ## "Warning: Internet clock could not be resolved. Boot will continue without clock correction." <a href="#internet-clock-not-resolved" id="internet-clock-not-resolved"></a>
 
-- **Where:** A yellow line under the elapsed time. **Environment** ends with **Done (warning)**.
+- **Where:** A yellow line under the elapsed time. **Environment** ends with **Done (warning)**. If the same line appears twice and **Clock and time zone** also ends with **Done (warning)**, the clock could not be read after Foundry Connect either.
 - **Cause:** The device had no Internet access before Foundry Connect: no cable, DHCP not ready yet, or a network that requires authentication. This is expected on a Wi-Fi-only device.
-- **Fix:** Nothing, when the last stage ends with **Ready**. The clock is read again at **Clock and time zone**, after Foundry Connect. If the time stays wrong, see [Wrong time or time zone](network.md#wrong-time-or-time-zone).
+- **Fix:** Nothing, when only **Environment** shows the warning and the last stage ends with **Ready**: the clock is read again at **Clock and time zone**, after Foundry Connect. If **Clock and time zone** shows it too, or the time stays wrong, the device keeps its firmware clock: see [Wrong time or time zone](network.md#wrong-time-or-time-zone).
 - **Collect:** Nothing.
 
 ## "Warning: Online runtime verification failed. Continuing with the original application provisioned on the boot media." <a href="#online-verification-failed" id="online-verification-failed"></a>
