@@ -2,13 +2,6 @@
 
 Once a configuration is [shared or connected](../deployment-profiles.md#create-a-shared-profile), the **Settings backup and sync** card shows its status next to **Synchronize**.
 
-{% hint style="warning" %}
-**Screenshot required**
-
-- **File:** `foundry-osd-deployment-profiles-sync-01-conflict.png`
-- **Capture:** Show the expanded card of a shared demonstration configuration with the status **Choose a version** and the conflict bar under it.
-{% endhint %}
-
 ## When changes are sent and applied
 
 - **Synchronize** checks at once: it sends your changes, or applies those of the other PCs.
