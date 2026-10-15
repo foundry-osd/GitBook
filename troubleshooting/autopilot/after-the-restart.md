@@ -10,7 +10,7 @@ Use this page for the upload window of the interactive mode, which opens in Wind
 | **Group tag** offers only **None** and **Custom** | [A group tag you expect is not offered](../autopilot.md#group-tag-not-offered) |
 | "Upload failed. Check logs for details.", or another message after **Upload** | [Upload failed](#upload-failed) |
 | The computer name is not assigned in your tenant | [Name](#name-not-assigned) |
-| The device is registered but Windows setup applies no Autopilot profile, or its group tag has disappeared | [No profile applied](#no-profile-applied) |
+| The device is registered but Windows setup applies no Autopilot profile, its group tag has disappeared, or your tenant reports "Self-Deploying mode requires TPM 2.0 hardware" | [No profile applied](#no-profile-applied) |
 | A device whose motherboard was replaced keeps its old registration | [Limits of the zero-touch mode](../../foundry-osd/autopilot/zero-touch-hardware-hash.md#limits) |
 
 The files named under **Collect** are described in [Evidence files](#evidence-files). In Windows setup, Shift+F10 opens a command prompt to read them.
@@ -79,10 +79,12 @@ After the wait began, the window shows the reason itself and **Upload** becomes 
   - In interactive mode the device restarts 10 seconds after the upload, so Windows setup can start again before the profile is assigned.
   - The group tag is missing or wrong, and your tenant uses it to assign the profile. A device that was already registered loses its tag when **None** is chosen in Foundry Deploy or in the upload window.
   - A custom answer file was used with the zero-touch mode. Foundry Deploy then warns "Hash upload does not guarantee Autopilot enrollment."
+  - The profile assignment fails with "Self-Deploying mode requires TPM 2.0 hardware" although the device has a TPM 2.0: its registered hardware hash does not carry the TPM version. Your tenant keeps that hash until the device is registered again.
 - **Fix:**
   1. In your tenant, check the device, its group tag and whether a profile is assigned. Set the group tag again if it was removed.
   2. Let nobody go through Windows setup until the profile is assigned.
   3. With the zero-touch mode, the administrator can turn automatic restart off on [General](../../foundry-osd/general.md), so that you check the tenant before the device restarts.
+  4. For "Self-Deploying mode requires TPM 2.0 hardware", delete the device from the Windows Autopilot devices of your tenant, then deploy it again with media created by the current Foundry OSD so that the hash is uploaded again.
 - **Collect:** `autopilot-hash-upload-status.json` or `registration-result.json`, which record the group tag that was sent.
 
 ## Evidence files <a href="#evidence-files" id="evidence-files"></a>
