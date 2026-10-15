@@ -36,13 +36,13 @@ Otherwise, find the message below.
 
 - A row is marked **Needs attention**; the bar at the top reads **Readiness items needing action:** with a number.
 - For **Create ISO**: the **ISO output** path is empty or does not end with `.iso`.
-- For **Create USB**: no drive is selected, or the drive shows less than 16 GB in the list. A drive sold as 16 GB shows less and is too small.
+- For **Create USB**: no drive is selected, or the drive is smaller than 16 GB. A drive sold as 16 GB is accepted, although the list shows it at about 14.5 GB.
 
 **Fix:**
 
 1. In each group, select the **Review** button of every row marked **Needs attention** and complete that page.
 2. Type a path that ends with `.iso`, or select **Browse**.
-3. Select a USB drive that the list shows at 16 GB or more: in practice, a drive sold as 32 GB or larger. If the drive is not in the list, see [The USB drive is not listed](media-creation/usb-drive-and-device-start.md#usb-not-listed).
+3. Select a USB drive sold as 16 GB or more. If the drive is not in the list, see [The USB drive is not listed](media-creation/usb-drive-and-device-start.md#usb-not-listed).
 
 If something changes between your click and the start, a dialog titled **ISO creation is blocked** or **USB creation is blocked** lists the same reasons, for example "ISO output path must end with .iso." or "Deploy configuration generation is not ready.". For the latter with Windows Autopilot and local accounts, see [Media creation is blocked by additional local accounts](autopilot.md#local-accounts).
 

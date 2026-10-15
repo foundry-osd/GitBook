@@ -5,7 +5,7 @@ This is the shortest path from an empty workstation to one deployed test device.
 ## Before you start
 
 - A workstation and a test device that meet the [Requirements](requirements.md).
-- A USB drive of 32 GB or larger (a drive sold as 16 GB is too small), or a virtual machine that can start from an ISO file.
+- A USB drive of at least 16 GB, or a virtual machine that can start from an ISO file.
 - A test device whose disk can be erased, connected to a network with Internet access. Ethernet is the simplest choice.
 - A test device that starts in UEFI mode. For a virtual machine, choose UEFI firmware (generation 2 in Hyper-V): a device that starts in legacy BIOS mode is deployed but does not start the installed Windows.
 
