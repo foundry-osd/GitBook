@@ -1,12 +1,10 @@
 # Get started
 
-Use this section to understand Foundry, verify the administrator workstation, and complete a first deployment.
+This section takes you from an empty workstation to a first deployed device. Run your first deployments on a test device or a virtual machine: Foundry erases the disk it deploys to.
 
-## Recommended path
-
-1. [Download Foundry OSD](download.md) for the administrator workstation architecture.
-2. Review the [requirements](requirements.md).
-3. Complete the [quick start](quick-start.md).
-4. Use the [deployment workflow](deployment-workflow.md) as the end-to-end reference.
-5. Configure advanced networking, customization, or Windows Autopilot only when the deployment requires them.
-6. Test the media on non-production hardware before using it at scale.
+| I want to ... | Go to |
+| --- | --- |
+| Check that my workstation, media and devices are suitable | [Requirements](requirements.md) |
+| Get the installer and install Foundry OSD | [Download and install](download.md) |
+| Follow one path from installation to a deployed test device | [Quick start](quick-start.md) |
+| Understand each phase of a deployment and who does what | [Deployment workflow](deployment-workflow.md) |

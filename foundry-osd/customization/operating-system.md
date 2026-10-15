@@ -1,31 +1,60 @@
-# Operating system
+# OS selection
 
-Use Operating system selection to control which Windows choices are available during deployment.
-
-## Configure available Windows options
-
-1. Open **Customization > OS selection**.
-2. Select the Windows releases, languages, license channels, editions, and default media preference allowed by the deployment standard.
-3. Review the resulting selection. Changes are saved automatically.
-4. Return to **Start**.
+**OS selection** limits the Windows versions, languages, license channels and editions that Foundry Deploy offers the technician, and chooses which ones are selected by default. Leave the page off to offer everything the Foundry catalog contains.
 
 <figure>
-  <img src="../../.gitbook/assets/foundry-osd-customization-operating-system-01-selection.png" alt="Foundry OSD operating system selection controls">
-  <figcaption>Define the Windows choices available to the deployment technician.</figcaption>
+  <img src="../../.gitbook/assets/foundry-osd-customization-operating-system-01-selection.png" alt="OS selection page enabled with the Windows version and Windows license channel groups expanded, and the Windows language and Windows edition groups collapsed">
+  <figcaption>Each group limits what the technician can choose in Foundry Deploy and sets what is preselected.</figcaption>
 </figure>
 
-Foundry Deploy obtains available media from the configured catalog and presents compatible combinations to the technician.
+## Configure the Windows choices
 
-{% hint style="info" %}
-**Supported Windows releases**
+1. Open **Customization > OS selection**.
+2. Turn the switch at the top right to **Enabled**. Until you do, every control is unavailable and the media carries no restriction. On **Start**, **OS selection** now shows **Configured**.
+3. Expand a group and tick the values the technician may choose.
+4. In the **Preselected ...** box of the same group, choose the value selected by default, or keep **Automatic**.
+5. Create or update the deployment media.
 
-Foundry supports Windows 11 24H2, 25H2, and 26H2, with 26H2 as the default. Review older profiles that allow only unavailable releases and select the releases intended for new deployments.
+| Group | Allowed values | Default value |
+| --- | --- | --- |
+| **Windows version** | **Available Windows versions**: 26H2, 25H2, 24H2 | **Preselected Windows version** and **Preselected Windows update level** |
+| **Windows language** | **Available Windows languages** | **Preselected Windows language** |
+| **Windows license channel** | **Available Windows license channels**: Retail, Volume | **Preselected Windows license channel** |
+| **Windows edition** | **Available Windows editions**: Home, Home N, Home Single Language, Home China, Education, Education N, Pro, Pro N, Enterprise, Enterprise N | **Preselected Windows edition** |
 
-If at least one allowed release remains available for the deployment architecture, Deploy keeps that restriction. If none remains available, Deploy automatically offers the supported releases available for that architecture. This release fallback does not change language, edition, or license-channel policy. Review the final selection before deployment.
-{% endhint %}
+Three rules apply to every group:
 
-See [Catalogs](../../reference/catalog.md) for field definitions and [Select Windows](../../foundry-deploy/operating-system.md) for the runtime workflow.
+- **An empty list means all.** A list with nothing ticked offers every supported value.
+- **A single value forces the default.** When exactly one value is ticked, it becomes the preselected value and the **Preselected ...** box of that group is locked, except **Preselected Windows update level**. Foundry Deploy locks that list too.
+- **Automatic** leaves the choice to Foundry: version 26H2, edition Pro, license channel Retail. For the language, Foundry Deploy chooses on the device: see [Select Windows](../../foundry-deploy/operating-system.md).
 
-## Custom Windows images
+### Preselected Windows update level
 
-The settings on this page constrain catalog selection. Use [Custom Windows images](custom-windows-images.md) to import your own WIMs and choose custom image defaults independently. Catalog restrictions do not filter custom WIM indexes.
+Each Windows version is published as several monthly builds. **Preselected Windows update level** chooses the build selected by default: **Latest available update**, **1 update earlier**, and so on up to **11 updates earlier**. If the catalog holds fewer builds than you asked for, the oldest one is selected. The technician can still pick another build.
+
+### Editions and license channels depend on each other
+
+Home editions exist only in the Retail channel and Enterprise editions only in the Volume channel. Pro and Education exist in both. Foundry OSD keeps the two lists consistent as you tick editions:
+
+- A channel that none of the ticked editions supports is cleared and locked.
+- A channel that a ticked edition requires is locked. If you had ticked a channel yourself, Foundry OSD also ticks the required one: ticking **Enterprise** adds **Volume**.
+
+To change a locked channel, change the ticked editions first.
+
+## What the technician sees
+
+On the **Operating system** step of Foundry Deploy, each list contains only the values you allowed, with your preselected value selected.
+
+A restriction is dropped when it cannot be met. If none of the allowed values of a list exists in the catalog for the device, for example an allowed version that is no longer published or a language missing for the selected build, Foundry Deploy offers every available value for that list and records a warning in its log. This fallback applies in the same way to versions, languages, editions and license channels. See [Select Windows](../../foundry-deploy/operating-system.md).
+
+## Limits
+
+- This page restricts the images of the Foundry catalog only. It does not filter [Custom Windows images](custom-windows-images.md).
+- Foundry deploys Windows 11 24H2, 25H2 and 26H2. See [Supported versions](../../reference/supported-versions.md).
+- The versions and editions ticked here also set the availability labels on [Optional features](optional-features.md).
+
+## Related
+
+- [Select Windows](../../foundry-deploy/operating-system.md)
+- [Catalogs](../../reference/catalog.md)
+- [Windows deployment troubleshooting](../../troubleshooting/deployment.md)

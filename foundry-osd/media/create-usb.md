@@ -1,46 +1,81 @@
 # Create a USB drive
 
-Create bootable USB media for physical deployment.
+Create a USB drive that starts physical devices and keeps the Windows images and driver packs it downloads, so that later deployments reuse them.
+
+<figure>
+  <img src="../../.gitbook/assets/foundry-osd-media-create-usb-02-usb-target.png" alt="Start page with a USB drive selected, the USB target card expanded on USB partition style GPT and USB format mode Quick format, and the Create USB button available">
+  <figcaption>The <strong>USB target</strong> card, expanded on its two options, and the <strong>Create USB</strong> button.</figcaption>
+</figure>
+
+## Before you start
+
+- No row of [Start](README.md) is marked **Needs attention**, and 20 GB are free on the drives listed in [Start](README.md#before-you-start).
+- The drive is sold as 16 GB or more. The list shows sizes with 1 GB = 1,024 MB, so a drive sold as 16 GB shows about 14.5 GB, which is enough. With a smaller drive selected, **Create USB** stays unavailable and no message is shown.
 
 {% hint style="danger" %}
-The selected USB drive can be erased. Verify its identity, capacity, and contents before confirming creation.
+Creating a USB drive erases every partition of the selected disk. Foundry OSD lists every disk connected through USB except the Windows system or boot disk: an external hard disk or SSD, such as a backup disk, is listed too and can be selected. Check the disk number, name and size in the list, then read the volumes that the **Format USB target** dialog lists before you confirm.
 {% endhint %}
 
 ## Create the drive
 
-1. Connect the USB drive.
-2. Open **Start** and refresh removable devices if necessary.
-3. Select the correct USB target.
-4. Choose the required layout and format options.
-5. Resolve all blocking readiness items.
-6. Select **Create USB** and confirm the destructive operation.
-7. Keep the drive connected until verification and cleanup complete.
+1. Connect the drive, open **Start**, and select **Refresh** in the **USB target** card.
+2. Select the drive in the list. An entry reads, for example, "Disk 4 - USB SanDisk 3.2Gen1 (114.6 GB)".
+3. Expand the **USB target** card and set the two [USB target options](#usb-target-options).
+4. Select **Create USB**. If the button reads **Update USB**, the drive already is a Foundry USB drive: see [Update a USB drive](update-usb.md).
+5. If a dialog titled **Update Foundry OSD before creating boot media** opens, apply the update first or select **Create anyway**.
+6. Read the **Format USB target** dialog, described below. Select **Format and create USB** only if the disk and its volumes are the ones you expect. **Cancel** is the default button, so pressing Enter erases nothing.
+7. Keep the drive connected until the dialog reads "USB media was created successfully. Boot volume: X:. Cache volume: Y:.", with the two drive letters.
 
 <figure>
-  <img src="../../.gitbook/assets/foundry-osd-media-create-usb-01-confirmation.png" alt="Foundry OSD confirmation before formatting and creating a USB drive">
-  <figcaption>Verify the selected USB drive before confirming the destructive operation.</figcaption>
+  <img src="../../.gitbook/assets/foundry-osd-media-create-usb-01-confirmation.png" alt="Format USB target dialog naming the disk to erase and listing its two volumes, with the Format and create USB and Cancel buttons, Cancel highlighted">
+  <figcaption>Check the volumes before you erase: here the disk holds two NTFS volumes.</figcaption>
 </figure>
 
-## If the disk identity cannot be confirmed
+The dialog tells you what is on the disk before anything is erased:
 
-Foundry checks that the connected drive still matches the one you confirmed before changing it. A missing, changed or ambiguous device identity, or a changed disk number, stops the operation.
+| Line of the dialog | What it tells you |
+| --- | --- |
+| "This will erase disk \<number>: \<name> (\<size>)." | The disk that will be erased. |
+| "Volumes on this disk:", then one line per volume: "\<letter>: \<label> (\<file system>), \<size> used of \<size>" | The drive letter, the label, the file system and the space in use of each volume Windows can read. Foundry OSD reads the disk again just before it opens the dialog. A volume can have no letter, and one without a label reads "No name". |
+| "This disk has no partition." | Shown in place of the list when the disk is blank. |
+| "Windows cannot read the volumes on this disk. It may still contain data." | Shown in place of the list when the disk has partitions that Windows cannot read, such as a locked BitLocker drive or a disk formatted for another operating system, or when the disk could not be read. Treat the disk as holding data. |
+| "Everything on this disk will be lost. Continue only if this is the intended USB disk." | The last line, above the buttons. |
 
-Refresh the removable-device list, select the intended drive again, and confirm creation. If the warning remains, use a drive or connection that reports a distinct device identity. Keep the drive connected throughout creation; do not swap drives after confirmation.
+A volume with data you did not expect, such as a backup, means the wrong disk is selected: select **Cancel**. The same goes for the line saying that Windows cannot read the volumes, unless you know why.
 
-## If boot files do not fit
+If the disk was removed or replaced since you selected it, the dialog does not open and Foundry OSD shows "The USB drive identity is missing, ambiguous or has changed. Refresh the USB drive list and select the drive again."
 
-Foundry checks that the prepared boot files fit the 2 GiB BOOT partition before erasing or formatting the drive. If they do not fit, reduce customizations or drivers, or [create an ISO](create-iso.md). A larger USB drive does not increase this BOOT partition size. See [capacity troubleshooting](../../troubleshooting/media-creation.md#boot-media-exceeds-a-size-limit) for other size warnings.
+## USB target options
 
-## Validate the drive
+| Option | Choices | Default |
+| --- | --- | --- |
+| **USB partition style** | **GPT** or **MBR**. Keep **GPT** unless you have a reason to change it. Foundry does not check the firmware of your devices: if a device does not offer the drive in its boot menu, creating the drive again with **MBR** is a test worth making. With `arm64`, only **GPT** is offered. | **GPT** |
+| **USB format mode** | **Quick format** or **Full format**, applied to both partitions. A full format takes much longer. | **Quick format** |
 
-Safely eject the drive, boot representative hardware, and confirm that Foundry Connect and Foundry Deploy start correctly.
+Foundry OSD remembers both choices for the next drive.
 
-## Include custom images
+## What Foundry creates on the drive
 
-[Custom Windows images](../customization/custom-windows-images.md) are stored under `Cache\OperatingSystems\Custom\` on the NTFS data partition, outside the FAT32 BOOT partition. This directory separates custom images from catalog downloads in the operating-system cache. Include at least one available library image when the feature is enabled, and allow enough space alongside other required data. After creating the media, you can add extra regular WIM files directly in that directory for manual selection in Deploy.
+Two partitions, each with a drive letter in Windows:
 
-## Post-installation content
+- **BOOT**, FAT32, 2 GiB, for the boot files and the boot image. With **GPT** it is an EFI System Partition; with **MBR**, an active FAT32 partition.
+- **Foundry Cache**, NTFS, the rest of the drive, for Foundry Connect, the custom images and post-installation content you included, and the Windows images and driver packs that deployments download.
 
-[Post-installation](../customization/post-installation.md) packages use the external data/cache volume. Source content must not reside on the USB disk being prepared. Foundry checks content, disk identity and combined capacity before erasure.
+The folders of the cache partition are listed in [What each media type carries](README.md#what-each-media-type-carries).
 
-[Bootstrap prepares PostInstall automatically at startup](../../reference/bootstrap.md#postinstall-preparation). Standard release media needs Internet access for this step, even if the application is already cached on the USB drive.
+## Check the result
+
+1. In File Explorer, check that two volumes named **BOOT** and **Foundry Cache** appear.
+2. Eject the drive, start a test device from it, and check that Foundry Connect opens, then Foundry Deploy.
+
+## Limits
+
+- The boot files must fit the 2 GiB **BOOT** partition, whatever the size of the drive. Foundry OSD checks this before it erases anything. If they do not fit, reduce the drivers or [create an ISO](create-iso.md).
+- Foundry OSD checks the identity of the drive again before it writes. If the drive was swapped or reconnected after you selected it, the operation stops and nothing is erased.
+- A drive that Foundry OSD recognizes as a Foundry USB drive can only be updated: see [How Foundry recognizes the drive](update-usb.md#how-foundry-recognizes-the-drive). To create it again, for example to change the partition style, delete its **Foundry Cache** volume in Windows Disk Management, select **Refresh**, and check that the button reads **Create USB**. Creating the drive erases the whole disk, **BOOT** included.
+
+## Related
+
+- [Update a USB drive](update-usb.md)
+- [Start: create deployment media](README.md)
+- [Media creation troubleshooting](../../troubleshooting/media-creation.md) and [USB drive and device start](../../troubleshooting/media-creation/usb-drive-and-device-start.md)

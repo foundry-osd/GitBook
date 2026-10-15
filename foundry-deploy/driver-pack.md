@@ -1,36 +1,51 @@
 # Select a driver pack
 
-The Driver pack step selects hardware drivers compatible with the target device and Windows selection.
-
-## Make a selection
-
-1. Choose **None** when Windows inbox drivers or separately managed drivers are sufficient.
-2. Choose **Microsoft Update Catalog** when the deployment should obtain applicable device drivers from that source.
-3. Choose an available manufacturer catalog when the device requires a supported OEM driver pack.
-4. For a manufacturer catalog, confirm the detected or selected model and choose the appropriate package version.
-5. Review package details before continuing.
+On **Drivers**, the third step of the wizard, you choose where Foundry Deploy gets the drivers it adds to Windows for this device.
 
 <figure>
-  <img src="../.gitbook/assets/foundry-deploy-driver-pack-01-selection.png" alt="Foundry Deploy driver pack source, model, and version selection">
-  <figcaption>Select the driver pack that matches the target hardware and Windows selection.</figcaption>
+  <img src="../.gitbook/assets/foundry-deploy-driver-pack-01-selection.png" alt="Drivers step with Dell selected as the driver source, and a model and a version chosen">
+  <figcaption>Choose the driver source, then the model and the version when the source needs them.</figcaption>
 </figure>
 
-Foundry uses catalog metadata to identify supported models, operating-system targets, architecture, package format, and available hashes. If no suitable pack appears, see [Catalogs](../reference/catalog.md) and [Windows deployment troubleshooting](../troubleshooting/deployment.md).
+## Choose a driver source
 
-For [custom Windows images](operating-system.md#custom-images), recognized Windows client builds use the same driver release preference and fallback rules as catalog images. For example, a Windows 11 24H2 image (build 26100) prefers a matching 24H2 OEM pack, and Microsoft Update Catalog searches start with 24H2. Hardware and architecture matching still apply. Server images and unidentified builds are not assigned a Windows client release.
+1. Check the pre-selected **Driver source** against the table below and change it if needed.
+2. For a manufacturer source, check **Model**. It must name the device in front of you.
+3. In **Version**, keep the pre-selected pack version unless you were told to use another one.
+4. Select **Next**.
 
-## Driver downloads and storage
+| Driver source | What you get | Pre-selected when |
+| --- | --- | --- |
+| **None** | No drivers are added. Windows uses the drivers it already contains. | The device is a virtual machine |
+| **Microsoft Update Catalog** | Drivers for the storage controllers, disks and network adapters detected on this device. Nothing else: no graphics, audio or chipset drivers. | The device model has no pack in the manufacturer catalogs |
+| **Dell**, **Lenovo**, **HP**, **Microsoft** | The manufacturer's driver pack for the model and Windows version you select. **Microsoft** covers Surface devices. | The device model has a pack in that catalog |
 
-When you select **Microsoft Update Catalog**, Foundry uses `Cache/MicrosoftUpdateCatalog/Drivers` on USB media when the cache is writable and has enough space for the download size reported by the catalog. Otherwise, it uses the target disk. ISO deployments use the target disk. Drivers are extracted on the target disk, and only drivers selected for the current deployment are installed.
+**Model** and **Version** appear only for a manufacturer source.
 
-Foundry checks downloaded and cached driver files against the catalog hash when one is supplied. Drivers without a catalog hash are downloaded again for each deployment to temporary storage on the prepared target disk. Keep the device connected to the network and leave enough space for driver downloads and extraction.
+{% hint style="warning" %}
+When Foundry pre-selects a manufacturer, the model matches the device. When you switch to a manufacturer source yourself and the device is not in its catalog, **Model** shows the first entry of the list, which is another machine. Select the right model, or go back to **Microsoft Update Catalog**.
+{% endhint %}
 
-## Driver installation paths
+## What the deployment does with your choice
 
-- **None:** driver download, extraction, and installation steps are omitted.
-- **Offline driver packages:** **Download driver pack**, **Extract driver pack**, and **Install Windows drivers** prepare and inject INF drivers. **Install recovery drivers** also services Windows Recovery Environment when applicable.
-- **Deferred installers:** supported packages such as Lenovo executable installers and Surface MSI packages use **Stage driver installer** to copy the package, followed by **Prepare setup tasks** to schedule installation. Installation occurs during Windows setup after reboot. Extraction and offline INF installation steps are omitted for this path.
+| Driver source | During deployment |
+| --- | --- |
+| **None** | No driver step runs. |
+| **Microsoft Update Catalog** | **Download driver pack**, then **Extract driver pack**, **Install Windows drivers** and **Install recovery drivers**. The drivers are in Windows before the restart. |
+| A pack Foundry can unpack: Dell, HP, and any `.cab` or `.zip` pack | The same four steps. The drivers are in Windows before the restart. |
+| A pack that is an installer: Lenovo `.exe`, Surface `.msi` | **Download driver pack**, then **Stage driver installer**. The installer runs in Windows after the restart, before your organization's post-installation actions. |
 
-A download can be **Skipped** because all selected files were reused from cache while extraction and installation still succeed normally. Microsoft Update Catalog lookup still requires network access; cached package files do not provide an offline copy of the catalog.
+The search and the download need the network. Manufacturer packs are large, so allow time for the download. A pack already present in the [cache of the USB drive](../foundry-osd/media/README.md#what-each-media-type-carries), where Foundry keeps downloaded images and packs between deployments, is verified and reused instead of downloaded.
 
-Deferred driver installers run before custom actions in the [Post-installation workflow](../foundry-osd/customization/post-installation.md#execution-order). They still run when the Post-installation page's custom actions are disabled.
+If Microsoft Update Catalog cannot be reached, or returns no driver for the device, **Download driver pack** is skipped and the deployment continues without those drivers. The step shows the reason, for example "Microsoft Update Catalog is not reachable; skipping driver lookup." Check the step before you hand over the device: without a storage or network driver, Windows may not start or may have no network.
+
+For a custom image, Foundry matches packs to the Windows release of the image build, as it does for a catalog image.
+
+## If something stops you
+
+- The summary shows "\<manufacturer>: no matching model or version" and **Deploy** stays unavailable.
+- **Download driver pack**, **Extract driver pack** or **Stage driver installer** fails.
+
+The first is covered in [Before the deployment starts](../troubleshooting/deployment/before-deployment-starts.md), the second in [After the disk is erased](../troubleshooting/deployment/after-disk-erase.md). The catalogs themselves are described in [Catalogs](../reference/catalog.md).
+
+Next: the [Windows Autopilot step](autopilot.md) or the [Domain Join step](domain-join.md) when the wizard shows one, otherwise [Review and deploy](review-and-deploy.md).

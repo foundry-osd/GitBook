@@ -1,81 +1,45 @@
 # Windows deployment troubleshooting
 
-## Computer name is invalid
+Use this section when Foundry Deploy refuses to continue, shows **Deployment failed**, or completes a deployment that does not start Windows. This page tells you which of its four pages to open and what to collect first.
 
-Use 1–15 ASCII letters, numbers, or hyphens, and avoid a name containing only digits. A numeric serial number, or truncation that removes its letters, can produce a name Windows Setup rejects. Use fixed text such as `PC-` with at most 12 serial characters.
+## Start here
 
-In the composed naming workflow, a missing hardware value or firmware placeholder also prevents generation. If editing is allowed, enter a valid complete name. Otherwise, correct the naming configuration and refresh the media. See [machine naming](../foundry-osd/customization/machine-naming.md) for naming requirements and editing options.
+1. On the **Deployment failed** screen, note the step on the "Failed step: ..." line and select **View error details** to read the complete message.
+2. Look at **Steps**. If the failed step is above **Prepare target disk**, the disk was not erased. If it is below, the disk was erased. If it is **Prepare target disk** itself, only "Disk partitioning failed ..." means the erase had started; with any other message, including "No drive letter is available ...", the disk is intact.
+3. Open the page for your case from the table below. Each page starts with an index of its messages.
+4. Collect the evidence before you turn the device off: logs kept in Windows PE memory are lost at the restart.
 
-For Domain Join with a custom answer file, the file must set exactly one fixed computer name in its `specialize` pass; Foundry does not replace a missing or `*` name. See [Domain Join troubleshooting](domain-join.md#media-is-not-ready-or-input-is-rejected).
+| What you have | Disk erased | Go to |
+| --- | --- | --- |
+| A password prompt, Foundry Deploy closing, or a wizard screen where **Next** or **Deploy** is unavailable | No | [Before the deployment starts](deployment/before-deployment-starts.md) |
+| "Failed step: Validate answer file", "Check deployment setup", "Download Windows image" or "Check Windows image", or "Prepare target disk" with any message other than "Disk partitioning failed ..." | Depends on the media: look at **Steps**. No for "Prepare target disk" | [Checks and image download](deployment/checks-and-image-download.md) |
+| "Failed step: Prepare target disk" with "Disk partitioning failed ...", or any later step, "System reboot", or a skipped step | Yes | [After the disk is erased](deployment/after-disk-erase.md) |
+| "Failed step: Provision Autopilot", or a skipped Autopilot step | Yes | [Windows Autopilot troubleshooting during deployment](autopilot/during-deployment.md) |
+| **Deployment complete**, then the device returns to the media or does not start Windows | Yes | [Windows does not start after deployment](deployment/device-does-not-start.md) |
+| **Deployment cancelled**, or the device lost power | Look at **Steps** (after a cancellation) | [Deploy again after a failure](#deploy-again) |
+| The Foundry console after the restart fails, or Windows is not activated | Yes | [After the restart troubleshooting](after-the-restart.md) |
+| "Diagnostics could not be exported. Check the log for details." | Not relevant | [Logs and support information](logs-and-support.md#export-failed) |
 
-## Target disk is unavailable
+Many messages are written by Foundry and are quoted on these pages exactly. Others come straight from a Windows tool: they start with a short summary, such as "Disk partitioning failed for disk 0.", followed by an exit code and the tool's own output in English.
 
-- Confirm the storage controller is supported in Windows PE.
-- Add the required storage driver to deployment media.
-- Disconnect removable disks that can confuse target selection.
-- Confirm that the disk is not connected over USB and is not marked as a system, boot, read-only, or offline disk.
+## What to collect <a href="#what-to-collect" id="what-to-collect"></a>
 
-## Windows selection is empty
+Unless an entry says otherwise, **Collect** means this set:
 
-- Confirm Internet and catalog access.
-- Confirm the media authoring configuration permits the required release and architecture.
-- Review [Catalogs](../reference/catalog.md).
+- The "Failed step: ..." line and the text of **View error details** (use **Copy**).
+- The archive created by **Tools > Export diagnostics...**, or `X:\Foundry\Logs\FoundryDeploy.log`.
+- The device manufacturer and model, the media type (USB drive, ISO or PXE) and the Windows image and driver source you selected.
 
-## Driver pack is unavailable
+Where the files are and how to export them is in [Logs and support information](logs-and-support.md).
 
-- Confirm manufacturer and model identification.
-- Confirm the selected Windows release and architecture.
-- Check whether the catalog marks the package as legacy or targets a different model family.
+## Deploy again after a failure <a href="#deploy-again" id="deploy-again"></a>
 
-## Download fails
+Foundry Deploy cannot resume or undo a deployment, and the error screen has no retry button. Correct the cause, restart the device from the deployment media and go through the wizard again. The new deployment erases the disk again. A Windows image or a driver pack already in the USB drive's cache is verified and reused, so it is not downloaded twice.
 
-Record the current deployment step, source type, and complete error. Confirm DNS, proxy, firewall, available storage, and system time before retrying.
+### "Deployment stopped. The target disk may contain an incomplete installation." <a href="#cancelled" id="cancelled"></a>
 
-For an HTTPS certificate error, check the device clock and certificate trust in Windows PE. If your network inspects HTTPS traffic, ask your administrator to provide the required trusted certificates or a network path that does not replace the server certificate.
+The **Deployment cancelled** screen shows this sentence after every cancellation, whether **Cancel** was selected or the window was closed, and whatever the moment. The disk was erased only if **Prepare target disk** had already run: check **Steps**. Nothing is undone and the device does not restart by itself. Deploy again as described above. See [Cancel a deployment](../foundry-deploy/review-and-deploy.md#cancel-a-deployment).
 
-During **Checking cache...** for a Windows image or OEM driver pack, the verification percentage and bytes processed show how much of the cached file has been checked. If verification takes longer than expected, allow it to finish. Large files and slower USB drives take longer to read. When a catalog hash is available, Deploy checks the file contents before reusing them, even if the file was used successfully before.
+### The device lost power or restarted during the deployment <a href="#power-loss" id="power-loss"></a>
 
-A cached file that fails verification is downloaded again automatically. The display switches from cache verification to the replacement download, which has its own progress. If the replacement also fails with a hash verification error, collect the logs and check the download source, deployment storage, and network before retrying. Files without a catalog hash cannot receive this integrity check.
-
-Artifact downloads stop if no data is transferred for two minutes. A connection error can stop a request sooner. There is no fixed total duration limit: a slow download can continue while data is arriving. Check the connection and available storage before retrying a timeout. You can also [cancel deployment](../foundry-deploy/review-and-deploy.md#cancel-deployment) while it is running.
-
-## Checks before disk preparation fail
-
-If Foundry stops before **Prepare target disk**, the target has not been erased by that deployment attempt. Image download and inspection run before or after this step depending on the available storage route; see [the deployment timeline](../foundry-deploy/review-and-deploy.md#follow-progress).
-
-Record the failed step and follow the reported action:
-
-- For source-access or image-download errors, check the network and selected catalog entry.
-- For an unavailable edition, select another Windows image containing the required edition.
-- For insufficient space, choose a larger target or make room on the deployment USB cache. Do not delete files from the intended target as a workaround for an image or network error.
-- For a cache-location error, check that the cache is available on separate storage and restart Foundry Deploy after correcting the connection.
-
-With ISO or USB overflow to target storage, some image checks finish after disk preparation. A successful source-access check does not guarantee that the complete download or later image verification will succeed. See [checks before disk preparation](../foundry-deploy/review-and-deploy.md#checks-before-disk-preparation).
-
-## Post-installation preparation fails
-
-**Post-installation preparation failed** appears before **Prepare target disk**, so the target has not been erased by that deployment attempt. Foundry could not find or verify [Post-installation](../foundry-osd/customization/post-installation.md) content that the configuration requires. The deployment log records the specific reason.
-
-- Confirm that the complete ISO or USB created with the boot image is still attached. Imported scripts and packages are stored outside `boot.wim`.
-- With a [PXE boot image](../foundry-osd/media/pxe-deployment.md#post-installation-content), imported content is not delivered. Attach the matching media, or disable the actions that use imported content and recreate the boot image.
-- Do not combine a boot image with content from a different media build.
-
-## Deployment stops with an error
-
-1. Record the failed step exactly as displayed.
-2. Capture the complete error details without exposing secrets.
-3. Collect logs before rebooting or starting another deployment.
-4. Correct the underlying cause.
-5. Restart the workflow only after verifying the target and deployment inputs again.
-
-There is no rollback or resume operation. A failure after disk preparation can leave the target partially deployed and unable to boot, and a retry starts again from the beginning.
-
-## Custom image failures
-
-For [custom images](../foundry-osd/customization/custom-windows-images.md), check that the complete ISO or USB remains available and that the chosen numeric index exists. Do not substitute a same-name manual WIM for a missing managed preference. Changed files, manifest mismatches, or a source disk chosen as the deployment target must be resolved before deployment. DISM apply or servicing failures can still occur after target preparation; review logs and validate the WIM and customizations on a test target.
-
-## Post-installation interruption
-
-For [Post-installation](../foundry-osd/customization/post-installation.md), distinguish WinPE staging from the later Windows sequence. Planned restarts resume from saved progress. An interrupted action, missing or damaged execution records, or an installer-owned restart stops the sequence without automatically retrying the action. Preserve the results and logs before deciding whether to redeploy. **Cleanup pending** means some temporary content could not yet be safely removed.
-
-[Domain Join](domain-join.md#interrupted-work-or-restart-is-pending) is an exception: when the join is interrupted, Foundry reports a warning, does not try the join again, and continues after the restart.
+If **Prepare target disk** had started, the disk holds an incomplete installation. Connect AC power, start from the deployment media and deploy again. The logs kept in Windows PE memory are lost. What can remain is the session folder under `Logs` on the USB drive's **Foundry Cache** volume and, on the target disk, `Foundry\Logs` or `Windows\Temp\Foundry\Logs`: see [Log locations](logs-and-support.md#log-locations).
