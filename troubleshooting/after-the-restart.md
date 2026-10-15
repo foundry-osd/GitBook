@@ -140,6 +140,7 @@ The files named below are on the Windows volume of the deployed device: Foundry'
 | `Remove AppX packages`, `Remove AI components` | Windows could not list the installed packages. The sequence stops. A package that cannot be removed is only a warning. | `Logs\PreOobe\appx-servicing.log` |
 | `Activate Windows` | See [Activation](#not-activated). The sequence continues, with warnings, unless the task takes more than 60 seconds. | `execution-result.json` |
 | `Join domain and place computer`, `Verify domain membership` | See [Domain Join troubleshooting](domain-join.md). The sequence continues, with warnings. | The Domain Join lines |
+| `Upload hardware hash to Windows Autopilot` | The Windows Autopilot window was closed before a successful upload, stayed open for 60 minutes, or was not copied to the device. The sequence continues, with warnings; the device is not registered. | `failureCode` in `execution-result.json`, then [Windows Autopilot troubleshooting after the restart](autopilot/after-the-restart.md) |
 | `Cleanup` | Temporary files or settings could not be removed. The sequence ends with warnings. | [Leftover files](#leftover-files) |
 
 - **Fix:** for `Install drivers` and the removals, deploy again. If `Install drivers` fails again, select another driver source in Foundry Deploy. For the other tasks, follow the linked section.
@@ -209,7 +210,7 @@ The files named below are on the Windows volume of the deployed device: Foundry'
 On the deployed device, once Windows is reachable:
 
 1. Open `C:\Windows\Temp\Foundry\State\PreOobe\plan.json`. Under `actions`, each entry has an `id` and a `name`. The administrator's actions have a 32-character identifier; Foundry's tasks have a short one such as `driver-pack` or `cleanup`.
-2. Open `C:\Windows\Temp\Foundry\Logs\PreOobe\<id>\Process\output.log`. It holds the standard output of the action, then its error output, each limited to 2,097,152 characters. Foundry's tasks have no such file.
+2. Open `C:\Windows\Temp\Foundry\Logs\PreOobe\<id>\Process\output.log`. It holds the standard output of the action, then its error output, each limited to 2,097,152 characters. Foundry's tasks have no such file, except `autopilot-registration`, the Windows Autopilot window.
 3. For an MSI with **Generate installation log**, the installer log is `<installer name>.log` in `Logs\PreOobe\<id>`.
 4. In `State\PreOobe\execution-result.json`, the entry with the same identifier under `actions` gives `status`, `exitCode`, `failureCode` and the start and end times.
 

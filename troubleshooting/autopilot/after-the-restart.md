@@ -1,6 +1,6 @@
 # Windows Autopilot troubleshooting after the restart
 
-Use this page for the upload window of the interactive mode, which opens in Windows setup (OOBE) after the restart, and for what you find in your tenant once a device is registered. For Foundry OSD, see [Windows Autopilot troubleshooting](../autopilot.md); for Foundry Deploy, see [During deployment](during-deployment.md).
+Use this page for the upload window of the interactive mode, which opens during Windows setup after the restart, in front of the **Foundry Post-installation** console, and for what you find in your tenant once a device is registered. For Foundry OSD, see [Windows Autopilot troubleshooting](../autopilot.md); for Foundry Deploy, see [During deployment](during-deployment.md).
 
 | What you see | Go to |
 | --- | --- |
@@ -18,17 +18,15 @@ The files named under **Collect** are described in [Evidence files](#evidence-fi
 ## The upload window does not open after the restart <a href="#no-upload-window" id="no-upload-window"></a>
 
 - **Where:** Windows setup, after a deployment in interactive mode.
-- **Cause:** the files of `C:\Windows\Temp\Foundry\Logs\AutopilotRegistration` tell which case applies.
-  - `oobe-waiter.log` reads "Autopilot registration is already completed.": the device was registered by an earlier run on this installation. The window opens once.
-  - `foreground.log` reads "Foreground wrapper failed. Timed out while waiting for OOBE foreground access.": the window comes to the front through the command prompt of Windows setup, and that prompt did not open within 2 minutes.
-  - `oobe-waiter.log` reads "Timed out while waiting for active console session.": Windows setup did not show a screen within 20 minutes.
-  - `OOBE.log` does not exist: Windows setup did not run Foundry's command.
-  - The media does not use the interactive mode: **Steps** had no **Prepare Autopilot assistant** step.
+- **Cause:** the line `Upload hardware hash to Windows Autopilot` of the **Foundry Post-installation** console tells which case applies.
+  - The line shows `[Succeeded]` at once and `registration.log` reads "Autopilot registration is already completed.": the device was registered by an earlier run on this installation. The window opens once.
+  - The line shows `[Failed]` and `failureCode` in `C:\Windows\Temp\Foundry\State\PreOobe\execution-result.json` is `autopilot_assistant_missing`: the files of the window were not copied to the device.
+  - The console has no such line: the media does not use the interactive mode, and **Steps** had no **Prepare Autopilot assistant** step.
+  - No console opens at all: see [No Foundry Post-installation console appears](../after-the-restart.md#no-console).
 - **Fix:**
-  1. Wait 2 minutes on the first Windows setup screen before you conclude.
-  2. If the command prompt of Windows setup is disabled in your image, use another image or the zero-touch mode.
-  3. Otherwise register the device another way and send the files below.
-- **Collect:** `OOBE.log`, `oobe-launcher.log`, `oobe-waiter.log`, `oobe-sessiondiag.log` and `foreground.log`.
+  1. For `autopilot_assistant_missing`, deploy the device again.
+  2. Otherwise register the device another way and send the files below.
+- **Collect:** `registration.log`, `C:\Windows\Temp\Foundry\Logs\PreOobe\autopilot-registration\Process\output.log` and `execution-result.json`.
 
 ## "Waiting for network connectivity." <a href="#waiting-for-network-connectivity" id="waiting-for-network-connectivity"></a>
 
@@ -76,7 +74,7 @@ After the wait began, the window shows the reason itself and **Upload** becomes 
 - **Where:** Windows setup, after a registration that succeeded.
 - **Cause:**
   - Foundry waits for the device to be listed in the tenant, not for a profile to be assigned to it. Your tenant can need more time.
-  - In interactive mode the device restarts 10 seconds after the upload, so Windows setup can start again before the profile is assigned.
+  - In interactive mode Windows setup continues 10 seconds after the upload, so OOBE can start before the profile is assigned.
   - The group tag is missing or wrong, and your tenant uses it to assign the profile. A device that was already registered loses its tag when **None** is chosen in Foundry Deploy or in the upload window.
   - A custom answer file was used with the zero-touch mode. Foundry Deploy then warns "Hash upload does not guarantee Autopilot enrollment."
   - The profile assignment fails with "Self-Deploying mode requires TPM 2.0 hardware" although the device has a TPM 2.0: its registered hardware hash does not carry the TPM version. Your tenant keeps that hash until the device is registered again.
@@ -101,7 +99,13 @@ In `C:\Windows\Temp\Foundry\Logs\AutopilotRegistration`:
 | --- | --- |
 | `registration.log` | What the upload window did, with the reason of a failure |
 | `graph.log` | Microsoft Graph requests and their errors |
-| `OOBE.log`, `oobe-launcher.log`, `oobe-waiter.log`, `oobe-sessiondiag.log`, `foreground.log`, `launcher.log` | How the window was started from Windows setup |
+| `launcher.log` | Only when the window was started by hand with `C:\Windows\Temp\Foundry\Runtime\AutopilotRegistration\Start-FoundryAutopilotRegistration.cmd` |
+
+In `C:\Windows\Temp\Foundry\Logs\PreOobe\autopilot-registration\Process`:
+
+| File | Content |
+| --- | --- |
+| `output.log` | What the window wrote while it ran, written when it closes |
 
 In `C:\Windows\Temp\Foundry\State\AutopilotRegistration`:
 

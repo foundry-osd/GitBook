@@ -49,6 +49,7 @@ Only the tasks the deployment needs are listed.
 | `Remove AI components` | Copilot or AI Hub removal is selected. |
 | `Remove AppX packages` | AppX removals are selected. |
 | `Activate Windows` | See [Windows activation](#windows-activation). |
+| `Upload hardware hash to Windows Autopilot` | The interactive hardware hash upload of Windows Autopilot is enabled. See [Windows Autopilot window](#windows-autopilot-window). |
 | `Cleanup` | Always, after the administrator's actions. |
 
 </details>
@@ -87,7 +88,7 @@ Both lines are on screen from the first second, reading `Join: NotStarted; Place
 
 ## Windows Autopilot window
 
-With the interactive hardware hash upload, the Autopilot window opens later, on the first Windows setup screens, after this console has closed. See [Windows Autopilot step](autopilot.md).
+With the interactive hardware hash upload, the line `Upload hardware hash to Windows Autopilot` opens the Autopilot window in front of this console, and the console waits until the window closes, for up to 60 minutes. See [Upload the hardware hash after the restart](autopilot.md#upload-the-hardware-hash-after-the-restart).
 
 ## Hand over the device
 
