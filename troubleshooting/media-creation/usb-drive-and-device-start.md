@@ -9,7 +9,7 @@ Messages appear in the **Operation complete** dialog of Foundry OSD, as "Final m
 | What you see | Go to section |
 | --- | --- |
 | The USB drive is not in the list of the **USB target** card | [The USB drive is not listed](#usb-not-listed) |
-| An external disk is in the list, or the **Format USB target** dialog lists volumes you do not recognize | [A disk you did not expect is offered](#unexpected-disk) |
+| An external disk is in the list, or the **Format USB drive** dialog lists volumes you do not recognize | [A disk you did not expect is offered](#unexpected-disk) |
 | "The USB drive identity is missing, ambiguous or has changed..." or "The selected USB drive is no longer safe to modify..." | [The USB drive changed](#usb-identity) |
 | "Failed to partition and format the USB disk." or another failure while the drive is written | [The USB drive cannot be written](#usb-write) |
 | "Selected USB media is not a Foundry USB media." or "USB provisioning did not return assigned drive letters." | [The USB drive cannot be updated](#usb-update) |
@@ -19,7 +19,7 @@ Messages appear in the **Operation complete** dialog of Foundry OSD, as "Final m
 
 ## The USB drive is not listed <a href="#usb-not-listed" id="usb-not-listed"></a>
 
-**Where:** Foundry OSD, **Start**, **USB target** card, which reads "No USB drives were found.", "USB targets can be refreshed after ADK readiness is complete.", "USB target refresh failed." or "A required PowerShell USB query command failed."
+**Where:** Foundry OSD, **Start**, **USB target** card, which reads "No USB drives were found.", "USB drives can be refreshed after ADK readiness is complete.", "USB drive refresh failed." or "A required PowerShell USB query command failed."
 
 **Cause:**
 
@@ -39,7 +39,7 @@ A drive smaller than 16 GB is listed, but **Create USB** stays unavailable while
 
 ## A disk you did not expect is offered <a href="#unexpected-disk" id="unexpected-disk"></a>
 
-**Where:** Foundry OSD, **Start**: the list of the **USB target** card, or the **Format USB target** dialog, whose "Volumes on this disk:" lines show a letter, a label or an amount of data you do not recognize.
+**Where:** Foundry OSD, **Start**: the list of the **USB target** card, or the **Format USB drive** dialog, whose "Volumes on this disk:" lines show a letter, a label or an amount of data you do not recognize.
 
 **Cause:** Foundry OSD offers every disk connected through USB that is not the Windows system or boot disk. An external hard disk or SSD, such as a backup disk, is a valid target and is erased like a flash drive.
 

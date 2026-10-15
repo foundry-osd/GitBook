@@ -52,7 +52,7 @@ The progress page shows the computer name, the overall percentage, the current s
 | Completed | Green check mark in a circle | The step did its work. **Stage driver installer**, **Stage firmware update**, **Prepare setup tasks** and **Prepare Autopilot assistant** only prepared work that runs in Windows after the restart. |
 | Skipped | Blue "i" in a circle | The step had nothing to do, or could not do optional work, and the deployment continues. Read the reason. |
 | Failed | Red cross in a circle | The deployment stopped at this step. See [Verify deployment](verify-deployment.md). |
-| Cancelled | Cross without a circle | You cancelled while this step was running. |
+| Canceled | Cross without a circle | You cancelled while this step was running. |
 
 The number of steps depends on the media configuration and can change while the deployment runs, for example when no driver is found. It does not measure the remaining time.
 
