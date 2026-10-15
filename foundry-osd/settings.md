@@ -2,12 +2,10 @@
 
 Settings holds the options of the Foundry OSD application itself: language, appearance, saved configurations, proxy, telemetry and updates. Open it with **Settings** at the bottom of the navigation pane. The sections below follow the cards of the page from top to bottom.
 
-{% hint style="warning" %}
-**Screenshot required**
-
-- **File:** `foundry-osd-settings-02-backup-and-sync.png`
-- **Capture:** Show the whole **Settings** page of a released build with its seven cards, **Settings backup and sync** expanded, and the current navigation pane.
-{% endhint %}
+<figure>
+  <img src="../.gitbook/assets/foundry-osd-settings-02-backup-and-sync.png" alt="Settings page with its seven cards and Settings backup and sync expanded">
+  <figcaption><strong>Settings backup and sync</strong> is the third card. It has its own page.</figcaption>
+</figure>
 
 Except for **Settings backup and sync**, these choices are stored for the workstation, so they apply to every Windows account that uses Foundry OSD on it.
 
@@ -71,8 +69,8 @@ Foundry OSD updates itself from the releases of the `foundry-osd/foundry` reposi
 The **Update app** page shows **Installed version**, the available or latest version, **Last checked** and the **Update source**. **Check for updates** checks at once, **Download update** and **Apply update** do each step by hand, and **Release notes** appears when an update is available.
 
 <figure>
-  <img src="../.gitbook/assets/foundry-osd-settings-01-app-updates.png" alt="Update app page of Foundry OSD showing Up to date, the installed and latest versions, the last check, Check for updates and the update source">
-  <figcaption>The Update app page when no update is available.</figcaption>
+  <img src="../.gitbook/assets/foundry-osd-settings-01-app-updates.png" alt="Update app page of Foundry OSD with the update status, the installed and available versions, the last check, Check for updates and the update source">
+  <figcaption>The installed version, the latest available one and when Foundry OSD last checked.</figcaption>
 </figure>
 
 If you start a media creation while an update is known, a dialog titled **Update Foundry OSD before creating boot media** offers **Apply update** (or **View update** while it is still downloading), **Create anyway** and **Cancel**. Applying first is the safe choice: the media then carries the latest fixes.

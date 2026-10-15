@@ -3,8 +3,8 @@
 **OOBE** sets what Windows asks during its first-run setup, the out-of-box experience: the license terms page, the privacy choices, and the local accounts Foundry creates. In the app, the page is titled **Out-of-Box Experience**.
 
 <figure>
-  <img src="../../.gitbook/assets/foundry-osd-customization-oobe-01-options.png" alt="Foundry OSD Out-of-Box Experience page with the Accounts section collapsed and the eight setup and privacy options below it">
-  <figcaption>The eight setup and privacy options with their default values. Local accounts are in the Accounts section, collapsed here.</figcaption>
+  <img src="../../.gitbook/assets/foundry-osd-customization-oobe-01-options.png" alt="Foundry OSD Out-of-Box Experience page with the Accounts section expanded on one additional standard account, and the setup and privacy options below it">
+  <figcaption>With only standard accounts, the page warns that another administrator account or management method must be available.</figcaption>
 </figure>
 
 ## Configure OOBE

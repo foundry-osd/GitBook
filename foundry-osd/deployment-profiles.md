@@ -4,12 +4,10 @@ A configuration is the whole set of options you choose in Foundry OSD. The **Set
 
 With one PC and one set of options, skip this page: Foundry OSD creates a configuration named **Default** at its first start and saves your changes into it. Some screens of the app call the configuration a profile.
 
-{% hint style="warning" %}
-**Screenshot required**
-
-- **File:** `foundry-osd-deployment-profiles-01-card.png`
-- **Capture:** Show the expanded **Settings backup and sync** card with a shared demonstration configuration selected, so that every button and switch of the card is visible.
-{% endhint %}
+<figure>
+  <img src="../.gitbook/assets/foundry-osd-deployment-profiles-01-card.png" alt="Settings backup and sync card expanded on a synchronized configuration with Import, Export, Synchronize, Automatic sync and Remember passwords">
+  <figcaption>A synchronized configuration shows <strong>Up to date</strong>, <strong>Synchronize</strong>, <strong>Disconnect</strong> and <strong>Automatic sync</strong>.</figcaption>
+</figure>
 
 ## Create and select a configuration
 
@@ -51,12 +49,10 @@ The shared folder must meet these requirements:
 - It is not synchronized by a cloud service such as OneDrive or Dropbox.
 - Foundry OSD creates `\\server\share\Foundry\<configuration name>` in it. That subfolder must not exist yet. The name cannot contain special characters or end with a dot or a space.
 
-{% hint style="warning" %}
-**Screenshot required**
-
-- **File:** `foundry-osd-deployment-profiles-02-share-dialog.png`
-- **Capture:** Show the whole **Share this configuration** dialog, filled in with a demonstration name and a `\\server\share` path.
-{% endhint %}
+<figure>
+  <img src="../.gitbook/assets/foundry-osd-deployment-profiles-02-share-dialog.png" alt="Share this configuration dialog with the configuration name, the shared folder, the connection password and its confirmation, and the two options">
+  <figcaption>Other PCs need the connection password to connect to the shared folder.</figcaption>
+</figure>
 
 1. Select the configuration, expand the card, and select **Set up synchronization…** > **Share this configuration** > **Continue**.
 2. Check the **Configuration name**, type the **Shared folder** or select **Browse**, and read the destination shown under the field.

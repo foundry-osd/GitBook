@@ -3,8 +3,8 @@
 **Machine naming** decides the computer name Foundry Deploy proposes for each device: a name the technician types, or a name built from device data such as the serial number.
 
 <figure>
-  <img src="../../.gitbook/assets/foundry-osd-customization-machine-naming-01-configuration.png" alt="Foundry OSD Machine naming page in Composed mode with a Fixed text and a Random text component, the separator, letter casing and preview controls, and Allow name editing during deployment">
-  <figcaption>Composed mode: the components in order, and the preview of the resulting name. The Upload computer name to Autopilot card sits below this area.</figcaption>
+  <img src="../../.gitbook/assets/foundry-osd-customization-machine-naming-01-configuration.png" alt="Foundry OSD Machine naming page in Composed mode with a Fixed text and a Serial number component, the separator, letter casing and preview controls, Allow name editing during deployment, and Upload computer name to Autopilot">
+  <figcaption>Composed mode: the components in order, and the preview of the resulting name.</figcaption>
 </figure>
 
 ## Configure naming

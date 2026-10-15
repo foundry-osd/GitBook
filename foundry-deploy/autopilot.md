@@ -2,12 +2,10 @@
 
 On media prepared for Windows Autopilot, Foundry Deploy shows an **Autopilot** step between **Drivers** and **Summary**, then does the Autopilot work near the end of the deployment. With the interactive mode there is no wizard step: you upload the hardware hash yourself after the restart.
 
-{% hint style="warning" %}
-**Screenshot required**
-
-- **File:** `foundry-deploy-autopilot-01-step.png`
-- **Capture:** Show the **Autopilot** step of a release build on zero-touch media: the "Zero-touch hardware hash upload" card, **Ready to upload hardware hash**, the **Group tag** list with a demonstration tag, and **Configuration details** collapsed. The menu bar must not show a Debug menu.
-{% endhint %}
+<figure>
+  <img src="../.gitbook/assets/foundry-deploy-autopilot-01-step.png" alt="Autopilot step of Foundry Deploy on zero-touch media with Ready to upload hardware hash, the Group tag list and the Configuration details">
+  <figcaption>Choose a group tag if the media offers several. <strong>Configuration details</strong> shows the tenant and when the certificate expires.</figcaption>
+</figure>
 
 ## Which mode the media uses
 

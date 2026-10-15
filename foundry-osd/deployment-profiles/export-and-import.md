@@ -2,12 +2,10 @@
 
 **Export** writes the configuration in use to one encrypted file, as a backup or to take to another PC. **Import** adds the configuration of such a file as an independent copy. Both are in the [Settings backup and sync](../deployment-profiles.md) card of **Settings**.
 
-{% hint style="warning" %}
-**Screenshot required**
-
-- **File:** `foundry-osd-deployment-profiles-export-01-import-preview.png`
-- **Capture:** Show the whole **Import** preview dialog for a demonstration file, with its counts, the line about missing files and **Remember passwords**.
-{% endhint %}
+<figure>
+  <img src="../../.gitbook/assets/foundry-osd-deployment-profiles-export-01-import-preview.png" alt="Import dialog with the configuration name, the number of files and passwords included, the warning and Remember passwords">
+  <figcaption>Read the counts and the warning before you select <strong>Continue</strong>.</figcaption>
+</figure>
 
 ## Export an encrypted file
 

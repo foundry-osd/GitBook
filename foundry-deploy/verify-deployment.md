@@ -2,12 +2,10 @@
 
 A deployment ends on one of three screens: **Deployment complete**, **Deployment failed** or **Deployment cancelled**. This page tells you what to do on each one before the device restarts.
 
-{% hint style="warning" %}
-**Screenshot required**
-
-- **File:** `foundry-deploy-verify-01-success.png`
-- **Capture:** Show the **Deployment complete** screen of a release build with the restart countdown ("This computer will restart in ...") and the **Steps** list. Use a demonstration computer name and hide the IP and MAC addresses.
-{% endhint %}
+<figure>
+  <img src="../.gitbook/assets/foundry-deploy-verify-01-success.png" alt="Deployment complete screen with the message to remove the boot media, the Reboot button and the Steps list">
+  <figcaption>Here automatic restart is off, so the device waits until you select <strong>Reboot</strong>.</figcaption>
+</figure>
 
 ## Deployment complete
 
@@ -26,12 +24,10 @@ A completed deployment means Windows is on the disk and the work planned for the
 
 ## Deployment failed
 
-{% hint style="warning" %}
-**Screenshot required**
-
-- **File:** `foundry-deploy-verify-02-error.png`
-- **Capture:** Show the **Deployment failed** screen of a release build with the "Failed step: ..." line, the **View error details** button and the failed step marked in the **Steps** list. Hide the IP and MAC addresses.
-{% endhint %}
+<figure>
+  <img src="../.gitbook/assets/foundry-deploy-verify-02-error.png" alt="Deployment failed screen naming Apply Windows image as the failed step, with View error details and the failed step marked in Steps">
+  <figcaption>The failed step has a red cross in <strong>Steps</strong>. The steps after it did not run.</figcaption>
+</figure>
 
 The device does not restart after a failure. Do this before you turn it off:
 

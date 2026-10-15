@@ -3,8 +3,8 @@
 The Zero-touch and Interactive Domain Join pages share two lists: the **Domains** the media can join and, for each domain, the **Organizational units** (OUs) where its computer account can be placed.
 
 <figure>
-  <img src="../../.gitbook/assets/foundry-osd-domain-join-01-overview-empty.png" alt="Domain Join page before it is enabled, with empty Domains and Organizational units cards and their commands">
-  <figcaption>The Domains and Organizational units cards stay unavailable until you select Enable.</figcaption>
+  <img src="../../.gitbook/assets/foundry-osd-domain-join-01-overview-empty.png" alt="Zero-touch Domain Join page with three domains under Domains and the two OUs of the selected domain under Organizational units">
+  <figcaption>The <strong>Domains</strong> and <strong>Organizational units</strong> cards are the same on both Domain Join pages. The zero-touch page also has the shared join account.</figcaption>
 </figure>
 
 ## Before you start

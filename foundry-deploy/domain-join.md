@@ -2,12 +2,10 @@
 
 On media prepared for Domain Join, Foundry Deploy shows a **Domain join** step between **Drivers** and **Summary**. You choose the domain and the organizational unit (OU) and, on interactive media, enter the join account. You can also [deploy the computer without joining a domain](#deploy-without-joining-a-domain). The join itself runs later, in installed Windows, after the restart.
 
-{% hint style="warning" %}
-**Screenshot required**
-
-- **File:** `foundry-deploy-domain-join-01-interactive-ou.png`
-- **Capture:** Show the **Domain join** step of a release build on interactive media, with all four fields filled with demonstration values and **Next** available. The menu bar must not show a Debug menu.
-{% endhint %}
+<figure>
+  <img src="../.gitbook/assets/foundry-deploy-domain-join-01-interactive-ou.png" alt="Domain join step on interactive media with the domain, the join account, the masked password and the organizational unit filled in">
+  <figcaption>Interactive media asks for the join account and its password. The <strong>Domain name</strong> list also offers <strong>Do not join a domain</strong>.</figcaption>
+</figure>
 
 ## Before you start
 

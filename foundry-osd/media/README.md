@@ -2,12 +2,10 @@
 
 The **Start** page shows whether your configuration is ready, then creates an ISO file or a USB drive from it. Foundry OSD uses the options, passwords and files as they are when you select the button.
 
-{% hint style="warning" %}
-**Screenshot required**
-
-- **File:** `foundry-osd-media-01-readiness-overview.png`
-- **Capture:** Show the whole **Start** page with its five readiness groups, one of them expanded on a row marked **Needs attention**, and the three cards at the bottom.
-{% endhint %}
+<figure>
+  <img src="../../.gitbook/assets/foundry-osd-media-01-readiness-overview.png" alt="Start page with its status bar, the five readiness groups, the ISO output and USB target cards and the Create media card">
+  <figcaption>Expand a group to read its rows. A row that needs attention has a <strong>Review</strong> button.</figcaption>
+</figure>
 
 ## Before you start
 

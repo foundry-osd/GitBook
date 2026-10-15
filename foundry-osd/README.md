@@ -2,12 +2,10 @@
 
 Foundry OSD is the desktop application in which the administrator sets the options of a deployment and creates the media. This page is a tour of its window; the pages of this section then follow the navigation pane from top to bottom.
 
-{% hint style="warning" %}
-**Screenshot required**
-
-- **File:** `foundry-osd-home-01-workflow.png`
-- **Capture:** Show the whole Foundry OSD window on **Home** with the ADK ready: full navigation pane including the **Domain Join** section and the footer items, the four action tiles, **Media readiness status** and the **ADK** and **Configuration** cards.
-{% endhint %}
+<figure>
+  <img src="../.gitbook/assets/foundry-osd-home-01-workflow.png" alt="Foundry OSD Home page with the navigation pane, the four action tiles, Media readiness status and the ADK and Configuration cards">
+  <figcaption><strong>Home</strong> shows whether the ADK and the configuration are ready before you create media.</figcaption>
+</figure>
 
 ## Navigation pane
 

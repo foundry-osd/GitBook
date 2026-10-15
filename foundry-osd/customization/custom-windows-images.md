@@ -3,8 +3,8 @@
 **Custom Windows images** adds your own Windows images, from a WIM file or an ISO, to the deployment media, so the technician can deploy them instead of an image downloaded from the Foundry catalog.
 
 <figure>
-  <img src="../../.gitbook/assets/foundry-osd-custom-images-01-library.png" alt="Foundry OSD Custom Windows images page with the command bar, one included image, its three indexes under Selected image and the Default image source in Foundry Deploy setting">
-  <figcaption>The image library, the indexes of the selected image, and the source Foundry Deploy shows first. The current page also shows a PXE warning under its title.</figcaption>
+  <img src="../../.gitbook/assets/foundry-osd-custom-images-01-library.png" alt="Foundry OSD Custom Windows images page with the PXE warning under its title, the command bar, one included image, its three indexes under Selected image and the Default image source in Foundry Deploy setting">
+  <figcaption>The image library, the indexes of the selected image, and the source Foundry Deploy shows first.</figcaption>
 </figure>
 
 ## Before you start

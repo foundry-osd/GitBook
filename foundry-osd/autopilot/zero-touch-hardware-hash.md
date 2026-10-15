@@ -2,12 +2,10 @@
 
 **Zero-touch hardware hash upload** registers each device in Windows Autopilot during the deployment, with nobody signing in on the device. The deployment media carries a certificate that lets Foundry Deploy upload the hardware hash to your tenant.
 
-{% hint style="warning" %}
-**Screenshot required**
-
-- **File:** `foundry-osd-autopilot-zero-touch-01-readiness.png`
-- **Capture:** Show the **Zero-touch hardware hash upload** page of a release build, connected, with **Status** at **Ready**, one certificate in **Provisioned certificates** and "Certificate ready for boot media generation." under **Boot media certificate**. Use demonstration identifiers for the tenant and the certificate, and hide the whole **Tenant ID** and **Client ID** values, the **Thumbprint** and the **Certificate ID**.
-{% endhint %}
+<figure>
+  <img src="../../.gitbook/assets/foundry-osd-autopilot-zero-touch-01-readiness.png" alt="Zero-touch hardware hash upload page connected to a tenant, with Status Ready, one provisioned certificate and the boot media certificate ready">
+  <figcaption>The tenant and certificate identifiers are hidden in this picture.</figcaption>
+</figure>
 
 ## Before you start
 

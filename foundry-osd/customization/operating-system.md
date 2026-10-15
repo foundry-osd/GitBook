@@ -2,12 +2,10 @@
 
 **OS selection** limits the Windows versions, languages, license channels and editions that Foundry Deploy offers the technician, and chooses which ones are selected by default. Leave the page off to offer everything the Foundry catalog contains.
 
-{% hint style="warning" %}
-**Screenshot required**
-
-- **File:** `foundry-osd-customization-operating-system-01-selection.png`
-- **Capture:** Show the OS selection page switched to Enabled, with the Windows version group expanded (26H2, 25H2 and 24H2 check boxes, Preselected Windows version, Preselected Windows update level) and the Windows edition group expanded with two editions ticked.
-{% endhint %}
+<figure>
+  <img src="../../.gitbook/assets/foundry-osd-customization-operating-system-01-selection.png" alt="OS selection page enabled with the Windows version and Windows license channel groups expanded, and the Windows language and Windows edition groups collapsed">
+  <figcaption>Each group limits what the technician can choose in Foundry Deploy and sets what is preselected.</figcaption>
+</figure>
 
 ## Configure the Windows choices
 

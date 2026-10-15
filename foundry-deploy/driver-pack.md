@@ -2,12 +2,10 @@
 
 On **Drivers**, the third step of the wizard, you choose where Foundry Deploy gets the drivers it adds to Windows for this device.
 
-{% hint style="warning" %}
-**Screenshot required**
-
-- **File:** `foundry-deploy-driver-pack-01-selection.png`
-- **Capture:** Show the **Drivers** step of a release build with **Driver source** set to a manufacturer and the **Model** and **Version** fields filled in.
-{% endhint %}
+<figure>
+  <img src="../.gitbook/assets/foundry-deploy-driver-pack-01-selection.png" alt="Drivers step with Dell selected as the driver source, and a model and a version chosen">
+  <figcaption>Choose the driver source, then the model and the version when the source needs them.</figcaption>
+</figure>
 
 ## Choose a driver source
 

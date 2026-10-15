@@ -2,12 +2,10 @@
 
 Foundry Deploy is the wizard that installs Windows on the target device. It opens in Windows PE once [Foundry Connect](../foundry-connect/README.md) reports that the network is ready.
 
-{% hint style="warning" %}
-**Screenshot required**
-
-- **File:** `foundry-deploy-welcome-01-start.png`
-- **Capture:** Show the **Welcome** screen of a release build once the components are loaded, with **Start deployment** available and the menu bar (**Theme**, **Language**, **Tools**, **About**). No **Debug** menu.
-{% endhint %}
+<figure>
+  <img src="../.gitbook/assets/foundry-deploy-welcome-01-start.png" alt="Foundry Deploy Welcome screen with the Start deployment button">
+  <figcaption>The <strong>Welcome</strong> screen once Foundry Deploy has loaded its components.</figcaption>
+</figure>
 
 ## Before you start
 

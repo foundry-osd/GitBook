@@ -2,12 +2,10 @@
 
 Foundry Connect shows the state of the wired and wireless connections of the target device, and lets you continue once it has reached the Internet.
 
-{% hint style="warning" %}
-**Screenshot required**
-
-- **File:** `foundry-connect-network-readiness-01-ready.png`
-- **Capture:** Show Foundry Connect in Windows PE, on media with Wi-Fi enabled: **Network ready**, **Continue** and the countdown, the **Ethernet** card on **Connected**, the **Provisioned Wi-Fi** card and the **Wi-Fi** list. No **Debug** menu. Redact SSIDs and IP addresses.
-{% endhint %}
+<figure>
+  <img src="../.gitbook/assets/foundry-connect-network-readiness-01-ready.png" alt="Foundry Connect showing Network ready with the Continue button, the Ethernet card on Connected and the nearby Wi-Fi networks">
+  <figcaption>Once Internet access is validated, <strong>Continue</strong> opens Foundry Deploy.</figcaption>
+</figure>
 
 ## Join a Wi-Fi network
 

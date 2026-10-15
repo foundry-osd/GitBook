@@ -2,12 +2,10 @@
 
 On **Operating system**, the second step of the wizard, you choose the Windows image to install: one from the Windows catalog or, when the media provides them, a custom image.
 
-{% hint style="warning" %}
-**Screenshot required**
-
-- **File:** `foundry-deploy-operating-system-01-selection.png`
-- **Capture:** Show the **Operating system** step of a release build with **Image source** set to **Windows catalog** and the five fields filled in: **Version**, **Windows update**, **Language**, **Edition (Target)**, **License channel**.
-{% endhint %}
+<figure>
+  <img src="../.gitbook/assets/foundry-deploy-operating-system-01-selection.png" alt="Operating system step with Version, Windows update, Language, Edition (Target) and License channel filled in">
+  <figcaption>The five fields of the <strong>Operating system</strong> step.</figcaption>
+</figure>
 
 ## Select a catalog image
 

@@ -47,12 +47,10 @@ For the three enterprise types, two more cards appear:
 - **Advanced enterprise Wi-Fi**: select **Browse** and choose the exported `.xml` file. The **SSID** above must match the network in that file. For the two WPA3 Enterprise types, Foundry OSD reads the `authentication` value of the file and refuses a file that does not match.
 - **Import a trusted root CA certificate**: turn it on if the profile needs a certificate. In **Trusted root CA certificate file**, select **Browse** and choose one file. A `.cer` or `.crt` file is added to the trusted root certification authorities of Windows PE. A `.pfx` file is imported as the client certificate with its private key: type its password in **PFX password**.
 
-{% hint style="warning" %}
-**Screenshot required**
-
-- **File:** `foundry-osd-network-wifi-02-enterprise-profile.png`
-- **Capture:** Show the Wi-Fi page with **Security type** set to **WPA2/WPA3 Enterprise**: the **Advanced enterprise Wi-Fi** card with a file selected, and the **Trusted root CA certificate file** card with its **PFX password** box. Use a demonstration SSID and file names.
-{% endhint %}
+<figure>
+  <img src="../../.gitbook/assets/foundry-osd-network-wifi-02-enterprise-profile.png" alt="Wi-Fi page with Security type WPA2/WPA3 Enterprise, an enterprise profile template, a trusted root CA certificate file with its PFX password, and Windows profile roaming">
+  <figcaption>With <strong>WPA2/WPA3 Enterprise</strong>, the profile template drives the connection.</figcaption>
+</figure>
 
 To keep the connection in the installed Windows, turn on **Windows profile roaming**, with or without an embedded profile. See [Windows profile roaming](README.md#windows-profile-roaming) for what is imported and when.
 

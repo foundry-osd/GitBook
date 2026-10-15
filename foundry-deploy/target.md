@@ -2,12 +2,10 @@
 
 On **Target device**, the first step of the wizard, you choose the disk that receives Windows, set the computer name and check that Foundry Deploy detected the right hardware.
 
-{% hint style="warning" %}
-**Screenshot required**
-
-- **File:** `foundry-deploy-target-01-disk-selection.png`
-- **Capture:** Show the **Target device** step of a release build with **Deployment settings** (**Answer file**, **Computer name**, **Target disk**, the disk erase notice), **Device inventory** and the **Apply firmware updates** check box. Use a demonstration computer name and hide the serial number.
-{% endhint %}
+<figure>
+  <img src="../.gitbook/assets/foundry-deploy-target-01-disk-selection.png" alt="Target device step with the computer name, the target disk, the disk erase notice, the device inventory and Apply firmware updates">
+  <figcaption>Check the target disk: it is erased when the deployment starts.</figcaption>
+</figure>
 
 ## Choose the target
 

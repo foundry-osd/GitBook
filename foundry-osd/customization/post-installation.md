@@ -3,7 +3,7 @@
 Use **Customization > Post-installation** to run your own scripts, commands and installers on the target device after Windows is installed and before the first sign-in. Your actions run in the order of the list, after Foundry's own setup tasks.
 
 <figure>
-  <img src="../../.gitbook/assets/foundry-osd-post-installation-01-ordered-actions.png" alt="Foundry OSD Post-installation page with five enabled actions in order: two software installations, a restart, a PowerShell script and a command line">
+  <img src="../../.gitbook/assets/foundry-osd-post-installation-01-ordered-actions.png" alt="Foundry OSD Post-installation page with five enabled actions in order: a software installation, a restart, a second software installation, a command line and a PowerShell script">
   <figcaption>Actions run from top to bottom. Content status shows whether the imported files are still in the local library.</figcaption>
 </figure>
 
@@ -38,12 +38,10 @@ Foundry waits for every process an action starts, not only the first one. An upd
 
 What Foundry runs for each type, and what it does with each exit code, is in [How actions run](post-installation/how-actions-run.md).
 
-{% hint style="warning" %}
-**Screenshot required**
-
-- **File:** `foundry-osd-post-installation-02-action-dialog.png`
-- **Capture:** Show the **Add action** dialog for a **Software (.exe/.msi)** action with an imported MSI: name, installer type, package content, installer path, arguments, **Generate installation log**, the execution settings and the command preview.
-{% endhint %}
+<figure>
+  <img src="../../.gitbook/assets/foundry-osd-post-installation-02-action-dialog.png" alt="Action dialog for an MSI software action with its package content, installer path, arguments, Generate installation log, execution settings and command preview">
+  <figcaption>The command preview shows the exact command the action runs.</figcaption>
+</figure>
 
 ## Prepare content
 

@@ -3,8 +3,8 @@
 **Optional features** turns Windows optional features on or off in the deployed Windows, for example .NET Framework 3.5, Hyper-V or Windows Sandbox. A feature you do not set stays as the Windows image has it.
 
 <figure>
-  <img src="../../.gitbook/assets/foundry-osd-customization-optional-features-01-selection.png" alt="Foundry OSD Optional features page with the search box, the Enable all, Disable all and Reset all buttons, and a state menu on each feature">
-  <figcaption>Each feature has a state menu. The line under its name gives the DISM feature name, its availability and any warning.</figcaption>
+  <img src="../../.gitbook/assets/foundry-osd-customization-optional-features-01-selection.png" alt="Foundry OSD Optional features page with the search box, the Enable all, Disable all and Reset all buttons, and the feature categories, each with its state menu">
+  <figcaption>Expand a category to set each feature. The line under a feature's name gives its DISM feature name, its availability and any warning.</figcaption>
 </figure>
 
 ## Configure features
