@@ -59,13 +59,6 @@ Interactive mode only. At the start of Windows setup (OOBE), a window titled **F
 5. Wait while the window reads "Waiting for device registration in Microsoft Intune.", for up to 15 minutes.
 6. When it reads "Restarting in 10 seconds.", the upload has succeeded. The device restarts by itself, and the window does not open again afterwards.
 
-{% hint style="warning" %}
-**Screenshot required**
-
-- **File:** `foundry-deploy-autopilot-03-upload.png`
-- **Capture:** Show the second screen of the window, **Foundry OSD - Upload hardware hash**, with the **Group tag** list, the **Custom group tag** box, "Ready to upload." and the **Upload** button. Use a demonstration tag.
-{% endhint %}
-
 If the upload fails, the reason stays in the window and **Upload** becomes available again: correct the cause, then select **Upload** again. See [Windows Autopilot troubleshooting after the restart](../troubleshooting/autopilot/after-the-restart.md).
 
 Next: [Review and deploy](review-and-deploy.md) in the wizard, and [After the restart](after-the-restart.md) for everything else that happens after the restart.
