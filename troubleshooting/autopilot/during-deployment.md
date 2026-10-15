@@ -40,25 +40,28 @@ If you deploy anyway, **Register Autopilot device** is skipped with the reason "
 
 ## "Autopilot hardware hash capture failed: \<reason>" <a href="#hardware-hash-capture-failed" id="hardware-hash-capture-failed"></a>
 
-- **Where:** step **Register Autopilot device**. For the first three reasons the deployment stops on **Deployment failed**, with "Failed step: Provision Autopilot". For the others the step is skipped and the deployment completes. Windows is already on the disk in both cases.
+- **Where:** step **Register Autopilot device**. For the first four reasons the deployment stops on **Deployment failed**, with "Failed step: Provision Autopilot". For the others the step is skipped and the deployment completes. Windows is already on the disk in both cases.
 - **Cause:**
 
 | Reason | Meaning |
 | --- | --- |
 | "Required support library was not found at '\<path>\PCPKsp.dll'." | The installed Windows image does not hold this file. The deployment stops. |
 | "Required support library could not be copied to '\<path>': ..." | The file could not be copied into Windows PE. The deployment stops. |
+| "Required support library could not be registered from '\<path>' (exit code \<n>)." | Windows PE could not register the file, which the tool needs to read the TPM. The deployment stops. |
 | "OA3Tool exited with code \<n>: ..." naming `PCPKsp.dll` or a provider that could not be loaded | The tool could not load the file. The deployment stops. |
 | "OA3Tool was not found at '\<path>'." | The media does not carry the tool. |
 | "OA3Tool exited with code \<n>: ..." | The tool could not read the hardware. |
 | "OA3Tool did not create OA3.xml." or "OA3 report XML is invalid: ..." | The tool produced no usable report. |
 | "OA3 report does not contain a serial number." | The firmware reports no serial number, or one of the placeholders "None", "To Be Filled By O.E.M." and "System Serial Number". |
 | "OA3 report does not contain a hardware hash." | The device returned no hardware hash. |
+| "OA3Tool detected a TPM but could not read its version (error \<code>); the hardware hash would not be recognized as TPM 2.0 capable." | The tool found the TPM but not its version. Windows Autopilot would refuse self-deploying mode and pre-provisioning for this hash, so Foundry does not upload it. |
 
 - **Fix:**
   1. For `PCPKsp.dll`, check that the Windows image you deploy contains `Windows\System32\PCPKsp.dll`, or deploy another image.
   2. For a missing tool, the administrator creates the media again.
-  3. For the other reasons, read `OA3.log`. The interactive mode reads the hardware hash in installed Windows instead of Windows PE.
-  4. When the deployment stopped, it did not finish and the device is not registered: deploy again once the cause is corrected. For "could not be copied" and for a file that cannot be loaded, no specific fix is known: deploy again, and if it repeats, send the files below.
+  3. For the TPM version, the device is not registered and Windows is installed. Update the firmware of the device if an update is offered, then deploy again. If it repeats, send the files below: `OA3.log` shows the error next to "TPM".
+  4. For the other reasons, read `OA3.log`. The interactive mode reads the hardware hash in installed Windows instead of Windows PE.
+  5. When the deployment stopped, it did not finish and the device is not registered: deploy again once the cause is corrected. For "could not be copied", "could not be registered" and for a file that cannot be loaded, no specific fix is known: deploy again, and if it repeats, send the files below.
 - **Collect:** `autopilot-hash-upload-status.json` (`uploadState` is `CaptureFailed`, and `failureCode` names the case), `OA3.log` and `OA3.xml`.
 
 ## The Autopilot step fails for another reason <a href="#step-fails-other-reason" id="step-fails-other-reason"></a>
