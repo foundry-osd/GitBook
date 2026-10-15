@@ -30,7 +30,7 @@ Three rules apply to every group:
 
 ### Preselected Windows update level
 
-Each Windows version is published as several monthly builds. **Preselected Windows update level** chooses the build selected by default: **Latest available update**, **1 update earlier**, and so on up to **11 updates earlier**. If the catalog holds fewer builds than you asked for, the oldest one is selected. The technician can still pick another build.
+Each Windows version is published as several monthly builds. **Preselected Windows update level** chooses the build selected by default: **Latest available update**, **Updates behind latest: 1**, and so on up to **Updates behind latest: 11**. If the catalog holds fewer builds than you asked for, the oldest one is selected. The technician can still pick another build.
 
 ### Editions and license channels depend on each other
 
