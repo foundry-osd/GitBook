@@ -45,7 +45,7 @@ Each reason is explained in [Windows Autopilot troubleshooting during deployment
 
 ## Upload the hardware hash after the restart
 
-Interactive mode only. At the start of Windows setup (OOBE), a window titled **Foundry OSD - Interactive hardware hash upload** opens in front; a command prompt may flash first. The window is in English. Do not go through Windows setup behind it: the device restarts when the upload succeeds.
+Interactive mode only. After the restart, while Windows setup is still installing, the **Foundry Post-installation** console runs the line `Upload hardware hash to Windows Autopilot` and a window titled **Foundry OSD - Interactive hardware hash upload** opens in front of it. The window is in English. Windows setup waits until the window closes, for up to 60 minutes.
 
 <figure>
   <img src="../.gitbook/assets/foundry-deploy-autopilot-02-device-code-sign-in.png" alt="Foundry OSD - Interactive hardware hash upload window showing a sign-in code and its countdown over the first Windows setup screen">
@@ -57,8 +57,8 @@ Interactive mode only. At the start of Windows setup (OOBE), a window titled **F
 3. When the window changes to **Foundry OSD - Upload hardware hash**, choose the **Group tag**: **None**, a tag already used in the tenant, or **Custom** to type one in **Custom group tag**. As in the wizard, **None** removes the tag of a device that is already registered.
 4. Select **Upload**.
 5. Wait while the window reads "Waiting for device registration in Microsoft Intune.", for up to 15 minutes.
-6. When it reads "Restarting in 10 seconds.", the upload has succeeded. The device restarts by itself, and the window does not open again afterwards.
+6. When it reads "Continuing Windows setup in 10 seconds.", the upload has succeeded. The window closes by itself and Windows setup continues to its first-run screens (OOBE), without a restart. The window does not open again afterwards.
 
-If the upload fails, the reason stays in the window and **Upload** becomes available again: correct the cause, then select **Upload** again. See [Windows Autopilot troubleshooting after the restart](../troubleshooting/autopilot/after-the-restart.md).
+If the upload fails, the reason stays in the window and **Upload** becomes available again: correct the cause, then select **Upload** again. If you close the window instead, the device is not registered, the console line shows `[Failed]` and Windows setup continues. See [Windows Autopilot troubleshooting after the restart](../troubleshooting/autopilot/after-the-restart.md).
 
 Next: [Review and deploy](review-and-deploy.md) in the wizard, and [After the restart](after-the-restart.md) for everything else that happens after the restart.

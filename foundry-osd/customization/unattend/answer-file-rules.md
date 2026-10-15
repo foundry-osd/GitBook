@@ -23,7 +23,7 @@ Foundry checks the format of a file when you import it, and its architecture on 
 
 ## When Foundry adds its command <a href="#when-foundry-adds-its-command" id="when-foundry-adds-its-command"></a>
 
-Foundry adds one command to the deployment copy whenever the deployment has work to do after the restart: Post-installation actions, AppX or AI component removals, a driver pack installed after the restart, network profiles copied to Windows, or Domain Join.
+Foundry adds one command to the deployment copy whenever the deployment has work to do after the restart: Post-installation actions, AppX or AI component removals, a driver pack installed after the restart, network profiles copied to Windows, Domain Join, or the interactive hardware hash upload of Windows Autopilot.
 
 The command goes at the end of the `RunSynchronous` list of the `Microsoft-Windows-Deployment` component in the `specialize` pass, with an `Order` one more than the highest in that list. Your `specialize` commands therefore run before Foundry's work and your `oobeSystem` commands after it. The file must have:
 

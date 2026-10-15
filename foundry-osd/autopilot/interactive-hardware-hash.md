@@ -1,6 +1,6 @@
 # Interactive hardware hash upload
 
-**Interactive hardware hash upload** lets the technician register the device in Windows Autopilot with their own account. After the restart, a Foundry window opens at the start of Windows setup (OOBE); the technician signs in with a code on another device and uploads the hardware hash. The deployment media carries no tenant data and no secret.
+**Interactive hardware hash upload** lets the technician register the device in Windows Autopilot with their own account. After the restart, while Windows setup is still installing and before its first-run screens (OOBE), a Foundry window opens; the technician signs in with a code on another device and uploads the hardware hash. The deployment media carries no tenant data and no secret.
 
 <figure>
   <img src="../../.gitbook/assets/foundry-osd-autopilot-interactive-01-configuration.png" alt="Interactive hardware hash upload page of Foundry OSD with the Disable button and a picture of the sign-in window">
@@ -13,7 +13,8 @@ Foundry OSD cannot test any of these from the workstation. Check them with one r
 
 - **A technician account in your tenant.** The window signs the technician in to Foundry's own Microsoft Entra application and asks for one delegated Microsoft Graph permission, `DeviceManagementServiceConfig.ReadWrite.All`. Foundry does not check that the account may use it. Check with your tenant administrator that this application and this account are allowed to register Windows Autopilot devices.
 - **Sign-in with a code on another device.** The technician opens `https://microsoft.com/devicelogin` on a phone or another computer. Check with your tenant administrator that this kind of sign-in is allowed.
-- **Network after the restart.** The window runs in installed Windows, not in Windows PE. The device must then reach the Microsoft sign-in and Microsoft Graph hosts listed in [Network endpoints](../../reference/network-endpoints.md).
+- **Network after the restart.** The window runs in installed Windows, not in Windows PE. The device must then reach the Microsoft sign-in and Microsoft Graph hosts listed in [Network endpoints](../../reference/network-endpoints.md). For Wi-Fi or Ethernet 802.1X, turn on [Windows profile roaming](../network/README.md#windows-profile-roaming): the profile is imported before the window opens.
+- **A custom answer file must accept Foundry's command.** The window opens from the [Post-installation](../customization/post-installation.md) console, so a custom answer file must follow [When Foundry adds its command](../customization/unattend/answer-file-rules.md#when-foundry-adds-its-command).
 
 ## Configure interactive upload
 
@@ -24,7 +25,7 @@ There is nothing else to set: the group tag is chosen by the technician at each 
 
 ## What the technician sees
 
-Foundry Deploy shows no **Autopilot** step in this mode; the deployment only runs **Prepare Autopilot assistant**. After the restart, the window **Foundry OSD - Interactive hardware hash upload** asks the technician to sign in, to choose a group tag and to select **Upload**. The device restarts by itself 10 seconds after a successful upload. See [Windows Autopilot step](../../foundry-deploy/autopilot.md) for the procedure.
+Foundry Deploy shows no **Autopilot** step in this mode; the deployment only runs **Prepare Autopilot assistant**. After the restart, the **Foundry Post-installation** console runs the line `Upload hardware hash to Windows Autopilot`, and the window **Foundry OSD - Interactive hardware hash upload** opens in front of it. It asks the technician to sign in, to choose a group tag and to select **Upload**. 10 seconds after a successful upload the window closes and Windows setup continues to OOBE, without a restart. See [Windows Autopilot step](../../foundry-deploy/autopilot.md) for the procedure.
 
 ## Check the result
 
@@ -34,11 +35,11 @@ Foundry Deploy shows no **Autopilot** step in this mode; the deployment only run
 
 ## Limits
 
-- **The device restarts before you can check the tenant.** Foundry waits up to 15 minutes for the device to be listed, not for a profile to be assigned. Windows setup can therefore start again before your tenant has assigned a profile.
+- **Windows setup continues before you can check the tenant.** Foundry waits up to 15 minutes for the device to be listed, not for a profile to be assigned. OOBE can therefore start before your tenant has assigned a profile.
 - **The technician chooses the group tag**, including **None**. [Windows Autopilot step](../../foundry-deploy/autopilot.md) says what each choice does to a device that is already registered.
 - **The window opens once.** After a successful upload it does not open again on that installation.
 - **The window is in English**, whatever the language of Windows.
-- **The window needs the command prompt of Windows setup.** It opens it with Shift+F10 to come to the front; if that prompt is not available in your image, the window does not appear.
+- **Windows setup waits for the window for up to 60 minutes.** If the technician closes it before a successful upload, or the time runs out, the device is not registered: the console ends with warnings and Windows setup continues.
 - To send the computer name as well, turn on **Upload computer name to Autopilot** on [Machine naming](../customization/machine-naming.md). The name is assigned after the technician selects **Upload**, once the device is listed.
 
 ## Related
