@@ -22,7 +22,7 @@ The sync status named in each section is shown for a shared configuration. For a
 
 ## "Couldn't complete this action. Check the file, its password, your access permissions, and your network connection." <a href="#could-not-complete" id="could-not-complete"></a>
 
-**Where:** After an import, an export, a connection or a synchronization, under the **Settings backup and sync** card, or in the **Foundry settings** dialog when you close Foundry OSD and the settings could not be saved. Sync status: **Unable to synchronize**.
+**Where:** After an import, an export, a connection or a synchronization, under the **Settings backup and sync** card, or in the **Close without saving settings?** dialog when you close Foundry OSD and the settings could not be saved. Sync status: **Unable to synchronize**.
 
 **Cause:** One message covers several causes. The most frequent:
 
@@ -66,11 +66,11 @@ The sync status named in each section is shown for a shared configuration. For a
 
 ## "Some passwords or source files are missing. Add them before saving or sharing passwords." <a href="#missing-passwords" id="missing-passwords"></a>
 
-**Where:** Under the **Settings backup and sync** card, with the sync status **Needs attention**, and in a dialog titled **Foundry settings** when you close Foundry OSD.
+**Where:** Under the **Settings backup and sync** card, with the sync status **Needs attention**, and in a dialog titled **Close without saving settings?** when you close Foundry OSD.
 
 **Cause:** **Remember passwords** is on, or the configuration is shared with its passwords, and a password or a file that a feature requires has not been provided.
 
-**Fix:** Complete the page concerned, or turn **Remember passwords** off. In the closing dialog, **Cancel** returns to the app so that you can complete it; **Close** quits and keeps the last saved state.
+**Fix:** Complete the page concerned, or turn **Remember passwords** off. In the closing dialog, **Cancel** returns to the app so that you can complete it; **Close without saving** quits and keeps the last saved state.
 
 **Collect:** Nothing.
 
