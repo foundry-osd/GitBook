@@ -1,6 +1,6 @@
 # General
 
-The General page sets the options every deployment media needs: processor architecture, boot signature, Windows PE language and time zone, what happens when a deployment ends, an optional password, and extra drivers for Windows PE. The defaults suit a first test; open the page at least once before you create media.
+The General page sets the options every deployment media needs: processor architecture, boot signature, Windows PE language, keyboard and time zone, what happens when a deployment ends, an optional password, and extra drivers for Windows PE. The defaults suit a first test; open the page at least once before you create media.
 
 <figure>
   <img src="../.gitbook/assets/foundry-osd-general-01-overview.png" alt="General page with Architecture and signature, Secure Boot, WinPE boot language, Windows PE time zone on Automatic, Automatic restart, Password protection and Driver options, and the Media creation card">
@@ -22,6 +22,7 @@ The [ADK](adk.md) page must report **ADK is ready**. Until then **General** cann
 | **Architecture and signature** | Processor architecture of the media: `x64` or `arm64`. It must match the target devices. | `x64` |
 | **Secure Boot** | Certificate that signs the boot files: **PCA 2023** when on, **PCA 2011** when off. | **PCA 2023** |
 | **WinPE boot language** | Language of Windows PE, among the language packs installed with the Windows PE add-on. | Keeps your earlier choice. On first use: the language of Foundry OSD when its pack is installed, otherwise the first one available |
+| **WinPE keyboard layout** | Keyboard of Windows PE: a keyboard language, then a layout of that language. See below. | **Default**, the keyboard of the WinPE boot language |
 | **Windows PE time zone** | Time zone used in Windows PE. See below. | **Automatic** |
 | **Automatic restart** | Restarts the device after a successful deployment. | On |
 | **Restart delay** | Seconds before that restart, from 0 to 3600. 0 restarts at once. | 10 |
@@ -32,6 +33,16 @@ The [ADK](adk.md) page must report **ADK is ready**. Until then **General** cann
 ### Secure Boot
 
 Keep **PCA 2023** unless you have a reason to change it. Foundry does not check the firmware of your devices: whether a device accepts media signed with the 2023 certificate depends on its firmware, as described in Microsoft's [Secure Boot certificate guidance](https://aka.ms/getsecureboot). If a target device with Secure Boot turned on does not start the media, creating the media again with **PCA 2011** is a test worth making.
+
+### WinPE keyboard layout
+
+The keyboard does not have to match the WinPE boot language. Keep an English Windows PE and type with a Belgian keyboard, for example: select the keyboard language, here **Nederlands** or **Français**, then the layout, here **Belgian (Period)** or **Belgian French**.
+
+The first list offers every language that has a layout on this computer. The second list shows the layouts of that language. **Default** appears only for the language of the WinPE boot language, and keeps the keyboard that comes with it. Layout names are shown in the display language of Windows on this computer.
+
+The layout is set for the whole media. A technician who works on another keyboard can switch it in Windows PE from the **Keyboard** menu of [Foundry Connect](../foundry-connect/README.md#menus) or [Foundry Deploy](../foundry-deploy/README.md#menu-bar). This option affects Windows PE only: Windows still asks for the keyboard during its first start.
+
+A profile from another computer can carry a layout that is not installed here. The card then shows "The selected WinPE keyboard layout is not installed on this computer." and media creation is blocked until you choose a layout or **Default**.
 
 ### Windows PE time zone
 
