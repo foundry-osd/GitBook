@@ -20,6 +20,7 @@ Otherwise, find the message below.
 | **Create ISO** or **Create USB** cannot be selected, or a dialog lists reasons | [The button stays unavailable](#button-unavailable) |
 | A dialog offering **Create anyway** | [Update Foundry OSD](#update-advisory) |
 | "Not enough disk space to create the boot image..." | [Not enough disk space](#not-enough-disk-space) |
+| "The selected WinPE keyboard layout is not installed on this computer.", "...is not available in the boot image." | [The keyboard layout is missing](#keyboard-layout-missing) |
 | "WinPE servicing is blocked..." | [Image cleanup not confirmed](#servicing-blocked) |
 | "Windows blocked access to the WinPE image files...", "Failed to mount boot.wim." | [Image files are locked](#access-blocked) |
 | "Failed to create WinPE workspace using copype.cmd.", a component "was not found", "PCA2023 requires..." | [The ADK lacks a component](#adk-component) |
@@ -57,6 +58,16 @@ If something changes between your click and the start, a dialog titled **ISO cre
 **Fix:** Select **Apply update**, or **View update** while the update is not ready, then create the media with the new version. **Create anyway** uses the current version.
 
 **Collect:** Nothing.
+
+## "The selected WinPE keyboard layout is not installed on this computer." <a href="#keyboard-layout-missing" id="keyboard-layout-missing"></a>
+
+**Where:** **Start**, on the **WinPE boot language** row marked **Needs attention**, in the **ISO creation is blocked** or **USB creation is blocked** dialog, and under the **WinPE keyboard layout** card of **General**. A second form, "The selected WinPE keyboard layout is not available in the boot image.", appears in the **Operation complete** dialog with the layout and its file.
+
+**Cause:** The first form: the layout was chosen on another computer, then the profile was imported here, and this computer does not have it. The second form: the Windows PE image for this architecture does not contain the file of that layout.
+
+**Fix:** On **General**, in the **WinPE keyboard layout** card, choose a layout available here, or **Default**. For the second form, choose another layout of the same language, or **Default**.
+
+**Collect:** `Foundry.log`, line "Media preflight summary refreshed", which names the layout.
 
 ## "Not enough disk space to create the boot image." <a href="#not-enough-disk-space" id="not-enough-disk-space"></a>
 
