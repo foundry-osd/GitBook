@@ -185,7 +185,7 @@ If only the architecture you do not use is incomplete, you can ignore the warnin
 
 ## "Update check failed" <a href="#update-failed" id="update-failed"></a>
 
-**Where:** **Settings** > **Update app**. The text continues with the reason: "Update check failed: \<reason\>". Related messages: "Update download failed: \<reason\>", with a **Retry** button, and **Update could not be applied** with "The update could not be applied: \<reason\>".
+**Where:** **Settings** > **Update app**. The text reads "Foundry OSD could not check for updates. Check your network connection and try again. Details are in the log." Related messages: **Update download failed** with "The update could not be downloaded. Check your network connection and try again. Details are in the log.", and a **Retry** button, and **Update could not be applied** with "Foundry OSD could not start the update. Try applying it again. Details are in the log."
 
 **Cause:**
 
@@ -230,10 +230,11 @@ If only the architecture you do not use is incomplete, you can ignore the warnin
 
 | Text under the title | Cause |
 | --- | --- |
-| "Enter a valid HTTP or HTTPS proxy address." | The address is empty, or contains a path, a query or credentials. |
+| "Enter the proxy server address." | The address is empty. |
+| "Enter a valid HTTP or HTTPS proxy address, such as proxy.contoso.com." | The address contains a path, a query or credentials. |
 | "Enter a username and password for explicit proxy authentication." | **Username and password** is selected and a field is empty. |
-| "The proxy rejected the configured authentication." | The proxy refused the credentials or the authentication mode. |
-| Another network error, in English | One of `github.com`, `login.microsoftonline.com` or `graph.microsoft.com` did not answer within 15 seconds. |
+| "The proxy rejected the sign-in. Check the proxy authentication settings and try again." | The proxy refused the credentials or the authentication mode. |
+| "Foundry OSD could not reach GitHub and Microsoft services with these settings. Check the proxy address, port, and your network connection. Details are in the log." | One of `github.com`, `login.microsoftonline.com` or `graph.microsoft.com` did not answer within 15 seconds. |
 
 **Fix:**
 
@@ -280,8 +281,8 @@ If only the architecture you do not use is incomplete, you can ignore the warnin
 **Cause:**
 
 - An operation is running. Foundry OSD does not close while the **Operation in progress** dialog is shown.
-- The current configuration could not be saved. A dialog titled **Foundry settings** then shows ["Some passwords or source files are missing."](foundry-osd/settings-backup-and-sync.md#missing-passwords) or ["Couldn't complete this action."](foundry-osd/settings-backup-and-sync.md#could-not-complete).
+- The current configuration could not be saved. A dialog titled **Close without saving settings?** then shows ["Some passwords or source files are missing."](foundry-osd/settings-backup-and-sync.md#missing-passwords) or ["Couldn't complete this action."](foundry-osd/settings-backup-and-sync.md#could-not-complete).
 
-**Fix:** Wait for the operation to end. In the dialog, select **Cancel** to go back and fix the problem, or **Close** to quit with the last saved state.
+**Fix:** Wait for the operation to end. In the dialog, select **Cancel** to go back and fix the problem, or **Close without saving** to quit with the last saved state.
 
 **Collect:** `Foundry.log`.

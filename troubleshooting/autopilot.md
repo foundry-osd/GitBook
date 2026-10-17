@@ -32,7 +32,7 @@ Otherwise, find the message below.
 ## "Autopilot import failed" <a href="#autopilot-import-failed" id="autopilot-import-failed"></a>
 
 - **Where:** **Windows Autopilot > JSON profile**, after **Import profile**.
-- **Cause:** the dialog gives the reason.
+- **Cause:** the dialog reads "The Autopilot profile could not be imported." and "Check that the file is a valid Autopilot profile JSON file, then try again. Details are in the log." The reason is in `%ProgramData%\Foundry\Logs\Foundry.log`, after the line "Autopilot profile import failed.":
   - "The selected Autopilot JSON file is empty."
   - "The selected Autopilot JSON file contains non-ASCII characters.": the file holds a character such as an accented letter, for example in a comment or a name.
   - A message from the JSON reader: the file is not valid JSON, for example because it is cut short.
@@ -46,8 +46,9 @@ Foundry does not check that the file is an Autopilot profile: a valid JSON file 
 
 - **Where:** **Windows Autopilot > JSON profile**, after **Download from tenant**.
 - **Cause:**
-  - "Autopilot profile download failed: Microsoft Graph request failed for '\<request>' with status code 403.": the account you signed in with may not read the Windows Autopilot deployment profiles (`DeviceManagementServiceConfig.Read.All`). Another status code means that Microsoft Graph refused the request or was unavailable.
-  - "Autopilot profile download failed: Microsoft Graph did not return a verified domain for the signed-in tenant.": Foundry needs a verified domain of the tenant to write the profile.
+  - A dialog that reads "The Autopilot profiles could not be downloaded from the tenant." and "Check your network connection and make sure your account can read Autopilot profiles in Intune, then try again. Details are in the log." The reason is in `%ProgramData%\Foundry\Logs\Foundry.log`, after the line "Autopilot tenant download failed.":
+    - "Microsoft Graph request failed for '\<request>' with status code 403.": the account you signed in with may not read the Windows Autopilot deployment profiles (`DeviceManagementServiceConfig.Read.All`). Another status code means that Microsoft Graph refused the request or was unavailable.
+    - "Microsoft Graph did not return a verified domain for the signed-in tenant.": Foundry needs a verified domain of the tenant to write the profile.
   - A dialog titled "No Autopilot profiles found" ("No Autopilot profiles were returned by the tenant."): the tenant has no Windows Autopilot deployment profile, or you signed in to another tenant than intended.
 - **Fix:**
   1. Sign in to the right tenant with an account that can read its Windows Autopilot deployment profiles.
@@ -58,7 +59,7 @@ Foundry does not check that the file is an Autopilot profile: a valid JSON file 
 ## "Tenant onboarding failed" <a href="#tenant-onboarding-failed" id="tenant-onboarding-failed"></a>
 
 - **Where:** **Windows Autopilot > Zero-Touch**, after **Connect tenant**. The page stays **Not connected**.
-- **Cause:** the dialog reads "Foundry could not configure the Autopilot app registration. \<reason>", where the reason is usually "Microsoft Graph \<method> request failed with status code \<code>. ErrorCode=\<error>." The account may not read the organization, list or create app registrations, or create the enterprise application; the sign-in did not complete; or the workstation cannot reach Microsoft Graph.
+- **Cause:** the dialog reads "Foundry could not configure the Autopilot app registration." and "Check your network connection and make sure your account can manage app registrations in the tenant, then try again. Details are in the log." The reason is in `%ProgramData%\Foundry\Logs\Foundry.log`, after the line "Autopilot hardware hash tenant onboarding failed.", and is usually "Microsoft Graph \<method> request failed with status code \<code>. ErrorCode=\<error>." The account may not read the organization, list or create app registrations, or create the enterprise application; the sign-in did not complete; or the workstation cannot reach Microsoft Graph.
 - **Fix:**
   1. Select **Connect tenant** again and sign in with an account that can manage app registrations and enterprise applications.
   2. Check that the workstation reaches the hosts of [Network endpoints](../reference/network-endpoints.md).
@@ -79,7 +80,7 @@ Foundry does not check that the file is an Autopilot profile: a valid JSON file 
 ## "Certificate creation failed" <a href="#certificate-creation-failed" id="certificate-creation-failed"></a>
 
 - **Where:** **Windows Autopilot > Zero-Touch**, after **Create certificate**. After **Remove certificate**, the dialog is titled "Certificate removal failed".
-- **Cause:** the dialog reads "Foundry could not create the app registration certificate. \<reason>" or "Foundry could not remove the selected app registration certificate. \<reason>".
+- **Cause:** after **Create certificate**, the dialog reads "Foundry could not create the app registration certificate." and "Check that the selected folder can be written to and that your account can manage the app registration, then try again. Details are in the log." After **Remove certificate**, it reads "Foundry could not remove the selected app registration certificate." and "Check your network connection and make sure your account can manage app registrations in the tenant, then try again. Details are in the log." The reason is in `%ProgramData%\Foundry\Logs\Foundry.log`, after the line named in **Collect**:
   - Microsoft Graph refused the change. A PFX file that was just written is then deleted.
   - The PFX file could not be written to the folder you chose.
   - "Connect to the tenant before managing Autopilot certificates.": the connection of the session is gone.
