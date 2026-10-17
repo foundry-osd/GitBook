@@ -26,6 +26,7 @@ Do not close Foundry Connect to get past it. Closing the window cancels the star
 | **Theme**, **Language** | Change the appearance or the display language of Foundry Connect. |
 | **Keyboard** | Change the keyboard layout of Windows PE, for example before typing a Wi-Fi password. The menu name shows the active layout. It lists the layouts of the same language first, and every other language under **Other languages**. Foundry Deploy keeps the layout chosen here. |
 | **Tools > Refresh status** | Check the network now instead of waiting for the next automatic check. Foundry Connect checks every 10 seconds. |
+| **Tools > Open log file** | Read the Foundry Connect log in Notepad. |
 | **Tools > Export diagnostics...** | Save the logs to the USB drive for support. See [Export logs from Foundry Connect and Foundry Deploy](../troubleshooting/logs-and-support.md#export-logs-from-foundry-connect-and-foundry-deploy). |
 | **Tools > Export raw diagnostics...** | Save unfiltered logs, which can contain credentials and network names. Use it only when a support contact you trust asks for it. |
 

@@ -36,9 +36,9 @@ Keep **PCA 2023** unless you have a reason to change it. Foundry does not check 
 
 ### WinPE keyboard layout
 
-The keyboard does not have to match the WinPE boot language. Keep an English Windows PE and type with a Belgian keyboard, for example: select the keyboard language, here **Nederlands** or **Français**, then the layout, here **Belgian (Period)** or **Belgian French**.
+The keyboard does not have to match the WinPE boot language. Keep an English Windows PE and type with a Belgian keyboard, for example: select the keyboard language, here **Dutch** or **French**, then the layout, here **Belgian (Period)** or **Belgian French**.
 
-The first list offers every language that has a layout on this computer. The second list shows the layouts of that language. **Default** appears only for the language of the WinPE boot language, and keeps the keyboard that comes with it. Layout names are shown in the display language of Windows on this computer.
+The first list offers every language that has a layout on this computer. The second list shows the layouts of that language. **Default** appears only for the language of the WinPE boot language, and keeps the keyboard that comes with it. Language names follow the language of Foundry OSD; layout names come from Windows, in its display language.
 
 The layout is set for the whole media. A technician who works on another keyboard can switch it in Windows PE from the **Keyboard** menu of [Foundry Connect](../foundry-connect/README.md#menus) or [Foundry Deploy](../foundry-deploy/README.md#menu-bar). This option affects Windows PE only: Windows still asks for the keyboard during its first start.
 
