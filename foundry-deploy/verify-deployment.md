@@ -1,6 +1,6 @@
 # Verify deployment
 
-A deployment ends on one of three screens: **Deployment complete**, **Deployment failed** or **Deployment cancelled**. This page tells you what to do on each one before the device restarts.
+A deployment ends on one of three screens: **Deployment complete**, **Deployment failed** or **Deployment canceled**. This page tells you what to do on each one before the device restarts.
 
 <figure>
   <img src="../.gitbook/assets/foundry-deploy-verify-01-success.png" alt="Deployment complete screen with the message to remove the boot media, the Reboot button and the Steps list">
@@ -41,7 +41,7 @@ Check where **Prepare target disk** sits in **Steps**. If the failed step is abo
 
 Foundry Deploy cannot resume or roll back a failed deployment, and the error screen has no retry button. After correcting the cause, restart the device from the deployment media and go through the wizard again: this erases the disk again. Images and driver packs already downloaded to the USB drive's cache are verified and reused.
 
-## Deployment cancelled
+## Deployment canceled <a href="#deployment-cancelled" id="deployment-cancelled"></a>
 
 The screen shows "Deployment stopped. The target disk may contain an incomplete installation." There is no restart and no error detail. Export the logs if you need them, then restart the device from the deployment media to start again. See [Cancel a deployment](review-and-deploy.md#cancel-a-deployment).
 
