@@ -24,7 +24,7 @@ Update a Foundry USB drive to apply your current options and the current Foundry
 3. To format **BOOT** completely, expand the **USB target** card and set **USB format mode** to **Full format**. The update then takes longer. **USB partition style** is ignored: an update never changes it.
 4. Select **Update USB**.
 5. If a dialog titled **Update Foundry OSD before creating boot media** opens, apply the update first or select **Create anyway**.
-6. Keep the drive connected until the dialog reads "USB boot partition was updated successfully. Boot volume: X:. Cache volume: Y:.", with the two drive letters.
+6. Keep the drive connected until the dialog is titled **USB media updated** and reads "Boot volume: X:. Cache volume: Y:.", with the two drive letters.
 
 ## How Foundry recognizes the drive
 

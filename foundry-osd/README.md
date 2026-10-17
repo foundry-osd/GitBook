@@ -53,7 +53,7 @@ An item without a badge is not configured, which is normal for a feature you do 
 ## When items are grayed out
 
 - The ADK is not ready: only **Home**, **ADK**, **Settings** and the other items at the bottom of the pane can be opened, and the **Configure media** and **Review and start** tiles on **Home** are disabled. Finish the [ADK](adk.md) page first.
-- An operation is running: while Foundry OSD installs the ADK or creates media, a dialog titled **Operation in progress** covers the window and the whole pane is disabled until the operation ends.
+- An operation is running: while Foundry OSD installs the ADK or creates media, a dialog titled with the operation, such as **Installing Windows ADK** or **Creating ISO**, covers the window and the whole pane is disabled until the operation ends.
 
 ## Find the right page
 

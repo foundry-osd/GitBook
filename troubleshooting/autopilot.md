@@ -148,7 +148,7 @@ Foundry does not check that the file is an Autopilot profile: a valid JSON file 
 
 ## "OA3Tool executable was not found for the selected WinPE architecture." <a href="#oa3tool-not-found" id="oa3tool-not-found"></a>
 
-- **Where:** **Start**, when media creation ends, after "Final media creation failed." and before "Expected OA3Tool under ADK Deployment Tools for '\<architecture>'." Zero-touch mode only.
+- **Where:** **Start**, when media creation ends, after "Technical details:" and before "Expected OA3Tool under ADK Deployment Tools for '\<architecture>'." Zero-touch mode only.
 - **Cause:** `oa3tool.exe` is missing from the Deployment Tools of the Windows ADK for the architecture of the media.
 - **Fix:** install or repair the Deployment Tools from [ADK](../foundry-osd/adk.md), then create the media again.
 - **Collect:** the Foundry OSD log.

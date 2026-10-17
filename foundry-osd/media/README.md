@@ -64,9 +64,9 @@ Each included custom image is stored as `Cache\OperatingSystems\Custom\<hash>\im
 
 ## While media is being created
 
-An **Operation in progress** dialog shows each stage and locks the rest of the app; its title becomes **Operation complete** with the result. **Cancel** stops the operation once the disk or image step in progress has finished: keep Foundry OSD open and the USB drive connected until the dialog reads "Media creation cancelled."
+A dialog titled **Creating ISO**, **Creating USB media** or **Updating USB media** locks the rest of the app. It shows the step, such as "Step 3 of 5: Customizing the boot image", the overall percentage, a line naming the current action, such as a download with its size, and the elapsed time. When the operation ends, the title gives the result, such as **ISO created** or **USB media creation failed**. To stop, select **Cancel** (or press Esc), then **Stop operation** within 10 seconds to confirm. The operation stops once the disk or image step in progress has finished: keep Foundry OSD open and the USB drive connected until the dialog reads "Media creation was canceled."
 
-A cancelled or failed ISO build keeps the previous file. A cancelled USB operation does not restore the drive: create or update it again.
+A cancelled or failed ISO build keeps the previous file. A cancelled USB operation does not restore the drive. Once Foundry OSD has started writing the drive, the dialog adds "The USB drive may no longer start a device. Create or update it again before you use it."
 
 ## Related
 
