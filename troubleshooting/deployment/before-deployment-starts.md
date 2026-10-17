@@ -27,7 +27,7 @@ Problems met when Foundry Deploy opens and in its wizard, up to the **Deploy** b
 
 **Fix:**
 
-1. Show the password with the show-or-hide button and check each character: the keyboard layout of Windows PE can differ from the one printed on your keyboard.
+1. Show the password with the show-or-hide button and check each character: the keyboard layout of Windows PE can differ from the one printed on your keyboard. Next time, select your layout in the **Keyboard** menu of Foundry Connect before Foundry Deploy opens, or ask the administrator to set the [WinPE keyboard layout](../../foundry-osd/general.md#winpe-keyboard-layout) of the media.
 2. Ask the administrator for the password of this media. A password cannot be recovered from the media.
 3. If the password is lost, the administrator recreates the media. See [Password protection](../../foundry-osd/general.md#password-protection).
 
