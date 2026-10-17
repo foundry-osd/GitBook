@@ -21,7 +21,7 @@ There is no folder to choose in Windows PE. Foundry writes the archive to the ro
 
 | Menu item | Application | What it does |
 | --- | --- | --- |
-| **Open log file** | Foundry Deploy | Opens the current log in Notepad. Also available in the **Error details** window |
+| **Open log file** | Both | Opens the current log in Notepad. In Foundry Deploy, also available in the **Error details** window |
 | **Refresh status** | Foundry Connect | Checks the network again. It does not export anything |
 | **Export diagnostics...** | Both | Creates an archive in which the secrets Foundry recognizes are masked |
 | **Export raw diagnostics...** | Both | Creates the same archive without masking, after a confirmation |
@@ -41,7 +41,7 @@ Use **Export raw diagnostics...** only when a support contact you trust asks for
 1. Insert a USB flash drive with free space and wait a few seconds.
 2. Select **Tools > Export diagnostics...** again.
 
-**Collect:** if the export still fails, use **Tools > Open log file** in Foundry Deploy and photograph the last lines.
+**Collect:** if the export still fails, use **Tools > Open log file** and photograph the last lines.
 
 ## Log locations
 
