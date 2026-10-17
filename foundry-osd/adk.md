@@ -46,7 +46,7 @@ The **Readiness details** card shows four values:
 | --- | --- |
 | **Installed version** | The version of the installed ADK. |
 | **Required version policy** | The version Foundry OSD requires. |
-| **Windows PE Add-on** | **Windows PE Add-on installed**, followed by the state of each architecture, for example `(x64: WinPE files available, ARM64: WinPE files available)`. |
+| **Windows PE Add-on** | **Installed**, followed by the state of each architecture, for example **Installed (x64: available, ARM64: available)**, or **Not installed**. |
 | **Media creation capability** | **ISO and USB creation are available.** |
 
 The **ADK** item in the navigation pane shows the badge **ADK ready** and the other pages become available. Continue with [General](general.md).
