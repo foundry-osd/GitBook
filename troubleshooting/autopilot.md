@@ -112,7 +112,7 @@ Foundry does not check that the file is an Autopilot profile: a valid JSON file 
 | Message on **Start** | Cause | Fix |
 | --- | --- | --- |
 | "Autopilot uses an unsupported provisioning mode." | The saved configuration names a mode that this version of Foundry OSD does not know. | Open the Windows Autopilot page of the mode you want and select the button of its header until it reads **Disable**. |
-| "Autopilot JSON profile mode is enabled but no valid default profile is selected." | **Imported profiles** is empty, or nothing is chosen in **Default profile**. | On **JSON profile**, import or download a profile and choose it in **Default profile**. |
+| "Autopilot JSON profile mode is enabled but no valid default profile is selected." | The profiles table is empty, or no profile reads **Yes** under **Default**. | On **JSON profile**, import or download a profile, select it, then **Set as default**. |
 | "Hardware hash upload is enabled but settings are missing." | Nothing is configured on **Zero-Touch** yet. | Select **Connect tenant**, then create a certificate. |
 | "Hardware hash upload is enabled but the tenant connection is missing. Connect to the tenant from Autopilot." | The page was never connected to a tenant. | Select **Connect tenant**, then create a certificate. |
 | "Hardware hash upload is enabled but the app registration is not configured. Connect to the tenant from Autopilot." | Foundry OSD knows the tenant but holds no app registration for it. | Reconnect: select **Disconnect tenant** if the page is connected, then **Connect tenant**. |
