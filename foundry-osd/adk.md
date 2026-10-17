@@ -18,11 +18,11 @@ The ADK page checks and installs the Windows ADK and the Windows PE add-on that 
 2. Read the status bar at the top of the page. The table below tells you what each status means.
 3. In the **ADK setup** card, select the button. Its label depends on what Foundry OSD found.
 4. If Windows shows an elevation prompt for the Microsoft installer, approve it.
-5. Wait. A dialog titled **Operation in progress** shows the current step and locks the window. The operation cannot be cancelled.
+5. Wait. A dialog titled **Installing Windows ADK**, or **Upgrading Windows ADK**, shows the current step and locks the window. The operation cannot be cancelled.
 6. When the dialog closes, check that the status bar shows **ADK is ready**.
 
 <figure>
-  <img src="../.gitbook/assets/foundry-osd-adk-02-setup-progress.png" alt="Operation in progress dialog over the ADK page while the Windows PE Add-on is being installed">
+  <img src="../.gitbook/assets/foundry-osd-adk-02-setup-progress.png" alt="Installing Windows ADK dialog over the ADK page while the Windows PE Add-on is being installed">
   <figcaption>While setup runs, the dialog shows the step and the navigation pane is disabled.</figcaption>
 </figure>
 
@@ -46,7 +46,7 @@ The **Readiness details** card shows four values:
 | --- | --- |
 | **Installed version** | The version of the installed ADK. |
 | **Required version policy** | The version Foundry OSD requires. |
-| **Windows PE Add-on** | **Windows PE Add-on installed**, followed by the state of each architecture, for example `(x64: WinPE files available, ARM64: WinPE files available)`. |
+| **Windows PE Add-on** | **Installed**, followed by the state of each architecture, for example **Installed (x64: available, ARM64: available)**, or **Not installed**. |
 | **Media creation capability** | **ISO and USB creation are available.** |
 
 The **ADK** item in the navigation pane shows the badge **ADK ready** and the other pages become available. Continue with [General](general.md).

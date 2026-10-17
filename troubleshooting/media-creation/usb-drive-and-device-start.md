@@ -2,7 +2,7 @@
 
 Use this page for a USB drive that Foundry OSD does not list, cannot write or cannot update, for media that a device does not start from, and for a start from a PXE server. For a creation that fails before the drive is written, see [Media creation troubleshooting](../media-creation.md).
 
-Messages appear in the **Operation complete** dialog of Foundry OSD, as "Final media creation failed." followed by the reason. The log is `%ProgramData%\Foundry\Logs\Foundry.log`: see [Log locations](../logs-and-support.md#log-locations).
+Messages appear in the **USB media creation failed** or **USB media update failed** dialog of Foundry OSD. Except for those of [The USB drive changed](#usb-identity), they appear after "Technical details:". The log is `%ProgramData%\Foundry\Logs\Foundry.log`: see [Log locations](../logs-and-support.md#log-locations).
 
 ## Find your symptom
 
@@ -53,7 +53,7 @@ A drive smaller than 16 GB is listed, but **Create USB** stays unavailable while
 
 ## "The USB drive identity is missing, ambiguous or has changed." <a href="#usb-identity" id="usb-identity"></a>
 
-**Where:** Dialog **USB creation is blocked**, or **Operation complete** dialog. The full text is "The USB drive identity is missing, ambiguous or has changed. Refresh the USB drive list and select the drive again." A related form is "The selected USB drive is no longer safe to modify. Refresh the USB drive list and select another USB drive."
+**Where:** Dialog **USB creation is blocked**, **USB media creation failed** or **USB media update failed**. The full text is "The USB drive identity is missing, ambiguous or has changed. Refresh the USB drive list and select the drive again." A related form is "The selected USB drive is no longer safe to modify. Refresh the USB drive list and select another USB drive."
 
 **Cause:** Foundry OSD checks the disk again before it writes, and stops when it is not sure to hold the disk you selected. Nothing has been erased.
 
@@ -67,7 +67,7 @@ A drive smaller than 16 GB is listed, but **Create USB** stays unavailable while
 
 ## "Failed to partition and format the USB disk." <a href="#usb-write" id="usb-write"></a>
 
-**Where:** **Operation complete** dialog. This entry covers these messages:
+**Where:** **USB media creation failed** or **USB media update failed** dialog. This entry covers these messages:
 
 | Message | When |
 | --- | --- |
@@ -92,7 +92,7 @@ A drive smaller than 16 GB is listed, but **Create USB** stays unavailable while
 
 ## "Selected USB media is not a Foundry USB media." <a href="#usb-update" id="usb-update"></a>
 
-**Where:** **Operation complete** dialog, during **Update USB**. A related form is "USB provisioning did not return assigned drive letters."
+**Where:** **USB media update failed** dialog. A related form is "USB provisioning did not return assigned drive letters."
 
 **Cause:**
 
@@ -108,7 +108,7 @@ A drive smaller than 16 GB is listed, but **Create USB** stays unavailable while
 
 ## "Custom Windows image media preparation failed." <a href="#media-content" id="media-content"></a>
 
-**Where:** **Operation complete** dialog of a USB operation, followed by a second line. The message is used for custom images and for post-installation content alike, even when you use no custom image.
+**Where:** **USB media creation failed** or **USB media update failed** dialog, followed by a second line. The message is used for custom images and for post-installation content alike, even when you use no custom image.
 
 **Cause and fix, by second line:**
 
@@ -135,7 +135,7 @@ A drive smaller than 16 GB is listed, but **Create USB** stays unavailable while
 **Fix:**
 
 1. Compare the device with **Architecture and signature** in **General**.
-2. Run **Update USB** again until it ends with "USB boot partition was updated successfully."
+2. Run **Update USB** again until its dialog is titled **USB media updated**.
 3. As a test, turn off the **Secure Boot** switch of **General**, which then reads **PCA 2011**, and create the ISO or update the USB drive again. This changes how the media is signed, not the firmware of the device.
 4. As a last test, delete the partitions of the USB drive in Windows Disk Management and create it again with the other **USB partition style**. This erases the drive and its downloads. With `arm64`, only **GPT** exists.
 

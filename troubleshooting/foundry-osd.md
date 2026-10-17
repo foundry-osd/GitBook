@@ -17,7 +17,7 @@ Otherwise, find what you see below.
 | The window never appears, or closes at once | [Foundry OSD does not open](#does-not-open) |
 | Pages grayed out, badge **ADK not ready** | [Most pages are grayed out](#grayed-out) |
 | A red or yellow status bar on the **ADK** page | [ADK is not installed](#adk-not-installed), [version is unsupported](#adk-unsupported), [add-on is missing](#winpe-missing), [add-on needs repair](#winpe-repair) |
-| An ADK installation that ends with a message | [ADK operation failed](#adk-failed), [canceled](#adk-canceled), [finished with remaining requirements](#adk-remaining) |
+| An ADK installation that ends with a message | [Windows ADK installation failed](#adk-failed), [canceled](#adk-canceled), [finished with remaining requirements](#adk-remaining) |
 | A message on **General**, or **Start** blocked by a General option | [No language packs](#no-language-packs), [passwords](#matching-passwords), [custom driver folder](#driver-folder) |
 | An update that fails or is not installed | [Update check failed](#update-failed), [stays on Apply update](#update-stays), [check skipped](#update-skipped), [update dialog before media creation](media-creation.md#update-advisory) |
 | A proxy test that fails | [Check the proxy settings, Connection failed](#proxy) |
@@ -106,9 +106,9 @@ If only the architecture you do not use is incomplete, you can ignore the warnin
 
 **Collect:** `Foundry.log`. It contains a line starting with "ADK status refreshed." that lists each check.
 
-## "ADK operation failed" <a href="#adk-failed" id="adk-failed"></a>
+## "Windows ADK installation failed" <a href="#adk-failed" id="adk-failed"></a>
 
-**Where:** Dialog titled **Operation complete**, after an installation started from the **ADK** page.
+**Where:** Dialog with this title, which reads "The installation did not complete. Details are in the log.", after an installation started from the **ADK** page.
 
 **Cause:**
 
@@ -123,9 +123,9 @@ If only the architecture you do not use is incomplete, you can ignore the warnin
 
 **Collect:** `Foundry.log` (search for "ADK operation failed"), and the files of `%ProgramData%\Foundry\Logs\Adk`.
 
-## "Windows ADK operation canceled." <a href="#adk-canceled" id="adk-canceled"></a>
+## "The installation was canceled." <a href="#adk-canceled" id="adk-canceled"></a>
 
-**Where:** **Operation in progress** dialog, during an installation started from the **ADK** page.
+**Where:** Dialog titled **Windows ADK installation canceled**, after an installation started from the **ADK** page.
 
 **Cause:** The elevation prompt of the Microsoft installer was declined.
 
@@ -185,7 +185,7 @@ If only the architecture you do not use is incomplete, you can ignore the warnin
 
 ## "Update check failed" <a href="#update-failed" id="update-failed"></a>
 
-**Where:** **Settings** > **Update app**. The text continues with the reason: "Update check failed: \<reason\>". Related messages: "Update download failed: \<reason\>", with a **Retry** button, and **Update could not be applied** with "The update could not be applied: \<reason\>".
+**Where:** **Settings** > **Update app**. The text reads "Foundry OSD could not check for updates. Check your network connection and try again. Details are in the log." Related messages: **Update download failed** with "The update could not be downloaded. Check your network connection and try again. Details are in the log.", and a **Retry** button, and **Update could not be applied** with "Foundry OSD could not start the update. Try applying it again. Details are in the log."
 
 **Cause:**
 
@@ -230,10 +230,11 @@ If only the architecture you do not use is incomplete, you can ignore the warnin
 
 | Text under the title | Cause |
 | --- | --- |
-| "Enter a valid HTTP or HTTPS proxy address." | The address is empty, or contains a path, a query or credentials. |
+| "Enter the proxy server address." | The address is empty. |
+| "Enter a valid HTTP or HTTPS proxy address, such as proxy.contoso.com." | The address contains a path, a query or credentials. |
 | "Enter a username and password for explicit proxy authentication." | **Username and password** is selected and a field is empty. |
-| "The proxy rejected the configured authentication." | The proxy refused the credentials or the authentication mode. |
-| Another network error, in English | One of `github.com`, `login.microsoftonline.com` or `graph.microsoft.com` did not answer within 15 seconds. |
+| "The proxy rejected the sign-in. Check the proxy authentication settings and try again." | The proxy refused the credentials or the authentication mode. |
+| "Foundry OSD could not reach GitHub and Microsoft services with these settings. Check the proxy address, port, and your network connection. Details are in the log." | One of `github.com`, `login.microsoftonline.com` or `graph.microsoft.com` did not answer within 15 seconds. |
 
 **Fix:**
 
@@ -279,9 +280,9 @@ If only the architecture you do not use is incomplete, you can ignore the warnin
 
 **Cause:**
 
-- An operation is running. Foundry OSD does not close while the **Operation in progress** dialog is shown.
-- The current configuration could not be saved. A dialog titled **Foundry settings** then shows ["Some passwords or source files are missing."](foundry-osd/settings-backup-and-sync.md#missing-passwords) or ["Couldn't complete this action."](foundry-osd/settings-backup-and-sync.md#could-not-complete).
+- An operation is running. Foundry OSD does not close while it installs the ADK or creates media.
+- The current configuration could not be saved. A dialog titled **Close without saving settings?** then shows ["Some passwords or source files are missing."](foundry-osd/settings-backup-and-sync.md#missing-passwords) or ["Couldn't complete this action."](foundry-osd/settings-backup-and-sync.md#could-not-complete).
 
-**Fix:** Wait for the operation to end. In the dialog, select **Cancel** to go back and fix the problem, or **Close** to quit with the last saved state.
+**Fix:** Wait for the operation to end. In the dialog, select **Cancel** to go back and fix the problem, or **Close without saving** to quit with the last saved state.
 
 **Collect:** `Foundry.log`.
