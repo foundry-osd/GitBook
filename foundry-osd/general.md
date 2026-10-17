@@ -3,7 +3,7 @@
 The General page sets the options every deployment media needs: processor architecture, boot signature, Windows PE language, keyboard and time zone, what happens when a deployment ends, an optional password, and extra drivers for Windows PE. The defaults suit a first test; open the page at least once before you create media.
 
 <figure>
-  <img src="../.gitbook/assets/foundry-osd-general-01-overview.png" alt="General page with Architecture and signature, Secure Boot, WinPE boot language, Windows PE time zone on Automatic, Automatic restart, Password protection and Driver options, and the Media creation card">
+  <img src="../.gitbook/assets/foundry-osd-general-01-overview.png" alt="General page with Architecture and signature, Secure Boot, WinPE boot language, WinPE keyboard layout on English and Default, Windows PE time zone on Automatic, Automatic restart, Password protection and Driver options, and the Media creation card">
   <figcaption>The cards of the page in order. <strong>Review and start</strong> opens the Start page.</figcaption>
 </figure>
 
