@@ -19,7 +19,7 @@
 
 1. Open **Windows Autopilot > Zero-Touch** and select **Enable**.
 2. Select **Connect tenant** and complete the sign-in in the browser. Foundry OSD asks nothing else: it finds or creates the app registration `Foundry OSD Autopilot Registration` in your tenant and gives it one Microsoft Graph application permission, `DeviceManagementServiceConfig.ReadWrite.All`.
-3. Under **Certificate actions**, choose a validity of **1 month**, **3 months**, **6 months** (the default) or **12 months**, select **Create certificate** and choose where to save the `.pfx` file.
+3. Under **Provisioned certificates**, select **Create certificate**, choose a validity of 1, 3, 6 or 12 months in the menu, then choose where to save the `.pfx` file.
 4. In the **Certificate ready** dialog, store the **PFX file** and the **PFX password** in your safe place before you close it. **Copy password** copies the password.
 5. Check that **Status** reads **Ready** in **Tenant readiness** and that **Boot media certificate** reads "Certificate ready for boot media generation." The new certificate is selected for you.
 6. In **Default group tag**, choose the tag that Foundry Deploy preselects, or keep **None**.

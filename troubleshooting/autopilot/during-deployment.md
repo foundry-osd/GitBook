@@ -22,7 +22,7 @@ The files named under **Collect** are described in [Evidence files](#evidence-fi
 
 - **Where:** **Autopilot** step of the wizard, JSON profile mode. **Next** stays unavailable.
 - **Cause:** Foundry Deploy found no profile on the media.
-- **Fix:** the administrator checks **Imported profiles** and **Default profile** on **Windows Autopilot > JSON profile**, then creates the media again.
+- **Fix:** the administrator checks the profiles table and its **Default** column on **Windows Autopilot > JSON profile**, then creates the media again.
 - **Collect:** `FoundryDeploy.log`.
 
 ## "Hardware hash upload unavailable" <a href="#hardware-hash-upload-unavailable" id="hardware-hash-upload-unavailable"></a>
@@ -74,7 +74,7 @@ If you deploy anyway, **Register Autopilot device** is skipped with the reason "
   - "Target Windows partition is unavailable for Autopilot staging.", "... for Autopilot hardware hash upload." or "... for interactive Autopilot registration assistant staging.": Foundry Deploy has no Windows partition to write to. The message says no more; the likely cause is that the target disk changed or was disconnected after Windows was applied.
 - **Fix:**
   1. Check that the deployment media is still connected, then deploy again.
-  2. For a profile message, the administrator checks **Imported profiles** and **Default profile** on **Windows Autopilot > JSON profile**, then creates the media again.
+  2. For a profile message, the administrator checks the profiles table and its **Default** column on **Windows Autopilot > JSON profile**, then creates the media again.
   3. For a partition message, see [Deploy again after a failure](../deployment.md#deploy-again).
 - **Collect:** the text of **View error details** and `FoundryDeploy.log`.
 
