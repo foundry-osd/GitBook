@@ -74,7 +74,7 @@ Add a visible GitBook placeholder where a screenshot is expected but not yet ava
 **Screenshot required**
 
 - **File:** `foundry-osd-adk-02-setup-progress.png`
-- **Capture:** Show the **Operation in progress** dialog over the ADK page while the Windows ADK is being installed.
+- **Capture:** Show the **Installing Windows ADK** dialog over the ADK page while the Windows ADK is being installed.
 {% endhint %}
 ```
 
@@ -89,7 +89,7 @@ Replace the marker with the final image before publication:
 <figure>
   <img
     src=".gitbook/assets/foundry-osd-adk-02-setup-progress.png"
-    alt="Operation in progress dialog over the ADK page while the Windows ADK is being installed"
+    alt="Installing Windows ADK dialog over the ADK page while the Windows ADK is being installed"
   >
   <figcaption>
     While setup runs, the dialog shows the step and the navigation pane is disabled.

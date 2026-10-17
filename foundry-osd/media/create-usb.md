@@ -24,7 +24,7 @@ Creating a USB drive erases every partition of the selected disk. Foundry OSD li
 4. Select **Create USB**. If the button reads **Update USB**, the drive already is a Foundry USB drive: see [Update a USB drive](update-usb.md).
 5. If a dialog titled **Update Foundry OSD before creating boot media** opens, apply the update first or select **Create anyway**.
 6. Read the **Format USB target** dialog, described below. Select **Format and create USB** only if the disk and its volumes are the ones you expect. **Cancel** is the default button, so pressing Enter erases nothing.
-7. Keep the drive connected until the dialog reads "USB media was created successfully. Boot volume: X:. Cache volume: Y:.", with the two drive letters.
+7. Keep the drive connected until the dialog is titled **USB media created** and reads "Boot volume: X:. Cache volume: Y:.", with the two drive letters.
 
 <figure>
   <img src="../../.gitbook/assets/foundry-osd-media-create-usb-01-confirmation.png" alt="Format USB target dialog naming the disk to erase and listing its two volumes, with the Format and create USB and Cancel buttons, Cancel highlighted">
