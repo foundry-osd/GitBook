@@ -12,7 +12,7 @@ With one PC and one set of options, skip this page: Foundry OSD creates a config
 ## Create and select a configuration
 
 1. Open **Settings**, at the bottom of the navigation pane, and find the **Settings backup and sync** card.
-2. Select **More options** > **Duplicate**, type a **Configuration name** of at most 120 characters, and select **Continue**. The copy becomes the configuration in use.
+2. Select **More options** > **Duplicate**, type a **Configuration name** of at most 120 characters, and select **Duplicate**. The copy becomes the configuration in use.
 3. To change configuration later, choose it in the list of the card. Foundry OSD saves your pending changes, then loads the options of that configuration on every page.
 
 Changes are saved by themselves within a second, and when you close the app. **Duplicate**, **Import** and connecting to a shared configuration are the only ways to add a configuration; **More options** > **Rename** changes its name.
@@ -66,7 +66,7 @@ The shared folder must meet these requirements:
 1. On the other PC, select a configuration that is not shared, then **Set up synchronization…** > **Connect to a shared configuration** > **Continue**.
 2. Select `Connection.foundryprofile` and type the **Connection password**.
 3. Check the **Shared folder**, filled in from the file. It is the folder of the configuration, such as `\\server\share\Foundry\Paris`.
-4. Read the preview, choose **Remember passwords** and **Remember this connection on this PC**, then select **Continue**.
+4. Read the preview, choose **Remember passwords** and **Remember this connection on this PC**, then select **Connect**.
 
 The shared configuration is added to the list and becomes the one in use.
 

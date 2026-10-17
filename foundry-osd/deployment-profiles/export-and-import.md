@@ -4,7 +4,7 @@
 
 <figure>
   <img src="../../.gitbook/assets/foundry-osd-deployment-profiles-export-01-import-preview.png" alt="Import dialog with the configuration name, the number of files and passwords included, the warning and Remember passwords">
-  <figcaption>Read the counts and the warning before you select <strong>Continue</strong>.</figcaption>
+  <figcaption>Read the counts and the warning before you select <strong>Import</strong>.</figcaption>
 </figure>
 
 ## Export an encrypted file
@@ -13,7 +13,7 @@
 2. Expand the card and select **Export**.
 3. Choose where to save the file. The suggested name is `Foundry-profile.foundryprofile`.
 4. Type a **File password** and repeat it in **Confirm file password**. Any password of 1 to 1,024 characters is accepted: choose a long one.
-5. Decide on **Include passwords and confidential files**, then select **Continue**.
+5. Decide on **Include passwords and confidential files**, then select **Export**.
 
 | The file contains | Without the option | With the option |
 | --- | --- | --- |
@@ -31,7 +31,7 @@ Anyone who has the file and its password can read what it contains, certificate 
 2. Type its **File password** and select **Continue**.
 3. Read the preview. It gives the configuration name, **Files included** and **Passwords and access keys included**. When files are absent it adds "\<number\> files are missing or were not included. Select their locations before creating media."
 4. Check **Remember passwords**. It is selected when the file is complete. When a password or a file is missing, leave it cleared: with it selected, the import stops with "Some passwords or source files are missing. Add them before saving or sharing passwords."
-5. Select **Continue**.
+5. Select **Import**.
 
 The imported configuration is added to the list and becomes the one in use. The preview says "This will replace the settings you are using.": it replaces what the pages show, and the configuration you were using is saved first and stays in the list.
 
