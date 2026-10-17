@@ -72,12 +72,12 @@ Things to know:
 ## Export diagnostics from Foundry OSD <a href="#export-from-foundry-osd" id="export-from-foundry-osd"></a>
 
 1. In Foundry OSD, open **Settings > General**.
-2. On **Export diagnostics**, select **Export...** and choose a folder.
+2. On **Export diagnostics**, select **Export…** and choose a folder.
 3. Send the archive `FoundrySupport-Foundry.OSD-<date and time>.zip`.
 
 The archive contains the Foundry OSD logs with recognized secrets masked. The original logs are not changed. It does not contain the ADK installation logs or anything from a target device: add those yourself when they matter.
 
-**Advanced: export raw logs...** creates the same archive without masking. Use it only when a support contact you trust asks for it.
+**Advanced: export raw logs…** creates the same archive without masking. Use it only when a support contact you trust asks for it.
 
 When **Enable remote diagnostics** is on, Foundry also sends application logs to the Foundry project. They do not replace the files above: attach local evidence to a support request. See [Telemetry and privacy](../reference/telemetry-and-privacy.md).
 

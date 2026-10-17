@@ -16,7 +16,7 @@ Use this section when Foundry Deploy refuses to continue, shows **Deployment fai
 | "Failed step: Prepare target disk" with "Disk partitioning failed ...", or any later step, "System reboot", or a skipped step | Yes | [After the disk is erased](deployment/after-disk-erase.md) |
 | "Failed step: Provision Autopilot", or a skipped Autopilot step | Yes | [Windows Autopilot troubleshooting during deployment](autopilot/during-deployment.md) |
 | **Deployment complete**, then the device returns to the media or does not start Windows | Yes | [Windows does not start after deployment](deployment/device-does-not-start.md) |
-| **Deployment cancelled**, or the device lost power | Look at **Steps** (after a cancellation) | [Deploy again after a failure](#deploy-again) |
+| **Deployment canceled**, or the device lost power | Look at **Steps** (after a cancellation) | [Deploy again after a failure](#deploy-again) |
 | The Foundry console after the restart fails, or Windows is not activated | Yes | [After the restart troubleshooting](after-the-restart.md) |
 | "Diagnostics could not be exported. Check the log for details." | Not relevant | [Logs and support information](logs-and-support.md#export-failed) |
 
@@ -38,7 +38,7 @@ Foundry Deploy cannot resume or undo a deployment, and the error screen has no r
 
 ### "Deployment stopped. The target disk may contain an incomplete installation." <a href="#cancelled" id="cancelled"></a>
 
-The **Deployment cancelled** screen shows this sentence after every cancellation, whether **Cancel** was selected or the window was closed, and whatever the moment. The disk was erased only if **Prepare target disk** had already run: check **Steps**. Nothing is undone and the device does not restart by itself. Deploy again as described above. See [Cancel a deployment](../foundry-deploy/review-and-deploy.md#cancel-a-deployment).
+The **Deployment canceled** screen shows this sentence after every cancellation, whether **Cancel** was selected or the window was closed, and whatever the moment. The disk was erased only if **Prepare target disk** had already run: check **Steps**. Nothing is undone and the device does not restart by itself. Deploy again as described above. See [Cancel a deployment](../foundry-deploy/review-and-deploy.md#cancel-a-deployment).
 
 ### The device lost power or restarted during the deployment <a href="#power-loss" id="power-loss"></a>
 

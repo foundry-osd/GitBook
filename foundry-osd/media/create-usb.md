@@ -13,7 +13,7 @@ Create a USB drive that starts physical devices and keeps the Windows images and
 - The drive is sold as 16 GB or more. The list shows sizes with 1 GB = 1,024 MB, so a drive sold as 16 GB shows about 14.5 GB, which is enough. With a smaller drive selected, **Create USB** stays unavailable and no message is shown.
 
 {% hint style="danger" %}
-Creating a USB drive erases every partition of the selected disk. Foundry OSD lists every disk connected through USB except the Windows system or boot disk: an external hard disk or SSD, such as a backup disk, is listed too and can be selected. Check the disk number, name and size in the list, then read the volumes that the **Format USB target** dialog lists before you confirm.
+Creating a USB drive erases every partition of the selected disk. Foundry OSD lists every disk connected through USB except the Windows system or boot disk: an external hard disk or SSD, such as a backup disk, is listed too and can be selected. Check the disk number, name and size in the list, then read the volumes that the **Format USB drive** dialog lists before you confirm.
 {% endhint %}
 
 ## Create the drive
@@ -23,11 +23,11 @@ Creating a USB drive erases every partition of the selected disk. Foundry OSD li
 3. Expand the **USB target** card and set the two [USB target options](#usb-target-options).
 4. Select **Create USB**. If the button reads **Update USB**, the drive already is a Foundry USB drive: see [Update a USB drive](update-usb.md).
 5. If a dialog titled **Update Foundry OSD before creating boot media** opens, apply the update first or select **Create anyway**.
-6. Read the **Format USB target** dialog, described below. Select **Format and create USB** only if the disk and its volumes are the ones you expect. **Cancel** is the default button, so pressing Enter erases nothing.
+6. Read the **Format USB drive** dialog, described below. Select **Format and create USB** only if the disk and its volumes are the ones you expect. **Cancel** is the default button, so pressing Enter erases nothing.
 7. Keep the drive connected until the dialog reads "USB media was created successfully. Boot volume: X:. Cache volume: Y:.", with the two drive letters.
 
 <figure>
-  <img src="../../.gitbook/assets/foundry-osd-media-create-usb-01-confirmation.png" alt="Format USB target dialog naming the disk to erase and listing its two volumes, with the Format and create USB and Cancel buttons, Cancel highlighted">
+  <img src="../../.gitbook/assets/foundry-osd-media-create-usb-01-confirmation.png" alt="Format USB drive dialog naming the disk to erase and listing its two volumes, with the Format and create USB and Cancel buttons, Cancel highlighted">
   <figcaption>Check the volumes before you erase: here the disk holds two NTFS volumes.</figcaption>
 </figure>
 
@@ -39,7 +39,7 @@ The dialog tells you what is on the disk before anything is erased:
 | "Volumes on this disk:", then one line per volume: "\<letter>: \<label> (\<file system>), \<size> used of \<size>" | The drive letter, the label, the file system and the space in use of each volume Windows can read. Foundry OSD reads the disk again just before it opens the dialog. A volume can have no letter, and one without a label reads "No name". |
 | "This disk has no partition." | Shown in place of the list when the disk is blank. |
 | "Windows cannot read the volumes on this disk. It may still contain data." | Shown in place of the list when the disk has partitions that Windows cannot read, such as a locked BitLocker drive or a disk formatted for another operating system, or when the disk could not be read. Treat the disk as holding data. |
-| "Everything on this disk will be lost. Continue only if this is the intended USB disk." | The last line, above the buttons. |
+| "Everything on this disk will be lost. Continue only if this is the intended USB drive." | The last line, above the buttons. |
 
 A volume with data you did not expect, such as a backup, means the wrong disk is selected: select **Cancel**. The same goes for the line saying that Windows cannot read the volumes, unless you know why.
 

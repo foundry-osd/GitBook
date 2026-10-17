@@ -29,7 +29,7 @@ Otherwise, find what you see below.
 
 Foundry OSD writes its log to `%ProgramData%\Foundry\Logs\Foundry.log` and keeps up to 10 files. **Settings** > **General** shows the folder as a link. Logs written by the Microsoft ADK installers are in the `Adk` subfolder.
 
-**Settings** > **General** > **Export...** packs the Foundry OSD logs into one archive with sensitive values masked. The ADK installer logs are not part of it: add them by hand when a problem concerns the ADK. Every location is listed in [Log locations](logs-and-support.md#log-locations).
+**Settings** > **General** > **Export…** packs the Foundry OSD logs into one archive with sensitive values masked. The ADK installer logs are not part of it: add them by hand when a problem concerns the ADK. Every location is listed in [Log locations](logs-and-support.md#log-locations).
 
 ## Foundry OSD does not open <a href="#does-not-open" id="does-not-open"></a>
 
@@ -255,7 +255,7 @@ If only the architecture you do not use is incomplete, you can ignore the warnin
 
 ## "Diagnostics export failed" <a href="#export-failed" id="export-failed"></a>
 
-**Where:** Dialog after **Settings** > **General** > **Export...**. Full text: "Diagnostics could not be exported. Check the log for details."
+**Where:** Dialog after **Settings** > **General** > **Export…**. Full text: "Diagnostics could not be exported. Check the log for details."
 
 **Cause:** The archive could not be written to the destination you chose.
 
