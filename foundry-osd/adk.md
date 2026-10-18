@@ -22,8 +22,8 @@ The ADK page checks and installs the Windows ADK and the Windows PE add-on that 
 6. When the dialog closes, check that the status bar shows **ADK is ready**.
 
 <figure>
-  <img src="../.gitbook/assets/foundry-osd-adk-02-setup-progress.png" alt="Installing Windows ADK dialog over the ADK page while the Windows PE Add-on is being installed">
-  <figcaption>While setup runs, the dialog shows the step and the navigation pane is disabled.</figcaption>
+  <img src="../.gitbook/assets/foundry-osd-adk-02-setup-progress.png" alt="Installing Windows ADK dialog over the ADK page while the Windows ADK Deployment Tools are being installed, with the percentage and the elapsed time">
+  <figcaption>While setup runs, the dialog shows the step, the percentage and the elapsed time, and the navigation pane is disabled.</figcaption>
 </figure>
 
 | Status | Button offered | What the button does |

@@ -27,8 +27,8 @@ Creating a USB drive erases every partition of the selected disk. Foundry OSD li
 7. Keep the drive connected until the dialog is titled **USB media created** and reads "Boot volume: X:. Cache volume: Y:.", with the two drive letters.
 
 <figure>
-  <img src="../../.gitbook/assets/foundry-osd-media-create-usb-01-confirmation.png" alt="Format USB drive dialog naming the disk to erase and listing its two volumes, with the Format and create USB and Cancel buttons, Cancel highlighted">
-  <figcaption>Check the volumes before you erase: here the disk holds two NTFS volumes.</figcaption>
+  <img src="../../.gitbook/assets/foundry-osd-media-create-usb-01-confirmation.png" alt="Format USB drive dialog naming the disk to erase and listing its volume, with the Format and create USB and Cancel buttons, Cancel highlighted">
+  <figcaption>Check the volumes before you erase: here the disk holds one NTFS volume, DATA.</figcaption>
 </figure>
 
 The dialog tells you what is on the disk before anything is erased:
