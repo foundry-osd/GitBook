@@ -39,7 +39,7 @@ A drive smaller than 16 GB is listed, but **Create USB** stays unavailable while
 
 ## A disk you did not expect is offered <a href="#unexpected-disk" id="unexpected-disk"></a>
 
-**Where:** Foundry OSD, **Start**: the list of the **USB target** card, or the **Format USB drive** dialog, whose "Volumes on this disk:" lines show a letter, a label or an amount of data you do not recognize.
+**Where:** Foundry OSD, **Start**: the list of the **USB target** card, or the **Format USB drive** dialog, whose "Volumes on this disk:" lines show a letter, a label or an amount of data you do not recognize, or which reads "Windows cannot read some partitions on this disk. They may still contain data." or "Windows cannot read the volumes on this disk. It may still contain data."
 
 **Cause:** Foundry OSD offers every disk connected through USB that is not the Windows system or boot disk. An external hard disk or SSD, such as a backup disk, is a valid target and is erased like a flash drive.
 
