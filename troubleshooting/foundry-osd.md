@@ -15,6 +15,7 @@ Otherwise, find what you see below.
 | What you see | Go to section |
 | --- | --- |
 | The window never appears, or closes at once | [Foundry OSD does not open](#does-not-open) |
+| A dialog titled **ARM64 version required** at startup | [ARM64 version required](#arm64-version-required) |
 | Pages grayed out, badge **ADK not ready** | [Most pages are grayed out](#grayed-out) |
 | A red or yellow status bar on the **ADK** page | [ADK is not installed](#adk-not-installed), [version is unsupported](#adk-unsupported), [add-on is missing](#winpe-missing), [add-on needs repair](#winpe-repair) |
 | An ADK installation that ends with a message | [Windows ADK installation failed](#adk-failed), [canceled](#adk-canceled), [finished with remaining requirements](#adk-remaining) |
@@ -46,6 +47,20 @@ Foundry OSD writes its log to `%ProgramData%\Foundry\Logs\Foundry.log` and keeps
 2. If the window still does not appear, run the latest MSI again. See [Download and install](../start-here/download.md).
 
 **Collect:** `Foundry.log`. A startup error is recorded as "Foundry process bootstrap failed.", "Foundry WinUI launch failed." or "Unhandled WinUI exception.".
+
+## "ARM64 version required" <a href="#arm64-version-required" id="arm64-version-required"></a>
+
+**Where:** At startup, a dialog over the Foundry OSD window: "This PC runs Windows on ARM64, but this is the x64 version of Foundry OSD. Under emulation, the x64 version cannot reliably create boot media. Download and install the ARM64 version of Foundry OSD (Foundry-win-arm64.msi) from the latest release." Foundry OSD closes when you close the dialog.
+
+**Cause:** the x64 installer, `Foundry-win-x64.msi`, was installed on a Windows on Arm workstation. Windows runs it under emulation, which cannot run the drivers the Windows ADK needs to build media.
+
+**Fix:**
+
+1. Select **Download ARM64 version**. The latest release opens in the browser.
+2. Uninstall Foundry OSD in **Settings** > **Apps** > **Installed apps** of Windows.
+3. Download `Foundry-win-arm64.msi` and install it, as described in [Download and install](../start-here/download.md).
+
+**Collect:** `Foundry.log`. It records "Foundry startup blocked because the x64 build runs under emulation on ARM64 Windows." with both architectures.
 
 ## Most pages are grayed out <a href="#grayed-out" id="grayed-out"></a>
 

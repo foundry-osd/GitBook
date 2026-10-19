@@ -170,6 +170,7 @@ Problems met when Foundry Deploy opens and in its wizard, up to the **Deploy** b
 | "The configured default image or index is unavailable. Choose an image and index explicitly." | The administrator's preferred image or index is not on this media | Select an image and an index yourself |
 | "The default image exists on more than one attached volume. Choose the source volume explicitly." | Two connected drives carry the same image | Select the one to use, or disconnect the other drive |
 | "The image cannot be read or its selected index or metadata has changed. Select the image again and try again." | The file is damaged, was replaced, or its drive was removed | Select the image again |
+| "The Windows image is not built for this device's processor architecture. Select an image built for this device." | No index of the image, or the administrator's preferred index, is built for the architecture of this device | Select another image. The administrator adds an image built for `x64` or `arm64`, the same as the device |
 
 **Collect:** the message and the list of drives connected to the device.
 

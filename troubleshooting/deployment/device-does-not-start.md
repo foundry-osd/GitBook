@@ -33,7 +33,7 @@ Foundry Deploy showed **Deployment complete**, the device restarted, and Windows
 
 **Cause:**
 
-- The firmware starts in legacy BIOS (CSM) mode. Foundry always creates a GPT disk that starts in UEFI mode only.
+- The firmware starts in legacy BIOS (CSM) mode. Foundry always creates a GPT disk that starts in UEFI mode only. Foundry Deploy normally refuses to deploy in that mode; it continues only when it cannot read the boot mode, and the deployment log then contains "Firmware boot mode could not be determined. Continuing with the UEFI disk layout."
 - Windows has no driver for the storage controller. This can happen when **Driver source** was **None**, when Microsoft Update Catalog returned nothing, or when the pack is an installer that runs only once Windows has started (Lenovo `.exe`, Surface `.msi`).
 - The firmware boot order was not updated: see [the previous entry](#returns-to-the-media).
 

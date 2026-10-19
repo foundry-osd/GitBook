@@ -74,17 +74,18 @@ A drive smaller than 16 GB is listed, but **Create USB** stays unavailable while
 | "Failed to partition and format the USB disk." | While a new drive is created. It is followed by the output of the Windows storage commands, such as "Timed out waiting for BOOT volume X: to become available." |
 | "Failed to format the USB BOOT partition." | While a drive is updated |
 | "Failed to copy WinPE media files to USB BOOT partition." | While the boot files are copied |
-| "USB verification failed: boot.wim not found.", "USB verification failed: BCD not found." or "USB verification failed: EFI boot file not found." | When Foundry OSD checks the drive after writing it |
+| "USB verification failed: boot.wim not found.", "USB verification failed: UEFI BCD not found.", "USB verification failed: BIOS BCD not found." or "USB verification failed: EFI boot file not found." | When Foundry OSD checks the boot files before it writes the drive, and checks the drive again after writing it. "BIOS BCD" concerns `x64` media only |
 
 **Cause:**
 
 - The drive is write-protected by a switch, or is failing.
 - A program uses the drive, such as a File Explorer window or an antivirus scan.
 - Windows has no free drive letter to assign.
+- A "USB verification failed" message that appears before the drive is written: a boot file is missing from the Windows PE add-on of the Windows ADK for the media **Architecture**. Nothing was erased.
 
 **Fix:**
 
-1. Close what uses the drive, check its write-protection switch, and free a drive letter if all are in use.
+1. Close what uses the drive, check its write-protection switch, and free a drive letter if all are in use. For a missing boot file, repair the Windows PE add-on as described in ["Windows PE Add-on needs repair"](../foundry-osd.md#winpe-repair).
 2. Start again: a drive being created is created again, a drive being updated is [updated](../../foundry-osd/media/update-usb.md) again.
 3. If it fails again, use another USB port, then another drive.
 

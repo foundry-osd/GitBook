@@ -150,6 +150,7 @@ A driver that Windows refuses does not fail **Install Windows drivers**: it is r
 | "System firmware hardware identifier is unavailable." | The device does not report the identifier needed to search for an update |
 | "Microsoft Update Catalog is not reachable; skipping firmware update." | The catalog site is blocked |
 | "No firmware update was found in Microsoft Update Catalog for firmware id '\<id>'." | The manufacturer published no update there for this device |
+| "Firmware update '\<title>' was found, but no CAB payload targets architecture '\<architecture>'." | The update found is built only for another processor architecture, so it is not used |
 
 A failed step stops the deployment with "The selected firmware content is unavailable." or "The extracted firmware content does not contain any INF files.": the downloaded update is not usable.
 

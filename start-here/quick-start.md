@@ -7,7 +7,7 @@ This is the shortest path from an empty workstation to one deployed test device.
 - A workstation and a test device that meet the [Requirements](requirements.md).
 - A USB drive of at least 16 GB, or a virtual machine that can start from an ISO file.
 - A test device whose disk can be erased, connected to a network with Internet access. Ethernet is the simplest choice.
-- A test device that starts in UEFI mode. For a virtual machine, choose UEFI firmware (generation 2 in Hyper-V): a device that starts in legacy BIOS mode is deployed but does not start the installed Windows.
+- A test device that starts in UEFI mode. For a virtual machine, choose UEFI firmware (generation 2 in Hyper-V): on a device that starts in legacy BIOS mode, the deployment stops before the disk is erased.
 
 ## 1. Install and open Foundry OSD
 
