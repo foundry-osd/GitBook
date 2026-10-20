@@ -52,7 +52,7 @@ Foundry OSD writes its log to `%ProgramData%\Foundry\Logs\Foundry.log` and keeps
 
 **Where:** At startup, a dialog over the Foundry OSD window: "This PC runs Windows on ARM64, but this is the x64 version of Foundry OSD. Under emulation, the x64 version cannot reliably create boot media. Download and install the ARM64 version of Foundry OSD (Foundry-win-arm64.msi) from the latest release." Foundry OSD closes when you close the dialog.
 
-**Cause:** the x64 installer, `Foundry-win-x64.msi`, was installed on a Windows on Arm workstation. Windows runs it under emulation, which cannot run the drivers the Windows ADK needs to build media.
+**Cause:** the x64 installer, `Foundry-win-x64.msi`, was installed on a Windows on Arm workstation. Windows runs it under emulation, where it cannot reliably create boot media.
 
 **Fix:**
 
