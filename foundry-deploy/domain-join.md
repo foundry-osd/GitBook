@@ -38,7 +38,7 @@ When you change the domain, the account or the password after a check, the next 
 
 ### On zero-touch media
 
-The check runs by itself as soon as the step is shown, with the account stored on the media for the selected domain, and again when you choose another domain.
+The check runs by itself as soon as the step is shown, with the account stored on the media for the selected domain, and again when you choose another domain. A domain that already accepted or refused the account is not asked again, so going back and forth between domains does not count more failed sign-ins against the join account.
 
 - **The domain accepts the account:** nothing more shows, and **Next** is available.
 - **The domain refuses the account:** a message says that the join account stored on the media was refused, locked out, expired or disabled, and that the administrator must correct it in Foundry OSD and create the media again. **Next** stays unavailable. Choose another domain, or **Do not join a domain** to deploy this computer without the join. See [The join account stored on the media is refused](../troubleshooting/domain-join.md#media-account-refused).
