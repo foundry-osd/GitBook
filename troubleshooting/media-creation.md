@@ -126,6 +126,7 @@ For the second form, Foundry OSD could not read the working folders: check that 
 | Message | What it means |
 | --- | --- |
 | "Failed to create WinPE workspace using copype.cmd." | The ADK tool that builds the Windows PE working folder failed |
+| "Failed to create WinPE workspace using copype.cmd.", then "DISM mount replay:" | The ADK tool could not mount the boot image. Foundry OSD ran the mount again with DISM and shows the DISM result after that line |
 | "WinPE workspace was created but boot.wim was not found." | The working folder was built without a boot image |
 | "The selected WinPE language pack was not found." | The language pack of the **WinPE boot language** is not in the Windows PE add-on |
 | "The WinPE optional components folder was not found." | The optional components of the Windows PE add-on are missing |
@@ -134,14 +135,15 @@ For the second form, Foundry OSD could not read the working folders: check that 
 | "PCA2023 requires /bootex support in the WinPE workspace." | The **Secure Boot** switch of **General** is on, which reads **PCA 2023**, and the installed ADK cannot produce media signed that way |
 | "PCA2023 USB creation requires BootEx EFI binaries in the WinPE workspace." | The same, for a USB drive |
 
-**Cause:** Except for the two PCA2023 messages, a file of the Windows ADK or of the Windows PE add-on is missing or damaged for the architecture selected in **General**.
+**Cause:** Except for the two PCA2023 messages and the mount failure, a file of the Windows ADK or of the Windows PE add-on is missing or damaged for the architecture selected in **General**.
 
 **Fix:**
 
 1. Open the [ADK](../foundry-osd/adk.md) page and repair or reinstall what it reports. The accepted version is in [Windows ADK](../reference/supported-versions.md#windows-adk).
 2. For the PCA2023 messages, you can instead turn off the **Secure Boot** switch of [General](../foundry-osd/general.md), which then reads **PCA 2011**.
+3. When the text contains "DISM mount replay:", the image mount is blocked on this workstation, usually by security software or the Windows image mount driver. Follow [Image files are locked](#access-blocked). If the text says the failure "did not reproduce", create the media again.
 
-**Collect:** `Foundry.log`, and the text shown after the message.
+**Collect:** `Foundry.log`, and the text shown after the message. For a mount failure, also `dism.log` and `%SystemRoot%\Logs\DISM\WimMountAdkSetup.log`.
 
 ## "Failed to retrieve the WinPE driver catalog." <a href="#download-failed" id="download-failed"></a>
 
