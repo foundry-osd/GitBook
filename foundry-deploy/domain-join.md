@@ -18,12 +18,22 @@ On media prepared for Domain Join, Foundry Deploy shows a **Domain join** step b
 2. **Account (DOMAIN\user or user@domain)** and **Password**: on interactive media, enter the join account and its password. Zero-touch media carries the account and does not show these fields.
 3. **Organizational unit**: choose the OU when the domain lists several; the default, if there is one, is preselected. A domain with a single OU uses it without asking.
 4. **OU distinguished name (optional)**: shown on interactive media for a domain without listed OUs. Type an OU of that domain, starting with `OU=`, or leave it empty to use the domain's default location.
-5. Select **Next**. It stays unavailable while a required field is empty or a field shows a message.
+5. Select **Next**. It stays unavailable while a required field is empty or a field shows a message. On interactive media, **Next** first checks the account with the domain: see [Account check](#account-check).
 
 Changing the domain replaces the OU choices and keeps the account and password you typed.
 
+## Account check
+
+On interactive media, **Next** checks the account and the password with a domain controller before the wizard moves on. While it runs, "Checking the account with the domain..." shows under the password and the wizard stays on the step.
+
+- **The domain accepts them:** the wizard moves to the next step.
+- **The domain refuses them:** a message under the password gives the reason, and **Next** stays unavailable until you change the domain, the account or the password. The account may be wrong or have a wrong password, be locked out, have an expired password, or be disabled. See [The Domain join step does not let you continue](../troubleshooting/domain-join.md#step-blocked).
+- **The domain cannot be reached, or does not give a clear answer:** a warning shows under the password. Select **Next** again to continue without the check; a mistyped password then only shows after the restart, as a failed join. See [The account was not checked](../troubleshooting/domain-join.md#credentials-not-checked).
+
+When you change the domain, the account or the password after a check, the next **Next** checks again, and so does **Start deployment** after a change made from **Summary**. Zero-touch media and **Do not join a domain** never contact the domain.
+
 {% hint style="info" %}
-Foundry Deploy does not contact the domain. A mistyped account or password is accepted here and only shows after the restart, as a failed join.
+The check proves only the account and the password. The join can still fail after the restart on the permissions of the account in the OU, on the number of computers the account may add to the domain, or on an existing computer account that another user created.
 {% endhint %}
 
 ## Deploy without joining a domain

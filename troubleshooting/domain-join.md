@@ -8,6 +8,7 @@ Find what you see, then go to its section. Sections follow the order of a deploy
 | **Import from domain** ends with a message | [Import](#import-adds-no-ous) |
 | A domain is not **Ready** | [Readiness](#page-not-ready) |
 | **Next** unavailable, or no **Domain join** step | [Wizard step](#step-blocked) |
+| "The domain could not be reached..." or "The account could not be checked..." | [Account not checked](#credentials-not-checked) |
 | "The selected answer file is unavailable..." | [Answer file](#answer-file-refused) |
 | "The domain join information is missing..." | [No start](#join-information-not-valid) |
 | The deployment fails on the answer file | [Deployment stops](#deployment-stops) |
@@ -58,12 +59,22 @@ A different case: when the import dialog opens with "Only some of the OUs could 
 - **Where:** Foundry Deploy, **Domain join** step.
 - **Cause:**
   - **Next** is unavailable: a required field is empty, an OU is not chosen, or a field shows a message.
+  - **Next** is unavailable and a message under the password starts with "The domain rejected this account or password", "This account is locked out", "The password of this account has expired" or "This account is disabled or expired": the [account check](../foundry-deploy/domain-join.md#account-check) was refused by the domain. **Next** comes back when you change the account, the password or the domain.
   - Another domain cannot be typed: media that lists domains joins only those.
   - No field to type an OU: it exists only on interactive media, for a domain without listed OUs.
   - The fields are missing: **Domain name** is set to **Do not join a domain**. Choose the domain to bring them back.
   - The step is missing: expected for a Windows Home edition.
-- **Fix:** complete or correct the fields. For a domain or an OU the media does not offer, the administrator adds it in Foundry OSD and creates the media again.
-- **Collect:** what **Summary** shows under **Domain join**.
+- **Fix:** complete or correct the fields. For a domain or an OU the media does not offer, the administrator adds it in Foundry OSD and creates the media again. For a refused account, type the right account and password, or ask your Active Directory administrator to unlock, enable or reset the account.
+- **Collect:** what **Summary** shows under **Domain join**, and the message under the password. Never send the password.
+
+## "The domain could not be reached from this network, so the account was not checked. Select Next again to continue; a wrong password would only show after the restart." <a href="#credentials-not-checked" id="credentials-not-checked"></a>
+
+- **Where:** Foundry Deploy, **Domain join** step, under the password, after **Next** on interactive media. The same place can show "The account could not be checked. Select Next again to continue; a wrong password would only show after the restart."
+- **Cause:**
+  - First message: from the deployment network, the domain name does not resolve or no domain controller answers. This is common on a staging network.
+  - Second message: a domain controller answered, but without saying whether the account is valid.
+- **Fix:** select **Next** again to continue without the check, then follow the hand-over checks of the [Domain Join step](../foundry-deploy/domain-join.md#before-you-hand-over-the-device) after the restart. To have the account checked, connect the device to a network that reaches the domain's DNS servers and a domain controller: see [Network endpoints](../reference/network-endpoints.md#target-device-in-windows-pe).
+- **Collect:** the message shown and the `FoundryDeploy.log` line that starts with `Domain credential check completed`. Never send the password.
 
 ## "The selected answer file is unavailable, invalid, or incompatible with the selected Windows architecture. Choose another file or rebuild the media." <a href="#answer-file-refused" id="answer-file-refused"></a>
 

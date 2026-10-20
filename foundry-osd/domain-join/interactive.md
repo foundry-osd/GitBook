@@ -25,7 +25,7 @@ This mode does not need Password protection.
 
 At each deployment, the [Domain Join step](../../foundry-deploy/domain-join.md) of Foundry Deploy asks for the domain, the join account, its password and, when the domain lists several, the OU. For a domain without listed OUs, the technician may type an OU or leave it empty. The technician can also choose **Do not join a domain**; nothing is then asked.
 
-Foundry Deploy does not contact the domain, so a mistyped password only shows after the restart, as a failed join.
+When the technician selects **Next**, Foundry Deploy checks the account and its password with the domain. See [Account check](../../foundry-deploy/domain-join.md#account-check).
 
 ## Check the result
 
