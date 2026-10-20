@@ -29,7 +29,7 @@ Choose one output, or both:
 | Requirement | Detail |
 | --- | --- |
 | Architecture | x64 or ARM64, the same as the media. You choose the media architecture in [General](../foundry-osd/general.md). |
-| Firmware | UEFI. Foundry Deploy converts the disk to GPT and sets Windows up for UEFI start only. A device that starts in legacy BIOS (CSM) mode, or a generation 1 virtual machine, is deployed but does not start the installed Windows. |
+| Firmware | UEFI. Foundry Deploy converts the disk to GPT and sets Windows up for UEFI start only. On a device that starts in legacy BIOS (CSM) mode, or a generation 1 virtual machine, the deployment stops before the disk is erased. |
 | Windows to install | Windows 11. The releases and editions offered are in [Supported versions](../reference/supported-versions.md); to install another image, see [Custom Windows images](../foundry-osd/customization/custom-windows-images.md). |
 | Network | Internet access from Windows PE to the hosts in [Network endpoints](../reference/network-endpoints.md). Ethernet is the simplest choice; Wi-Fi works when you enable it in [Network](../foundry-osd/network/README.md) and Windows PE has a driver for the adapter. |
 | Disk | A disk that can be erased. Foundry Deploy erases the disk the technician selects. |

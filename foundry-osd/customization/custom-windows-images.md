@@ -41,6 +41,7 @@ Select an image row to list its indexes under **Selected image**, then use the c
 Below the tables, **Default image source in Foundry Deploy** decides which source Foundry Deploy shows first: **Foundry catalog**, the default, or **Custom Windows images**. Setting a preferred image does not change it. The technician then chooses the image and the index, with your preferred ones preselected: see [Select Windows](../../foundry-deploy/operating-system.md).
 
 - While the page is **Enabled**, Foundry OSD creates media only if at least one image is included and every included image shows the **Status** **Available**, even when the default source is **Foundry catalog**. To create media without custom images, switch the page off.
+- Every index of an included image must be built for the media **Architecture** set in [General](../general.md): `x64` media takes `x64` indexes, `arm64` media takes `arm64` indexes. Otherwise **Start** marks **Custom images** as **Needs attention** with "One or more included custom images are not built for the selected media architecture. Exclude them or change the media architecture." Check the **Architecture** column under **Selected image**. An index whose architecture Foundry cannot read does not block the media.
 - Each media creation starts with the stage "Verifying custom image sources…", which checks every included image again and takes time with large images.
 - Excluding or removing the preferred image clears the preference.
 - **Remove** deletes the library copy for every configuration: the others show the image as **Missing**. The original file and existing media are not changed.
@@ -66,7 +67,7 @@ Also remove any answer file from `Windows\Panther\Unattend` on the reference dev
 ## Limits
 
 - 256 images in the library, 1,024 indexes per image, 200 characters per name.
-- Foundry OSD checks that it can read the image, not that the image deploys or suits your other customizations. Versions, editions and architectures are not limited to those of the Foundry catalog.
+- Foundry OSD checks that it can read the image and that its architecture matches the media, not that the image deploys or suits your other customizations. Versions and editions are not limited to those of the Foundry catalog.
 - .NET Framework 3.5 cannot be turned on in a custom image during deployment. See the limits of [Optional features](optional-features.md).
 - For where the images sit on an ISO or a USB drive, see [What each media type carries](../media/README.md#what-each-media-type-carries).
 

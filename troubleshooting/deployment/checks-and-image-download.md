@@ -11,6 +11,7 @@ On this page the disk may or may not have been erased. With an ISO or PXE, or a 
 | What you see | Go to |
 | --- | --- |
 | "Failed step: Validate answer file" | [Answer file validation](#validate-answer-file) |
+| "This device started in legacy BIOS mode. ..." | [Legacy BIOS mode](#legacy-bios-boot) |
 | "Windows optional feature configuration is invalid." | [Optional feature configuration](#optional-feature-configuration) |
 | "Post-installation preparation failed. ...", "The post-installation components could not be prepared. ..." | [Post-installation preparation](#post-installation-preparation-fails) |
 | A custom image message, or "Custom image is not ready." | [Custom image rejected](#custom-image-rejected) |
@@ -58,6 +59,19 @@ If the step shows "The selected answer file is unavailable, invalid, or incompat
 
 **Collect:** the standard set. Do not attach the answer file.
 
+## "This device started in legacy BIOS mode." <a href="#legacy-bios-boot" id="legacy-bios-boot"></a>
+
+**Where:** **Check deployment setup**, the first step after **Deploy**. Disk not erased. Full text: "This device started in legacy BIOS mode. Foundry deploys Windows in UEFI mode only. Turn on UEFI boot in the firmware settings, then restart the device from the deployment media."
+
+**Cause:** the firmware started the deployment media in legacy BIOS (CSM) mode. Foundry Deploy always creates a GPT disk that starts in UEFI mode only, so Windows would not start after the restart. A generation 1 Hyper-V virtual machine is in the same case. ARM64 devices always start in UEFI mode.
+
+**Fix:**
+
+1. In the firmware setup, set the boot mode to UEFI and disable legacy or CSM boot. For a Hyper-V virtual machine, create a generation 2 machine.
+2. Restart the device from the deployment media and deploy again.
+
+**Collect:** the device model and its firmware boot settings.
+
 ## "Windows optional feature configuration is invalid." <a href="#optional-feature-configuration" id="optional-feature-configuration"></a>
 
 **Where:** **Check deployment setup**. Disk not erased.
@@ -96,7 +110,10 @@ If the step shows "The selected answer file is unavailable, invalid, or incompat
 | --- | --- | --- |
 | "The source disk cannot be confirmed as separate from the destination disk. Select another source." | **Check deployment setup** | The image file is stored on the disk you are about to erase, or Foundry cannot tell which disk holds it |
 | "The image cannot be read or its selected index or metadata has changed. Select the image again and try again." | **Check deployment setup** | The file changed or became unreadable after you selected it, or the selected index no longer matches |
+| "The Windows image is not built for this device's processor architecture. Select an image built for this device." | **Check deployment setup** | The selected index is built for another architecture than the device, for example an `x64` image on an ARM64 device |
 | "Custom image is not ready." | **Resolve custom image**, **Check Windows image** | The drive that holds the image was removed or stopped responding after the first check |
+
+The architecture message can also appear on **Check Windows image** with a Windows catalog image: the downloaded image does not match the architecture of its catalog entry. Select another release or edition, and report the entry.
 
 **Fix:**
 

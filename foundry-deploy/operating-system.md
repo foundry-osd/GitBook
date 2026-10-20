@@ -36,7 +36,7 @@ A restriction applies only while the catalog still contains one of the allowed v
 
 1. In **Image source**, select **Custom image**.
 2. In **Image**, select the image. The drive it comes from is shown beside its name.
-3. In **Image index**, select the index to install. An image with a single index selects it for you.
+3. In **Image index**, select the index to install. Only the indexes built for the architecture of this device are listed, and when only one remains it is selected for you.
 4. Check the read-only **Version**, **Edition**, **Architecture** and **Language** fields: they describe the selected index.
 5. Select **Next**.
 

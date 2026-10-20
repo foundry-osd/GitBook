@@ -35,7 +35,7 @@ Otherwise, find the message below.
 
 **Cause:**
 
-- A row is marked **Needs attention**; the bar at the top reads **Readiness items needing action:** with a number.
+- A row is marked **Needs attention**; the bar at the top reads **Readiness items needing action:** with a number. For **Custom images**, the row can read "One or more included custom images are not built for the selected media architecture. Exclude them or change the media architecture.": see [Custom Windows images](../foundry-osd/customization/custom-windows-images.md#choose-what-goes-on-the-media).
 - For **Create ISO**: the **ISO output** path is empty or does not end with `.iso`.
 - For **Create USB**: no drive is selected, or the drive is smaller than 16 GB. A drive sold as 16 GB is accepted, although the list shows it at about 14.5 GB.
 

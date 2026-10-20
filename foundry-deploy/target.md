@@ -33,7 +33,7 @@ All data on the selected disk is lost when the deployment starts. Size alone doe
 
 ## What happens to the disk
 
-Foundry Deploy always prepares the disk the same way. There is no option to keep existing partitions and no support for legacy BIOS (CSM) boot: the device firmware must start in UEFI mode.
+Foundry Deploy always prepares the disk the same way. There is no option to keep existing partitions and no support for legacy BIOS (CSM) boot: the device firmware must start in UEFI mode. If the device started Foundry in legacy BIOS mode, **Check deployment setup** stops the deployment before anything is erased: see ["This device started in legacy BIOS mode."](../troubleshooting/deployment/checks-and-image-download.md#legacy-bios-boot)
 
 | Partition | Size |
 | --- | --- |
