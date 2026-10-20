@@ -43,7 +43,7 @@ Notes on this table:
 | `login.microsoftonline.com`, `graph.microsoft.com` | 443, HTTPS | Zero-touch Windows Autopilot hardware hash upload | When that method is used |
 | `time.now`, `ipapi.co`, `get.geojs.io` | 443, HTTPS | Time zone lookup from the public IP address | Optional. Windows PE uses UTC without them, or the time zone set in [General](../foundry-osd/general.md#windows-pe-time-zone). |
 | `eu.i.posthog.com` | 443, HTTPS | Telemetry and remote diagnostics | Optional |
-| Your domain controllers and DNS servers | 53, DNS; 88, Kerberos; 389, LDAP | Account check on the **Domain join** step of interactive media | Optional. Without it, the account is not checked and Foundry Deploy shows a warning. |
+| Your domain controllers and DNS servers | 53, DNS; 88, Kerberos; 389, LDAP | Account check on the **Domain join** step | Optional. Without it, the account is not checked and Foundry Deploy shows a warning. |
 
 Notes on this table:
 
