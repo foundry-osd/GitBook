@@ -60,18 +60,18 @@ A different case: when the import dialog opens with "Only some of the OUs could 
 - **Where:** Foundry Deploy, **Domain join** step.
 - **Cause:**
   - **Next** is unavailable: a required field is empty, an OU is not chosen, or a field shows a message.
-  - **Next** is unavailable and a message at the bottom of the step starts with "The domain rejected this account or password", "This account is locked out", "The password of this account has expired" or "This account is disabled or expired": the [account check](../foundry-deploy/domain-join.md#account-check) was refused by the domain. **Next** comes back when you change the account, the password or the domain.
+  - **Next** is unavailable and the card at the bottom of the step starts with "The domain rejected this account or password", "This account is locked out", "The password of this account has expired" or "This account is disabled or expired": the [account check](../foundry-deploy/domain-join.md#account-check) was refused by the domain. **Next** comes back when you change the account, the password or the domain.
   - On zero-touch media, the message names the join account stored on the media: see [The join account stored on the media is refused](#media-account-refused).
   - Another domain cannot be typed: media that lists domains joins only those.
   - No field to type an OU: it exists only on interactive media, for a domain without listed OUs.
   - The fields are missing: **Domain name** is set to **Do not join a domain**. Choose the domain to bring them back.
   - The step is missing: expected for a Windows Home edition.
 - **Fix:** complete or correct the fields. For a domain or an OU the media does not offer, the administrator adds it in Foundry OSD and creates the media again. For a refused account, type the right account and password, or ask your Active Directory administrator to unlock, enable or reset the account.
-- **Collect:** what **Summary** shows under **Domain join**, and the message at the bottom of the step. Never send the password.
+- **Collect:** what **Summary** shows under **Domain join**, and the message in the card at the bottom of the step. Never send the password.
 
 ## "The domain could not be reached from this network, so the account was not checked. Select Next again to continue; a wrong password would only show after the restart." <a href="#credentials-not-checked" id="credentials-not-checked"></a>
 
-- **Where:** Foundry Deploy, **Domain join** step, at the bottom of the step, after **Next** on interactive media. The same place can show "The account could not be checked. Select Next again to continue; a wrong password would only show after the restart." On zero-touch media the warnings read "The domain could not be reached from this network, so the join account stored on the media was not checked. A wrong password would only show after the restart." and "The join account stored on the media could not be checked. A wrong password would only show after the restart.", and **Next** stays available without a second selection.
+- **Where:** Foundry Deploy, **Domain join** step, in the card at the bottom of the step, after **Next** on interactive media. The same place can show "The account could not be checked. Select Next again to continue; a wrong password would only show after the restart." On zero-touch media the warnings read "The domain could not be reached from this network, so the join account stored on the media was not checked. A wrong password would only show after the restart." and "The join account stored on the media could not be checked. A wrong password would only show after the restart.", and **Next** stays available without a second selection.
 - **Cause:**
   - First message: from the deployment network, the domain name does not resolve or no domain controller answers. This is common on a staging network.
   - Second message: a domain controller answered, but without saying whether the account is valid.
