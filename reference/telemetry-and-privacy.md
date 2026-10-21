@@ -41,7 +41,7 @@ Values are switches, counts or fixed choices. No name, path or text you typed is
 | Failure | Name of the step that failed; kind, reason and code of the failure, each from a fixed list; name of the tool that failed and its exit code. Empty when the creation succeeds |
 | Media | Architecture; Windows PE language; standard or Wi-Fi boot image; Secure Boot signature; USB partition style and format mode; whether the Foundry applications that the media uses are release builds |
 | Drivers | Whether Dell, HP or a custom driver folder is used |
-| General | Whether Password protection is on; restart mode and delay; whether a Windows PE time zone is set |
+| General | Whether Password protection is on; restart mode and delay; whether a Windows PE time zone is set, and which one; the Windows ADK version and whether Foundry supports it |
 | Network | Whether any network option is on. Ethernet 802.1X: whether it is on, whether a profile is set, whether a certificate is required and whether one is set. Wi-Fi: whether it is on, whether a profile, a network name, a passphrase, an enterprise profile and an enterprise certificate are set, whether a certificate is required, and the security type. Whether profiles and private keys are kept for the installed Windows, overall and for each of Ethernet and Wi-Fi |
 | Windows Autopilot | Whether it is on, and the method |
 | Domain Join | Whether it is on, the method, the number of domains (up to 32) and of OUs, whether a shared join account is used, whether a default OU is set |
@@ -65,13 +65,13 @@ Values are switches, counts or fixed choices. No name, path or text you typed is
 | Event | What is reported |
 | --- | --- |
 | Foundry OSD, once a day | Proxy method; authentication mode of a manual proxy |
-| Windows PE startup failure | Failure category; last stage reached; elapsed time; which application failed, its exit code and how far its start went; version, release or development build, and architecture of that application |
+| Windows PE startup failure | Failure category; last stage reached; elapsed time; which application failed, its exit code and how far its start went; version of the application that failed, release or development build, and architecture; ISO or USB media |
 | Foundry Connect, network ready | Connection type (Ethernet or Wi-Fi); window layout; whether Ethernet and Wi-Fi were available; Wi-Fi security type and the origin of the Wi-Fi connection; whether Ethernet 802.1X and Wi-Fi were set on the media; ISO or USB media; release or development build of Foundry Connect |
 | Foundry Deploy, result | Success, cancellation, duration, number of steps completed, an identifier of the operation; whether it was a test run and the session mode; ISO or USB media; release or development build of Foundry Deploy |
 | Foundry Deploy, failure | Name of the step and of the operation that failed; kind, code and reason of the failure |
 | Foundry Deploy, device | Manufacturer, model, and whether it is a virtual machine |
 | Foundry Deploy, Windows | Catalog or custom image; product, release, build, update month, architecture, language, edition, licensing, image index; Foundry's settings or a custom answer file |
-| Foundry Deploy, options | Driver pack source, manufacturer and model; whether firmware updates were on; Windows Autopilot: on or off, method, upload state, whether a group tag was chosen; Domain Join: on or off, method, how the domain and the OU were chosen, state; restart mode and delay |
+| Foundry Deploy, options | Driver pack source, manufacturer and model; whether firmware updates were on; Windows Autopilot: on or off, method, upload state, whether a group tag was chosen; Domain Join: on or off, method, how the domain and the OU were chosen, state; restart mode and delay; OOBE: whether it is on, whether the administrator account is on, the number of additional accounts, and whether account creation is skipped |
 
 </details>
 
