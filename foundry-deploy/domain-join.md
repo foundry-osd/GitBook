@@ -18,12 +18,36 @@ On media prepared for Domain Join, Foundry Deploy shows a **Domain join** step b
 2. **Account (DOMAIN\user or user@domain)** and **Password**: on interactive media, enter the join account and its password. Zero-touch media carries the account and does not show these fields.
 3. **Organizational unit**: choose the OU when the domain lists several; the default, if there is one, is preselected. A domain with a single OU uses it without asking.
 4. **OU distinguished name (optional)**: shown on interactive media for a domain without listed OUs. Type an OU of that domain, starting with `OU=`, or leave it empty to use the domain's default location.
-5. Select **Next**. It stays unavailable while a required field is empty or a field shows a message.
+5. Select **Next**. It stays unavailable while a required field is empty, a field shows a message, or the domain refused the join account. See [Account check](#account-check).
 
 Changing the domain replaces the OU choices and keeps the account and password you typed.
 
+## Account check
+
+Foundry Deploy checks the join account and its password with a domain controller before the deployment starts. The check reports in a card at the bottom of the step: "Checking the account with the domain..." with a progress bar while it runs, and the wizard stays on the step. The result replaces it in the same card, and "Account verified by the domain." shows when the domain accepts the account. **Do not join a domain** never contacts the domain.
+
+### On interactive media
+
+**Next** checks the account and the password you typed before the wizard moves on.
+
+- **The domain accepts them:** the wizard moves to the next step. When you come back to the step, the card shows "Account verified by the domain."
+- **The domain refuses them:** a message gives the reason, and **Next** stays unavailable until you change the domain, the account or the password. The account may be wrong or have a wrong password, be locked out, have an expired password, or be disabled. See [The Domain join step does not let you continue](../troubleshooting/domain-join.md#step-blocked).
+- **The domain cannot be reached, or does not give a clear answer:** a warning shows. Select **Next** again to continue without the check; a mistyped password then only shows after the restart, as a failed join. See [The account was not checked](../troubleshooting/domain-join.md#credentials-not-checked).
+
+When you change the domain, the account or the password after a check, the next **Next** checks again, and so does **Start deployment** after a change made from **Summary**.
+
+### On zero-touch media
+
+The check runs by itself as soon as the step is shown, with the account stored on the media for the selected domain, and again when you choose another domain. A domain that already accepted or refused the account is not asked again, so going back and forth between domains does not count more failed sign-ins against the join account.
+
+- **The domain accepts the account:** the card shows "Account verified by the domain.", and **Next** is available.
+- **The domain refuses the account:** a message says that the join account stored on the media was refused, locked out, expired or disabled, and that the administrator must correct it in Foundry OSD and create the media again. **Next** stays unavailable. Choose another domain, or **Do not join a domain** to deploy this computer without the join. See [The join account stored on the media is refused](../troubleshooting/domain-join.md#media-account-refused).
+- **The domain cannot be reached, or does not give a clear answer:** a warning shows, and **Next** stays available. A wrong password stored on the media then only shows after the restart, as a failed join.
+
+If the check could not run on the step, **Start deployment** runs it before anything is written to the disk, and a refusal stops the deployment with the same message.
+
 {% hint style="info" %}
-Foundry Deploy does not contact the domain. A mistyped account or password is accepted here and only shows after the restart, as a failed join.
+The check proves only the account and the password. The join can still fail after the restart on the permissions of the account in the OU, on the number of computers the account may add to the domain, or on an existing computer account that another user created.
 {% endhint %}
 
 ## Deploy without joining a domain

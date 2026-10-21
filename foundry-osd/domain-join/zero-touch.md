@@ -30,6 +30,8 @@ A password belongs to its account: if you change an account, enter its password 
 
 The technician unlocks the media with the Deployment password and is never asked for the join account. The [Domain Join step](../../foundry-deploy/domain-join.md) of Foundry Deploy shows the domain, with the default preselected, and asks for the OU only when the domain lists several. The technician can choose **Do not join a domain** instead.
 
+When the step is shown, Foundry Deploy checks the account stored on the media for the selected domain with a domain controller. If the domain refuses it, the technician cannot continue with that domain: correct the account or its password here and create the media again. If the domain cannot be reached from the deployment network, Foundry Deploy shows a warning and the deployment continues. See [Account check](../../foundry-deploy/domain-join.md#on-zero-touch-media).
+
 ## Check the result
 
 - On **Start**, **Zero-Touch** under **Domain Join** reads **Configured**, not **Needs attention**.
@@ -38,6 +40,7 @@ The technician unlocks the media with the Deployment password and is never asked
 ## Limits
 
 - Media keeps the accounts and passwords it was created with. Create or update it after you change one.
+- Foundry OSD does not check the account with the domain, because the media may be created on a computer that cannot reach it. The check runs in Foundry Deploy.
 - A join password is limited to 2,560 bytes: 2,560 characters if all are plain ASCII; other characters count 2 to 4 bytes.
 - A configuration exported to a file never contains the join passwords. See [Settings backup and sync](../deployment-profiles.md).
 
