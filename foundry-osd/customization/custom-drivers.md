@@ -2,12 +2,10 @@
 
 **Custom drivers** adds your own driver folders, called driver sets, to the deployment media, so the technician can choose one as the driver source for the deployed Windows. Use it when the driver pack of a manufacturer is older than the drivers on its support site, or when a device has no pack.
 
-{% hint style="warning" %}
-**Screenshot required**
-
-- **File:** `foundry-osd-custom-drivers-01-library.png`
-- **Capture:** Show the Foundry OSD **Custom drivers** page with the section enabled and one imported driver set, included and set as default, with the PXE warning under the title, the command bar and the table row (name, default, included, INF files, files, size, status **Available**).
-{% endhint %}
+<figure>
+  <img src="../../.gitbook/assets/foundry-osd-custom-drivers-01-library.png" alt="Foundry OSD Custom drivers page with the PXE warning under its title, the command bar, and one driver set that is the default, included, with its INF file count, file count, size and Available status">
+  <figcaption>The driver set library: one set, included in the media and offered by default in Foundry Deploy.</figcaption>
+</figure>
 
 Drivers added to Windows PE itself are a different setting: see **WinPE drivers** in [General](../general.md#winpe-drivers).
 
@@ -27,7 +25,7 @@ Foundry does not check the architecture or the models of a driver set. You are r
 2. Select **Import folder** in the command bar. The import dialog opens.
 3. Select **Browse** and choose the driver folder.
 4. Check **Name**. It defaults to the folder name, accepts up to 200 characters and must be unique in the current configuration. Foundry OSD refuses a name already used in it: "A driver set with this name already exists in this profile."
-5. Select **Import**. The dialog shows "Copying and verifying driver files… {0}%" with a progress bar, where {0} is the percentage done. Keep the source folder available until the dialog closes. **Cancel**, or closing the dialog, stops the import and adds nothing.
+5. Select **Import**. The dialog shows "Copying and verifying driver files…" with a progress bar, and the percentage done to the right of the bar. Keep the source folder available until the dialog closes. **Cancel**, or closing the dialog, stops the import and adds nothing.
 
 When the import succeeds, the dialog closes and the set appears in the list, included in the media straight away. If the dialog shows an error, read the message under [If something goes wrong](#if-something-goes-wrong) and choose another folder in the same dialog. If the folder content is already in the configuration, the dialog says so ("This folder is already in this profile as {0}.", where {0} is the name of the existing set) and nothing is added.
 
@@ -49,6 +47,8 @@ Select a row, then use the command bar.
 Excluding the default set clears the default. The original folder and existing media are not changed by **Remove**.
 
 While the page is **Enabled**, Foundry OSD creates media only if at least one set is included and the local copy of every included set is intact. To create media without custom drivers, switch the page off.
+
+On a USB drive, creating or updating the media starts with "Checking the content to copy…" while Foundry OSD checks the files to copy and the free space. With large driver sets this takes a moment: let it finish.
 
 ## What the technician sees
 
