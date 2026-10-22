@@ -21,11 +21,11 @@ Below it, five groups list one row per page of the app:
 
 | Group | Rows | Fix on |
 | --- | --- | --- |
-| **General** | **Architecture**, **Secure Boot**, **WinPE boot language**, **Windows PE time zone**, **Automatic restart**, **Password protection**, **Driver options** | [General](../general.md) |
+| **General** | **Architecture**, **Secure Boot**, **WinPE boot language**, **Windows PE time zone**, **Automatic restart**, **Password protection**, **WinPE drivers** | [General](../general.md) |
 | **Network** | **Ethernet 802.1X**, **Wi-Fi** | [Network](../network/README.md) |
 | **Windows Autopilot** | **JSON profile**, **Zero-Touch**, **Interactive** | [Windows Autopilot](../autopilot/README.md) |
 | **Domain Join** | **Zero-Touch**, **Interactive** | [Domain Join](../domain-join/README.md) |
-| **Customization** | **OS selection**, **Machine naming**, **OOBE**, **Custom Windows images**, **Post-installation**, **Unattend**, **Optional features**, **AppX removals**, **AI components** | [Customization](../customization/README.md) |
+| **Customization** | **OS selection**, **Machine naming**, **OOBE**, **Custom Windows images**, **Custom drivers**, **Post-installation**, **Unattend**, **Optional features**, **AppX removals**, **AI components** | [Customization](../customization/README.md) |
 
 Each row shows its value and one state: **Configured**, **Default**, **Disabled**, **Not configured**, **Not selected** or **Needs attention**.
 
@@ -48,6 +48,7 @@ Each row shows its value and one state: **Configured**, **Default**, **Disabled*
 | Foundry Connect and, with Domain Join, the post-installation application | In the boot image | In `Runtime\` on the cache partition, **Foundry Cache** | In the boot image |
 | Foundry Deploy | Not on the media: downloaded at each start | Not on the media: downloaded at a start, then kept in `Runtime\` | Not on the media: downloaded at each start |
 | [Custom images](../customization/custom-windows-images.md) | In the ISO, in `Cache\OperatingSystems\Custom\` | Same folder on the cache partition | Not delivered |
+| [Custom drivers](../customization/custom-drivers.md) | In the ISO, in `Cache\DriverPacks\Custom\` | Same folder on the cache partition | Not delivered |
 | [Post-installation](../customization/post-installation.md) content you imported | In the ISO, in `Cache\PreOobe\` | Same folder on the cache partition | Not delivered |
 | Cache of downloaded Windows images and driver packs | None: every deployment downloads again | On the cache partition, kept by updates | None |
 

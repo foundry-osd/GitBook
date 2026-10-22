@@ -13,7 +13,7 @@ On **Summary**, the last step of the wizard, you check every choice, start the d
 | --- | --- |
 | **Target device** | Answer file, computer name, target disk, firmware updates and the detected hardware |
 | **Operating system** | Release, edition, architecture, language, license channel and build, or the custom image and its index |
-| **Drivers** | Driver source and, for a manufacturer, the model and pack version |
+| **Drivers** | Driver source and, for a manufacturer, the model and pack version, or, for custom drivers, the driver set |
 | **Autopilot** | Provisioning method and the profile or group tag |
 | **Domain join** | Domain and organizational unit, or **Do not join a domain**. Listed only when the media uses Domain Join |
 | **Windows customization** | Windows setup options, application and AI component removal, optional features |
@@ -90,6 +90,7 @@ The order below is the one used when the Windows image is checked before the dis
 | **Download driver pack** | **Driver source** is not **None** | The pack was in the cache, or Microsoft Update Catalog was unreachable or had no driver: the deployment continues without those drivers |
 | **Extract driver pack**, **Install Windows drivers** | The drivers can be added to Windows before the restart | Removed from the list when Microsoft Update Catalog returned nothing |
 | **Stage driver installer** | The pack is an installer that runs after the restart (Lenovo `.exe`, Surface `.msi`) | Not skipped |
+| **Stage custom drivers** | **Driver source** is **Custom drivers** | Not skipped |
 | **Download firmware update** | **Apply firmware updates** is checked on a physical device | The device runs on battery, reports no firmware identifier, has no update in Microsoft Update Catalog, or the catalog is unreachable. Also when the update was in the cache |
 | **Extract firmware update**, **Stage firmware update** | A firmware update was found | Not skipped |
 | **Set computer name** | **Use Foundry settings** is selected | Not skipped |

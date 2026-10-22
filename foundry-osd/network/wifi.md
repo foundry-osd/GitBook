@@ -10,7 +10,7 @@ The Wi-Fi page does two separate things. Its main switch adds Wi-Fi support to t
 ## Before you start
 
 - **Enabling Wi-Fi changes how the media is built.** The standard Windows PE image has no Wi-Fi support. Foundry downloads a Windows 11 24H2 image for the architecture and language of the boot image, and builds the boot image from its Windows Recovery Environment (Windows RE). Media creation takes longer and needs disk space for that download, which later builds reuse.
-- **Check the Wi-Fi adapter driver.** Foundry adds the latest Intel wireless driver package from its driver catalog. For any other adapter, put its driver in the **Custom driver folder** on the [General](../general.md) page.
+- **Check the Wi-Fi adapter driver.** Foundry adds the latest Intel wireless driver package from its driver catalog. For any other adapter, put its driver in the **Additional WinPE driver folder** on the [General](../general.md) page.
 - **For an enterprise network (802.1X), export the profile as XML** on a Windows computer that already connects to it:
 
   ```

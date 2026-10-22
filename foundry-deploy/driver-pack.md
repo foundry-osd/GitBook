@@ -19,8 +19,9 @@ On **Drivers**, the third step of the wizard, you choose where Foundry Deploy ge
 | **None** | No drivers are added. Windows uses the drivers it already contains. | The device is a virtual machine |
 | **Microsoft Update Catalog** | Drivers for the storage controllers, disks and network adapters detected on this device. Nothing else: no graphics, audio or chipset drivers. | The device model has no pack in the manufacturer catalogs |
 | **Dell**, **Lenovo**, **HP**, **Microsoft** | The manufacturer's driver pack for the model and Windows version you select. **Microsoft** covers Surface devices. | The device model has a pack in that catalog |
+| **Custom drivers** | A driver set your administrator added to the media. You pick the set under **Driver set**. | The media has a default set, also on a virtual machine |
 
-**Model** and **Version** appear only for a manufacturer source.
+**Model** and **Version** appear only for a manufacturer source. **Driver set** appears only for **Custom drivers**, which is listed only when the media carries driver sets. Foundry Deploy started over PXE does not list it.
 
 {% hint style="warning" %}
 When Foundry pre-selects a manufacturer, the model matches the device. When you switch to a manufacturer source yourself and the device is not in its catalog, **Model** shows the first entry of the list, which is another machine. Select the right model, or go back to **Microsoft Update Catalog**.
@@ -34,12 +35,24 @@ When Foundry pre-selects a manufacturer, the model matches the device. When you 
 | **Microsoft Update Catalog** | **Download driver pack**, then **Extract driver pack**, **Install Windows drivers** and **Install recovery drivers**. The drivers are in Windows before the restart. |
 | A pack Foundry can unpack: Dell, HP, and any `.cab` or `.zip` pack | The same four steps. The drivers are in Windows before the restart. |
 | A pack that is an installer: Lenovo `.exe`, Surface `.msi` | **Download driver pack**, then **Stage driver installer**. The installer runs in Windows after the restart, before your organization's post-installation actions. |
+| **Custom drivers** | **Stage custom drivers**, which copies the set to the target device and verifies every file, then **Install Windows drivers** and **Install recovery drivers**. The drivers are in Windows and in the Windows recovery environment before the restart. |
 
 The search and the download need the network. Manufacturer packs are large, so allow time for the download. A pack already present in the [cache of the USB drive](../foundry-osd/media/README.md#what-each-media-type-carries), where Foundry keeps downloaded images and packs between deployments, is verified and reused instead of downloaded.
 
 If Microsoft Update Catalog cannot be reached, or returns no driver for the device, **Download driver pack** is skipped and the deployment continues without those drivers. The step shows the reason, for example "Microsoft Update Catalog is not reachable; skipping driver lookup." Check the step before you hand over the device: without a storage or network driver, Windows may not start or may have no network.
 
 For a custom image, Foundry matches packs to the Windows release of the image build, as it does for a catalog image.
+
+## Custom drivers
+
+Foundry Deploy does not match a driver set to the device: you choose it, and it injects the INF files of the set. INF files that do not apply to the device or to the media architecture are skipped. Use the set your administrator prepared for this model. How sets are made is in [Custom drivers](../foundry-osd/customization/custom-drivers.md).
+
+<figure>
+  <img src="../.gitbook/assets/foundry-deploy-driver-pack-02-custom-drivers.png" alt="Drivers step with Custom drivers selected as the driver source and a driver set chosen in the Driver set box">
+  <figcaption>With <strong>Custom drivers</strong>, choose the set in <strong>Driver set</strong>; no model or version is needed.</figcaption>
+</figure>
+
+When the media carries no driver sets, the step behaves as without this feature. When the driver sets of the media fail the integrity check, a warning reads "The custom drivers on this media failed the integrity check and are not offered. Choose another driver source or rebuild the boot media." and the usual pre-selection applies. If **Stage custom drivers** cannot verify a file, the deployment stops: "The selected custom drivers are unavailable or failed verification. Reconnect the deployment media, or restart deployment and choose another driver source."
 
 ## If something stops you
 

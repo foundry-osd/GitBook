@@ -8,11 +8,11 @@ A PXE server sends one file to the device, `sources\boot.wim`. Everything Foundr
 
 | Delivered with the boot image | Not delivered |
 | --- | --- |
-| Windows PE with its drivers, and Foundry Connect | [Custom Windows images](../customization/custom-windows-images.md) |
+| Windows PE with its drivers, and Foundry Connect | [Custom Windows images](../customization/custom-windows-images.md) and [custom driver sets](../customization/custom-drivers.md) |
 | Every option of your configuration: network, Windows Autopilot, Domain Join, computer name, OOBE, answer file, optional features, AppX removals, AI components | [Post-installation](../customization/post-installation.md) actions that use imported files: every **PowerShell script (.ps1)** and **Software (.exe/.msi)** action, and a **Command line** action with imported content |
 | Post-installation actions that need no imported file: **Command line** without content and **Restart Windows** | A cache: each deployment downloads Windows and the driver pack again |
 
-Foundry OSD says the same on the two pages concerned: "Not available with PXE boot. Custom images require the full ISO or USB media." and "Actions that use imported files are not available with PXE boot. They require the full ISO or USB media."
+Foundry OSD says the same on the three pages concerned: "Not available with PXE boot. Custom images require the full ISO or USB media.", "Not available with PXE boot. Custom drivers require the full ISO or USB media." and "Actions that use imported files are not available with PXE boot. They require the full ISO or USB media."
 
 As with an ISO, Foundry Deploy is downloaded when the device starts. The full comparison is in [What each media type carries](README.md#what-each-media-type-carries).
 
