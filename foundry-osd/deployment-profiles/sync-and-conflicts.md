@@ -7,7 +7,8 @@ Once a configuration is [shared or connected](../deployment-profiles.md#create-a
 - **Synchronize** checks at once: it sends your changes, or applies those of the other PCs.
 - **Automatic sync**, on after sharing or connecting, checks at startup and every 30 seconds. It waits 2 seconds after your last change, and while a dialog is open or media is being created.
 - Changes from another PC are applied by themselves only at startup, before you change anything, or while **Settings** is open. Elsewhere the status reads **Changes available**.
-- The ISO output path, the custom driver folder and the telemetry choices are never synchronized.
+- The ISO output path, the Additional WinPE driver folder and the telemetry choices are never synchronized.
+- The list of custom driver sets and the default set are synchronized, not the driver files: import the folder again on the other PC.
 - When passwords and confidential files are not shared, each PC keeps its own, as long as the account or the certificate they belong to does not change.
 
 ## Status next to Synchronize

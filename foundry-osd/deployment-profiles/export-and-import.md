@@ -21,7 +21,8 @@
 | Passwords: Wi-Fi, Deployment password, local accounts of OOBE, certificates | No | Yes |
 | Confidential files present on this PC: answer files, Ethernet 802.1X and Wi-Fi profiles, PFX certificates | No | Yes |
 | Passwords of the join accounts of zero-touch Domain Join | No | No |
-| Custom Windows images, post-installation packages, the custom driver folder | No | No |
+| Files of custom Windows images, post-installation packages and custom driver sets: the file carries the list of them and the default set | No | No |
+| The Additional WinPE driver folder | No | No |
 
 Anyone who has the file and its password can read what it contains, certificate private keys included. Send the password by another channel than the file.
 
@@ -40,7 +41,7 @@ The imported configuration is added to the list and becomes the one in use. The 
 - Select again each file reported as missing, and type the passwords that were not in the file.
 - Turn on **Remember passwords** once nothing is missing.
 - Set the **Additional WinPE driver folder** in [General](../general.md): it is not part of the file. The ISO output path and the telemetry choices of this PC are kept.
-- Import the same custom Windows images and post-installation packages on this PC when the configuration uses them.
+- Import the same custom Windows images, post-installation packages and driver folders on this PC when the configuration uses them.
 - Open [Start](../media/README.md) and clear every row marked **Needs attention**.
 
 ## Limits

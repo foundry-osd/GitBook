@@ -9,7 +9,10 @@ Drivers added to Windows PE itself are a different setting: see **WinPE drivers*
 - **Source.** A folder of `.inf` drivers. Subfolders are allowed, and the folder must contain at least one `.inf` file. Packed content is not supported: no `.cab`, `.zip` or `.exe`.
 - **Disk space.** Foundry OSD copies the folder into `%LOCALAPPDATA%\Foundry\Packages\Drivers`, so that drive needs room for the whole folder.
 - **Media type.** The page states: "Not available with PXE boot. Custom drivers require the full ISO or USB media."
-- **Right drivers.** Foundry does not check driver sets. Choose INF files that match your device models and the media **Architecture** set in [General](../general.md), `x64` or `arm64`. Foundry Deploy only injects the INF files of the folder, and INF files that do not apply to the device or to the architecture are skipped.
+
+{% hint style="warning" %}
+Foundry does not check the architecture or the models of a driver set. You are responsible for choosing the right drivers: INF files for the media **Architecture** set in [General](../general.md), `x64` or `arm64`, that match your device models. Foundry Deploy only injects the INF files of the folder, and INF files that do not apply are skipped.
+{% endhint %}
 
 ## Import a driver folder
 
@@ -38,13 +41,15 @@ While the page is **Enabled**, Foundry OSD creates media only if at least one se
 
 ## What the technician sees
 
-In [Select a driver pack](../../foundry-deploy/driver-pack.md), **Custom drivers** is a fourth **Driver source**, next to **None**, **Microsoft Update Catalog** and the manufacturers. The technician picks one set under **Driver set**. When you mark a default set, Foundry Deploy preselects **Custom drivers** with that set, also on virtual machines. Without a default set, the usual pre-selection applies.
+In [Select a driver pack](../../foundry-deploy/driver-pack.md), **Custom drivers** is another **Driver source**. The technician picks one set under **Driver set**. When you mark a default set, Foundry Deploy preselects **Custom drivers** with that set, also on virtual machines. Without a default set, the usual pre-selection applies.
 
 During the deployment, Foundry Deploy verifies the set file by file while it copies it to the target device (the step **Stage custom drivers**), then adds it to Windows and to the Windows recovery environment.
 
 ## Update a USB drive
 
-An [update](../media/update-usb.md) of a USB drive writes the driver sets of the current configuration to the **Foundry Cache** partition and removes the driver sets the new media no longer uses, including all of them when none remain. Foundry OSD checks the free space before it removes anything. If the update does not fit, create the USB drive again.
+An [update](../media/update-usb.md) of a USB drive writes the driver sets of the current configuration to the **Foundry Cache** partition and removes the driver sets the new media no longer uses, including all of them when none remain. Foundry OSD checks the free space before it removes anything, because the previous content is still on the drive. If the update does not fit, it stops with "The USB cache partition does not have enough free space for the updated content, because the previous content stays on the drive during the update. Nothing has been erased or formatted. Create the USB media again instead of updating it." Then [create the USB drive](../media/create-usb.md) again.
+
+If the update succeeds but ends with "Unused custom driver sets could not be removed from the USB drive.", the old sets are still on the drive and keep using space. The next update tries again, or create the USB drive again.
 
 ## Check the result
 
@@ -54,7 +59,7 @@ An [update](../media/update-usb.md) of a USB drive writes the driver sets of the
 
 ## Limits
 
-- 256 driver sets per configuration, one of them optional default.
+- 256 driver sets per configuration, at most one of them the default. A name accepts up to 200 characters.
 - Up to 20,000 files and 20,000 folders per set. Relative paths are limited to 150 characters.
 - A set cannot contain a symbolic link, a junction or a cloud placeholder file.
 - Foundry Deploy applies one driver source at a time: a set cannot be combined with a manufacturer pack.

@@ -50,7 +50,7 @@ Without access to the host, Foundry Deploy cannot list Windows images or driver 
 
 - **Microsoft Update Catalog**, the other driver source of Foundry Deploy, is queried directly at Microsoft. See [Select a driver pack](../foundry-deploy/driver-pack.md).
 - [Custom Windows images](../foundry-osd/customization/custom-windows-images.md) come from the media you created, not from a catalog.
-- The custom driver folder of [General](../foundry-osd/general.md) is copied from the workstation.
+- The Additional WinPE driver folder of [General](../foundry-osd/general.md) and the folders of [Custom drivers](../foundry-osd/customization/custom-drivers.md) are copied from the workstation.
 
 ## Related
 

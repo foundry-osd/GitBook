@@ -19,7 +19,7 @@ Otherwise, find what you see below.
 | Pages grayed out, badge **ADK not ready** | [Most pages are grayed out](#grayed-out) |
 | A red or yellow status bar on the **ADK** page | [ADK is not installed](#adk-not-installed), [version is unsupported](#adk-unsupported), [add-on is missing](#winpe-missing), [add-on needs repair](#winpe-repair) |
 | An ADK installation that ends with a message | [Windows ADK installation failed](#adk-failed), [canceled](#adk-canceled), [finished with remaining requirements](#adk-remaining) |
-| A message on **General**, or **Start** blocked by a General option | [No language packs](#no-language-packs), [passwords](#matching-passwords), [custom driver folder](#driver-folder) |
+| A message on **General**, or **Start** blocked by a General option | [No language packs](#no-language-packs), [passwords](#matching-passwords), [Additional WinPE driver folder](#driver-folder) |
 | An update that fails or is not installed | [Update check failed](#update-failed), [stays on Apply update](#update-stays), [check skipped](#update-skipped), [update dialog before media creation](media-creation.md#update-advisory) |
 | A proxy test that fails | [Check the proxy settings, Connection failed](#proxy) |
 | Options back to their defaults | [Settings were reset](#settings-reset) |

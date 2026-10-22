@@ -45,6 +45,8 @@ New custom images, post-installation content and driver sets are copied before *
 
 Eject the drive, start a test device from it, and check that Foundry Connect opens, then Foundry Deploy, with the options you changed.
 
+If the update ends with "Unused custom driver sets could not be removed from the USB drive.", it still succeeded: see [Custom drivers](../customization/custom-drivers.md#update-a-usb-drive).
+
 ## Limits
 
 - The boot files must fit the existing **BOOT** partition. Foundry OSD checks this before it formats. If they do not fit, reduce the drivers or [create an ISO](create-iso.md).

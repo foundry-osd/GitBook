@@ -16,7 +16,7 @@ On this page the disk has been erased, unless an entry says otherwise. Its previ
 | **Apply Windows image** | [Image apply failed](#image-apply-failed) |
 | **Configure Windows boot** | [Boot configuration failed](#boot-configuration-failed) |
 | **Copy answer file**, **Set computer name**, **Configure Windows setup** | [Name or Windows setup](#name-or-windows-setup) |
-| **Download driver pack**, **Extract driver pack**, **Install Windows drivers**, **Stage driver installer** | [A driver pack step fails](#driver-pack-download) |
+| **Download driver pack**, **Extract driver pack**, **Install Windows drivers**, **Stage driver installer**, **Stage custom drivers** | [A driver pack step fails](#driver-pack-download) |
 | **Download driver pack** is skipped with a reason about Microsoft Update Catalog | [No driver from Microsoft Update Catalog](#no-driver-from-microsoft-update-catalog) |
 | A firmware update step is skipped or fails | [Firmware update](#firmware-update) |
 | **Configure Windows features** | [Optional features](#optional-features) |
@@ -95,7 +95,7 @@ The error screen names the Autopilot step "Provision Autopilot". **Steps** shows
 
 ## A driver pack step fails <a href="#driver-pack-download" id="driver-pack-download"></a>
 
-**Where:** **Download driver pack**, **Extract driver pack**, **Install Windows drivers** or **Stage driver installer**.
+**Where:** **Download driver pack**, **Extract driver pack**, **Install Windows drivers**, **Stage driver installer** or **Stage custom drivers**.
 
 **Cause:** it depends on the step and the message.
 
@@ -108,6 +108,7 @@ The error screen names the Autopilot step "Provision Autopilot". **Steps** shows
 | **Extract driver pack** | "Driver pack was not downloaded." or an error from the extraction tool | The pack is missing, the archive is damaged, or the disk is full |
 | **Install Windows drivers** | "No extracted INF driver content is available." | The pack contains no driver that can be added to Windows before the restart |
 | **Stage driver installer** | "Driver pack source content is unavailable for first-boot staging." or "First-boot driver pack staging was requested without a supported command." | The downloaded installer is missing, or the pack is in a format Foundry cannot run |
+| **Stage custom drivers** | "The selected custom drivers are unavailable or failed verification. Reconnect the deployment media, or restart deployment and choose another driver source." | The USB drive or ISO that carries the driver set was removed, or a file of the set no longer matches what Foundry OSD wrote. Reconnect the media, or restart and choose another driver source. If it repeats, create or update the media again |
 
 A driver that Windows refuses does not fail **Install Windows drivers**: it is recorded as a warning in the log and the other drivers are installed.
 

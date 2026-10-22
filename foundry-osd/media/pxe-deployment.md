@@ -8,8 +8,7 @@ A PXE server sends one file to the device, `sources\boot.wim`. Everything Foundr
 
 | Delivered with the boot image | Not delivered |
 | --- | --- |
-| Windows PE with its drivers, and Foundry Connect | [Custom Windows images](../customization/custom-windows-images.md) |
-| | [Custom drivers](../customization/custom-drivers.md): Foundry Deploy does not offer the **Custom drivers** source |
+| Windows PE with its drivers, and Foundry Connect | [Custom Windows images](../customization/custom-windows-images.md) and [custom driver sets](../customization/custom-drivers.md) |
 | Every option of your configuration: network, Windows Autopilot, Domain Join, computer name, OOBE, answer file, optional features, AppX removals, AI components | [Post-installation](../customization/post-installation.md) actions that use imported files: every **PowerShell script (.ps1)** and **Software (.exe/.msi)** action, and a **Command line** action with imported content |
 | Post-installation actions that need no imported file: **Command line** without content and **Restart Windows** | A cache: each deployment downloads Windows and the driver pack again |
 
