@@ -33,12 +33,11 @@ Create one `.iso` file to start virtual machines, to attach through a remote man
 
 ## What decides the boot image
 
-There is no boot image option to set. Foundry OSD chooses the base of the boot image from your network options:
+There is no boot image option to set. Every boot image, `x64` or `arm64`, with or without Wi-Fi, is built from the Windows Recovery Environment (Windows RE) of the newest Windows 11 package in the [catalog](../../reference/catalog.md) for the **Architecture** and the **WinPE boot language** of [General](../general.md). Its drivers are more recent than those of the standard Windows PE of the ADK, which matters on recent hardware.
 
-- With [Wi-Fi](../network/wifi.md) turned on, the boot image is built from the Windows Recovery Environment, which can connect to Wi-Fi. The first build downloads a Windows 11 package of several GB and keeps it in `%ProgramData%\Foundry\Cache\WindowsSources`.
-- Otherwise, the boot image is the standard Windows PE of the ADK.
-
-A build for `arm64` downloads the same Windows 11 package, with or without Wi-Fi.
+- The first build for an architecture and a language downloads a Windows 11 package of several GB, keeps its Windows RE in `%ProgramData%\Foundry\Cache\WinRe`, then deletes the package. Later builds reuse that Windows RE until the catalog lists a newer package.
+- [Wi-Fi](../network/wifi.md) adds the files and the Intel driver that Windows RE needs to join a wireless network.
+- When no new Windows RE can be obtained, for example without Internet access, Foundry OSD reuses the one it kept. Without one, an `x64` build uses the standard Windows PE of the ADK, without Wi-Fi, and the result message says so. An `arm64` build fails instead: see [Media creation](../../troubleshooting/media-creation.md#winre-unavailable).
 
 ## Check the result
 
