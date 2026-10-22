@@ -12,8 +12,8 @@ Foundry OSD can use a proxy, set in [Settings](../foundry-osd/settings.md#proxy)
 | `raw.githubusercontent.com` | 443, HTTPS | Catalog of Windows PE drivers and catalog of Windows releases | When the media uses Dell or HP drivers, Wi-Fi, or `arm64` |
 | `go.microsoft.com` | 443, HTTPS | Download of the Windows ADK and Windows PE add-on installers | Until the ADK is installed |
 | `dl.delivery.mp.microsoft.com` | 80, HTTP | Windows package from which the boot image is built | When the media uses Wi-Fi or `arm64` |
-| `downloads.dell.com` | 443, HTTPS | Dell drivers for Windows PE | When **Dell** is on in **Driver options** |
-| `ftp.hp.com`, `ftp.ext.hp.com` | 443, HTTPS | HP drivers for Windows PE | When **HP** is on in **Driver options** |
+| `downloads.dell.com` | 443, HTTPS | Dell drivers for Windows PE | When **Dell** is on in **WinPE drivers** |
+| `ftp.hp.com`, `ftp.ext.hp.com` | 443, HTTPS | HP drivers for Windows PE | When **HP** is on in **WinPE drivers** |
 | `catalog.s.download.windowsupdate.com` | 443, HTTPS | Intel Wi-Fi driver for Windows PE | When the media uses Wi-Fi |
 | `login.microsoftonline.com`, `graph.microsoft.com` | 443, HTTPS | Sign-in to your tenant and Microsoft Graph requests from the Windows Autopilot pages | When you use Windows Autopilot |
 | `eu.i.posthog.com` | 443, HTTPS | Telemetry and remote diagnostics | Optional. See [Telemetry and privacy](telemetry-and-privacy.md). |

@@ -44,7 +44,7 @@ Foundry Connect writes its log to `X:\Foundry\Logs\FoundryConnect.log`. To take 
   3. The device has no wired adapter.
 - **Fix:**
   1. Try another adapter, or use Wi-Fi if the **Wi-Fi** list is shown.
-  2. The administrator adds the driver with the driver options or the **Custom driver folder** on the [General](../foundry-osd/general.md) page, then recreates the media.
+  2. The administrator adds the driver with the **WinPE drivers** options or the **Additional WinPE driver folder** on the [General](../foundry-osd/general.md) page, then recreates the media.
 - **Collect:** The device model and the adapter model.
 
 ## "No active link" <a href="#no-active-link" id="no-active-link"></a>
@@ -103,7 +103,7 @@ Foundry Connect writes its log to `X:\Foundry\Logs\FoundryConnect.log`. To take 
   2. The wireless adapter is turned off in the firmware or by a hardware switch.
 - **Fix:**
   1. Use a wired connection for this deployment.
-  2. The administrator puts the adapter driver in the **Custom driver folder** on the [General](../foundry-osd/general.md) page and recreates the media.
+  2. The administrator puts the adapter driver in the **Additional WinPE driver folder** on the [General](../foundry-osd/general.md) page and recreates the media.
 - **Collect:** The device model and the wireless adapter model.
 
 ## "No Wi-Fi networks are currently visible." <a href="#no-wi-fi-networks" id="no-wi-fi-networks"></a>

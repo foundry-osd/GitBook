@@ -39,7 +39,7 @@ The imported configuration is added to the list and becomes the one in use. The 
 
 - Select again each file reported as missing, and type the passwords that were not in the file.
 - Turn on **Remember passwords** once nothing is missing.
-- Set the **Custom driver folder** in [General](../general.md): it is not part of the file. The ISO output path and the telemetry choices of this PC are kept.
+- Set the **Additional WinPE driver folder** in [General](../general.md): it is not part of the file. The ISO output path and the telemetry choices of this PC are kept.
 - Import the same custom Windows images and post-installation packages on this PC when the configuration uses them.
 - Open [Start](../media/README.md) and clear every row marked **Needs attention**.
 

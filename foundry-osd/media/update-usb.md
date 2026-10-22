@@ -36,9 +36,10 @@ The drive must have an NTFS volume named `Foundry Cache` and its **BOOT** partit
 | --- | --- |
 | The whole **BOOT** partition: boot files and the boot image, with your current options | `Cache\OperatingSystems`, `Cache\DriverPacks` and `Cache\Firmware`: the downloads of earlier deployments |
 | Foundry Connect, and the post-installation application with Domain Join, in `Runtime\` on the cache partition | The copy of Foundry Deploy downloaded by an earlier start, `Logs\`, and any file you copied to the cache partition |
-| The custom images and post-installation content of the current configuration, added to the cache partition | Custom images and post-installation content written by earlier builds. They keep using space. |
+| The custom images, post-installation content and custom driver sets of the current configuration, added to the cache partition | Custom images and post-installation content written by earlier builds. They keep using space. |
+| The driver sets that the new media no longer uses, removed from `Cache\DriverPacks\Custom\`, all of them when no set is left | The downloaded driver packs in `Cache\DriverPacks` |
 
-New custom images and post-installation content are copied before **BOOT** is formatted, and Foundry OSD checks first that the cache partition has room for them.
+New custom images, post-installation content and driver sets are copied before **BOOT** is formatted, and Foundry OSD checks first that the cache partition has room for them, before it removes anything. If the update does not fit, [create the USB drive](create-usb.md) again. See [Custom drivers](../customization/custom-drivers.md#update-a-usb-drive).
 
 ## Check the result
 

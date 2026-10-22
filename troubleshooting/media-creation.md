@@ -184,7 +184,7 @@ For the second form, Foundry OSD could not read the working folders: check that 
 | "No Windows 11 24H2 Windows source matched the requested architecture and language." | No package exists for that architecture and language | Choose a **WinPE boot language** in which Windows 11 is published |
 | "The cached Windows source package failed hash validation." | The downloaded package is damaged | Close Foundry OSD, delete `%ProgramData%\Foundry\Cache\WindowsSources`, create the media again |
 | "Failed to extract driver package with bundled 7-Zip.", "Executable driver package was extracted with 7-Zip but no INF files were found." or "Unsupported driver package format." | A downloaded **Dell** or **HP** driver package is damaged or cannot be used | Close Foundry OSD, delete `%ProgramData%\Foundry\Cache\WinPeDrivers`, create the media again |
-| "Failed to inject driver package into the mounted image." | Windows PE refused a driver, downloaded or from your **Custom driver folder** | Remove the driver named in `dism.log` from the folder, or delete the driver cache as in the row above |
+| "Failed to inject driver package into the mounted image." | Windows PE refused a driver, downloaded or from your **Additional WinPE driver folder** | Remove the driver named in `dism.log` from the folder, or delete the driver cache as in the row above |
 
 **Collect:** `Foundry.log` and `dism.log`.
 
@@ -196,9 +196,9 @@ For the second form, Foundry OSD could not read the working folders: check that 
 
 | Message | Cause | Fix |
 | --- | --- | --- |
-| "Custom drivers total at least \<size\>; the maximum is \<size\>. Select only the network and storage drivers needed by Windows PE." | The **Custom driver folder**, subfolders included, exceeds 2 GiB. The size shown is what was counted when the check stopped | Point **Custom driver folder** to a folder with only the network and storage drivers Windows PE needs |
+| "Custom drivers total at least \<size\>; the maximum is \<size\>. Select only the network and storage drivers needed by Windows PE." | The **Additional WinPE driver folder**, subfolders included, exceeds 2 GiB. The size shown is what was counted when the check stopped | Point **Additional WinPE driver folder** to a folder with only the network and storage drivers Windows PE needs |
 | "Custom driver snapshots exceed the entry limit or contain a reparse point." or "Custom driver snapshots do not follow reparse points." | The folder holds more than 10,000 files and folders, or contains a junction or a symbolic link | Use a plain folder without links |
-| "The USB BOOT partition needs approximately \<size\>, but its capacity is \<size\>. Nothing has been erased or formatted. Reduce customizations or drivers, or create an ISO." | The boot files do not fit the **BOOT** partition, which is 2 GiB whatever the size of the drive | Reduce the custom drivers, turn off the **Driver options** you do not need, or [create an ISO](../foundry-osd/media/create-iso.md) |
+| "The USB BOOT partition needs approximately \<size\>, but its capacity is \<size\>. Nothing has been erased or formatted. Reduce customizations or drivers, or create an ISO." | The boot files do not fit the **BOOT** partition, which is 2 GiB whatever the size of the drive | Reduce the custom drivers, turn off the **WinPE drivers** options you do not need, or [create an ISO](../foundry-osd/media/create-iso.md) |
 | "A boot media file is \<size\>; FAT32 supports at most \<size\> per file. Reduce the boot image size or create an ISO." | One file of the media is larger than the FAT32 **BOOT** partition accepts | The same |
 | "The USB BOOT partition capacity could not be verified. Nothing has been erased or formatted. Check and reconnect the USB drive, then retry. Also check that the source files are accessible." | Foundry OSD could not measure the partition or the files to copy | Reconnect the drive, select **Refresh** and start again |
 

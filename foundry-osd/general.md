@@ -3,7 +3,7 @@
 The General page sets the options every deployment media needs: processor architecture, boot signature, Windows PE language, keyboard and time zone, what happens when a deployment ends, an optional password, and extra drivers for Windows PE. The defaults suit a first test; open the page at least once before you create media.
 
 <figure>
-  <img src="../.gitbook/assets/foundry-osd-general-01-overview.png" alt="General page with Architecture and signature, Secure Boot, WinPE boot language, WinPE keyboard layout on English and Default, Windows PE time zone on Automatic, Automatic restart, Password protection and Driver options, and the Media creation card">
+  <img src="../.gitbook/assets/foundry-osd-general-01-overview.png" alt="General page with Architecture and signature, Secure Boot, WinPE boot language, WinPE keyboard layout on English and Default, Windows PE time zone on Automatic, Automatic restart, Password protection and WinPE drivers, and the Media creation card">
   <figcaption>The cards of the page in order. <strong>Review and start</strong> opens the Start page.</figcaption>
 </figure>
 
@@ -27,8 +27,8 @@ The [ADK](adk.md) page must report **ADK is ready**. Until then **General** cann
 | **Automatic restart** | Restarts the device after a successful deployment. | On |
 | **Restart delay** | Seconds before that restart, from 0 to 3600. 0 restarts at once. | 10 |
 | **Password protection** | Asks the technician for a password before deployment. See below. | Off |
-| **Driver options** | Adds the **Dell** or **HP** driver set for Windows PE to the boot image. | Both off |
-| **Custom driver folder** | Folder of extra `.inf` drivers to add to Windows PE. | Empty |
+| **WinPE drivers** | Adds the **Dell** or **HP** driver set to the Windows PE boot image only. | Both off |
+| **Additional WinPE driver folder** | Optional folder of extra `.inf` drivers added to the Windows PE boot image. | Empty |
 
 ### Secure Boot
 
@@ -50,9 +50,9 @@ With **Automatic**, Foundry looks up the time zone on the target device, from th
 
 Select a time zone to skip the lookup, for example when the public IP address of the site is located in another region. This option affects Windows PE only, not the installed Windows.
 
-### Driver options
+### WinPE drivers
 
-Windows PE only needs drivers for the network and storage hardware it must use. Turn on **Dell** or **HP** for devices of those manufacturers, and add a **Custom driver folder** for anything else.
+Windows PE only needs drivers for the network and storage hardware it must use. Turn on **Dell** or **HP** for devices of those manufacturers, and add an **Additional WinPE driver folder** for anything else. These drivers reach the boot image only. To add drivers to the deployed Windows, use [Custom drivers](customization/custom-drivers.md).
 
 - The folder must exist and contain `.inf` files, not packed installers.
 - Its content, subfolders included, is limited to 2 GiB and to 10,000 files and folders, and must not contain a junction or a symbolic link.
@@ -81,7 +81,7 @@ Foundry OSD saves the Deployment password with the configuration while **Remembe
 
 ## Check the result
 
-[Start](media/README.md) shows one row for each option of this page, from **Architecture** to **Driver options**, with the value you chose. None of them must be marked **Needs attention**.
+[Start](media/README.md) shows one row for each option of this page, from **Architecture** to **WinPE drivers**, with the value you chose. None of them must be marked **Needs attention**.
 
 ## Related
 

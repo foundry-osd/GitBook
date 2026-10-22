@@ -190,9 +190,9 @@ If only the architecture you do not use is incomplete, you can ignore the warnin
 
 ## "Custom driver folder does not exist." <a href="#driver-folder" id="driver-folder"></a>
 
-**Where:** **Start** page, **Driver options** row. A second form is "Custom driver folder does not contain .inf files.".
+**Where:** **Start** page, **WinPE drivers** row. A second form is "Custom driver folder does not contain .inf files.".
 
-**Cause:** The folder set in **General** > **Driver options** > **Custom driver folder** was moved, is on a drive that is not connected, or holds only packed installers.
+**Cause:** The folder set in **General** > **WinPE drivers** > **Additional WinPE driver folder** was moved, is on a drive that is not connected, or holds only packed installers.
 
 **Fix:** In **General**, select a folder that contains extracted drivers with their `.inf` files, or empty the field.
 

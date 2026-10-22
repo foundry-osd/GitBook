@@ -23,6 +23,7 @@
   * [Customization](foundry-osd/customization/README.md)
     * [OS selection](foundry-osd/customization/operating-system.md)
     * [Custom Windows images](foundry-osd/customization/custom-windows-images.md)
+    * [Custom drivers](foundry-osd/customization/custom-drivers.md)
     * [Unattend (custom answer files)](foundry-osd/customization/unattend.md)
       * [Answer file rules](foundry-osd/customization/unattend/answer-file-rules.md)
     * [Machine naming](foundry-osd/customization/machine-naming.md)

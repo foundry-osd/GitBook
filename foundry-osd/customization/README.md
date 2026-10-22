@@ -6,6 +6,7 @@ The **Customization** pages of Foundry OSD decide which Windows the technician c
 | --- | --- |
 | Limit the Windows versions, languages, editions and license channels the technician can choose | [OS selection](operating-system.md) |
 | Deploy my own Windows image instead of, or next to, the images of the Foundry catalog | [Custom Windows images](custom-windows-images.md) |
+| Add my own drivers to the deployed Windows | [Custom drivers](custom-drivers.md) |
 | Use my own answer file for Windows Setup | [Unattend](unattend.md) |
 | Build the computer name from device data, or prefill it | [Machine naming](machine-naming.md) |
 | Skip setup pages, set privacy defaults and create local accounts | [OOBE](oobe.md) |
@@ -24,7 +25,7 @@ Foundry OSD saves each change as you make it. A change reaches a device only aft
 
 | Stage | What happens |
 | --- | --- |
-| In Foundry Deploy, before the disk is erased | OS selection and Custom Windows images decide which images are offered and preselected. Machine naming proposes the computer name. |
+| In Foundry Deploy, before the disk is erased | OS selection and Custom Windows images decide which images are offered and preselected. Custom drivers adds a driver source. Machine naming proposes the computer name. |
 | In Windows PE, after Windows is applied to the disk | OOBE settings, AI policies and Optional features are written into the installed Windows. |
 | At the first start of Windows, before the first sign-in | Copilot and AI Hub removal, then AppX removals, then Post-installation actions. |
 
@@ -38,7 +39,7 @@ Foundry OSD saves each change as you make it. A change reaches a device only aft
 | **Configured** | The page is on and its settings are valid. |
 | **Needs attention** | The page is on but incomplete or invalid. Foundry OSD cannot create media until you fix the page or switch it off. |
 
-Only Custom Windows images, Unattend, Machine naming, OOBE and Post-installation can show **Needs attention**. Open the page to see what is missing.
+Only Custom Windows images, Custom drivers, Unattend, Machine naming, OOBE and Post-installation can show **Needs attention**. Open the page to see what is missing.
 
 ## Test before production
 
