@@ -7,7 +7,7 @@ Foundry does not carry a list of Windows images or driver packs. It reads three 
 | Catalog | Read by | When | Lists |
 | --- | --- | --- | --- |
 | Windows images | Foundry Deploy | When it starts | Windows 11 images published by Microsoft |
-| Windows images | Foundry OSD | When media uses Wi-Fi or `arm64` | The Windows 11 package used to build the boot image |
+| Windows images | Foundry OSD | Each time it builds media | The Windows 11 package whose Windows RE becomes the boot image |
 | Driver packs | Foundry Deploy | When it starts | Driver packs of Dell, HP, Lenovo and Microsoft Surface |
 | Windows PE drivers | Foundry OSD | When media uses **Dell** or **HP** drivers, or Wi-Fi | Windows PE driver sets of Dell and HP, and one Intel Wi-Fi driver |
 
@@ -20,7 +20,7 @@ Foundry does not carry a list of Windows images or driver packs. It reads three 
 | Copy on the media or the workstation | None. The catalog is downloaded each time. |
 | Proxy | Foundry OSD uses the proxy set in [Settings](../foundry-osd/settings.md). That proxy is not used on the target device. |
 
-Without access to the host, Foundry Deploy cannot list Windows images or driver packs, and Foundry OSD cannot build media that needs a catalog. The full list of hosts, including those of the downloads, is in [Network endpoints](network-endpoints.md).
+Without access to the host, Foundry Deploy cannot list Windows images or driver packs, and Foundry OSD cannot build media that needs a driver catalog. For the boot image, Foundry OSD reuses the Windows RE it kept from an earlier build: see [What decides the boot image](../foundry-osd/media/create-iso.md#what-decides-the-boot-image). The full list of hosts, including those of the downloads, is in [Network endpoints](network-endpoints.md).
 
 ## Windows image catalog
 

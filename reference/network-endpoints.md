@@ -9,9 +9,9 @@ Foundry OSD can use a proxy, set in [Settings](../foundry-osd/settings.md#proxy)
 | Host | Port and protocol | Used for | Required |
 | --- | --- | --- | --- |
 | `github.com`, `api.github.com`, `*.githubusercontent.com` | 443, HTTPS | Updates of Foundry OSD; download of the Foundry applications that go on the media, when media is created | Yes |
-| `raw.githubusercontent.com` | 443, HTTPS | Catalog of Windows PE drivers and catalog of Windows releases | When the media uses Dell or HP drivers, Wi-Fi, or `arm64` |
+| `raw.githubusercontent.com` | 443, HTTPS | Catalog of Windows PE drivers and catalog of Windows releases | Yes for the catalog of Windows releases; the driver catalog when the media uses Dell or HP drivers, or Wi-Fi |
 | `go.microsoft.com` | 443, HTTPS | Download of the Windows ADK and Windows PE add-on installers | Until the ADK is installed |
-| `dl.delivery.mp.microsoft.com` | 80, HTTP | Windows package from which the boot image is built | When the media uses Wi-Fi or `arm64` |
+| `dl.delivery.mp.microsoft.com` | 80, HTTP | Windows package from which the boot image is built | When the catalog lists a newer package than the one kept in `%ProgramData%\Foundry\Cache\WinRe` |
 | `downloads.dell.com` | 443, HTTPS | Dell drivers for Windows PE | When **Dell** is on in **WinPE drivers** |
 | `ftp.hp.com`, `ftp.ext.hp.com` | 443, HTTPS | HP drivers for Windows PE | When **HP** is on in **WinPE drivers** |
 | `catalog.s.download.windowsupdate.com` | 443, HTTPS | Intel Wi-Fi driver for Windows PE | When the media uses Wi-Fi |

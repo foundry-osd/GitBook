@@ -25,7 +25,8 @@ Otherwise, find the message below.
 | "Windows blocked access to the WinPE image files...", "Failed to mount boot.wim." | [Image files are locked](#access-blocked) |
 | "Failed to create WinPE workspace using copype.cmd.", a component "was not found", "PCA2023 requires..." | [The ADK lacks a component](#adk-component) |
 | "Failed to retrieve...", "Failed to download...", "The transfer timed out..." | [A download fails](#download-failed) |
-| A Windows source or driver package that is refused | [A downloaded package is refused](#package-refused) |
+| A driver package that is refused | [A downloaded package is refused](#package-refused) |
+| "ARM64 boot media requires the Windows Recovery Environment...", or a result message saying the media uses the standard Windows PE image | [Windows RE is unavailable](#winre-unavailable) |
 | "Custom drivers total at least...", "The USB BOOT partition needs approximately..." | [Drivers or boot files are too large](#too-large) |
 | "Foundry could not replace the ISO file...", "Unexpected failure while creating WinPE ISO media." | [The ISO cannot be written](#iso-failed) |
 
@@ -154,14 +155,12 @@ For the second form, Foundry OSD could not read the working folders: check that 
 | "Failed to retrieve the WinPE driver catalog." | The catalog of Windows PE drivers |
 | "Failed to parse the WinPE driver catalog." | The same catalog: what was received cannot be read |
 | "Driver package download failed." or "Failed to download driver package." | A **Dell** or **HP** driver set, or the Intel Wi-Fi driver |
-| "Failed to download the operating system catalog." | The catalog of Windows images, used for media with Wi-Fi or `arm64` |
-| "Failed to acquire a verified Windows source package." | The Windows 11 package that such media is built from |
 | "Failed to prepare Foundry runtime payloads." or "Failed to provision Foundry runtime payloads." | The Foundry applications that go on the media |
 | "The transfer timed out. Check your connection and try again." | Any of these downloads: no data arrived for two minutes |
 
 **Cause:** The workstation cannot reach a host this build needs.
 
-- The [catalogs](../reference/catalog.md) on `raw.githubusercontent.com` are needed only with **Dell** or **HP** drivers, Wi-Fi or `arm64`. A build can therefore fail the day after you turn on Wi-Fi.
+- The [catalog](../reference/catalog.md) of Windows PE drivers on `raw.githubusercontent.com` is needed only with **Dell** or **HP** drivers, or Wi-Fi. The catalog of Windows images and the Windows 11 package are covered in [Windows RE is unavailable](#winre-unavailable).
 - The other hosts are GitHub and the download servers of Dell, HP and Microsoft.
 
 **Fix:**
@@ -172,17 +171,33 @@ For the second form, Foundry OSD could not read the working folders: check that 
 
 **Collect:** `Foundry.log`.
 
-## "Failed to prepare boot image dependencies from every matching operating system source." <a href="#package-refused" id="package-refused"></a>
+## "ARM64 boot media requires the Windows Recovery Environment..." <a href="#winre-unavailable" id="winre-unavailable"></a>
 
-**Where:** Failure dialog, after "Technical details:". Media with Wi-Fi or `arm64` takes files from a Windows 11 package of several GB, chosen for the **Architecture** and the **WinPE boot language** of **General**.
+**Where:** With `arm64`, failure dialog, after "Technical details:". With `x64`, the media is created and its result message ends with "Foundry OSD could not get the Windows Recovery Environment, so this media uses the standard Windows PE image. Wi-Fi is not available on it..."
+
+**Cause:** Foundry OSD builds every boot image from the Windows RE of the newest Windows 11 package: see [What decides the boot image](../foundry-osd/media/create-iso.md#what-decides-the-boot-image). It could not get that package and had no Windows RE kept from an earlier build for the **Architecture** and the **WinPE boot language** of **General**. An `x64` media then uses the standard Windows PE of the ADK, without Wi-Fi; an `arm64` media cannot. The lines that follow the first message name the reason:
+
+| Message | Cause | Fix |
+| --- | --- | --- |
+| "Failed to download the operating system catalog." | The catalog of Windows images on `raw.githubusercontent.com` cannot be reached | Follow [A download fails](#download-failed) |
+| "Failed to acquire a verified Windows source package." | The Windows 11 package could not be downloaded from `dl.delivery.mp.microsoft.com`, or arrived damaged | Follow [A download fails](#download-failed). A damaged package is downloaded again on the next build |
+| "No Windows 11 source of the 26100 servicing branch (24H2, 25H2 or 26H2) matched the requested architecture and language." | No package exists for that architecture and language | Choose a **WinPE boot language** in which Windows 11 is published |
+| "Failed to extract WinRE from every matching operating system source." | The package was downloaded but its Windows RE could not be extracted; the lines that follow name the DISM or file error | Check the free space and `dism.log`, then create the media again |
+
+**Fix:** remove the cause, then create the media again. An `x64` media created in the meantime works, but without Wi-Fi.
+
+Foundry OSD checks the kept Windows RE before each use and extracts it again when it is damaged. To start over anyway, close Foundry OSD and delete `%ProgramData%\Foundry\Cache\WinRe`.
+
+**Collect:** `Foundry.log` and `dism.log`.
+
+## "Failed to extract driver package with bundled 7-Zip." <a href="#package-refused" id="package-refused"></a>
+
+**Where:** Failure dialog, after "Technical details:".
 
 **Cause and fix**, by message:
 
 | Message | Cause | Fix |
 | --- | --- | --- |
-| "Failed to prepare boot image dependencies from every matching operating system source." | No Windows 11 package could be prepared; the lines that follow name the reason | Follow the row of the reason |
-| "No Windows 11 24H2 Windows source matched the requested architecture and language." | No package exists for that architecture and language | Choose a **WinPE boot language** in which Windows 11 is published |
-| "The cached Windows source package failed hash validation." | The downloaded package is damaged | Close Foundry OSD, delete `%ProgramData%\Foundry\Cache\WindowsSources`, create the media again |
 | "Failed to extract driver package with bundled 7-Zip.", "Executable driver package was extracted with 7-Zip but no INF files were found." or "Unsupported driver package format." | A downloaded **Dell** or **HP** driver package is damaged or cannot be used | Close Foundry OSD, delete `%ProgramData%\Foundry\Cache\WinPeDrivers`, create the media again |
 | "Failed to inject driver package into the mounted image." | Windows PE refused a driver, downloaded or from your **Additional WinPE driver folder** | Remove the driver named in `dism.log` from the folder, or delete the driver cache as in the row above |
 

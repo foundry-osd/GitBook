@@ -136,7 +136,7 @@ The console window that appears first when a device starts from the media. It pr
 
 ## Windows RE
 
-Windows Recovery Environment: the recovery tools stored in the file `winre.wim` of a Windows image. Foundry also builds the Windows PE boot image from it when the media needs Wi-Fi.
+Windows Recovery Environment: the recovery tools stored in the file `winre.wim` of a Windows image. Foundry builds every Windows PE boot image from the Windows RE of the newest Windows 11 package and keeps it in `%ProgramData%\Foundry\Cache\WinRe`.
 
 ## Zero-touch
 
