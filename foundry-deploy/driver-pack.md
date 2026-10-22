@@ -47,6 +47,13 @@ For a custom image, Foundry matches packs to the Windows release of the image bu
 
 Foundry Deploy does not match a driver set to the device: you choose it, and it injects the INF files of the set. INF files that do not apply to the device or to the media architecture are skipped. Use the set your administrator prepared for this model. How sets are made is in [Custom drivers](../foundry-osd/customization/custom-drivers.md).
 
+{% hint style="warning" %}
+**Screenshot required**
+
+- **File:** `foundry-deploy-driver-pack-02-custom-drivers.png`
+- **Capture:** Show the Foundry Deploy **Drivers** step with **Driver source** set to **Custom drivers** and the driver set selected in the **Driver set** list. The step header shows the custom drivers icon.
+{% endhint %}
+
 When the media carries no driver sets, the step behaves as without this feature. When the driver sets of the media fail the integrity check, a warning reads "The custom drivers on this media failed the integrity check and are not offered. Choose another driver source or rebuild the boot media." and the usual pre-selection applies. If **Stage custom drivers** cannot verify a file, the deployment stops: "The selected custom drivers are unavailable or failed verification. Reconnect the deployment media, or restart deployment and choose another driver source."
 
 ## If something stops you

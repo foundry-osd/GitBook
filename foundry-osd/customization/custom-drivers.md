@@ -2,6 +2,13 @@
 
 **Custom drivers** adds your own driver folders, called driver sets, to the deployment media, so the technician can choose one as the driver source for the deployed Windows. Use it when the driver pack of a manufacturer is older than the drivers on its support site, or when a device has no pack.
 
+{% hint style="warning" %}
+**Screenshot required**
+
+- **File:** `foundry-osd-custom-drivers-01-library.png`
+- **Capture:** Show the Foundry OSD **Custom drivers** page with the section enabled and one imported driver set, included and set as default, with the PXE warning under the title, the command bar and the table row (name, default, included, INF files, files, size, status **Available**).
+{% endhint %}
+
 Drivers added to Windows PE itself are a different setting: see **WinPE drivers** in [General](../general.md#winpe-drivers).
 
 ## Before you start
@@ -17,8 +24,12 @@ Foundry does not check the architecture or the models of a driver set. You are r
 ## Import a driver folder
 
 1. Open **Customization > Custom drivers** and turn the switch at the top right to **Enabled**.
-2. Select **Import folder** in the command bar and choose the folder.
-3. Wait for "Copying and verifying driver files…" to end. A new set is included in the media straight away. Its name defaults to the folder name and must be unique in the current configuration.
+2. Select **Import folder** in the command bar. The import dialog opens.
+3. Select **Browse** and choose the driver folder.
+4. Check **Name**. It defaults to the folder name, accepts up to 200 characters and must be unique in the current configuration. Foundry OSD refuses a name already used in it: "A driver set with this name already exists in this profile."
+5. Select **Import**. The dialog shows "Copying and verifying driver files… {0}%" with a progress bar, where {0} is the percentage done. Keep the source folder available until the dialog closes. **Cancel**, or closing the dialog, stops the import and adds nothing.
+
+When the import succeeds, the dialog closes and the set appears in the list, included in the media straight away. If the dialog shows an error, read the message under [If something goes wrong](#if-something-goes-wrong) and choose another folder in the same dialog. If the folder content is already in the configuration, the dialog says so ("This folder is already in this profile as {0}.", where {0} is the name of the existing set) and nothing is added.
 
 The table lists each set with **Name**, **Default set**, **Included**, **INF files**, **Files**, **Size** and **Status**.
 
@@ -67,6 +78,8 @@ If the update succeeds but ends with "Unused custom driver sets could not be rem
 - Custom drivers are not delivered to a [PXE boot image](../media/pxe-deployment.md). Foundry Deploy started over PXE does not offer the **Custom drivers** source.
 
 ## If something goes wrong
+
+Import errors appear in the import dialog, where you can choose another folder.
 
 | Message | Fix |
 | --- | --- |
