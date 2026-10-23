@@ -37,6 +37,7 @@ Each row shows its value and one state: **Configured**, **Default**, **Disabled*
 | --- | --- |
 | Start virtual machines, or attach media through a remote management console | [Create an ISO](create-iso.md) |
 | Deploy physical devices, and reuse downloads between deployments | [Create a USB drive](create-usb.md) |
+| Deploy physical devices from a drive that works like an ISO, or from a drive smaller than 16 GB | [Create a drive without cache](create-usb.md#create-a-drive-without-cache) |
 | Apply new options to a Foundry USB drive and keep its downloads | [Update a USB drive](update-usb.md) |
 | Start devices from an existing PXE server | [Deploy with PXE](pxe-deployment.md) |
 
@@ -52,7 +53,7 @@ Each row shows its value and one state: **Configured**, **Default**, **Disabled*
 | [Post-installation](../customization/post-installation.md) content you imported | In the ISO, in `Cache\PreOobe\` | Same folder on the cache partition | Not delivered |
 | Cache of downloaded Windows images and driver packs | None: every deployment downloads again | On the cache partition, kept by updates | None |
 
-A USB drive has two partitions:
+A USB drive [created without cache](create-usb.md#create-a-drive-without-cache) carries what the ISO carries, in the same folders, on one FAT32 partition named **FOUNDRY**. A USB drive created with **Create USB** has two partitions:
 
 | Partition | Format | Holds |
 | --- | --- | --- |
