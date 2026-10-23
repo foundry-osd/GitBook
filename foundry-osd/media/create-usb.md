@@ -78,12 +78,12 @@ A drive without cache works like an ISO written to a USB drive: one FAT32 partit
 1. Select the drive as for a drive with cache.
 2. Open the arrow of the **Create USB** button and select **Create without cache**. With a Foundry USB drive selected, the button reads **Update USB** and the menu item reads **Recreate without cache**: it erases the drive and its downloads.
 3. Read and confirm the **Format USB drive** dialog, as above.
-4. Wait until the dialog is titled **USB media created** and reads "USB volume: X:. The drive has no cache: each deployment downloads Windows and drivers again."
+4. Wait until the dialog is titled **USB media created** and reads "USB volume: X:. The drive keeps no downloads: each deployment downloads Windows and drivers from the catalog again."
 
 | Rule | Detail |
 | --- | --- |
-| Drive size | Any size that holds the media. Foundry OSD measures the boot files and the imported content before it erases anything, and stops with "The media needs approximately …" when they do not fit. |
-| Partition size | The whole drive, up to 32 GiB: Windows formats FAT32 only up to that size. The rest of a larger drive stays unallocated. |
+| Drive size | 1 GB or more, and enough to hold the media. Foundry OSD measures the boot files and the imported content before it erases anything, and stops with "The media needs approximately …" when they do not fit. |
+| Partition size | The whole drive, up to 32,000 MB (about 31 GB): Windows formats FAT32 only up to 32 GB. The rest of a larger drive stays unallocated. |
 | File size | FAT32 holds files up to 4 GiB minus one byte. A larger file, usually a custom Windows image, stops the creation before anything is erased: use **Create USB** for that configuration. |
 | Options | **USB partition style** and **USB format mode** apply as for a drive with cache. |
 
