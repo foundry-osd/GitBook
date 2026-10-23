@@ -1,55 +1,67 @@
 # Deploy with PXE
 
-Foundry OSD does not create PXE media and does not configure a PXE server. You can still start devices from a PXE server you already run, by importing the boot image of a Foundry ISO into it. This use is not officially supported: the PXE server, DHCP and TFTP stay the responsibility of their administrator.
+Create the files a PXE server needs to start devices from the network with Foundry. Foundry OSD writes them to a folder; it does not configure the PXE server, DHCP or TFTP, which stay the responsibility of their administrator.
 
-## What a PXE boot image delivers
+{% hint style="warning" %}
+**Screenshot required**
 
-A PXE server sends one file to the device, `sources\boot.wim`. Everything Foundry OSD stores next to that file on an ISO or a USB drive stays behind.
-
-| Delivered with the boot image | Not delivered |
-| --- | --- |
-| Windows PE with its drivers, and Foundry Connect | [Custom Windows images](../customization/custom-windows-images.md) and [custom driver sets](../customization/custom-drivers.md) |
-| Every option of your configuration: network, Windows Autopilot, Domain Join, computer name, OOBE, answer file, optional features, AppX removals, AI components | [Post-installation](../customization/post-installation.md) actions that use imported files: every **PowerShell script (.ps1)** and **Software (.exe/.msi)** action, and a **Command line** action with imported content |
-| Post-installation actions that need no imported file: **Command line** without content and **Restart Windows** | A cache: each deployment downloads Windows and the driver pack again |
-
-Foundry OSD says the same on the three pages concerned: "Not available with PXE boot. Custom images require the full ISO or USB media.", "Not available with PXE boot. Custom drivers require the full ISO or USB media." and "Actions that use imported files are not available with PXE boot. They require the full ISO or USB media."
-
-As with an ISO, Foundry Deploy is downloaded when the device starts. The full comparison is in [What each media type carries](README.md#what-each-media-type-carries).
+- **File:** `foundry-osd-media-pxe-01-destination.png`
+- **Capture:** Show the **Create PXE files** dialog over Start, with a destination folder typed and the **Not delivered with a PXE start** warning listing one custom Windows image.
+{% endhint %}
 
 ## Before you start
 
-- A PXE server that can import and start a WIM boot image, and the right to add a boot image to it.
-- Target devices of the same architecture as the ISO, `x64` or `arm64`.
-- The network drivers the devices need in Windows PE, added in [General](../general.md) before the ISO is created.
+- No row of [Start](README.md) is marked **Needs attention**.
+- 20 GB are free on the drives listed in [Start](README.md#before-you-start). The destination folder only needs room for the four files, about the size of `boot.wim`.
+- The architecture, the language and the drivers of Windows PE are set in [General](../general.md). The network drivers the devices need in Windows PE must be there.
+- A PXE server that can start a UEFI device from a WIM boot image, and the right to add a boot image to it.
 - Internet access from Windows PE to the hosts in [Network endpoints](../../reference/network-endpoints.md).
 
-## Prepare the boot image
+## Create the PXE files
 
-1. [Create an ISO](create-iso.md) and start one test device or virtual machine from it.
-2. Open the ISO in File Explorer and copy `sources\boot.wim`.
-3. Import the copy as a boot image in your PXE server and publish it, following the documentation of that server.
+1. Open **Start** and select **Create PXE files**.
+2. In **Destination folder**, type the folder or select **Browse**. A network share written as `\\server\share\folder` works. The folder you used last time is filled in.
+3. Read the warnings of the dialog, then select **Create**:
+   - "This folder already contains a boot image." The four files below are replaced. Other files of the folder are kept.
+   - **Not delivered with a PXE start** lists the [imported content](#what-a-pxe-start-delivers) of your configuration that devices started from the network will not have.
+4. If a dialog titled **Update Foundry OSD before creating boot media** opens, apply the update first, or select **Create anyway**.
+5. Wait until the dialog is titled **PXE files created** and reads "The PXE boot files were saved to:", followed by the folder and the total size. Select **Open folder** to open it, or **Close**.
 
-Take the file from an ISO, not from a Foundry USB drive: the boot image of a USB drive does not contain Foundry Connect, which is stored on its cache partition.
+| File | Use |
+| --- | --- |
+| `boot.wim` | The boot image: Windows PE, its drivers, Foundry Connect and your options, built like the boot image of an ISO. Import this file in Windows Deployment Services or Configuration Manager. |
+| `boot.sdi` | The RAM disk image that Windows PE starts from. |
+| `BCD` | The UEFI boot configuration that loads `boot.wim`. |
+| `bootmgr.efi` | The UEFI boot manager, signed for the **Secure Boot** choice of [General](../general.md). |
+
+PXE servers that start Windows PE with wimboot, such as iPXE or FOG, use all four files. The files start UEFI devices only.
+
+Foundry OSD replaces the files only once all four are written: a failed or cancelled creation keeps the previous ones.
+
+## What a PXE start delivers
+
+| Delivered | Not delivered |
+| --- | --- |
+| Windows PE with its drivers, and Foundry Connect. As with an ISO, Foundry Deploy is downloaded when the device starts. | [Custom Windows images](../customization/custom-windows-images.md) and [custom driver sets](../customization/custom-drivers.md) |
+| Every option of your configuration: network, Windows Autopilot, Domain Join, computer name, OOBE, answer file, optional features, AppX removals, AI components | [Post-installation](../customization/post-installation.md) actions that use imported files: every **PowerShell script (.ps1)** and **Software (.exe/.msi)** action, and a **Command line** action with imported content |
+| Post-installation actions that need no imported file: **Command line** without content and **Restart Windows** | A cache: each deployment downloads Windows and the driver pack again |
+
+A deployment that needs a post-installation action with imported files stops before the disk is erased. Start those deployments from an [ISO](create-iso.md) or a [USB drive](create-usb.md), or disable the actions in Foundry OSD and create the PXE files again. See [PXE start](../../troubleshooting/media-creation/usb-drive-and-device-start.md#pxe).
 
 ## Check the result
 
-1. Start a test device from the network.
-2. Check that Foundry Connect opens and reports the network as ready, then that Foundry Deploy opens.
-3. Run one complete deployment and the [post-deployment checks](../../foundry-deploy/verify-deployment.md).
+1. Import the files in your PXE server, following the documentation of that server.
+2. Start a test device from the network.
+3. Check that Foundry Connect opens and reports the network as ready, then that Foundry Deploy opens.
+4. Run one complete deployment and the [post-deployment checks](../../foundry-deploy/verify-deployment.md).
 
 ## Keep the boot image up to date
 
-Each time you create the ISO again, import its `sources\boot.wim` again. Keep the previous boot image on the PXE server until the new one has started a test device.
-
-## Use imported content with a PXE start
-
-If a deployment must use imported post-installation content, attach to the device the complete ISO the boot image was copied from, for example as virtual media, and leave it attached until the deployment ends. Foundry Deploy looks for the content on every drive of the device and accepts only the content of that same ISO. It does not download it from a web server or a network share.
-
-Without that media, the deployment stops before the disk is erased, with "Post-installation preparation failed. Check the deployment log for details.". See [PXE start](../../troubleshooting/media-creation/usb-drive-and-device-start.md#pxe).
+Each time you change the configuration, create the PXE files again and import them again. Keep the previous boot image on the PXE server until the new one has started a test device.
 
 ## Related
 
-- [Create an ISO](create-iso.md)
 - [Start: create deployment media](README.md)
+- [Create an ISO](create-iso.md)
 - [Windows PE startup](../../foundry-connect/windows-pe-startup.md)
 - [USB drive and device start troubleshooting](../../troubleshooting/media-creation/usb-drive-and-device-start.md)

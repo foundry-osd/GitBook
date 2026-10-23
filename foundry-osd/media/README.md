@@ -1,6 +1,6 @@
 # Start: create deployment media
 
-The **Start** page shows whether your configuration is ready, then creates an ISO file or a USB drive from it. Foundry OSD uses the options, passwords and files as they are when you select the button.
+The **Start** page shows whether your configuration is ready, then creates an ISO file, a USB drive or PXE boot files from it. Foundry OSD uses the options, passwords and files as they are when you select the button.
 
 <figure>
   <img src="../../.gitbook/assets/foundry-osd-media-01-readiness-overview.png" alt="Start page with its status bar, the five readiness groups, the ISO output and USB target cards and the Create media card">
@@ -38,13 +38,13 @@ Each row shows its value and one state: **Configured**, **Default**, **Disabled*
 | Start virtual machines, or attach media through a remote management console | [Create an ISO](create-iso.md) |
 | Deploy physical devices, and reuse downloads between deployments | [Create a USB drive](create-usb.md) |
 | Apply new options to a Foundry USB drive and keep its downloads | [Update a USB drive](update-usb.md) |
-| Start devices from an existing PXE server | [Deploy with PXE](pxe-deployment.md) |
+| Start devices from an existing PXE server with **Create PXE files** | [Deploy with PXE](pxe-deployment.md) |
 
 ## What each media type carries
 
-| Content | ISO | USB drive | PXE boot image |
+| Content | ISO | USB drive | PXE files |
 | --- | --- | --- | --- |
-| Boot image `sources\boot.wim`: Windows PE, its drivers, the program behind the startup console and your options | In the ISO | On the **BOOT** partition | The only file delivered |
+| Boot image `sources\boot.wim`: Windows PE, its drivers, the program behind the startup console and your options | In the ISO | On the **BOOT** partition | `boot.wim`, with `boot.sdi`, `BCD` and `bootmgr.efi` to start it |
 | Foundry Connect and, with Domain Join, the post-installation application | In the boot image | In `Runtime\` on the cache partition, **Foundry Cache** | In the boot image |
 | Foundry Deploy | Not on the media: downloaded at each start | Not on the media: downloaded at a start, then kept in `Runtime\` | Not on the media: downloaded at each start |
 | [Custom images](../customization/custom-windows-images.md) | In the ISO, in `Cache\OperatingSystems\Custom\` | Same folder on the cache partition | Not delivered |
@@ -65,9 +65,9 @@ Each included custom image is stored as `Cache\OperatingSystems\Custom\<hash>\im
 
 ## While media is being created
 
-A dialog titled **Creating ISO**, **Creating USB media** or **Updating USB media** locks the rest of the app. It shows the step, such as "Step 3 of 5: Customizing the boot image", the overall percentage, a line naming the current action, such as a download with its size, and the elapsed time. When the operation ends, the title gives the result, such as **ISO created** or **USB media creation failed**. To stop, select **Cancel** (or press Esc), then **Stop operation** within 10 seconds to confirm. The operation stops once the disk or image step in progress has finished: keep Foundry OSD open and the USB drive connected until the dialog reads "Media creation was canceled."
+A dialog titled **Creating ISO**, **Creating PXE files**, **Creating USB media** or **Updating USB media** locks the rest of the app. It shows the step, such as "Step 3 of 5: Customizing the boot image", the overall percentage, a line naming the current action, such as a download with its size, and the elapsed time. When the operation ends, the title gives the result, such as **ISO created** or **USB media creation failed**. To stop, select **Cancel** (or press Esc), then **Stop operation** within 10 seconds to confirm. The operation stops once the disk or image step in progress has finished: keep Foundry OSD open and the USB drive connected until the dialog reads "Media creation was canceled."
 
-A cancelled or failed ISO build keeps the previous file. A cancelled USB operation does not restore the drive. Once Foundry OSD has started writing the drive, the dialog adds "The USB drive may no longer start a device. Create or update it again before you use it."
+A cancelled or failed ISO build keeps the previous file, and cancelled or failed PXE files keep the previous ones. A cancelled USB operation does not restore the drive. Once Foundry OSD has started writing the drive, the dialog adds "The USB drive may no longer start a device. Create or update it again before you use it."
 
 ## Related
 

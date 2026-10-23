@@ -1,6 +1,6 @@
 # Create an ISO
 
-Create one `.iso` file to start virtual machines, to attach through a remote management console, or to take the boot image for a PXE server from. An ISO keeps no downloads: every deployment started from it downloads Windows and drivers again.
+Create one `.iso` file to start virtual machines or to attach through a remote management console. An ISO keeps no downloads: every deployment started from it downloads Windows and drivers again.
 
 <figure>
   <img src="../../.gitbook/assets/foundry-osd-media-create-iso-01-output.png" alt="Start page with a path typed in the ISO output card and the Create ISO button available">
