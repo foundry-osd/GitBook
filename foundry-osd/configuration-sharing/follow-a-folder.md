@@ -51,7 +51,7 @@ When the publication includes the passwords, the password fields are read-only t
 
 ## New versions
 
-Foundry OSD reads the folder when it starts and every 60 seconds. **Check now** reads it at once. A new version is applied by itself, and a bar at the top of the window shows "Configuration updated from \<PC name\>." A media creation that is already running is not affected.
+Foundry OSD reads the folder when it starts and every 60 seconds. **Check now** reads it at once. A new version is applied by itself; the **Configuration sharing** card of **Settings** shows the status and the **Version**. A media creation that is already running is not affected.
 
 New post-installation packages, driver sets and images are downloaded in the background, with a progress bar on the card. Meanwhile **Start** and the navigation pane show these items as **Downloading**, and media creation is still available: it waits with "Waiting for shared content to finish downloading" until the content has arrived, then continues. If some content cannot be downloaded, it stops: see [Shared content missing](../../troubleshooting/foundry-osd/configuration-sharing.md#content-failed). Content that the configuration no longer uses stays on this PC.
 

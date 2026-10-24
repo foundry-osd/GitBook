@@ -12,16 +12,16 @@ Configuration sharing replaces **Settings backup and sync** and its deployment p
 
 Post-installation packages, custom driver sets and custom Windows images stay in their libraries and need nothing.
 
-**Home** then shows a notice for each item that needs you. Close a notice once it is handled: it stays closed. The passwords notice comes back at each start while the saved passwords still cannot be read: see [When passwords cannot be restored](saved-passwords.md#when-passwords-cannot-be-restored).
+When an item needs you, a dialog titled **Check your configuration** opens once the main window is shown, with one paragraph for each item. Select **Close**: the notices it listed are not shown again. The passwords notice is the exception: it comes back at each start until you type a password, as described in [When passwords cannot be restored](saved-passwords.md#when-passwords-cannot-be-restored).
 
 {% hint style="warning" %}
 **Screenshot required**
 
-- **File:** `foundry-osd-configuration-sharing-migration-01-home-notices.png`
-- **Capture:** Show **Home** after the first-launch migration with the notices about passwords, files and synchronization.
+- **File:** `foundry-osd-configuration-sharing-migration-01-notices-dialog.png`
+- **Capture:** Show the **Check your configuration** dialog over the main window after the first-launch migration, with the notices about passwords, synchronization and files.
 {% endhint %}
 
-| Notice on Home | What to do |
+| Notice in the dialog | What to do |
 | --- | --- |
 | "Saved passwords could not be restored. Enter them again on the configuration pages." | Type the passwords on their pages. This happens when the profile cannot be opened by your Windows account. |
 | "Some files used by the configuration could not be recovered. Select them again on the configuration pages." | Select each file again on the page marked **Needs attention** on **Start**. |
@@ -33,10 +33,10 @@ Old shared folders cannot be followed. On the PC whose configuration the others 
 
 ## Other profiles of this PC
 
-Only the profile in use is moved. To use another one:
+Only the profile in use is moved. The other profiles saved on this PC can be imported one at a time:
 
 1. In **Settings**, expand **Configuration sharing** and select **Import** on **Import configuration**.
-2. Under **Previous configurations on this PC**, select the profile and select **Open**.
+2. Under **Profiles from the previous version**, select the profile and select **Open**. The list, with the hint "These profiles were saved on this PC before the update.", shows only the profiles that the migration did not apply. It is hidden when none remain.
 3. Read the preview and select **Import**. It replaces the current configuration.
 
 A profile whose key is no longer in Windows Credential Manager, for example after saved credentials were cleaned, shows "This configuration cannot be opened by this Windows user."
@@ -49,7 +49,7 @@ A `Connection.foundryprofile` connection file imports the configuration it holds
 
 ## What stays on the disk
 
-The old profile store, `%LocalAppData%\Foundry\Profiles`, the keys of its profiles in Windows Credential Manager and the old shared folders are left as they are. Foundry OSD no longer writes them, and reads the store and its keys only for **Previous configurations on this PC**.
+The old profile store, `%LocalAppData%\Foundry\Profiles`, the keys of its profiles in Windows Credential Manager and the old shared folders are left as they are. Foundry OSD no longer writes them, and reads the store and its keys only for **Profiles from the previous version**.
 
 ## Related
 

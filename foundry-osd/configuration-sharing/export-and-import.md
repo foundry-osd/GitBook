@@ -47,7 +47,7 @@ The card then reports one of these results:
 | "Configuration imported. Some content is missing on this PC: import it again on its page." | The items listed under **Missing on this PC** are still missing. |
 | "Configuration imported, but its passwords could not be saved. Enter them again on the configuration pages." | The options and files are imported; type the passwords on their pages. |
 
-The same dialog imports the configurations of Settings backup and sync: see [Move from Settings backup and sync](migration.md).
+When profiles of Settings backup and sync remain on this PC, the dialog also lists them under **Profiles from the previous version**: see [Move from Settings backup and sync](migration.md#other-profiles-of-this-pc). The dialog imports one source at a time: opening a file clears the profile selection, and opening a profile clears the file and its passphrase.
 
 ## Complete the configuration on this PC
 

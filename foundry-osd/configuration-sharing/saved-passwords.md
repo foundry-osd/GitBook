@@ -24,12 +24,12 @@ The saved passwords and files open only for your Windows account on this PC. To 
 
 ## When passwords cannot be restored
 
-Windows can stop opening `secrets.dat`, for example after an administrator reset your Windows password. Foundry OSD then starts with empty password fields, and **Home** shows "Saved passwords could not be restored. Enter them again on the configuration pages."
+Windows can stop opening `secrets.dat`, for example after an administrator reset your Windows password. Foundry OSD then starts with empty password fields, and a dialog titled **Check your configuration** reads "Saved passwords could not be restored. Enter them again on the configuration pages."
 
-1. Close the notice.
+1. Select **Close**.
 2. Open each page that shows **Needs attention** on **Start**, and type its passwords again.
 
-Your options are saved normally meanwhile. The first password you type creates a new `secrets.dat`, and the notice no longer appears.
+Your options are saved normally meanwhile. The dialog opens at each start until you type a password: the first password you type creates a new `secrets.dat`.
 
 On a PC that publishes or follows a folder, the publication password is in the same file: see [Configuration sharing troubleshooting](../../troubleshooting/foundry-osd/configuration-sharing.md#passwords-needed).
 
