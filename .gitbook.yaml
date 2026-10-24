@@ -24,3 +24,7 @@ redirects:
   docs/deploy/autopilot-hash-upload: foundry-deploy/autopilot.md
   foundry-osd/home: foundry-osd/README.md
   reference/bootstrap: foundry-connect/windows-pe-startup.md
+  foundry-osd/deployment-profiles: foundry-osd/configuration-sharing.md
+  foundry-osd/deployment-profiles/export-and-import: foundry-osd/configuration-sharing/export-and-import.md
+  foundry-osd/deployment-profiles/sync-and-conflicts: foundry-osd/configuration-sharing/migration.md
+  troubleshooting/foundry-osd/settings-backup-and-sync: troubleshooting/foundry-osd/configuration-sharing.md

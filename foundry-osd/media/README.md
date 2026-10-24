@@ -11,7 +11,6 @@ The **Start** page shows whether your configuration is ready, then creates an IS
 
 - The [ADK](../adk.md) page reports **ADK is ready**. Until then **Start** cannot be opened.
 - 20 GB are free on each drive that holds `%ProgramData%\Foundry`, `%LocalAppData%\Foundry` or the Windows temporary folders, and on the drive of the ISO file. On most workstations this is the Windows drive.
-- With several saved configurations, the one you want is selected in [Settings backup and sync](../deployment-profiles.md).
 
 ## Read the readiness rows
 
@@ -72,5 +71,5 @@ A cancelled or failed ISO build keeps the previous file. A cancelled USB operati
 ## Related
 
 - [General](../general.md)
-- [Settings backup and sync](../deployment-profiles.md)
+- [Configuration sharing](../configuration-sharing.md)
 - [Media creation troubleshooting](../../troubleshooting/media-creation.md)

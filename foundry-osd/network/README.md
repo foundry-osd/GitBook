@@ -18,7 +18,7 @@ Everything you configure here is copied to the deployment media: the profile fil
 [Password protection](../general.md#password-protection) does not protect network credentials. Foundry Connect uses them before the technician types the Deployment password, so anyone who can read the ISO or the USB drive can recover them, including a `.pfx` file and its password. Use credentials dedicated to deployment that you can revoke. See [Security and credentials](../../reference/security-and-credentials.md).
 {% endhint %}
 
-Foundry OSD saves the Wi-Fi **Passphrase**, a **PFX password** and a copy of the files you selected with the configuration while **Remember passwords** is on, which is the default: see [What is remembered](../deployment-profiles.md#what-is-remembered). With it off, type the passphrase and the PFX password again each time you start Foundry OSD, before you create media:
+Foundry OSD saves the Wi-Fi **Passphrase**, the **PFX password** and a copy of the files you selected for your Windows account on this PC: see [Saved passwords and files](../configuration-sharing/saved-passwords.md). When one is empty, for example after importing a configuration without its passwords, type it again before you create media:
 
 - A missing passphrase blocks **Start** with "Required media secrets are not ready."
 - A missing PFX password blocks nothing. The media is created, and the certificate import fails later in Windows PE.

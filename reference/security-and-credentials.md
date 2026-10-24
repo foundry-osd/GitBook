@@ -49,19 +49,45 @@ The Deployment password is never written to the media. Once a technician has typ
 
 ## Saved on the workstation
 
-Foundry OSD saves each configuration for your Windows account, under `%LocalAppData%\Foundry\Profiles`. What the saved configuration contains depends on **Remember passwords**, which is on by default. What you find at the next start is listed in [What is remembered](../foundry-osd/deployment-profiles.md#what-is-remembered).
+Foundry OSD saves the configuration, its passwords and the files you select for your Windows account, under `%LocalAppData%\Foundry`. The list of what is saved is in [Saved passwords and files](../foundry-osd/configuration-sharing/saved-passwords.md).
 
 | Item | Value |
 | --- | --- |
-| With **Remember passwords** on | The saved configuration holds the Deployment password, the passwords of local accounts and join accounts, the Wi-Fi passphrase, the PFX passwords, and a copy of the confidential files: answer files, network profiles, network certificates and the Windows Autopilot PFX |
-| With **Remember passwords** off | The saved configuration holds the options only: no password and no copy of a file |
-| Encryption | AES-256-GCM, with a random 256-bit key for each saved version |
-| Where the key is | Windows Credential Manager, for your Windows account on this PC. Another Windows account, or a copy of the folder on another PC, cannot open the configuration |
-| While a configuration is in use | Its saved files are written, not encrypted, to `%LocalAppData%\Foundry\Profiles\Staging`, a folder that only your Windows account can open. Foundry OSD deletes them when it closes, or at its next start |
-| To remove what is saved | **Clear saved passwords and access**, in [Settings backup and sync](../foundry-osd/deployment-profiles.md#what-is-remembered) |
+| Options | `Configuration\foundry.config.json`, without any password |
+| Passwords | `Configuration\secrets.dat`: the Deployment password, the passwords of local accounts and join accounts, the Wi-Fi passphrase and the PFX passwords |
+| Protection of the passwords | Windows DPAPI, for your Windows account. Another Windows account, or a copy of the file on another PC, cannot read them |
+| Selected files | `Files\content`: answer files, network profiles, network certificates and the Windows Autopilot PFX, stored as they are, not encrypted by Foundry |
+| Publication password and keys of configuration sharing | In `secrets.dat`, with the other passwords |
 
-An exported file and a shared folder are protected differently, by a password you choose: see [Export and import](../foundry-osd/deployment-profiles/export-and-import.md).
+These passwords are never written to `foundry.config.json`.
 
+## Configuration sharing
+
+An exported file and a publication folder are protected by a secret you choose, not by your Windows account. How to use them is described in [Configuration sharing](../foundry-osd/configuration-sharing.md).
+
+| Item | Exported file | Publication folder |
+| --- | --- | --- |
+| Secret | The passphrase | The publication password |
+| Rule for the secret | At least 12 characters, not the same character repeated | Same rule |
+| Passwords of the configuration | Only with **Include passwords** | Only with **Include passwords** |
+| Encryption | AES-256-GCM, with a key derived from the passphrase by PBKDF2 with HMAC-SHA-256, 600,000 iterations | Same for each version. Content files are encrypted with AES-256-GCM under a content key carried in the version |
+| Signature | None | Every version is signed with an ECDSA P-256 key of the reference PC |
+
+What each person can do with a publication folder:
+
+| Who | Can | Cannot |
+| --- | --- | --- |
+| Someone who can read the folder, without the password | See the file sizes and `current.json`, which points to the current version | Read the configuration, the passwords or the content |
+| Someone who can write in the folder, without the password | Delete files, so followers stop receiving updates | Publish a version, change one, or bring back an older one: followers refuse it |
+| Someone who knows the publication password | Read the configuration, the included passwords and the content | Publish: only the key of the reference PC signs a version |
+| Another PC that takes the folder over | Publish with its own key, once it has the current password | Be applied by a follower before that follower accepts the new key |
+
+The publication password gives read access; the signature of the reference PC gives the authority to publish. To withdraw read access, the reference PC changes the password or resets the publication:
+
+- **Change password** rewrites the current version under the new password. A former password holder can no longer read new versions, but one who kept the content key can still decrypt the content files.
+- **Reset publication** creates a new content key and encrypts every content file again. It is the complete revocation.
+
+On a follower, every setting of the publication is read-only. Only the ISO output path, the Additional WinPE driver folder, the telemetry settings and the passwords that the publication does not include can be changed.
 ## Windows Autopilot credentials
 
 Zero-touch hardware hash upload uses two separate identities. The rights of the first are never available to the media.
@@ -77,7 +103,7 @@ Facts that follow from this:
 - The media carries the tenant ID, the client ID of the app registration and the certificate PFX with its password. It carries no administrator credential and no sign-in token.
 - Foundry Deploy signs in as the app registration with the certificate private key. No technician signs in. The certificate is decrypted in memory and is not copied to the deployed device.
 - Anyone who obtains the PFX and its password can use the permission of the app registration until the certificate expires or is removed from the registration.
-- On the workstation, Foundry OSD keeps a copy of the PFX and its password with the configuration while **Remember passwords** is on: see [Saved on the workstation](#saved-on-the-workstation).
+- On the workstation, Foundry OSD keeps a copy of the PFX and its password for your Windows account: see [Saved on the workstation](#saved-on-the-workstation).
 
 How to create the certificate, choose its validity (12 months at most), select it again, renew it and remove it is described in [Zero-touch hardware hash upload](../foundry-osd/autopilot/zero-touch-hardware-hash.md).
 

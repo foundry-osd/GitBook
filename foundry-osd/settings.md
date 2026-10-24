@@ -1,13 +1,8 @@
 # Settings
 
-Settings holds the options of the Foundry OSD application itself: language, appearance, saved configurations, proxy, telemetry and updates. Open it with **Settings** at the bottom of the navigation pane. The sections below follow the cards of the page from top to bottom.
+Settings holds the options of the Foundry OSD application itself: language, appearance, configuration sharing, proxy, telemetry and updates. Open it with **Settings** at the bottom of the navigation pane. The sections below follow the cards of the page from top to bottom.
 
-<figure>
-  <img src="../.gitbook/assets/foundry-osd-settings-02-backup-and-sync.png" alt="Settings page with its seven cards and Settings backup and sync expanded">
-  <figcaption><strong>Settings backup and sync</strong> is the third card. It has its own page.</figcaption>
-</figure>
-
-Except for **Settings backup and sync**, these choices are stored for the workstation, so they apply to every Windows account that uses Foundry OSD on it. The proxy username and password are the exception: they are saved in Windows Credential Manager for your Windows account, so another account must type them again.
+Except for **Configuration sharing**, these choices are stored for the workstation, so they apply to every Windows account that uses Foundry OSD on it. The proxy username and password are the exception: they are saved in Windows Credential Manager for your Windows account, so another account must type them again.
 
 ## General
 
@@ -27,11 +22,11 @@ A dialog titled **Diagnostics exported** gives the path of the archive. What the
 | **Material** | **Mica**, **Mica Alt**, **Acrylic**, **Acrylic Thin** |
 | **Accent color** | **Open** opens the color settings of Windows, where the accent color is chosen. |
 
-## Settings backup and sync
+## Configuration sharing
 
-A configuration is the set of deployment options you chose in Foundry OSD. This card selects the configuration in use, exports it to a file, imports one, and can keep a configuration synchronized between workstations through a shared network folder. Configurations belong to your Windows account.
+A configuration is the set of deployment options you chose in Foundry OSD, with their passwords and files. It belongs to your Windows account. This card exports it to an encrypted file, imports one, publishes it to a folder that other PCs follow, or follows the folder of another PC.
 
-All of it is explained in [Settings backup and sync](deployment-profiles.md).
+All of it is explained in [Configuration sharing](configuration-sharing.md).
 
 ## Proxy
 
@@ -79,7 +74,7 @@ An update is not installed on closing while a second Foundry OSD window is open.
 
 ## Related
 
-- [Settings backup and sync](deployment-profiles.md)
+- [Configuration sharing](configuration-sharing.md)
 - [Telemetry and privacy](../reference/telemetry-and-privacy.md)
 - [Network endpoints](../reference/network-endpoints.md)
 - [Foundry OSD application troubleshooting](../troubleshooting/foundry-osd.md)

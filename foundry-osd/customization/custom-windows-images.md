@@ -44,11 +44,11 @@ Below the tables, **Default image source in Foundry Deploy** decides which sourc
 - Every index of an included image must be built for the media **Architecture** set in [General](../general.md): `x64` media takes `x64` indexes, `arm64` media takes `arm64` indexes. Otherwise **Start** marks **Custom images** as **Needs attention** with "One or more included custom images are not built for the selected media architecture. Exclude them or change the media architecture." Check the **Architecture** column under **Selected image**. An index whose architecture Foundry cannot read does not block the media.
 - Each media creation starts with the stage "Verifying custom image sources…", which checks every included image again and takes time with large images.
 - Excluding or removing the preferred image clears the preference.
-- **Remove** deletes the library copy for every configuration: the others show the image as **Missing**. The original file and existing media are not changed.
+- **Remove** removes the image from the configuration and deletes its library copy. The original file and existing media are not changed.
 
 ## Restore or move an image
 
-[Settings backup and sync](../deployment-profiles.md) carries the list of images and their defaults, not the image files. On another PC, or after the library copy is lost, the image shows **Missing**.
+A [publication](../configuration-sharing/publish-to-a-folder.md) carries the image files: followers download them in the background. An [exported file](../configuration-sharing/export-and-import.md) carries the list of images and their defaults, not the image files. After such an import on another PC, or after the library copy is lost, the image shows **Missing**.
 
 Import the same `.wim` file again, under a name that is not yet used. Foundry OSD recognizes the image by the SHA-256 hash of the WIM, and the existing row keeps its name, inclusion and defaults. This is not guaranteed for an image converted from `install.esd`, because the conversion writes a new WIM file.
 
@@ -83,10 +83,10 @@ Also remove any answer file from `Windows\Panther\Unattend` on the reference dev
 ### The Import ISO/WIM button stays unavailable
 
 - **Where:** the import dialog.
-- **Cause:** the dialog shows "An image with this name already exists in this profile.", still shows "Reading image indexes…", or waits for your choice under "Choose the installation image in this ISO."
+- **Cause:** the dialog shows "An image with this name already exists in this configuration.", still shows "Reading image indexes…", or waits for your choice under "Choose the installation image in this ISO."
 - **Fix:** change **Name**, wait for the indexes to appear, or choose the installation image.
 
-### "Include at least one available Windows image in this profile. Restore missing included images and fix or clear the preferred image or index before creating or updating media."
+### "Include at least one available Windows image in this configuration. Restore missing included images and fix or clear the preferred image or index before creating or updating media."
 
 - **Where:** the top of the page. **Start** shows **Custom Windows images** as **Needs attention** and media creation is blocked.
 - **Cause:** no image is included, an included image shows **Missing**, the preferred image is excluded, or the preferred index no longer exists in the image.

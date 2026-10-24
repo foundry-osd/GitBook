@@ -24,10 +24,10 @@ Foundry does not check the architecture or the models of a driver set. You are r
 1. Open **Customization > Custom drivers** and turn the switch at the top right to **Enabled**.
 2. Select **Import folder** in the command bar. The import dialog opens.
 3. Select **Browse** and choose the driver folder.
-4. Check **Name**. It defaults to the folder name, accepts up to 200 characters and must be unique in the current configuration. Foundry OSD refuses a name already used in it: "A driver set with this name already exists in this profile."
+4. Check **Name**. It defaults to the folder name, accepts up to 200 characters and must be unique in the current configuration. Foundry OSD refuses a name already used in it: "A driver set with this name already exists in this configuration."
 5. Select **Import**. The dialog shows "Copying and verifying driver files…" with a progress bar, and the percentage done to the right of the bar. Keep the source folder available until the dialog closes. **Cancel**, or closing the dialog, stops the import and adds nothing.
 
-When the import succeeds, the dialog closes and the set appears in the list, included in the media straight away. If the dialog shows an error, read the message under [If something goes wrong](#if-something-goes-wrong) and choose another folder in the same dialog. If the folder content is already in the configuration, the dialog says so ("This folder is already in this profile as {0}.", where {0} is the name of the existing set) and nothing is added.
+When the import succeeds, the dialog closes and the set appears in the list, included in the media straight away. If the dialog shows an error, read the message under [If something goes wrong](#if-something-goes-wrong) and choose another folder in the same dialog. If the folder content is already in the configuration, the dialog says so ("This folder is already in this configuration as {0}.", where {0} is the name of the existing set) and nothing is added.
 
 The table lists each set with **Name**, **Default set**, **Included**, **INF files**, **Files**, **Size** and **Status**.
 
@@ -40,7 +40,7 @@ Select a row, then use the command bar.
 | **Refresh** | Reads the library again and updates the **Status** of each set. |
 | **Edit** | Changes the name of the set. |
 | **Include** / **Exclude** | Adds the set to the media you create next, or leaves it out. An excluded set stays in the library. |
-| **Remove** | After confirmation, removes the set from the current configuration and deletes its local copy unless another configuration uses it. |
+| **Remove** | After confirmation, removes the set from the current configuration and deletes its local copy. |
 | **Set as default** | Includes the set and marks it as the default. |
 | **Clear default** | Clears the default set. |
 
@@ -74,7 +74,7 @@ If the update succeeds but ends with "Unused custom driver sets could not be rem
 - Up to 20,000 files and 20,000 folders per set. Relative paths are limited to 150 characters.
 - A set cannot contain a symbolic link, a junction or a cloud placeholder file.
 - Foundry Deploy applies one driver source at a time: a set cannot be combined with a manufacturer pack.
-- [Settings backup and sync](../deployment-profiles.md) carries the list of sets and the default, not their files. On another PC, import the folder again.
+- A [publication](../configuration-sharing/publish-to-a-folder.md) carries the driver sets: followers download them in the background. An [exported file](../configuration-sharing/export-and-import.md) carries the list of sets and the default, not their files: on another PC, import the folder again.
 - Custom drivers are not delivered to a [PXE boot image](../media/pxe-deployment.md). Foundry Deploy started over PXE does not offer the **Custom drivers** source.
 
 ## If something goes wrong

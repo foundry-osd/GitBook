@@ -67,4 +67,4 @@ An item without a badge is not configured, which is normal for a feature you do 
 | Choose the Windows offered, name computers, shape OOBE, run my own actions | [Customization](customization/README.md) |
 | Create an ISO file or a USB drive | [Start: create deployment media](media/README.md) |
 | Change the language, proxy, telemetry or update behaviour of the app | [Settings](settings.md) |
-| Save, move or share my deployment settings | [Settings backup and sync](deployment-profiles.md) |
+| Save, move or share my deployment settings | [Configuration sharing](configuration-sharing.md) |

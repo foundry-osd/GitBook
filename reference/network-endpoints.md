@@ -19,7 +19,7 @@ Foundry OSD can use a proxy, set in [Settings](../foundry-osd/settings.md#proxy)
 | `eu.i.posthog.com` | 443, HTTPS | Telemetry and remote diagnostics | Optional. See [Telemetry and privacy](telemetry-and-privacy.md). |
 | `docs.foundryosd.com` | 443, HTTPS | The **Documentation** buttons, opened in your browser | Optional |
 | Domain controllers of the domains you list | 389, LDAP | **Import from domain** on the Domain Join pages | When you import OUs |
-| The server of the shared folder | 445, SMB | Sharing, connecting and synchronizing in **Settings backup and sync** | When a configuration is shared |
+| The server of the publication folder | 445, SMB | Publishing and following a folder in **Configuration sharing** | When the folder is a network share |
 
 Notes on this table:
 

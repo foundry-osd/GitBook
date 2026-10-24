@@ -64,7 +64,7 @@ If something changes between your click and the start, a dialog titled **ISO cre
 
 **Where:** **Start**, on the **WinPE boot language** row marked **Needs attention**, in the **ISO creation is blocked** or **USB creation is blocked** dialog, and under the **WinPE keyboard layout** card of **General**. A second form, "The selected WinPE keyboard layout is not available in the boot image.", appears in the **Operation complete** dialog with the layout and its file.
 
-**Cause:** The first form: the layout was chosen on another computer, then the profile was imported here, and this computer does not have it. The second form: the Windows PE image for this architecture does not contain the file of that layout.
+**Cause:** The first form: the layout was chosen on another computer, then the configuration was imported or followed here, and this computer does not have it. The second form: the Windows PE image for this architecture does not contain the file of that layout.
 
 **Fix:** On **General**, in the **WinPE keyboard layout** card, choose a layout available here, or **Default**. For the second form, choose another layout of the same language, or **Default**.
 
