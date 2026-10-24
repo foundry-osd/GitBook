@@ -13,7 +13,7 @@ The status is the colored bar under the role of the PC, "This PC publishes its c
 | "This PC neither publishes nor follows a configuration." | The PC uses its own configuration. |
 | "Changes are published automatically.", "Publishing the configuration.", "Published. Followers receive this version at their next check." | The reference PC works normally. |
 | "Waiting for the first check of the folder.", "Up to date.", "Configuration updated." | The follower works normally. |
-| "The configuration is applied. Shared content is being downloaded." | The follower downloads new packages, driver sets or images. Media creation waits for them. |
+| "The configuration is applied. Shared content is being downloaded." | The follower downloads new packages, driver sets or images. Media creation waits for them. If the download fails or stalls, the status changes: see [Shared content missing](#content-failed). |
 
 ## Symptom index
 
@@ -30,7 +30,7 @@ The status is the colored bar under the role of the PC, "This PC publishes its c
 | "The folder points to an older version than the one applied. It is ignored." | Follower | [Older version](#rollback-rejected) |
 | "This publication requires a newer version of Foundry OSD." or "This file requires a newer version of Foundry OSD." | Follower, import | [Newer version required](#unsupported) |
 | "Checking the folder: the publication has not fully arrived yet ..." | Follower | [Publication not arrived](#checking) |
-| "\<number\> shared items could not be imported on this PC. ..." or "Some shared content is still not available ..." | Follower | [Shared content missing](#content-failed) |
+| "The configuration is applied, but some shared content could not be imported." or "The configuration is applied, but some shared content is still not available after repeated checks." | Follower | [Shared content missing](#content-failed) |
 | "Publishing and following are unavailable during this session ..." | Both | [Sharing unavailable](#sharing-unavailable) |
 | A message of the **Export configuration** or **Import configuration** dialog | Any | [Export and import messages](#export-and-import-messages) |
 
@@ -59,7 +59,7 @@ The status is the colored bar under the role of the PC, "This PC publishes its c
 
 ## "This folder holds files that are not a publication of this PC. Choose an empty folder." <a href="#not-a-publication" id="not-a-publication"></a>
 
-**Where:** **Publish to a folder** dialog. In the **Follow a folder** dialog, the form is "This folder does not hold a published configuration.".
+**Where:** **Publish to a folder** dialog, or status of the reference PC, for example after **Retry**. In the **Follow a folder** dialog, the form is "This folder does not hold a published configuration.".
 
 **Cause:** The reference PC publishes only to an empty folder or to a folder it already publishes to. A follower was given a folder where no reference PC has published yet, or the wrong folder.
 
@@ -150,9 +150,9 @@ The status is the colored bar under the role of the PC, "This PC publishes its c
 
 **Collect:** Nothing.
 
-## "\<number\> shared items could not be imported on this PC. They are fetched again when the reference PC publishes a new version." <a href="#content-failed" id="content-failed"></a>
+## "The configuration is applied, but some shared content could not be imported." <a href="#content-failed" id="content-failed"></a>
 
-**Where:** Card of a follower. Related messages: "Some shared content is still not available after repeated checks. It may be damaged in the folder: publish again from the reference PC." on the card, and "The shared content of the followed publication could not all be downloaded. Check the configuration sharing card in Settings." when media creation stops.
+**Where:** Status of a follower, with "\<number\> shared items could not be imported on this PC. They are fetched again when the reference PC publishes a new version." under it. Second form: "The configuration is applied, but some shared content is still not available after repeated checks.", with "Some shared content is still not available after repeated checks. It may be damaged in the folder: publish again from the reference PC." A media creation started meanwhile stops with "The shared content of the followed publication could not all be downloaded. Check the configuration sharing card in Settings."
 
 **Cause:** A post-installation package, driver set or image could not be downloaded or imported: not enough free space, a damaged file in the folder, or a driver set that breaks the [limits of Custom drivers](../../foundry-osd/customization/custom-drivers.md#limits).
 

@@ -26,7 +26,7 @@
 7. Create or update the deployment media from [Start](../media/README.md).
 
 {% hint style="warning" %}
-Store the password while the **Certificate ready** dialog shows it. Foundry OSD also saves it for your Windows account on this PC: see [Saved passwords and files](../configuration-sharing/saved-passwords.md). If you lose it, remove the certificate and create another one.
+Store the password while the **Certificate ready** dialog shows it. Foundry OSD also remembers it on this PC, encrypted for your Windows account; it leaves this PC only in an export or a publication with **Include passwords**. See [Saved passwords and files](../configuration-sharing/saved-passwords.md). If you lose it, remove the certificate and create another one.
 {% endhint %}
 
 **Tenant readiness** has four rows:

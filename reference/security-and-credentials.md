@@ -55,7 +55,7 @@ Foundry OSD saves the configuration, its passwords and the files you select for 
 | --- | --- |
 | Options | `Configuration\foundry.config.json`, without any password |
 | Passwords | `Configuration\secrets.dat`: the Deployment password, the passwords of local accounts and join accounts, the Wi-Fi passphrase and the PFX passwords |
-| Protection of the passwords | Windows DPAPI, for your Windows account. Another Windows account, or a copy of the file on another PC, cannot read them |
+| Protection of the passwords | Windows DPAPI. Only your Windows account can read them; another account, or the file copied to another PC, cannot |
 | Selected files | `Files\content`: answer files, network profiles, network certificates and the Windows Autopilot PFX, stored as they are, not encrypted by Foundry |
 | Publication password and keys of configuration sharing | In `secrets.dat`, with the other passwords |
 
@@ -82,12 +82,17 @@ What each person can do with a publication folder:
 | Someone who knows the publication password | Read the configuration, the included passwords and the content | Publish: only the key of the reference PC signs a version |
 | Another PC that takes the folder over | Publish with its own key, once it has the current password | Be applied by a follower before that follower accepts the new key |
 
-The publication password gives read access; the signature of the reference PC gives the authority to publish. To withdraw read access, the reference PC changes the password or resets the publication:
+The publication password gives read access; the signature of the reference PC gives the authority to publish.
 
-- **Change password** rewrites the current version under the new password. A former password holder can no longer read new versions, but one who kept the content key can still decrypt the content files.
-- **Reset publication** creates a new content key and encrypts every content file again. It is the complete revocation.
+### Revoke read access
+
+The reference PC has two ways to withdraw read access from someone who knows the publication password:
+
+- **Change password** rewrites the current version under the new password. Content files are not encrypted again, so someone who knew the old password can still read them. The folder also keeps the previous version under the old password, with the same content key: anyone with the old password and read access to the folder can still read every content file, without having kept anything.
+- **Reset publication** sets a new password and a new content key, and encrypts every content file again. It is the complete revocation, once the reset is published.
 
 On a follower, every setting of the publication is read-only. Only the ISO output path, the Additional WinPE driver folder, the telemetry settings and the passwords that the publication does not include can be changed.
+
 ## Windows Autopilot credentials
 
 Zero-touch hardware hash upload uses two separate identities. The rights of the first are never available to the media.

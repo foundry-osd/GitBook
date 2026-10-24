@@ -1,6 +1,6 @@
 # Move from Settings backup and sync
 
-Configuration sharing replaces **Settings backup and sync** and its deployment profiles. The first time Foundry OSD starts after the update, it moves the configuration you were using into the new storage, once for each Windows account. Nothing is deleted.
+Configuration sharing replaces **Settings backup and sync** and its deployment profiles. The first time Foundry OSD starts with Configuration sharing, it reads the old profile store, `%LocalAppData%\Foundry\Profiles`, and moves the configuration you were using into the new storage, once for each Windows account. Nothing is deleted.
 
 ## What is moved by itself
 
@@ -12,13 +12,20 @@ Configuration sharing replaces **Settings backup and sync** and its deployment p
 
 Post-installation packages, custom driver sets and custom Windows images stay in their libraries and need nothing.
 
-**Home** then shows a notice for each item that needs you. Close a notice once it is handled: it stays closed.
+**Home** then shows a notice for each item that needs you. Close a notice once it is handled: it stays closed. The passwords notice comes back at each start while the saved passwords still cannot be read: see [When passwords cannot be restored](saved-passwords.md#when-passwords-cannot-be-restored).
+
+{% hint style="warning" %}
+**Screenshot required**
+
+- **File:** `foundry-osd-configuration-sharing-migration-01-home-notices.png`
+- **Capture:** Show **Home** after the first-launch migration with the notices about passwords, files and synchronization.
+{% endhint %}
 
 | Notice on Home | What to do |
 | --- | --- |
 | "Saved passwords could not be restored. Enter them again on the configuration pages." | Type the passwords on their pages. This happens when the profile cannot be opened by your Windows account. |
 | "Some files used by the configuration could not be recovered. Select them again on the configuration pages." | Select each file again on the page marked **Needs attention** on **Start**. |
-| "Deployment profile synchronization is no longer supported. To share this configuration, use Publish to a folder on the reference PC." | The profile was synchronized through a shared folder. Set up the PCs again, as described below. |
+| "The configuration synchronization of earlier versions is no longer supported. To share this configuration, use Publish to a folder on the reference PC." | The profile was synchronized through a shared folder. Set up the PCs again, as described below. |
 
 ## Synchronized profiles
 
@@ -42,7 +49,7 @@ A `Connection.foundryprofile` connection file imports the configuration it holds
 
 ## What stays on the disk
 
-The old profile store, `%LocalAppData%\Foundry\Profiles`, the keys of its profiles in Windows Credential Manager and the old shared folders are left as they are. Foundry OSD no longer writes them, and reads the store and its keys only for **Previous configurations on this PC**. Once every configuration you need has been imported, you can delete the store and the old shared folders.
+The old profile store, `%LocalAppData%\Foundry\Profiles`, the keys of its profiles in Windows Credential Manager and the old shared folders are left as they are. Foundry OSD no longer writes them, and reads the store and its keys only for **Previous configurations on this PC**.
 
 ## Related
 

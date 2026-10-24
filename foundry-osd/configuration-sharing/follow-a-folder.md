@@ -2,6 +2,13 @@
 
 **Follow a folder** makes this PC use the configuration that a reference PC [publishes to a folder](publish-to-a-folder.md). Foundry OSD applies each new version by itself, and the published settings become read-only on this PC.
 
+{% hint style="warning" %}
+**Screenshot required**
+
+- **File:** `foundry-osd-configuration-sharing-follow-01-preview.png`
+- **Capture:** Show the **Follow a folder** dialog after **Open**, with the folder, the publication password and the preview: **Reference PC**, **Published on**, **Version**, **Passwords** and **To download**.
+{% endhint %}
+
 ## Before you start
 
 - The folder path and the publication password, from the administrator of the reference PC.
@@ -17,6 +24,13 @@
 
 The card shows "This PC follows \<PC name\>" and the status "Up to date." or "The configuration is applied. Shared content is being downloaded."
 
+{% hint style="warning" %}
+**Screenshot required**
+
+- **File:** `foundry-osd-configuration-sharing-follow-02-card-follower.png`
+- **Capture:** Show the **Configuration sharing** card of a follower: the role with the reference PC name, the **Up to date** status, **Folder**, **Version**, **Last success**, and the buttons **Check now** and **Stop following**.
+{% endhint %}
+
 ## What changes on this PC
 
 Every configuration page shows **Managed by a reference PC**, and its settings are read-only. You can still change:
@@ -28,15 +42,22 @@ When the publication includes the passwords, the password fields are read-only t
 
 **Import configuration** is not available while this PC follows a folder.
 
+{% hint style="warning" %}
+**Screenshot required**
+
+- **File:** `foundry-osd-configuration-sharing-follow-03-managed-banner.png`
+- **Capture:** Show a configuration page of a follower, such as **Wi-Fi**, with the **Managed by a reference PC** banner and its settings disabled.
+{% endhint %}
+
 ## New versions
 
 Foundry OSD reads the folder when it starts and every 60 seconds. **Check now** reads it at once. A new version is applied by itself, and a bar at the top of the window shows "Configuration updated from \<PC name\>." A media creation that is already running is not affected.
 
-New post-installation packages, driver sets and images are downloaded in the background, with a progress bar on the card. Meanwhile **Start** and the navigation pane show these items as **Downloading**, and media creation is still available: it waits with "Waiting for shared content to finish downloading", then continues. Content that the configuration no longer uses stays on this PC.
+New post-installation packages, driver sets and images are downloaded in the background, with a progress bar on the card. Meanwhile **Start** and the navigation pane show these items as **Downloading**, and media creation is still available: it waits with "Waiting for shared content to finish downloading" until the content has arrived, then continues. If some content cannot be downloaded, it stops: see [Shared content missing](../../troubleshooting/foundry-osd/configuration-sharing.md#content-failed). Content that the configuration no longer uses stays on this PC.
 
 ## Enter a new publication password
 
-After the reference PC changes the password or resets the publication, the status reads "The publication password does not open the current publication. Enter the new password."
+After a reset of the publication, and after a password change once the reference PC publishes its next version, the status reads "The publication password does not open the current publication. Enter the new password."
 
 1. Select **Enter password** on the card.
 2. Type the new **Publication password** and select **Save**.
@@ -45,9 +66,16 @@ After the reference PC changes the password or resets the publication, the statu
 
 When another PC takes over the folder, the status reads "The folder is now published by another PC. Accept the new reference or stop following." Nothing is applied until you decide.
 
+{% hint style="warning" %}
+**Screenshot required**
+
+- **File:** `foundry-osd-configuration-sharing-follow-04-accept-reference.png`
+- **Capture:** Show the **Accept the new reference?** dialog with **Previous key**, **New key** and **Version**.
+{% endhint %}
+
 1. Select **Accept new reference**.
 2. Compare **Previous key** and **New key**, and check **Version**. Accept only a change you expect, for example a take over announced by the administrator.
-3. Select **Accept**. The new version is applied.
+3. Select **Accept**. The new version is applied. If the new reference did not continue the version numbers of the folder, its version is older than the one applied, and the status then reads "The folder points to an older version than the one applied. It is ignored.": see [Older version](../../troubleshooting/foundry-osd/configuration-sharing.md#rollback-rejected).
 
 If the reference changes again while the dialog is open, it shows "The reference changed while this dialog was open. Review the new key before you accept it." with the new key: review it, then select **Accept** again.
 

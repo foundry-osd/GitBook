@@ -2,6 +2,13 @@
 
 Settings holds the options of the Foundry OSD application itself: language, appearance, configuration sharing, proxy, telemetry and updates. Open it with **Settings** at the bottom of the navigation pane. The sections below follow the cards of the page from top to bottom.
 
+{% hint style="warning" %}
+**Screenshot required**
+
+- **File:** `foundry-osd-settings-02-configuration-sharing.png`
+- **Capture:** Show the Settings page with its cards and **Configuration sharing** expanded on a PC that neither publishes nor follows: **Publish to a folder**, **Follow a folder**, **Export configuration** and **Import configuration**.
+{% endhint %}
+
 Except for **Configuration sharing**, these choices are stored for the workstation, so they apply to every Windows account that uses Foundry OSD on it. The proxy username and password are the exception: they are saved in Windows Credential Manager for your Windows account, so another account must type them again.
 
 ## General

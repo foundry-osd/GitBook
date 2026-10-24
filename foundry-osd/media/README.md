@@ -26,7 +26,7 @@ Below it, five groups list one row per page of the app:
 | **Domain Join** | **Zero-Touch**, **Interactive** | [Domain Join](../domain-join/README.md) |
 | **Customization** | **OS selection**, **Machine naming**, **OOBE**, **Custom Windows images**, **Custom drivers**, **Post-installation**, **Unattend**, **Optional features**, **AppX removals**, **AI components** | [Customization](../customization/README.md) |
 
-Each row shows its value and one state: **Configured**, **Default**, **Disabled**, **Not configured**, **Not selected** or **Needs attention**.
+Each row shows its value and one state: **Configured**, **Default**, **Disabled**, **Not configured**, **Not selected**, **Downloading** or **Needs attention**. **Downloading** appears on a PC that [follows a folder](../configuration-sharing/follow-a-folder.md#new-versions) while shared content is still arriving: media creation stays available and waits for it.
 
 **Needs attention** means something on that page is missing or not valid. The row shows the reason and a button, **Review** followed by the row name, that opens the page to fix. Its group opens by itself. Clear every such row before you create media.
 

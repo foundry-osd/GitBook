@@ -7,7 +7,7 @@ Foundry OSD saves your configuration, its passwords and the files you select by 
 | Item | Where, under `%LocalAppData%\Foundry` | Protection |
 | --- | --- | --- |
 | The options of every configuration page | `Configuration\foundry.config.json` | None: the file holds no password |
-| The Deployment password, the Wi-Fi **Passphrase**, the **PFX password** of the Ethernet 802.1X, Wi-Fi and Windows Autopilot certificates, the passwords of the OOBE Administrator account and of the local accounts, and the passwords of the join accounts of zero-touch Domain Join | `Configuration\secrets.dat` | Encrypted with Windows DPAPI for your Windows account. Another Windows account, or a copy of the file on another PC, cannot read it |
+| The Deployment password, the Wi-Fi **Passphrase**, the **PFX password** of the Ethernet 802.1X, Wi-Fi and Windows Autopilot certificates, the passwords of the OOBE Administrator account and of the local accounts, and the passwords of the join accounts of zero-touch Domain Join | `Configuration\secrets.dat` | Encrypted with Windows DPAPI. Only your Windows account can read it; another account, or the file copied to another PC, cannot |
 | A copy of each file you select: answer files, Ethernet 802.1X and Wi-Fi profile templates and certificates, the Windows Autopilot PFX | `Files\content` | None added by Foundry: the copies are stored as they are in your Windows profile |
 
 A selected file is copied when you select it, so the original is no longer needed. A file larger than 4 MiB is refused with **File not added** and "The selected file could not be added to Foundry. Choose a readable file no larger than 4 MiB." The previous selection stays.
