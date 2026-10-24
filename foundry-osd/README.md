@@ -45,6 +45,7 @@ A small colored badge can appear to the right of an item. Point at it to read it
 | --- | --- | --- |
 | **ADK ready** / **ADK not ready** | **ADK** | Whether Foundry OSD can create media. |
 | **Configured** | Network and Customization pages | The settings of the page are valid, or left at their defaults, and the media will use them. |
+| **Downloading** | **Post-installation**, **Custom Windows images** and **Custom drivers**, on a PC that follows a folder | Shared content of this item is still being downloaded. Media creation stays available and waits for it: see [New versions](configuration-sharing/follow-a-folder.md#new-versions). |
 | **Active provisioning mode** | Windows Autopilot and Domain Join pages | This method is the one the media will use. |
 | **Needs attention** | Any page, including **General** | The feature is turned on but something is missing. Media creation is blocked until you fix it. |
 
@@ -67,4 +68,4 @@ An item without a badge is not configured, which is normal for a feature you do 
 | Choose the Windows offered, name computers, shape OOBE, run my own actions | [Customization](customization/README.md) |
 | Create an ISO file or a USB drive | [Start: create deployment media](media/README.md) |
 | Change the language, proxy, telemetry or update behaviour of the app | [Settings](settings.md) |
-| Save, move or share my deployment settings | [Settings backup and sync](deployment-profiles.md) |
+| Save, move or share my deployment settings | [Configuration sharing](configuration-sharing.md) |

@@ -26,7 +26,7 @@
 7. Create or update the deployment media from [Start](../media/README.md).
 
 {% hint style="warning" %}
-Store the password while the **Certificate ready** dialog shows it. Foundry OSD keeps it with your configuration only when **Remember passwords** is on: see [what is remembered](../deployment-profiles.md#what-is-remembered). If you lose it, remove the certificate and create another one.
+Store the password while the **Certificate ready** dialog shows it. Foundry OSD also remembers it on this PC, encrypted for your Windows account; it leaves this PC only in an export or a publication with **Include passwords**. See [Saved passwords and files](../configuration-sharing/saved-passwords.md). If you lose it, remove the certificate and create another one.
 {% endhint %}
 
 **Tenant readiness** has four rows:
@@ -42,9 +42,9 @@ A permission, consent or enterprise application problem has no row of its own: a
 
 ## If the certificate is no longer selected
 
-Foundry OSD keeps the tenant, the app registration and the default group tag. While **Remember passwords** is on, which is the default, it also saves a copy of the PFX and its password with the configuration, so the certificate is still selected when you start the app again: see [What is remembered](../deployment-profiles.md#what-is-remembered).
+Foundry OSD keeps the tenant, the app registration and the default group tag. It also saves a copy of the PFX and its password for your Windows account, so the certificate is still selected when you start the app again: see [Saved passwords and files](../configuration-sharing/saved-passwords.md).
 
-The certificate is no longer selected after **Disconnect tenant**, when **Remember passwords** is off, or in a configuration that came from another PC without its passwords and confidential files. Then open **Windows Autopilot > Zero-Touch**, select **Select PFX**, choose the file and type **PFX password**. You do not sign in again while the certificate is valid.
+The certificate is no longer selected after **Disconnect tenant**. Then open **Windows Autopilot > Zero-Touch**, select **Select PFX**, choose the file and type **PFX password**. You do not sign in again while the certificate is valid. In a configuration imported or followed without its passwords, only **PFX password** is empty: type it.
 
 <details>
 

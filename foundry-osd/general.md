@@ -42,7 +42,7 @@ The first list offers every language that has a layout on this computer. The sec
 
 The layout is set for the whole media. A technician who works on another keyboard can switch it in Windows PE from the **Keyboard** menu of [Foundry Connect](../foundry-connect/README.md#menus) or [Foundry Deploy](../foundry-deploy/README.md#menu-bar). This option affects Windows PE only: Windows still asks for the keyboard during its first start.
 
-A profile from another computer can carry a layout that is not installed here. The card then shows "The selected WinPE keyboard layout is not installed on this computer." and media creation is blocked until you choose a layout or **Default**.
+A configuration imported or followed from another computer can carry a layout that is not installed here. The card then shows "The selected WinPE keyboard layout is not installed on this computer." and media creation is blocked until you choose a layout or **Default**.
 
 ### Windows PE time zone
 
@@ -77,7 +77,7 @@ The password must have at least 8 characters; Foundry OSD recommends 12, or a pa
 Network credentials are not protected because Foundry Connect uses them before the password is asked. Anyone who holds the media can read them. Password protection does not encrypt the whole ISO file or USB drive either.
 {% endhint %}
 
-Foundry OSD saves the Deployment password with the configuration while **Remember passwords** is on, which is the default; with it off, the password lasts until you close the app. See [What is remembered](deployment-profiles.md#what-is-remembered). If the fields are empty when you come back, type the password again. If you lose the password of existing media, create the media again with a new one.
+Foundry OSD saves the Deployment password for your Windows account on this PC: see [Saved passwords and files](configuration-sharing/saved-passwords.md). If the fields are empty when you come back, type the password again. If you lose the password of existing media, create the media again with a new one.
 
 ## Check the result
 

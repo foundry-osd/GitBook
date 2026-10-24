@@ -42,7 +42,7 @@ When the step is shown, Foundry Deploy checks the account stored on the media fo
 - Media keeps the accounts and passwords it was created with. Create or update it after you change one.
 - Foundry OSD does not check the account with the domain, because the media may be created on a computer that cannot reach it. The check runs in Foundry Deploy.
 - A join password is limited to 2,560 bytes: 2,560 characters if all are plain ASCII; other characters count 2 to 4 bytes.
-- A configuration exported to a file never contains the join passwords. See [Settings backup and sync](../deployment-profiles.md).
+- An [exported file](../configuration-sharing/export-and-import.md) or a [publication](../configuration-sharing/publish-to-a-folder.md) contains the join passwords only when **Include passwords** is selected.
 
 ## Related
 
