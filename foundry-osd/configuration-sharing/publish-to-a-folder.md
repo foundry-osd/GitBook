@@ -19,7 +19,7 @@
 
 1. Open **Settings**, expand **Configuration sharing**, and select **Publish** on **Publish to a folder**.
 2. In **Folder**, type the path or select **Browse**.
-3. Type a **Publication password**, or select **Generate**, and type it again in **Confirm the password**. **Copy** puts it on the clipboard.
+3. Type a **Publication password**, or select **Generate**, and type it again in **Confirm password**. **Copy** puts it on the clipboard.
 4. Decide on **Include passwords**. With it, the dialog warns: "Anyone who can read the folder and knows the publication password can read these passwords."
 5. Select **Publish**. The dialog shows each step with a percentage: "Checking the folder…", then for each item "Verifying \<name\>…" (an image) or "Preparing \<name\>…" (a package or a driver set), then "Sending \<name\>…", and finally "Finishing the publication…".
 
@@ -29,10 +29,10 @@ The card shows "This PC publishes its configuration" and the status "Published. 
 **Screenshot required**
 
 - **File:** `foundry-osd-configuration-sharing-publish-02-card-reference.png`
-- **Capture:** Show the **Configuration sharing** card of a reference PC: the role, the **Published** status, **Folder**, **Version**, **Last success**, and the buttons **Retry**, **Change password**, **Reset publication** and **Stop publishing**.
+- **Capture:** Show the **Configuration sharing** card of a reference PC: the role, the **Published** status, **Folder**, **Version**, **Last published**, and the buttons **Change password**, **Reset publication** and **Stop publishing**.
 {% endhint %}
 
-If another PC already publishes to the folder, the **Take over the folder** dialog opens instead: see [Take over a folder](#take-over-a-folder).
+If another PC already publishes to the folder, the **Take over this folder** dialog opens instead: see [Take over a folder](#take-over-a-folder).
 
 ## How changes are published
 
@@ -40,7 +40,7 @@ Foundry OSD publishes by itself about 5 seconds after you change the configurati
 
 - A configuration that is not ready, or uses content missing on this PC, is not published: the status reads "Not published: ..." and the previous version stays current.
 - Packages, driver sets and images are copied in the background; the card shows the same steps as the dialog. Followers see the version once all its content is written.
-- **Retry** publishes at once.
+- After a failed publish, **Publish now** appears on the card and publishes again at once.
 
 ## Change password or reset the publication
 
@@ -51,14 +51,14 @@ Both actions ask for a new password. Each follower then selects **Enter password
 | **Change password** | Rewrites the current version under the new password. Content files are not encrypted again: former readers are not revoked. | At the next published version. Until then they stay **Up to date**. |
 | **Reset publication** | New password and content key; every content file is encrypted again. The complete revocation. | At once: the reset publishes a new version. |
 
-What a former password holder can still read is in [Revoke read access](../../reference/security-and-credentials.md#revoke-read-access). Until a reset is published, the card shows "Old readers can still open content until the next successful publish." When this PC cannot publish at that moment, the card shows "The new password is saved. The change completes at the next successful publish."
+What a former password holder can still read is in [Revoke read access](../../reference/security-and-credentials.md#revoke-read-access). Until a reset is published, the card shows "Former readers can still open the content until the next successful publish." When this PC cannot publish at that moment, the card shows "The new password is saved. The change completes at the next successful publish."
 
 ## Take over a folder
 
 Taking over continues the publication of another PC from this one, for example when the reference PC is replaced.
 
 1. Select **Publish** on **Publish to a folder** and choose the folder, or select **Take over** on the card when it shows "Another PC publishes to this folder. Take it over to publish from this PC."
-2. In **Take over the folder**, check **Version found** and **Key found**, which are not verified yet.
+2. In **Take over this folder**, check **Version found** and **Key found**, which are not verified yet.
 3. Type the **Current publication password**, decide on **Include passwords**, and select **Take over**. The dialog shows the same steps as **Publish**.
 
 Each follower must then [accept the new reference](follow-a-folder.md#accept-a-new-reference) once. The same dialog recovers this PC when its own publication keys can no longer be read: see [Configuration sharing troubleshooting](../../troubleshooting/foundry-osd/configuration-sharing.md#passwords-needed).

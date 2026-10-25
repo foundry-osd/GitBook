@@ -11,7 +11,7 @@ The status is the colored bar under the role of the PC, "This PC publishes its c
 | Status | Meaning |
 | --- | --- |
 | "This PC neither publishes nor follows a configuration." | The PC uses its own configuration. |
-| "Changes are published automatically.", "Publishing the configuration.", "Published. Followers receive this version at their next check." | The reference PC works normally. |
+| "Changes are published automatically.", "Publishing the configuration…", "Published. Followers receive this version at their next check." | The reference PC works normally. |
 | "Waiting for the first check of the folder.", "Up to date.", "Configuration updated." | The follower works normally. |
 | "The configuration is applied. Shared content is being downloaded." | The follower downloads and installs new packages, driver sets or images. Media creation is blocked until they are installed, then becomes available by itself. If the download fails or stalls, the status changes: see [Shared content missing](#content-failed). |
 
@@ -19,28 +19,28 @@ The status is the colored bar under the role of the PC, "This PC publishes its c
 
 | What you see | Role | Go to |
 | --- | --- | --- |
-| "Not published: the configuration is not ready to build media ..." | Reference | [Not published](#not-published) |
+| "Not published: the configuration is not ready to create media ..." | Reference | [Not published](#not-published) |
 | "The folder is unavailable. ..." | Both | [Folder unavailable](#folder-unavailable) |
 | "This folder holds files that are not a publication of this PC. ..." or "This folder does not hold a published configuration." | Both | [Not a publication](#not-a-publication) |
 | "Another PC publishes to this folder. ..." | Reference | [Another PC publishes](#another-pc-publishes) |
 | "The folder is now published by another PC. ..." | Follower | [New reference](#new-reference) |
-| "The publication password does not open ..." or "Wrong publication password, or the publication was modified." | Both | [Wrong password](#wrong-password) |
+| "The publication password does not open ..." or "This password does not open the publication, or the publication was modified." | Both | [Wrong password](#wrong-password) |
 | "Passwords are needed: ..." or "The publication password or keys of this PC could not be read." | Both | [Passwords needed](#passwords-needed) |
 | "The publication was modified. It is not applied." | Follower | [Publication modified](#tampered) |
 | "The folder points to an older version than the one applied. It is ignored." | Follower | [Older version](#rollback-rejected) |
 | "This publication requires a newer version of Foundry OSD." or "This file requires a newer version of Foundry OSD." | Follower, import | [Newer version required](#unsupported) |
 | "Checking the folder: the publication has not fully arrived yet ..." | Follower | [Publication not arrived](#checking) |
-| "The configuration is applied, but some shared content could not be imported." or "The configuration is applied, but some shared content is still not available after repeated checks." | Follower | [Shared content missing](#content-failed) |
+| "The configuration is applied, but some shared content could not be installed." or "The configuration is applied, but some shared content is still not available after repeated checks." | Follower | [Shared content missing](#content-failed) |
 | "Publishing and following are unavailable during this session ..." | Both | [Sharing unavailable](#sharing-unavailable) |
 | A message of the **Export configuration** or **Import configuration** dialog | Any | [Export and import messages](#export-and-import-messages) |
 
-## "Not published: the configuration is not ready to build media or references content missing on this PC. The previous version stays current." <a href="#not-published" id="not-published"></a>
+## "Not published: the configuration is not ready to create media, or it references content missing on this PC. The previous version stays current." <a href="#not-published" id="not-published"></a>
 
 **Where:** Status of the reference PC.
 
 **Cause:** Foundry OSD publishes only a configuration that can create media. A row of **Start** needs attention, or a post-installation package, driver set or custom image used by the configuration is missing on this PC.
 
-**Fix:** Open [Start](../../foundry-osd/media/README.md) and clear every row marked **Needs attention**. The next change publishes; **Retry** publishes at once. Followers keep the previous version meanwhile.
+**Fix:** Open [Start](../../foundry-osd/media/README.md) and clear every row marked **Needs attention**. The next change publishes; **Publish now** publishes at once. Followers keep the previous version meanwhile.
 
 **Collect:** Nothing.
 
@@ -53,13 +53,13 @@ The status is the colored bar under the role of the PC, "This PC publishes its c
 **Fix:**
 
 1. Open the folder in File Explorer with the same Windows account. On the reference PC, check that you can create a file in it.
-2. Select **Retry** on the reference PC, or **Check now** on a follower. A follower also reads the folder again every 60 seconds.
+2. Select **Publish now** on the reference PC, or **Check now** on a follower. A follower also reads the folder again every 60 seconds.
 
 **Collect:** `Foundry.log`.
 
 ## "This folder holds files that are not a publication of this PC. Choose an empty folder." <a href="#not-a-publication" id="not-a-publication"></a>
 
-**Where:** **Publish to a folder** dialog, or status of the reference PC, for example after **Retry**. In the **Follow a folder** dialog, the form is "This folder does not hold a published configuration.".
+**Where:** **Publish to a folder** dialog, or status of the reference PC, for example after **Publish now**. In the **Follow a folder** dialog, the form is "This folder does not hold a published configuration.".
 
 **Cause:** The reference PC publishes only to an empty folder or to a folder it already publishes to. A follower was given a folder where no reference PC has published yet, or the wrong folder.
 
@@ -69,7 +69,7 @@ The status is the colored bar under the role of the PC, "This PC publishes its c
 
 ## "Another PC publishes to this folder. Take it over to publish from this PC." <a href="#another-pc-publishes" id="another-pc-publishes"></a>
 
-**Where:** Status of the reference PC, or the **Take over the folder** dialog after **Publish**.
+**Where:** Status of the reference PC, or the **Take over this folder** dialog after **Publish**.
 
 **Cause:** A version of the folder is signed by another PC, which took the folder over or publishes to it.
 
@@ -89,7 +89,7 @@ The status is the colored bar under the role of the PC, "This PC publishes its c
 
 ## "The publication password does not open the current publication. Enter the new password." <a href="#wrong-password" id="wrong-password"></a>
 
-**Where:** Status of a follower. Second forms: "The publication password does not open the publication of this PC in this folder." on the reference PC, "Wrong publication password, or the publication was modified." in the **Follow a folder** and **Enter the publication password** dialogs, and "This password does not open the current publication." in **Take over the folder**.
+**Where:** Status of a follower. Second forms: "The publication password does not open the publication of this PC in this folder." on the reference PC, "This password does not open the publication, or the publication was modified." in the **Follow a folder** and **Enter publication password** dialogs, and "This password does not open the current publication." in **Take over this folder**.
 
 **Cause:** The reference PC changed the password or reset the publication, the password was mistyped, or, on the reference PC, this PC published to the folder before with another password.
 
@@ -97,7 +97,7 @@ The status is the colored bar under the role of the PC, "This PC publishes its c
 
 **Collect:** Nothing.
 
-## "Passwords are needed: enter the publication password, or the passwords the publication does not include on the configuration pages." <a href="#passwords-needed" id="passwords-needed"></a>
+## "Passwords are needed: enter the publication password, or enter the missing passwords on the configuration pages." <a href="#passwords-needed" id="passwords-needed"></a>
 
 **Where:** Status of a follower. On the reference PC, the status is "The publication password or keys of this PC could not be read."
 
@@ -116,7 +116,7 @@ The status is the colored bar under the role of the PC, "This PC publishes its c
 
 **Cause:** The current version in the folder does not match the signature of the reference PC: a file was damaged, changed by hand or by a synchronization conflict. The follower keeps the version it applied last.
 
-**Fix:** On the reference PC, select **Retry** to publish a new version. If the status comes back, find out who or what writes in the folder.
+**Fix:** On the reference PC, make a change to the configuration: a new version is published a few seconds later. If the status comes back, find out who or what writes in the folder.
 
 **Collect:** `Foundry.log` of the follower.
 
@@ -126,7 +126,7 @@ The status is the colored bar under the role of the PC, "This PC publishes its c
 
 **Cause:** The folder was restored from a backup or a snapshot, or a synchronized copy older than the one this PC read replaced it. A follower never goes back to an older version.
 
-**Fix:** On the reference PC, select **Retry**: the new version is newer than the one applied, and followers take it.
+**Fix:** On the reference PC, make a change to the configuration: the new version is newer than the one applied, and followers take it.
 
 **Collect:** Nothing.
 
@@ -150,16 +150,16 @@ The status is the colored bar under the role of the PC, "This PC publishes its c
 
 **Collect:** Nothing.
 
-## "The configuration is applied, but some shared content could not be imported." <a href="#content-failed" id="content-failed"></a>
+## "The configuration is applied, but some shared content could not be installed." <a href="#content-failed" id="content-failed"></a>
 
-**Where:** Status of a follower, with "\<number\> shared items could not be imported on this PC. They are fetched again when the reference PC publishes a new version." under it. Second form: "The configuration is applied, but some shared content is still not available after repeated checks.", with "Some shared content is still not available after repeated checks. It may be damaged in the folder: publish again from the reference PC." Media creation stays blocked, and the readiness bar of **Start** reads "Some shared content could not be installed. Media creation is available once the synchronization is complete; check the sharing status in Settings." or "Some shared content is still not available after repeated checks. Media creation is available once the synchronization is complete; check the sharing status in Settings."
+**Where:** Status of a follower, with "Items that could not be installed: \<names\>. They are fetched again when the reference PC publishes a new version." under it. Second form: "The configuration is applied, but some shared content is still not available after repeated checks.", with "The content may be damaged in the folder. Publish again from the reference PC." Media creation stays blocked. The readiness bar of **Start** reads **Shared content could not be installed** with "Some shared content could not be installed on this PC. It is fetched again when the reference PC publishes a new version. Check Configuration sharing on the Settings page.", or **Shared content is not available** with "Some shared content is still not available after repeated checks. Publish again from the reference PC, then check Configuration sharing on the Settings page."
 
 **Cause:** A post-installation package, driver set or image could not be downloaded or imported: not enough free space, a damaged file in the folder, or a driver set that breaks the [limits of Custom drivers](../../foundry-osd/customization/custom-drivers.md#limits).
 
 **Fix:**
 
 1. Free space on the drive of `%LocalAppData%\Foundry`.
-2. On the reference PC, select **Retry**. The follower downloads the missing content again with the new version.
+2. On the reference PC, make a change to the configuration so that it publishes a new version. The follower downloads the missing content again.
 
 **Collect:** `Foundry.log` of the follower.
 

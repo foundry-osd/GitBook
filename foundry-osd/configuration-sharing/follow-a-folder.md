@@ -6,7 +6,7 @@
 **Screenshot required**
 
 - **File:** `foundry-osd-configuration-sharing-follow-01-preview.png`
-- **Capture:** Show the **Follow a folder** dialog after **Open**, with the folder, the publication password and the preview: **Reference PC**, **Published on**, **Version**, **Passwords** and **To download**.
+- **Capture:** Show the **Follow a folder** dialog after **Open**, with the folder, the publication password and the preview: **Reference PC**, **Published on**, **Version**, **Passwords** and **Download size**.
 {% endhint %}
 
 ## Before you start
@@ -19,8 +19,8 @@
 
 1. Open **Settings**, expand **Configuration sharing**, and select **Follow** on **Follow a folder**.
 2. In **Folder**, type the path or select **Browse**, type the **Publication password**, and select **Open**.
-3. Read the preview: **Reference PC**, **Published on**, **Version**, **Passwords** (**Included** or **Not included**) and **To download**, the size of the content this PC does not have yet.
-4. Read the warning "Following replaces the current configuration and makes the published settings read-only. The ISO output path, the WinPE driver folder and the telemetry settings of this PC are kept.", then select **Follow**.
+3. Read the preview: **Reference PC**, **Published on**, **Version**, **Passwords** (**Included** or **Not included**) and **Download size**, the size of the content this PC does not have yet.
+4. Read the warning "Following replaces the current configuration and makes the published settings read-only. The ISO output path, the additional WinPE driver folder and the telemetry settings of this PC are kept.", then select **Follow**.
 
 The card shows "This PC follows \<PC name\>" and the status "Up to date." or "The configuration is applied. Shared content is being downloaded."
 
@@ -28,7 +28,7 @@ The card shows "This PC follows \<PC name\>" and the status "Up to date." or "Th
 **Screenshot required**
 
 - **File:** `foundry-osd-configuration-sharing-follow-02-card-follower.png`
-- **Capture:** Show the **Configuration sharing** card of a follower: the role with the reference PC name, the **Up to date** status, **Folder**, **Version**, **Last success**, and the buttons **Check now** and **Stop following**.
+- **Capture:** Show the **Configuration sharing** card of a follower: the role with the reference PC name, the **Up to date** status, **Folder**, **Version**, **Last successful check**, and the buttons **Check now** and **Stop following**.
 {% endhint %}
 
 ## What changes on this PC
@@ -55,7 +55,7 @@ Foundry OSD reads the folder when it starts and every 60 seconds. **Check now** 
 
 New post-installation packages, driver sets and images are downloaded, then installed, in the background. The card shows each step with the item name and a percentage: "Downloading \<name\>…", then "Installing \<name\>…".
 
-Until every item is installed, the navigation pane shows these items as **Downloading**, and media creation is blocked: **Create ISO**, **Create USB**, **Update USB**, **Create without cache**, **Recreate without cache** and **Create PXE files** are unavailable. The readiness bar of **Start** and the **Start** step of **Home** read "Shared content is still being synchronized. Media creation is available once it is complete." The actions become available again by themselves when the synchronization completes. If some content cannot be installed, media creation stays blocked: see [Shared content missing](../../troubleshooting/foundry-osd/configuration-sharing.md#content-failed). Content that the configuration no longer uses stays on this PC.
+Until every item is installed, the navigation pane shows these items as **Downloading**, and media creation is blocked: **Create ISO**, **Create USB**, **Update USB**, **Create without cache**, **Recreate without cache** and **Create PXE files** are unavailable. The readiness bar of **Start** reads **Waiting for shared content** with "Shared content is still being downloaded. Media creation is available once the download is complete.", and the **Start** step of **Home** reads **Downloading**. The actions become available again by themselves when the synchronization completes. If some content cannot be installed, media creation stays blocked: see [Shared content missing](../../troubleshooting/foundry-osd/configuration-sharing.md#content-failed). Content that the configuration no longer uses stays on this PC.
 
 ## Enter a new publication password
 
@@ -72,7 +72,7 @@ When another PC takes over the folder, the status reads "The folder is now publi
 **Screenshot required**
 
 - **File:** `foundry-osd-configuration-sharing-follow-04-accept-reference.png`
-- **Capture:** Show the **Accept the new reference?** dialog with **Previous key**, **New key** and **Version**.
+- **Capture:** Show the **Accept new reference?** dialog with **Previous key**, **New key** and **Version**.
 {% endhint %}
 
 1. Select **Accept new reference**.
@@ -83,7 +83,7 @@ If the reference changes again while the dialog is open, it shows "The reference
 
 ## Stop following
 
-Select **Stop following**. The confirmation reads "The configuration stays as it is and becomes editable on this PC." Select **Forget the publication password** to remove it from this PC: following the folder again then asks for it.
+Select **Stop following**. The **Stop following?** dialog reads "The configuration stays as it is and becomes editable on this PC." Select **Forget publication password** to remove it from this PC: following the folder again then asks for it.
 
 ## Related
 

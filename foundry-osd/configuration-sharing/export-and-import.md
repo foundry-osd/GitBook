@@ -30,7 +30,7 @@ When a selected file is missing or damaged on this PC, the file is still written
 3. Type its **Passphrase** and select **Open**.
 4. Read the preview: **Name**, **Exported on**, and **Passwords**, which reads **Included** or **Not included**.
 5. Read **Missing on this PC**, when it appears. It lists each post-installation package, driver set, image or file that the configuration uses and this PC does not have, with its kind.
-6. Read the warning "Importing replaces the current configuration. The ISO output path, the WinPE driver folder and the telemetry settings of this PC are kept.", then select **Import**.
+6. Read the warning "Importing replaces the current configuration. The ISO output path, the additional WinPE driver folder and the telemetry settings of this PC are kept.", then select **Import**.
 
 {% hint style="warning" %}
 **Screenshot required**

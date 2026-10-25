@@ -54,10 +54,10 @@ Foundry OSD shows the first message on the Unattend page and the others on the l
 | --- | --- |
 | "Some files are missing or invalid. Remove these entries and import the files again before creating media." | Read the line under each file in the list: it carries one of the messages below. |
 | "Foundry no longer has a valid copy of this file. Remove the entry and import the file again." | The copy kept by Foundry is missing or damaged. Remove the entry and import the file again. |
-| "The file could not be read. Check that it exists and that you can open it, then try again." | Select **Check sources**. If the message stays, remove the entry and import the file again. |
-| "Checking the stored files took too long. Try again." | Select **Check sources** again. |
-| "Two file checks are still running. Wait for them to finish, then try again." | Wait, then select **Check sources**. |
-| "Source check pending. Choose Check sources to validate the current file without accepting content changes." | Select **Check sources**. |
+| "The file could not be read. Check that it exists and that you can open it, then try again." | Select **Check files**. If the message stays, remove the entry and import the file again. |
+| "Checking the stored files took too long. Try again." | Select **Check files** again. |
+| "Two file checks are still running. Wait for them to finish, then try again." | Wait, then select **Check files**. |
+| "File check pending. Choose Check files to validate the stored copy." | Select **Check files**. |
 
 ## Related
 

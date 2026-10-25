@@ -23,7 +23,7 @@ Use **Customization > Unattend** to put your own Windows answer files on the dep
 
 Foundry keeps its own copy of each imported file in its [file library](../configuration-sharing/saved-passwords.md), so the source file is no longer needed. To use an updated file, remove the entry and import the file again.
 
-**Check sources** checks that the copy of every file is still readable and valid. A missing or invalid copy blocks media creation. **Remove** takes the selected file off the list; the source file is not deleted. If it was the default, choose another one under **Deployment default** before you create media.
+**Check files** checks that the copy of every file is still readable and valid. A missing or invalid copy blocks media creation. **Remove** takes the selected file off the list; the source file is not deleted. If it was the default, choose another one under **Deployment default** before you create media.
 
 ## What the technician sees
 
@@ -49,7 +49,7 @@ Read [Answer file rules](unattend/answer-file-rules.md) before you write a file.
 
 ## Check the result
 
-- In Foundry OSD, every file shows "Source validated." and no warning bar is displayed.
+- In Foundry OSD, every file shows "File validated." and no warning bar is displayed.
 - On a test device, deploy with the file and confirm in Windows that its settings were applied. Foundry cannot tell whether Windows accepted them.
 
 ## Limits

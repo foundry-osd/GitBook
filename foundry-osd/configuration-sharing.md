@@ -17,7 +17,7 @@ Open **Settings**, at the bottom of the navigation pane, and expand **Configurat
 
 - **Export configuration** and **Import configuration** are always offered.
 - On a PC that neither publishes nor follows, the card also offers **Publish to a folder** and **Follow a folder**.
-- On a PC that publishes or follows, the card shows its role, "This PC publishes its configuration" or "This PC follows \<PC name\>", the status, the **Folder**, the **Version** and the **Last success**, with the buttons of that role. A PC cannot publish and follow at the same time.
+- On a PC that publishes or follows, the card shows its role, "This PC publishes its configuration" or "This PC follows \<PC name\>", the status, the **Folder**, the **Version** and **Last published** or **Last successful check**, with the buttons of that role. A PC cannot publish and follow at the same time.
 
 ## What travels
 
