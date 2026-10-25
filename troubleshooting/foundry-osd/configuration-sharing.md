@@ -13,7 +13,7 @@ The status is the colored bar under the role of the PC, "This PC publishes its c
 | "This PC neither publishes nor follows a configuration." | The PC uses its own configuration. |
 | "Changes are published automatically.", "Publishing the configuration.", "Published. Followers receive this version at their next check." | The reference PC works normally. |
 | "Waiting for the first check of the folder.", "Up to date.", "Configuration updated." | The follower works normally. |
-| "The configuration is applied. Shared content is being downloaded." | The follower downloads new packages, driver sets or images. Media creation waits for them. If the download fails or stalls, the status changes: see [Shared content missing](#content-failed). |
+| "The configuration is applied. Shared content is being downloaded." | The follower downloads and installs new packages, driver sets or images. Media creation is blocked until they are installed, then becomes available by itself. If the download fails or stalls, the status changes: see [Shared content missing](#content-failed). |
 
 ## Symptom index
 
@@ -152,7 +152,7 @@ The status is the colored bar under the role of the PC, "This PC publishes its c
 
 ## "The configuration is applied, but some shared content could not be imported." <a href="#content-failed" id="content-failed"></a>
 
-**Where:** Status of a follower, with "\<number\> shared items could not be imported on this PC. They are fetched again when the reference PC publishes a new version." under it. Second form: "The configuration is applied, but some shared content is still not available after repeated checks.", with "Some shared content is still not available after repeated checks. It may be damaged in the folder: publish again from the reference PC." A media creation started meanwhile stops with "The shared content of the followed publication could not all be downloaded. Check the configuration sharing card in Settings."
+**Where:** Status of a follower, with "\<number\> shared items could not be imported on this PC. They are fetched again when the reference PC publishes a new version." under it. Second form: "The configuration is applied, but some shared content is still not available after repeated checks.", with "Some shared content is still not available after repeated checks. It may be damaged in the folder: publish again from the reference PC." Media creation stays blocked, and the readiness bar of **Start** reads "Some shared content could not be installed. Media creation is available once the synchronization is complete; check the sharing status in Settings." or "Some shared content is still not available after repeated checks. Media creation is available once the synchronization is complete; check the sharing status in Settings."
 
 **Cause:** A post-installation package, driver set or image could not be downloaded or imported: not enough free space, a damaged file in the folder, or a driver set that breaks the [limits of Custom drivers](../../foundry-osd/customization/custom-drivers.md#limits).
 

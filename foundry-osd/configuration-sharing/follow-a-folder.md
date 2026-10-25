@@ -53,7 +53,9 @@ When the publication includes the passwords, the password fields are read-only t
 
 Foundry OSD reads the folder when it starts and every 60 seconds. **Check now** reads it at once. A new version is applied by itself; the **Configuration sharing** card of **Settings** shows the status and the **Version**. A media creation that is already running is not affected.
 
-New post-installation packages, driver sets and images are downloaded in the background, with a progress bar on the card. Meanwhile **Start** and the navigation pane show these items as **Downloading**, and media creation is still available: it waits with "Waiting for shared content to finish downloading" until the content has arrived, then continues. If some content cannot be downloaded, it stops: see [Shared content missing](../../troubleshooting/foundry-osd/configuration-sharing.md#content-failed). Content that the configuration no longer uses stays on this PC.
+New post-installation packages, driver sets and images are downloaded, then installed, in the background. The card shows each step with the item name and a percentage: "Downloading \<name\>…", then "Installing \<name\>…".
+
+Until every item is installed, the navigation pane shows these items as **Downloading**, and media creation is blocked: **Create ISO**, **Create USB**, **Update USB**, **Create without cache**, **Recreate without cache** and **Create PXE files** are unavailable. The readiness bar of **Start** and the **Start** step of **Home** read "Shared content is still being synchronized. Media creation is available once it is complete." The actions become available again by themselves when the synchronization completes. If some content cannot be installed, media creation stays blocked: see [Shared content missing](../../troubleshooting/foundry-osd/configuration-sharing.md#content-failed). Content that the configuration no longer uses stays on this PC.
 
 ## Enter a new publication password
 
