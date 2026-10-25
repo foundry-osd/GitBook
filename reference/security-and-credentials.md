@@ -49,50 +49,33 @@ The Deployment password is never written to the media. Once a technician has typ
 
 ## Saved on the workstation
 
-Foundry OSD saves the configuration, its passwords and the files you select for your Windows account, under `%LocalAppData%\Foundry`. The list of what is saved is in [Saved passwords and files](../foundry-osd/configuration-sharing/saved-passwords.md).
+Foundry OSD saves the configuration, its passwords and the files you select for your Windows account on this PC. The list is in [Saved passwords and files](../foundry-osd/configuration-sharing/saved-passwords.md).
 
-| Item | Value |
+| Item | How it is protected |
 | --- | --- |
-| Options | `Configuration\foundry.config.json`, without any password |
-| Passwords | `Configuration\secrets.dat`: the Deployment password, the passwords of local accounts and join accounts, the Wi-Fi passphrase and the PFX passwords |
-| Protection of the passwords | Windows DPAPI. Only your Windows account can read them; another account, or the file copied to another PC, cannot |
-| Selected files | `Files\content`: answer files, network profiles, network certificates and the Windows Autopilot PFX, stored as they are, not encrypted by Foundry |
-| Publication password and keys of configuration sharing | In `secrets.dat`, with the other passwords |
-
-These passwords are never written to `foundry.config.json`.
+| Options | Saved without any password |
+| Passwords: the Deployment password, the passwords of local accounts and join accounts, the Wi-Fi passphrase, the PFX passwords, and the publication password of configuration sharing | Encrypted. Only your Windows account on this PC can read them; another account, or a copy of your files on another PC, cannot |
+| Selected files: answer files, network profiles, network certificates and the Windows Autopilot PFX | Kept as they are under `%LocalAppData%\Foundry`, not encrypted by Foundry OSD. Anyone who can read your Windows profile can read them |
 
 ## Configuration sharing
 
 An exported file and a publication folder are protected by a secret you choose, not by your Windows account. How to use them is described in [Configuration sharing](../foundry-osd/configuration-sharing.md).
 
-| Item | Exported file | Publication folder |
-| --- | --- | --- |
-| Secret | The passphrase | The publication password |
-| Rule for the secret | At least 12 characters, not the same character repeated | Same rule |
-| Passwords of the configuration | Only with **Include passwords** | Only with **Include passwords** |
-| Encryption | AES-256-GCM, with a key derived from the passphrase by PBKDF2 with HMAC-SHA-256, 600,000 iterations | Same for each version. Content files are encrypted with AES-256-GCM under a content key carried in the version |
-| Signature | None | Every version is signed with an ECDSA P-256 key of the reference PC |
-
-What each person can do with a publication folder:
-
-| Who | Can | Cannot |
-| --- | --- | --- |
-| Someone who can read the folder, without the password | See the file sizes and `current.json`, which points to the current version | Read the configuration, the passwords or the content |
-| Someone who can write in the folder, without the password | Delete files, so followers stop receiving updates | Publish a version, change one, or bring back an older one: followers refuse it |
-| Someone who knows the publication password | Read the configuration, the included passwords and the content | Publish: only the key of the reference PC signs a version |
-| Another PC that takes the folder over | Publish with its own key, once it has the current password | Be applied by a follower before that follower accepts the new key |
-
-The publication password gives read access; the signature of the reference PC gives the authority to publish.
+- **The secret.** An exported file is protected by its passphrase, a publication folder by its publication password. Both follow the rule the dialogs show: "At least 12 characters, and not the same character repeated (for example aaaaaaaaaaaa)." Keep them as safe as the passwords they protect, and send them by another channel than the file or the folder path.
+- **Included passwords.** The passwords of the configuration travel only when **Include passwords** is selected. Then anyone who has the file and its passphrase, or who can open the folder and knows the publication password, can read them.
+- **Who can publish.** Knowing the publication password lets someone read the folder, not publish to it. Only the reference PC publishes. A follower accepts a version from another PC only after you [accept the new reference](../foundry-osd/configuration-sharing/follow-a-folder.md#accept-a-new-reference).
+- **Write access to the folder.** Someone who can change files in the folder without the password cannot make followers apply a changed or older configuration. They can still delete files, so give write access only to the reference PC.
 
 ### Revoke read access
 
-The reference PC has two ways to withdraw read access from someone who knows the publication password:
+When someone who knew the publication password should no longer read the folder, the reference PC sets a new password:
 
-- **Change password** rewrites the current version under the new password. Content files are not encrypted again, so someone who knew the old password can still read them. The folder also keeps the previous version under the old password, with the same content key: anyone with the old password and read access to the folder can still read every content file, without having kept anything.
-- **Reset publication** sets a new password and a new content key, and encrypts every content file again. It is the complete revocation, once the reset is published.
+- **Change password** protects the next versions with the new password, but it does not encrypt the shared content again. Someone who knew the old password and can still open the folder can still read all the shared content (files, post-installation packages, driver sets and images), and the included passwords of the versions published before the change.
+- **Reset publication** sets a new password and encrypts all the shared content again. Once the reset is published, people who knew the old password can no longer read anything in the folder.
+
+Use **Reset publication** when someone who leaves must lose access. In both cases, change the passwords that were included in the publication if they must stay secret.
 
 On a follower, every setting of the publication is read-only. Only the ISO output path, the Additional WinPE driver folder, the telemetry settings and the passwords that the publication does not include can be changed.
-
 ## Windows Autopilot credentials
 
 Zero-touch hardware hash upload uses two separate identities. The rights of the first are never available to the media.

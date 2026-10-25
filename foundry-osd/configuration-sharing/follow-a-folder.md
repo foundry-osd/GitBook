@@ -51,7 +51,7 @@ When the publication includes the passwords, the password fields are read-only t
 
 ## New versions
 
-Foundry OSD reads the folder when it starts and every 60 seconds. **Check now** reads it at once. A new version is applied by itself; the **Configuration sharing** card of **Settings** shows the status and the **Version**. A media creation that is already running is not affected.
+Foundry OSD reads the folder when it starts and about once a minute. **Check now** reads it at once. A new version is applied by itself; the **Configuration sharing** card of **Settings** shows the status and the **Version**. A media creation that is already running is not affected.
 
 New post-installation packages, driver sets and images are downloaded, then installed, in the background. The card shows each step with the item name and a percentage: "Downloading \<name\>…", then "Installing \<name\>…".
 
@@ -77,7 +77,7 @@ When another PC takes over the folder, the status reads "The folder is now publi
 
 1. Select **Accept new reference**.
 2. Compare **Previous key** and **New key**, and check **Version**. Accept only a change you expect, for example a take over announced by the administrator.
-3. Select **Accept**. The new version is applied. If the new reference did not continue the version numbers of the folder, its version is older than the one applied, and the status then reads "The folder points to an older version than the one applied. It is ignored.": see [Older version](../../troubleshooting/foundry-osd/configuration-sharing.md#rollback-rejected).
+3. Select **Accept**. The new version is applied. If the version of the new reference is older than the one this PC applied, the status then reads "The folder points to an older version than the one applied. It is ignored.": see [Older version](../../troubleshooting/foundry-osd/configuration-sharing.md#rollback-rejected).
 
 If the reference changes again while the dialog is open, it shows "The reference changed while this dialog was open. Review the new key before you accept it." with the new key: review it, then select **Accept** again.
 

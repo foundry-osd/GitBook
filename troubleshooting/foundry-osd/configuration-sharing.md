@@ -53,7 +53,7 @@ The status is the colored bar under the role of the PC, "This PC publishes its c
 **Fix:**
 
 1. Open the folder in File Explorer with the same Windows account. On the reference PC, check that you can create a file in it.
-2. Select **Publish now** on the reference PC, or **Check now** on a follower. A follower also reads the folder again every 60 seconds.
+2. Select **Publish now** on the reference PC, or **Check now** on a follower. A follower also reads the folder again about once a minute.
 
 **Collect:** `Foundry.log`.
 
@@ -71,7 +71,7 @@ The status is the colored bar under the role of the PC, "This PC publishes its c
 
 **Where:** Status of the reference PC, or the **Take over this folder** dialog after **Publish**.
 
-**Cause:** A version of the folder is signed by another PC, which took the folder over or publishes to it.
+**Cause:** Another PC took the folder over, or publishes to it.
 
 **Fix:** Agree with your colleagues which PC is the reference. To publish from this PC, [take the folder over](../../foundry-osd/configuration-sharing/publish-to-a-folder.md#take-over-a-folder). Otherwise select **Stop publishing**.
 
@@ -81,7 +81,7 @@ The status is the colored bar under the role of the PC, "This PC publishes its c
 
 **Where:** Status of a follower.
 
-**Cause:** Another PC took the folder over, or the reference PC took it over again after its keys were lost. Nothing is applied from that PC until you accept it.
+**Cause:** Another PC took the folder over, or the reference PC took it over again after a Windows password reset. Nothing is applied from that PC until you accept it.
 
 **Fix:** If you expect the change, [accept the new reference](../../foundry-osd/configuration-sharing/follow-a-folder.md#accept-a-new-reference). If nobody announced it, select **Stop following** and contact the administrator of the reference PC.
 
@@ -106,7 +106,7 @@ The status is the colored bar under the role of the PC, "This PC publishes its c
 **Fix:**
 
 - On a follower, select **Enter password** and type the publication password, then type the missing passwords on the pages marked **Needs attention** on **Start**.
-- On the reference PC, its publication keys are lost. Select **Take over** and type the current publication password: this PC publishes again with new keys, and each follower [accepts it as the new reference](../../foundry-osd/configuration-sharing/follow-a-folder.md#accept-a-new-reference) once. Without the publication password, select **Stop publishing**, publish to a new empty folder, and have the followers follow it.
+- On the reference PC, this PC lost its publication data. Select **Take over** and type the current publication password: this PC publishes again, and each follower [accepts it as the new reference](../../foundry-osd/configuration-sharing/follow-a-folder.md#accept-a-new-reference) once. Without the publication password, select **Stop publishing**, publish to a new empty folder, and have the followers follow it.
 
 **Collect:** `Foundry.log`.
 
@@ -114,7 +114,7 @@ The status is the colored bar under the role of the PC, "This PC publishes its c
 
 **Where:** Status of a follower.
 
-**Cause:** The current version in the folder does not match the signature of the reference PC: a file was damaged, changed by hand or by a synchronization conflict. The follower keeps the version it applied last.
+**Cause:** A file of the folder was damaged, or changed by hand or by a synchronization conflict. The follower keeps the version it applied last.
 
 **Fix:** On the reference PC, make a change to the configuration: a new version is published a few seconds later. If the status comes back, find out who or what writes in the folder.
 
@@ -146,7 +146,7 @@ The status is the colored bar under the role of the PC, "This PC publishes its c
 
 **Cause:** The folder points to a version whose files are not all there yet, usually because a OneDrive or SharePoint folder is still synchronizing.
 
-**Fix:** Wait. The follower reads the folder again every 60 seconds. If the status stays, check the synchronization client on this PC and on the reference PC.
+**Fix:** Wait. The follower reads the folder again about once a minute. If the status stays, check the synchronization client on this PC and on the reference PC.
 
 **Collect:** Nothing.
 
@@ -167,9 +167,9 @@ The status is the colored bar under the role of the PC, "This PC publishes its c
 
 **Where:** Card of either role.
 
-**Cause:** Foundry OSD could not read `%LocalAppData%\Foundry\Configuration\sharing.json`, which records whether this PC publishes or follows.
+**Cause:** Foundry OSD could not read, in your Windows profile, the record of whether this PC publishes or follows.
 
-**Fix:** Restart Foundry OSD. If the message comes back, check the access of your Windows account to that folder.
+**Fix:** Restart Foundry OSD. If the message comes back, check that your Windows account can write in `%LocalAppData%\Foundry`.
 
 **Collect:** `Foundry.log`.
 

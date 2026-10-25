@@ -36,7 +36,7 @@ If another PC already publishes to the folder, the **Take over this folder** dia
 
 ## How changes are published
 
-Foundry OSD publishes by itself about 5 seconds after you change the configuration or an included password. Each publication increases the **Version** on the card. Do not edit, move or delete files in the folder.
+Foundry OSD publishes by itself a few seconds after you change the configuration or an included password. Each publication increases the **Version** on the card.
 
 - A configuration that is not ready, or uses content missing on this PC, is not published: the status reads "Not published: ..." and the previous version stays current.
 - Packages, driver sets and images are copied in the background; the card shows the same steps as the dialog. Followers see the version once all its content is written.
@@ -48,10 +48,10 @@ Both actions ask for a new password. Each follower then selects **Enter password
 
 | Button | What changes | When followers ask for the new password |
 | --- | --- | --- |
-| **Change password** | Rewrites the current version under the new password. Content files are not encrypted again: former readers are not revoked. | At the next published version. Until then they stay **Up to date**. |
-| **Reset publication** | New password and content key; every content file is encrypted again. The complete revocation. | At once: the reset publishes a new version. |
+| **Change password** | The folder uses the new password. The shared content is not encrypted again, so people who knew the old password can still read it. | At the next published version. Until then they stay **Up to date**. |
+| **Reset publication** | The folder uses the new password, and all the shared content is encrypted again. People who knew the old password can no longer read anything. | At once: the reset publishes a new version. |
 
-What a former password holder can still read is in [Revoke read access](../../reference/security-and-credentials.md#revoke-read-access). Until a reset is published, the card shows "Former readers can still open the content until the next successful publish." When this PC cannot publish at that moment, the card shows "The new password is saved. The change completes at the next successful publish."
+Use **Reset publication** when someone must lose access: see [Revoke read access](../../reference/security-and-credentials.md#revoke-read-access). Until a reset is published, the card shows "Former readers can still open the content until the next successful publish." When this PC cannot publish at that moment, the card shows "The new password is saved. The change completes at the next successful publish."
 
 ## Take over a folder
 
@@ -61,17 +61,17 @@ Taking over continues the publication of another PC from this one, for example w
 2. In **Take over this folder**, check **Version found** and **Key found**, which are not verified yet.
 3. Type the **Current publication password**, decide on **Include passwords**, and select **Take over**. The dialog shows the same steps as **Publish**.
 
-Each follower must then [accept the new reference](follow-a-folder.md#accept-a-new-reference) once. The same dialog recovers this PC when its own publication keys can no longer be read: see [Configuration sharing troubleshooting](../../troubleshooting/foundry-osd/configuration-sharing.md#passwords-needed).
+Each follower must then [accept the new reference](follow-a-folder.md#accept-a-new-reference) once. The same dialog lets this PC publish again after a Windows password reset made it lose its publication data: see [Configuration sharing troubleshooting](../../troubleshooting/foundry-osd/configuration-sharing.md#passwords-needed).
 
 ## Stop publishing
 
-**Stop publishing** makes this PC a normal PC. The folder stays as it is, and followers keep the last version. To publish again, use the same folder and publication password.
+**Stop publishing** opens the **Stop publishing?** dialog: "The folder stays as it is and followers keep the last published version. This PC no longer publishes its configuration." To publish again, use the same folder and publication password.
 
 ## Limits
 
 - One reference PC per folder. Another PC publishes there only by taking it over.
-- Foundry OSD keeps the current and the previous version in the folder, and removes the content that neither of them uses.
-- What the password and the signature protect is in [Security and credentials](../../reference/security-and-credentials.md#configuration-sharing).
+- Do not edit, move or delete files in the folder: Foundry OSD manages them.
+- What the publication password protects, and what it does not, is in [Security and credentials](../../reference/security-and-credentials.md#configuration-sharing).
 
 ## Related
 

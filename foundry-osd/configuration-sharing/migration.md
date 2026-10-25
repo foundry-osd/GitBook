@@ -39,7 +39,7 @@ Only the profile in use is moved. The other profiles saved on this PC can be imp
 2. Under **Profiles from the previous version**, select the profile and select **Open**. The list, with the hint "These profiles were saved on this PC before the update.", shows only the profiles that the migration did not apply. It is hidden when none remain.
 3. Read the preview and select **Import**. It replaces the current configuration.
 
-A profile whose key is no longer in Windows Credential Manager, for example after saved credentials were cleaned, shows "This configuration cannot be opened by this Windows user."
+A profile that your Windows account can no longer open, for example after its saved Windows credentials were removed, shows "This configuration cannot be opened by this Windows user."
 
 ## Exported profiles
 
@@ -49,7 +49,7 @@ A `Connection.foundryprofile` connection file imports the configuration it holds
 
 ## What stays on the disk
 
-The old profile store, `%LocalAppData%\Foundry\Profiles`, the keys of its profiles in Windows Credential Manager and the old shared folders are left as they are. Foundry OSD no longer writes them, and reads the store and its keys only for **Profiles from the previous version**.
+The old profiles in `%LocalAppData%\Foundry\Profiles`, their entries in Windows Credential Manager and the old shared folders are left as they are. Foundry OSD no longer writes them, and reads the old profiles only for **Profiles from the previous version**.
 
 ## Related
 

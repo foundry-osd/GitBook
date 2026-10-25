@@ -41,6 +41,6 @@ Remove Foundry OSD from the installed apps list in Windows Settings. Your data s
 | `%ProgramData%\Foundry` | Application settings, logs, downloaded files, working folders and the default ISO output |
 | `%LocalAppData%\Foundry` | Your configuration with its saved passwords and files, imported custom Windows images, custom driver sets and post-installation packages |
 
-Foundry OSD also keeps entries whose names start with `FoundryOSD/` in Windows Credential Manager, for your Windows account: the proxy credentials, and the keys of the profiles of Settings backup and sync if you used it. Remove them in **Credential Manager** > **Windows Credentials** if you want nothing left.
+Foundry OSD also keeps entries whose names start with `FoundryOSD/` in Windows Credential Manager, for your Windows account: the proxy credentials, and the entries of Settings backup and sync if you used it. Remove them in **Credential Manager** > **Windows Credentials** if you want nothing left.
 
 If Foundry OSD does not install or start, see [Foundry OSD application troubleshooting](../troubleshooting/foundry-osd.md).
