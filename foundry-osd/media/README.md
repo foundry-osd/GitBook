@@ -11,7 +11,6 @@ The **Start** page shows whether your configuration is ready, then creates an IS
 
 - The [ADK](../adk.md) page reports **ADK is ready**. Until then **Start** cannot be opened.
 - 20 GB are free on each drive that holds `%ProgramData%\Foundry`, `%LocalAppData%\Foundry` or the Windows temporary folders, and on the drive of the ISO file. On most workstations this is the Windows drive.
-- With several saved configurations, the one you want is selected in [Settings backup and sync](../deployment-profiles.md).
 
 ## Read the readiness rows
 
@@ -27,7 +26,9 @@ Below it, five groups list one row per page of the app:
 | **Domain Join** | **Zero-Touch**, **Interactive** | [Domain Join](../domain-join/README.md) |
 | **Customization** | **OS selection**, **Machine naming**, **OOBE**, **Custom Windows images**, **Custom drivers**, **Post-installation**, **Unattend**, **Optional features**, **AppX removals**, **AI components** | [Customization](../customization/README.md) |
 
-Each row shows its value and one state: **Configured**, **Default**, **Disabled**, **Not configured**, **Not selected** or **Needs attention**.
+Each row shows its value and one state: **Configured**, **Default**, **Disabled**, **Not configured**, **Not selected**, **Downloading** or **Needs attention**. **Downloading** appears on a PC that [follows a folder](../configuration-sharing/follow-a-folder.md#new-versions) while shared content is still arriving.
+
+On such a PC, media creation is blocked until the shared content is installed: every create, update and PXE action is unavailable, and the readiness bar reads **Waiting for shared content** with "Shared content is still being downloaded. Media creation is available once the download is complete." It becomes available again by itself when the download completes. When the content failed or stalled, the bar reads **Shared content could not be installed** or **Shared content is not available**, with the reason: check the **Configuration sharing** card in **Settings**, as described in [Shared content missing](../../troubleshooting/foundry-osd/configuration-sharing.md#content-failed).
 
 **Needs attention** means something on that page is missing or not valid. The row shows the reason and a button, **Review** followed by the row name, that opens the page to fix. Its group opens by itself. Clear every such row before you create media.
 
@@ -37,6 +38,7 @@ Each row shows its value and one state: **Configured**, **Default**, **Disabled*
 | --- | --- |
 | Start virtual machines, or attach media through a remote management console | [Create an ISO](create-iso.md) |
 | Deploy physical devices, and reuse downloads between deployments | [Create a USB drive](create-usb.md) |
+| Deploy physical devices from a drive that works like an ISO, or from a drive smaller than 16 GB | [Create a drive without cache](create-usb.md#create-a-drive-without-cache) |
 | Apply new options to a Foundry USB drive and keep its downloads | [Update a USB drive](update-usb.md) |
 | Start devices from an existing PXE server with **Create PXE files** | [Deploy with PXE](pxe-deployment.md) |
 
@@ -52,7 +54,7 @@ Each row shows its value and one state: **Configured**, **Default**, **Disabled*
 | [Post-installation](../customization/post-installation.md) content you imported | In the ISO, in `Cache\PreOobe\` | Same folder on the cache partition | Not delivered |
 | Cache of downloaded Windows images and driver packs | None: every deployment downloads again | On the cache partition, kept by updates | None |
 
-A USB drive has two partitions:
+A USB drive [created without cache](create-usb.md#create-a-drive-without-cache) carries what the ISO carries, in the same folders, on one FAT32 partition named **FOUNDRY**. A USB drive created with **Create USB** has two partitions:
 
 | Partition | Format | Holds |
 | --- | --- | --- |
@@ -72,5 +74,5 @@ A cancelled or failed ISO build keeps the previous file, and cancelled or failed
 ## Related
 
 - [General](../general.md)
-- [Settings backup and sync](../deployment-profiles.md)
+- [Configuration sharing](../configuration-sharing.md)
 - [Media creation troubleshooting](../../troubleshooting/media-creation.md)

@@ -73,7 +73,7 @@ Every one of these limits is reported by the same message, "Content import faile
 | **Restart delay (seconds)** | 0 to 86400, default 0 |
 
 - With the page turned off, your actions are kept but left out of new media. Foundry's own setup tasks still run.
-- Imported files are not part of a [configuration](../../deployment-profiles.md). On another workstation the action shows **Missing** until you import the same content there.
+- Imported files travel with a [publication](../../configuration-sharing/publish-to-a-folder.md), not with an [exported file](../../configuration-sharing/export-and-import.md). After an import on another workstation, the action shows **Missing** until you import the same content there.
 - The content is deleted from the target device when the sequence ends. The command lines and the output of the actions stay: see the warning on [Post-installation](../post-installation.md#restarts-and-secrets).
 
 ## Related

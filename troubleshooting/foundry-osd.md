@@ -4,7 +4,7 @@ This page covers the Foundry OSD application itself: opening and closing it, the
 
 | Where the problem shows | Go to |
 | --- | --- |
-| A message under the **Settings backup and sync** card of **Settings**, or in one of its dialogs: export, import, sharing, synchronization | [Settings backup and sync](foundry-osd/settings-backup-and-sync.md) |
+| A status or a message of the **Configuration sharing** card of **Settings**, or of one of its dialogs: export, import, publish, follow | [Configuration sharing](foundry-osd/configuration-sharing.md) |
 | A message on a Customization page | The "If something goes wrong" section of that page: [Custom Windows images](../foundry-osd/customization/custom-windows-images.md#if-something-goes-wrong), [Unattend](../foundry-osd/customization/unattend.md#if-something-goes-wrong), [Machine naming](../foundry-osd/customization/machine-naming.md#if-something-goes-wrong), [Post-installation](../foundry-osd/customization/post-installation.md#if-something-goes-wrong) |
 | **Start**, while media is being created | [Media creation](media-creation.md) |
 
@@ -182,7 +182,7 @@ If only the architecture you do not use is incomplete, you can ignore the warnin
 
 **Where:** **General** page, under **Deployment password**. **Review and start** is disabled. On **Start**, the reason reads "Deploy configuration generation is not ready.".
 
-**Cause:** **Password protection** is on and the two password fields are empty, different, or shorter than 8 characters. The fields are also empty after Foundry OSD restarts when **Remember passwords** is off.
+**Cause:** **Password protection** is on and the two password fields are empty, different, or shorter than 8 characters. The fields are also empty after importing or following a configuration without its passwords, or when the [saved passwords could not be restored](../foundry-osd/configuration-sharing/saved-passwords.md#when-passwords-cannot-be-restored).
 
 **Fix:** Type the Deployment password in both fields, or turn **Password protection** off. See [General](../foundry-osd/general.md#password-protection).
 
@@ -293,11 +293,8 @@ If only the architecture you do not use is incomplete, you can ignore the warnin
 
 **Where:** When you close the window.
 
-**Cause:**
+**Cause:** An operation is running. Foundry OSD does not close while it installs the ADK or creates media.
 
-- An operation is running. Foundry OSD does not close while it installs the ADK or creates media.
-- The current configuration could not be saved. A dialog titled **Close without saving settings?** then shows ["Some passwords or source files are missing."](foundry-osd/settings-backup-and-sync.md#missing-passwords) or ["Couldn't complete this action."](foundry-osd/settings-backup-and-sync.md#could-not-complete).
-
-**Fix:** Wait for the operation to end. In the dialog, select **Cancel** to go back and fix the problem, or **Close without saving** to quit with the last saved state.
+**Fix:** Wait for the operation to end.
 
 **Collect:** `Foundry.log`.

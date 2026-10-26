@@ -52,12 +52,12 @@ Foundry OSD shows the first message on the Unattend page and the others on the l
 
 | Message | What to do |
 | --- | --- |
-| "Some sources are missing, changed, or invalid. Refresh or remove these entries before creating media." | Read the line under each file in the list: it carries one of the messages below. |
-| "The source changed. Use Refresh source to accept the updated file before creating media." | Select the file, then **Refresh source**. |
-| "The source could not be read. Check that the file still exists and is accessible." | Restore the file or the access to its folder, then **Check sources**, or remove the entry. |
-| "Source validation timed out. Check access to the source location and try again." | The source did not answer within 15 seconds, for example on a network share. Restore access, then **Check sources**. |
-| "Two source checks are still waiting for file access. Restore the unavailable source locations, then check sources again." | Two earlier checks are still blocked on an unreachable location. Restore access or remove those entries. |
-| "This source now duplicates another imported file. Remove this entry and choose the existing file instead." | After a refresh, two entries have the same content. Remove one. |
+| "Some files are missing or invalid. Remove these entries and import the files again before creating media." | Read the line under each file in the list: it carries one of the messages below. |
+| "Foundry no longer has a valid copy of this file. Remove the entry and import the file again." | The copy kept by Foundry is missing or damaged. Remove the entry and import the file again. |
+| "The file could not be read. Check that it exists and that you can open it, then try again." | Select **Check files**. If the message stays, remove the entry and import the file again. |
+| "Checking the stored files took too long. Try again." | Select **Check files** again. |
+| "Two file checks are still running. Wait for them to finish, then try again." | Wait, then select **Check files**. |
+| "File check pending. Choose Check files to validate the stored copy." | Select **Check files**. |
 
 ## Related
 

@@ -21,14 +21,9 @@ Use **Customization > Unattend** to put your own Windows answer files on the dep
 4. Under **Deployment default**, choose the file selected by default in Foundry Deploy, or keep **Use Foundry settings**.
 5. Return to **Start** and [create the media](../media/README.md).
 
-Keep the source files in place until the media is created. Whether Foundry also keeps a copy of them with your saved configuration depends on **Remember passwords**: see [what is remembered](../deployment-profiles.md#what-is-remembered).
+Foundry keeps its own copy of each imported file in its [file library](../configuration-sharing/saved-passwords.md), so the source file is no longer needed. To use an updated file, remove the entry and import the file again.
 
-| Button | Applies to | What it does |
-| --- | --- | --- |
-| **Check sources** | Every file | Checks that each source is still readable, valid and unchanged. It does not accept a changed file. |
-| **Refresh source** | The selected file | Reads the file again and accepts its new content. Use it after you edit a source file. |
-
-A missing, changed or invalid source blocks media creation. **Remove** takes the selected file off the list; the source file is not deleted. If it was the default, choose another one under **Deployment default** before you create media.
+**Check files** checks that the copy of every file is still readable and valid. A missing or invalid copy blocks media creation. **Remove** takes the selected file off the list; the source file is not deleted. If it was the default, choose another one under **Deployment default** before you create media.
 
 ## What the technician sees
 
@@ -54,7 +49,7 @@ Read [Answer file rules](unattend/answer-file-rules.md) before you write a file.
 
 ## Check the result
 
-- In Foundry OSD, every file shows "Source validated." and no warning bar is displayed.
+- In Foundry OSD, every file shows "File validated." and no warning bar is displayed.
 - On a test device, deploy with the file and confirm in Windows that its settings were applied. Foundry cannot tell whether Windows accepted them.
 
 ## Limits
@@ -71,7 +66,7 @@ Messages in Foundry OSD, on the Unattend page:
 | "Enable deployment media password protection in General configuration to use custom answer files." | Turn on [Password protection](../general.md#password-protection). |
 | "Use valid Windows answer-file XML no larger than 4 MiB...", "Only specialize and oobeSystem settings are supported..." or "The file must declare a supported architecture..." | The file breaks one of the [rules checked at import](unattend/answer-file-rules.md#rules-checked-at-import). Correct it and import again. |
 | "Missing default - choose a replacement" | The default file was removed. Choose another file or **Use Foundry settings** under **Deployment default**. |
-| "Some sources are missing, changed, or invalid. Refresh or remove these entries before creating media." | See [Source check messages](unattend/answer-file-rules.md#source-check-messages). |
+| "Some files are missing or invalid. Remove these entries and import the files again before creating media." | See [Source check messages](unattend/answer-file-rules.md#source-check-messages). |
 
 In Foundry Deploy, a refused file is explained in [A message under Answer file](../../troubleshooting/deployment/before-deployment-starts.md#answer-file-rejected) and a deployment that stops on **Validate answer file** in [Answer file validation](../../troubleshooting/deployment/checks-and-image-download.md#validate-answer-file). Failures in Windows Setup are in [After the restart troubleshooting](../../troubleshooting/after-the-restart.md#windows-setup).
 

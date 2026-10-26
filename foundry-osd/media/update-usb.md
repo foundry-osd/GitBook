@@ -3,8 +3,8 @@
 Update a Foundry USB drive to apply your current options and the current Foundry applications without erasing the Windows images and driver packs it has already downloaded.
 
 <figure>
-  <img src="../../.gitbook/assets/foundry-osd-media-update-usb-01-action.png" alt="Start page with a Foundry USB drive selected and the highlighted Update USB button in place of Create USB">
-  <figcaption>When the selected drive is a Foundry USB drive, the button reads <strong>Update USB</strong> and is highlighted.</figcaption>
+  <img src="../../.gitbook/assets/foundry-osd-media-update-usb-01-action.png" alt="Start page with a Foundry USB drive selected and the Update USB split button in place of Create USB">
+  <figcaption>When the selected drive is a Foundry USB drive, the button reads <strong>Update USB</strong>. Its arrow offers <strong>Recreate without cache</strong>.</figcaption>
 </figure>
 
 {% hint style="warning" %}
@@ -22,7 +22,7 @@ Update a Foundry USB drive to apply your current options and the current Foundry
 1. Connect the drive, open **Start**, and select **Refresh** in the **USB target** card.
 2. Select the drive and check that the button reads **Update USB**. This label is the only sign that Foundry OSD recognized the drive.
 3. To format **BOOT** completely, expand the **USB target** card and set **USB format mode** to **Full format**. The update then takes longer. **USB partition style** is ignored: an update never changes it.
-4. Select **Update USB**.
+4. Select **Update USB**, not its arrow: the arrow offers **Recreate without cache**, which erases the drive and its downloads. See [Create a drive without cache](create-usb.md#create-a-drive-without-cache).
 5. If a dialog titled **Update Foundry OSD before creating boot media** opens, apply the update first or select **Create anyway**.
 6. Keep the drive connected until the dialog is titled **USB media updated** and reads "Boot volume: X:. Cache volume: Y:.", with the two drive letters.
 
