@@ -78,6 +78,10 @@ A method that asks the technician for something during the deployment, such as a
 
 The Active Directory account used to join a computer to the domain.
 
+## Network cache
+
+SMB shares that devices use as a shared cache, chosen by their IP address. Devices read Windows images, driver packs and imported content from them before the Internet. See [Network cache](../foundry-osd/network-cache.md).
+
 ## OOBE
 
 Out-of-box experience: the screens Windows shows at the first start, for region, keyboard, account and privacy choices.

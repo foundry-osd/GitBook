@@ -13,7 +13,7 @@ Drivers added to Windows PE itself are a different setting: see **WinPE drivers*
 
 - **Source.** A folder of `.inf` drivers. Subfolders are allowed, and the folder must contain at least one `.inf` file. Packed content is not supported: no `.cab`, `.zip` or `.exe`.
 - **Disk space.** Foundry OSD copies the folder into `%LOCALAPPDATA%\Foundry\Packages\Drivers`, so that drive needs room for the whole folder.
-- **Media type.** The page states: "Not available with PXE boot. Custom drivers require the full ISO or USB media."
+- **Media type.** The page states: "Not available with PXE boot. Custom drivers require the full ISO or USB media." With the [network cache](../network-cache.md) on, the note disappears: devices started over PXE find the sets on their share.
 
 {% hint style="warning" %}
 Foundry does not check the architecture or the models of a driver set. You are responsible for choosing the right drivers: INF files for the media **Architecture** set in [General](../general.md), `x64` or `arm64`, that match your device models. Foundry Deploy only injects the INF files of the folder, and INF files that do not apply are skipped.
@@ -75,7 +75,7 @@ If the update succeeds but ends with "Unused custom driver sets could not be rem
 - A set cannot contain a symbolic link, a junction or a cloud placeholder file.
 - Foundry Deploy applies one driver source at a time: a set cannot be combined with a manufacturer pack.
 - A [publication](../configuration-sharing/publish-to-a-folder.md) carries the driver sets: followers download them in the background. An [exported file](../configuration-sharing/export-and-import.md) carries the list of sets and the default, not their files: on another PC, import the folder again.
-- Custom drivers are not delivered to a [PXE boot image](../media/pxe-deployment.md). Foundry Deploy started over PXE does not offer the **Custom drivers** source.
+- Custom drivers are not delivered to a [PXE boot image](../media/pxe-deployment.md). Without the [network cache](../network-cache.md), Foundry Deploy started over PXE does not offer the **Custom drivers** source.
 
 ## If something goes wrong
 

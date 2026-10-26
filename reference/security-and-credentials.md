@@ -18,6 +18,8 @@ What **Password protection** covers, and what it does not, is explained on the [
 | Autopilot certificate (PFX and its password), zero-touch upload | Protected with Password protection, recoverable without it | Never written to disk | Not applicable |
 | Device hardware hash | Never on the media | `C:\Windows\Temp\Foundry\Logs\AutopilotHash` | Not removed by Foundry |
 | Join account and its password, zero-touch Domain Join | Protected. Password protection is required | `C:\Windows\Temp\Foundry\Payloads\DomainJoin\<operation-id>\credentials.bin`, in clear text | By Foundry, as soon as the join has used the file |
+| Network cache account passwords | Protected. Password protection is required when a share has an account | Never written to disk: Foundry Deploy uses them only to open the share in Windows PE | Not applicable |
+| Network cache account passwords | Protected. Password protection is required when a share has an account | Never written to disk: Foundry Deploy uses them only to open the share in Windows PE | Not applicable |
 | Join account and its password, interactive Domain Join | Not on the media: the technician types them in Foundry Deploy | Same file as zero-touch | Same as zero-touch |
 
 Details the table leaves out:
@@ -28,6 +30,7 @@ Details the table leaves out:
 - Foundry restricts the `AutopilotHash` and `DomainJoin` folders to SYSTEM and Administrators.
 - Foundry Deploy uses the Autopilot certificate in memory only.
 - Interactive hardware hash upload places no secret on the media or on the device: the technician signs in with their own account when the upload runs.
+- The network cache share paths and user names are on the media in clear text. Anyone who holds the media and knows the Deployment password can use a network cache account, so give it rights on the cache shares only: see [Network cache](../foundry-osd/network-cache.md#before-you-start).
 
 {% hint style="warning" %}
 A file listed as "Not removed by Foundry" stays readable to local administrators of the deployed device. If it holds a secret, remove it with your own process once Windows setup has finished, and never attach it to a support request.
@@ -54,7 +57,7 @@ Foundry OSD saves the configuration, its passwords and the files you select for 
 | Item | How it is protected |
 | --- | --- |
 | Options | Saved without any password |
-| Passwords: the Deployment password, the passwords of local accounts and join accounts, the Wi-Fi passphrase, the PFX passwords, and the publication password of configuration sharing | Encrypted. Only your Windows account on this PC can read them; another account, or a copy of your files on another PC, cannot |
+| Passwords: the Deployment password, the passwords of local accounts, join accounts and network cache accounts, the Wi-Fi passphrase, the PFX passwords, and the publication password of configuration sharing | Encrypted. Only your Windows account on this PC can read them; another account, or a copy of your files on another PC, cannot |
 | Selected files: answer files, network profiles, network certificates and the Windows Autopilot PFX | Kept as they are under `%LocalAppData%\Foundry`, not encrypted by Foundry OSD. Anyone who can read your Windows profile can read them |
 
 ## Configuration sharing

@@ -9,6 +9,7 @@
 * [Foundry OSD](foundry-osd/README.md)
   * [ADK](foundry-osd/adk.md)
   * [General](foundry-osd/general.md)
+  * [Network cache](foundry-osd/network-cache.md)
   * [Network](foundry-osd/network/README.md)
     * [Ethernet 802.1X](foundry-osd/network/ethernet-802.1x.md)
     * [Wi-Fi](foundry-osd/network/wifi.md)

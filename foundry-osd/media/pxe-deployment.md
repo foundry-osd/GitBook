@@ -23,7 +23,7 @@ Create the files a PXE server needs to start devices from the network with Found
 2. In **Destination folder**, type the folder or select **Browse**. A network share written as `\\server\share\folder` works. The folder you used last time is filled in.
 3. Read the warnings of the dialog, then select **Create**:
    - "This folder already contains a boot image." The four files below are replaced. Other files of the folder are kept.
-   - **Not delivered with a PXE start** lists the [imported content](#what-a-pxe-start-delivers) of your configuration that devices started from the network will not have.
+   - **Not delivered with a PXE start** lists the [imported content](#what-a-pxe-start-delivers) of your configuration that devices started from the network will not have. It does not appear while the [network cache](../network-cache.md) is on with at least one share.
 4. If a dialog titled **Update Foundry OSD before creating boot media** opens, apply the update first, or select **Create anyway**.
 5. Wait until the dialog is titled **PXE files created** and reads "The PXE boot files were saved to:", followed by the folder and the total size. Select **Open folder** to open it, or **Close**.
 
@@ -46,7 +46,9 @@ Foundry OSD replaces the files only once all four are written: a failed or cance
 | Every option of your configuration: network, Windows Autopilot, Domain Join, computer name, OOBE, answer file, optional features, AppX removals, AI components | [Post-installation](../customization/post-installation.md) actions that use imported files: every **PowerShell script (.ps1)** and **Software (.exe/.msi)** action, and a **Command line** action with imported content |
 | Post-installation actions that need no imported file: **Command line** without content and **Restart Windows** | A cache: each deployment downloads Windows and the driver pack again |
 
-A deployment that needs a post-installation action with imported files stops before the disk is erased. Start those deployments from an [ISO](create-iso.md) or a [USB drive](create-usb.md), or disable the actions in Foundry OSD and create the PXE files again. See [PXE start](../../troubleshooting/media-creation/usb-drive-and-device-start.md#pxe).
+With the [network cache](../network-cache.md) on, the device gets what this table lists as not delivered from its share: Foundry OSD publishes the imported content to every share when it creates the PXE files, and Foundry Deploy takes the Windows image and the driver pack from the share when another device already published them. The device must be in an IP scope and reach one of its shares.
+
+Without the network cache, or when the device reaches none of its shares, a deployment that needs a post-installation action with imported files stops before the disk is erased. Start those deployments from an [ISO](create-iso.md) or a [USB drive](create-usb.md), turn on the network cache, or disable the actions in Foundry OSD and create the PXE files again. See [PXE start](../../troubleshooting/media-creation/usb-drive-and-device-start.md#pxe).
 
 ## Check the result
 
@@ -63,5 +65,6 @@ Each time you change the configuration, create the PXE files again and import th
 
 - [Start: create deployment media](README.md)
 - [Create an ISO](create-iso.md)
+- [Network cache](../network-cache.md)
 - [Windows PE startup](../../foundry-connect/windows-pe-startup.md)
 - [USB drive and device start troubleshooting](../../troubleshooting/media-creation/usb-drive-and-device-start.md)

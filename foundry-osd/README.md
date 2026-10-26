@@ -13,7 +13,7 @@ The pane on the left lists every page. Sections and items appear in this order:
 
 | Section | Items |
 | --- | --- |
-| **General** | **Home**, **ADK**, **General**, **Start** |
+| **General** | **Home**, **ADK**, **General**, **Network cache**, **Start** |
 | **Network** | **Ethernet 802.1X**, **Wi-Fi** |
 | **Windows Autopilot** | **JSON profile**, **Zero-Touch**, **Interactive** |
 | **Domain Join** | **Zero-Touch**, **Interactive** |
@@ -62,6 +62,7 @@ An item without a badge is not configured, which is normal for a feature you do 
 | --- | --- |
 | Install or repair the Windows ADK components | [ADK](adk.md) |
 | Choose the architecture, language, restart behaviour, drivers or a Deployment password | [General](general.md) |
+| Let devices share their downloads and the imported content through network shares | [Network cache](network-cache.md) |
 | Give Windows PE access to Wi-Fi or an 802.1X network | [Network](network/README.md) |
 | Register devices with Windows Autopilot | [Windows Autopilot](autopilot/README.md) |
 | Join devices to an Active Directory domain | [Domain Join](domain-join/README.md) |

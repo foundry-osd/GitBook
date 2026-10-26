@@ -10,7 +10,7 @@ Use **Customization > Post-installation** to run your own scripts, commands and 
 ## Before you start
 
 - Every script and installer must run to the end without a prompt. Actions run as SYSTEM, the Windows built-in account with full rights on the device, with no signed-in user, no window and no keyboard input.
-- Actions that use imported files need the complete ISO or USB drive during deployment. A PXE boot image alone does not carry them: see [what each media type carries](../media/README.md#what-each-media-type-carries).
+- Actions that use imported files need the complete ISO or USB drive during deployment, or the [network cache](../network-cache.md). A PXE boot image alone does not carry them: see [what each media type carries](../media/README.md#what-each-media-type-carries).
 - Use content built for the Windows architecture you deploy, x64 or ARM64.
 
 ## Configure actions

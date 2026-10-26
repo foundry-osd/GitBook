@@ -20,6 +20,7 @@ Foundry OSD can use a proxy, set in [Settings](../foundry-osd/settings.md#proxy)
 | `docs.foundryosd.com` | 443, HTTPS | The **Documentation** buttons, opened in your browser | Optional |
 | Domain controllers of the domains you list | 389, LDAP | **Import from domain** on the Domain Join pages | When you import OUs |
 | The server of the publication folder | 445, SMB | Publishing and following a folder in **Configuration sharing** | When the folder is a network share |
+| The file servers of the network cache shares | 445, SMB | Publishing imported content, and measuring or emptying the shares | When the [network cache](../foundry-osd/network-cache.md) is on |
 
 Notes on this table:
 
@@ -43,6 +44,7 @@ Notes on this table:
 | `login.microsoftonline.com`, `graph.microsoft.com` | 443, HTTPS | Zero-touch Windows Autopilot hardware hash upload | When that method is used |
 | `time.now`, `ipapi.co`, `get.geojs.io` | 443, HTTPS | Time zone lookup from the public IP address | Optional. Windows PE uses UTC without them, or the time zone set in [General](../foundry-osd/general.md#windows-pe-time-zone). |
 | `eu.i.posthog.com` | 443, HTTPS | Telemetry and remote diagnostics | Optional |
+| The file servers of the network cache shares | 445, SMB | Reading Windows images, driver packs and imported content, and publishing what the device downloads | When the [network cache](../foundry-osd/network-cache.md) is on. Without it, devices download from the Internet. |
 | Your domain controllers and DNS servers | 53, DNS; 88, Kerberos; 389, LDAP | Account check on the **Domain join** step | Optional. Without it, the account is not checked and Foundry Deploy shows a warning. |
 
 Notes on this table:
