@@ -58,7 +58,7 @@ Problems met when Foundry Deploy opens and in its wizard, up to the **Deploy** b
 | "No IP scope contains this device (*address*). In Foundry OSD, on the Network cache page, add a scope for this network or a 0.0.0.0/0 scope to a backup share." | The address of the device is in none of the IP scopes | The administrator adds the network to a scope, or adds a [backup scope](../../foundry-osd/network-cache.md#backup-scope-for-every-other-device) for every other device, then creates the media again | No |
 | "*Share* is not responding. On the server, check that the share is online and that port 445 is open." | The file server is down, the share is renamed or removed, or port 445 is blocked between the device and the server | Bring the share back, or open port 445, then select **Retry** | Yes |
 | "*Account* cannot open *share*. In Foundry OSD, on the Network cache page, check the account password; on the server, check its permissions." Without an account: "*Share* refused this device. In Foundry OSD, on the Network cache page, set an account for this share; on the server, check the share permissions." | The server refused the account, because its password changed, or it has no right on the share or its folder; or the share requires an account and none is set | The administrator corrects the account on the Network cache page and on the server, then creates the media again | No |
-| "The published content on *share* is missing or incomplete. In Foundry OSD, on the Network cache page, select Publish." Under it, "Missing:" and the content concerned, such as **Custom Windows images** or **Driver sets** | Nothing was published to this share yet, or a file of the publication is missing or changed | The administrator selects **Publish** in Foundry OSD, then you select **Retry** | Yes |
+| "The published content on *share* is missing or incomplete. In Foundry OSD, on the Network cache page, select Publish." When part of the content is incomplete, a line under it starts with "Missing:" and names it, such as **Custom Windows images** or **Driver sets**; it does not appear when nothing is published yet | Nothing was published to this share yet, or a file of the publication is missing or changed | The administrator selects **Publish** in Foundry OSD, then you select **Retry** | Yes |
 
 **Retry** checks again from the start, including the choice of the share, so you do not restart the device. It appears only for the causes that can resolve without new media. **Close** ends Foundry Deploy without deploying: use it, then restart the device from the media once the administrator has fixed the cause.
 
@@ -72,6 +72,7 @@ When the administrator changed the reference PC of [configuration sharing](../..
 {% endhint %}
 
 **Collect:** the message, and the Foundry Deploy log: it names the share and the exact reason. See [Log locations](../logs-and-support.md#log-locations).
+
 ## The Target disk list is empty <a href="#no-disk" id="no-disk"></a>
 
 **Where:** **Target device**, **Target disk**. No message is shown.

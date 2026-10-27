@@ -20,7 +20,7 @@ Foundry OSD can use a proxy, set in [Settings](../foundry-osd/settings.md#proxy)
 | `docs.foundryosd.com` | 443, HTTPS | The **Documentation** buttons, opened in your browser | Optional |
 | Domain controllers of the domains you list | 389, LDAP | **Import from domain** on the Domain Join pages | When you import OUs |
 | The server of the publication folder | 445, SMB | Publishing and following a folder in **Configuration sharing** | When the folder is a network share |
-| The file servers of the network cache shares | 445, SMB | Publishing imported content, and measuring or emptying the shares | When the [network cache](../foundry-osd/network-cache.md) is on |
+| The file servers of the network cache shares | 445, SMB | Publishing imported content, and measuring or cleaning up the shares | When the [network cache](../foundry-osd/network-cache.md) is on |
 
 Notes on this table:
 

@@ -78,6 +78,7 @@ When someone who knew the publication password should no longer read the folder,
 Use **Reset publication** when someone who leaves must lose access. In both cases, change the passwords that were included in the publication if they must stay secret.
 
 On a follower, every setting of the publication is read-only. Only the ISO output path, the Additional WinPE driver folder, the telemetry settings and the passwords that the publication does not include can be changed.
+
 ## Network cache publication <a href="#network-cache-publication" id="network-cache-publication"></a>
 
 With the [network cache](../foundry-osd/network-cache.md) on, Foundry Deploy takes the custom Windows images, custom driver sets and post-installation content from the shares, and runs them on the device. Foundry OSD signs what it publishes, so that a device runs only what an administrator of Foundry OSD published.

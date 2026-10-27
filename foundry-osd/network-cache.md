@@ -26,7 +26,7 @@ For each file it needs, Foundry Deploy then looks in this order:
 | Shared on the cache | Where on the share |
 | --- | --- |
 | Windows images of the catalog, driver packs, Microsoft Update Catalog drivers and firmware | `Foundry\Downloads\`, published by devices |
-| [Custom Windows images](customization/custom-windows-images.md), [custom driver sets](customization/custom-drivers.md) and [post-installation](customization/post-installation.md) content you imported, with the settings that select them | `Foundry\Cache\` and `Foundry\Index\`, published by Foundry OSD |
+| [Custom Windows images](customization/custom-windows-images.md), [custom driver sets](customization/custom-drivers.md) and [post-installation](customization/post-installation.md) content you imported | `Foundry\Cache\`, published by Foundry OSD |
 
 Foundry Deploy checks the hash of every file it reads from a share. A file that is incomplete or does not match is ignored, and the device downloads it from the Internet. Foundry Deploy runs content you imported only when Foundry OSD published it: see [Security and credentials](../reference/security-and-credentials.md#network-cache-publication). Foundry Connect and Foundry Deploy themselves are not taken from the share.
 
