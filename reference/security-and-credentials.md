@@ -19,7 +19,6 @@ What **Password protection** covers, and what it does not, is explained on the [
 | Device hardware hash | Never on the media | `C:\Windows\Temp\Foundry\Logs\AutopilotHash` | Not removed by Foundry |
 | Join account and its password, zero-touch Domain Join | Protected. Password protection is required | `C:\Windows\Temp\Foundry\Payloads\DomainJoin\<operation-id>\credentials.bin`, in clear text | By Foundry, as soon as the join has used the file |
 | Network cache account passwords | Protected. Password protection is required when a share has an account | Never written to disk: Foundry Deploy uses them only to open the share in Windows PE | Not applicable |
-| Network cache account passwords | Protected. Password protection is required when a share has an account | Never written to disk: Foundry Deploy uses them only to open the share in Windows PE | Not applicable |
 | Join account and its password, interactive Domain Join | Not on the media: the technician types them in Foundry Deploy | Same file as zero-touch | Same as zero-touch |
 
 Details the table leaves out:
@@ -79,6 +78,17 @@ When someone who knew the publication password should no longer read the folder,
 Use **Reset publication** when someone who leaves must lose access. In both cases, change the passwords that were included in the publication if they must stay secret.
 
 On a follower, every setting of the publication is read-only. Only the ISO output path, the Additional WinPE driver folder, the telemetry settings and the passwords that the publication does not include can be changed.
+## Network cache publication <a href="#network-cache-publication" id="network-cache-publication"></a>
+
+With the [network cache](../foundry-osd/network-cache.md) on, Foundry Deploy takes the custom Windows images, custom driver sets and post-installation content from the shares, and runs them on the device. Foundry OSD signs what it publishes, so that a device runs only what an administrator of Foundry OSD published.
+
+- **Who signs.** The reference PC of [configuration sharing](../foundry-osd/configuration-sharing.md), or the single PC when configuration sharing is not used. Each of them signs the index of its publication with a signing key kept in the vault of its Windows account. A follower never signs and never publishes an index.
+- **Where the signature is written.** In the index `Foundry\Index\<key id>.json` of each share, next to the content.
+- **What a boot image trusts.** The public key of the signing PC: the key of the reference PC or the standalone PC, or, on a follower, the reference key it already accepted. Boot images carry only this public key. The private key never leaves the vault and is never written to the media or to a share.
+- **What a device refuses.** Foundry Deploy stops at start, and runs nothing, when the index is missing, was not signed by the trusted key, is damaged, is older than the index known when the boot image was created, or points to a file that is missing or changed. Someone who can write to a share cannot make devices run content that Foundry OSD did not publish, or go back to an older publication; they can only delete files, in which case devices stop at start with [Network cache not available](../troubleshooting/deployment/before-deployment-starts.md#network-cache-not-available).
+- **Reading.** Anyone who can read a share can read the published content, including post-installation scripts. Give read access to the devices and to the administrators only, and keep secrets out of scripts.
+- **When the reference PC changes.** The new reference PC signs with its own key and writes its own index beside the previous one. A boot image created before the change keeps trusting the previous reference PC and reads its last publication, until you create it again; a boot image created after the change trusts the new reference PC. Two PCs running Foundry OSD without configuration sharing coexist the same way, each boot image reading the publication of the PC that created it.
+
 ## Windows Autopilot credentials
 
 Zero-touch hardware hash upload uses two separate identities. The rights of the first are never available to the media.
