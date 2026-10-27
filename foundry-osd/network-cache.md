@@ -83,11 +83,18 @@ When a device matches several scopes, the most specific one wins: the scope with
 
 ## Imported content
 
-Each time Foundry OSD creates an ISO, a USB drive or [PXE files](media/pxe-deployment.md), it also publishes the custom Windows images, custom driver sets and post-installation content of the media to every share of the page. The progress dialog shows "Publishing imported content to the network cache." at the end. Foundry OSD opens each share with its account, or with your Windows account when the share has none.
+While the network cache is on with at least one share, the custom Windows images, custom driver sets and post-installation content of your configuration stay on the shares only. ISO files and USB drives no longer carry them, and **Start** reads "The network cache is on, so ISO and USB media do not include the custom Windows images, custom driver sets and post-installation content. Devices take them from their network cache share." Without the network cache, every media carries its content and works on its own.
 
-A share that cannot be reached or written does not make the media fail. The result then adds "The imported content could not be published to these network cache shares:", followed by the shares. Check them, then create the media again.
+Each time Foundry OSD creates an ISO, a USB drive or [PXE files](media/pxe-deployment.md), it publishes this content to every share of the page. The progress dialog shows "Publishing imported content to the network cache." at the end. Foundry OSD opens each share with its account, or with your Windows account when the share has none.
 
-On the device, Foundry Deploy offers the custom images and driver sets found on the media first, then those of its share, and takes post-installation content the same way. A device started from the network therefore gets the imported content of the configuration, as long as it reaches its share: see [What a PXE start delivers](media/pxe-deployment.md#what-a-pxe-start-delivers).
+A share that cannot be reached or written does not make the media fail. The result then adds "The imported content could not be published to these network cache shares:", followed by the shares. Check them, then create the media again: devices that use those shares do not find the content until then.
+
+On the device, Foundry Deploy offers the custom images and driver sets of its share, and takes post-installation content from it. A device gets this content only when it is in an IP scope and reaches a share that received it:
+
+- Without a share, Foundry Deploy offers no custom image and no custom driver set.
+- A deployment that needs a post-installation action with imported files stops before the disk is erased, with "Post-installation preparation failed. Check the deployment log for details.".
+
+To deploy imported content on devices outside your scopes, turn the network cache off, create the media, then turn it on again.
 
 ## Space used and emptying
 

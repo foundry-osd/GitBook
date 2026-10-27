@@ -88,13 +88,13 @@ If the step shows "The selected answer file is unavailable, invalid, or incompat
 
 **Cause:**
 
-- First message: the deployment needs scripts or packages that Foundry cannot find or verify. The USB drive or ISO was removed, is not the one created with this boot image, or its files were changed. A PXE boot image does not carry imported scripts and packages; only the [network cache](../../foundry-osd/network-cache.md) can provide them to it.
+- First message: the deployment needs scripts or packages that Foundry cannot find or verify. The USB drive or ISO was removed, is not the one created with this boot image, or its files were changed. A PXE boot image does not carry imported scripts and packages, and no media carries them while the [network cache](../../foundry-osd/network-cache.md) is on: the device then takes them from its share.
 - Second message: it appears only on media created with an older Foundry OSD. The startup console of current media prepares the post-installation application before Foundry Deploy opens, at the line "Preparing Foundry PostInstall"; older media does not, although it starts the latest Foundry Deploy. Foundry Deploy then downloads the application itself from GitHub, showing "Preparing post-installation components...", and that download failed.
 
 **Fix:**
 
 1. First message: connect the complete USB drive or ISO created together with the boot image, then restart from the media.
-2. First message over PXE: start the deployment from an ISO or a USB drive, or have the administrator disable the actions that use imported content or check the network cache. See [Deploy with PXE](../../foundry-osd/media/pxe-deployment.md).
+2. First message over PXE, or with the network cache on: check in the deployment log that the device used a share (see [If devices do not use the cache](../../foundry-osd/network-cache.md#if-devices-do-not-use-the-cache)). Without the network cache, start a PXE deployment from an ISO or a USB drive instead, or have the administrator disable the actions that use imported content. See [Deploy with PXE](../../foundry-osd/media/pxe-deployment.md).
 3. Second message: check that the device still reaches GitHub (see [Network endpoints](../../reference/network-endpoints.md)), then restart from the media to try again.
 4. If either message returns, the administrator updates Foundry OSD and recreates the media. For the second message this removes the cause.
 

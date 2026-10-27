@@ -148,7 +148,7 @@ If a console titled **Foundry Bootstrap** appears, the device did start from the
 
 **Where:** Foundry Deploy, on a device started from a PXE server such as Windows Deployment Services, before the disk is erased. The deployment log contains "The referenced post-installation media generation is unavailable."
 
-**Cause:** A PXE server delivers only the boot image. The deployment has a Post-installation action that uses imported files, and those files are copied only to ISO and USB media and to the [network cache](../../foundry-osd/network-cache.md) shares. The network cache is off, or the device is in no IP scope, reached none of its shares, or its share did not receive the content when the media was created.
+**Cause:** A PXE server delivers only the boot image. The deployment has a Post-installation action that uses imported files, and those files are copied only to ISO and USB media, or, while the [network cache](../../foundry-osd/network-cache.md) is on, only to its shares. The network cache is off, or the device is in no IP scope, reached none of its shares, or its share did not receive the content when the media was created.
 
 **Fix:**
 

@@ -49,12 +49,12 @@ On such a PC, media creation is blocked until the shared content is installed: e
 | Boot image `sources\boot.wim`: Windows PE, its drivers, the program behind the startup console and your options | In the ISO | On the **BOOT** partition | `boot.wim`, with `boot.sdi`, `BCD` and `bootmgr.efi` to start it |
 | Foundry Connect and, with Domain Join, the post-installation application | In the boot image | In `Runtime\` on the cache partition, **Foundry Cache** | In the boot image |
 | Foundry Deploy | Not on the media: downloaded at each start | Not on the media: downloaded at a start, then kept in `Runtime\` | Not on the media: downloaded at each start |
-| [Custom images](../customization/custom-windows-images.md) | In the ISO, in `Cache\OperatingSystems\Custom\` | Same folder on the cache partition | Not delivered, unless the [network cache](../network-cache.md) is on |
-| [Custom drivers](../customization/custom-drivers.md) | In the ISO, in `Cache\DriverPacks\Custom\` | Same folder on the cache partition | Not delivered, unless the [network cache](../network-cache.md) is on |
-| [Post-installation](../customization/post-installation.md) content you imported | In the ISO, in `Cache\PreOobe\` | Same folder on the cache partition | Not delivered, unless the [network cache](../network-cache.md) is on |
+| [Custom images](../customization/custom-windows-images.md) | In the ISO, in `Cache\OperatingSystems\Custom\` | Same folder on the cache partition | Not delivered |
+| [Custom drivers](../customization/custom-drivers.md) | In the ISO, in `Cache\DriverPacks\Custom\` | Same folder on the cache partition | Not delivered |
+| [Post-installation](../customization/post-installation.md) content you imported | In the ISO, in `Cache\PreOobe\` | Same folder on the cache partition | Not delivered |
 | Cache of downloaded Windows images and driver packs | None: every deployment downloads again | On the cache partition, kept by updates | None |
 
-With the [network cache](../network-cache.md) on, every media type also reads Windows images, driver packs and imported content from the share of its IP scope, and Foundry OSD publishes the imported content to the shares when it creates media.
+With the [network cache](../network-cache.md) on, no media type carries the custom images, custom drivers and post-installation content: devices take them from the share of their IP scope, where Foundry OSD publishes them when it creates media. Every media type also reads Windows images and driver packs from that share before the Internet.
 
 A USB drive [created without cache](create-usb.md#create-a-drive-without-cache) carries what the ISO carries, in the same folders, on one FAT32 partition named **FOUNDRY**. A USB drive created with **Create USB** has two partitions:
 

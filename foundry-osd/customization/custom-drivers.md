@@ -13,7 +13,7 @@ Drivers added to Windows PE itself are a different setting: see **WinPE drivers*
 
 - **Source.** A folder of `.inf` drivers. Subfolders are allowed, and the folder must contain at least one `.inf` file. Packed content is not supported: no `.cab`, `.zip` or `.exe`.
 - **Disk space.** Foundry OSD copies the folder into `%LOCALAPPDATA%\Foundry\Packages\Drivers`, so that drive needs room for the whole folder.
-- **Media type.** The page states: "Not available with PXE boot. Custom drivers require the full ISO or USB media." With the [network cache](../network-cache.md) on, the note disappears: devices started over PXE find the sets on their share.
+- **Media type.** The page states: "Not available with PXE boot. Custom drivers require the full ISO or USB media." With the [network cache](../network-cache.md) on, the note disappears: ISO and USB media no longer carry the sets, and every device, PXE included, takes them from its share.
 
 {% hint style="warning" %}
 Foundry does not check the architecture or the models of a driver set. You are responsible for choosing the right drivers: INF files for the media **Architecture** set in [General](../general.md), `x64` or `arm64`, that match your device models. Foundry Deploy only injects the INF files of the folder, and INF files that do not apply are skipped.
@@ -58,7 +58,7 @@ During the deployment, Foundry Deploy verifies the set file by file while it cop
 
 ## Update a USB drive
 
-An [update](../media/update-usb.md) of a USB drive writes the driver sets of the current configuration to the **Foundry Cache** partition and removes the driver sets the new media no longer uses, including all of them when none remain. Foundry OSD checks the free space before it removes anything, because the previous content is still on the drive. If the update does not fit, it stops with "The USB cache partition does not have enough free space for the updated content, because the previous content stays on the drive during the update. Nothing has been erased or formatted. Create the USB media again instead of updating it." Then [create the USB drive](../media/create-usb.md) again.
+An [update](../media/update-usb.md) of a USB drive writes the driver sets of the current configuration to the **Foundry Cache** partition and removes the driver sets the new media no longer uses, including all of them when none remain or while the [network cache](../network-cache.md) is on. Foundry OSD checks the free space before it removes anything, because the previous content is still on the drive. If the update does not fit, it stops with "The USB cache partition does not have enough free space for the updated content, because the previous content stays on the drive during the update. Nothing has been erased or formatted. Create the USB media again instead of updating it." Then [create the USB drive](../media/create-usb.md) again.
 
 If the update succeeds but ends with "Unused custom driver sets could not be removed from the USB drive.", the old sets are still on the drive and keep using space. The next update tries again, or create the USB drive again.
 
