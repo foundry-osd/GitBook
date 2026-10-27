@@ -41,11 +41,11 @@ A share without an account is read without credentials and devices never write t
 ## Turn on the network cache
 
 1. In the navigation pane, under **General**, open **Network cache**.
-2. Select **Enable** at the top of the page.
+2. Turn the switch at the top right to **Enabled**.
 3. Add the accounts, then the shares, then the IP scopes, as described below. Each change is saved at once.
 4. If the page shows "Shares with an account require Deploy password protection, because a PXE boot image can be downloaded by anyone on the network. Turn it on in General.", turn on **Password protection** in [General](general.md#password-protection).
 
-Select **Disable** to stop using the cache. The accounts, shares and scopes are kept for later.
+Turn the switch to **Disabled** to stop using the cache. The accounts, shares and scopes are kept for later.
 
 ### Accounts
 
@@ -94,7 +94,7 @@ On the device, Foundry Deploy offers the custom images and driver sets of its sh
 - Without a share, Foundry Deploy offers no custom image and no custom driver set.
 - A deployment that needs a post-installation action with imported files stops before the disk is erased, with "Post-installation preparation failed. Check the deployment log for details.".
 
-To deploy imported content on devices outside your scopes, turn the network cache off, create the media, then turn it on again.
+To deploy imported content on devices outside your scopes, turn the network cache switch to **Disabled**, create the media, then turn it back to **Enabled**.
 
 ## Space used and emptying
 
