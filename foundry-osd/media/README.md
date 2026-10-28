@@ -30,7 +30,7 @@ Each row shows its value and one state: **Configured**, **Default**, **Disabled*
 
 On such a PC, media creation is blocked until the shared content is installed: every create, update and PXE action is unavailable, and the readiness bar reads **Waiting for shared content** with "Shared content is still being downloaded. Media creation is available once the download is complete." It becomes available again by itself when the download completes. When the content failed or stalled, the bar reads **Shared content could not be installed** or **Shared content is not available**, with the reason: check the **Configuration sharing** card in **Settings**, as described in [Shared content missing](../../troubleshooting/foundry-osd/configuration-sharing.md#content-failed).
 
-**Needs attention** means something on that page is missing or not valid. The row shows the reason and a button, **Review** followed by the row name, that opens the page to fix. Its group opens by itself. Clear every such row before you create media. The one exception is the **Network cache** row when it reads **Not published**: creating media publishes too, so it does not block you. See [Publish](../network-cache.md#publish).
+**Needs attention** means something on that page is missing or not valid. The row shows the reason and a button, **Review** followed by the row name, that opens the page to fix. Its group opens by itself. Clear every such row before you create media. The **Network cache** row stays **Configured** when the shares are behind: its summary adds **Not up to date** or **Not published**, and creating media publishes to the shares. See [Publish](../network-cache.md#publish).
 
 ## Choose what to create
 
