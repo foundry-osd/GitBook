@@ -169,6 +169,16 @@ A device writes a file under a temporary name and gives it its final name only o
 
 A device copies what it downloaded to the share in the background, without slowing the deployment. At the end, it waits up to 2 minutes for the copies still running: the step reads "Finishing the copy to the network cache..." with the file, its progress and the time left. A copy that does not finish in time is dropped without any message; the next device downloads the file again.
 
+{% hint style="info" %}
+**Share speed**
+
+All the devices that read from or write to a share at the same time share the network card of its server. With a 1 Gbit/s card and ten devices deploying together, each one gets about 100 Mbit/s. To deploy many devices at once:
+
+- Give the file server a 10 Gbit/s network card, or several cards with SMB Multichannel.
+- Store the share on SSD disks.
+- Spread the devices over several shares, each with its own IP scope.
+{% endhint %}
+
 ## Check the result
 
 1. Open [Start](media/README.md). In the **General** group, the **Network cache** row shows the number of shares and IP scopes, and **Outdated** or **Not published** until you publish. It must not show **Needs attention**.
