@@ -47,7 +47,7 @@ A share without an account is read without credentials and devices never write t
 1. In the navigation pane, under **General**, open **Network cache**.
 2. Turn the switch at the top right to **Enabled**.
 3. Add the accounts, then the shares, then the IP scopes, as described below. Each change is saved at once.
-4. If the page shows "Shares with an account require Deploy password protection, because a PXE boot image can be downloaded by anyone on the network. Turn it on in General.", turn on **Password protection** in [General](general.md#password-protection).
+4. If the page shows "Shares with an account require Password protection, because anyone on the network can download a PXE boot image. Turn it on in General.", turn on **Password protection** in [General](general.md#password-protection).
 5. Select **Publish**, as described in [Publish](#publish).
 
 Turn the switch to **Disabled** to stop using the cache. The accounts, shares and scopes are kept for later.
@@ -81,7 +81,7 @@ Under **IP scopes**, select **Add**. **Add** stays disabled until there is a sha
    | **Range** | A first and a last address of the same family, separated by `-` | `10.20.0.10-10.20.0.200` |
    | **Address** | One address | `10.20.0.15` |
 
-3. Under **Shares**, check the shares of this scope and order them with the arrows. Devices try the checked shares from top to bottom.
+3. Under **Shares**, check the shares of this scope and order them with the arrows. Devices use the first checked share that answers, from top to bottom.
 4. Select **Add**.
 
 When a device matches several scopes, the most specific one wins: the scope with the fewest addresses. Between two scopes of the same size, the one higher in the table wins.
@@ -137,7 +137,7 @@ While the network cache is on with at least one share, the custom Windows images
 
 Foundry OSD publishes this content to every share of the page when you select **Publish** and each time it creates an ISO, a USB drive or [PXE files](media/pxe-deployment.md). The progress dialog of the media then has a last but one step, **Publishing to the network cache**, with the progress of the copy to each share. Only what a share is missing is copied: a file already there with the right size is kept without being read again. Foundry OSD opens each share with its account, or with your Windows account when the share has none.
 
-A share that cannot be reached or written does not make the media fail. The result then adds "The imported content could not be published to these network cache shares:", followed by the shares. Check them, then select **Publish**: devices that use those shares do not deploy until then.
+A share that cannot be reached or written does not make the media fail. The result then adds "These network cache shares did not receive the imported content:", followed by the shares. Check them, then select **Publish**: until then, devices that use those shares deploy with the previous publication, or stop at start if there is none.
 
 On the device, Foundry Deploy offers the custom images and driver sets of its share, and takes post-installation content from it. A device in no scope, or that reaches none of its shares, stops at start with the message described in [If a device stops at start](#if-a-device-stops-at-start); to deploy such devices, add a [backup scope](#backup-scope-for-every-other-device). To deploy imported content with no share at all, turn the network cache switch to **Disabled** and create the media, which then carries its content.
 
