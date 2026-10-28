@@ -130,7 +130,7 @@ On a PC that [follows a folder](configuration-sharing/follow-a-folder.md), **Pub
 
 ## Imported content
 
-While the network cache is on with at least one share, the custom Windows images, custom driver sets and post-installation content of your configuration stay on the shares only. ISO files and USB drives no longer carry them, and **Start** reads "The network cache is on, so ISO and USB media do not include the custom Windows images, custom driver sets and post-installation content. Devices take them from their network cache share." Without the network cache, every media carries its content and works on its own.
+While the network cache is on with at least one share, the custom Windows images, custom driver sets and post-installation content of your configuration stay on the shares only. ISO files and USB drives no longer carry them: devices take them from their network cache share. Without the network cache, every media carries its content and works on its own.
 
 Foundry OSD publishes this content to every share of the page when you select **Publish** and each time it creates an ISO, a USB drive or [PXE files](media/pxe-deployment.md). The progress dialog of the media then has a last but one step, **Publishing to the network cache**, with the progress of the copy to each share. Foundry OSD opens each share with its account, or with your Windows account when the share has none.
 
