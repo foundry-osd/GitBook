@@ -8,7 +8,7 @@ You change imported content in Foundry OSD, then select **Publish**: devices pic
 **Screenshot required**
 
 - **File:** `foundry-osd-network-cache-01-overview.png`
-- **Capture:** Show the Network cache page turned on and up to date, with one account, two shares with their **Space used** measured, the **Publish** and **Clean up** buttons, and two IP scopes, one subnet and one range.
+- **Capture:** Show the Network cache page turned on and up to date, with one account, two shares **Up to date** with their space measured, the **Publish** and **Clean up** buttons, and two IP scopes, one subnet and one range.
 {% endhint %}
 
 ## How a device uses the cache
@@ -108,10 +108,10 @@ The page shows one of two states.
 
 | State | What you see |
 | --- | --- |
-| Up to date | Nothing. The shares have your latest changes. |
-| **Not published** | A warning bar reads "The shares do not have your latest changes. Select Publish." The **Network cache** item of the navigation pane shows a **Caution** badge, and the **Network cache** row of [Start](media/README.md) reads **Needs attention** with the reason **Not published**. |
+| **Up to date** | The **Status** column of each share reads **Up to date**. |
+| **Not published** | The **Status** column of the shares without your latest changes reads **Not published**. A warning bar reads "The shares do not have your latest changes. Select Publish." The **Network cache** item of the navigation pane shows a **Caution** badge, and the **Network cache** row of [Start](media/README.md) reads **Needs attention** with the reason **Not published**. |
 
-When a share did not receive the last publication, the bar names it, as in "`\\fileserver\foundry` did not receive your latest changes. Select Publish." Check that the share is reachable and that its account can write, then select **Publish** again.
+A share whose settings are incomplete shows what is missing in its **Status** column instead. When a share did not receive the last publication, the bar names it, as in "`\\fileserver\foundry` did not receive your latest changes. Select Publish." Check that the share is reachable and that its account can write, then select **Publish** again.
 
 **Not published** does not block media creation, because creating media publishes too.
 
@@ -126,25 +126,32 @@ When a share did not receive the last publication, the bar names it, as in "`\\f
 
 Several PCs running Foundry OSD? Use [configuration sharing](configuration-sharing.md) so that every device gets the same configuration. Without it, each PC publishes its own configuration, and each boot image gets the configuration of the PC that created it.
 
-On a PC that [follows a folder](configuration-sharing/follow-a-folder.md), **Publish** is not shown and the page is never **Not published**: the reference PC publishes. Media created on the follower still copy missing files to the shares.
+On a PC that [follows a folder](configuration-sharing/follow-a-folder.md), **Publish** is not shown, the shares read **Ready**, and the page is never **Not published**: the reference PC publishes. Media created on the follower still copy missing files to the shares.
 
 ## Imported content
 
 While the network cache is on with at least one share, the custom Windows images, custom driver sets and post-installation content of your configuration stay on the shares only. ISO files and USB drives no longer carry them, and **Start** reads "The network cache is on, so ISO and USB media do not include the custom Windows images, custom driver sets and post-installation content. Devices take them from their network cache share." Without the network cache, every media carries its content and works on its own.
 
-Foundry OSD publishes this content to every share of the page when you select **Publish** and each time it creates an ISO, a USB drive or [PXE files](media/pxe-deployment.md). The progress dialog of the media shows "Publishing imported content to the network cache." at the end. Foundry OSD opens each share with its account, or with your Windows account when the share has none.
+Foundry OSD publishes this content to every share of the page when you select **Publish** and each time it creates an ISO, a USB drive or [PXE files](media/pxe-deployment.md). The progress dialog of the media then has a last but one step, **Publishing to the network cache**, with the progress of the copy to each share. Foundry OSD opens each share with its account, or with your Windows account when the share has none.
 
 A share that cannot be reached or written does not make the media fail. The result then adds "The imported content could not be published to these network cache shares:", followed by the shares. Check them, then select **Publish**: devices that use those shares do not deploy until then.
 
 On the device, Foundry Deploy offers the custom images and driver sets of its share, and takes post-installation content from it. A device in no scope, or that reaches none of its shares, stops at start with the message described in [If a device stops at start](#if-a-device-stops-at-start); to deploy such devices, add a [backup scope](#backup-scope-for-every-other-device). To deploy imported content with no share at all, turn the network cache switch to **Disabled** and create the media, which then carries its content.
 
-## Space used and clean up
+## Space and clean up
 
-The **Space used** column shows, for each share, the size of the downloads published by devices and of the imported content published by Foundry OSD. Select **Refresh** to measure all the shares. A share that cannot be opened shows **Cannot be reached**.
+Two columns show the space each share uses. Point to a column header to read what it counts.
+
+| Column | What it counts |
+| --- | --- |
+| **From the internet** | Windows and the driver packs that devices downloaded from the internet and published to the share. |
+| **Imported content** | The custom images, custom driver sets and post-installation scripts that Foundry OSD published. |
+
+Foundry OSD measures the shares when you open the page; select **Refresh** to measure them again. A share that cannot be opened shows **Cannot be reached**.
 
 To free space on a share:
 
-1. Select **Refresh**, then select the share.
+1. Select the share.
 2. Select **Clean up**, then **Clean up** in the confirmation dialog: "Delete the downloads on `\\fileserver\foundry` and the imported content your published configuration no longer uses? Devices download again what they need."
 
 Foundry OSD deletes every download of the share and the imported content that no publication uses any more. Content that is still used is kept, including the content that boot images created by another PC, or before a change of reference PC, still read. Devices download again from the Internet what was deleted, and publish it again.
