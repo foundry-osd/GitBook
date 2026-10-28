@@ -94,7 +94,7 @@ If the step shows "The selected answer file is unavailable, invalid, or incompat
 **Fix:**
 
 1. First message: connect the complete USB drive or ISO created together with the boot image, then restart from the media.
-2. First message over PXE, or with the network cache on: check in the deployment log that the device used a share (see [If devices do not use the cache](../../foundry-osd/network-cache.md#if-devices-do-not-use-the-cache)). Without the network cache, start a PXE deployment from an ISO or a USB drive instead, or have the administrator disable the actions that use imported content. See [Deploy with PXE](../../foundry-osd/media/pxe-deployment.md).
+2. First message with the network cache on: the share stopped answering, or its published content was deleted, after Foundry Deploy opened. Have the administrator check the share and select **Publish** on the [Network cache](../../foundry-osd/network-cache.md#publish) page, then restart the device. First message over PXE without the network cache: start the deployment from an ISO or a USB drive instead, or have the administrator disable the actions that use imported content. See [Deploy with PXE](../../foundry-osd/media/pxe-deployment.md).
 3. Second message: check that the device still reaches GitHub (see [Network endpoints](../../reference/network-endpoints.md)), then restart from the media to try again.
 4. If either message returns, the administrator updates Foundry OSD and recreates the media. For the second message this removes the cause.
 

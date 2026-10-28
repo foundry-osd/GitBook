@@ -34,7 +34,7 @@ Create the files a PXE server needs to start devices from the network with Found
 | `BCD` | The UEFI boot configuration that loads `boot.wim`. |
 | `bootmgr.efi` | The UEFI boot manager, signed for the **Secure Boot** choice of [General](../general.md). |
 
-PXE servers that start Windows PE with wimboot, such as iPXE or FOG, use all four files. The files start UEFI devices only.
+PXE servers that start Windows PE with wimboot, such as iPXE or FOG, can load the four files together; check in the documentation of your server under which name it expects the UEFI boot manager. The files start UEFI devices only.
 
 Foundry OSD replaces the files only once all four are written: a failed or cancelled creation keeps the previous ones.
 
@@ -48,7 +48,7 @@ Foundry OSD replaces the files only once all four are written: a failed or cance
 
 With the [network cache](../network-cache.md) on, the device gets what this table lists as not delivered from its share: Foundry OSD publishes the imported content to every share when it creates the PXE files, and Foundry Deploy takes the Windows image and the driver pack from the share when another device already published them. The device must be in an IP scope and reach one of its shares.
 
-Without the network cache, or when the device reaches none of its shares, a deployment that needs a post-installation action with imported files stops before the disk is erased. Start those deployments from an [ISO](create-iso.md) or a [USB drive](create-usb.md), turn on the network cache, or disable the actions in Foundry OSD and create the PXE files again. See [PXE start](../../troubleshooting/media-creation/usb-drive-and-device-start.md#pxe).
+Without the network cache, a deployment that needs a post-installation action with imported files stops before the disk is erased. With the network cache on, a device that reaches none of its shares stops when Foundry Deploy opens: see [If a device stops at start](../network-cache.md#if-a-device-stops-at-start). Start those deployments from an [ISO](create-iso.md) or a [USB drive](create-usb.md), turn on the network cache, or disable the actions in Foundry OSD and create the PXE files again. See [PXE start](../../troubleshooting/media-creation/usb-drive-and-device-start.md#pxe).
 
 ## Check the result
 

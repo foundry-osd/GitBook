@@ -36,7 +36,7 @@ The card shows "This PC follows \<PC name\>" and the status "Up to date." or "Th
 Every configuration page shows **Managed by a reference PC**, and its settings are read-only. You can still change:
 
 - the **ISO output** path on **Start**, the **Additional WinPE driver folder** on [General](../general.md), and the telemetry settings of **Settings**;
-- the passwords, when the publication does not include them. Type them on their pages: they are [saved](saved-passwords.md) on this PC only. For OOBE local accounts and zero-touch Domain Join, **Edit** opens a dialog where only the password can be entered.
+- the passwords, when the publication does not include them. Type them on their pages: they are [saved](saved-passwords.md) on this PC only. For OOBE local accounts, zero-touch Domain Join and [network cache](../network-cache.md) accounts, **Edit** opens a dialog where only the password can be entered.
 
 When the publication includes the passwords, the password fields are read-only too, and each new version replaces them.
 

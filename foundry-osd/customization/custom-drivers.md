@@ -13,7 +13,7 @@ Drivers added to Windows PE itself are a different setting: see **WinPE drivers*
 
 - **Source.** A folder of `.inf` drivers. Subfolders are allowed, and the folder must contain at least one `.inf` file. Packed content is not supported: no `.cab`, `.zip` or `.exe`.
 - **Disk space.** Foundry OSD copies the folder into `%LOCALAPPDATA%\Foundry\Packages\Drivers`, so that drive needs room for the whole folder.
-- **Media type.** The page states: "With PXE boot, custom drivers need the network cache. Without it, use ISO or USB media." With the [network cache](../network-cache.md) on, the note disappears: ISO and USB media no longer carry the sets, and every device, PXE included, takes them from its share.
+- **Media type.** The page states: "With PXE boot, custom drivers need the network cache. Without it, use ISO or USB media." With the [network cache](../network-cache.md) on and at least one share, the note disappears: ISO and USB media no longer carry the sets, and every device, PXE included, takes them from its share.
 
 {% hint style="warning" %}
 Foundry does not check the architecture or the models of a driver set. You are responsible for choosing the right drivers: INF files for the media **Architecture** set in [General](../general.md), `x64` or `arm64`, that match your device models. Foundry Deploy only injects the INF files of the folder, and INF files that do not apply are skipped.

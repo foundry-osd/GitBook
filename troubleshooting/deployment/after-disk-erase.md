@@ -184,7 +184,7 @@ A failed step stops the deployment with "The selected firmware content is unavai
 **Cause:**
 
 - At **Apply Windows image**: a custom image carries its own answer file. Foundry refuses `Windows\Panther\Unattend\unattend.xml`, `Windows\Panther\Unattend\autounattend.xml` and an `UnattendFile` value under `HKLM\SYSTEM\Setup`, which Windows would use instead of Foundry's file, and a `Windows\Panther\unattend.xml` that cannot take Foundry's command.
-- At **Prepare setup tasks**: the deployment media was removed or changed during the deployment, a file could not be copied to the disk, or the answer file on the disk cannot take Foundry's command.
+- At **Prepare setup tasks**: the deployment media was removed or changed during the deployment, the [network cache](../../foundry-osd/network-cache.md) share stopped answering or one of its published files changed, a file could not be copied to the disk, or the answer file on the disk cannot take Foundry's command.
 
 **Fix:**
 

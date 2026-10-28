@@ -28,6 +28,7 @@ Start from the stage where the work stopped, or from what you see on screen. Eac
 | The device does not start from the USB drive, the ISO or PXE | [The device does not start from the media](media-creation/usb-drive-and-device-start.md#does-not-boot) |
 | A console window stays open in Windows PE and no Foundry window appears | [Windows PE startup](windows-pe-startup.md) |
 | Foundry Connect does not report the network as ready | [Network and Foundry Connect](network.md) |
+| **Network cache not available** when Foundry Deploy opens | [Before the deployment starts](deployment/before-deployment-starts.md#network-cache-not-available) |
 | Foundry Deploy refuses the password, or closes as soon as it opens | [Before the deployment starts](deployment/before-deployment-starts.md) |
 | No disk is offered, a message under **Answer file**, or **Next** or **Deploy** stays unavailable | [Before the deployment starts](deployment/before-deployment-starts.md) |
 | **Deployment failed** with a "Failed step: ..." line | [Windows deployment](deployment.md), which sends you to the page for that step |

@@ -61,7 +61,7 @@ The number of steps depends on the media configuration and can change while the 
 **Prepare target disk** is the step that erases the disk. Everything listed above it in **Steps** runs first, and a failure there leaves the disk untouched. Foundry Deploy first checks the disk, the storage space it can calculate, the answer file and the post-installation content the media must carry.
 
 - **USB drive with enough free cache space, or a custom image on the ISO or USB drive:** the Windows image is downloaded or reused and checked before **Prepare target disk**.
-- **ISO or PXE, a USB drive whose cache cannot hold the image, or a custom image from the [network cache](../foundry-osd/network-cache.md):** only access to the source is checked first (for a custom image from the share: its signed publication, its size and its editions). **Download Windows image** copies the image to the disk and checks it, and **Check Windows image** runs, after **Prepare target disk**, so a download or image problem can stop a deployment whose disk is already erased. The share is read once, during the copy.
+- **ISO or PXE, a USB drive whose cache cannot hold the image, or a custom image from the [network cache](../foundry-osd/network-cache.md):** only access to the source is checked first (for a custom image from the share: its signed publication, its size and its editions). **Download Windows image**, or **Resolve custom image** for a custom image, copies the image to the disk and checks it, and **Check Windows image** runs, after **Prepare target disk**, so a download or image problem can stop a deployment whose disk is already erased. The share is read once, during the copy.
 
 Checking a large cached image takes time, especially on a slow USB drive. The step shows "Checking cache..." with a percentage: let it finish.
 
@@ -81,7 +81,7 @@ The order below is the one used when the Windows image is checked before the dis
 | **Validate answer file** | A custom answer file is selected | Not skipped |
 | **Check deployment setup** | Always | Not skipped |
 | **Download Windows image** | A catalog image is selected | The image was in the cache and passed verification |
-| **Resolve custom image** | A custom image is selected. Replaces **Download Windows image**; the error screen still names it "Download Windows image" | Always shown as skipped: the image is read from the deployment media |
+| **Resolve custom image** | A custom image is selected. Replaces **Download Windows image**; the error screen still names it "Download Windows image" | Shown as skipped when the image is read from the ISO or the USB drive. With the [network cache](../foundry-osd/network-cache.md), it runs after **Prepare target disk** and copies the image from the share to the disk, with its progress |
 | **Check Windows image** | Always | Not skipped |
 | **Prepare target disk** | Always. Erases and partitions the disk | Not skipped |
 | **Apply Windows image** | Always | Not skipped |

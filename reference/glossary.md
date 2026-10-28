@@ -80,7 +80,7 @@ The Active Directory account used to join a computer to the domain.
 
 ## Network cache
 
-SMB shares that devices use as a shared cache, chosen by their IP address. Devices read Windows images, driver packs and imported content from them before the Internet. See [Network cache](../foundry-osd/network-cache.md).
+SMB shares that devices use as a shared cache, chosen by their IP address. Devices read imported content from them, and Windows images and driver packs from them before the Internet. See [Network cache](../foundry-osd/network-cache.md).
 
 ## OOBE
 

@@ -26,6 +26,7 @@ Otherwise, find the message below.
 | "Failed to create WinPE workspace using copype.cmd.", a component "was not found", "PCA2023 requires..." | [The ADK lacks a component](#adk-component) |
 | "Failed to retrieve...", "Failed to download...", "The transfer timed out..." | [A download fails](#download-failed) |
 | A driver package that is refused | [A downloaded package is refused](#package-refused) |
+| "These network cache shares did not receive the imported content: ..." at the end of a creation | [Imported content](../foundry-osd/network-cache.md#imported-content) on the Network cache page |
 | "ARM64 boot media requires the Windows Recovery Environment...", or a result message saying the media uses the standard Windows PE image | [Windows RE is unavailable](#winre-unavailable) |
 | "Custom drivers total at least...", "The USB BOOT partition needs approximately..." | [Drivers or boot files are too large](#too-large) |
 | "Foundry could not replace the ISO file...", "Unexpected failure while creating WinPE ISO media." | [The ISO cannot be written](#iso-failed) |

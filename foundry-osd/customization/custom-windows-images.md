@@ -11,7 +11,7 @@
 
 - **Source.** A `.wim` file, or an ISO that contains `sources\install.wim` or `sources\install.esd`. Split `.swm` images are not supported.
 - **Disk space.** Foundry OSD copies the image into `%LOCALAPPDATA%\Foundry\Images\Custom`. That drive needs free space of at least the size of the WIM or, for an `install.esd`, the expanded size of all its indexes plus 1 GB.
-- **Media type.** The page states: "With PXE boot, custom images need the network cache. Without it, use ISO or USB media." With the [network cache](../network-cache.md) on, the note disappears: ISO and USB media no longer carry the images, and every device, PXE included, takes them from its share.
+- **Media type.** The page states: "With PXE boot, custom images need the network cache. Without it, use ISO or USB media." With the [network cache](../network-cache.md) on and at least one share, the note disappears: ISO and USB media no longer carry the images, and every device, PXE included, takes them from its share.
 - **Captured images.** Keep the recovery image in the capture, as described [below](#capture-an-image-that-keeps-windows-recovery).
 
 ## Import an image

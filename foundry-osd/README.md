@@ -44,7 +44,8 @@ A small colored badge can appear to the right of an item. Point at it to read it
 | Badge text | Shown on | Meaning |
 | --- | --- | --- |
 | **ADK ready** / **ADK not ready** | **ADK** | Whether Foundry OSD can create media. |
-| **Configured** | Network and Customization pages | The settings of the page are valid, or left at their defaults, and the media will use them. |
+| **Configured** | **Network cache**, Network and Customization pages | The settings of the page are valid, or left at their defaults, and the media will use them. |
+| **Outdated** / **Not published** | **Network cache** | The shares do not have your latest changes. Media creation still works and publishes to them: see [Publish](network-cache.md#publish). |
 | **Downloading**, an attention badge with a download icon | **Post-installation**, **Custom Windows images** and **Custom drivers**, on a PC that follows a folder | Shared content of this item is still being downloaded or installed. Media creation is blocked until it is: see [New versions](configuration-sharing/follow-a-folder.md#new-versions). |
 | **Active provisioning mode** | Windows Autopilot and Domain Join pages | This method is the one the media will use. |
 | **Needs attention** | Any page, including **General** | The feature is turned on but something is missing. Media creation is blocked until you fix it. |
