@@ -111,7 +111,7 @@ The page shows one of two states.
 | **Up to date** | The **Status** column of each share reads **Up to date**. |
 | **Not published** | The **Status** column of the shares without your latest changes reads **Not published**. A warning bar reads "The shares do not have your latest changes. Select Publish." The **Network cache** item of the navigation pane shows a **Caution** badge, and the **Network cache** row of [Start](media/README.md) reads **Needs attention** with the reason **Not published**. |
 
-A share whose settings are incomplete shows what is missing in its **Status** column instead. When a share did not receive the last publication, the bar names it, as in "`\\fileserver\foundry` did not receive your latest changes. Select Publish." Check that the share is reachable and that its account can write, then select **Publish** again.
+A share whose settings are incomplete shows what is missing in its **Status** column instead. When you open the page, Foundry OSD also checks that each share still holds what you published. A share whose published content was deleted or moved reads **Not published**, and the bar names it: "`\\fileserver\foundry` no longer has your published content. Select Publish." When a share did not receive the last publication, the bar names it, as in "`\\fileserver\foundry` did not receive your latest changes. Select Publish." Check that the share is reachable and that its account can write, then select **Publish** again.
 
 **Not published** does not block media creation, because creating media publishes too.
 
