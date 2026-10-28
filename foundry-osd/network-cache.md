@@ -109,10 +109,10 @@ The **Status** column of each share shows one of three states.
 | State | Meaning | What devices do |
 | --- | --- | --- |
 | **Up to date** | The share has your latest changes. | Deploy with your latest changes. |
-| **Not up to date** | You changed the content since the last publication, or the last publication to this share failed. | Deploy with the previous publication. |
+| **Outdated** | You changed the content since the last publication, or the last publication to this share failed. | Deploy with the previous publication. |
 | **Not published** | The share has nothing you published: you never published to it, or its published content was deleted or moved. | Stop at start with [Network cache not available](../troubleshooting/deployment/before-deployment-starts.md#network-cache-not-available). |
 
-While a share is **Not up to date** or **Not published**, a warning bar reads "The shares do not have your latest changes. Select Publish.", the **Network cache** item of the navigation pane shows a **Caution** badge with the state, and the **Network cache** row of [Start](media/README.md) adds the state to its summary. A share whose settings are incomplete shows what is missing in its **Status** column instead.
+While a share is **Outdated** or **Not published**, a warning bar reads "The shares do not have your latest changes. Select Publish.", the **Network cache** item of the navigation pane shows a **Caution** badge with the state, and the **Network cache** row of [Start](media/README.md) adds the state to its summary. A share whose settings are incomplete shows what is missing in its **Status** column instead.
 
 When you open the page, Foundry OSD also checks that each share still holds what you published. A share whose content was deleted or moved reads **Not published**, and the bar names it: "`\\fileserver\foundry` no longer has your published content. Select Publish." When a share did not receive the last publication, the bar names it, as in "`\\fileserver\foundry` did not receive your latest changes. Select Publish." Check that the share is reachable and that its account can write, then select **Publish** again.
 
@@ -129,7 +129,7 @@ Neither state blocks media creation, because creating media publishes too.
 
 Several PCs running Foundry OSD? Use [configuration sharing](configuration-sharing.md) so that every device gets the same configuration. Without it, each PC publishes its own configuration, and each boot image gets the configuration of the PC that created it.
 
-On a PC that [follows a folder](configuration-sharing/follow-a-folder.md), **Publish** is not shown, the shares read **Ready**, and the page never shows **Not up to date** or **Not published**: the reference PC publishes. Media created on the follower still copy missing files to the shares.
+On a PC that [follows a folder](configuration-sharing/follow-a-folder.md), **Publish** is not shown, the shares read **Ready**, and the page never shows **Outdated** or **Not published**: the reference PC publishes. Media created on the follower still copy missing files to the shares.
 
 ## Imported content
 
@@ -169,7 +169,7 @@ A device writes a file under a temporary name and gives it its final name only o
 
 ## Check the result
 
-1. Open [Start](media/README.md). In the **General** group, the **Network cache** row shows the number of shares and IP scopes, and **Not up to date** or **Not published** until you publish. It must not show **Needs attention**.
+1. Open [Start](media/README.md). In the **General** group, the **Network cache** row shows the number of shares and IP scopes, and **Outdated** or **Not published** until you publish. It must not show **Needs attention**.
 2. Create the media and deploy a test device whose address is in one of the scopes.
 3. In the Foundry Deploy log, look for "Network cache connected", followed by the share and whether the device can write there: see [Logs and support information](../troubleshooting/logs-and-support.md).
 4. Deploy a second device in the same scope. Its Windows image and driver pack are read from the share instead of the Internet.
