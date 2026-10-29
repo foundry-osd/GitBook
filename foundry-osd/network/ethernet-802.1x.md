@@ -55,8 +55,8 @@ The **Ethernet** card of Foundry Connect has an **802.1X** row:
 | **Authenticating** | The network is checking the device. |
 | **Authenticated** | The network accepted the device. The card then shows **Connected** once the address arrives. |
 | **Profile applied** | The profile is in place, but Foundry Connect cannot read the result. An address under **IPv4** means that it worked. |
-| **Authentication failed** | The profile from the media or the network refused the device. A box under the details gives a short reason. |
-| **Unavailable** | The profile is not used. A box under the details gives the reason: the Deployment password was not entered, or the profile cannot be used from this media and the box says to recreate it. Plain Ethernet and Wi-Fi keep working. |
+| **Authentication failed** | The profile is missing from the media, or the profile or the network refused the device. A box under the details gives a short reason. |
+| **Unavailable** | The profile is not used. A box under the details gives the reason: the Deployment password was not entered, or a secret of the profile cannot be read from this media and the box says to recreate it. Plain Ethernet and Wi-Fi keep working. |
 
 See ["Authentication failed"](../../troubleshooting/network.md#wired-authentication-fails) when the device is refused.
 
@@ -70,6 +70,7 @@ See ["Authentication failed"](../../troubleshooting/network.md#wired-authenticat
 - One profile file, one client certificate and any number of trusted root CA certificates. From a `.pfx` file, Foundry Connect imports the client certificate only: add its issuing CA under **Trusted root CA certificates**.
 - Foundry OSD checks that the files exist. It does not check the content of the profile or the PFX password. A mistake shows only in Windows PE.
 - The client certificate and its **PFX password** are protected by the Deployment password; the profile file and the trusted root CA certificates are readable on the media. Foundry OSD keeps the **PFX password** between sessions only while **Remember passwords** is on. See [What goes on the media](README.md#what-goes-on-the-media).
+- On protected media, the client certificate file must not be empty and must stay under about 3 MB. Otherwise media creation stops with an error.
 
 ## Related
 

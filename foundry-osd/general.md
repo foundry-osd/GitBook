@@ -72,7 +72,7 @@ The password must have at least 8 characters; Foundry OSD recommends 12, or a pa
 | Custom answer files | Yes |
 | Join accounts and passwords of [zero-touch Domain Join](domain-join/zero-touch.md) | Yes. This method requires Password protection. |
 | Wi-Fi **Passphrase**, and the **Client certificate (PFX)** with its password for [Wi-Fi](network/wifi.md) and [Ethernet 802.1X](network/ethernet-802.1x.md) | Yes. They require Password protection. |
-| Enterprise Wi-Fi profile file | Yes, when Password protection is on |
+| Enterprise Wi-Fi profile file | Yes, when Password protection is on and the file contains key material |
 | Wired profile file and **Trusted root CA certificates** | No. They hold no secret. |
 
 As soon as the media carries a Wi-Fi passphrase or a client certificate, Password protection is required. Until you turn it on, the Wi-Fi or Ethernet 802.1X page shows **Needs attention** with "Wi-Fi passwords and client certificates are protected by the deployment password. Turn on password protection on the General page and set the deployment password.", **Start** marks the network item and **Password protection** as **Needs attention**, and media creation is refused.

@@ -40,7 +40,7 @@ As soon as you connect or disconnect a network yourself, Foundry Connect stops t
 
 When the profile cannot be used from this media, the card shows **Provisioned Wi-Fi unavailable** and the reason. Ethernet and the other Wi-Fi networks keep working. See ["Provisioned Wi-Fi unavailable"](../troubleshooting/network.md#provisioned-wifi-unavailable).
 
-When the profile is protected by the Deployment password, because it carries a passphrase or a client certificate, the card shows **Password required** and "The provisioned Wi-Fi is protected by the deployment password. Select Connect to enter it." Foundry Connect asks for the [Deployment password](README.md#deployment-password-in-foundry-connect) by itself once, when it would otherwise connect the profile, and each time you select **Connect** while the card shows **Password required**. After a correct entry, the profile connects as described above. After **Cancel**, the card reads "The deployment password was not entered. Select Connect to enter it. Ethernet and other Wi-Fi networks still work." and Foundry Connect no longer asks by itself.
+When the profile is protected by the Deployment password, because it carries a passphrase, a client certificate, or an enterprise profile file that contains key material, the card shows **Password required** and "The provisioned Wi-Fi is protected by the deployment password. Select Connect to enter it." Foundry Connect asks for the [Deployment password](README.md#deployment-password-in-foundry-connect) by itself once, when it would otherwise connect the profile, and each time you select **Connect** while the card shows **Password required**. After a correct entry, the profile connects as described above. After **Cancel**, the card reads "The deployment password was not entered. Select Connect to enter it. Ethernet and other Wi-Fi networks still work." and Foundry Connect no longer asks by itself.
 
 ## What Network ready tests
 
@@ -75,8 +75,8 @@ The test cannot be changed or skipped. **Network ready** does not prove that the
 | **802.1X**: **Authenticating** | The media carries a wired 802.1X profile and the network is checking the device. |
 | **802.1X**: **Authenticated** | The network accepted the device. |
 | **802.1X**: **Profile applied** | The profile is in place, but the result of the authentication cannot be read. An address under **IPv4** means it worked. |
-| **802.1X**: **Authentication failed** | The profile or the network refused the device. A box under the details gives the reason. |
-| **802.1X**: **Unavailable** | The profile cannot be used from this media. A box under the details gives the reason. |
+| **802.1X**: **Authentication failed** | The profile from the media is missing, or the profile or the network refused the device. A box under the details gives the reason. |
+| **802.1X**: **Unavailable** | The profile is not used: the Deployment password was not entered, or a secret of the profile cannot be read from this media. A box under the details gives the reason. |
 
 </details>
 
@@ -93,10 +93,11 @@ The test cannot be changed or skipped. **Network ready** does not prove that the
 | A dimmed network in the list | The selected network is no longer seen by the adapter. It stays selected but cannot be connected. |
 | **Not in range** | The provisioned network is not seen by the adapter. |
 | **Ready to connect** | The provisioned profile is not connected yet. |
+| **Connecting** | The provisioned profile is being connected. |
 | **Password required** | The provisioned profile waits for the Deployment password. Select **Connect** to enter it. |
 | **Connected** | The device uses this network. |
 | **Another Wi-Fi network is active** | The device uses a network you joined from the list, not the provisioned profile. This is not an error. |
-| **Open**, **Enhanced Open**, **WPA2 Personal**, **WPA3 Personal**, **WPA2/WPA3 Personal**, **Enterprise** | The security of the network or of the provisioned profile. **Configured security** means a profile whose security is not shown. |
+| **Open**, **Enhanced Open**, **WEP**, **WPA Personal**, **WPA2 Personal**, **WPA3 Personal**, **WPA2/WPA3 Personal**, **WPA Enterprise**, **WPA2 Enterprise**, **WPA3 Enterprise**, **Enterprise**, **Vendor-specific** | The security of the network or of the provisioned profile. **Configured security** means a profile whose security is not shown. |
 
 </details>
 

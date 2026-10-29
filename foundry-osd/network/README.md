@@ -14,7 +14,7 @@ The **Network** pages decide how a target device gets online in Windows PE when 
 
 Everything you configure here is copied to the deployment media: the profile files, the certificate files, the Wi-Fi passphrase and the PFX password.
 
-The Wi-Fi **Passphrase**, the **Client certificate (PFX)** and its **PFX password** are encrypted with the Deployment password, so [Password protection](../general.md#password-protection) is required as soon as you provide one of them. Until it is on, the Wi-Fi or Ethernet 802.1X page shows **Needs attention** with "Wi-Fi passwords and client certificates are protected by the deployment password. Turn on password protection on the General page and set the deployment password.", **Start** shows **Needs attention** and media creation is refused. With Password protection on, an enterprise Wi-Fi profile file is encrypted too. Profile files of wired 802.1X and **Trusted root CA certificates** hold no secret and stay readable on the media.
+The Wi-Fi **Passphrase**, the **Client certificate (PFX)** and its **PFX password** are encrypted with the Deployment password, so [Password protection](../general.md#password-protection) is required as soon as you provide one of them. Until it is on, the Wi-Fi or Ethernet 802.1X page shows **Needs attention** with "Wi-Fi passwords and client certificates are protected by the deployment password. Turn on password protection on the General page and set the deployment password.", **Start** shows **Needs attention** and media creation is refused. With Password protection on, an enterprise Wi-Fi profile file that contains key material is encrypted too. Profile files of wired 802.1X and **Trusted root CA certificates** hold no secret and stay readable on the media.
 
 On the target device, Foundry Connect asks the technician for the Deployment password only when it needs one of these secrets. See [Deployment password in Foundry Connect](../../foundry-connect/README.md#deployment-password-in-foundry-connect).
 
@@ -57,6 +57,8 @@ Which Wi-Fi networks are roamed:
 - A network that failed to connect, or that the device never joined during the session, is not roamed.
 
 Leave Wi-Fi roaming off when a password typed by a technician must not stay on the device.
+
+The wired 802.1X profile is roamed only when Foundry Connect applied it. It is not roamed when the **802.1X** row of Foundry Connect shows **Unavailable**, for example after the technician cancelled the Deployment password, or when the profile was missing from the media or refused by Windows PE.
 
 A failed import does not stop the deployment. See [The roamed profile does not connect after deployment](../../troubleshooting/network.md#roamed-profile-does-not-connect).
 

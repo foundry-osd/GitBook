@@ -67,8 +67,7 @@ Foundry Connect shows a **Wi-Fi** card with the networks in range and, for the e
 - Foundry Connect connects the embedded profile by itself only while the device has no Internet access, so a working cable is used first. It keeps trying until the technician connects or disconnects a network by hand. After that, the technician selects **Connect** on the **Provisioned Wi-Fi** card to use the profile again.
 - Networks that hide their name are not listed in Foundry Connect. To use one, embed its profile here.
 - When the media holds a profile that Foundry Connect cannot use, for example a passphrase it cannot read, the card shows **Provisioned Wi-Fi unavailable** with a hint to recreate the media. Ethernet and the other Wi-Fi networks keep working.
-
-- With a passphrase or a client certificate, the **Provisioned Wi-Fi** card shows **Password required** until the technician types the Deployment password. Foundry Connect asks for it by itself once, only when the device has no Internet access and the network is in range, and again each time the technician selects **Connect** on the card. If the technician selects **Cancel**, the profile stays unused and Ethernet and the other Wi-Fi networks keep working. One correct entry is enough: Foundry Deploy does not ask again.
+- With a passphrase, a client certificate, or an enterprise profile file that contains key material, the **Provisioned Wi-Fi** card shows **Password required** until the technician types the Deployment password. Foundry Connect asks for it by itself once, only when the device has no Internet access and the network is in range, and again each time the technician selects **Connect** on the card. If the technician selects **Cancel**, the profile stays unused and Ethernet and the other Wi-Fi networks keep working. One correct entry is enough: Foundry Deploy does not ask again.
 
 See [Network readiness](../../foundry-connect/network-readiness.md#use-the-provisioned-wi-fi) and [Deployment password in Foundry Connect](../../foundry-connect/README.md#deployment-password-in-foundry-connect).
 
@@ -82,6 +81,7 @@ See [Network readiness](../../foundry-connect/network-readiness.md#use-the-provi
 - One embedded profile per media.
 - Enterprise profiles: one client certificate and any number of trusted root CA certificates. From a `.pfx` file only the client certificate is imported, not its issuing CA: add that CA under **Trusted root CA certificates**. Foundry OSD checks neither the PFX password nor the content of a **WPA2/WPA3 Enterprise** profile: a mistake shows only in Windows PE.
 - The **Passphrase** and the client certificate with its **PFX password** need Password protection, and anyone who knows the Deployment password can recover them from the media. Foundry OSD keeps them between sessions only while **Remember passwords** is on. See [What goes on the media](README.md#what-goes-on-the-media).
+- On protected media, the client certificate file, and an enterprise profile file that contains key material, must not be empty and must stay under about 3 MB. Otherwise media creation stops with an error.
 
 ## Related
 

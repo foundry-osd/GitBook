@@ -37,7 +37,7 @@ Nothing has to be typed here. [Windows PE startup](../foundry-connect/windows-pe
 
 ## 3. Connect to the network
 
-[Foundry Connect](../foundry-connect/README.md) checks Ethernet, and Wi-Fi when the media includes it, until the device has Internet access. It then continues by itself after 10 seconds, unless the technician worked on the network: Foundry Connect then waits for **Continue**.
+[Foundry Connect](../foundry-connect/README.md) checks Ethernet, and Wi-Fi when the media includes it, until the device has Internet access. It then continues by itself after 10 seconds, unless the technician worked on the network or was asked for the Deployment password: Foundry Connect then waits for **Continue**.
 
 The technician acts only when the network needs it, for example to choose a Wi-Fi network. Closing Foundry Connect stops the startup: Foundry Deploy does not open.
 

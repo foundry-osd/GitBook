@@ -83,18 +83,20 @@ While **No internet access** is shown, the status area offers **Retry**, to chec
 
 - **Where:** **Ethernet** card, on the **802.1X** row, with a red box that gives the reason. The media was created with [Ethernet 802.1X](../foundry-osd/network/ethernet-802.1x.md). The same causes apply when the row shows **Profile applied** and the card never gets a usable address: the network refused the device without saying so.
 - **Cause:**
-  1. "The network rejected the authentication. Check the certificate and the switch port settings.": the certificate is unknown to the authentication server or not valid at the date of the device clock, the profile expects a typed user name and password, or the switch port is not set for this device.
-  2. "Windows rejected the 802.1X profile from the boot media.": the profile file or the certificate could not be installed, for example because of a wrong **PFX password** or a damaged certificate.
+  1. "The network rejected the authentication. Check the certificate and the switch port settings.": the certificate is unknown to the authentication server or not valid at the date of the device clock, the profile expects a typed user name and password, or the switch port is not set for this device. The client certificate may also not have been imported in Windows PE, for example because of a wrong **PFX password** or a damaged certificate: the log then shows `FailureCode=wired_certificate_import_failed`.
+  2. "Windows rejected the 802.1X profile from the boot media.": Windows PE refused the profile file.
+  3. "The 802.1X profile is missing from the boot media. Recreate the boot media.": the profile file is not on the media.
 - **Fix:**
-  1. For the first cause, check the date and time in the firmware, then ask the network team to read the log of the authentication server. Windows PE cannot correct its clock before the device is online.
-  2. For the second cause, in Foundry OSD, select the certificate again, retype the **PFX password**, export the profile again from a computer that authenticates on this network, and recreate the media. The password is empty after a restart of Foundry OSD when **Remember passwords** is off.
-  3. To continue now, use Wi-Fi or a port without 802.1X.
+  1. For the first cause, check the date and time in the firmware, then ask the network team to read the log of the authentication server. Windows PE cannot correct its clock before the device is online. For a certificate import failure, in Foundry OSD, select the certificate again, retype the **PFX password** and recreate the media. The password is empty after a restart of Foundry OSD when **Remember passwords** is off.
+  2. For a refused profile, export the profile again from a computer that authenticates on this network, and recreate the media.
+  3. For a missing profile, recreate the media.
+  4. To continue now, use Wi-Fi or a port without 802.1X.
 - **Collect:** `FoundryConnect.log`. See [Failure codes](#failure-codes) and [Logs and support information](logs-and-support.md).
 
 ## 802.1X "Unavailable" <a href="#wired-dot1x-unavailable" id="wired-dot1x-unavailable"></a>
 
 - **Where:** **Ethernet** card, on the **802.1X** row, with a yellow box.
-- **Cause:** The wired 802.1X settings on the media cannot be used: "The 802.1X profile is missing from the boot media. Recreate the boot media." or "The 802.1X certificate password cannot be read. Recreate the boot media." A plain wired network and Wi-Fi keep working.
+- **Cause:** The wired 802.1X settings on the media cannot be used: "The 802.1X certificate password cannot be read. Recreate the boot media." A plain wired network and Wi-Fi keep working.
 - **Fix:**
   1. Use Wi-Fi or a port without 802.1X to continue now.
   2. The administrator recreates the media with the current version of Foundry OSD.
@@ -272,7 +274,7 @@ While **No internet access** is shown, the status area offers **Retry**, to chec
 - **Where:** Under **Continue**, in the status area.
 - **Cause:**
   1. A check made during the countdown found no Internet access: the connection is unstable. The countdown starts again at the next **Network ready**.
-  2. You worked on the network, or selected **Stay here**. The countdown stays off for the session, by design: "Automatic continue is paused because you changed network settings." or "Automatic continue is off. Select Continue when you are ready."
+  2. You worked on the network, the Deployment password was asked, or you selected **Stay here**. The countdown stays off for the session, by design: "Automatic continue is paused because you changed network settings." or "Automatic continue is off. Select Continue when you are ready."
 - **Fix:**
   1. Select **Continue** when you are ready.
   2. If the connection keeps dropping, check the cable or move closer to the access point.
@@ -321,11 +323,11 @@ When a network step fails, `FoundryConnect.log` contains a line that starts with
 | Code | Step that failed |
 | --- | --- |
 | `wired_profile_template_missing` | The wired 802.1X profile file is not on the media. |
-| `wired_secret_unavailable` | The certificate password for wired 802.1X cannot be read from the media. |
+| `wired_secret_unavailable` | The client certificate or its password for wired 802.1X cannot be read from the media. |
 | `wired_certificate_import_failed` | The certificate for wired 802.1X could not be imported. |
 | `wired_profile_import_failed` | Windows PE rejected the wired 802.1X profile file. |
 | `wired_reconnect_request_failed` | The wired adapter could not be asked to reconnect. |
-| `wifi_secret_unavailable` | The Wi-Fi password or certificate password cannot be read from the media. |
+| `wifi_secret_unavailable` | The Wi-Fi password, or the client certificate or its password, cannot be read from the media. |
 | `wifi_secret_locked` | The provisioned Wi-Fi could not connect because the Deployment password was not entered. |
 | `wifi_certificate_import_failed` | The certificate for Wi-Fi could not be imported. |
 | `wifi_profile_import_failed` | Windows PE rejected the Wi-Fi profile. |

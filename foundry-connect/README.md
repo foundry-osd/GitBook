@@ -47,10 +47,10 @@ Do not close Foundry Connect to get past it. Closing the window cancels the star
 
 ## Deployment password in Foundry Connect <a href="#deployment-password-in-foundry-connect" id="deployment-password-in-foundry-connect"></a>
 
-When the administrator put a Wi-Fi passphrase or a client certificate on the media, these network settings are protected by the Deployment password. Foundry Connect asks for the password in a window titled **Protected network settings**, under the heading **Password required**, and only when it needs these settings:
+When the administrator put a Wi-Fi passphrase, a client certificate, or an enterprise profile file that contains key material on the media, these network settings are protected by the Deployment password. Foundry Connect asks for the password in a window titled **Protected network settings**, under the heading **Password required**, and only when it needs these settings:
 
 - At startup, when wired 802.1X uses a client certificate.
-- For the provisioned Wi-Fi, once per session at most, when the device has no Internet access and the network is in range. While Ethernet gives Internet access, no password is asked.
+- For the provisioned Wi-Fi, once per session at most, when the device has no Internet access and the network is in range. While Ethernet gives Internet access, no password is asked. Once you connected or disconnected a network yourself, Foundry Connect no longer connects the profile by itself, so it no longer asks by itself either.
 - When you select **Connect** on a **Provisioned Wi-Fi** card that shows **Password required**.
 
 Type the password in **Deployment password** and select **Continue**. A wrong password reopens the window with "The password is incorrect. Try again." after a short wait: one second more for each failed attempt, up to five seconds.
