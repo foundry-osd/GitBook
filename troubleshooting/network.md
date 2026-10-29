@@ -12,6 +12,7 @@ While **No internet access** is shown, the status area offers **Retry**, to chec
 | **Waiting for network configuration**, or "The network did not provide an IP address..." | [Waiting for network configuration](#waiting-for-network-configuration) |
 | **802.1X**: **Authentication failed** | [Authentication failed](#wired-authentication-fails) |
 | **802.1X**: **Unavailable** | [802.1X unavailable](#wired-dot1x-unavailable) |
+| **802.1X**: **Unavailable**, "The deployment password was not entered, so the 802.1X settings were not applied." | [802.1X: deployment password not entered](#wired-dot1x-password-not-entered) |
 | "Sign-in page detected", or "This network requires signing in on a web page." | [Sign-in page detected](#captive-portal) |
 | "The network is connected but cannot reach the internet..." | [Connected but no Internet access](#internet-not-validated) |
 | No **Wi-Fi** card | [The Wi-Fi card is missing](#wi-fi-list-missing) |
@@ -21,6 +22,7 @@ While **No internet access** is shown, the status area offers **Retry**, to chec
 | "This network requires a provisioned Wi-Fi profile." or "This Wi-Fi network is not supported in this build." | [Network cannot be joined from the list](#requires-provisioned-profile) |
 | "Unable to connect. Check the password or network settings and try again." | [Unable to connect](#unable-to-connect) |
 | **Provisioned Wi-Fi unavailable** | [Provisioned Wi-Fi unavailable](#provisioned-wifi-unavailable) |
+| **Password required** on the **Provisioned Wi-Fi** card | [Provisioned Wi-Fi: deployment password not entered](#provisioned-wifi-password-not-entered) |
 | "Unable to apply the provisioned network settings." | [Unable to apply the provisioned settings](#unable-to-apply-provisioned-settings) |
 | "The provisioned Wi-Fi profile is not available." | [Provisioned profile not available](#provisioned-profile-not-available) |
 | "Unable to connect the provisioned Wi-Fi profile. Try again." | [Unable to connect the provisioned profile](#unable-to-connect-provisioned-profile) |
@@ -98,7 +100,14 @@ While **No internet access** is shown, the status area offers **Retry**, to chec
   2. The administrator recreates the media with the current version of Foundry OSD.
 - **Collect:** `FoundryConnect.log`. See [Logs and support information](logs-and-support.md).
 
-<!-- TODO lot 4: add the case where the technician cancelled the Deployment password prompt, which leaves wired 802.1X unavailable for the session. -->
+## "The deployment password was not entered, so the 802.1X settings were not applied." <a href="#wired-dot1x-password-not-entered" id="wired-dot1x-password-not-entered"></a>
+
+- **Where:** **Ethernet** card, on the **802.1X** row, which shows **Unavailable**. The box goes on: "Ethernet without 802.1X and Wi-Fi still work."
+- **Cause:** The wired 802.1X profile uses a client certificate protected by the Deployment password, and **Cancel** was selected in the **Protected network settings** window at startup. Foundry Connect does not apply wired 802.1X for the rest of the session.
+- **Fix:**
+  1. Restart the device and type the Deployment password when Foundry Connect asks for it. See [Deployment password in Foundry Connect](../foundry-connect/README.md#deployment-password-in-foundry-connect).
+  2. To continue now without the password, use Wi-Fi or a port without 802.1X. Foundry Deploy then asks for the password when it opens.
+- **Collect:** Nothing. Never write the password in a support request.
 
 ## "Sign-in page detected" <a href="#captive-portal" id="captive-portal"></a>
 
@@ -205,7 +214,15 @@ While **No internet access** is shown, the status area offers **Retry**, to chec
   2. The administrator checks the profile on the [Wi-Fi](../foundry-osd/network/wifi.md) page and recreates the media.
 - **Collect:** `FoundryConnect.log`. See [Logs and support information](logs-and-support.md).
 
-<!-- TODO lot 4: add the locked provisioned Wi-Fi (Deployment password prompt cancelled) and how to unlock it again. -->
+## "The deployment password was not entered. Select Connect to enter it." <a href="#provisioned-wifi-password-not-entered" id="provisioned-wifi-password-not-entered"></a>
+
+- **Where:** A box in the **Provisioned Wi-Fi** card, which shows **Password required**. The box goes on: "Ethernet and other Wi-Fi networks still work." Before any password was asked, the box reads "The provisioned Wi-Fi is protected by the deployment password. Select Connect to enter it."
+- **Cause:** The provisioned Wi-Fi uses a passphrase or a client certificate protected by the Deployment password, and **Cancel** was selected in the **Protected network settings** window. Foundry Connect does not ask again by itself.
+- **Fix:**
+  1. Select **Connect** on the **Provisioned Wi-Fi** card, type the Deployment password and select **Continue**. The profile then connects.
+  2. If the window reads "The password is incorrect. Try again.", check the keyboard layout in the **Keyboard** menu and type the password again.
+  3. To continue without the password, use a wired connection or join a network from the **Wi-Fi** list. Foundry Deploy then asks for the password when it opens.
+- **Collect:** Nothing. Never write the password in a support request.
 
 ## "Unable to apply the provisioned network settings." <a href="#unable-to-apply-provisioned-settings" id="unable-to-apply-provisioned-settings"></a>
 
@@ -309,6 +326,7 @@ When a network step fails, `FoundryConnect.log` contains a line that starts with
 | `wired_profile_import_failed` | Windows PE rejected the wired 802.1X profile file. |
 | `wired_reconnect_request_failed` | The wired adapter could not be asked to reconnect. |
 | `wifi_secret_unavailable` | The Wi-Fi password or certificate password cannot be read from the media. |
+| `wifi_secret_locked` | The provisioned Wi-Fi could not connect because the Deployment password was not entered. |
 | `wifi_certificate_import_failed` | The certificate for Wi-Fi could not be imported. |
 | `wifi_profile_import_failed` | Windows PE rejected the Wi-Fi profile. |
 | `wifi_profile_unavailable` | The media carries no usable Wi-Fi profile. |

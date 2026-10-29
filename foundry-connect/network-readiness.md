@@ -40,7 +40,7 @@ As soon as you connect or disconnect a network yourself, Foundry Connect stops t
 
 When the profile cannot be used from this media, the card shows **Provisioned Wi-Fi unavailable** and the reason. Ethernet and the other Wi-Fi networks keep working. See ["Provisioned Wi-Fi unavailable"](../troubleshooting/network.md#provisioned-wifi-unavailable).
 
-<!-- TODO lot 4: explain that the provisioned Wi-Fi can ask for the Deployment password before it connects, and what happens when the technician cancels. -->
+When the profile is protected by the Deployment password, because it carries a passphrase or a client certificate, the card shows **Password required** and "The provisioned Wi-Fi is protected by the deployment password. Select Connect to enter it." Foundry Connect asks for the [Deployment password](README.md#deployment-password-in-foundry-connect) by itself once, when it would otherwise connect the profile, and each time you select **Connect** while the card shows **Password required**. After a correct entry, the profile connects as described above. After **Cancel**, the card reads "The deployment password was not entered. Select Connect to enter it. Ethernet and other Wi-Fi networks still work." and Foundry Connect no longer asks by itself.
 
 ## What Network ready tests
 
@@ -93,6 +93,7 @@ The test cannot be changed or skipped. **Network ready** does not prove that the
 | A dimmed network in the list | The selected network is no longer seen by the adapter. It stays selected but cannot be connected. |
 | **Not in range** | The provisioned network is not seen by the adapter. |
 | **Ready to connect** | The provisioned profile is not connected yet. |
+| **Password required** | The provisioned profile waits for the Deployment password. Select **Connect** to enter it. |
 | **Connected** | The device uses this network. |
 | **Another Wi-Fi network is active** | The device uses a network you joined from the list, not the provisioned profile. This is not an error. |
 | **Open**, **Enhanced Open**, **WPA2 Personal**, **WPA3 Personal**, **WPA2/WPA3 Personal**, **Enterprise** | The security of the network or of the provisioned profile. **Configured security** means a profile whose security is not shown. |

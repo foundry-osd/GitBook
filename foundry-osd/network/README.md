@@ -14,11 +14,13 @@ The **Network** pages decide how a target device gets online in Windows PE when 
 
 Everything you configure here is copied to the deployment media: the profile files, the certificate files, the Wi-Fi passphrase and the PFX password.
 
-{% hint style="warning" %}
-[Password protection](../general.md#password-protection) does not protect network credentials. Foundry Connect uses them before the technician types the Deployment password, so anyone who can read the ISO or the USB drive can recover them, including a `.pfx` file and its password. Use credentials dedicated to deployment that you can revoke. See [Security and credentials](../../reference/security-and-credentials.md).
-{% endhint %}
+The Wi-Fi **Passphrase**, the **Client certificate (PFX)** and its **PFX password** are encrypted with the Deployment password, so [Password protection](../general.md#password-protection) is required as soon as you provide one of them. Until it is on, the Wi-Fi or Ethernet 802.1X page shows **Needs attention** with "Wi-Fi passwords and client certificates are protected by the deployment password. Turn on password protection on the General page and set the deployment password.", **Start** shows **Needs attention** and media creation is refused. With Password protection on, an enterprise Wi-Fi profile file is encrypted too. Profile files of wired 802.1X and **Trusted root CA certificates** hold no secret and stay readable on the media.
 
-<!-- TODO lot 4: replace the warning above with the protection of network secrets by the Deployment password (Password protection required when a network secret is provisioned). -->
+On the target device, Foundry Connect asks the technician for the Deployment password only when it needs one of these secrets. See [Deployment password in Foundry Connect](../../foundry-connect/README.md#deployment-password-in-foundry-connect).
+
+{% hint style="warning" %}
+Anyone who holds the media and knows the Deployment password can recover the network secrets, including the `.pfx` file and its password. Use credentials dedicated to deployment that you can revoke. See [Security and credentials](../../reference/security-and-credentials.md).
+{% endhint %}
 
 Foundry OSD saves the Wi-Fi **Passphrase**, a **PFX password** and a copy of the files you selected with the configuration while **Remember passwords** is on, which is the default: see [What is remembered](../deployment-profiles.md#what-is-remembered). With it off, type the passphrase and the PFX password again each time you start Foundry OSD, before you create media:
 

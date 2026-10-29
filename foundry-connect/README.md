@@ -45,7 +45,21 @@ When Internet access cannot be reached, there is no way to continue without it. 
 Do not close Foundry Connect to get past it. Closing the window cancels the startup: Foundry Deploy does not open. See ["Boot was cancelled. Deployment will not continue."](../troubleshooting/windows-pe-startup.md#boot-cancelled) to start again.
 {% endhint %}
 
-<!-- TODO lot 4: describe the Deployment password prompt that Foundry Connect can show for protected network secrets, what Cancel does, and that a successful unlock is not asked again in Foundry Deploy. -->
+## Deployment password in Foundry Connect <a href="#deployment-password-in-foundry-connect" id="deployment-password-in-foundry-connect"></a>
+
+When the administrator put a Wi-Fi passphrase or a client certificate on the media, these network settings are protected by the Deployment password. Foundry Connect asks for the password in a window titled **Protected network settings**, under the heading **Password required**, and only when it needs these settings:
+
+- At startup, when wired 802.1X uses a client certificate.
+- For the provisioned Wi-Fi, once per session at most, when the device has no Internet access and the network is in range. While Ethernet gives Internet access, no password is asked.
+- When you select **Connect** on a **Provisioned Wi-Fi** card that shows **Password required**.
+
+Type the password in **Deployment password** and select **Continue**. A wrong password reopens the window with "The password is incorrect. Try again." after a short wait: one second more for each failed attempt, up to five seconds.
+
+One correct entry unlocks every protected network setting for the session, and [Foundry Deploy](../foundry-deploy/README.md#open-foundry-deploy) then opens without asking for the password again. If Foundry Deploy still asks, type the same password.
+
+**Cancel** leaves the protected settings unused for the session: wired 802.1X shows **Unavailable**, and the provisioned Wi-Fi stays on **Password required** and is not asked for again by itself. Its **Connect** button asks again. Plain Ethernet and the other Wi-Fi networks keep working, and Foundry Deploy asks for the password when it opens.
+
+While the window is open, Foundry Connect never continues by itself. Afterwards, select **Continue** in the status area when **Network ready** appears.
 
 ## Menus
 

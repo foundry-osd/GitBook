@@ -45,7 +45,7 @@ The technician acts only when the network needs it, for example to choose a Wi-F
 
 [Foundry Deploy](../foundry-deploy/README.md) opens a wizard. Its steps are **Target device**, **Operating system**, **Drivers** and **Summary**. An **Autopilot** or a **Domain join** step can appear before **Summary** when the media uses that feature.
 
-When the administrator turned on [Password protection](../foundry-osd/general.md#password-protection), Foundry Deploy asks for the Deployment password first.
+When the administrator turned on [Password protection](../foundry-osd/general.md#password-protection), Foundry Deploy asks for the Deployment password first, unless it was already typed in Foundry Connect.
 
 ## 5. Install Windows
 
