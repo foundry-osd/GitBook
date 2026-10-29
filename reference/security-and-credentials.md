@@ -29,6 +29,8 @@ Details the table leaves out:
 - Foundry Deploy uses the Autopilot certificate in memory only.
 - Interactive hardware hash upload places no secret on the media or on the device: the technician signs in with their own account when the upload runs.
 
+<!-- TODO lot 4: update the network credentials line above and the network rows for protected network secrets and the unlock prompt in Foundry Connect. -->
+
 {% hint style="warning" %}
 A file listed as "Not removed by Foundry" stays readable to local administrators of the deployed device. If it holds a secret, remove it with your own process once Windows setup has finished, and never attach it to a support request.
 {% endhint %}

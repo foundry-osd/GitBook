@@ -47,8 +47,8 @@ The menu bar stays available on every screen, including the error screen.
 
 | Menu | Use it to |
 | --- | --- |
-| **Theme** | Switch between **System**, **Light** and **Dark** |
-| **Language** | Change the display language of Foundry Deploy |
+| **Theme** | Switch between **System**, **Light** and **Dark**. It opens on the theme chosen in Foundry Connect |
+| **Language** | Change the display language of Foundry Deploy. It opens on the language chosen in Foundry Connect |
 | **Keyboard** | Change the keyboard layout of Windows PE. It opens on the layout chosen in Foundry Connect, or the one set for the media |
 | **Tools** | Open or export the logs: **Open log file**, **Export diagnostics...**, **Export raw diagnostics...** |
 | **About** | Read the Foundry Deploy version |

@@ -47,6 +47,8 @@ For the three enterprise types, two more cards appear:
 - **Advanced enterprise Wi-Fi**: select **Browse** and choose the exported `.xml` file. The **SSID** above must match the network in that file. For the two WPA3 Enterprise types, Foundry OSD reads the `authentication` value of the file and refuses a file that does not match.
 - **Import a trusted root CA certificate**: turn it on if the profile needs a certificate. In **Trusted root CA certificate file**, select **Browse** and choose one file. A `.cer` or `.crt` file is added to the trusted root certification authorities of Windows PE. A `.pfx` file is imported as the client certificate with its private key: type its password in **PFX password**.
 
+<!-- TODO lot 4: update the enterprise certificate fields (client certificate and trusted root certificates as separate fields) and the screenshot foundry-osd-network-wifi-02-enterprise-profile.png. -->
+
 <figure>
   <img src="../../.gitbook/assets/foundry-osd-network-wifi-02-enterprise-profile.png" alt="Wi-Fi page with Security type WPA2/WPA3 Enterprise, an enterprise profile template, a trusted root CA certificate file, the PFX password box, and Windows profile roaming">
   <figcaption>With <strong>WPA2/WPA3 Enterprise</strong>, the profile template drives the connection. The PFX password only matters for a <code>.pfx</code> file.</figcaption>
@@ -56,18 +58,28 @@ To keep the connection in the installed Windows, turn on **Windows profile roami
 
 ## What the technician sees
 
-Foundry Connect shows a **Wi-Fi** list and, for the embedded profile, a **Provisioned Wi-Fi** card. It connects that profile by itself only while the device has no Internet access, so a working cable is used first. See [Network readiness](../../foundry-connect/network-readiness.md).
+Foundry Connect shows a **Wi-Fi** card with the networks in range and, for the embedded profile, a **Provisioned Wi-Fi** card.
+
+- Foundry Connect connects the embedded profile by itself only while the device has no Internet access, so a working cable is used first. It keeps trying until the technician connects or disconnects a network by hand. After that, the technician selects **Connect** on the **Provisioned Wi-Fi** card to use the profile again.
+- Networks that hide their name are not listed in Foundry Connect. To use one, embed its profile here.
+- When the media holds a profile that Foundry Connect cannot use, for example a passphrase it cannot read, the card shows **Provisioned Wi-Fi unavailable** with a hint to recreate the media. Ethernet and the other Wi-Fi networks keep working.
+
+See [Network readiness](../../foundry-connect/network-readiness.md#use-the-provisioned-wi-fi).
+
+<!-- TODO lot 4: describe the Deployment password prompt shown before a protected Wi-Fi profile connects. -->
 
 ## Check the result
 
 - In Foundry OSD, **Start** reports neither "Network configuration is not ready." nor "Required media secrets are not ready."
-- On a device with no cable, Foundry Connect shows **Network ready** and, below it, **Provisioned Wi-Fi ·** followed by the SSID.
+- On a device with no cable, Foundry Connect shows **Network ready** and, below it, **Provisioned Wi-Fi ·** followed by the SSID. The **Provisioned Wi-Fi** card shows **Connected**.
 
 ## Limits
 
 - One embedded profile per media.
 - Enterprise profiles: one certificate file, not a root CA file and a client `.pfx` file together. From a `.pfx` file only the client certificate is imported, not its issuing CA. Foundry OSD checks neither the PFX password nor the content of a **WPA2/WPA3 Enterprise** profile: a mistake shows only in Windows PE.
 - The **Passphrase** and the **PFX password** can be recovered from the media, and Foundry OSD keeps them between sessions only while **Remember passwords** is on. See [What goes on the media](README.md#what-goes-on-the-media).
+
+<!-- TODO lot 4: update the two limits above for separate certificate fields and protected network secrets. -->
 
 ## Related
 

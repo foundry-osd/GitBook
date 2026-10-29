@@ -18,6 +18,8 @@ Everything you configure here is copied to the deployment media: the profile fil
 [Password protection](../general.md#password-protection) does not protect network credentials. Foundry Connect uses them before the technician types the Deployment password, so anyone who can read the ISO or the USB drive can recover them, including a `.pfx` file and its password. Use credentials dedicated to deployment that you can revoke. See [Security and credentials](../../reference/security-and-credentials.md).
 {% endhint %}
 
+<!-- TODO lot 4: replace the warning above with the protection of network secrets by the Deployment password (Password protection required when a network secret is provisioned). -->
+
 Foundry OSD saves the Wi-Fi **Passphrase**, a **PFX password** and a copy of the files you selected with the configuration while **Remember passwords** is on, which is the default: see [What is remembered](../deployment-profiles.md#what-is-remembered). With it off, type the passphrase and the PFX password again each time you start Foundry OSD, before you create media:
 
 - A missing passphrase blocks **Start** with "Required media secrets are not ready."
@@ -46,7 +48,13 @@ Certificates follow their profile:
 
 Turn on **Include private-key certificate material** only when Windows must keep authenticating with that certificate after deployment, and plan its renewal and revocation.
 
-When Wi-Fi roaming is on, a network that the technician joins by typing a passphrase in Foundry Connect is roamed too. Leave roaming off when that passphrase must not stay on the device.
+Which Wi-Fi networks are roamed:
+
+- Every Wi-Fi network that the device joined successfully in Foundry Connect, the embedded profile as well as a network the technician joined by typing a password. This applies even when the cable stays connected and Ethernet carries the Internet access.
+- When several qualify, the one that carries the Internet access when Foundry Connect closes is preferred in the installed Windows.
+- A network that failed to connect, or that the device never joined during the session, is not roamed.
+
+Leave Wi-Fi roaming off when a password typed by a technician must not stay on the device.
 
 A failed import does not stop the deployment. See [The roamed profile does not connect after deployment](../../troubleshooting/network.md#roamed-profile-does-not-connect).
 
