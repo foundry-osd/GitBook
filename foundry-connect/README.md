@@ -38,6 +38,10 @@ When **Network ready** appears, the line under the title reads "Continuing autom
 
 The countdown also stops as soon as you work on the network, for example when you select a Wi-Fi network, type a password, connect or disconnect. It then reads "Automatic continue is paused because you changed network settings." If you worked on the network before Internet access came, the countdown does not start at all: **Continue** is offered and waits for you. Enter pressed in the Wi-Fi list or in the password box acts on the Wi-Fi only, and Enter on the **Ethernet** card title opens or closes its details: neither sends you to Foundry Deploy.
 
+The Deployment password window that Foundry Connect opens by itself does not count as working on the network. The countdown never runs while this window is open, and starts once it is closed if Internet access is there. Selecting **Connect** on the **Provisioned Wi-Fi** card does count as working on the network.
+
+Right after a network connects, Internet access can take a few seconds to answer. Foundry Connect then shows the check in progress and checks again every 2 seconds for up to 10 seconds before it reports a problem.
+
 Before it closes, Foundry Connect checks Internet access once more. If the connection dropped, it stays open and waits for **Network ready** again.
 
 When Internet access cannot be reached, there is no way to continue without it. Use **Retry** after you fixed the cause, or **Export diagnostics...** to take the logs to support. See [Network and Foundry Connect troubleshooting](../troubleshooting/network.md).

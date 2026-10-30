@@ -20,7 +20,7 @@ Deployment erases the disk you select. Nothing is erased while you are in the wi
 
 ## Open Foundry Deploy
 
-1. If a **Protected deployment** window asks "Enter the technician password to continue.", type the Deployment password and select **Continue**. Media created without Password protection skips this window, and so does a start where the password was already accepted in [Foundry Connect](../foundry-connect/README.md#deployment-password-in-foundry-connect).
+1. If a **Protected deployment** window asks "Enter the deployment password to continue.", type the Deployment password and select **Continue**. Media created without Password protection skips this window, and so does a start where the password was already accepted in [Foundry Connect](../foundry-connect/README.md#deployment-password-in-foundry-connect).
 2. Wait on the **Welcome** screen while it shows **Initializing components...**. Foundry Deploy detects the hardware, lists the disks and loads the Windows and driver catalogs.
 3. Select **Start deployment**.
 

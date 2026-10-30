@@ -272,7 +272,7 @@ While the device is not online, the title of the status banner names the cause, 
 - **Where:** Under the title, in the status banner.
 - **Cause:**
   1. A check made during the countdown found no Internet access: the connection is unstable. The countdown starts again at the next **Network ready**.
-  2. You worked on the network, the Deployment password was asked, or you selected **Stay here**. The countdown stays off for the session, by design: "Automatic continue is paused because you changed network settings." or "Automatic continue is off. Select Continue when you are ready."
+  2. You worked on the network (including selecting **Connect** on the **Provisioned Wi-Fi** card), or you selected **Stay here**. The countdown stays off for the session, by design: "Automatic continue is paused because you changed network settings." or "Automatic continue is off. Select Continue when you are ready."
 - **Fix:**
   1. Select **Continue** when you are ready.
   2. If the connection keeps dropping, check the cable or move closer to the access point.
