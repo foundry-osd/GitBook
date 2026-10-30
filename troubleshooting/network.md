@@ -120,7 +120,7 @@ While the device is not online, the title of the status banner names the cause, 
   <figcaption>A sign-in page counts as no Internet access.</figcaption>
 </figure>
 
-- **Where:** The status banner, which reads **Sign-in required** with "The network answered with a sign-in page instead of internet access. Sign in from another device if this network allows it, or use another network, then select Retry."
+- **Where:** The status banner, which reads **Sign-in required** with "The network answered with a sign-in page instead of internet access. Sign in from another device if this network allows it, or use another network, then select Retry." When no other network can be used on this device, the text ends with "Sign in from another device if this network allows it, then select Retry."
 - **Cause:** The device is connected, but the network answered the Internet check with its own page instead of the expected answer. This is typical of a guest network that asks you to sign in or accept terms, and of a proxy that asks for credentials. Windows PE has no browser to sign in.
 - **Fix:**
   1. Use another network for deployments, such as a wired port or an SSID without a sign-in page.
