@@ -55,15 +55,15 @@ The **Ethernet** card of Foundry Connect has an **802.1X** row:
 | **Authenticating** | The network is checking the device. |
 | **Authenticated** | The network accepted the device. The card then shows **Connected** once the address arrives. |
 | **Profile applied** | The profile is in place, but Foundry Connect cannot read the result. An address under **IPv4** means that it worked. |
-| **Authentication failed** | The profile is missing from the media, or the profile or the network refused the device. A box under the details gives a short reason. |
-| **Unavailable** | The profile is not used. A box under the details gives the reason: the Deployment password was not entered, or a secret of the profile cannot be read from this media and the box says to recreate it. Plain Ethernet and Wi-Fi keep working. |
+| **Authentication failed** | The profile is missing from the media, or the profile or the network refused the device. A line under **802.1X** gives a short reason. |
+| **Unavailable** | The profile is not used. A line under **802.1X** gives the reason: the Deployment password was not entered, or a secret of the profile cannot be read from this media and the line says to recreate it. A port without 802.1X still works. |
 
 See ["Authentication failed"](../../troubleshooting/network.md#wired-authentication-fails) when the device is refused.
 
 ## Check the result
 
 - In Foundry OSD, **Start** does not report "Network configuration is not ready."
-- On a device connected to a production switch port, the **Ethernet** card in Foundry Connect shows **Connected** and **802.1X** shows **Authenticated** or **Profile applied**, then the status at the top shows **Network ready**.
+- On a device connected to a production switch port, the **Ethernet** card in Foundry Connect shows **Connected** and **802.1X** shows **Authenticated** or **Profile applied**, then the status banner shows **Network ready**.
 
 ## Limits
 

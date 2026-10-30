@@ -57,7 +57,7 @@ The reason is the line under the list of stages. On a failure, the console also 
 ## "Foundry Connect could not load its configuration. Recreate the boot media." <a href="#exit-code-22" id="exit-code-22"></a>
 
 - **Where:** **Network connection** shows **Failed**. Foundry Connect does not open, or closes at once.
-- **Cause:** The configuration file of Foundry Connect on the media is missing or damaged. A Wi-Fi or 802.1X secret that cannot be read does not stop Foundry Connect: only that network is marked unavailable, see ["Provisioned Wi-Fi unavailable"](network.md#provisioned-wifi-unavailable).
+- **Cause:** The configuration file of Foundry Connect on the media is missing or damaged. A Wi-Fi or 802.1X secret that cannot be read does not stop Foundry Connect: only that network is marked unavailable, see [Provisioned Wi-Fi "Unavailable"](network.md#provisioned-wifi-unavailable).
 - **Fix:** Recreate the media in Foundry OSD.
 - **Collect:** `FoundryConnect.log` and `FoundryBootstrap.log`. See [Logs and support information](logs-and-support.md).
 
@@ -143,7 +143,7 @@ Yellow lines that start with "Warning:" never stop the startup. The console show
 | Warning | Meaning | What to do |
 | --- | --- | --- |
 | "Wired AutoConfig service could not be started. Boot will continue." | The Windows PE service for wired 802.1X did not start. A plain wired network still works. | Restart. A wired 802.1X profile cannot authenticate without it. |
-| "Wi-Fi AutoConfig service could not be started. Boot will continue." | The Windows PE wireless service did not start. Foundry Connect shows "Wi-Fi support is not available in this boot environment." instead of the Wi-Fi cards. | Restart. See [Wi-Fi support is not available](network.md#wi-fi-runtime-missing). |
+| "Wi-Fi AutoConfig service could not be started. Boot will continue." | The Windows PE wireless service did not start. Foundry Connect shows no Wi-Fi card and nothing about Wi-Fi. | Restart. See [The Wi-Fi card is missing](network.md#wi-fi-list-missing). |
 | "System clock could not be corrected. Boot will continue." | The Internet time was read but the clock could not be set. | Set the date and time in the firmware. |
 | "Public IP timezone could not be resolved. Boot will continue with UTC." | Automatic time zone detection got no answer. | See [Wrong time or time zone](network.md#wrong-time-or-time-zone). |
 | "IANA timezone map could not be loaded. Boot will continue with UTC if needed." | A file used to convert the detected time zone could not be read. | Nothing. The time zone may stay on UTC. |

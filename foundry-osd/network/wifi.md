@@ -66,15 +66,15 @@ Foundry Connect shows a **Wi-Fi** card with the networks in range and, for the e
 
 - Foundry Connect connects the embedded profile by itself only while the device has no Internet access, so a working cable is used first. It keeps trying until the technician connects or disconnects a network by hand. After that, the technician selects **Connect** on the **Provisioned Wi-Fi** card to use the profile again.
 - Networks that hide their name are not listed in Foundry Connect. To use one, embed its profile here.
-- When the media holds a profile that Foundry Connect cannot use, for example a passphrase it cannot read, the card shows **Provisioned Wi-Fi unavailable** with a hint to recreate the media. Ethernet and the other Wi-Fi networks keep working.
-- With a passphrase, a client certificate, or an enterprise profile file that contains key material, the **Provisioned Wi-Fi** card shows **Password required** until the technician types the Deployment password. Foundry Connect asks for it by itself once, only when the device has no Internet access and the network is in range, and again each time the technician selects **Connect** on the card. If the technician selects **Cancel**, the profile stays unused and Ethernet and the other Wi-Fi networks keep working. One correct entry is enough: Foundry Deploy does not ask again.
+- When the media holds a profile that Foundry Connect cannot use, for example a passphrase it cannot read, the card shows **Unavailable** with a hint to recreate the media. The other connections are not affected.
+- With a passphrase, a client certificate, or an enterprise profile file that contains key material, the **Provisioned Wi-Fi** card shows **Password required** until the technician types the Deployment password. Foundry Connect asks for it by itself once, only when the device has no Internet access and the network is in range, and again each time the technician selects **Connect** on the card. If the technician selects **Cancel**, the profile stays unused; the other connections are not affected. One correct entry is enough: Foundry Deploy does not ask again.
 
 See [Network readiness](../../foundry-connect/network-readiness.md#use-the-provisioned-wi-fi) and [Deployment password in Foundry Connect](../../foundry-connect/README.md#deployment-password-in-foundry-connect).
 
 ## Check the result
 
 - In Foundry OSD, **Start** reports neither "Network configuration is not ready." nor "Required media secrets are not ready."
-- On a device with no cable, Foundry Connect shows **Network ready** and, below it, **Provisioned Wi-Fi ·** followed by the SSID. The **Provisioned Wi-Fi** card shows **Connected**.
+- On a device with no cable, Foundry Connect shows **Network ready** and, next to it, **Provisioned Wi-Fi ·** followed by the SSID. The **Provisioned Wi-Fi** card shows **Connected**.
 
 ## Limits
 
