@@ -36,7 +36,7 @@ The ISO file or USB drive created by Foundry OSD, from which a target device sta
 
 ## Deployment password
 
-The password the technician types when Foundry Deploy starts, on media created with **Password protection** turned on.
+The password the technician types when Foundry Deploy starts, on media created with **Password protection** turned on. Foundry Connect asks for it earlier when a protected network setting needs it, and Foundry Deploy then does not ask again.
 
 ## Distinguished name
 
