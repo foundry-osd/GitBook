@@ -2,12 +2,10 @@
 
 **Publish to a folder** makes this PC the reference: Foundry OSD writes its configuration to a folder, and the PCs that [follow the folder](follow-a-folder.md) apply each new version, read-only.
 
-{% hint style="warning" %}
-**Screenshot required**
-
-- **File:** `foundry-osd-configuration-sharing-publish-01-dialog.png`
-- **Capture:** Show the **Publish to a folder** dialog filled in: a folder, a generated publication password with its confirmation, and **Include passwords** checked with its warning.
-{% endhint %}
+<figure>
+  <img src="../../.gitbook/assets/foundry-osd-configuration-sharing-publish-01-dialog.png" alt="Publish to a folder dialog over Settings, with a folder, a hidden publication password and its confirmation, and Include passwords checked with its warning">
+  <figcaption>Followers need the folder path and the publication password.</figcaption>
+</figure>
 
 ## Before you start
 
@@ -24,13 +22,6 @@
 5. Select **Publish**. The dialog shows each step with a percentage: "Checking the folder…", then for each item "Verifying \<name\>…" (an image) or "Preparing \<name\>…" (a package or a driver set), then "Sending \<name\>…", and finally "Finishing the publication…".
 
 The card shows "This PC publishes its configuration" and the status "Published. Followers receive this version at their next check." Send the publication password to the followers by another channel than the folder path.
-
-{% hint style="warning" %}
-**Screenshot required**
-
-- **File:** `foundry-osd-configuration-sharing-publish-02-card-reference.png`
-- **Capture:** Show the **Configuration sharing** card of a reference PC: the role, the **Published** status, **Folder**, **Version**, **Last published**, and the buttons **Change password**, **Reset publication** and **Stop publishing**.
-{% endhint %}
 
 If another PC already publishes to the folder, the **Take over this folder** dialog opens instead: see [Take over a folder](#take-over-a-folder).
 

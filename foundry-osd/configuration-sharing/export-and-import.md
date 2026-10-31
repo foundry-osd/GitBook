@@ -4,12 +4,10 @@
 
 What the file carries, and what it leaves out, is listed in [What travels](../configuration-sharing.md#what-travels).
 
-{% hint style="warning" %}
-**Screenshot required**
-
-- **File:** `foundry-osd-configuration-sharing-export-01-export-dialog.png`
-- **Capture:** Show the **Export configuration** dialog with a generated passphrase and its confirmation, and **Include passwords** checked with its warning.
-{% endhint %}
+<figure>
+  <img src="../../.gitbook/assets/foundry-osd-configuration-sharing-export-01-export-dialog.png" alt="Export configuration dialog over Settings, with a hidden passphrase and its confirmation, and Include passwords checked with its warning">
+  <figcaption><strong>Generate</strong> creates a passphrase that follows the rule. With <strong>Include passwords</strong>, the dialog warns who can read them.</figcaption>
+</figure>
 
 ## Export a configuration
 
@@ -32,12 +30,10 @@ When a selected file is missing or damaged on this PC, the file is still written
 5. Read **Missing on this PC**, when it appears. It lists each post-installation package, driver set, image or file that the configuration uses and this PC does not have, with its kind.
 6. Read the warning "Importing replaces the current configuration. The ISO output path, the additional WinPE driver folder and the telemetry settings of this PC are kept.", then select **Import**.
 
-{% hint style="warning" %}
-**Screenshot required**
-
-- **File:** `foundry-osd-configuration-sharing-export-02-import-preview.png`
-- **Capture:** Show the **Import configuration** dialog after **Open**: the preview with **Name**, **Exported on** and **Passwords**, and **Missing on this PC** listing a driver set, a post-installation package and an image.
-{% endhint %}
+<figure>
+  <img src="../../.gitbook/assets/foundry-osd-configuration-sharing-export-02-import-preview.png" alt="Import configuration dialog after Open, with the file, the hidden passphrase, the Name, Exported on and Passwords of the file, and the warning above the Import button">
+  <figcaption>The preview after <strong>Open</strong>. When the configuration uses content this PC does not have, the dialog also lists it under <strong>Missing on this PC</strong>.</figcaption>
+</figure>
 
 The card then reports one of these results:
 

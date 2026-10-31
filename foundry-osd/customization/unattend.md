@@ -2,11 +2,6 @@
 
 Use **Customization > Unattend** to put your own Windows answer files on the deployment media. The technician picks one in Foundry Deploy, and Windows then uses it instead of the answer file Foundry generates. Foundry keeps the file's settings. When the deployment needs one, it adds its post-installation command to the deployment copy, the copy of your file that Foundry Deploy writes to the target device.
 
-<figure>
-  <img src="../../.gitbook/assets/foundry-osd-unattend-01-catalog.png" alt="Unattend page turned on with its two information bars, one imported answer file marked Source validated, the Display name of the selected file with Rename, Refresh source and Remove, and Deployment default">
-  <figcaption><strong>Deployment default</strong> sets what Foundry Deploy preselects: Foundry settings or one of the imported files.</figcaption>
-</figure>
-
 ## Before you start
 
 - Turn on [Password protection](../general.md#password-protection). It is required for every custom answer file, even one without credentials.
