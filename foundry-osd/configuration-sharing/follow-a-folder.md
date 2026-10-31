@@ -2,12 +2,10 @@
 
 **Follow a folder** makes this PC use the configuration that a reference PC [publishes to a folder](publish-to-a-folder.md). Foundry OSD applies each new version by itself, and the published settings become read-only on this PC.
 
-{% hint style="warning" %}
-**Screenshot required**
-
-- **File:** `foundry-osd-configuration-sharing-follow-01-preview.png`
-- **Capture:** Show the **Follow a folder** dialog after **Open**, with the folder, the publication password and the preview: **Reference PC**, **Published on**, **Version**, **Passwords** and **Download size**.
-{% endhint %}
+<figure>
+  <img src="../../.gitbook/assets/foundry-osd-configuration-sharing-follow-01-preview.png" alt="Follow a folder dialog after Open, with the folder, the hidden publication password, the preview with Reference PC, Published on, Version, Passwords and Download size, and the warning above the Follow button">
+  <figcaption>The preview after <strong>Open</strong>. <strong>Download size</strong> is the content this PC does not have yet.</figcaption>
+</figure>
 
 ## Before you start
 
@@ -24,13 +22,6 @@
 
 The card shows "This PC follows \<PC name\>" and the status "Up to date." or "The configuration is applied. Shared content is being downloaded."
 
-{% hint style="warning" %}
-**Screenshot required**
-
-- **File:** `foundry-osd-configuration-sharing-follow-02-card-follower.png`
-- **Capture:** Show the **Configuration sharing** card of a follower: the role with the reference PC name, the **Up to date** status, **Folder**, **Version**, **Last successful check**, and the buttons **Check now** and **Stop following**.
-{% endhint %}
-
 ## What changes on this PC
 
 Every configuration page shows **Managed by a reference PC**, and its settings are read-only. You can still change:
@@ -41,13 +32,6 @@ Every configuration page shows **Managed by a reference PC**, and its settings a
 When the publication includes the passwords, the password fields are read-only too, and each new version replaces them.
 
 **Import configuration** is not available while this PC follows a folder.
-
-{% hint style="warning" %}
-**Screenshot required**
-
-- **File:** `foundry-osd-configuration-sharing-follow-03-managed-banner.png`
-- **Capture:** Show a configuration page of a follower, such as **Wi-Fi**, with the **Managed by a reference PC** banner and its settings disabled.
-{% endhint %}
 
 ## New versions
 
@@ -67,13 +51,6 @@ After a reset of the publication, and after a password change once the reference
 ## Accept a new reference
 
 When another PC takes over the folder, the status reads "The folder is now published by another PC. Accept the new reference or stop following." Nothing is applied until you decide.
-
-{% hint style="warning" %}
-**Screenshot required**
-
-- **File:** `foundry-osd-configuration-sharing-follow-04-accept-reference.png`
-- **Capture:** Show the **Accept new reference?** dialog with **Previous key**, **New key** and **Version**.
-{% endhint %}
 
 1. Select **Accept new reference**.
 2. Compare **Previous key** and **New key**, and check **Version**. Accept only a change you expect, for example a take over announced by the administrator.

@@ -14,13 +14,6 @@ Post-installation packages, custom driver sets and custom Windows images stay in
 
 When an item needs you, a dialog titled **Check your configuration** opens once the main window is shown, with one paragraph for each item. Select **Close**: the notices it listed are not shown again. The passwords notice is the exception: it comes back at each start until you type a password, as described in [When passwords cannot be restored](saved-passwords.md#when-passwords-cannot-be-restored).
 
-{% hint style="warning" %}
-**Screenshot required**
-
-- **File:** `foundry-osd-configuration-sharing-migration-01-notices-dialog.png`
-- **Capture:** Show the **Check your configuration** dialog over the main window after the first-launch migration, with the notices about passwords, synchronization and files.
-{% endhint %}
-
 | Notice in the dialog | What to do |
 | --- | --- |
 | "Saved passwords could not be restored. Enter them again on the configuration pages." | Type the passwords on their pages. This happens when the profile cannot be opened by your Windows account. |

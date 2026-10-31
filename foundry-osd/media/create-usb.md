@@ -68,12 +68,10 @@ The folders of the cache partition are listed in [What each media type carries](
 
 A drive without cache works like an ISO written to a USB drive: one FAT32 partition named **FOUNDRY** holds the boot files, the boot image with Foundry Connect, and the custom images, driver sets and post-installation content you included, unless the [network cache](../network-cache.md) is on. Devices started from it download Windows and drivers again at each deployment, to the target disk, or read them from their network cache share.
 
-{% hint style="warning" %}
-**Screenshot required**
-
-- **File:** `foundry-osd-media-create-usb-03-without-cache.png`
-- **Capture:** Show the **Create USB** split button open on Start, with its **Create without cache** menu item.
-{% endhint %}
+<figure>
+  <img src="../../.gitbook/assets/foundry-osd-media-create-usb-03-without-cache.png" alt="Start page with a USB drive selected and the arrow of the Create USB button open on its Create without cache item">
+  <figcaption>The arrow of the <strong>Create USB</strong> button offers <strong>Create without cache</strong>.</figcaption>
+</figure>
 
 1. Select the drive as for a drive with cache.
 2. Open the arrow of the **Create USB** button and select **Create without cache**. With a Foundry USB drive selected, the button reads **Update USB** and the menu item reads **Recreate without cache**: it erases the drive and its downloads.
