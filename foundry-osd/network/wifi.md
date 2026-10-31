@@ -80,7 +80,7 @@ See [Network readiness](../../foundry-connect/network-readiness.md#use-the-provi
 
 - One embedded profile per media.
 - Enterprise profiles: one client certificate and any number of trusted root CA certificates. From a `.pfx` file only the client certificate is imported, not its issuing CA: add that CA under **Trusted root CA certificates**. Foundry OSD checks neither the PFX password nor the content of a **WPA2/WPA3 Enterprise** profile: a mistake shows only in Windows PE.
-- The **Passphrase** and the client certificate with its **PFX password** need Password protection, and anyone who knows the Deployment password can recover them from the media. Foundry OSD keeps them between sessions only while **Remember passwords** is on. See [What goes on the media](README.md#what-goes-on-the-media).
+- The **Passphrase** and the client certificate with its **PFX password** need Password protection, and anyone who knows the Deployment password can recover them from the media. See [What goes on the media](README.md#what-goes-on-the-media).
 - On protected media, the client certificate file, and an enterprise profile file that contains key material, must not be empty and must stay under about 3 MB. Otherwise media creation stops with an error.
 
 ## Related

@@ -49,7 +49,7 @@ If every account is **Standard** and the built-in Administrator account is **Dis
 ### Password protection
 
 - **A predefined password needs a Deployment password.** Turn on [Password protection](../general.md#password-protection) on **General**. Without it, the **Accounts** section and **Start** show **Needs attention** and Foundry OSD cannot create media. A blank password does not need it.
-- **Passwords are saved with the configuration** when **Remember passwords** is on, which is the default. When it is off, enter them again each time you start Foundry OSD. See [Settings backup and sync](../deployment-profiles.md).
+- **Passwords are saved** for your Windows account on this PC. See [Saved passwords and files](../configuration-sharing/saved-passwords.md).
 - **On the device**, Windows Setup receives the password in its answer file, hidden but not encrypted. Treat copies of that file as sensitive. See [Security and credentials](../../reference/security-and-credentials.md).
 
 ## Limits

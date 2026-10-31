@@ -22,7 +22,7 @@ On the target device, Foundry Connect asks the technician for the Deployment pas
 Anyone who holds the media and knows the Deployment password can recover the network secrets, including the `.pfx` file and its password. Use credentials dedicated to deployment that you can revoke. See [Security and credentials](../../reference/security-and-credentials.md).
 {% endhint %}
 
-Foundry OSD saves the Wi-Fi **Passphrase**, a **PFX password** and a copy of the files you selected with the configuration while **Remember passwords** is on, which is the default: see [What is remembered](../deployment-profiles.md#what-is-remembered). With it off, type the passphrase and the PFX password again each time you start Foundry OSD, before you create media:
+Foundry OSD saves the Wi-Fi **Passphrase**, the **PFX password** and a copy of the files you selected for your Windows account on this PC. The passwords leave this PC only in an export or a publication with **Include passwords**. See [Saved passwords and files](../configuration-sharing/saved-passwords.md). When one is empty, for example after importing a configuration without its passwords, type it again before you create media:
 
 - A missing passphrase blocks **Start** with "Required media secrets are not ready."
 - A missing PFX password blocks nothing. The media is created, and the certificate import fails later in Windows PE.

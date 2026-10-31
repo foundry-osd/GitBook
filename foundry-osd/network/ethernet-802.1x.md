@@ -69,7 +69,7 @@ See ["Authentication failed"](../../troubleshooting/network.md#wired-authenticat
 
 - One profile file, one client certificate and any number of trusted root CA certificates. From a `.pfx` file, Foundry Connect imports the client certificate only: add its issuing CA under **Trusted root CA certificates**.
 - Foundry OSD checks that the files exist. It does not check the content of the profile or the PFX password. A mistake shows only in Windows PE.
-- The client certificate and its **PFX password** are protected by the Deployment password; the profile file and the trusted root CA certificates are readable on the media. Foundry OSD keeps the **PFX password** between sessions only while **Remember passwords** is on. See [What goes on the media](README.md#what-goes-on-the-media).
+- The client certificate and its **PFX password** are protected by the Deployment password; the profile file and the trusted root CA certificates are readable on the media. See [What goes on the media](README.md#what-goes-on-the-media).
 - On protected media, the client certificate file must not be empty and must stay under about 3 MB. Otherwise media creation stops with an error.
 
 ## Related

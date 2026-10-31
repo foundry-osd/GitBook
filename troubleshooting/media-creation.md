@@ -37,6 +37,7 @@ Otherwise, find the message below.
 **Cause:**
 
 - A row is marked **Needs attention**; the bar at the top reads **Readiness items needing action:** with a number. For **Custom images**, the row can read "One or more included custom images are not built for the selected media architecture. Exclude them or change the media architecture.": see [Custom Windows images](../foundry-osd/customization/custom-windows-images.md#choose-what-goes-on-the-media).
+- On a PC that [follows a folder](../foundry-osd/configuration-sharing/follow-a-folder.md#new-versions), shared content is not installed yet. The bar reads **Waiting for shared content**, **Shared content could not be installed** or **Shared content is not available**, and every media action is unavailable until the synchronization completes. When it failed or stalled, see [Shared content missing](foundry-osd/configuration-sharing.md#content-failed).
 - For **Create ISO**: the **ISO output** path is empty or does not end with `.iso`.
 - For **Create USB**: no drive is selected, or the drive is smaller than 16 GB. A drive sold as 16 GB is accepted, although the list shows it at about 14.5 GB.
 
@@ -64,7 +65,7 @@ If something changes between your click and the start, a dialog titled **ISO cre
 
 **Where:** **Start**, on the **WinPE boot language** row marked **Needs attention**, in the **ISO creation is blocked** or **USB creation is blocked** dialog, and under the **WinPE keyboard layout** card of **General**. A second form, "The selected WinPE keyboard layout is not available in the boot image.", appears in the **Operation complete** dialog with the layout and its file.
 
-**Cause:** The first form: the layout was chosen on another computer, then the profile was imported here, and this computer does not have it. The second form: the Windows PE image for this architecture does not contain the file of that layout.
+**Cause:** The first form: the layout was chosen on another computer, then the configuration was imported or followed here, and this computer does not have it. The second form: the Windows PE image for this architecture does not contain the file of that layout.
 
 **Fix:** On **General**, in the **WinPE keyboard layout** card, choose a layout available here, or **Default**. For the second form, choose another layout of the same language, or **Default**.
 

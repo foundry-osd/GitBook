@@ -84,7 +84,7 @@ While the device is not online, the title of the status banner names the cause, 
   2. "Windows rejected the 802.1X profile from the boot media.": Windows PE refused the profile file.
   3. "The 802.1X profile is missing from the boot media. Recreate the boot media.": the profile file is not on the media.
 - **Fix:**
-  1. For the first cause, check the date and time in the firmware, then ask the network team to read the log of the authentication server. Windows PE cannot correct its clock before the device is online. For a certificate import failure, in Foundry OSD, select the certificate again, retype the **PFX password** and recreate the media. The password is empty after a restart of Foundry OSD when **Remember passwords** is off.
+  1. For the first cause, check the date and time in the firmware, then ask the network team to read the log of the authentication server. Windows PE cannot correct its clock before the device is online. For a certificate import failure, in Foundry OSD, select the certificate again, retype the **PFX password** and recreate the media. The password is empty after importing or following a configuration without its passwords.
   2. For a refused profile, export the profile again from a computer that authenticates on this network, and recreate the media.
   3. For a missing profile, recreate the media.
   4. To continue now, use a port without 802.1X, or Wi-Fi when the media includes it.

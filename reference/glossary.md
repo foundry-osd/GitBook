@@ -28,7 +28,7 @@ A list published by the Foundry project and read over the Internet: the Windows 
 
 ## Configuration
 
-The set of deployment options chosen in Foundry OSD. **Settings backup and sync** saves, exports and shares configurations.
+The set of deployment options chosen in Foundry OSD, with their passwords and files. Each Windows account on a PC has one. **Configuration sharing** exports, imports, publishes and follows it.
 
 ## Deployment media
 

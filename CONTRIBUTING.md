@@ -44,7 +44,7 @@ Terminology:
 | USB drive | USB media, USB key |
 | Deployment password | technician password |
 | custom Windows image, then custom image | custom WIM |
-| configuration | profile, for Settings backup and sync |
+| configuration | profile, deployment profile |
 | computer name | machine name |
 | answer file | unattend file |
 | join account | domain account |
