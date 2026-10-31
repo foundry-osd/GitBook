@@ -19,7 +19,7 @@ Choose one or more outputs:
 
 | Output | Requirement |
 | --- | --- |
-| USB drive | 16 GB or larger; a drive sold as 16 GB is accepted. Foundry OSD refuses a smaller drive. Creating the media erases the drive. |
+| USB drive | 16 GB or larger for **Create USB**; a drive sold as 16 GB is accepted. A smaller drive can only be [created without cache](../foundry-osd/media/create-usb.md#create-a-drive-without-cache). Creating the media erases the drive. |
 | ISO file | A destination with at least 20 GB free. Use it for virtual machines or remote management consoles. |
 | PXE files | A folder, local or on a network share, for a PXE server that starts UEFI devices. See [Deploy with PXE](../foundry-osd/media/pxe-deployment.md). |
 

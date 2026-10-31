@@ -46,7 +46,7 @@ Otherwise, find the message below.
 
 1. In each group, select the **Review** button of every row marked **Needs attention** and complete that page.
 2. Type a path that ends with `.iso`, or select **Browse**.
-3. Select a USB drive sold as 16 GB or more. If the drive is not in the list, see [The USB drive is not listed](media-creation/usb-drive-and-device-start.md#usb-not-listed).
+3. Select a USB drive sold as 16 GB or more, or create a smaller drive [without cache](../foundry-osd/media/create-usb.md#create-a-drive-without-cache). If the drive is not in the list, see [The USB drive is not listed](media-creation/usb-drive-and-device-start.md#usb-not-listed).
 
 If something changes between your click and the start, a dialog titled **ISO creation is blocked** or **USB creation is blocked** gives the reason, or "Resolve the following before creating media:" followed by a list of reasons, for example "ISO output path must end with .iso." or "Deploy configuration generation is not ready.". For the latter with Windows Autopilot and local accounts, see [Media creation is blocked by additional local accounts](autopilot.md#local-accounts).
 

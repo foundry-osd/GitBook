@@ -24,7 +24,7 @@ You work with three applications. Only the first one is installed; the other two
 
 | Application | Runs on | Used by | What it does |
 | --- | --- | --- | --- |
-| Foundry OSD | Administrator workstation | Administrator | Holds your deployment settings and creates an ISO or a USB drive. |
+| Foundry OSD | Administrator workstation | Administrator | Holds your deployment settings and creates an ISO, a USB drive or PXE boot files. |
 | Foundry Connect | Target device, in Windows PE | Technician | Checks that the device has network access, with Ethernet or Wi-Fi. |
 | Foundry Deploy | Target device, in Windows PE | Technician | Guides the choice of disk, Windows and drivers, then installs Windows. |
 

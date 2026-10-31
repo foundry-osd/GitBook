@@ -38,7 +38,7 @@ Values are switches, counts or fixed choices. No name, path or text you typed is
 
 | Area | What is reported |
 | --- | --- |
-| Result | ISO or USB, creation or update; success or failure; duration; an identifier of the operation |
+| Result | ISO, USB or PXE files, creation or update; success or failure; duration; an identifier of the operation |
 | Failure | Name of the step that failed; kind, reason and code of the failure, each from a fixed list; name of the tool that failed and its exit code. Empty when the creation succeeds |
 | Media | Architecture; Windows PE language; Windows RE boot image, or standard Windows PE when the media fell back to it; Secure Boot signature; USB partition style and format mode; whether the Foundry applications that the media uses are release builds |
 | Drivers | Whether Dell, HP or an Additional WinPE driver folder is used; the number of custom driver sets included, never their names |
