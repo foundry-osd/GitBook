@@ -2,12 +2,10 @@
 
 Create the files a PXE server needs to start devices from the network with Foundry. Foundry OSD writes them to a folder; it does not configure the PXE server, DHCP or TFTP, which stay the responsibility of their administrator.
 
-{% hint style="warning" %}
-**Screenshot required**
-
-- **File:** `foundry-osd-media-pxe-01-destination.png`
-- **Capture:** Show the **Create PXE files** dialog over Start, with a destination folder typed and the **Not delivered with a PXE start** warning listing one custom Windows image.
-{% endhint %}
+<figure>
+  <img src="../../.gitbook/assets/foundry-osd-media-pxe-01-destination.png" alt="Create PXE files dialog over the Start page, with a destination folder typed and the Create and Cancel buttons">
+  <figcaption>The <strong>Create PXE files</strong> dialog. When your configuration has imported content, the dialog also lists it under <strong>Not delivered with a PXE start</strong>.</figcaption>
+</figure>
 
 ## Before you start
 
