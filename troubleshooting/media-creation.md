@@ -40,13 +40,13 @@ Otherwise, find the message below.
 - A row is marked **Needs attention**; the bar at the top reads **Readiness items needing action:** with a number. For **Custom images**, the row can read "One or more included custom images are not built for the selected media architecture. Exclude them or change the media architecture.": see [Custom Windows images](../foundry-osd/customization/custom-windows-images.md#choose-what-goes-on-the-media).
 - On a PC that [follows a folder](../foundry-osd/configuration-sharing/follow-a-folder.md#new-versions), shared content is not installed yet. The bar reads **Waiting for shared content**, **Shared content could not be installed** or **Shared content is not available**, and every media action is unavailable until the synchronization completes. When it failed or stalled, see [Shared content missing](foundry-osd/configuration-sharing.md#content-failed).
 - For **Create ISO**: the **ISO output** path is empty or does not end with `.iso`.
-- For **Create USB**: no drive is selected, or the drive is smaller than 16 GB. A drive sold as 16 GB is accepted, although the list shows it at about 14.5 GB.
+- For **Create USB**: no drive is selected, or the drive is smaller than 1 GB. A drive from 1 GB to 16 GB keeps the button available: **Create USB** then opens **USB creation is blocked**, and the drive can be [created without cache](../foundry-osd/media/create-usb.md#create-a-drive-without-cache). A drive sold as 16 GB is accepted, although the list shows it at about 14.5 GB.
 
 **Fix:**
 
 1. In each group, select the **Review** button of every row marked **Needs attention** and complete that page.
 2. Type a path that ends with `.iso`, or select **Browse**.
-3. Select a USB drive sold as 16 GB or more, or create a smaller drive [without cache](../foundry-osd/media/create-usb.md#create-a-drive-without-cache). If the drive is not in the list, see [The USB drive is not listed](media-creation/usb-drive-and-device-start.md#usb-not-listed).
+3. Select a USB drive sold as 16 GB or more, or a drive of at least 1 GB to [create it without cache](../foundry-osd/media/create-usb.md#create-a-drive-without-cache). If the drive is not in the list, see [The USB drive is not listed](media-creation/usb-drive-and-device-start.md#usb-not-listed).
 
 If something changes between your click and the start, a dialog titled **ISO creation is blocked** or **USB creation is blocked** gives the reason, or "Resolve the following before creating media:" followed by a list of reasons, for example "ISO output path must end with .iso." or "Deploy configuration generation is not ready.". For the latter with Windows Autopilot and local accounts, see [Media creation is blocked by additional local accounts](autopilot.md#local-accounts).
 
