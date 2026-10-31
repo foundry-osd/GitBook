@@ -94,7 +94,7 @@ If the step shows "The selected answer file is unavailable, invalid, or incompat
 **Fix:**
 
 1. First message: connect the complete USB drive or ISO created together with the boot image, then restart from the media.
-2. First message over PXE: connect the matching media, or have the administrator disable the actions that use imported content. See [Deploy with PXE](../../foundry-osd/media/pxe-deployment.md).
+2. First message over PXE: start the deployment from an ISO or a USB drive, or have the administrator disable the actions that use imported content. See [Deploy with PXE](../../foundry-osd/media/pxe-deployment.md).
 3. Second message: check that the device still reaches GitHub (see [Network endpoints](../../reference/network-endpoints.md)), then restart from the media to try again.
 4. If either message returns, the administrator updates Foundry OSD and recreates the media. For the second message this removes the cause.
 

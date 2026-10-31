@@ -15,12 +15,13 @@ Foundry needs a Windows workstation to create the deployment media, the media it
 
 ## Deployment media
 
-Choose one output, or both:
+Choose one or more outputs:
 
 | Output | Requirement |
 | --- | --- |
 | USB drive | 16 GB or larger; a drive sold as 16 GB is accepted. Foundry OSD refuses a smaller drive. Creating the media erases the drive. |
-| ISO file | A destination with at least 20 GB free. Use it for virtual machines, remote management consoles or [PXE](../foundry-osd/media/pxe-deployment.md). |
+| ISO file | A destination with at least 20 GB free. Use it for virtual machines or remote management consoles. |
+| PXE files | A folder, local or on a network share, for a PXE server that starts UEFI devices. See [Deploy with PXE](../foundry-osd/media/pxe-deployment.md). |
 
 [Start: create deployment media](../foundry-osd/media/README.md) explains what each output carries.
 
