@@ -64,13 +64,6 @@ Problems met when Foundry Deploy opens and in its wizard, up to the **Deploy** b
 
 When the administrator changed the reference PC of [configuration sharing](../../foundry-osd/configuration-sharing.md), a boot image created before the change keeps reading what the previous reference PC published. If the last message stays after **Publish**, the administrator recreates the media from the current reference PC. See [Security and credentials](../../reference/security-and-credentials.md#network-cache-publication).
 
-{% hint style="warning" %}
-**Screenshot required**
-
-- **File:** `foundry-deploy-network-cache-01-startup-error.png`
-- **Capture:** Show the Foundry Deploy **Network cache not available** message for a share that is not responding, with the **Retry** and **Close** buttons.
-{% endhint %}
-
 **Collect:** the message, and the Foundry Deploy log: it names the share and the exact reason. See [Log locations](../logs-and-support.md#log-locations).
 
 ## The Target disk list is empty <a href="#no-disk" id="no-disk"></a>

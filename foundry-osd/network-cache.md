@@ -4,12 +4,10 @@ The Network cache page lets Foundry Deploy use SMB shares of your network as a s
 
 You change imported content in Foundry OSD, then select **Publish**: devices pick up the change on their next deployment, with the media they already have.
 
-{% hint style="warning" %}
-**Screenshot required**
-
-- **File:** `foundry-osd-network-cache-01-overview.png`
-- **Capture:** Show the Network cache page turned on and up to date, with one account, two shares **Up to date** with their space measured, the **Publish** and **Clean up** buttons, and two IP scopes, one subnet and one range.
-{% endhint %}
+<figure>
+  <img src="../.gitbook/assets/foundry-osd-network-cache-01-overview.png" alt="Network cache page turned on, with one account Ready, one share Up to date with its From the internet and Imported content sizes, the Publish, Refresh and Clean up buttons, and three IP scopes of type Subnet">
+  <figcaption>Accounts, then shares, then the IP scopes that choose the shares of each device.</figcaption>
+</figure>
 
 ## How a device uses the cache
 
@@ -121,13 +119,6 @@ When the bar says instead that this PC cannot publish because its signing key co
 
 Neither state blocks media creation, because creating media publishes too.
 
-{% hint style="warning" %}
-**Screenshot required**
-
-- **File:** `foundry-osd-network-cache-02-not-published.png`
-- **Capture:** Show the Network cache page with the **Not published** warning bar, the **Caution** badge on the **Network cache** navigation item, and the **Publish** button on the **Shares** command bar.
-{% endhint %}
-
 ### Several PCs running Foundry OSD
 
 When several PCs run Foundry OSD, use [configuration sharing](configuration-sharing.md) so that they all publish the same configuration. Without it, each PC publishes its own configuration, and each boot image gets the configuration of the PC that created it.
@@ -197,13 +188,6 @@ All the devices that read from or write to a share at the same time share the ne
 ## If a device stops at start
 
 Foundry Deploy shows one message, **Network cache not available**, with the cause and the place to fix it, either in Foundry OSD or on the server. For some causes it offers **Retry**; **Close** ends Foundry Deploy without deploying. The four messages, their causes and their fixes are listed in [Network cache not available](../troubleshooting/deployment/before-deployment-starts.md#network-cache-not-available).
-
-{% hint style="warning" %}
-**Screenshot required**
-
-- **File:** `foundry-deploy-network-cache-01-startup-error.png`
-- **Capture:** Show the Foundry Deploy **Network cache not available** message for a share that is not responding, with the **Retry** and **Close** buttons.
-{% endhint %}
 
 ## If devices do not use the cache
 

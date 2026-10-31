@@ -3,8 +3,8 @@
 **Custom drivers** adds your own driver folders, called driver sets, to the deployment media, so the technician can choose one as the driver source for the deployed Windows. Use it when the driver pack of a manufacturer is older than the drivers on its support site, or when a device has no pack.
 
 <figure>
-  <img src="../../.gitbook/assets/foundry-osd-custom-drivers-01-library.png" alt="Foundry OSD Custom drivers page with the PXE warning under its title, the command bar, and one driver set that is the default, included, with its INF file count, file count, size and Available status">
-  <figcaption>The driver set library: one set, included in the media and offered by default in Foundry Deploy.</figcaption>
+  <img src="../../.gitbook/assets/foundry-osd-custom-drivers-01-library.png" alt="Foundry OSD Custom drivers page with the PXE warning under its title, the command bar, and one driver set, included and not the default, with its INF file count, file count, size and Available status">
+  <figcaption>The driver set library: one set, included in the media.</figcaption>
 </figure>
 
 Drivers added to Windows PE itself are a different setting: see **WinPE drivers** in [General](../general.md#winpe-drivers).
