@@ -78,11 +78,6 @@ While the device is not online, the title of the status banner names the cause, 
 
 ## "Authentication failed" <a href="#wired-authentication-fails" id="wired-authentication-fails"></a>
 
-<figure>
-  <img src="../.gitbook/assets/foundry-connect-network-troubleshooting-01-dot1x-failed.png" alt="Foundry Connect with the status banner on Wired 802.1X authentication did not succeed, and the Ethernet card with the 802.1X row on Authentication failed and the reason on the line under it">
-  <figcaption>The line under 802.1X gives the reason.</figcaption>
-</figure>
-
 - **Where:** **Ethernet** card, on the **802.1X** row, with a line under it that gives the reason. The status banner reads **Wired 802.1X authentication did not succeed** with "The reason is shown in the Ethernet section." The media was created with [Ethernet 802.1X](../foundry-osd/network/ethernet-802.1x.md). The same causes apply when the banner stays on **Connecting** with "Wired 802.1X authentication is in progress.", or when the row shows **Profile applied** and the card never gets a usable address: the network refused the device without saying so. **Retry** checks the state again; it does not restart the authentication.
 - **Cause:**
   1. "The network rejected the authentication. Check the certificate and the switch port settings.": the certificate is unknown to the authentication server or not valid at the date of the device clock, the profile expects a typed user name and password, or the switch port is not set for this device. The client certificate may also not have been imported in Windows PE, for example because of a wrong **PFX password** or a damaged certificate: the log then shows `FailureCode=wired_certificate_import_failed`.
@@ -114,11 +109,6 @@ While the device is not online, the title of the status banner names the cause, 
 - **Collect:** Nothing. Never write the password in a support request.
 
 ## "Sign-in required" <a href="#captive-portal" id="captive-portal"></a>
-
-<figure>
-  <img src="../.gitbook/assets/foundry-connect-network-troubleshooting-02-captive-portal.png" alt="Foundry Connect with the status banner on Sign-in required, the sign-in page text under the title, and the Retry and Export diagnostics buttons">
-  <figcaption>A sign-in page counts as no Internet access.</figcaption>
-</figure>
 
 - **Where:** The status banner, which reads **Sign-in required** with "The network answered with a sign-in page instead of internet access. Sign in from another device if this network allows it, or use another network, then select Retry." When no other network can be used on this device, the text ends with "Sign in from another device if this network allows it, then select Retry."
 - **Cause:** The device is connected, but the network answered the Internet check with its own page instead of the expected answer. This is typical of a guest network that asks you to sign in or accept terms, and of a proxy that asks for credentials. Windows PE has no browser to sign in.

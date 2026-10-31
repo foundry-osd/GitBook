@@ -3,7 +3,7 @@
 Foundry Connect opens after the startup console on a target device started from deployment media. It gets the device online in Windows PE and holds the startup until Internet access is confirmed, because the startup then needs GitHub to get Foundry Deploy.
 
 <figure>
-  <img src="../.gitbook/assets/foundry-connect-overview-01-waiting.png" alt="Foundry Connect page with the status banner on No network connection and its Retry and Export diagnostics buttons at the right, the Ethernet card on No active link in the left column, and the Wi-Fi card with its list of networks in the right column">
+  <img src="../.gitbook/assets/foundry-connect-overview-01-waiting.png" alt="Foundry Connect with the status banner on Connecting, the Ethernet card on No active link and the Provisioned Wi-Fi card in the left column, and the Wi-Fi card in the right column with a WPA3 Personal network selected, its Wi-Fi password box, eye button and Connect button">
   <figcaption>The status banner at the top, Ethernet and the provisioned Wi-Fi on the left, the Wi-Fi networks on the right. On a small screen, or on media without Wi-Fi, the cards stack in one column. The menu bar is at the top left and the version at the top right.</figcaption>
 </figure>
 

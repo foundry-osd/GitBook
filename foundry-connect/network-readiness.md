@@ -3,7 +3,7 @@
 Foundry Connect shows the state of the wired and wireless connections of the target device, and lets you continue once it has reached the Internet.
 
 <figure>
-  <img src="../.gitbook/assets/foundry-connect-network-readiness-01-ready.png" alt="Foundry Connect showing Network ready with the Ethernet label next to the title, the Continuing automatically in 10s countdown under it, the Continue and Stay here buttons at the right, and the Ethernet card folded on Connected">
+  <img src="../.gitbook/assets/foundry-connect-network-readiness-01-ready.png" alt="Foundry Connect showing Network ready with the Ethernet label next to the title, the countdown Continuing automatically under it, the Continue and Stay here buttons at the right, and the Ethernet card on Connected, expanded on its adapter, IPv4 address, gateway and IP assignment">
   <figcaption>Once Internet access is validated, <strong>Continue</strong> closes Foundry Connect and the startup continues to Foundry Deploy. <strong>Stay here</strong> stops the countdown.</figcaption>
 </figure>
 
@@ -14,11 +14,6 @@ With a cable and DHCP, or a profile from the media, you have nothing to do. To j
 1. In the **Wi-Fi** card, select the network in the list. Use the refresh button next to the card title if it is missing.
 2. Under the list, type its password in **Wi-Fi password**. The eye button shows what you typed.
 3. Select **Connect**, or press Enter in the password box. **Connect** stays unavailable until you type a password, except on an open or Enhanced Open network.
-
-<figure>
-  <img src="../.gitbook/assets/foundry-connect-network-readiness-02-wifi-password.png" alt="Wi-Fi card with a WPA2 Personal network selected in the list and, under the list, the Wi-Fi password box, its eye button and the Connect button">
-  <figcaption>The details of the selected network sit under the list.</figcaption>
-</figure>
 
 Once the network is connected, the same button reads **Disconnect**, and the list shows **Connected** next to the network.
 
