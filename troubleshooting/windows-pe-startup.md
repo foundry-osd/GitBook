@@ -10,8 +10,9 @@ The reason is the line under the list of stages. On a failure, the console also 
 | "The boot environment could not be initialized." | [The boot environment could not be initialized](#boot-environment-not-initialized) |
 | Yellow "Internet clock could not be resolved..." | [Internet clock could not be resolved](#internet-clock-not-resolved) |
 | Yellow "Online runtime verification failed..." | [Online runtime verification failed](#online-verification-failed) |
-| "Foundry Connect stopped with exit code 22." | [Exit code 22](#exit-code-22) |
-| "Foundry Connect stopped with exit code 21." | [Exit code 21](#exit-code-21) |
+| "Foundry Connect could not load its configuration. Recreate the boot media." | [Foundry Connect could not load its configuration](#exit-code-22) |
+| "Foundry Connect could not start. Check the session log for details." | [Foundry Connect could not start](#exit-code-21) |
+| "Foundry Connect stopped unexpectedly. Check the session log for details." | [Foundry Connect stopped unexpectedly](#exit-code-23) |
 | "Boot was cancelled. Deployment will not continue." | [Boot was cancelled](#boot-cancelled) |
 | "This boot stage could not be completed. Check the session log for details." | [This boot stage could not be completed](#boot-stage-not-completed) |
 | "Foundry Deploy stopped with exit code" and a number | [Foundry Deploy stopped](#foundry-deploy-stopped) |
@@ -53,17 +54,26 @@ The reason is the line under the list of stages. On a failure, the console also 
 - **Fix:** Nothing. Foundry Connect opens normally.
 - **Collect:** Nothing.
 
-## "Foundry Connect stopped with exit code 22." <a href="#exit-code-22" id="exit-code-22"></a>
+## "Foundry Connect could not load its configuration. Recreate the boot media." <a href="#exit-code-22" id="exit-code-22"></a>
 
 - **Where:** **Network connection** shows **Failed**. Foundry Connect does not open, or closes at once.
-- **Cause:** Foundry Connect could not read its configuration on the media: the configuration file is missing or damaged, or the Wi-Fi passphrase or the PFX password stored on the media cannot be decrypted.
+- **Cause:** The configuration file of Foundry Connect on the media is missing or damaged. A Wi-Fi or 802.1X secret that cannot be read does not stop Foundry Connect: only that network is marked unavailable, see [Provisioned Wi-Fi "Unavailable"](network.md#provisioned-wifi-unavailable).
 - **Fix:** Recreate the media in Foundry OSD.
 - **Collect:** `FoundryConnect.log` and `FoundryBootstrap.log`. See [Logs and support information](logs-and-support.md).
 
-## "Foundry Connect stopped with exit code 21." <a href="#exit-code-21" id="exit-code-21"></a>
+## "Foundry Connect could not start. Check the session log for details." <a href="#exit-code-21" id="exit-code-21"></a>
 
 - **Where:** **Network connection** shows **Failed**.
 - **Cause:** Foundry Connect met an unexpected error while starting.
+- **Fix:**
+  1. Restart the device.
+  2. If it happens again, recreate the media with the current version of Foundry OSD.
+- **Collect:** `FoundryConnect.log` and `FoundryBootstrap.log`. See [Logs and support information](logs-and-support.md).
+
+## "Foundry Connect stopped unexpectedly. Check the session log for details." <a href="#exit-code-23" id="exit-code-23"></a>
+
+- **Where:** **Network connection** shows **Failed** after Foundry Connect had opened.
+- **Cause:** Foundry Connect met an unexpected error while it was running.
 - **Fix:**
   1. Restart the device.
   2. If it happens again, recreate the media with the current version of Foundry OSD.
@@ -133,7 +143,7 @@ Yellow lines that start with "Warning:" never stop the startup. The console show
 | Warning | Meaning | What to do |
 | --- | --- | --- |
 | "Wired AutoConfig service could not be started. Boot will continue." | The Windows PE service for wired 802.1X did not start. A plain wired network still works. | Restart. A wired 802.1X profile cannot authenticate without it. |
-| "Wi-Fi AutoConfig service could not be started. Boot will continue." | The Windows PE wireless service did not start. Foundry Connect shows no Wi-Fi list. | Restart. See [The Wi-Fi list is missing](network.md#wi-fi-list-missing). |
+| "Wi-Fi AutoConfig service could not be started. Boot will continue." | The Windows PE wireless service did not start. Foundry Connect shows no Wi-Fi card and nothing about Wi-Fi. | Restart. See [The Wi-Fi card is missing](network.md#wi-fi-list-missing). |
 | "System clock could not be corrected. Boot will continue." | The Internet time was read but the clock could not be set. | Set the date and time in the firmware. |
 | "Public IP timezone could not be resolved. Boot will continue with UTC." | Automatic time zone detection got no answer. | See [Wrong time or time zone](network.md#wrong-time-or-time-zone). |
 | "IANA timezone map could not be loaded. Boot will continue with UTC if needed." | A file used to convert the detected time zone could not be read. | Nothing. The time zone may stay on UTC. |

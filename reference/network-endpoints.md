@@ -34,7 +34,8 @@ Notes on this table:
 
 | Host | Port and protocol | Used for | Required |
 | --- | --- | --- | --- |
-| `www.msftconnecttest.com`, `www.google.com` | 80, HTTP | Internet check by the Windows PE startup and Foundry Connect; clock correction | Yes, at least one of the two |
+| `www.msftconnecttest.com`, `www.msftncsi.com` | 80, HTTP | Internet check by Foundry Connect. It must get the expected answer, not a sign-in page | Yes, at least one of the two |
+| `www.msftconnecttest.com`, `www.google.com` | 80, HTTP | Clock correction by the Windows PE startup | For a correct clock in Windows PE, at least one of the two. Without them the firmware clock is kept |
 | `api.github.com`, `github.com`, `*.githubusercontent.com` | 443, HTTPS | Release lookup at every start, and download of Foundry Connect, Foundry Deploy and the post-installation application | Yes. See the note below. |
 | `raw.githubusercontent.com` | 443, HTTPS | Catalogs of Windows releases and driver packs, read each time Foundry Deploy starts | Yes |
 | `dl.delivery.mp.microsoft.com` | 80, HTTP | Windows image | Yes, unless a custom Windows image is deployed |

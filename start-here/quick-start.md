@@ -64,7 +64,7 @@ A console window shows the [Windows PE startup](../foundry-connect/windows-pe-st
 
 ## 7. Deploy Windows
 
-1. In [Foundry Connect](../foundry-connect/README.md), wait for the network check. Once Internet access is confirmed, Foundry Connect continues by itself after 10 seconds; **Continue** skips the wait.
+1. In [Foundry Connect](../foundry-connect/README.md), wait for the network check. Once Internet access is confirmed, Foundry Connect continues by itself after 10 seconds; **Continue** skips the wait and **Stay here** stops it.
 2. In [Foundry Deploy](../foundry-deploy/README.md), select **Start deployment**.
 3. **Target device**: [select the disk](../foundry-deploy/target.md). This disk is erased.
 4. **Operating system**: [select Windows](../foundry-deploy/operating-system.md), with its release, language, edition and licensing.

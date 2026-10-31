@@ -60,7 +60,7 @@ Windows PE only needs drivers for the network and storage hardware it must use. 
 
 ## Password protection
 
-Turn on **Password protection** and type the **Deployment password** twice. This is the password the technician types when Foundry Deploy starts; without it, Foundry Deploy does not open.
+Turn on **Password protection** and type the **Deployment password** twice. This is the password the technician types when Foundry Deploy starts, or earlier in Foundry Connect when a protected network setting needs it; without it, Foundry Deploy does not open.
 
 The password must have at least 8 characters; Foundry OSD recommends 12, or a passphrase. **Review and start** stays disabled until the two entries match.
 
@@ -72,10 +72,16 @@ The password must have at least 8 characters; Foundry OSD recommends 12, or a pa
 | Custom answer files | Yes |
 | Join accounts and passwords of [zero-touch Domain Join](domain-join/zero-touch.md) | Yes. This method requires Password protection. |
 | Passwords of the [network cache](network-cache.md) accounts | Yes. A share with an account requires Password protection. The share paths and user names are not protected. |
-| Wi-Fi passwords, and certificates with their passwords for Wi-Fi and Ethernet 802.1X | No |
+| Wi-Fi **Passphrase**, and the **Client certificate (PFX)** with its password for [Wi-Fi](network/wifi.md) and [Ethernet 802.1X](network/ethernet-802.1x.md) | Yes. They require Password protection. |
+| Enterprise Wi-Fi profile file | Yes, when Password protection is on and the file contains key material |
+| Wired profile file and **Trusted root CA certificates** | No. They hold no secret. |
+
+As soon as the media carries a Wi-Fi passphrase or a client certificate, Password protection is required. Until you turn it on, the Wi-Fi or Ethernet 802.1X page shows **Needs attention** with "Wi-Fi passwords and client certificates are protected by the deployment password. Turn on password protection on the General page and set the deployment password.", **Start** marks the network item and **Password protection** as **Needs attention**, and media creation is refused.
+
+On the target device, [Foundry Connect](../foundry-connect/README.md#deployment-password-in-foundry-connect) asks for the Deployment password only when it needs one of these network secrets. After a successful entry there, Foundry Deploy does not ask again.
 
 {% hint style="warning" %}
-Network credentials are not protected because Foundry Connect uses them before the password is asked. Anyone who holds the media can read them. Password protection does not encrypt the whole ISO file or USB drive either.
+Password protection does not encrypt the whole ISO file or USB drive. Anyone who holds the media and knows the Deployment password can recover every protected secret.
 {% endhint %}
 
 Foundry OSD saves the Deployment password for your Windows account on this PC: see [Saved passwords and files](configuration-sharing/saved-passwords.md). If the fields are empty when you come back, type the password again. If you lose the password of existing media, create the media again with a new one.

@@ -2,16 +2,18 @@
 
 Foundry deployment media can carry passwords, certificates and tenant information. This page states, for each secret, where it is stored, what protects it, where it ends up on the deployed device and when it is removed.
 
-What **Password protection** covers, and what it does not, is explained on the [General](../foundry-osd/general.md#password-protection) page. The short version: it protects the deployment secrets in the table below, it does not protect network credentials, and it does not encrypt the media as a whole.
+What **Password protection** covers, and what it does not, is explained on the [General](../foundry-osd/general.md#password-protection) page. The short version: it protects the deployment secrets in the table below, network secrets included, and it does not encrypt the media as a whole.
 
 ## Where each secret is stored
 
-"Protected" means the secret can be decrypted only after the Deployment password is typed in Foundry Deploy. "Recoverable" means anyone who holds the media can decrypt it.
+"Protected" means the secret can be decrypted only after the Deployment password is typed in Foundry Connect or Foundry Deploy. "Recoverable" means anyone who holds the media can decrypt it.
 
 | Secret | On the media | On the deployed device | Removed |
 | --- | --- | --- | --- |
 | Deployment password | Not stored | Not copied | Not applicable |
-| Wi-Fi passwords, 802.1X certificates and their passwords | Recoverable, with or without Password protection | Only with network profile roaming: `C:\Windows\Temp\Foundry\Payloads\NetworkProfiles` | By Foundry, once the profiles are imported at the first start of Windows |
+| Wi-Fi passphrase, client certificates (PFX) of Wi-Fi and wired 802.1X and their passwords | Protected. Password protection is required | Only with network profile roaming: `C:\Windows\Temp\Foundry\Payloads\NetworkProfiles` | By Foundry, once the profiles are imported at the first start of Windows |
+| Enterprise Wi-Fi profile files | Protected with Password protection when the file contains key material, readable otherwise | Same as the row above | Same as the row above |
+| Wired 802.1X profile files, trusted root CA certificates | Readable. They hold no secret | Same as the row above | Same as the row above |
 | Local account passwords set in OOBE | Protected. Password protection is required | `C:\Windows\Panther\unattend.xml`, encoded but not encrypted | Not removed by Foundry |
 | Custom answer files | Protected. Password protection is required | `C:\Windows\Panther\unattend.xml`, in clear text | Not removed by Foundry |
 | Autopilot JSON profiles | Protected with Password protection, readable without it | `C:\Windows\Provisioning\Autopilot\AutopilotConfigurationFile.json` | Not removed by Foundry |
@@ -23,7 +25,7 @@ What **Password protection** covers, and what it does not, is explained on the [
 
 Details the table leaves out:
 
-- Network credentials stay recoverable because Foundry Connect needs them before any password is asked.
+- Foundry Connect asks for the Deployment password only when it needs a protected network secret. After a successful entry there, Foundry Deploy does not ask again. See [Deployment password in Foundry Connect](../foundry-connect/README.md#deployment-password-in-foundry-connect).
 - A network certificate private key and its password are copied to the device, in clear text, only when the **Private-key material** row of the deployment summary shows **Included**.
 - The hardware hash is in `AutopilotHWID.csv` and `OA3.xml`.
 - Foundry restricts the `AutopilotHash` and `DomainJoin` folders to SYSTEM and Administrators.
@@ -44,10 +46,10 @@ A file listed as "Not removed by Foundry" stays readable to local administrators
 | With Password protection | The deployment key is itself encrypted with a key derived from the Deployment password. It is not stored in clear on the media |
 | Key derivation | PBKDF2 with HMAC-SHA-256, 600,000 iterations, random 128-bit salt |
 | Without Password protection | The deployment key is stored on the media, so every deployment secret is recoverable |
-| Network secrets | Encrypted with a separate key that is always stored on the media |
+| Network secrets | Encrypted like the other secrets. Password protection is required for them |
 | Deployment password length | 8 characters minimum. Foundry OSD warns below 12 |
 
-The Deployment password is never written to the media. Once a technician has typed it, Foundry Deploy can use the secrets for the rest of that session.
+The Deployment password is never written to the media. Once a technician has typed it, in Foundry Connect or Foundry Deploy, Foundry can use the secrets for the rest of that session.
 
 ## Saved on the workstation
 

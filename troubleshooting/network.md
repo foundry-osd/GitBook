@@ -1,28 +1,32 @@
 # Network and Foundry Connect troubleshooting
 
-Use this page when Foundry Connect does not reach **Network ready** or shows one of the messages below. [Network readiness](../foundry-connect/network-readiness.md) explains every status of a normal start.
+Use this page when Foundry Connect does not reach **Network ready**, or shows one of the messages below. [Network readiness](../foundry-connect/network-readiness.md) explains every status of a normal start.
 
-Foundry Connect writes its log to `X:\Foundry\Logs\FoundryConnect.log`. To take it off the device, select **Tools > Export diagnostics...**. See [Export logs from Foundry Connect and Foundry Deploy](logs-and-support.md#export-logs-from-foundry-connect-and-foundry-deploy).
+While the device is not online, the title of the status banner names the cause, the line under it says what to do, and the banner offers **Retry**, to check again once you fixed the cause, and **Export diagnostics...**, to save the logs for support. There is no way to continue without Internet access. Foundry Connect writes its log to `X:\Foundry\Logs\FoundryConnect.log`; see [Export logs from Foundry Connect and Foundry Deploy](logs-and-support.md#export-logs-from-foundry-connect-and-foundry-deploy).
 
 | What you see | Go to section |
 | --- | --- |
 | "New version available. Update Foundry OSD and rebuild boot media." | [New version available](#new-version-available) |
-| "No Ethernet adapter detected." | [No Ethernet adapter](#no-ethernet-adapter) |
-| "No active link", "Check the cable connection" | [No active link](#no-active-link) |
-| "Waiting for network configuration", or an **IPv4** value that starts with 169.254 | [Waiting for network configuration](#waiting-for-network-configuration) |
-| A wired 802.1X network, no usable address and no message | [Wired 802.1X does not authenticate](#wired-authentication-fails) |
-| No **Wi-Fi** list | [The Wi-Fi list is missing](#wi-fi-list-missing) |
-| "No Wi-Fi adapter is currently detected." | [No Wi-Fi adapter](#no-wi-fi-adapter) |
-| "No Wi-Fi networks are currently visible." | [No Wi-Fi networks](#no-wi-fi-networks) |
-| "This network requires a provisioned Wi-Fi profile." | [Network requires a provisioned profile](#requires-provisioned-profile) |
+| **No network adapter**, or "Ethernet isn't available on this device." | [Ethernet isn't available on this device](#no-ethernet-adapter) |
+| **No Ethernet cable**, **No network connection**, or **No active link** | [No active link](#no-active-link) |
+| **No IP address**, or **Waiting for network configuration** | [Waiting for network configuration](#waiting-for-network-configuration) |
+| **Wired 802.1X authentication did not succeed**, **802.1X**: **Authentication failed**, or **Connecting** with "Wired 802.1X authentication is in progress." that does not end | [Authentication failed](#wired-authentication-fails) |
+| **802.1X**: **Unavailable** | [802.1X unavailable](#wired-dot1x-unavailable) |
+| **802.1X**: **Unavailable**, "The deployment password was not entered, so the 802.1X settings were not applied." | [802.1X: deployment password not entered](#wired-dot1x-password-not-entered) |
+| **Sign-in required** | [Sign-in required](#captive-portal) |
+| **No internet access** | [Connected but no Internet access](#internet-not-validated) |
+| No **Wi-Fi** card, and nothing about Wi-Fi on the page | [The Wi-Fi card is missing](#wi-fi-list-missing) |
+| "Wi-Fi isn't available on this device." | [Wi-Fi isn't available on this device](#no-wi-fi-adapter) |
+| "No Wi-Fi networks are currently visible.", or a network missing from the list | [No Wi-Fi networks](#no-wi-fi-networks) |
+| "This network requires a provisioned Wi-Fi profile." or "This Wi-Fi network is not supported in this build." | [Network cannot be joined from the list](#requires-provisioned-profile) |
 | "Unable to connect. Check the password or network settings and try again." | [Unable to connect](#unable-to-connect) |
+| **Unavailable** on the **Provisioned Wi-Fi** card | [Provisioned Wi-Fi "Unavailable"](#provisioned-wifi-unavailable) |
+| **Password required** on the **Provisioned Wi-Fi** card | [Provisioned Wi-Fi: deployment password not entered](#provisioned-wifi-password-not-entered) |
 | "Unable to apply the provisioned network settings." | [Unable to apply the provisioned settings](#unable-to-apply-provisioned-settings) |
 | "The provisioned Wi-Fi profile is not available." | [Provisioned profile not available](#provisioned-profile-not-available) |
 | "Unable to connect the provisioned Wi-Fi profile. Try again." | [Unable to connect the provisioned profile](#unable-to-connect-provisioned-profile) |
 | "Unable to complete the Wi-Fi action. Try again." or "Unable to disconnect. Try again." | [Unable to complete the Wi-Fi action](#wi-fi-action-fails) |
-| **Waiting for network** although the device is connected | [Internet access has not been validated](#internet-not-validated) |
-| The countdown disappears | [The countdown disappears](#countdown-disappears) |
-| "Network refresh failed" | [Network refresh failed](#network-refresh-failed) |
+| The countdown disappears, or does not start | [The countdown disappears](#countdown-disappears) |
 | **Network ready**, then downloads fail | [Network ready, then downloads fail](#network-ready-downloads-fail) |
 | "Diagnostics export failed" | ["Diagnostics could not be exported."](logs-and-support.md#export-failed) in Logs and support information |
 | A wrong time or time zone | [Wrong time or time zone](#wrong-time-or-time-zone) |
@@ -35,90 +39,139 @@ Foundry Connect writes its log to `X:\Foundry\Logs\FoundryConnect.log`. To take 
 - **Fix:** Continue the deployment. Afterwards, the administrator updates Foundry OSD, then recreates the ISO or updates the USB drive.
 - **Collect:** Nothing.
 
-## "No Ethernet adapter detected." <a href="#no-ethernet-adapter" id="no-ethernet-adapter"></a>
+## "Ethernet isn't available on this device." <a href="#no-ethernet-adapter" id="no-ethernet-adapter"></a>
 
-- **Where:** **Ethernet** card.
+- **Where:** The **Ethernet** card, which shows only this line. When no other adapter can be used either, the status banner reads **No network adapter** with "Check the Ethernet section, then select Retry.", or with "Check the Ethernet and Wi-Fi sections, then select Retry." when the **Wi-Fi** card is shown.
 - **Cause:**
-  1. Windows PE has no driver for the wired adapter, for example a USB-C adapter or a dock.
-  2. The adapter is disabled in the firmware of the device.
-  3. The device has no wired adapter.
+  1. The device has no wired adapter, for example a virtual machine without a network adapter.
+  2. Windows PE has no driver for the wired adapter, for example a USB-C adapter or a dock.
+  3. The adapter is disabled in the firmware of the device.
+  4. The adapter could not be read for a moment. The next check, about 10 seconds later, shows it again.
 - **Fix:**
-  1. Try another adapter, or use Wi-Fi if the **Wi-Fi** list is shown.
-  2. The administrator adds the driver with the **WinPE drivers** options or the **Additional WinPE driver folder** on the [General](../foundry-osd/general.md) page, then recreates the media.
+  1. Connect a supported adapter, or join a network from the **Wi-Fi** card when it lists networks.
+  2. On a virtual machine, add a network adapter to the virtual machine.
+  3. The administrator adds the driver with the **WinPE drivers** options or the **Additional WinPE driver folder** on the [General](../foundry-osd/general.md) page, then recreates the media.
 - **Collect:** The device model and the adapter model.
 
 ## "No active link" <a href="#no-active-link" id="no-active-link"></a>
 
-- **Where:** **Ethernet** card, with "Check the cable connection".
-- **Cause:** The adapter is detected but has no link: cable, dock or switch port.
+- **Where:** **Ethernet** card. The status banner reads **No Ethernet cable** with "Connect an Ethernet cable." when Wi-Fi cannot be used, or **No network connection** with "Connect an Ethernet cable or join a Wi-Fi network." On a device without a wired adapter, it reads **No network connection** with "Join a Wi-Fi network."
+- **Cause:** The adapter is detected but has no link: cable, dock or switch port. No Wi-Fi network is joined either.
 - **Fix:**
   1. Reseat the cable, then try another cable and another port.
-  2. Wait 10 seconds or select **Tools > Refresh status**.
+  2. Or join a network from the **Wi-Fi** card, when it is shown.
+  3. Select **Retry**, or wait for the next check, about 10 seconds.
 - **Collect:** Nothing.
 
 ## "Waiting for network configuration" <a href="#waiting-for-network-configuration" id="waiting-for-network-configuration"></a>
 
-- **Where:** **Ethernet** card, with "Waiting for DHCP or static network configuration". The same causes apply when the card shows **Connected** with an **IPv4** value that starts with `169.254`: Windows assigned that address itself because no DHCP server answered.
+- **Where:** **Ethernet** card, sometimes with "Self-assigned address" under the title. The status banner reads **No IP address** with "Check DHCP on this network, then select Retry."
 - **Cause:**
   1. The network has no DHCP server for this port or VLAN, or the address pool is empty.
-  2. The network requires 802.1X and the device is not authenticated. See the next section.
+  2. The network requires 802.1X and the device is not authenticated. See [Authentication failed](#wired-authentication-fails).
   3. Network access control keeps unknown devices in a restricted network.
 - **Fix:**
-  1. Wait for two checks, about 20 seconds.
+  1. Wait about 20 seconds, then select **Retry**.
   2. Try a port that is known to work.
   3. Ask the network team to check DHCP and access control for this port.
-- **Collect:** The values of **Adapter**, **IPv4** and **Gateway**.
+- **Collect:** The values of **Adapter**, **IPv4** and **Gateway** in the details of the **Ethernet** card. Select the card title to open them.
 
-## Wired 802.1X does not authenticate and no error is shown <a href="#wired-authentication-fails" id="wired-authentication-fails"></a>
+## "Authentication failed" <a href="#wired-authentication-fails" id="wired-authentication-fails"></a>
 
-- **Where:** The media was created with [Ethernet 802.1X](../foundry-osd/network/ethernet-802.1x.md). The **Ethernet** card does not get a usable address: it may stay on "Waiting for network configuration", or show **Connected** with an **IPv4** value that starts with `169.254`. Which of the two appears is not confirmed on a device. Foundry Connect shows a message for this step only when the media also carries a Wi-Fi profile: see ["Unable to apply the provisioned network settings."](#unable-to-apply-provisioned-settings)
+- **Where:** **Ethernet** card, on the **802.1X** row, with a line under it that gives the reason. The status banner reads **Wired 802.1X authentication did not succeed** with "The reason is shown in the Ethernet section." The media was created with [Ethernet 802.1X](../foundry-osd/network/ethernet-802.1x.md). The same causes apply when the banner stays on **Connecting** with "Wired 802.1X authentication is in progress.", or when the row shows **Profile applied** and the card never gets a usable address: the network refused the device without saying so. **Retry** checks the state again; it does not restart the authentication.
 - **Cause:**
-  1. The certificate or the profile could not be imported in Windows PE: missing or wrong **PFX password**, damaged certificate, or a profile file that Windows rejects.
-  2. The network refused the device: certificate unknown to the authentication server, certificate not valid at the date of the device clock, or a profile that expects a typed user name and password.
+  1. "The network rejected the authentication. Check the certificate and the switch port settings.": the certificate is unknown to the authentication server or not valid at the date of the device clock, the profile expects a typed user name and password, or the switch port is not set for this device. The client certificate may also not have been imported in Windows PE, for example because of a wrong **PFX password** or a damaged certificate: the log then shows `FailureCode=wired_certificate_import_failed`.
+  2. "Windows rejected the 802.1X profile from the boot media.": Windows PE refused the profile file.
+  3. "The 802.1X profile is missing from the boot media. Recreate the boot media.": the profile file is not on the media.
 - **Fix:**
-  1. Export the logs and open `FoundryConnect.log` on another computer. Search for `FailureCode=wired_`.
-  2. `wired_certificate_import_failed`: in Foundry OSD, select the certificate again, retype the **PFX password**, and recreate the media. The password is empty after importing or following a configuration without its passwords.
-  3. `wired_profile_import_failed`: export the profile again from a computer that authenticates on this network, and recreate the media.
-  4. `wired_profile_template_missing`: recreate the media.
-  5. No `wired_` line: the imports worked and the network refused the device. Check the date and time in the firmware, then the log of the authentication server. Windows PE cannot correct its clock before the device is online.
+  1. For the first cause, check the date and time in the firmware, then ask the network team to read the log of the authentication server. Windows PE cannot correct its clock before the device is online. For a certificate import failure, in Foundry OSD, select the certificate again, retype the **PFX password** and recreate the media. The password is empty after importing or following a configuration without its passwords.
+  2. For a refused profile, export the profile again from a computer that authenticates on this network, and recreate the media.
+  3. For a missing profile, recreate the media.
+  4. To continue now, use a port without 802.1X, or Wi-Fi when the media includes it.
+- **Collect:** `FoundryConnect.log`. See [Failure codes](#failure-codes) and [Logs and support information](logs-and-support.md).
+
+## 802.1X "Unavailable" <a href="#wired-dot1x-unavailable" id="wired-dot1x-unavailable"></a>
+
+- **Where:** **Ethernet** card, on the **802.1X** row, with a line under it that gives the reason. When the port gives no address without 802.1X, the status banner reads **Wired 802.1X authentication did not succeed**.
+- **Cause:** The wired 802.1X settings on the media cannot be used: "The 802.1X certificate password cannot be read. Recreate the boot media."
+- **Fix:**
+  1. To continue now, use a port without 802.1X, or Wi-Fi when the media includes it.
+  2. The administrator recreates the media with the current version of Foundry OSD.
 - **Collect:** `FoundryConnect.log`. See [Logs and support information](logs-and-support.md).
 
-## The Wi-Fi list is missing <a href="#wi-fi-list-missing" id="wi-fi-list-missing"></a>
+## "The deployment password was not entered, so the 802.1X settings were not applied." <a href="#wired-dot1x-password-not-entered" id="wired-dot1x-password-not-entered"></a>
 
-- **Where:** Foundry Connect shows only the **Ethernet** card.
+- **Where:** **Ethernet** card, on the line under the **802.1X** row, which shows **Unavailable**.
+- **Cause:** The wired 802.1X profile uses a client certificate protected by the Deployment password, and **Cancel** was selected in the **Protected network settings** window at startup. Foundry Connect does not apply wired 802.1X for the rest of the session.
+- **Fix:**
+  1. Restart the device and type the Deployment password when Foundry Connect asks for it. See [Deployment password in Foundry Connect](../foundry-connect/README.md#deployment-password-in-foundry-connect).
+  2. To continue now without the password, use a port without 802.1X, or Wi-Fi when the media includes it. Foundry Deploy then asks for the password when it opens.
+- **Collect:** Nothing. Never write the password in a support request.
+
+## "Sign-in required" <a href="#captive-portal" id="captive-portal"></a>
+
+- **Where:** The status banner, which reads **Sign-in required** with "The network answered with a sign-in page instead of internet access. Sign in from another device if this network allows it, or use another network, then select Retry." When no other network can be used on this device, the text ends with "Sign in from another device if this network allows it, then select Retry."
+- **Cause:** The device is connected, but the network answered the Internet check with its own page instead of the expected answer. This is typical of a guest network that asks you to sign in or accept terms, and of a proxy that asks for credentials. Windows PE has no browser to sign in.
+- **Fix:**
+  1. Use another network for deployments, such as a wired port or an SSID without a sign-in page.
+  2. If this network lets you authorize the device from another computer or phone, do so, then select **Retry**.
+  3. Ask the network team to let the deployment network reach the test addresses without a sign-in page. See [What Network ready tests](../foundry-connect/network-readiness.md#what-network-ready-tests).
+- **Collect:** `FoundryConnect.log`. Lines that start with "Connectivity endpoint result changed." show, for each test address, whether it answered and with which status.
+
+## "The network is connected but cannot reach the internet." <a href="#internet-not-validated" id="internet-not-validated"></a>
+
+- **Where:** The status banner reads **No internet access** with "The network is connected but cannot reach the internet. Check the firewall or proxy, then select Retry." The **Ethernet** card shows **Connected**, or Wi-Fi is connected.
+- **Cause:** Neither test address answered within 5 seconds.
+  1. The network filters outbound HTTP or these two hosts.
+  2. Name resolution (DNS) fails.
+  3. The network requires an explicit proxy. Foundry has no proxy setting for Windows PE.
+- **Fix:**
+  1. Ask the network team to allow HTTP requests to `www.msftconnecttest.com` and `www.msftncsi.com` from the deployment network. The test cannot be changed or skipped.
+  2. Use another network to continue now, then select **Retry**.
+- **Collect:** `FoundryConnect.log`. Lines that start with "Connectivity endpoint result changed." show, for each test address, whether it answered.
+
+## The Wi-Fi card is missing <a href="#wi-fi-list-missing" id="wi-fi-list-missing"></a>
+
+- **Where:** Foundry Connect shows only the **Ethernet** card, in one column, and no text about Wi-Fi.
 - **Cause:**
   1. The media was created without Wi-Fi.
-  2. The wireless service of Windows PE did not start. The startup console then showed "Warning: Wi-Fi AutoConfig service could not be started. Boot will continue."
+  2. The boot image has no Wi-Fi support. See [What decides the boot image](../foundry-osd/media/create-iso.md#what-decides-the-boot-image).
+  3. The wireless service of Windows PE did not start. The startup console may have shown "Warning: Wi-Fi AutoConfig service could not be started. Boot will continue."
 - **Fix:**
   1. Use a wired connection for this deployment.
-  2. The administrator turns on Wi-Fi on the [Wi-Fi](../foundry-osd/network/wifi.md) page and recreates the media.
-  3. If Wi-Fi was already enabled, restart the device once.
+  2. For the third cause, restart the device once. If Wi-Fi starts working later in the session, its cards appear under the **Ethernet** card.
+  3. The administrator turns on Wi-Fi on the [Wi-Fi](../foundry-osd/network/wifi.md) page and recreates the media.
 - **Collect:** `FoundryBootstrap.log` and `FoundryConnect.log`. See [Logs and support information](logs-and-support.md).
 
-## "No Wi-Fi adapter is currently detected." <a href="#no-wi-fi-adapter" id="no-wi-fi-adapter"></a>
+## "Wi-Fi isn't available on this device." <a href="#no-wi-fi-adapter" id="no-wi-fi-adapter"></a>
 
-- **Where:** **Wi-Fi** list. The **Provisioned Wi-Fi** card shows "No Wi-Fi adapter available", and an attempt to connect answers "No Wi-Fi adapter is available."
+- **Where:** **Wi-Fi** card, in place of the list. The **Provisioned Wi-Fi** card is hidden meanwhile.
 - **Cause:**
-  1. Windows PE has no driver for the wireless adapter. Foundry adds a driver package for Intel adapters only.
-  2. The wireless adapter is turned off in the firmware or by a hardware switch.
+  1. The device has no wireless adapter, for example a virtual machine, or the adapter is turned off in the firmware or by a hardware switch.
+  2. Windows PE has no driver for the wireless adapter. Foundry adds a driver package for Intel adapters only.
+  3. The wireless service of Windows PE stopped, or the adapter could not be read for a moment. The list comes back at the next good check.
 - **Fix:**
   1. Use a wired connection for this deployment.
-  2. The administrator puts the adapter driver in the **Additional WinPE driver folder** on the [General](../foundry-osd/general.md) page and recreates the media.
+  2. Turn on the adapter, then select **Retry** or **Tools > Refresh status**.
+  3. The administrator puts the adapter driver in the **Additional WinPE driver folder** on the [General](../foundry-osd/general.md) page and recreates the media.
 - **Collect:** The device model and the wireless adapter model.
 
 ## "No Wi-Fi networks are currently visible." <a href="#no-wi-fi-networks" id="no-wi-fi-networks"></a>
 
-- **Where:** **Wi-Fi** list.
-- **Cause:** No network is in range of the adapter.
+- **Where:** **Wi-Fi** card, or a network you expect is missing from the list.
+- **Cause:**
+  1. No network is in range of the adapter.
+  2. The network hides its name. Hidden networks are not listed.
 - **Fix:**
-  1. Select the refresh button above the list.
+  1. Select the refresh button next to the card title.
   2. Move the device closer to an access point.
+  3. For a hidden network, the administrator embeds its profile on the [Wi-Fi](../foundry-osd/network/wifi.md) page and recreates the media.
 - **Collect:** Nothing.
 
 ## "This network requires a provisioned Wi-Fi profile." <a href="#requires-provisioned-profile" id="requires-provisioned-profile"></a>
 
-- **Where:** Under the network selected in the **Wi-Fi** list. There is no **Connect** button.
-- **Cause:** Only open, OWE and passphrase networks can be joined from the list. The selected network uses another type of security, such as enterprise (802.1X) or WEP.
+- **Where:** Under the **Wi-Fi** list, for the selected network, with no password box and no button. The text can also read "This Wi-Fi network is not supported in this build."
+- **Cause:** Only open, Enhanced Open, WPA2 Personal and WPA3 Personal networks can be joined from the list. The first text means an enterprise (802.1X) network; the second a WEP or WPA Personal network.
 - **Fix:**
   1. Use a wired connection or another network.
   2. For an enterprise network, the administrator embeds a profile on the [Wi-Fi](../foundry-osd/network/wifi.md) page and recreates the media.
@@ -126,20 +179,45 @@ Foundry Connect writes its log to `X:\Foundry\Logs\FoundryConnect.log`. To take 
 
 ## "Unable to connect. Check the password or network settings and try again." <a href="#unable-to-connect" id="unable-to-connect"></a>
 
-- **Where:** Under the network selected in the **Wi-Fi** list, after **Connect**.
+- **Where:** Under the **Wi-Fi** list, for the selected network, after **Connect**. Three related texts appear in the same place: "The connection attempt timed out. Move closer to the access point and try again.", "The password does not meet the requirements of this network." and "This network is no longer visible. Refresh the list and try again."
 - **Cause:**
-  1. The passphrase is wrong.
-  2. The connection was not established within 15 seconds, for example with a weak signal.
-  3. Windows PE refused the network settings.
+  1. The password is wrong, or Windows PE refused the network settings.
+  2. The connection was not established within about 20 seconds, for example with a weak signal.
+  3. The password does not have 8 to 63 characters.
+  4. The network went out of range.
 - **Fix:**
-  1. Type the passphrase again. The eye button shows it.
+  1. Type the password again. The eye button shows it.
   2. Move closer to the access point and select **Connect** again.
+  3. Select the refresh button next to the card title, then select the network again.
 - **Collect:** `FoundryConnect.log`. The `FailureCode=` value names the step that failed: see [Failure codes](#failure-codes).
+
+## Provisioned Wi-Fi "Unavailable" <a href="#provisioned-wifi-unavailable" id="provisioned-wifi-unavailable"></a>
+
+- **Where:** The **Provisioned Wi-Fi** card shows **Unavailable**, without a button, and the line in the card gives the reason.
+- **Cause:** The Wi-Fi profile on the media cannot be used:
+  1. "The provisioned Wi-Fi password cannot be read from this boot media. Recreate the boot media."
+  2. "The enterprise Wi-Fi profile is missing from the boot media. Recreate the boot media."
+  3. "The provisioned Wi-Fi settings are not valid. Recreate the boot media."
+  4. "The provisioned Wi-Fi password does not meet the requirements of the network. Recreate the boot media."
+- **Fix:**
+  1. Use a wired connection, or join a network from the **Wi-Fi** list, to continue now.
+  2. The administrator checks the profile on the [Wi-Fi](../foundry-osd/network/wifi.md) page and recreates the media.
+- **Collect:** `FoundryConnect.log`. See [Logs and support information](logs-and-support.md).
+
+## "The deployment password was not entered. Select Connect to enter it." <a href="#provisioned-wifi-password-not-entered" id="provisioned-wifi-password-not-entered"></a>
+
+- **Where:** The line in the **Provisioned Wi-Fi** card, which shows **Password required**. Before any password was asked, the line reads "The provisioned Wi-Fi is protected by the deployment password. Select Connect to enter it."
+- **Cause:** The provisioned Wi-Fi uses a passphrase or a client certificate protected by the Deployment password, and **Cancel** was selected in the **Protected network settings** window. Foundry Connect does not ask again by itself.
+- **Fix:**
+  1. Select **Connect** on the **Provisioned Wi-Fi** card, type the Deployment password and select **Continue**. The profile then connects.
+  2. If the window reads "The password is incorrect. Try again.", check the keyboard layout in the **Keyboard** menu and type the password again.
+  3. To continue without the password, use a wired connection or join a network from the **Wi-Fi** list. Foundry Deploy then asks for the password when it opens.
+- **Collect:** Nothing. Never write the password in a support request.
 
 ## "Unable to apply the provisioned network settings." <a href="#unable-to-apply-provisioned-settings" id="unable-to-apply-provisioned-settings"></a>
 
 - **Where:** **Provisioned Wi-Fi** card, when Foundry Connect opens.
-- **Cause:** A certificate or a profile from the media could not be imported: the Wi-Fi certificate (missing or wrong **PFX password**), the Wi-Fi profile, or the wired 802.1X profile when the media carries both.
+- **Cause:** The Wi-Fi certificate or the Wi-Fi profile from the media could not be installed, for example a missing or wrong **PFX password**.
 - **Fix:**
   1. Join a network from the **Wi-Fi** list, or use a wired connection, to continue now.
   2. Export the logs and find the `FailureCode=` value in `FoundryConnect.log`: see [Failure codes](#failure-codes).
@@ -148,8 +226,8 @@ Foundry Connect writes its log to `X:\Foundry\Logs\FoundryConnect.log`. To take 
 
 ## "The provisioned Wi-Fi profile is not available." <a href="#provisioned-profile-not-available" id="provisioned-profile-not-available"></a>
 
-- **Where:** **Provisioned Wi-Fi** card.
-- **Cause:** The profile announced by the media is incomplete: its file is missing, or it has no SSID or security type.
+- **Where:** **Provisioned Wi-Fi** card, after **Connect**.
+- **Cause:** The profile announced by the media cannot be used, for example because its file is missing.
 - **Fix:**
   1. Join a network from the **Wi-Fi** list, or use a wired connection.
   2. The administrator recreates the media.
@@ -157,7 +235,7 @@ Foundry Connect writes its log to `X:\Foundry\Logs\FoundryConnect.log`. To take 
 
 ## "Unable to connect the provisioned Wi-Fi profile. Try again." <a href="#unable-to-connect-provisioned-profile" id="unable-to-connect-provisioned-profile"></a>
 
-- **Where:** **Provisioned Wi-Fi** card. The message comes back about every 20 seconds, because Foundry Connect retries by itself.
+- **Where:** **Provisioned Wi-Fi** card. While the device has no Internet access, Foundry Connect tries again by itself, about every 20 seconds at first and then less often, until you connect or disconnect a network yourself. The card can also show **Not in range**.
 - **Cause:**
   1. The network is out of range.
   2. The **SSID** typed in Foundry OSD differs from the broadcast name. Upper and lower case count.
@@ -165,58 +243,38 @@ Foundry Connect writes its log to `X:\Foundry\Logs\FoundryConnect.log`. To take 
   4. An enterprise network refused the device: certificate, device clock, or a profile that expects typed credentials.
 - **Fix:**
   1. Check that the network name appears in the **Wi-Fi** list.
-  2. To continue now, join a passphrase network from the list or use a wired connection.
-  3. The administrator corrects the profile on the [Wi-Fi](../foundry-osd/network/wifi.md) page and recreates the media.
+  2. To try again at once, select **Connect** on the **Provisioned Wi-Fi** card.
+  3. To continue now, join a passphrase network from the list or use a wired connection.
+  4. The administrator corrects the profile on the [Wi-Fi](../foundry-osd/network/wifi.md) page and recreates the media.
 - **Collect:** `FoundryConnect.log`. See [Logs and support information](logs-and-support.md).
 
 ## "Unable to complete the Wi-Fi action. Try again." <a href="#wi-fi-action-fails" id="wi-fi-action-fails"></a>
 
-- **Where:** Under the selected network or on the **Provisioned Wi-Fi** card. The text can also read "Unable to disconnect. Try again." or "Unable to disconnect the provisioned Wi-Fi profile. Try again."
-- **Cause:** The request met an unexpected error, or the adapter did not disconnect within 15 seconds.
+- **Where:** Under the **Wi-Fi** list, for the selected network, or on the **Provisioned Wi-Fi** card. The text can also read "Unable to disconnect. Try again." or "Unable to disconnect the provisioned Wi-Fi profile. Try again."
+- **Cause:** The request met an unexpected error, or the adapter did not disconnect within about 10 seconds.
 - **Fix:**
   1. Select **Tools > Refresh status**, then repeat the action.
   2. If it repeats, restart the device.
 - **Collect:** `FoundryConnect.log`. See [Logs and support information](logs-and-support.md).
 
-## "Internet access has not been validated yet." <a href="#internet-not-validated" id="internet-not-validated"></a>
-
-- **Where:** The header stays on **Waiting for network** although the **Ethernet** card shows **Connected** with an IPv4 address, or Wi-Fi is connected.
-- **Cause:** Neither test address answered within 5 seconds. Foundry Connect requests `http://www.msftconnecttest.com/connecttest.txt`, then `http://www.google.com`.
-  1. The network filters outbound HTTP or these two hosts.
-  2. Name resolution (DNS) fails.
-  3. The network requires an explicit proxy. Foundry has no proxy setting for Windows PE.
-  4. A captive portal answers with an error instead of a page.
-- **Fix:**
-  1. Ask the network team to allow HTTP requests to at least one of the two addresses from the deployment network. The test cannot be changed or skipped.
-  2. Use another network to continue now.
-- **Collect:** `FoundryConnect.log`. Lines that start with "Internet probe failed." or "Internet probe timed out." name the address and the type of failure.
-
 ## The "Continuing automatically" countdown disappears <a href="#countdown-disappears" id="countdown-disappears"></a>
 
-- **Where:** Header, next to **Continue**.
-- **Cause:** A check made during the 10 seconds of the countdown found no Internet access. The connection is unstable.
+- **Where:** Under the title, in the status banner.
+- **Cause:**
+  1. A check made during the countdown found no Internet access: the connection is unstable. The countdown starts again at the next **Network ready**.
+  2. You worked on the network (including selecting **Connect** on the **Provisioned Wi-Fi** card), or you selected **Stay here**. The countdown stays off for the session, by design: "Automatic continue is paused because you changed network settings." or "Automatic continue is off. Select Continue when you are ready."
 - **Fix:**
-  1. Wait for **Network ready** to come back: the countdown restarts.
-  2. If it keeps happening, check the cable or move closer to the access point.
+  1. Select **Continue** when you are ready.
+  2. If the connection keeps dropping, check the cable or move closer to the access point.
 - **Collect:** Nothing.
-
-## "Network refresh failed" <a href="#network-refresh-failed" id="network-refresh-failed"></a>
-
-- **Where:** Header, with a technical error text under it.
-- **Cause:** Foundry Connect could not read the state of the network adapters.
-- **Fix:**
-  1. Select **Tools > Refresh status**.
-  2. If the message stays, restart the device.
-- **Collect:** The error text and `FoundryConnect.log`. See [Logs and support information](logs-and-support.md).
 
 ## Network ready appears, then downloads fail <a href="#network-ready-downloads-fail" id="network-ready-downloads-fail"></a>
 
 - **Where:** After **Continue**: the startup console fails at **Deployment files**, or Foundry Deploy cannot load its catalogs or download Windows.
-- **Cause:** **Network ready** only proves that one test address answered. A captive portal or a filtering proxy can answer that test with its own page while GitHub and Microsoft stay blocked.
+- **Cause:** **Network ready** only proves that one Microsoft test address answered. A firewall or a filtering proxy can let that test through while GitHub and the Microsoft download hosts stay blocked.
 - **Fix:**
-  1. Use a network without a sign-in page for deployments.
-  2. Check that the network allows the hosts in [Network endpoints](../reference/network-endpoints.md).
-  3. See ["This boot stage could not be completed. Check the session log for details."](windows-pe-startup.md#boot-stage-not-completed) for the startup console, and [Next stays unavailable on Target device](deployment/before-deployment-starts.md#next-unavailable) or [Download fails](deployment/checks-and-image-download.md#image-source-unavailable) for Foundry Deploy.
+  1. Check that the network allows the hosts in [Network endpoints](../reference/network-endpoints.md).
+  2. See ["This boot stage could not be completed. Check the session log for details."](windows-pe-startup.md#boot-stage-not-completed) for the startup console, and [Next stays unavailable on Target device](deployment/before-deployment-starts.md#next-unavailable) or [Download fails](deployment/checks-and-image-download.md#image-source-unavailable) for Foundry Deploy.
 - **Collect:** `FoundryBootstrap.log` and `FoundryDeploy.log`. See [Logs and support information](logs-and-support.md).
 
 ## The time or the time zone is wrong in Windows PE <a href="#wrong-time-or-time-zone" id="wrong-time-or-time-zone"></a>
@@ -232,10 +290,11 @@ Foundry Connect writes its log to `X:\Foundry\Logs\FoundryConnect.log`. To take 
 
 - **Where:** The installed Windows, at the out-of-box experience (OOBE): no network, although [Windows profile roaming](../foundry-osd/network/README.md#windows-profile-roaming) was turned on.
 - **Cause:**
-  1. An enterprise Wi-Fi profile is imported but not connected by Foundry.
-  2. A wired 802.1X profile connects only when Windows holds the computer credential it requires.
-  3. A `.pfx` client certificate is copied only with **Include private-key certificate material**.
-  4. The import failed. This is reported as a warning and does not stop the deployment.
+  1. The Wi-Fi network was never joined successfully in Foundry Connect, so it was not roamed.
+  2. An enterprise Wi-Fi profile is imported but not connected by Foundry.
+  3. A wired 802.1X profile connects only when Windows holds the computer credential it requires.
+  4. A `.pfx` client certificate is copied only with **Include private-key certificate material**.
+  5. The import failed. This is reported as a warning and does not stop the deployment.
 - **Fix:**
   1. Check the roaming settings on the Network pages of Foundry OSD against the table in [Windows profile roaming](../foundry-osd/network/README.md#windows-profile-roaming).
   2. Read `Foundry.PostInstall.log` on the device. See [After the restart troubleshooting](after-the-restart.md).
@@ -243,7 +302,7 @@ Foundry Connect writes its log to `X:\Foundry\Logs\FoundryConnect.log`. To take 
 
 ## Failure codes in the log <a href="#failure-codes" id="failure-codes"></a>
 
-When a network step fails, `FoundryConnect.log` contains a line that starts with "Network operation failed." and ends with `FailureCode=` and one of these values.
+When a network step fails, `FoundryConnect.log` contains a line that starts with "Network operation failed." and holds `FailureCode=` followed by one of these values. Foundry Connect does not write Wi-Fi network names in its log.
 
 <details>
 
@@ -252,16 +311,25 @@ When a network step fails, `FoundryConnect.log` contains a line that starts with
 | Code | Step that failed |
 | --- | --- |
 | `wired_profile_template_missing` | The wired 802.1X profile file is not on the media. |
+| `wired_secret_unavailable` | The client certificate or its password for wired 802.1X cannot be read from the media. |
 | `wired_certificate_import_failed` | The certificate for wired 802.1X could not be imported. |
 | `wired_profile_import_failed` | Windows PE rejected the wired 802.1X profile file. |
 | `wired_reconnect_request_failed` | The wired adapter could not be asked to reconnect. |
+| `wifi_secret_unavailable` | The Wi-Fi password, or the client certificate or its password, cannot be read from the media. |
+| `wifi_secret_locked` | The provisioned Wi-Fi could not connect because the Deployment password was not entered. |
 | `wifi_certificate_import_failed` | The certificate for Wi-Fi could not be imported. |
-| `wifi_profile_import_failed` | Windows PE rejected the Wi-Fi profile, after 3 attempts. |
+| `wifi_profile_import_failed` | Windows PE rejected the Wi-Fi profile. |
 | `wifi_profile_unavailable` | The media carries no usable Wi-Fi profile. |
+| `wifi_runtime_missing` | The wireless service of Windows PE is not available. |
+| `wifi_runtime_not_supported` | The selected network uses a security that cannot be joined from the list. |
+| `wifi_passphrase_invalid` | The password does not meet the rules of the network. |
+| `wifi_network_not_visible` | The network is no longer in range. |
 | `wifi_connect_request_failed` | Windows PE refused the connection request. |
-| `wifi_connect_timeout` | The network was not connected within 15 seconds. |
+| `wifi_connect_failed` | The network refused the connection, for example a wrong password. |
+| `wifi_connect_timeout` | The network was not connected within about 20 seconds. |
 | `no_wireless_adapter` | No wireless adapter is available. |
 | `wifi_disconnect_request_failed` | Windows PE refused the disconnect request. |
-| `wifi_disconnect_timeout` | The network was still connected after 15 seconds. |
+| `wifi_disconnect_timeout` | The network was still connected after about 10 seconds. |
+| `network_unexpected` | An unexpected error. Export the logs for support. |
 
 </details>
