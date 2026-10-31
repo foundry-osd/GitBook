@@ -71,6 +71,7 @@ The password must have at least 8 characters; Foundry OSD recommends 12, or a pa
 | Certificate and its password for the zero-touch Windows Autopilot upload | Yes |
 | Custom answer files | Yes |
 | Join accounts and passwords of [zero-touch Domain Join](domain-join/zero-touch.md) | Yes. This method requires Password protection. |
+| Passwords of the [network cache](network-cache.md) accounts | Yes. A share with an account requires Password protection. The share paths and user names are not protected. |
 | Wi-Fi **Passphrase**, and the **Client certificate (PFX)** with its password for [Wi-Fi](network/wifi.md) and [Ethernet 802.1X](network/ethernet-802.1x.md) | Yes. They require Password protection. |
 | Enterprise Wi-Fi profile file | Yes, when Password protection is on and the file contains key material |
 | Wired profile file and **Trusted root CA certificates** | No. They hold no secret. |

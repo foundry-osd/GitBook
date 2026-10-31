@@ -20,7 +20,7 @@ Below it, five groups list one row per page of the app:
 
 | Group | Rows | Fix on |
 | --- | --- | --- |
-| **General** | **Architecture**, **Secure Boot**, **WinPE boot language**, **Windows PE time zone**, **Automatic restart**, **Password protection**, **WinPE drivers** | [General](../general.md) |
+| **General** | **Architecture**, **Secure Boot**, **WinPE boot language**, **Windows PE time zone**, **Automatic restart**, **Password protection**, **WinPE drivers**, **Network cache** | [General](../general.md), [Network cache](../network-cache.md) |
 | **Network** | **Ethernet 802.1X**, **Wi-Fi** | [Network](../network/README.md) |
 | **Windows Autopilot** | **JSON profile**, **Zero-Touch**, **Interactive** | [Windows Autopilot](../autopilot/README.md) |
 | **Domain Join** | **Zero-Touch**, **Interactive** | [Domain Join](../domain-join/README.md) |
@@ -30,7 +30,7 @@ Each row shows its value and one state: **Configured**, **Default**, **Disabled*
 
 On such a PC, media creation is blocked until the shared content is installed: every create, update and PXE action is unavailable, and the readiness bar reads **Waiting for shared content** with "Shared content is still being downloaded. Media creation is available once the download is complete." It becomes available again by itself when the download completes. When the content failed or stalled, the bar reads **Shared content could not be installed** or **Shared content is not available**, with the reason: check the **Configuration sharing** card in **Settings**, as described in [Shared content missing](../../troubleshooting/foundry-osd/configuration-sharing.md#content-failed).
 
-**Needs attention** means something on that page is missing or not valid. The row shows the reason and a button, **Review** followed by the row name, that opens the page to fix. Its group opens by itself. Clear every such row before you create media.
+**Needs attention** means something on that page is missing or not valid. The row shows the reason and a button, **Review** followed by the row name, that opens the page to fix. Its group opens by itself. Clear every such row before you create media. The **Network cache** row stays **Configured** when the shares are behind: its summary adds **Outdated** or **Not published**, and creating media publishes to the shares. See [Publish](../network-cache.md#publish).
 
 ## Choose what to create
 
@@ -53,6 +53,8 @@ On such a PC, media creation is blocked until the shared content is installed: e
 | [Custom drivers](../customization/custom-drivers.md) | In the ISO, in `Cache\DriverPacks\Custom\` | Same folder on the cache partition | Not delivered |
 | [Post-installation](../customization/post-installation.md) content you imported | In the ISO, in `Cache\PreOobe\` | Same folder on the cache partition | Not delivered |
 | Cache of downloaded Windows images and driver packs | None: every deployment downloads again | On the cache partition, kept by updates | None |
+
+With the [network cache](../network-cache.md) on, no media type carries the custom images, custom drivers and post-installation content: devices take them from the share of their IP scope, where Foundry OSD publishes them when it creates media. Every media type also reads Windows images and driver packs from that share before the Internet.
 
 A USB drive [created without cache](create-usb.md#create-a-drive-without-cache) carries what the ISO carries, in the same folders, on one FAT32 partition named **FOUNDRY**. A USB drive created with **Create USB** has two partitions:
 

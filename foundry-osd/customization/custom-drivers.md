@@ -3,8 +3,8 @@
 **Custom drivers** adds your own driver folders, called driver sets, to the deployment media, so the technician can choose one as the driver source for the deployed Windows. Use it when the driver pack of a manufacturer is older than the drivers on its support site, or when a device has no pack.
 
 <figure>
-  <img src="../../.gitbook/assets/foundry-osd-custom-drivers-01-library.png" alt="Foundry OSD Custom drivers page with the PXE warning under its title, the command bar, and one driver set that is the default, included, with its INF file count, file count, size and Available status">
-  <figcaption>The driver set library: one set, included in the media and offered by default in Foundry Deploy.</figcaption>
+  <img src="../../.gitbook/assets/foundry-osd-custom-drivers-01-library.png" alt="Foundry OSD Custom drivers page with the PXE warning under its title, the command bar, and one driver set, included and not the default, with its INF file count, file count, size and Available status">
+  <figcaption>The driver set library: one set, included in the media.</figcaption>
 </figure>
 
 Drivers added to Windows PE itself are a different setting: see **WinPE drivers** in [General](../general.md#winpe-drivers).
@@ -13,7 +13,7 @@ Drivers added to Windows PE itself are a different setting: see **WinPE drivers*
 
 - **Source.** A folder of `.inf` drivers. Subfolders are allowed, and the folder must contain at least one `.inf` file. Packed content is not supported: no `.cab`, `.zip` or `.exe`.
 - **Disk space.** Foundry OSD copies the folder into `%LOCALAPPDATA%\Foundry\Packages\Drivers`, so that drive needs room for the whole folder.
-- **Media type.** The page states: "Not available with PXE boot. Custom drivers require the full ISO or USB media."
+- **Media type.** The page states: "With PXE boot, custom drivers need the network cache. Without it, use ISO or USB media." With the [network cache](../network-cache.md) on and at least one share, the note disappears: ISO and USB media no longer carry the sets, and every device, PXE included, takes them from its share.
 
 {% hint style="warning" %}
 Foundry does not check the architecture or the models of a driver set. You are responsible for choosing the right drivers: INF files for the media **Architecture** set in [General](../general.md), `x64` or `arm64`, that match your device models. Foundry Deploy only injects the INF files of the folder, and INF files that do not apply are skipped.
@@ -58,7 +58,7 @@ During the deployment, Foundry Deploy verifies the set file by file while it cop
 
 ## Update a USB drive
 
-An [update](../media/update-usb.md) of a USB drive writes the driver sets of the current configuration to the **Foundry Cache** partition and removes the driver sets the new media no longer uses, including all of them when none remain. Foundry OSD checks the free space before it removes anything, because the previous content is still on the drive. If the update does not fit, it stops with "The USB cache partition does not have enough free space for the updated content, because the previous content stays on the drive during the update. Nothing has been erased or formatted. Create the USB media again instead of updating it." Then [create the USB drive](../media/create-usb.md) again.
+An [update](../media/update-usb.md) of a USB drive writes the driver sets of the current configuration to the **Foundry Cache** partition and removes the driver sets the new media no longer uses, including all of them when none remain or while the [network cache](../network-cache.md) is on. Foundry OSD checks the free space before it removes anything, because the previous content is still on the drive. If the update does not fit, it stops with "The USB cache partition does not have enough free space for the updated content, because the previous content stays on the drive during the update. Nothing has been erased or formatted. Create the USB media again instead of updating it." Then [create the USB drive](../media/create-usb.md) again.
 
 If the update succeeds but ends with "Unused custom driver sets could not be removed from the USB drive.", the old sets are still on the drive and keep using space. The next update tries again, or create the USB drive again.
 
@@ -75,7 +75,7 @@ If the update succeeds but ends with "Unused custom driver sets could not be rem
 - A set cannot contain a symbolic link, a junction or a cloud placeholder file.
 - Foundry Deploy applies one driver source at a time: a set cannot be combined with a manufacturer pack.
 - A [publication](../configuration-sharing/publish-to-a-folder.md) carries the driver sets: followers download them in the background. An [exported file](../configuration-sharing/export-and-import.md) carries the list of sets and the default, not their files: on another PC, import the folder again.
-- Custom drivers are not delivered to a [PXE boot image](../media/pxe-deployment.md). Foundry Deploy started over PXE does not offer the **Custom drivers** source.
+- Custom drivers are not delivered to a [PXE boot image](../media/pxe-deployment.md). Without the [network cache](../network-cache.md), Foundry Deploy started over PXE does not offer the **Custom drivers** source.
 
 ## If something goes wrong
 

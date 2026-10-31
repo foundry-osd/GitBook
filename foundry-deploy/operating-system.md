@@ -35,15 +35,15 @@ A restriction applies only while the catalog still contains one of the allowed v
 ## Select a custom image <a href="#custom-images" id="custom-images"></a>
 
 1. In **Image source**, select **Custom image**.
-2. In **Image**, select the image. The drive it comes from is shown beside its name.
-3. In **Image index**, select the index to install. Only the indexes built for the architecture of this device are listed, and when only one remains it is selected for you.
+2. In **Image**, keep the selected image or choose another one. The administrator's preferred image is selected; without one, the first image is. The drive or the [network cache](../foundry-osd/network-cache.md) share it comes from is shown beside its name.
+3. In **Image index**, keep the selected index or choose another one. Only the indexes built for the architecture of this device are listed. The preferred index is selected; without one, the first index built for this device is.
 4. Check the read-only **Version**, **Edition**, **Architecture** and **Language** fields: they describe the selected index.
 5. Select **Next**.
 
 Points to know:
 
 - Two indexes can carry the same edition name. The index number is what Foundry installs.
-- Keep the drive that holds the image connected until the deployment ends.
+- Keep the drive that holds the image connected until the deployment ends. An image from a network cache share is copied to the disk after **Prepare target disk**.
 - A WIM file [added to the USB drive by hand](../foundry-osd/customization/custom-windows-images.md#add-an-image-to-a-usb-drive-by-hand) after Foundry Deploy opened is found when you select **Windows catalog** and then **Custom image** again.
 - The administrator's catalog restrictions do not filter custom images.
 - Foundry does not attempt automatic activation for a custom image.
