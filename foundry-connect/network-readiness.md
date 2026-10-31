@@ -59,7 +59,7 @@ The title of the status banner names the state or, while the device is not onlin
 
 | On screen | Meaning | What to do |
 | --- | --- | --- |
-| **Checking the network** | Foundry Connect has just opened. | Wait a few seconds. |
+| **Checking the network** | Foundry Connect has just opened, or a network has just connected and Internet access has not answered yet. | Wait a few seconds. |
 | **Connecting**, "Applying the network settings from the boot media." | Foundry Connect is installing the profiles and certificates from the media. | Wait. |
 | **Connecting**, "A network action is in progress. It can take up to 20 seconds." | A Wi-Fi network is being connected. | Wait. |
 | **Connecting**, "Wired 802.1X authentication is in progress." | The network is checking the device on the wired port. | Wait. **Retry** checks the state again; it does not restart the authentication. |

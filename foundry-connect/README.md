@@ -15,13 +15,13 @@ The status banner at the top says where the device stands. Its title names the s
 
 | Status | Meaning |
 | --- | --- |
-| **Checking the network** | Foundry Connect has just opened and reads the state of the adapters. |
+| **Checking the network** | Foundry Connect has just opened and reads the state of the adapters, or a network has just connected and Internet access has not answered yet. |
 | **Connecting** | A network action is running: the network settings from the media, a Wi-Fi connection, or wired 802.1X authentication. A Wi-Fi connection can take up to 20 seconds. |
 | **Disconnecting** | A Wi-Fi network is being disconnected. |
 | A cause, such as **No Ethernet cable**, **No IP address** or **No internet access** | The device is not online yet. The title names what blocks it, the line under it says what to do, and **Retry** and **Export diagnostics...** appear. [Network readiness](network-readiness.md#what-the-statuses-mean) lists every cause. |
 | **Network ready** | A test address answered. The label next to the title, **Ethernet**, **Wi-Fi ·** or **Provisioned Wi-Fi ·** followed by the network name, tells which connection is used. |
 
-Under the banner, the page has two columns: **Ethernet** and **Provisioned Wi-Fi** on the left, **Wi-Fi** on the right. On a screen smaller than 1100 × 700 pixels, and on media without Wi-Fi, the cards stack in one column.
+Under the banner, the page has two columns: **Ethernet** and **Provisioned Wi-Fi** on the left, **Wi-Fi** on the right. On a screen smaller than 1024 × 768 pixels, and on media without Wi-Fi, the cards stack in one column.
 
 - **Ethernet**: the wired adapter, its state and, once it is connected, its address. When the media carries a wired 802.1X profile, the **802.1X** row shows the authentication. The details stay folded: select the card title, or press Enter on it, to see them.
 - **Provisioned Wi-Fi**: the Wi-Fi profile that the administrator put on the media, with one **Connect** or **Disconnect** button. The card appears only when the media carries a profile.
@@ -40,7 +40,7 @@ The countdown also stops as soon as you work on the network, for example when yo
 
 The Deployment password window that Foundry Connect opens by itself does not count as working on the network. The countdown never runs while this window is open, and starts once it is closed if Internet access is there. Selecting **Connect** on the **Provisioned Wi-Fi** card does count as working on the network.
 
-Right after a network connects, Internet access can take a few seconds to answer. Foundry Connect then shows the check in progress and checks again every 2 seconds for up to 10 seconds before it reports a problem.
+Right after a network connects, Internet access can take a few seconds to answer: Foundry Connect shows the check in progress before it reports a problem.
 
 Before it closes, Foundry Connect checks Internet access once more. If the connection dropped, it stays open and waits for **Network ready** again.
 
@@ -64,7 +64,7 @@ One correct entry unlocks every protected network setting for the session, and [
 
 **Cancel** leaves the protected settings unused for the session: wired 802.1X shows **Unavailable**, and the provisioned Wi-Fi stays on **Password required** with "The deployment password was not entered. Select Connect to enter it." It is not asked for again by itself; its **Connect** button asks again. Plain Ethernet and the other Wi-Fi networks keep working, and Foundry Deploy asks for the password when it opens.
 
-While the window is open, Foundry Connect never continues by itself. Afterwards, select **Continue** in the status banner when **Network ready** appears.
+While the window is open, Foundry Connect never continues by itself. After a window that Foundry Connect opened by itself, the countdown starts when **Network ready** appears; after the one opened by **Connect**, select **Continue** when you are ready. See [Continue to Foundry Deploy](#continue-to-foundry-deploy).
 
 ## Menus
 
