@@ -33,7 +33,7 @@ Messages appear in the **USB media creation failed** or **USB media update faile
 2. Connect the drive directly to a USB port of the workstation, another one if needed.
 3. If the card names the ADK, open the [ADK](../../foundry-osd/adk.md) page.
 
-A drive smaller than 16 GB is listed, but **Create USB** stays unavailable while it is selected. A drive sold as 16 GB is accepted, although the list shows it at about 14.5 GB.
+A drive smaller than 16 GB is listed. With it selected, **Create USB** opens **USB creation is blocked**, which reads "The selected USB drive is too small for a cache. Use a USB drive of at least 16 GB, or select Create without cache from the arrow of Create USB.": [create the drive without cache](../../foundry-osd/media/create-usb.md#create-a-drive-without-cache), or use a larger drive. A drive sold as 16 GB is accepted, although the list shows it at about 14.5 GB. With a drive smaller than 1 GB, **Create USB** stays unavailable.
 
 **Collect:** `Foundry.log` when the card reports a failure.
 

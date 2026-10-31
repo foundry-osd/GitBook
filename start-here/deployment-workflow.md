@@ -25,9 +25,11 @@ For the same path as a list of actions, follow the [Quick start](quick-start.md)
 
 ## 1. Prepare the media
 
-In [Foundry OSD](../foundry-osd/README.md), the administrator installs the Windows ADK components, sets the options of the deployment, and creates an ISO file or a USB drive. An existing USB drive can also be updated.
+In [Foundry OSD](../foundry-osd/README.md), the administrator installs the Windows ADK components, sets the options of the deployment, and creates an ISO file, a USB drive or [PXE files](../foundry-osd/media/pxe-deployment.md). An existing USB drive can also be updated.
 
 The settings are written to the media when it is created. To change them later, create the media again or update the USB drive.
+
+With the [network cache](../foundry-osd/network-cache.md) on, a change of imported content, such as custom Windows images, custom driver sets or post-installation content, only needs **Publish** on the Network cache page: media already handed out pick it up. See [Publish](../foundry-osd/network-cache.md#publish).
 
 ## 2. Start Windows PE
 

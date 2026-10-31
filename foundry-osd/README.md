@@ -68,6 +68,6 @@ An item without a badge is not configured, which is normal for a feature you do 
 | Register devices with Windows Autopilot | [Windows Autopilot](autopilot/README.md) |
 | Join devices to an Active Directory domain | [Domain Join](domain-join/README.md) |
 | Choose the Windows offered, name computers, shape OOBE, run my own actions | [Customization](customization/README.md) |
-| Create an ISO file or a USB drive | [Start: create deployment media](media/README.md) |
+| Create an ISO file, a USB drive or PXE files | [Start: create deployment media](media/README.md) |
 | Change the language, proxy, telemetry or update behaviour of the app | [Settings](settings.md) |
 | Save, move or share my deployment settings | [Configuration sharing](configuration-sharing.md) |

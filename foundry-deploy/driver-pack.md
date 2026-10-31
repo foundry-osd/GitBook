@@ -21,7 +21,7 @@ On **Drivers**, the third step of the wizard, you choose where Foundry Deploy ge
 | **Dell**, **Lenovo**, **HP**, **Microsoft** | The manufacturer's driver pack for the model and Windows version you select. **Microsoft** covers Surface devices. | The device model has a pack in that catalog |
 | **Custom drivers** | A driver set your administrator added to the media. You pick the set under **Driver set**. | The media has a default set, also on a virtual machine |
 
-**Model** and **Version** appear only for a manufacturer source. **Driver set** appears only for **Custom drivers**, which is listed only when the media carries driver sets. Foundry Deploy started over PXE does not list it.
+**Model** and **Version** appear only for a manufacturer source. **Driver set** appears only for **Custom drivers**, which is listed only when driver sets are available: on the media, or on the share of the device when the [network cache](../foundry-osd/network-cache.md) is on. Without the network cache, Foundry Deploy started over PXE does not list it.
 
 {% hint style="warning" %}
 When Foundry pre-selects a manufacturer, the model matches the device. When you switch to a manufacturer source yourself and the device is not in its catalog, **Model** shows the first entry of the list, which is another machine. Select the right model, or go back to **Microsoft Update Catalog**.

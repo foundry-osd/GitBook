@@ -58,7 +58,7 @@ Start the device from the media in one of three ways:
 
 - From the USB drive, through the firmware boot menu.
 - From the ISO file, attached to a virtual machine or a remote management console.
-- From the network, when you publish the media with [PXE](../foundry-osd/media/pxe-deployment.md).
+- From the network, when you create PXE files for your PXE server: see [Deploy with PXE](../foundry-osd/media/pxe-deployment.md).
 
 A console window shows the [Windows PE startup](../foundry-connect/windows-pe-startup.md), then Foundry Connect opens.
 
