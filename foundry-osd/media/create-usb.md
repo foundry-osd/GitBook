@@ -10,7 +10,7 @@ Create a USB drive that starts physical devices and keeps the Windows images and
 ## Before you start
 
 - No row of [Start](README.md) is marked **Needs attention**, and 20 GB are free on the drives listed in [Start](README.md#before-you-start).
-- The drive is sold as 16 GB or more. The list shows sizes with 1 GB = 1,024 MB, so a drive sold as 16 GB shows about 14.5 GB, which is enough. With a smaller drive selected, **Create USB** stays unavailable and no message is shown.
+- The drive is sold as 16 GB or more. The list shows sizes with 1 GB = 1,024 MB, so a drive sold as 16 GB shows about 14.5 GB, which is enough. A smaller drive can only be [created without cache](#create-a-drive-without-cache): selecting **Create USB** shows why.
 
 {% hint style="danger" %}
 Creating a USB drive erases every partition of the selected disk. Foundry OSD lists every disk connected through USB except the Windows system or boot disk: an external hard disk or SSD, such as a backup disk, is listed too and can be selected. Check the disk number, name and size in the list, then read the volumes that the **Format USB drive** dialog lists before you confirm.
@@ -64,16 +64,39 @@ Two partitions, each with a drive letter in Windows:
 
 The folders of the cache partition are listed in [What each media type carries](README.md#what-each-media-type-carries).
 
+## Create a drive without cache
+
+A drive without cache works like an ISO written to a USB drive: one FAT32 partition named **FOUNDRY** holds the boot files, the boot image with Foundry Connect, and the custom images, driver sets and post-installation content you included. Devices started from it download Windows and drivers again at each deployment, to the target disk.
+
+<figure>
+  <img src="../../.gitbook/assets/foundry-osd-media-create-usb-03-without-cache.png" alt="Start page with a USB drive selected and the arrow of the Create USB button open on its Create without cache item">
+  <figcaption>The arrow of the <strong>Create USB</strong> button offers <strong>Create without cache</strong>.</figcaption>
+</figure>
+
+1. Select the drive as for a drive with cache.
+2. Open the arrow of the **Create USB** button and select **Create without cache**. With a Foundry USB drive selected, the button reads **Update USB** and the menu item reads **Recreate without cache**: it erases the drive and its downloads.
+3. Read and confirm the **Format USB drive** dialog, as above.
+4. Wait until the dialog is titled **USB media created** and reads "USB volume: X:. The drive keeps no downloads: each deployment downloads Windows and drivers from the catalog again."
+
+| Rule | Detail |
+| --- | --- |
+| Drive size | 1 GB or more, and enough to hold the media. Foundry OSD measures the boot files and the imported content before it erases anything, and stops with "The media needs approximately …" when they do not fit. |
+| Partition size | The whole drive, up to 32,000 MB (about 31 GB): Windows formats FAT32 only up to 32 GB. The rest of a larger drive stays unallocated. |
+| File size | FAT32 holds files up to 4 GiB minus one byte. A larger file, usually a custom Windows image, stops the creation before anything is erased: use **Create USB** for that configuration. |
+| Options | **USB partition style** and **USB format mode** apply as for a drive with cache. |
+
+Foundry OSD does not recognize a drive without cache as a Foundry USB drive: the button reads **Create USB** again, and there is nothing to update. Create the drive again after each change of configuration.
+
 ## Check the result
 
-1. In File Explorer, check that two volumes named **BOOT** and **Foundry Cache** appear.
+1. In File Explorer, check that two volumes named **BOOT** and **Foundry Cache** appear, or one volume named **FOUNDRY** for a drive without cache.
 2. Eject the drive, start a test device from it, and check that Foundry Connect opens, then Foundry Deploy.
 
 ## Limits
 
 - The boot files must fit the 2 GiB **BOOT** partition, whatever the size of the drive. Foundry OSD checks this before it erases anything. If they do not fit, reduce the drivers or [create an ISO](create-iso.md).
 - Foundry OSD checks the identity of the drive again before it writes. If the drive was swapped or reconnected after you selected it, the operation stops and nothing is erased.
-- A drive that Foundry OSD recognizes as a Foundry USB drive can only be updated: see [How Foundry recognizes the drive](update-usb.md#how-foundry-recognizes-the-drive). To create it again, for example to change the partition style, delete its **Foundry Cache** volume in Windows Disk Management, select **Refresh**, and check that the button reads **Create USB**. Creating the drive erases the whole disk, **BOOT** included.
+- A drive that Foundry OSD recognizes as a Foundry USB drive can only be updated: see [How Foundry recognizes the drive](update-usb.md#how-foundry-recognizes-the-drive). To create it again with a cache, for example to change the partition style, delete its **Foundry Cache** volume in Windows Disk Management, select **Refresh**, and check that the button reads **Create USB**. To create it again without cache, use **Recreate without cache**. Both erase the whole disk, **BOOT** included.
 
 ## Related
 
