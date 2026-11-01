@@ -52,7 +52,7 @@ The files named under **Collect** are described in [Evidence files](#evidence-fi
   3. For a secure connection error, check the date and time of the device, then use a network that does not inspect the traffic to Microsoft.
 - **Collect:** `Foundry.AutopilotInteractive.log`.
 
-An expired code is not an error: the window replaces the code and the QR code by itself. "Your session expired. Sign in again with the new code." means that Microsoft rejected the sign-in while the device was being registered: sign in again.
+An expired code is not an error: the window replaces the code by itself; the QR code stays the same. "Your session expired. Sign in again with the new code." means that Microsoft rejected the sign-in while the device was being registered: sign in again.
 
 ## An error message after Register <a href="#upload-failed" id="upload-failed"></a>
 

@@ -63,7 +63,7 @@ Notes on this table:
 | `login.microsoftonline.com`, `graph.microsoft.com` | 443, HTTPS | Interactive Windows Autopilot hardware hash upload: sign-in with a code, then Microsoft Graph requests, including the wait for the Autopilot profile | When that method is used |
 | Your domain controllers and DNS servers | Active Directory ports of your network | Domain Join | When Domain Join is used |
 
-For the interactive Windows Autopilot upload, the technician also signs in on another device, such as a phone, by scanning the QR code or by opening the address shown in the window (currently `https://login.microsoft.com/device`, as returned by Microsoft). That device must reach `login.microsoft.com` and the Microsoft sign-in hosts its page uses; the target device does not need `login.microsoft.com`.
+For the interactive Windows Autopilot upload, the technician also signs in on another device, such as a phone, by scanning the QR code, which opens the sign-in page, or by opening the address shown in the window (currently `https://login.microsoft.com/device`, as returned by Microsoft). That device must reach `login.microsoft.com` and the Microsoft sign-in hosts its page uses; the target device does not need `login.microsoft.com`.
 
 Foundry's post-installation step contacts no Foundry or telemetry host. Windows itself, Windows Autopilot enrollment and the software you install with post-installation actions have their own network requirements, which are documented by their publishers.
 

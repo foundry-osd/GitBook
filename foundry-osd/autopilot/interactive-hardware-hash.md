@@ -33,7 +33,7 @@ The group tag is otherwise chosen by the technician at each deployment. To send 
 
 Foundry Deploy shows no **Autopilot** step in this mode; the deployment only runs **Prepare Autopilot assistant**. After the restart, the **Foundry Post-installation** console runs the line `Upload hardware hash to Windows Autopilot`, and Foundry Autopilot Interactive opens full screen in front of it. It has no title bar and shows the manufacturer, model and serial number of the device at the bottom.
 
-1. **Sign in.** The technician signs in with a code: either by scanning a QR code, which opens the Microsoft sign-in page, normally with the code already filled in, or by opening the address shown on another device and typing the code. A new code replaces the old one by itself.
+1. **Sign in.** The technician signs in with a code: the QR code opens the Microsoft sign-in page, which can also be opened from the address shown in the window on another device, and the technician types the code shown in the window there. The QR code does not change; a new code replaces the old one by itself.
 2. **Register.** The window shows the signed-in account, with **Use another account**. The technician chooses the group tag, enters the assigned user when offered, and selects **Register**. If the device is already registered, the window says so and preselects its current group tag.
 3. **Wait for the profile.** After the registration, the window waits for your tenant to assign the Autopilot profile, for up to 20 minutes. **Continue without waiting** ends the wait.
 4. **Continue.** Windows setup continues 10 seconds later, without a restart, or at once with **Continue now**.

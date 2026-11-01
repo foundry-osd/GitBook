@@ -16,7 +16,7 @@ Foundry can prepare a device for Windows Autopilot in three ways: copy an Autopi
 | --- | --- | --- | --- |
 | What Foundry does | Copies the profile file into the installed Windows. The device is not registered. | Uploads the hardware hash to your tenant | Uploads the hardware hash to your tenant |
 | When | In Windows PE, at the end of the deployment | In Windows PE, at the end of the deployment | In Windows setup, after the restart |
-| Who signs in on the device | Nobody | Nobody | The technician, with a code or a QR code scanned on another device |
+| Who signs in on the device | Nobody | Nobody | The technician, with a code typed on another device (the QR code opens the sign-in page) |
 | What you prepare | One or more profiles | A tenant connection, a certificate and the ADK Deployment Tools | Nothing: you enable the mode and, if you want, two options |
 | What the media carries | Every profile in the list | The certificate and its password | No tenant data and no secret |
 | Step in the Foundry Deploy wizard | **Autopilot**: choose the profile | **Autopilot**: choose the group tag | No wizard step |
