@@ -47,7 +47,7 @@ Each reason is explained in [Windows Autopilot troubleshooting during deployment
 
 ## Register the device after the restart
 
-Interactive mode only. After the restart, during Windows setup and before the first sign-in screens, the **Foundry Post-installation** console runs the line `Upload hardware hash to Windows Autopilot` and **Foundry Autopilot Interactive** opens full screen in front of it. The window has no title bar and follows the language and theme you used in Foundry Deploy. At the bottom of both pages it shows the manufacturer, model and serial number of the device, and the computer name when it is known. Windows setup waits for the window, for up to 120 minutes.
+Interactive mode only. After the restart, during Windows setup and before the first sign-in screens, the **Foundry Post-installation** console runs the line `Upload hardware hash to Windows Autopilot` and **Foundry Autopilot Interactive** opens full screen in front of it. The window has no title bar and follows the language, theme and keyboard you used in Foundry Deploy. At the bottom of both pages it shows the manufacturer, model and serial number of the device, and the computer name when it is known. Windows setup waits for the window, for up to 120 minutes.
 
 <figure>
   <img src="../.gitbook/assets/foundry-deploy-autopilot-02-interactive-sign-in.png" alt="Foundry Autopilot Interactive sign-in page with the sign-in address, a QR code, the sign-in code and its countdown, and the device details at the bottom">

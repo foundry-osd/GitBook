@@ -51,7 +51,7 @@ Foundry Deploy shows no **Autopilot** step in this mode; the deployment only run
 - **Windows setup can continue before the profile is assigned.** The window waits for the profile for up to 20 minutes, then continues anyway, with a message. If the technician selects **Continue without waiting**, or if your tenant does not report the status, OOBE can start before the profile is assigned.
 - **The technician chooses the group tag**, including **None**. [Windows Autopilot step](../../foundry-deploy/autopilot.md) says what each choice does to a device that is already registered.
 - **The window does not ask twice.** Once the registration is complete, the window does not ask again if Windows setup repeats the step on that installation.
-- **The window follows the language and theme of Foundry Deploy.**
+- **The window follows the language, theme and keyboard of Foundry Deploy.**
 - **Windows setup waits for the window for up to 120 minutes.** After that, or if the technician skips the registration, Windows setup continues and the device is not registered.
 - **Foundry Deploy needs GitHub in this mode.** Without access to the Foundry Autopilot Interactive download, the deployment stops before the disk is erased. See [Windows Autopilot troubleshooting during deployment](../../troubleshooting/autopilot/during-deployment.md#interactive-download-unavailable).
 
