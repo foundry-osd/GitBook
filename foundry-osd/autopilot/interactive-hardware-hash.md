@@ -31,7 +31,7 @@ The group tag is otherwise chosen by the technician at each deployment. To send 
 
 ## What the technician sees
 
-Foundry Deploy shows no **Autopilot** step in this mode; the deployment only runs **Prepare Autopilot assistant**. After the restart, the **Foundry Post-installation** console runs the line `Upload hardware hash to Windows Autopilot`, and Foundry Autopilot Interactive opens full screen in front of it. It has no title bar and shows the manufacturer, model and serial number of the device at the bottom.
+Foundry Deploy shows no **Autopilot** step in this mode; the deployment only runs **Prepare Autopilot assistant**. After the restart, the **Foundry Post-installation** console runs the line `Upload hardware hash to Windows Autopilot`, and Foundry Autopilot Interactive opens full screen in front of it. It has no title bar and shows the manufacturer, model and serial number of the device at the bottom, with the computer name when it is known.
 
 1. **Sign in.** The technician signs in with a code: the QR code opens the Microsoft sign-in page, which can also be opened from the address shown in the window on another device, and the technician types the code shown in the window there. The QR code does not change; a new code replaces the old one by itself.
 2. **Register.** The window shows the signed-in account, with **Use another account**. The technician chooses the group tag, enters the assigned user when offered, and selects **Register**. If the device is already registered, the window says so and preselects its current group tag.
@@ -42,7 +42,7 @@ Foundry Deploy shows no **Autopilot** step in this mode; the deployment only run
 The QR code only opens the Microsoft sign-in page: the technician always types the code. Microsoft no longer allows the code to be filled in from a link or a QR code.
 {% endhint %}
 
-**Skip registration**, at the bottom of both pages, asks for confirmation, then lets Windows setup continue without registering the device. See [Windows Autopilot step](../../foundry-deploy/autopilot.md) for the procedure.
+**Skip registration**, in the bottom-right corner of the screen, asks for confirmation, then lets Windows setup continue without registering the device. See [Windows Autopilot step](../../foundry-deploy/autopilot.md) for the procedure.
 
 ## Check the result
 
