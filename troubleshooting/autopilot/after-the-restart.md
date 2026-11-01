@@ -23,7 +23,7 @@ The files named under **Collect** are described in [Evidence files](#evidence-fi
 - **Cause:** the line `Upload hardware hash to Windows Autopilot` of the **Foundry Post-installation** console tells which case applies.
   - The line shows `[Succeeded]` at once: the device was registered by an earlier run on this installation. The window does not ask again.
   - The line shows `[Failed]` and `failureCode` in `C:\Windows\Temp\Foundry\State\PreOobe\execution-result.json` is `autopilot_assistant_missing`: Foundry Autopilot Interactive was not copied to the device.
-  - The window opened and closed at once, with a message that the Autopilot configuration is missing or invalid: the registration cannot run on this installation.
+  - A message box titled **Foundry Autopilot Interactive** reads "The Autopilot configuration is missing or invalid, so this device cannot be registered.", with a **Close** button, instead of the sign-in page. When you select **Close**, or after a while if Windows setup is close to its time limit, the window ends and Windows setup continues without registering the device.
   - The console has no such line: the media does not use the interactive mode, and **Steps** had no **Prepare Autopilot assistant** step.
   - No console opens at all: see [No Foundry Post-installation console appears](../after-the-restart.md#no-console).
 - **Fix:**

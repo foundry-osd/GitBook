@@ -54,10 +54,11 @@ Interactive mode only. After the restart, during Windows setup and before the fi
   <figcaption>Scan the QR code, or open the address on another device and type the code. The code shown here is an example.</figcaption>
 </figure>
 
-1. **Sign in.** Check the network: while the window says the network is not available, connect the device. It tries again every 10 seconds. Then, on another device, scan the QR code, which opens the Microsoft sign-in page with the code already filled in. Or open the address shown, type the code and sign in with your account. When the countdown ends, the code and the QR code are replaced together, so always use what is on screen.
+1. **Sign in.** Check the network: while the window says the network is not available, connect the device. It tries again every 10 seconds. Then, on another device, scan the QR code, which opens the Microsoft sign-in page, normally with the code already filled in. If the code box is empty, type the code shown in the window. Or open the address shown, type the code and sign in with your account. When the countdown ends, the code and the QR code are replaced together, so always use what is on screen.
 2. When the window changes to **Register this device in Autopilot**, check **Signed in as**. Select **Use another account** to sign in again with another account.
 3. Choose the **Group tag**: **None**, a tag already used in the tenant, or **Custom** to type one in **Custom group tag**. If the window says "This device is already registered in Windows Autopilot", its current group tag is preselected: **None** removes it. The administrator can have **Custom** preselected for devices that are not registered yet.
-4. When the administrator offers it, type the **Assigned user (UPN)**, such as `user@contoso.com`, or leave it empty.
+   If the window warns "Several Windows Autopilot devices have this serial number", nothing is preselected and the registration cannot update that device: remove the duplicates in your tenant first.
+4. When the administrator offers it, type the **Assigned user (UPN)**, such as `user@contoso.com`, or leave it empty. An empty box never removes a user already assigned to a device that is registered.
 5. Select **Register**. The window reports each stage, then waits for the device to appear in Windows Autopilot, for up to 15 minutes.
 
 <figure>
