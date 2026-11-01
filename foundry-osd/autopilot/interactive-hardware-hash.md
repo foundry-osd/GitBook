@@ -38,6 +38,10 @@ Foundry Deploy shows no **Autopilot** step in this mode; the deployment only run
 3. **Wait for the profile.** After the registration, the window waits for your tenant to assign the Autopilot profile, for up to 20 minutes. **Continue without waiting** ends the wait.
 4. **Continue.** Windows setup continues 10 seconds later, without a restart, or at once with **Continue now**.
 
+{% hint style="info" %}
+The QR code only opens the Microsoft sign-in page: the technician always types the code. Microsoft no longer allows the code to be filled in from a link or a QR code.
+{% endhint %}
+
 **Skip registration**, at the bottom of both pages, asks for confirmation, then lets Windows setup continue without registering the device. See [Windows Autopilot step](../../foundry-deploy/autopilot.md) for the procedure.
 
 ## Check the result

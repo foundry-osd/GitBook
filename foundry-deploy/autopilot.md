@@ -54,6 +54,10 @@ Interactive mode only. After the restart, during Windows setup and before the fi
   <figcaption>Scan the QR code, or open the address on another device, then type the code. The code shown here is an example.</figcaption>
 </figure>
 
+{% hint style="info" %}
+The QR code only opens the Microsoft sign-in page: you always type the code yourself. Microsoft no longer allows the code to be filled in from a link or a QR code.
+{% endhint %}
+
 1. **Sign in.** Check the network: while the window says the network is not available, connect the device. It tries again every 10 seconds. Then scan the QR code with a phone to open the Microsoft sign-in page, or open the address shown in the window on another device, then type the code shown in the window and sign in with your account. The QR code does not change: when the countdown ends, only the code is replaced, so always type the code that is on screen.
 2. When the window changes to **Register this device in Autopilot**, check **Signed in as**. Select **Use another account** to sign in again with another account.
 3. Choose the **Group tag**: **None**, a tag already used in the tenant, or **Custom** to type one in **Custom group tag**. If the window says "This device is already registered in Windows Autopilot", its current group tag is preselected: **None** removes it. The administrator can have **Custom** preselected for devices that are not registered yet.
