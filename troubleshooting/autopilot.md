@@ -23,7 +23,7 @@ Otherwise, find the message below.
 | "Tenant onboarding failed" | [Connection failed](#tenant-onboarding-failed) |
 | "Tenant onboarding requires attention", or **Status** stays **Not ready** | [Connection incomplete](#tenant-onboarding-requires-attention) |
 | "Certificate creation failed", "Certificate removal failed", or a PFX password you did not keep | [Certificates](#certificate-creation-failed) |
-| A group tag is missing from a list, in Foundry OSD, Foundry Deploy or the upload window | [Group tags](#group-tag-not-offered) |
+| A group tag is missing from a list, in Foundry OSD, Foundry Deploy or the registration window | [Group tags](#group-tag-not-offered) |
 | On **Start**, a sentence that starts with "Hardware hash upload is enabled but", "Autopilot JSON profile mode is enabled but" or "Autopilot uses an unsupported" | [Start](#start-blocked) |
 | A line under **Boot media certificate** other than "Certificate ready for boot media generation." | [Start](#start-blocked) |
 | "Deploy configuration generation is not ready." while Windows Autopilot and local accounts are configured | [Local accounts](#local-accounts) |
@@ -91,17 +91,17 @@ Foundry does not check that the file is an Autopilot profile: a valid JSON file 
 
 ## A group tag you expect is not offered <a href="#group-tag-not-offered" id="group-tag-not-offered"></a>
 
-- **Where:** **Default group tag** on **Windows Autopilot > Zero-Touch**, which then offers only **None**; **Group tag** in the **Autopilot** step of Foundry Deploy; **Group tag** in the upload window of the interactive mode, which then offers only **None** and **Custom**.
+- **Where:** **Default group tag** on **Windows Autopilot > Zero-Touch**, which then offers only **None**; **Group tag** in the **Autopilot** step of Foundry Deploy; **Group tag** in the registration window of the interactive mode, which then offers only **None** and **Custom** and says "Existing group tags could not be loaded."
 - **Cause:**
-  - No Windows Autopilot device of the tenant carries the tag. The lists hold only tags already in use. Only the upload window accepts a new tag, through **Custom**.
+  - No Windows Autopilot device of the tenant carries the tag. The lists hold only tags already in use. Only the registration window accepts a new tag, through **Custom**.
   - Foundry could not read the tags of the tenant. Foundry OSD then shows only **None**, without a message. Foundry Deploy reads the tags for 30 seconds when it starts and otherwise keeps those saved on the media.
   - In Foundry OSD, a default tag that no device carries any more is reset to **None** at the next connection.
 - **Fix:**
   1. Give the tag to at least one Windows Autopilot device in your tenant.
   2. In Foundry OSD, select **Disconnect tenant**, then **Connect tenant**, choose the tag and update the media.
   3. In Foundry Deploy, restore the network and start the device from the media again before you deploy.
-  4. In the upload window, choose **Custom** and type the tag. With **Custom** and an empty box, the device is uploaded without a tag.
-- **Collect:** the line that starts with "Autopilot group tag discovery failed" in the Foundry OSD log, with "Optional Autopilot group tag discovery" in `FoundryDeploy.log`, or with "Group tag discovery failed" in `registration.log`.
+  4. In the registration window, choose **Custom** and type the tag. With **Custom** and an empty box, the device is registered without a tag.
+- **Collect:** the line that starts with "Autopilot group tag discovery failed" in the Foundry OSD log, with "Optional Autopilot group tag discovery" in `FoundryDeploy.log`, or with "Group tag discovery failed" in `Foundry.AutopilotInteractive.log`.
 
 ## Start blocks media creation for a Windows Autopilot reason <a href="#start-blocked" id="start-blocked"></a>
 

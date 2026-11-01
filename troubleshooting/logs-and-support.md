@@ -59,7 +59,7 @@ Use **Export raw diagnostics...** only when a support contact you trust asks for
 | Deployment finished | Installed Windows: `C:\Windows\Temp\Foundry\Logs\Deployment` and `C:\Windows\Temp\Foundry\State\Deployment` | Deployment logs, `deployment-summary.json` |
 | Post-installation | Installed Windows: `C:\Windows\Temp\Foundry\Logs\PreOobe` and `C:\Windows\Temp\Foundry\State\PreOobe` | `Foundry.PostInstall.log`, one folder per action, `execution-result.json` |
 | Autopilot hardware hash upload | Installed Windows: `C:\Windows\Temp\Foundry\Logs\AutopilotHash` | Upload status and result files, listed in [Evidence files](autopilot/during-deployment.md#evidence-files) |
-| Interactive Autopilot window | Installed Windows: `C:\Windows\Temp\Foundry\Logs\AutopilotRegistration` | Registration logs, listed in [Evidence files](autopilot/after-the-restart.md#evidence-files) |
+| Foundry Autopilot Interactive window | Installed Windows: `C:\Windows\Temp\Foundry\Logs\AutopilotInteractive` | `Foundry.AutopilotInteractive.log`, listed in [Evidence files](autopilot/after-the-restart.md#evidence-files) |
 
 Things to know:
 

@@ -50,6 +50,10 @@ Making the target device a member of an Active Directory domain.
 
 A package of drivers published by a manufacturer for one model or family of devices, installed with Windows during the deployment.
 
+## Foundry Autopilot Interactive
+
+The full-screen window, opened during Windows setup after the restart, in which the technician signs in and registers the device in Windows Autopilot. It is used by the interactive hardware hash upload. See [Windows Autopilot step](../foundry-deploy/autopilot.md#register-the-device-after-the-restart).
+
 ## Foundry Cache
 
 The second volume of a USB drive created by Foundry OSD, labelled `Foundry Cache`. It keeps downloaded files, so that later deployments from the same drive do not download them again.

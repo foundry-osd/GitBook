@@ -23,6 +23,7 @@ On this page the disk may or may not have been erased. With an ISO or PXE, or a 
 | "A secure connection could not be established. ..." | [Secure connection](#secure-connection) |
 | "The downloaded Windows image failed hash verification. ..." | [Image verification failed](#image-verification-failed) |
 | "Deployment readiness could not be confirmed. ..." | [Readiness not confirmed](#readiness-not-confirmed) |
+| "The interactive Autopilot registration assistant is not available for this Foundry release. ..." or "GitHub temporarily limited downloads from this network. ..." | [Interactive download unavailable](../autopilot/during-deployment.md#interactive-download-unavailable), step **Check deployment readiness** |
 | "No drive letter is available for deployment partitions." | [No drive letter](#no-drive-letter) |
 | "Checking cache..." for a long time | [Cache check is slow](#cache-check-is-slow) |
 | "The disk identity is missing, ambiguous or has changed. ..." | [Before the deployment starts](before-deployment-starts.md#disk-identity) |
