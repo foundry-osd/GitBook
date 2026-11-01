@@ -73,11 +73,6 @@ The QR code only opens the Microsoft sign-in page: you always type the code your
 6. The window then reads "Waiting for the Autopilot profile assignment", for up to 20 minutes, while your tenant assigns the profile. Select **Continue without waiting** to stop waiting.
 7. When it reads "Registration completed" and "Continuing Windows setup in 10 seconds", the registration has succeeded. Select **Continue now** to go on at once. Windows setup then continues to its first-run screens (OOBE), without a restart.
 
-<figure>
-  <img src="../.gitbook/assets/foundry-deploy-autopilot-04-interactive-registration-success.png" alt="Foundry Autopilot Interactive after a successful registration, with Registration completed, the profile assignment result and the Continuing Windows setup countdown with the Continue now button">
-  <figcaption>After 10 seconds, or with <strong>Continue now</strong>, Windows setup continues.</figcaption>
-</figure>
-
 If the registration fails, the reason stays in the window and the controls become available again: correct the cause, then select **Register** again. The window gives explicit messages when the device is registered in another tenant, when it is a duplicate, when the account lacks an Intune role that can import Autopilot devices, and when the group tag, computer name or user could not be applied to a device that is registered. For a sign-in that fails, select **Retry** to get a new code.
 
 To leave without registering, select **Skip registration**, at the bottom of either page, or close the window with Alt+F4, then confirm. Windows setup continues and the device is not registered. If you skip while the registration is in progress, the device may still appear in Windows Autopilot: check your tenant. If you do nothing, the window ends by itself after 120 minutes, and Windows setup continues without registering the device. See [Windows Autopilot troubleshooting after the restart](../troubleshooting/autopilot/after-the-restart.md).
