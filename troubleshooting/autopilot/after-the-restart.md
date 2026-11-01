@@ -77,7 +77,7 @@ An expired code is not an error: the window replaces the code by itself; the QR 
 
 ## Windows setup continued without registering the device <a href="#skipped-or-timed-out" id="skipped-or-timed-out"></a>
 
-- **Where:** the registration window closed, and the console line `Upload hardware hash to Windows Autopilot` shows `[Failed]`.
+- **Where:** the registration window closed. After **Skip registration**, the console line `Upload hardware hash to Windows Autopilot` shows `[Succeeded]` and the console ends with warnings, because skipping is a choice, not an error. When the time allowed is over, the line shows `[Failed]`.
 - **Cause:**
   - **Skip registration** was confirmed, or the window was closed with Alt+F4 and confirmed. If this happened while the registration was in progress, the device may still appear in Windows Autopilot.
   - The window reads "The time allowed for this step is over. Windows setup continues without registering this device.": the step lasts 120 minutes at most.
