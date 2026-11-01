@@ -1,6 +1,6 @@
 # Windows Autopilot troubleshooting during deployment
 
-Use this page for what Foundry Deploy shows at the **Autopilot** step of the wizard and at the Autopilot step of the deployment. For Foundry OSD, see [Windows Autopilot troubleshooting](../autopilot.md); for the upload window and the tenant, see [After the restart](after-the-restart.md).
+Use this page for what Foundry Deploy shows at the **Autopilot** step of the wizard and at the Autopilot step of the deployment, and, in interactive mode, when it checks the Foundry Autopilot Interactive download. For Foundry OSD, see [Windows Autopilot troubleshooting](../autopilot.md); for the registration window and the tenant, see [After the restart](after-the-restart.md).
 
 In **Steps**, the Autopilot step is named **Copy Autopilot profile**, **Register Autopilot device** or **Prepare Autopilot assistant**. The **Deployment failed** screen names it "Provision Autopilot". A skipped step has a skipped icon next to its name: point at it to read the reason in a tooltip.
 
@@ -9,6 +9,8 @@ In **Steps**, the Autopilot step is named **Copy Autopilot profile**, **Register
 | "This answer file conflicts with the configured Autopilot enrollment mode. Choose another file or change the media configuration." | [A message under Answer file](../deployment/before-deployment-starts.md#answer-file-rejected), in Windows deployment troubleshooting |
 | "No embedded Autopilot profiles were found on this media." | [No profile on the media](#no-embedded-profiles) |
 | A group tag is missing from the **Group tag** list | [A group tag you expect is not offered](../autopilot.md#group-tag-not-offered) |
+| "GitHub temporarily limited downloads from this network. ..." or "The interactive Autopilot registration assistant is not available for this Foundry release. ..." | [Interactive download unavailable](#interactive-download-unavailable) |
+| "The interactive Autopilot registration assistant could not be installed on this device. ..." | [Interactive download failed](#interactive-install-failed) |
 | "Hardware hash upload unavailable", or "Autopilot hardware hash upload skipped because ..." | [Upload unavailable](#hardware-hash-upload-unavailable) |
 | "Failed step: Provision Autopilot" and, under **View error details**, "Autopilot hardware hash capture failed: ..." | [Capture failed](#hardware-hash-capture-failed) |
 | "Failed step: Provision Autopilot" with another reason under **View error details** | [Another reason](#step-fails-other-reason) |
@@ -24,6 +26,25 @@ The files named under **Collect** are described in [Evidence files](#evidence-fi
 - **Cause:** Foundry Deploy found no profile on the media.
 - **Fix:** the administrator checks the profiles table and its **Default** column on **Windows Autopilot > JSON profile**, then creates the media again.
 - **Collect:** `FoundryDeploy.log`.
+
+## "The interactive Autopilot registration assistant is not available for this Foundry release." <a href="#interactive-download-unavailable" id="interactive-download-unavailable"></a>
+
+- **Where:** **Check deployment setup**, in interactive mode, before the disk is erased. The full messages are "The interactive Autopilot registration assistant is not available for this Foundry release. Check your connection and retry, or recreate the boot media. See the deployment log for details." and "GitHub temporarily limited downloads from this network. Wait a few minutes, then start the deployment again."
+- **Cause:** before it touches the disk, Foundry Deploy checks that the matching Foundry Autopilot Interactive download is available on GitHub, from the same Foundry release as Foundry Deploy.
+  - First message: the device cannot reach GitHub, or GitHub does not offer the download for this release.
+  - Second message: GitHub limits the downloads of the network of the device, which is common when many devices share one public address.
+- **Fix:**
+  1. Check that the device reaches GitHub: see [Network endpoints](../../reference/network-endpoints.md).
+  2. Second message: wait a few minutes, then start the deployment again. Spread the deployments if many devices start together.
+  3. If the first message returns although the network is correct, the administrator updates Foundry OSD and creates the media again.
+- **Collect:** `FoundryDeploy.log`.
+
+## "The interactive Autopilot registration assistant could not be installed on this device." <a href="#interactive-install-failed" id="interactive-install-failed"></a>
+
+- **Where:** step **Prepare Autopilot assistant**, which fails. The deployment stops on **Deployment failed**, with "Failed step: Provision Autopilot". Windows is already on the disk.
+- **Cause:** Foundry Deploy could not download Foundry Autopilot Interactive into the installed Windows, or could not unpack it, after trying 3 times.
+- **Fix:** check the network connection, then deploy again: see [Deploy again after a failure](../deployment.md#deploy-again).
+- **Collect:** the text of **View error details** and `FoundryDeploy.log`.
 
 ## "Hardware hash upload unavailable" <a href="#hardware-hash-upload-unavailable" id="hardware-hash-upload-unavailable"></a>
 
@@ -100,14 +121,14 @@ If you deploy anyway, **Register Autopilot device** is skipped with the reason "
   4. To register this device without deploying again, import `AutopilotHWID.csv` in your tenant.
 - **Collect:** `AutopilotUploadResult.json` (`failureCode` and `message`) and `FoundryDeploy.log`.
 
-**Other results of the upload.** The same step is also skipped with one of these reasons after the import request was sent. The upload window of the interactive mode shows the same messages, with a wait of 15 minutes instead of 10.
+**Other results of the upload.** The same step is also skipped with one of these reasons after the import request was sent. The registration window of the interactive mode reports the same cases with its own messages, listed in [After the restart](after-the-restart.md#upload-failed), with a wait of 15 minutes instead of 10.
 
 | Reason | Meaning | Fix |
 | --- | --- | --- |
 | "Imported Autopilot device did not appear in Windows Autopilot devices before the timeout." | The device was not listed in the tenant within 10 minutes. | Look for its serial number in your tenant a little later: the import can finish after Foundry stopped waiting. |
-| "Autopilot hardware hash import failed: \<error>." In the window: "Autopilot import failed. \<error>" | Your tenant refused the import. \<error> is the error name returned by Intune. | Search the error name in the Microsoft documentation of Windows Autopilot device import, correct the cause, then deploy again. |
+| "Autopilot hardware hash import failed: \<error>." | Your tenant refused the import. \<error> is the error name returned by Intune. | Search the error name in the Microsoft documentation of Windows Autopilot device import, correct the cause, then deploy again. |
 | "The hardware hash is visible in Windows Autopilot, but group tag assignment failed: \<reason>", "... but computer name and device property assignment failed: \<reason>" or "... was not confirmed before the timeout." | The device is registered. Only its group tag or its name is missing. | Check the device in your tenant, then set the group tag or the name there. |
-| "Multiple Windows Autopilot devices matched the captured serial number; device property reconciliation was skipped to avoid updating the wrong device." In the window: "... group tag reconciliation was skipped ..." | Several Windows Autopilot devices of the tenant have this serial number. Foundry changed none of them. | Delete the outdated record in your tenant, then deploy again. |
+| "Multiple Windows Autopilot devices matched the captured serial number; device property reconciliation was skipped to avoid updating the wrong device." | Several Windows Autopilot devices of the tenant have this serial number. Foundry changed none of them. | Delete the outdated record in your tenant, then deploy again. |
 
 For these four, collect `AutopilotUploadResult.json`: its `failureCode` names the case, for example `AutopilotDeviceTimedOut` or `AutopilotDeviceAmbiguous`.
 

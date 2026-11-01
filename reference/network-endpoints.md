@@ -36,7 +36,7 @@ Notes on this table:
 | --- | --- | --- | --- |
 | `www.msftconnecttest.com`, `www.msftncsi.com` | 80, HTTP | Internet check by Foundry Connect. It must get the expected answer, not a sign-in page | Yes, at least one of the two |
 | `www.msftconnecttest.com`, `www.google.com` | 80, HTTP | Clock correction by the Windows PE startup | For a correct clock in Windows PE, at least one of the two. Without them the firmware clock is kept |
-| `api.github.com`, `github.com`, `*.githubusercontent.com` | 443, HTTPS | Release lookup at every start, and download of Foundry Connect, Foundry Deploy and the post-installation application | Yes. See the note below. |
+| `api.github.com`, `github.com`, `*.githubusercontent.com` | 443, HTTPS | Release lookup at every start, and download of Foundry Connect, Foundry Deploy and the post-installation application. With the interactive Windows Autopilot upload, also the check and the download of Foundry Autopilot Interactive by Foundry Deploy | Yes. See the note below. |
 | `raw.githubusercontent.com` | 443, HTTPS | Catalogs of Windows releases and driver packs, read each time Foundry Deploy starts | Yes |
 | `dl.delivery.mp.microsoft.com` | 80, HTTP | Windows image | Yes, unless a custom Windows image is deployed |
 | `downloads.dell.com`, `ftp.hp.com`, `download.lenovo.com`, `download.microsoft.com` | 443, HTTPS | Driver packs for Dell, HP, Lenovo and Microsoft Surface | For the manufacturer of the driver pack selected |
@@ -54,15 +54,16 @@ Notes on this table:
 - Every start asks `api.github.com` which release to use. When GitHub cannot be reached once the network is ready, the startup stops before Foundry Deploy opens, because Foundry Deploy is not on the media. See [Windows PE startup](../foundry-connect/windows-pe-startup.md#what-needs-internet-access).
 - Driver pack addresses come from the catalog and all use HTTPS today.
 - Microsoft Update Catalog returns the download address of each file, and Foundry uses it as given, so the protocol of that download is Microsoft's choice.
+- With the interactive Windows Autopilot upload, Foundry Deploy downloads Foundry Autopilot Interactive from GitHub, straight into the installed Windows, and stops before it erases the disk when the download is unavailable. GitHub redirects the download to a host under `githubusercontent.com`. The Windows PE row above covers it.
 
 ## Target device after the restart
 
 | Host | Port and protocol | Used for | Required |
 | --- | --- | --- | --- |
-| `login.microsoftonline.com`, `graph.microsoft.com` | 443, HTTPS | Interactive Windows Autopilot hardware hash upload | When that method is used |
+| `login.microsoftonline.com`, `graph.microsoft.com` | 443, HTTPS | Interactive Windows Autopilot hardware hash upload: sign-in with a code, then Microsoft Graph requests, including the wait for the Autopilot profile | When that method is used |
 | Your domain controllers and DNS servers | Active Directory ports of your network | Domain Join | When Domain Join is used |
 
-For the interactive Windows Autopilot upload, the technician also opens `https://microsoft.com/devicelogin` on another device to sign in.
+For the interactive Windows Autopilot upload, the technician also signs in on another device, such as a phone, by scanning the QR code or by opening `https://microsoft.com/devicelogin`. That device needs access to the Microsoft sign-in pages; the target device does not.
 
 Foundry's post-installation step contacts no Foundry or telemetry host. Windows itself, Windows Autopilot enrollment and the software you install with post-installation actions have their own network requirements, which are documented by their publishers.
 

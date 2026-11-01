@@ -1,6 +1,6 @@
 # Windows Autopilot step
 
-On media prepared for Windows Autopilot, Foundry Deploy shows an **Autopilot** step between **Drivers** and **Summary**, then does the Autopilot work near the end of the deployment. With the interactive mode there is no wizard step: you upload the hardware hash yourself after the restart.
+On media prepared for Windows Autopilot, Foundry Deploy shows an **Autopilot** step between **Drivers** and **Summary**, then does the Autopilot work near the end of the deployment. With the interactive mode there is no wizard step: you register the device yourself after the restart.
 
 <figure>
   <img src="../.gitbook/assets/foundry-deploy-autopilot-01-step.png" alt="Autopilot step of Foundry Deploy on zero-touch media with Ready to upload hardware hash, the Group tag list and the Configuration details">
@@ -15,7 +15,7 @@ On media prepared for Windows Autopilot, Foundry Deploy shows an **Autopilot** s
 | --- | --- | --- |
 | JSON profile | **Autopilot** step: choose the profile | **Copy Autopilot profile** copies the profile into the installed Windows. |
 | Zero-touch hardware hash upload | **Autopilot** step: check the status and choose the group tag | **Register Autopilot device** reads the hardware hash, uploads it, then waits for the device to appear in the tenant. |
-| Interactive hardware hash upload | No step | **Prepare Autopilot assistant** prepares the window that opens after the restart. Nothing is uploaded yet: you [upload after the restart](#upload-the-hardware-hash-after-the-restart). |
+| Interactive hardware hash upload | No step | **Prepare Autopilot assistant** downloads Foundry Autopilot Interactive into the installed Windows, for the window that opens after the restart. Nothing is uploaded yet: you [register the device after the restart](#register-the-device-after-the-restart). |
 
 ## Complete the step
 
@@ -41,24 +41,40 @@ In **Steps**, the Autopilot step is the last one before **Finalize deployment**.
 - **When Register Autopilot device is skipped**, a skipped icon appears next to its name in **Steps** and the deployment still ends on **Deployment complete**. Windows is installed, but the device is not registered, or is registered without its group tag or name. Point at the step to read the reason in a tooltip, and note it before the restart.
 - **When the step fails**, the deployment stops on **Deployment failed**, which reads "Failed step: Provision Autopilot" for the three modes. For **Register Autopilot device** this happens when the file `PCPKsp.dll` of the installed Windows is missing, cannot be copied, cannot be registered or cannot be loaded. **Copy Autopilot profile** and **Prepare Autopilot assistant** are never skipped: any problem there stops the deployment.
 
+In interactive mode, the deployment checks before it touches the disk that the Foundry Autopilot Interactive download is available, and stops with a message if it is not. The device needs Internet access in Windows PE for this.
+
 Each reason is explained in [Windows Autopilot troubleshooting during deployment](../troubleshooting/autopilot/during-deployment.md).
 
-## Upload the hardware hash after the restart
+## Register the device after the restart
 
-Interactive mode only. After the restart, while Windows setup is still installing, the **Foundry Post-installation** console runs the line `Upload hardware hash to Windows Autopilot` and a window titled **Foundry OSD - Interactive hardware hash upload** opens in front of it. The window is in English. Windows setup waits until the window closes, for up to 60 minutes.
+Interactive mode only. After the restart, during Windows setup and before the first sign-in screens, the **Foundry Post-installation** console runs the line `Upload hardware hash to Windows Autopilot` and **Foundry Autopilot Interactive** opens full screen in front of it. The window has no title bar and follows the language and theme you used in Foundry Deploy. At the bottom of both pages it shows the manufacturer, model and serial number of the device, and the computer name when it is known. Windows setup waits for the window, for up to 120 minutes.
 
 <figure>
-  <img src="../.gitbook/assets/foundry-deploy-autopilot-02-device-code-sign-in.png" alt="Foundry OSD - Interactive hardware hash upload window showing a sign-in code and its countdown, in front of the Foundry Post-installation console during Windows setup">
-  <figcaption>Enter the code on another device. The code shown here is an example.</figcaption>
+  <img src="../.gitbook/assets/foundry-deploy-autopilot-02-interactive-sign-in.png" alt="Foundry Autopilot Interactive sign-in page with the sign-in address, a QR code, the sign-in code and its countdown, and the device details at the bottom">
+  <figcaption>Scan the QR code, or open the address on another device and type the code. The code shown here is an example.</figcaption>
 </figure>
 
-1. Check the network. While the window reads "Waiting for network connectivity.", connect the device: it retries by itself.
-2. On another device, open `https://microsoft.com/devicelogin`, enter the code shown in the window and sign in with your account. "Code expires in \<n> seconds." counts down; an expired code is replaced by a new one, so always use the code on screen.
-3. When the window changes to **Foundry OSD - Upload hardware hash**, choose the **Group tag**: **None**, a tag already used in the tenant, or **Custom** to type one in **Custom group tag**. As in the wizard, **None** removes the tag of a device that is already registered.
-4. Select **Upload**.
-5. Wait while the window reads "Waiting for device registration in Microsoft Intune.", for up to 15 minutes.
-6. When it reads "Continuing Windows setup in 10 seconds.", the upload has succeeded. The window closes by itself and Windows setup continues to its first-run screens (OOBE), without a restart. The window does not open again afterwards.
+1. **Sign in.** Check the network: while the window says the network is not available, connect the device. It tries again every 10 seconds. Then, on another device, scan the QR code, which opens the Microsoft sign-in page with the code already filled in. Or open the address shown, type the code and sign in with your account. When the countdown ends, the code and the QR code are replaced together, so always use what is on screen.
+2. When the window changes to **Register this device in Autopilot**, check **Signed in as**. Select **Use another account** to sign in again with another account.
+3. Choose the **Group tag**: **None**, a tag already used in the tenant, or **Custom** to type one in **Custom group tag**. If the window says "This device is already registered in Windows Autopilot", its current group tag is preselected: **None** removes it. The administrator can have **Custom** preselected for devices that are not registered yet.
+4. When the administrator offers it, type the **Assigned user (UPN)**, such as `user@contoso.com`, or leave it empty.
+5. Select **Register**. The window reports each stage, then waits for the device to appear in Windows Autopilot, for up to 15 minutes.
 
-If the upload fails, the reason stays in the window and **Upload** becomes available again: correct the cause, then select **Upload** again. If you close the window instead, the device is not registered, the console line shows `[Failed]` and Windows setup continues. See [Windows Autopilot troubleshooting after the restart](../troubleshooting/autopilot/after-the-restart.md).
+<figure>
+  <img src="../.gitbook/assets/foundry-deploy-autopilot-03-interactive-group-tag.png" alt="Foundry Autopilot Interactive registration page with the signed-in account, the Group tag list set to Custom, the Custom group tag box and the Register button">
+  <figcaption>Choose the group tag, then select <strong>Register</strong>.</figcaption>
+</figure>
+
+6. The window then reads "Waiting for the Autopilot profile assignment", for up to 20 minutes, while your tenant assigns the profile. Select **Continue without waiting** to stop waiting.
+7. When it reads "Registration completed" and "Continuing Windows setup in 10 seconds", the registration has succeeded. Select **Continue now** to go on at once. Windows setup then continues to its first-run screens (OOBE), without a restart.
+
+<figure>
+  <img src="../.gitbook/assets/foundry-deploy-autopilot-04-interactive-registration-success.png" alt="Foundry Autopilot Interactive after a successful registration, with Registration completed, the profile assignment result and the Continuing Windows setup countdown with the Continue now button">
+  <figcaption>After 10 seconds, or with <strong>Continue now</strong>, Windows setup continues.</figcaption>
+</figure>
+
+If the registration fails, the reason stays in the window and the controls become available again: correct the cause, then select **Register** again. The window gives explicit messages when the device is registered in another tenant, when it is a duplicate, when the account lacks an Intune role that can import Autopilot devices, and when the group tag, computer name or user could not be applied to a device that is registered. For a sign-in that fails, select **Retry** to get a new code.
+
+To leave without registering, select **Skip registration**, at the bottom of either page, or close the window with Alt+F4, then confirm. Windows setup continues and the device is not registered. If you skip while the registration is in progress, the device may still appear in Windows Autopilot: check your tenant. If you do nothing, the window ends by itself after 120 minutes, and Windows setup continues without registering the device. See [Windows Autopilot troubleshooting after the restart](../troubleshooting/autopilot/after-the-restart.md).
 
 Next: [Review and deploy](review-and-deploy.md) in the wizard, and [After the restart](after-the-restart.md) for everything else that happens after the restart.

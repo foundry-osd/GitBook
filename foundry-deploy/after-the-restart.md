@@ -88,7 +88,7 @@ Both lines are on screen from the first second, reading `Join: NotStarted; Place
 
 ## Windows Autopilot window
 
-With the interactive hardware hash upload, the line `Upload hardware hash to Windows Autopilot` opens the Autopilot window in front of this console, and the console waits until the window closes, for up to 60 minutes. See [Upload the hardware hash after the restart](autopilot.md#upload-the-hardware-hash-after-the-restart).
+With the interactive hardware hash upload, the line `Upload hardware hash to Windows Autopilot` opens the full-screen Foundry Autopilot Interactive window in front of this console, and the console waits until the window closes, for up to 120 minutes. See [Register the device after the restart](autopilot.md#register-the-device-after-the-restart).
 
 ## Hand over the device
 
