@@ -9,7 +9,7 @@ The reason is the line under the list of stages. On a failure, the console also 
 | Only "Foundry startup failed. See X:\Foundry\Logs for details." | [Foundry startup failed](#foundry-startup-failed) |
 | "The boot environment could not be initialized." | [The boot environment could not be initialized](#boot-environment-not-initialized) |
 | Yellow "Internet clock could not be resolved..." | [Internet clock could not be resolved](#internet-clock-not-resolved) |
-| Yellow "Online runtime verification failed..." | [Online runtime verification failed](#online-verification-failed) |
+| Yellow "... was repaired from release ..." | [Repaired from release](#repaired-from-release) |
 | "Foundry Connect could not load its configuration. Recreate the boot media." | [Foundry Connect could not load its configuration](#exit-code-22) |
 | "Foundry Connect could not start. Check the session log for details." | [Foundry Connect could not start](#exit-code-21) |
 | "Foundry Connect stopped unexpectedly. Check the session log for details." | [Foundry Connect stopped unexpectedly](#exit-code-23) |
@@ -33,7 +33,7 @@ The reason is the line under the list of stages. On a failure, the console also 
 ## "The boot environment could not be initialized." <a href="#boot-environment-not-initialized" id="boot-environment-not-initialized"></a>
 
 - **Where:** **Environment** shows **Failed**, a few seconds after the console appears.
-- **Cause:** The startup met an error before its first stage. A known cause is two Foundry USB drives connected at the same time: each has a partition labelled **Foundry Cache**, and the startup refuses to choose between them. The log then contains "Multiple Foundry Cache volumes are connected. Disconnect the other deployment media and restart."
+- **Cause:** The startup met an error before its first stage. A known cause is two Foundry USB drives connected at the same time: each has a partition labeled **Foundry Cache**, and the startup refuses to choose between them. The log then contains "Multiple Foundry Cache volumes are connected. Disconnect the other deployment media and restart."
 - **Fix:**
   1. Unplug every Foundry USB drive except the one the device started from.
   2. Restart the device.
@@ -47,12 +47,12 @@ The reason is the line under the list of stages. On a failure, the console also 
 - **Fix:** Nothing, when only **Environment** shows the warning and the last stage ends with **Ready**: the clock is read again at **Clock and time zone**, after Foundry Connect. If **Clock and time zone** shows it too, or the time stays wrong, the device keeps its firmware clock: see [Wrong time or time zone](network.md#wrong-time-or-time-zone).
 - **Collect:** Nothing.
 
-## "Warning: Online runtime verification failed. Continuing with the original application provisioned on the boot media." <a href="#online-verification-failed" id="online-verification-failed"></a>
+## "Warning: Foundry.Connect was repaired from release v26.11.2.1." <a href="#repaired-from-release" id="repaired-from-release"></a>
 
-- **Where:** A yellow line under the elapsed time. **Network connection** ends with **Done (warning)**.
-- **Cause:** Same as the previous warning: GitHub could not be reached before Foundry Connect, so the copy of Foundry Connect from the media is used.
-- **Fix:** Nothing. Foundry Connect opens normally.
-- **Collect:** Nothing.
+- **Where:** A yellow line under the elapsed time. It names the application and the release, for example `Foundry.Connect` or `Foundry.PostInstall`.
+- **Cause:** The copy of that application on the media was missing or damaged. The console downloaded the same version again from the Foundry release that created the media, checked it, and used it.
+- **Fix:** Nothing for this start. If the line appears at every start, recreate the ISO or the PXE files, or [update the USB drive](../foundry-osd/media/update-usb.md), with the same version of Foundry OSD or a newer one.
+- **Collect:** `FoundryBootstrap.log` if the line keeps appearing. See [Logs and support information](logs-and-support.md).
 
 ## "Foundry Connect could not load its configuration. Recreate the boot media." <a href="#exit-code-22" id="exit-code-22"></a>
 
@@ -92,16 +92,16 @@ The reason is the line under the list of stages. On a failure, the console also 
 
 - **Where:** Usually **Deployment files** shows **Failed**. Sometimes **Network connection**.
 - **Cause:**
-  1. GitHub does not answer from Windows PE. Every start asks `api.github.com` which release to use, even when Foundry Deploy is already on the USB drive. The GitHub download hosts are needed too when nothing is kept: always from an ISO, and the first time or after a new release from a USB drive. The log contains "No authenticated original Foundry.Deploy payload is available. Recreate the boot media or connect to the network to obtain a verified runtime.", or the same line for `Foundry.PostInstall` on media without Domain Join: neither application is on the media, as [What each media type carries](../foundry-osd/media/README.md#what-each-media-type-carries) explains.
+  1. GitHub does not answer from Windows PE. Foundry Deploy is downloaded from the Foundry release that created the media: at every start from an ISO or PXE files, and from a USB drive the first time or after it was updated to another version. The log contains "No authenticated original Foundry.Deploy payload is available. Recreate the boot media or connect to the network to obtain a verified runtime.", or the same line for `Foundry.PostInstall` on media without Domain Join: neither application is on the media, as [What each media type carries](../foundry-osd/media/README.md#what-each-media-type-carries) explains.
   2. The device clock is wrong, and secure connections fail.
   3. Possibly, many devices start behind the same public IP address. Each start sends three or four anonymous requests to `api.github.com`, and GitHub can limit anonymous requests from one address. Foundry does not report this case separately: the log shows the same line as for cause 1.
-  4. At **Network connection**: the copy of Foundry Connect on the media is missing or failed its integrity check. The log contains "No authenticated original Foundry.Connect payload is available." or "Runtime archive SHA256 does not match the trusted digest."
+  4. At **Network connection**: the copy of Foundry Connect on the media is missing or failed its integrity check, and it could not be downloaded again because the device had no network access within a few seconds. The log contains "No authenticated original Foundry.Connect payload is available. Recreate the boot media or connect to the network to obtain a verified runtime."
 - **Fix:**
   1. Check that the network allows the hosts in [Network endpoints](../reference/network-endpoints.md). **Network ready** in Foundry Connect does not prove it.
   2. Check the date and time in the firmware of the device.
   3. Restart the device and try again.
   4. For a large batch behind one public address, space the starts or use a network with several public addresses.
-  5. If the failure is at **Network connection**, recreate the media.
+  5. If the failure is at **Network connection**, connect a network cable and restart, or recreate the ISO or the PXE files, or [update the USB drive](../foundry-osd/media/update-usb.md).
 - **Collect:** `FoundryBootstrap.log`. See [Logs and support information](logs-and-support.md).
 
 ## "Foundry Deploy stopped with exit code" and a number <a href="#foundry-deploy-stopped" id="foundry-deploy-stopped"></a>
@@ -123,12 +123,12 @@ The reason is the line under the list of stages. On a failure, the console also 
   3. If the stage was **Network connection**, restart the device: the startup no longer waits for Foundry Connect.
 - **Collect:** `FoundryBootstrap.log` and the log of the application. See [Logs and support information](logs-and-support.md).
 
-## "Application startup metadata is invalid. Recreate the boot media or refresh the runtime cache." <a href="#startup-metadata-invalid" id="startup-metadata-invalid"></a>
+## "Application startup metadata is invalid. Recreate the boot media or use Update USB." <a href="#startup-metadata-invalid" id="startup-metadata-invalid"></a>
 
 - **Where:** **Network connection** or **Deployment application** shows **Failed**.
 - **Cause:** The startup description inside the package of Foundry Connect or Foundry Deploy is invalid.
 - **Fix:**
-  1. Recreate the media with the current version of Foundry OSD.
+  1. Recreate the media with the current version of Foundry OSD, or [update the USB drive](../foundry-osd/media/update-usb.md).
   2. If it happens again, open a support issue with the log.
 - **Collect:** `FoundryBootstrap.log`. See [Logs and support information](logs-and-support.md).
 
@@ -149,8 +149,7 @@ Yellow lines that start with "Warning:" never stop the startup. The console show
 | "IANA timezone map could not be loaded. Boot will continue with UTC if needed." | A file used to convert the detected time zone could not be read. | Nothing. The time zone may stay on UTC. |
 | "WinPE timezone could not be updated. Boot will continue." | The time zone was found but could not be applied. | Nothing. Times in Windows PE stay in the previous zone. |
 | "Embedded deployment timezone configuration could not be read. Boot will continue with automatic detection." | The time zone setting on the media could not be read. | Recreate the media if it repeats. |
-| "The verified runtime could not be saved to the cache. This boot can continue." | The downloaded application could not be written to the USB drive. | Nothing for this start. If it repeats, check the USB drive. |
-| "Foundry Connect could not be updated. Continuing." | On a USB drive, the check for a newer Foundry Connect failed. | Nothing. |
+| "Online runtime verification failed. Continuing with the original application provisioned on the boot media.", "The verified runtime could not be saved to the cache. This boot can continue." or "Foundry Connect could not be updated. Continuing." | The media was created with an older Foundry OSD, which still looks for newer Foundry applications at each start, and that lookup or its copy to the USB drive failed. | Nothing for this start. Recreate the ISO or the PXE files, or [update the USB drive](../foundry-osd/media/update-usb.md), with the current Foundry OSD. |
 | "This application does not support startup confirmation. Readiness will remain unverified." | The console cannot confirm that the application opened. The last stage shows **Unverified** and the second line reads "Deployment application launched". | Check that the Foundry Deploy window is open. |
 | "Some network preparation was unavailable. Continuing.", "Early clock synchronization was unavailable. Continuing to Foundry Connect." or "Some system preparation was unavailable. Continuing." | A preparation step met an unexpected error. | Nothing, unless a later stage fails. |
 

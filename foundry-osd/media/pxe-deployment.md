@@ -34,7 +34,7 @@ Create the files a PXE server needs to start devices from the network with Found
 
 PXE servers that start Windows PE with wimboot, such as iPXE or FOG, can load the four files together; check in the documentation of your server under which name it expects the UEFI boot manager. The files start UEFI devices only.
 
-Foundry OSD replaces the files only once all four are written: a failed or cancelled creation keeps the previous ones.
+Foundry OSD replaces the files only once all four are written: a failed or canceled creation keeps the previous ones.
 
 ## What a PXE start delivers
 

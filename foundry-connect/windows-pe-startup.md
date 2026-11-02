@@ -14,32 +14,36 @@ Each of the five stages goes from **Waiting** to **In progress**, then **Done**.
 | Stage | Line under the list | What happens |
 | --- | --- | --- |
 | **Environment** | "Preparing network access" | Windows PE starts its wired and Wi-Fi services. |
-| **Network connection** | "Preparing Foundry Connect", then "Waiting for Foundry Connect" | Foundry Connect opens. When GitHub is reachable, its latest release is used: downloaded, or taken from a USB drive that already holds it. The stage stays **In progress** until you continue from [Foundry Connect](README.md). |
+| **Network connection** | "Preparing Foundry Connect", then "Waiting for Foundry Connect" | Foundry Connect opens from the copy on the media. The stage stays **In progress** until you continue from [Foundry Connect](README.md). |
 | **Clock and time zone** | "Preparing the system clock and time zone" | The clock is set from the Internet and the time zone is applied. |
-| **Deployment files** | "Preparing the deployment application", then "Preparing Foundry PostInstall" | Foundry Deploy and the post-installation application are downloaded, or taken from the USB drive. On a USB drive, the latest Foundry Connect is also fetched here and kept for the next start. |
+| **Deployment files** | "Preparing the deployment application", then "Preparing Foundry PostInstall" | Foundry Deploy is downloaded, or taken from the USB drive that kept it, with the post-installation application when the media does not carry it. |
 | **Deployment application** | "Starting Foundry Deploy" | Foundry Deploy opens. |
 
 During a download, the status reads **Downloading**, **Verifying**, then **Extracting**, with a progress bar. Startup is complete when the last stage shows **Ready** and the line under the list reads "Continue in Foundry Deploy."
 
 ## Waits that are normal
 
-- **Network connection**: up to 5 seconds on "Preparing Foundry Connect" without a network, longer when Foundry Connect is downloaded, then as long as you need in [Foundry Connect](network-readiness.md).
+- **Network connection**: a few seconds on "Preparing Foundry Connect", longer when its copy on the media must be [repaired](#which-version-runs), then as long as you need in [Foundry Connect](network-readiness.md).
 - **Clock and time zone**: up to 50 seconds on a network that filters the lookups (five lookups of 10 seconds).
 - **Deployment files**: a download can run for 15 minutes and is tried 3 times.
 - **Deployment application**: up to 2 minutes before the Foundry Deploy window appears.
 
-On a device with no cable, the Internet is out of reach before Foundry Connect. Two yellow lines can then appear and stay until the end:
+On a device with no cable, the Internet is out of reach before Foundry Connect. A yellow line can then appear and stay until the end: "Warning: Internet clock could not be resolved. Boot will continue without clock correction."
 
-- "Warning: Internet clock could not be resolved. Boot will continue without clock correction."
-- "Warning: Online runtime verification failed. Continuing with the original application provisioned on the boot media."
+It is expected on a Wi-Fi-only device. **Environment** ends with **Done (warning)** and the final screen adds a `Session:` and a `Log:` line. No action is needed when the last stage ends with **Ready**.
 
-Both are expected on a Wi-Fi-only device. The first two stages end with **Done (warning)** and the final screen adds a `Session:` and a `Log:` line. No action is needed when the last stage ends with **Ready**.
+## Which version runs
+
+The media runs Foundry Connect, Foundry Deploy and the post-installation application of the Foundry OSD version that created it, never a newer one. To use newer versions, update Foundry OSD, then recreate the ISO or the PXE files, or [update the USB drive](../foundry-osd/media/update-usb.md).
+
+If an application on the media is missing or damaged, the console downloads the same version again from the Foundry release that created the media and shows a yellow line such as "Warning: Foundry.Connect was repaired from release v26.11.2.1." Foundry Connect is checked before the network is set up, so its repair works only when the device already has network access within a few seconds. Without a valid copy, startup stops: see [This boot stage could not be completed](../troubleshooting/windows-pe-startup.md#boot-stage-not-completed).
+
+When a newer Foundry release is published, Foundry Connect and Foundry Deploy show a notice next to their version. It blocks nothing: see [New version available](../troubleshooting/network.md#new-version-available).
 
 ## What needs Internet access
 
-- **Foundry Connect** is on the media and starts without a network. When GitHub is reachable before it opens, its latest release is used instead.
-- **Foundry Deploy** is never on the media. It is downloaded from GitHub with the post-installation application, which the media carries only with Domain Join. An ISO downloads them at every start. A USB drive keeps the downloads on its **Foundry Cache** partition and repeats them only after a new release.
-- **Every start needs an answer from `api.github.com`**, which names the release to use, even when the applications are already on the USB drive. Without it, startup stops at **Deployment files**.
+- **Foundry Connect** is on the media and starts without a network.
+- **Foundry Deploy** is never on the media. It is downloaded from GitHub, from the release that created the media, with the post-installation application, which the media carries only with Domain Join. An ISO, PXE files and a USB drive created without cache download it at every start. A USB drive created with cache keeps Foundry Deploy on its **Foundry Cache** partition and reuses it at the next starts; it downloads it again only after the drive was updated to another version. When Foundry Deploy cannot be obtained, startup stops at **Deployment files**.
 
 See [Network endpoints](../reference/network-endpoints.md) for the hosts. What the media carries, and where, is in [What each media type carries](../foundry-osd/media/README.md#what-each-media-type-carries).
 

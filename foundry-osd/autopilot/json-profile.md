@@ -10,7 +10,7 @@
 ## Before you start
 
 - Have a profile to add, from one of two sources:
-  - a `.json` profile file on the workstation;
+  - a `.json` profile file on the PC;
   - an account that can read the Windows Autopilot deployment profiles of your tenant. **Download from tenant** signs you in and asks for the Microsoft Graph permissions `DeviceManagementServiceConfig.Read.All` and `User.Read`.
 - Decide whether the profiles may be readable on the media. They are stored as readable files unless **Password protection** is on. See [Password protection](../general.md#password-protection).
 

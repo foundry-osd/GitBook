@@ -52,7 +52,7 @@ The progress page shows the computer name, the overall percentage, the current s
 | Completed | Green check mark in a circle | The step did its work. **Stage driver installer**, **Stage firmware update**, **Prepare setup tasks** and **Prepare Autopilot assistant** only prepared work that runs in Windows after the restart. |
 | Skipped | Blue "i" in a circle | The step had nothing to do, or could not do optional work, and the deployment continues. Read the reason. |
 | Failed | Red cross in a circle | The deployment stopped at this step. See [Verify deployment](verify-deployment.md). |
-| Canceled | Cross without a circle | You cancelled while this step was running. |
+| Canceled | Cross without a circle | You canceled while this step was running. |
 
 The number of steps depends on the media configuration and can change while the deployment runs, for example when no driver is found. It does not measure the remaining time.
 
@@ -112,6 +112,6 @@ An image captured without `winre.wim` deploys correctly but leaves the device wi
 
 Select **Cancel** on the progress page, or close the window. There is no confirmation. Foundry shows "Cancellation requested. Waiting for the current operation to finish safely." and stops at once during a download or a check. Any other step finishes first.
 
-Cancelling does not undo anything. The screen then says "Deployment stopped. The target disk may contain an incomplete installation." whatever the moment of the cancellation. The disk was erased only if **Prepare target disk** had already run: check **Steps**. Foundry Deploy does not restart the device after a cancellation and cannot resume: to deploy again, restart the device from the deployment media.
+Canceling does not undo anything. The screen then says "Deployment stopped. The target disk may contain an incomplete installation." whatever the moment of the cancellation. The disk was erased only if **Prepare target disk** had already run: check **Steps**. Foundry Deploy does not restart the device after a cancellation and cannot resume: to deploy again, restart the device from the deployment media.
 
 Next: [Verify deployment](verify-deployment.md).

@@ -2,6 +2,13 @@
 
 Use **Customization > Unattend** to put your own Windows answer files on the deployment media. The technician picks one in Foundry Deploy, and Windows then uses it instead of the answer file Foundry generates. Foundry keeps the file's settings. When the deployment needs one, it adds its post-installation command to the deployment copy, the copy of your file that Foundry Deploy writes to the target device.
 
+{% hint style="warning" %}
+**Screenshot required**
+
+- **File:** `foundry-osd-unattend-01-catalog.png`
+- **Capture:** Show the **Unattend** page turned on, with one imported answer file showing "File validated.", the **Display name** of the selected file with **Rename** and **Remove**, the **Import files** and **Check files** buttons, and **Deployment default**.
+{% endhint %}
+
 ## Before you start
 
 - Turn on [Password protection](../general.md#password-protection). It is required for every custom answer file, even one without credentials.
@@ -16,7 +23,7 @@ Use **Customization > Unattend** to put your own Windows answer files on the dep
 4. Under **Deployment default**, choose the file selected by default in Foundry Deploy, or keep **Use Foundry settings**.
 5. Return to **Start** and [create the media](../media/README.md).
 
-Foundry keeps its own copy of each imported file in its [file library](../configuration-sharing/saved-passwords.md), so the source file is no longer needed. To use an updated file, remove the entry and import the file again.
+Foundry keeps its own copy of each imported file on this PC, as described in [Saved passwords and files](../configuration-sharing/saved-passwords.md), so the source file is no longer needed. To use an updated file, remove the entry and import the file again.
 
 **Check files** checks that the copy of every file is still readable and valid. A missing or invalid copy blocks media creation. **Remove** takes the selected file off the list; the source file is not deleted. If it was the default, choose another one under **Deployment default** before you create media.
 

@@ -52,7 +52,11 @@ Taking over continues the publication of another PC from this one, for example w
 2. In **Take over this folder**, check **Version found** and **Key found**, which are not verified yet.
 3. Type the **Current publication password**, decide on **Include passwords**, and select **Take over**. The dialog shows the same steps as **Publish**.
 
-Each follower must then [accept the new reference](follow-a-folder.md#accept-a-new-reference) once. The same dialog lets this PC publish again after a Windows password reset made it lose its publication data: see [Configuration sharing troubleshooting](../../troubleshooting/foundry-osd/configuration-sharing.md#passwords-needed).
+Each follower must then [accept the new reference](follow-a-folder.md#accept-a-new-reference) once.
+
+When the [network cache](../network-cache.md) is on, the dialog also reads "Boot media created before the takeover keep deploying the content already published until you recreate them." Devices started from older media keep using what the previous reference PC published to the shares, and do not see the changes this PC publishes. Create the ISO files, USB drives and PXE files again from this PC after the takeover.
+
+The same dialog lets this PC publish again after a Windows password reset made it lose its publication data: see [Configuration sharing troubleshooting](../../troubleshooting/foundry-osd/configuration-sharing.md#passwords-needed).
 
 ## Stop publishing
 

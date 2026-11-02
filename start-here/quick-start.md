@@ -1,10 +1,10 @@
 # Quick start
 
-This is the shortest path from an empty workstation to one deployed test device. It uses the default settings; optional features are listed in step 4 and can wait.
+This is the shortest path from a new PC to one deployed test device. It uses the default settings; optional features are listed in step 4 and can wait.
 
 ## Before you start
 
-- A workstation and a test device that meet the [Requirements](requirements.md).
+- A PC and a test device that meet the [Requirements](requirements.md).
 - A USB drive of at least 16 GB, or a virtual machine that can start from an ISO file.
 - A test device whose disk can be erased, connected to a network with Internet access. Ethernet is the simplest choice.
 - A test device that starts in UEFI mode. For a virtual machine, choose UEFI firmware (generation 2 in Hyper-V): on a device that starts in legacy BIOS mode, the deployment stops before the disk is erased.
@@ -19,7 +19,7 @@ Until this step succeeds, every page except **Home**, **ADK** and **Settings** i
 
 1. Open **ADK**.
 2. Select **Install Windows ADK and Windows PE Add-on**.
-3. Wait for the status **ADK is ready**. The download and installation can take several minutes and cannot be cancelled.
+3. Wait for the status **ADK is ready**. The download and installation can take several minutes and cannot be canceled.
 
 If the page shows another status or another button, see [ADK](../foundry-osd/adk.md).
 
@@ -39,6 +39,8 @@ Skip this step for a first test on Ethernet. Each feature is independent:
 - [Windows Autopilot](../foundry-osd/autopilot/README.md) or [Domain Join](../foundry-osd/domain-join/README.md): only one of the two can be active.
 - [Customization](../foundry-osd/customization/README.md): Windows releases offered, computer name, OOBE, post-installation actions and more.
 - [Password protection](../foundry-osd/general.md#password-protection): a password the technician must type before deploying.
+- [Network cache](../foundry-osd/network-cache.md): SMB shares, reached on port 445, from which devices read your imported content, Windows images and driver packs. A share that uses an account requires **Password protection**.
+- [Configuration sharing](../foundry-osd/configuration-sharing.md): a folder, such as a network share, through which several PCs running Foundry OSD use the same configuration.
 
 ## 5. Create the media
 

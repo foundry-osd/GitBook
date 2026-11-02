@@ -1,8 +1,8 @@
 # Requirements
 
-Foundry needs a Windows workstation to create the deployment media, the media itself, and a target device that can start from it. This page lists what each one must provide.
+Foundry needs a Windows PC to create the deployment media, the media itself, and a target device that can start from it. This page lists what each one must provide.
 
-## Administrator workstation
+## Administrator PC
 
 | Requirement | Detail |
 | --- | --- |
@@ -41,5 +41,7 @@ Each feature has its own prerequisites, listed on its page:
 
 - [Windows Autopilot](../foundry-osd/autopilot/README.md): a Microsoft Entra tenant with Microsoft Intune, and rights that depend on the method you choose.
 - [Domain Join](../foundry-osd/domain-join/README.md): an Active Directory domain that the device can reach after the restart, and a join account allowed to join computers.
+- [Network cache](../foundry-osd/network-cache.md): an SMB share that the devices and the PC running Foundry OSD reach on port 445, ideally with an account that can read, write and delete in it. **Password protection** is required when a share uses an account.
+- [Configuration sharing](../foundry-osd/configuration-sharing.md): a folder, such as a network share or a OneDrive or SharePoint folder, that the reference PC can write to and that the other PCs running Foundry OSD can read.
 
 Next: [Download and install](download.md).

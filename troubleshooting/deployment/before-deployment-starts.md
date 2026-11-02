@@ -51,18 +51,18 @@ Problems met when Foundry Deploy opens and in its wizard, up to the **Deploy** b
 
 **Where:** a window titled **Network cache not available**, before the wizard opens. It appears only on media where the administrator turned on the [network cache](../../foundry-osd/network-cache.md). Nothing has been erased.
 
-**Cause and fix:** Foundry Deploy checks the share of the device and the content published by Foundry OSD before the wizard opens. It stops with one of four messages, and each one says where the fix is.
+**Cause and fix:** Foundry Deploy checks the shares of the device and the content published by Foundry OSD before the wizard opens. It tries the shares of the IP scope of the device in order, skips a share whose published content is missing or out of date, and stops only when no share of the scope can be used. It then shows one of four messages, and each one says where the fix is.
 
 | Message | Cause | Fix | Retry |
 | --- | --- | --- | --- |
 | "No IP scope contains this device (*address*). In Foundry OSD, on the Network cache page, add a scope for this network or a 0.0.0.0/0 scope to a backup share." | The address of the device is in none of the IP scopes | The administrator adds the network to a scope, or adds a [backup scope](../../foundry-osd/network-cache.md#backup-scope-for-every-other-device) for every other device, then creates the media again | No |
 | "*Share* is not responding. On the server, check that the share is online and that port 445 is open." | The file server is down, the share is renamed or removed, port 445 is blocked between the device and the server, or the check of the published content on the share took more than 2 minutes | Bring the share back, or open port 445, then select **Retry** | Yes |
 | "*Account* cannot open *share*. In Foundry OSD, on the Network cache page, check the account password; on the server, check its permissions." Without an account: "*Share* refused this device. In Foundry OSD, on the Network cache page, set an account for this share; on the server, check the share permissions." | The server refused the account, because its password changed, or it has no right on the share or its folder; or the share requires an account and none is set | The administrator corrects the account on the Network cache page and on the server, then creates the media again | No |
-| "The published content on *share* is missing or incomplete. In Foundry OSD, on the Network cache page, select Publish." When part of the content is incomplete, a line under it starts with "Missing:" and names it, such as **Custom Windows images** or **Driver sets**; it does not appear when nothing is published yet | Nothing was published to this share yet, or a file of the publication is missing or changed | The administrator selects **Publish** in Foundry OSD, then you select **Retry** | Yes |
+| "The published content on *share* is missing or incomplete. In Foundry OSD, on the Network cache page, select Publish." When part of the content is incomplete, a line under it starts with "Missing:" and names it, such as **Custom Windows images** or **Driver sets**; it does not appear when nothing is published yet | No share of the scope has usable published content: nothing was published to the shares yet, or a file of the publication is missing or changed | The administrator selects **Publish** in Foundry OSD, then you select **Retry** | Yes |
 
 **Retry** checks again from the start, including the choice of the share, so you do not restart the device. It appears only for the causes that can resolve without new media. **Close** ends Foundry Deploy without deploying: use it, then restart the device from the media once the administrator has fixed the cause.
 
-When the administrator changed the reference PC of [configuration sharing](../../foundry-osd/configuration-sharing.md), a boot image created before the change keeps reading what the previous reference PC published. If the last message stays after **Publish**, the administrator recreates the media from the current reference PC. See [Security and credentials](../../reference/security-and-credentials.md#network-cache-publication).
+When the administrator changed the reference PC of [configuration sharing](../../foundry-osd/configuration-sharing.md), for example with **Take over**, a boot image created before the change keeps deploying what the previous reference PC published. If the last message stays after **Publish**, the administrator recreates the media from the current reference PC. See [Security and credentials](../../reference/security-and-credentials.md#network-cache-publication).
 
 **Collect:** the message, and the Foundry Deploy log: it names the share and the exact reason. See [Log locations](../logs-and-support.md#log-locations).
 
@@ -156,7 +156,7 @@ When the administrator changed the reference PC of [configuration sharing](../..
 **Fix:**
 
 1. To deploy now, select another file in **Answer file**, or **Use Foundry settings** if your organization allows it.
-2. First and third message: the administrator corrects the source file, selects **Refresh source** in [Unattend](../../foundry-osd/customization/unattend.md) and recreates the media. For Domain Join media, see [the same message in Domain Join troubleshooting](../domain-join.md#answer-file-refused).
+2. First and third message: the administrator corrects the source file, then in [Unattend](../../foundry-osd/customization/unattend.md) selects the entry, selects **Remove**, imports the corrected file with **Import files**, chooses it again under **Deployment default** if it was the default, and recreates the media. For Domain Join media, see [the same message in Domain Join troubleshooting](../domain-join.md#answer-file-refused).
 3. Missing default: the administrator chooses a file or **Use Foundry settings** under **Deployment default** on the same page, then recreates the media.
 
 **Collect:** the message and the name of the selected file. Do not attach the answer file: it can contain passwords.

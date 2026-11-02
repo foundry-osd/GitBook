@@ -1,6 +1,6 @@
 # Deployment workflow
 
-A Foundry deployment has six phases. The administrator does the first one on a workstation; the other five happen on the target device, where a technician makes a few choices and Foundry does the rest.
+A Foundry deployment has six phases. The administrator does the first one on a PC; the other five happen on the target device, where a technician makes a few choices and Foundry does the rest.
 
 <figure>
   <img
@@ -8,7 +8,7 @@ A Foundry deployment has six phases. The administrator does the first one on a w
     alt="Six phases of a Foundry deployment: prepare the media in Foundry OSD, Windows PE startup, Foundry Connect, choices and installation in Foundry Deploy, and setup after the restart"
   >
   <figcaption>
-    Phase 1 runs on the administrator workstation. Phases 2 to 5 run on the target device in Windows PE, and phase 6 in the installed Windows.
+    Phase 1 runs on the administrator PC. Phases 2 to 5 run on the target device in Windows PE, and phase 6 in the installed Windows.
   </figcaption>
 </figure>
 

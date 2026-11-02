@@ -76,6 +76,7 @@ While the window is open, Foundry Connect never continues by itself. After a win
 | **Tools > Open log file** | Read the Foundry Connect log in Notepad. |
 | **Tools > Export diagnostics...** | Save the logs to the USB drive for support. See [Export logs from Foundry Connect and Foundry Deploy](../troubleshooting/logs-and-support.md#export-logs-from-foundry-connect-and-foundry-deploy). |
 | **Tools > Export raw diagnostics...** | Save the logs without masking. Use it only when a support contact you trust asks for it. |
+| **About** | Open **About Foundry Connect**, which shows the version and the license of Foundry Connect. |
 
 Press Alt to show the underlined letter of each menu, then press that letter to open it. The version of Foundry Connect is shown at the top right of the window.
 

@@ -4,14 +4,14 @@ This page lists the hosts Foundry contacts, so that you can allow them on a fire
 
 Foundry OSD can use a proxy, set in [Settings](../foundry-osd/settings.md#proxy). That proxy is not passed to the deployment media: on the target device, Foundry Connect and Foundry Deploy connect without the proxy configured in Foundry OSD.
 
-## Administrator workstation (Foundry OSD)
+## Administrator PC (Foundry OSD)
 
 | Host | Port and protocol | Used for | Required |
 | --- | --- | --- | --- |
 | `github.com`, `api.github.com`, `*.githubusercontent.com` | 443, HTTPS | Updates of Foundry OSD; download of the Foundry applications that go on the media, when media is created | Yes |
 | `raw.githubusercontent.com` | 443, HTTPS | Catalog of Windows PE drivers and catalog of Windows releases | Yes for the catalog of Windows releases; the driver catalog when the media uses Dell or HP drivers, or Wi-Fi |
 | `go.microsoft.com` | 443, HTTPS | Download of the Windows ADK and Windows PE add-on installers | Until the ADK is installed |
-| `dl.delivery.mp.microsoft.com` | 80, HTTP | Windows package from which the boot image is built | When the catalog lists a newer package than the one kept in `%ProgramData%\Foundry\Cache\WinRe` |
+| `dl.delivery.mp.microsoft.com` | 80, HTTP | Windows package from which the boot image is built | When the catalog lists a newer package than the one Foundry OSD kept from an earlier build |
 | `downloads.dell.com` | 443, HTTPS | Dell drivers for Windows PE | When **Dell** is on in **WinPE drivers** |
 | `ftp.hp.com`, `ftp.ext.hp.com` | 443, HTTPS | HP drivers for Windows PE | When **HP** is on in **WinPE drivers** |
 | `catalog.s.download.windowsupdate.com` | 443, HTTPS | Intel Wi-Fi driver for Windows PE | When the media uses Wi-Fi |
@@ -36,7 +36,7 @@ Notes on this table:
 | --- | --- | --- | --- |
 | `www.msftconnecttest.com`, `www.msftncsi.com` | 80, HTTP | Internet check by Foundry Connect. It must get the expected answer, not a sign-in page | Yes, at least one of the two |
 | `www.msftconnecttest.com`, `www.google.com` | 80, HTTP | Clock correction by the Windows PE startup | For a correct clock in Windows PE, at least one of the two. Without them the firmware clock is kept |
-| `api.github.com`, `github.com`, `*.githubusercontent.com` | 443, HTTPS | Release lookup at every start, and download of Foundry Connect, Foundry Deploy and the post-installation application. With the interactive Windows Autopilot upload, also the check and the download of Foundry Autopilot Interactive by Foundry Deploy | Yes. See the note below. |
+| `api.github.com`, `github.com`, `*.githubusercontent.com` | 443, HTTPS | Download of Foundry Deploy, and of the post-installation application when the media does not carry it, from the release that created the media: at every start from an ISO or PXE files, the first time from a USB drive; download of an application again when its copy on the media is missing or damaged; check by Foundry Connect and Foundry Deploy for a newer Foundry release. With the interactive Windows Autopilot upload, also the check and the download of Foundry Autopilot Interactive by Foundry Deploy | Yes. See the note below. |
 | `raw.githubusercontent.com` | 443, HTTPS | Catalogs of Windows releases and driver packs, read each time Foundry Deploy starts | Yes |
 | `dl.delivery.mp.microsoft.com` | 80, HTTP | Windows image | Yes, unless a custom Windows image is deployed |
 | `downloads.dell.com`, `ftp.hp.com`, `download.lenovo.com`, `download.microsoft.com` | 443, HTTPS | Driver packs for Dell, HP, Lenovo and Microsoft Surface | For the manufacturer of the driver pack selected |
@@ -51,10 +51,10 @@ Notes on this table:
 Notes on this table:
 
 - Foundry downloads the Windows image from `dl.delivery.mp.microsoft.com` over HTTP (port 80), not HTTPS. A firewall that allows only port 443 to this host blocks the deployment.
-- Every start asks `api.github.com` which release to use. When GitHub cannot be reached once the network is ready, the startup stops before Foundry Deploy opens, because Foundry Deploy is not on the media. See [Windows PE startup](../foundry-connect/windows-pe-startup.md#what-needs-internet-access).
+- Foundry Deploy is not on the media: it is downloaded from the Foundry release that created the media, at every start from an ISO or PXE files, and the first time from a USB drive. When GitHub cannot be reached then, the startup stops before Foundry Deploy opens. See [Windows PE startup](../foundry-connect/windows-pe-startup.md#what-needs-internet-access).
 - Driver pack addresses come from the catalog and all use HTTPS today.
 - Microsoft Update Catalog returns the download address of each file, and Foundry uses it as given, so the protocol of that download is Microsoft's choice.
-- With the interactive Windows Autopilot upload, Foundry Deploy downloads Foundry Autopilot Interactive from GitHub, straight into the installed Windows, and stops before it erases the disk when the download is unavailable. GitHub redirects the download to a host under `githubusercontent.com`. The Windows PE row above covers it.
+- With the interactive Windows Autopilot upload, Foundry Deploy downloads Foundry Autopilot Interactive of its own release from GitHub, straight into the installed Windows, and stops before it erases the disk when the download is unavailable. GitHub redirects the download to a host under `githubusercontent.com`. The Windows PE row above covers it.
 
 ## Target device after the restart
 

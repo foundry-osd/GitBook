@@ -1,6 +1,6 @@
 # Foundry OSD documentation
 
-Foundry OSD is a Windows deployment tool: you prepare deployment media on a workstation, start a device from it, and Foundry installs Windows on that device through a guided workflow.
+Foundry OSD is a Windows deployment tool: you prepare deployment media on a PC, start a device from it, and Foundry installs Windows on that device through a guided workflow.
 
 <figure>
   <img src=".gitbook/assets/shared-overview-01-hero.png" alt="Foundry OSD">
@@ -24,7 +24,7 @@ You work with three applications. Only the first one is installed; the other two
 
 | Application | Runs on | Used by | What it does |
 | --- | --- | --- | --- |
-| Foundry OSD | Administrator workstation | Administrator | Holds your deployment settings and creates an ISO, a USB drive or PXE boot files. |
+| Foundry OSD | Administrator PC | Administrator | Holds your deployment settings and creates an ISO, a USB drive or PXE boot files. |
 | Foundry Connect | Target device, in Windows PE | Technician | Checks that the device has network access, with Ethernet or Wi-Fi. |
 | Foundry Deploy | Target device, in Windows PE | Technician | Guides the choice of disk, Windows and drivers, then installs Windows. |
 

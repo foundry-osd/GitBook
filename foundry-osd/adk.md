@@ -3,13 +3,13 @@
 The ADK page checks and installs the Windows ADK and the Windows PE add-on that Foundry needs to build media. Until it reports **ADK is ready**, every page except **Home**, **ADK** and **Settings** is disabled.
 
 <figure>
-  <img src="../.gitbook/assets/foundry-osd-adk-01-status-missing.png" alt="ADK page of Foundry OSD on a workstation without the Windows ADK: red status bar, ADK setup card with its install button, and Readiness details">
-  <figcaption>On a new workstation the page reports that the ADK is not installed and offers one button to install both components.</figcaption>
+  <img src="../.gitbook/assets/foundry-osd-adk-01-status-missing.png" alt="ADK page of Foundry OSD on a PC without the Windows ADK: red status bar, ADK setup card with its install button, and Readiness details">
+  <figcaption>On a new PC the page reports that the ADK is not installed and offers one button to install both components.</figcaption>
 </figure>
 
 ## Before you start
 
-- The workstation needs Internet access to Microsoft's download site. A proxy set in [Settings](settings.md#proxy) is used for this download.
+- The PC needs Internet access to Microsoft's download site. A proxy set in [Settings](settings.md#proxy) is used for this download.
 - Let any other Windows installation finish first.
 
 ## Install the components
@@ -18,7 +18,7 @@ The ADK page checks and installs the Windows ADK and the Windows PE add-on that 
 2. Read the status bar at the top of the page. The table below tells you what each status means.
 3. In the **ADK setup** card, select the button. Its label depends on what Foundry OSD found.
 4. If Windows shows an elevation prompt for the Microsoft installer, approve it.
-5. Wait. A dialog titled **Installing Windows ADK**, or **Upgrading Windows ADK**, shows the current step and locks the window. The operation cannot be cancelled.
+5. Wait. A dialog titled **Installing Windows ADK**, or **Upgrading Windows ADK**, shows the current step and locks the window. The operation cannot be canceled.
 6. When the dialog closes, check that the status bar shows **ADK is ready**.
 
 <figure>

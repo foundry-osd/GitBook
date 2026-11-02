@@ -42,7 +42,7 @@ The files named under **Collect** are described in [Evidence files](#evidence-fi
 
 - **Where:** the sign-in page, in place of the code, with a **Retry** button.
 - **Cause:**
-  - "The sign-in was declined.": the sign-in on the other device was refused or cancelled.
+  - "The sign-in was declined.": the sign-in on the other device was refused or canceled.
   - "The sign-in failed. Your organization may block device code sign-in with a Conditional Access policy.": your tenant does not allow this kind of sign-in. A new code does not help.
   - "A secure connection to Microsoft could not be established. A proxy that inspects HTTPS traffic or a wrong system clock can cause this.": the network inspects secure traffic, or the date and time of the device are wrong.
   - "The sign-in failed because Microsoft returned an unexpected response. A proxy or a captive portal on this network can cause this.": a sign-in page or a proxy answers in place of Microsoft.

@@ -6,8 +6,8 @@ Start from the stage where the work stopped, or from what you see on screen. Eac
 
 | Stage | Where it happens | Go to |
 | --- | --- | --- |
-| Foundry OSD starts, installs the ADK, updates, or shares its configuration | Workstation, Foundry OSD | [Foundry OSD application](foundry-osd.md) and its page [Configuration sharing](foundry-osd/configuration-sharing.md) |
-| Creating an ISO or a USB drive, and starting a device from it or from a PXE server | Workstation, Foundry OSD **Start**, then the target device | [Media creation](media-creation.md) and its page [USB drive and device start](media-creation/usb-drive-and-device-start.md) |
+| Foundry OSD starts, installs the ADK, updates, shares its configuration or publishes to the network cache | PC running Foundry OSD | [Foundry OSD application](foundry-osd.md) and its pages [Configuration sharing](foundry-osd/configuration-sharing.md) and [Network cache](foundry-osd/network-cache.md) |
+| Creating an ISO or a USB drive, and starting a device from it or from a PXE server | PC running Foundry OSD, **Start**, then the target device | [Media creation](media-creation.md) and its page [USB drive and device start](media-creation/usb-drive-and-device-start.md) |
 | The device starts from the media, up to the first Foundry window | Target device, Windows PE | [Windows PE startup](windows-pe-startup.md) |
 | Getting an Ethernet or Wi-Fi connection | Target device, Foundry Connect | [Network and Foundry Connect](network.md) |
 | Choosing the disk, Windows and drivers, then installing Windows | Target device, Foundry Deploy | [Windows deployment](deployment.md), in four pages: [before the deployment starts](deployment/before-deployment-starts.md), [checks and image download](deployment/checks-and-image-download.md), [after the disk is erased](deployment/after-disk-erase.md), [Windows does not start after deployment](deployment/device-does-not-start.md) |
@@ -29,6 +29,7 @@ Start from the stage where the work stopped, or from what you see on screen. Eac
 | A console window stays open in Windows PE and no Foundry window appears | [Windows PE startup](windows-pe-startup.md) |
 | Foundry Connect does not report the network as ready | [Network and Foundry Connect](network.md) |
 | **Network cache not available** when Foundry Deploy opens | [Before the deployment starts](deployment/before-deployment-starts.md#network-cache-not-available) |
+| A message of the **Network cache** page, or devices that do not read from or write to the network cache share | [Network cache](foundry-osd/network-cache.md) |
 | Foundry Deploy refuses the password, or closes as soon as it opens | [Before the deployment starts](deployment/before-deployment-starts.md) |
 | No disk is offered, a message under **Answer file**, or **Next** or **Deploy** stays unavailable | [Before the deployment starts](deployment/before-deployment-starts.md) |
 | **Deployment failed** with a "Failed step: ..." line | [Windows deployment](deployment.md), which sends you to the page for that step |

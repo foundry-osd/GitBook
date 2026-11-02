@@ -58,7 +58,7 @@ Which Wi-Fi networks are roamed:
 
 Leave Wi-Fi roaming off when a password typed by a technician must not stay on the device.
 
-The wired 802.1X profile is roamed only when Foundry Connect applied it. It is not roamed when the **802.1X** row of Foundry Connect shows **Unavailable**, for example after the technician cancelled the Deployment password, or when the profile was missing from the media or refused by Windows PE.
+The wired 802.1X profile is roamed only when Foundry Connect applied it. It is not roamed when the **802.1X** row of Foundry Connect shows **Unavailable**, for example after the technician canceled the Deployment password, or when the profile was missing from the media or refused by Windows PE.
 
 A failed import does not stop the deployment. See [The roamed profile does not connect after deployment](../../troubleshooting/network.md#roamed-profile-does-not-connect).
 

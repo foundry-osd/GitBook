@@ -1,10 +1,11 @@
 # Foundry OSD application troubleshooting
 
-This page covers the Foundry OSD application itself: opening and closing it, the **ADK** page, the options of **General**, updates, the proxy and the diagnostics export. Three kinds of problems are described elsewhere:
+This page covers the Foundry OSD application itself: opening and closing it, the **ADK** page, the options of **General**, updates, the proxy and the diagnostics export. Four kinds of problems are described elsewhere:
 
 | Where the problem shows | Go to |
 | --- | --- |
 | A status or a message of the **Configuration sharing** card of **Settings**, or of one of its dialogs: export, import, publish, follow | [Configuration sharing](foundry-osd/configuration-sharing.md) |
+| A message of the **Network cache** page, or of its **Publish** and **Clean up** dialogs | [Network cache](foundry-osd/network-cache.md) |
 | A message on a Customization page | The "If something goes wrong" section of that page: [Custom Windows images](../foundry-osd/customization/custom-windows-images.md#if-something-goes-wrong), [Unattend](../foundry-osd/customization/unattend.md#if-something-goes-wrong), [Machine naming](../foundry-osd/customization/machine-naming.md#if-something-goes-wrong), [Post-installation](../foundry-osd/customization/post-installation.md#if-something-goes-wrong) |
 | **Start**, while media is being created | [Media creation](media-creation.md) |
 
@@ -52,7 +53,7 @@ Foundry OSD writes its log to `%ProgramData%\Foundry\Logs\Foundry.log` and keeps
 
 **Where:** At startup, a dialog over the Foundry OSD window: "This PC runs Windows on ARM64, but this is the x64 version of Foundry OSD. Under emulation, the x64 version cannot reliably create boot media. Download and install the ARM64 version of Foundry OSD (Foundry-win-arm64.msi) from the latest release." Foundry OSD closes when you close the dialog.
 
-**Cause:** the x64 installer, `Foundry-win-x64.msi`, was installed on a Windows on Arm workstation. Windows runs it under emulation, where it cannot reliably create boot media.
+**Cause:** the x64 installer, `Foundry-win-x64.msi`, was installed on a Windows on Arm PC. Windows runs it under emulation, where it cannot reliably create deployment media.
 
 **Fix:**
 
@@ -76,7 +77,7 @@ Foundry OSD writes its log to `%ProgramData%\Foundry\Logs\Foundry.log` and keeps
 
 **Where:** **ADK** page, status bar. Full text: "Install the Windows ADK Deployment Tools and the Windows PE Add-on before configuring media creation."
 
-**Cause:** The Deployment Tools of the Windows ADK are not on this workstation.
+**Cause:** The Deployment Tools of the Windows ADK are not on this PC.
 
 **Fix:** Select **Install Windows ADK and Windows PE Add-on**. If the button reads **Upgrade Windows ADK and Windows PE Add-on**, Windows still lists an ADK whose files are gone; select it.
 
@@ -88,7 +89,7 @@ Foundry OSD writes its log to `%ProgramData%\Foundry\Logs\Foundry.log` and keeps
 
 **Cause:** The installed ADK is older or newer than the versions Foundry OSD accepts. **Readiness details** shows the **Installed version**. The rule is in [Supported versions](../reference/supported-versions.md#windows-adk).
 
-**Fix:** Select **Upgrade Windows ADK and Windows PE Add-on** (older version) or **Downgrade Windows ADK and Windows PE Add-on** (newer version). Both remove the installed ADK and add-on, then install the supported version. If another tool on the workstation needs the newer ADK, use a different workstation for Foundry OSD.
+**Fix:** Select **Upgrade Windows ADK and Windows PE Add-on** (older version) or **Downgrade Windows ADK and Windows PE Add-on** (newer version). Both remove the installed ADK and add-on, then install the supported version. If another tool on the PC needs the newer ADK, use a different PC for Foundry OSD.
 
 **Collect:** Nothing, unless the installation fails.
 
@@ -132,7 +133,7 @@ If only the architecture you do not use is incomplete, you can ignore the warnin
 
 **Fix:**
 
-1. Check Internet access. If the workstation uses a proxy, set it in **Settings** > **Proxy** and select **Test connection**.
+1. Check Internet access. If the PC uses a proxy, set it in **Settings** > **Proxy** and select **Test connection**.
 2. Wait for any other installation to finish, or restart Windows.
 3. Select the button again.
 
@@ -285,7 +286,7 @@ If only the architecture you do not use is incomplete, you can ignore the warnin
 
 **Cause:** Windows has no default browser to open the link.
 
-**Fix:** Copy the address shown in the dialog and open it in a browser, on this workstation or another one.
+**Fix:** Copy the address shown in the dialog and open it in a browser, on this PC or another one.
 
 **Collect:** Nothing.
 

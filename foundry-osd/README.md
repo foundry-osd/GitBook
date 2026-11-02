@@ -17,7 +17,7 @@ The pane on the left lists every page. Sections and items appear in this order:
 | **Network** | **Ethernet 802.1X**, **Wi-Fi** |
 | **Windows Autopilot** | **JSON profile**, **Zero-Touch**, **Interactive** |
 | **Domain Join** | **Zero-Touch**, **Interactive** |
-| **Customization** | **OS selection**, **Custom Windows images**, **Unattend**, **Machine naming**, **OOBE**, **Post-installation**, **Optional features**, **AppX removals**, **AI components** |
+| **Customization** | **OS selection**, **Custom Windows images**, **Custom drivers**, **Unattend**, **Machine naming**, **OOBE**, **Post-installation**, **Optional features**, **AppX removals**, **AI components** |
 
 The bottom of the pane holds five more items:
 
@@ -33,7 +33,7 @@ Each configuration page also has a **Documentation** button on the right of its 
 
 ## Home
 
-**Home** summarizes the state of the workstation. Its four tiles are shortcuts: **Open ADK**, **Configure media** (opens **General**), **Review and start** (opens **Start**) and **Open documentation**.
+**Home** summarizes the state of the PC. Its four tiles are shortcuts: **Open ADK**, **Configure media** (opens **General**), **Review and start** (opens **Start**) and **Open documentation**.
 
 Under **Media readiness status**, the **ADK** step shows **Ready** or the status of the ADK page, such as **ADK is not installed**. The **General** and **Start** steps show **Ready**, **Needs attention** or, while the ADK is not ready, **Requires ADK**. The **ADK** card gives the installed version and the state of the Windows PE add-on. The **Configuration** card gives the architecture, the Windows PE language, the Secure Boot signature and the drivers chosen in **General**.
 
@@ -62,12 +62,12 @@ An item without a badge is not configured, which is normal for a feature you do 
 | I want to ... | Go to |
 | --- | --- |
 | Install or repair the Windows ADK components | [ADK](adk.md) |
-| Choose the architecture, language, restart behaviour, drivers or a Deployment password | [General](general.md) |
+| Choose the architecture, language, restart behavior, drivers or a Deployment password | [General](general.md) |
 | Let devices share their downloads and the imported content through network shares | [Network cache](network-cache.md) |
 | Give Windows PE access to Wi-Fi or an 802.1X network | [Network](network/README.md) |
 | Register devices with Windows Autopilot | [Windows Autopilot](autopilot/README.md) |
 | Join devices to an Active Directory domain | [Domain Join](domain-join/README.md) |
 | Choose the Windows offered, name computers, shape OOBE, run my own actions | [Customization](customization/README.md) |
 | Create an ISO file, a USB drive or PXE files | [Start: create deployment media](media/README.md) |
-| Change the language, proxy, telemetry or update behaviour of the app | [Settings](settings.md) |
+| Change the language, proxy, telemetry or update behavior of the app | [Settings](settings.md) |
 | Save, move or share my deployment settings | [Configuration sharing](configuration-sharing.md) |

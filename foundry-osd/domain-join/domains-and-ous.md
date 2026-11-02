@@ -41,7 +41,7 @@ The search uses your Windows account, not the join account, so it does not prove
 3. In **Import OUs from the domain**, select the OUs to keep, or use **Select all** and **Clear**. Nothing is selected for you, and OUs already listed are not offered.
 4. Select **Add selected OUs**.
 
-The workstation must reach a domain controller of that domain over LDAP (TCP 389), and your Windows account must be allowed to read the directory. The search stops after 60 seconds and returns at most 4,096 OUs; the dialog says when the list is incomplete.
+The PC must reach a domain controller of that domain over LDAP (TCP 389), and your Windows account must be allowed to read the directory. The search stops after 60 seconds and returns at most 4,096 OUs; the dialog says when the list is incomplete.
 
 ## What the technician sees
 

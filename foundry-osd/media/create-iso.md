@@ -28,7 +28,7 @@ Create one `.iso` file to start virtual machines or to attach through a remote m
 | --- | --- |
 | Extension | The path must end with `.iso`. With an empty path or another extension, **Create ISO** stays unavailable and no message is shown. |
 | Location | A local folder or a network share written as `\\server\share\folder`. Foundry OSD checks the free space, quotas included, before it writes. |
-| Existing file | A file of the same name is replaced without a question, but only once the new ISO is complete. A failed or cancelled build keeps the previous file. |
+| Existing file | A file of the same name is replaced without a question, but only once the new ISO is complete. A failed or canceled build keeps the previous file. |
 | File system | An ISO larger than 4 GiB cannot be saved on a FAT32 drive, whatever its free space. Use NTFS or a network share. |
 
 ## What decides the boot image

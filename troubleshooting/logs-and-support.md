@@ -5,7 +5,7 @@ Collect the logs before you restart the device, recreate the media or deploy aga
 | Where you are | Do this |
 | --- | --- |
 | In Foundry Connect or Foundry Deploy, on the target device | [Export logs from Foundry Connect and Foundry Deploy](#export-logs-from-foundry-connect-and-foundry-deploy). If it fails, see [the export error](#export-failed) |
-| In Foundry OSD, on the workstation | [Export diagnostics from Foundry OSD](#export-from-foundry-osd) |
+| In Foundry OSD, on the PC | [Export diagnostics from Foundry OSD](#export-from-foundry-osd) |
 | In Windows after the restart | Copy the folders listed in [Log locations](#log-locations) |
 | In front of a device that no longer starts | [Collect logs from a device that does not start](#device-does-not-start) |
 
@@ -49,8 +49,8 @@ Use **Export raw diagnostics...** only when a support contact you trust asks for
 
 | Written by | Location | Files |
 | --- | --- | --- |
-| Foundry OSD | Workstation: `%ProgramData%\Foundry\Logs`, or `%LOCALAPPDATA%\Foundry\Logs` when the first cannot be written | `Foundry.log` |
-| Foundry OSD, ADK installation | Workstation: `%ProgramData%\Foundry\Logs\Adk` | One `.log` per setup stage |
+| Foundry OSD | PC running Foundry OSD: `%ProgramData%\Foundry\Logs`, or `%LOCALAPPDATA%\Foundry\Logs` when the first cannot be written | `Foundry.log` |
+| Foundry OSD, ADK installation | PC running Foundry OSD: `%ProgramData%\Foundry\Logs\Adk` | One `.log` per setup stage |
 | Windows PE startup | Windows PE: `X:\Foundry\Logs` | `FoundryBootstrap.log`, `FoundryBootstrap.Launcher.log` |
 | Foundry Connect | Windows PE: `X:\Foundry\Logs` | `FoundryConnect.log` |
 | Foundry Deploy | Windows PE: `X:\Foundry\Logs` | `FoundryDeploy.log` |

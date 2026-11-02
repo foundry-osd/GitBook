@@ -37,7 +37,7 @@ Otherwise, find the message below.
 
 **Cause:**
 
-- A row is marked **Needs attention**; the bar at the top reads **Readiness items needing action:** with a number. For **Custom images**, the row can read "One or more included custom images are not built for the selected media architecture. Exclude them or change the media architecture.": see [Custom Windows images](../foundry-osd/customization/custom-windows-images.md#choose-what-goes-on-the-media).
+- A row is marked **Needs attention**; the bar at the top reads **Readiness items needing action:** with a number. For **Custom Windows images**, the row can read "One or more included custom images are not built for the selected media architecture. Exclude them or change the media architecture.": see [Custom Windows images](../foundry-osd/customization/custom-windows-images.md#choose-what-goes-on-the-media).
 - On a PC that [follows a folder](../foundry-osd/configuration-sharing/follow-a-folder.md#new-versions), shared content is not installed yet. The bar reads **Waiting for shared content**, **Shared content could not be installed** or **Shared content is not available**, and every media action is unavailable until the synchronization completes. When it failed or stalled, see [Shared content missing](foundry-osd/configuration-sharing.md#content-failed).
 - For **Create ISO**: the **ISO output** path is empty or does not end with `.iso`.
 - For **Create USB**: no drive is selected, or the drive is smaller than 1 GB. A drive from 1 GB to 16 GB keeps the button available: **Create USB** then opens **USB creation is blocked**, and the drive can be [created without cache](../foundry-osd/media/create-usb.md#create-a-drive-without-cache). A drive sold as 16 GB is accepted, although the list shows it at about 14.5 GB.
@@ -58,13 +58,13 @@ If something changes between your click and the start, a dialog titled **ISO cre
 
 **Cause:** A newer Foundry OSD is available. This is advice, not a failure.
 
-**Fix:** Select **Apply update**, or **View update** while the update is not ready, then create the media with the new version. **Create anyway** uses the current version.
+**Fix:** Select **Apply update**, or **View update** while the update is not ready, then create the media with the new version. **Create anyway** uses the current version, and the media then runs the Foundry applications of that version.
 
 **Collect:** Nothing.
 
 ## "The selected WinPE keyboard layout is not installed on this computer." <a href="#keyboard-layout-missing" id="keyboard-layout-missing"></a>
 
-**Where:** **Start**, on the **WinPE boot language** row marked **Needs attention**, in the **ISO creation is blocked** or **USB creation is blocked** dialog, and under the **WinPE keyboard layout** card of **General**. A second form, "The selected WinPE keyboard layout is not available in the boot image.", appears in the **Operation complete** dialog with the layout and its file.
+**Where:** **Start**, on the **WinPE boot language** row marked **Needs attention**, in the **ISO creation is blocked** or **USB creation is blocked** dialog, and under the **WinPE keyboard layout** card of **General**. A second form, "The selected WinPE keyboard layout is not available in the boot image.", appears with the layout and its file when the creation fails, in the dialog titled **ISO creation failed**, **PXE file creation failed**, **USB media creation failed** or **USB media update failed**.
 
 **Cause:** The first form: the layout was chosen on another computer, then the configuration was imported or followed here, and this computer does not have it. The second form: the Windows PE image for this architecture does not contain the file of that layout.
 
@@ -118,7 +118,7 @@ For the second form, Foundry OSD could not read the working folders: check that 
 
 1. Add an exclusion for `%ProgramData%\Foundry` in your security software.
 2. Close imaging tools, terminals and File Explorer windows opened in that folder.
-3. Restart the workstation and create the media again. If it then reports "WinPE servicing is blocked...", see [the previous entry](#servicing-blocked).
+3. Restart the PC and create the media again. If it then reports "WinPE servicing is blocked...", see [the previous entry](#servicing-blocked).
 
 **Collect:** `Foundry.log` and `dism.log`.
 
@@ -144,7 +144,7 @@ For the second form, Foundry OSD could not read the working folders: check that 
 
 1. Open the [ADK](../foundry-osd/adk.md) page and repair or reinstall what it reports. The accepted version is in [Windows ADK](../reference/supported-versions.md#windows-adk).
 2. For the PCA2023 messages, you can instead turn off the **Secure Boot** switch of [General](../foundry-osd/general.md), which then reads **PCA 2011**.
-3. When the text contains "DISM mount replay:", the image mount is blocked on this workstation, usually by security software or the Windows image mount driver. Follow [Image files are locked](#access-blocked). If the text says the failure "did not reproduce", create the media again.
+3. When the text contains "DISM mount replay:", the image mount is blocked on this PC, usually by security software or the Windows image mount driver. Follow [Image files are locked](#access-blocked). If the text says the failure "did not reproduce", create the media again.
 
 **Collect:** `Foundry.log`, and the text shown after the message. For a mount failure, also `dism.log` and `%SystemRoot%\Logs\DISM\WimMountAdkSetup.log`.
 
@@ -157,10 +157,10 @@ For the second form, Foundry OSD could not read the working folders: check that 
 | "Failed to retrieve the WinPE driver catalog." | The catalog of Windows PE drivers |
 | "Failed to parse the WinPE driver catalog." | The same catalog: what was received cannot be read |
 | "Driver package download failed." or "Failed to download driver package." | A **Dell** or **HP** driver set, or the Intel Wi-Fi driver |
-| "Failed to prepare Foundry runtime payloads." or "Failed to provision Foundry runtime payloads." | The Foundry applications that go on the media |
+| "Failed to prepare Foundry runtime payloads." or "Failed to provision Foundry runtime payloads." | The Foundry applications of this Foundry OSD version that go on the media |
 | "The transfer timed out. Check your connection and try again." | Any of these downloads: no data arrived for two minutes |
 
-**Cause:** The workstation cannot reach a host this build needs.
+**Cause:** The PC cannot reach a host this build needs.
 
 - The [catalog](../reference/catalog.md) of Windows PE drivers on `raw.githubusercontent.com` is needed only with **Dell** or **HP** drivers, or Wi-Fi. The catalog of Windows images and the Windows 11 package are covered in [Windows RE is unavailable](#winre-unavailable).
 - The other hosts are GitHub and the download servers of Dell, HP and Microsoft.
@@ -168,7 +168,7 @@ For the second form, Foundry OSD could not read the working folders: check that 
 **Fix:**
 
 1. Open **Settings** > **Proxy**, set the proxy of your network, select **Test connection**, then **Apply**.
-2. Allow the workstation hosts listed in [Network endpoints](../reference/network-endpoints.md).
+2. Allow the hosts listed for the administrator PC in [Network endpoints](../reference/network-endpoints.md#administrator-pc-foundry-osd).
 3. Create the media again. Files already downloaded are reused.
 
 **Collect:** `Foundry.log`.
