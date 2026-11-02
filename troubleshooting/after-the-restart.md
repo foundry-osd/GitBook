@@ -1,6 +1,6 @@
 # After the restart troubleshooting
 
-Find what you see, then go to its section. In the **Foundry Post-installation** console, the status line is the coloured line under the list of actions, above `Log:`.
+Find what you see, then go to its section. In the **Foundry Post-installation** console, the status line is the colored line under the list of actions, above `Log:`.
 
 ## Symptom index
 

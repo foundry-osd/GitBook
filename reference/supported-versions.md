@@ -7,7 +7,7 @@ This page lists what Foundry runs on and what it deploys. Foundry OSD checks mos
 | Component | Supported | Notes |
 | --- | --- | --- |
 | Foundry OSD | The latest published release | Foundry OSD updates itself. See [Settings](../foundry-osd/settings.md#update-app). |
-| Administrator workstation | Windows 10 or Windows 11, on x64 or ARM64 | The application declares Windows 10 version 1809 as its minimum. One installer per architecture: see [Download and install](../start-here/download.md). |
+| Administrator PC | Windows 10 or Windows 11, on x64 or ARM64 | The application declares Windows 10 version 1809 as its minimum. One installer per architecture: see [Download and install](../start-here/download.md). |
 | Windows ADK and Windows PE add-on | Version `10.1.26100.9457` or a later revision of `10.1.26100` | See [Windows ADK](#windows-adk) below. |
 | Deployment media | x64 or ARM64 | The architecture is chosen in [General](../foundry-osd/general.md) and must match the target device. |
 | USB drive | 16 GB or larger | A drive sold as 16 GB is accepted; Foundry OSD needs at least 14 billion bytes for **Create USB**. A smaller drive can only be [created without cache](../foundry-osd/media/create-usb.md#create-a-drive-without-cache). |

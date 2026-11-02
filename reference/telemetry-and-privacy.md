@@ -22,11 +22,11 @@ Telemetry is a small number of events, each sent at a precise moment:
 | Sent by | When | Content |
 | --- | --- | --- |
 | Foundry OSD | Once a day, when the app starts | Proxy method, and the authentication mode of a manual proxy |
-| Foundry OSD | When a media creation ends, whether it succeeded, failed or was cancelled | Result, duration, failure details, and the options chosen for the media |
+| Foundry OSD | When a media creation ends, whether it succeeded, failed or was canceled | Result, duration, failure details, and the options chosen for the media |
 | Foundry OSD | When **Publish** on the Network cache page ends | How the publication ended, and the number of shares |
 | Windows PE startup | Only when the startup fails | Failure category, last stage reached, elapsed time, and which application failed to start |
 | Foundry Connect | When the network is ready | Connection type, what was available, Wi-Fi security type |
-| Foundry Deploy | When a deployment ends, whether it succeeded, failed or was cancelled | Result, duration, failure details; device manufacturer and model; the Windows, driver pack and options used |
+| Foundry Deploy | When a deployment ends, whether it succeeded, failed or was canceled | Result, duration, failure details; device manufacturer and model; the Windows, driver pack and options used |
 
 Every event also carries a format version, the application name and version, its build type, the environment it runs in, its language and architecture, a session identifier, and an anonymous installation identifier created at random by Foundry OSD. The two lists below give every field of each event.
 
@@ -38,14 +38,14 @@ Values are switches, counts or fixed choices. No name, path or text you typed is
 
 | Area | What is reported |
 | --- | --- |
-| Result | ISO, USB or PXE files, creation or update; success or failure; duration; an identifier of the operation |
+| Result | ISO, USB or PXE files; for a USB drive, creation, creation without cache or update; success or failure; duration; an identifier of the operation |
 | Failure | Name of the step that failed; kind, reason and code of the failure, each from a fixed list; name of the tool that failed and its exit code. Empty when the creation succeeds |
-| Media | Architecture; Windows PE language; Windows RE boot image, or standard Windows PE when the media fell back to it; Secure Boot signature; USB partition style and format mode; whether the Foundry applications that the media uses are release builds |
+| Media | Architecture; Windows PE language; Windows PE keyboard layout, the default of the language or the layout chosen; Windows RE boot image, or standard Windows PE when the media fell back to it; Secure Boot signature; USB partition style and format mode; whether the Foundry applications that the media uses are release builds |
 | Drivers | Whether Dell, HP or an Additional WinPE driver folder is used; the number of custom driver sets included, never their names |
 | Network cache | Whether it is on; the number of shares, IP scopes and accounts, never their paths, addresses or user names; how the publication of the imported content to the shares ended: published to every share, to some of them, to none, or not attempted |
 | General | Whether Password protection is on; restart mode and delay; whether a Windows PE time zone is set, and which one; the Windows ADK version and whether Foundry supports it |
 | Network | Whether any network option is on. Ethernet 802.1X: whether it is on, whether a profile is set, whether a certificate is required and whether one is set. Wi-Fi: whether it is on, whether a profile, a network name, a passphrase, an enterprise profile and an enterprise certificate are set, whether a certificate is required, and the security type. Whether profiles and private keys are kept for the installed Windows, overall and for each of Ethernet and Wi-Fi |
-| Windows Autopilot | Whether it is on, and the method |
+| Windows Autopilot | Whether it is on, and the method; with the interactive upload, whether **Preselect Custom for the group tag** and **Offer assigned user** are on |
 | Domain Join | Whether it is on, the method, the number of domains (up to 32) and of OUs, whether a shared join account is used, whether a default OU is set |
 | Customization | Whether any customization page is on |
 | OS selection | Whether it is on and whether anything is set; number of allowed languages, releases, editions and licensing types; whether a default is set for each of the four; the default update offset (0 to 11) |
@@ -68,9 +68,9 @@ Values are switches, counts or fixed choices. No name, path or text you typed is
 | --- | --- |
 | Foundry OSD, once a day | Proxy method; authentication mode of a manual proxy |
 | Foundry OSD, Publish | An identifier of the operation; how the publication ended: published to every share, to some of them, to none, or not attempted; the number of shares |
-| Windows PE startup failure | Failure category; last stage reached; elapsed time; which application failed, its exit code and how far its start went; version of the application that failed, release or development build, and architecture; ISO or USB media |
-| Foundry Connect, network ready | Connection type (Ethernet or Wi-Fi); whether Ethernet and Wi-Fi were available; Wi-Fi security type and the origin of the Wi-Fi connection; whether Ethernet 802.1X and Wi-Fi were set on the media; ISO or USB media; release or development build of Foundry Connect |
-| Foundry Deploy, result | Success, cancellation, duration, number of steps completed, an identifier of the operation; whether it was a test run and the session mode; ISO or USB media; release or development build of Foundry Deploy |
+| Windows PE startup failure | Failure category; last stage reached; elapsed time; which application failed, its exit code and how far its start went; version of the application that failed, release or development build, and architecture; ISO or USB drive |
+| Foundry Connect, network ready | Connection type (Ethernet or Wi-Fi); whether Ethernet and Wi-Fi were available; Wi-Fi security type and the origin of the Wi-Fi connection; whether Ethernet 802.1X and Wi-Fi were set on the media; ISO or USB drive; release or development build of Foundry Connect |
+| Foundry Deploy, result | Success, cancellation, duration, number of steps completed, an identifier of the operation; whether it was a test run and the session mode; ISO or USB drive; release or development build of Foundry Deploy |
 | Foundry Deploy, failure | Name of the step and of the operation that failed; kind, code and reason of the failure |
 | Foundry Deploy, network cache | Whether a share was used: off, no matching IP scope, connected or unavailable; when the cache stops the deployment at start, why: no IP scope contains the device, the share does not respond, the share refused the account, nothing is published or the published content is incomplete; whether the device could write to the share; the number of downloads read from it |
 | Foundry Deploy, device | Manufacturer, model, and whether it is a virtual machine |
@@ -98,7 +98,7 @@ PostHog necessarily sees the public IP address a connection comes from. Foundry 
 3. Restart Foundry OSD. Remote diagnostics stops at once, telemetry at the next start.
 4. Create your media again, or update your USB drives. Each media keeps the choice that was in force when it was created.
 
-The choice is stored for the workstation and applies to every Windows account that uses Foundry OSD on it. To block the data at the network level instead, block `eu.i.posthog.com`: Foundry works without it. See [Network endpoints](network-endpoints.md).
+The choice is stored for the PC and applies to every Windows account that uses Foundry OSD on it. To block the data at the network level instead, block `eu.i.posthog.com`: Foundry works without it. See [Network endpoints](network-endpoints.md).
 
 ## Before you share files
 

@@ -61,6 +61,7 @@
 * [Troubleshooting](troubleshooting/README.md)
   * [Foundry OSD application](troubleshooting/foundry-osd.md)
     * [Configuration sharing](troubleshooting/foundry-osd/configuration-sharing.md)
+    * [Network cache](troubleshooting/foundry-osd/network-cache.md)
   * [Media creation](troubleshooting/media-creation.md)
     * [USB drive and device start](troubleshooting/media-creation/usb-drive-and-device-start.md)
   * [Windows PE startup](troubleshooting/windows-pe-startup.md)

@@ -1,6 +1,6 @@
 # Move from Settings backup and sync
 
-Configuration sharing replaces **Settings backup and sync** and its deployment profiles. The first time Foundry OSD starts with Configuration sharing, it reads the old profile store, `%LocalAppData%\Foundry\Profiles`, and moves the configuration you were using into the new storage, once for each Windows account. Nothing is deleted.
+Configuration sharing replaces **Settings backup and sync** and its deployment profiles. When Foundry OSD finds deployment profiles from an earlier installation for your Windows account, it moves the profile you were using into your configuration, once for each Windows account. Nothing is deleted.
 
 ## What is moved by itself
 
@@ -29,7 +29,7 @@ Old shared folders cannot be followed. On the PC whose configuration the others 
 Only the profile in use is moved. The other profiles saved on this PC can be imported one at a time:
 
 1. In **Settings**, expand **Configuration sharing** and select **Import** on **Import configuration**.
-2. Under **Profiles from the previous version**, select the profile and select **Open**. The list, with the hint "These profiles were saved on this PC before the update.", shows only the profiles that the migration did not apply. It is hidden when none remain.
+2. Under **Profiles from the previous version**, select the profile and select **Open**. The list, with the hint "These profiles were saved on this PC before the update.", shows only the profiles that Foundry OSD did not move by itself. It is hidden when none remain.
 3. Read the preview and select **Import**. It replaces the current configuration.
 
 A profile that your Windows account can no longer open, for example after its saved Windows credentials were removed, shows "This configuration cannot be opened by this Windows user."
@@ -42,7 +42,7 @@ A `Connection.foundryprofile` connection file imports the configuration it holds
 
 ## What stays on the disk
 
-The old profiles in `%LocalAppData%\Foundry\Profiles`, their entries in Windows Credential Manager and the old shared folders are left as they are. Foundry OSD no longer writes them, and reads the old profiles only for **Profiles from the previous version**.
+The old profiles, their entries in Windows Credential Manager and the old shared folders are left as they are. Foundry OSD no longer writes them, and reads the old profiles only for **Profiles from the previous version**.
 
 ## Related
 

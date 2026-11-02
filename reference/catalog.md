@@ -17,7 +17,7 @@ Foundry does not carry a list of Windows images or driver packs. It reads three 
 | --- | --- |
 | Host | `raw.githubusercontent.com`, over HTTPS |
 | Refresh | Once a day, without a Foundry update |
-| Copy on the media or the workstation | None. The catalog is downloaded each time. |
+| Copy on the media or the PC | None. The catalog is downloaded each time. |
 | Proxy | Foundry OSD uses the proxy set in [Settings](../foundry-osd/settings.md). That proxy is not used on the target device. |
 
 Without access to the host, Foundry Deploy cannot list Windows images or driver packs, and Foundry OSD cannot build media that needs a driver catalog. For the boot image, Foundry OSD reuses the Windows RE it kept from an earlier build: see [What decides the boot image](../foundry-osd/media/create-iso.md#what-decides-the-boot-image). The full list of hosts, including those of the downloads, is in [Network endpoints](network-endpoints.md).
@@ -31,7 +31,7 @@ Without access to the host, Foundry Deploy cannot list Windows images or driver 
 | Language and edition | One entry for each language and edition |
 | License channel | Retail (`RET`) or volume (`VOL`) |
 | File name and size | The `.esd` file that Foundry Deploy downloads |
-| Hash | SHA-256 for 25H2 and 26H2, SHA-1 for 24H2. Foundry Deploy checks the download against it. |
+| Checksum | A checksum that Foundry Deploy verifies after the download |
 | Address | A download address on a Microsoft server |
 
 26H2 follows the media Microsoft currently publishes. 25H2 and 24H2 stay at the last builds recorded in the catalog. Foundry Deploy offers only the releases it supports, even if the catalog lists others: see [Supported versions](supported-versions.md) and [Select Windows](../foundry-deploy/operating-system.md).
@@ -44,13 +44,13 @@ Without access to the host, Foundry Deploy cannot list Windows images or driver 
 | Windows target | The Windows release and architecture the pack is made for |
 | Package | Version, file name, format, size and download address on the manufacturer's server |
 | Role | A complete driver pack, or a supplement such as the Intel Wi-Fi driver for Windows PE |
-| Hash | SHA-256, when the manufacturer publishes one |
+| Checksum | A checksum that Foundry Deploy verifies, when the manufacturer publishes one |
 
 ## What is not in the catalogs
 
 - **Microsoft Update Catalog**, the other driver source of Foundry Deploy, is queried directly at Microsoft. See [Select a driver pack](../foundry-deploy/driver-pack.md).
 - [Custom Windows images](../foundry-osd/customization/custom-windows-images.md) come from the media you created, not from a catalog.
-- The Additional WinPE driver folder of [General](../foundry-osd/general.md) and the folders of [Custom drivers](../foundry-osd/customization/custom-drivers.md) are copied from the workstation.
+- The Additional WinPE driver folder of [General](../foundry-osd/general.md) and the folders of [Custom drivers](../foundry-osd/customization/custom-drivers.md) are copied from the PC.
 
 ## Related
 

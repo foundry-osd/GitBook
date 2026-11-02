@@ -37,21 +37,19 @@ Details the table leaves out:
 A file listed as "Not removed by Foundry" stays readable to local administrators of the deployed device. If it holds a secret, remove it with your own process once Windows setup has finished, and never attach it to a support request.
 {% endhint %}
 
-## How secrets are encrypted on the media
+## How secrets are protected on the media
 
-| Item | Value |
+| Item | Fact |
 | --- | --- |
-| Encryption of each secret | AES-256-GCM, with its own 96-bit nonce and a 128-bit authentication tag |
-| Deployment key | Random, 256 bits, generated each time media is created |
-| With Password protection | The deployment key is itself encrypted with a key derived from the Deployment password. It is not stored in clear on the media |
-| Key derivation | PBKDF2 with HMAC-SHA-256, 600,000 iterations, random 128-bit salt |
-| Without Password protection | The deployment key is stored on the media, so every deployment secret is recoverable |
-| Network secrets | Encrypted like the other secrets. Password protection is required for them |
+| Deployment key | Each media gets a new deployment key when it is created. The deployment secrets of that media are encrypted with it |
+| With Password protection | The deployment key is protected by the Deployment password. It is not stored in clear on the media |
+| Without Password protection | The deployment key is stored on the media, so every deployment secret on the media is recoverable |
+| Network secrets | Protected like the other secrets. Password protection is required for them |
 | Deployment password length | 8 characters minimum. Foundry OSD warns below 12 |
 
 The Deployment password is never written to the media. Once a technician has typed it, in Foundry Connect or Foundry Deploy, Foundry can use the secrets for the rest of that session.
 
-## Saved on the workstation
+## Saved on this PC
 
 Foundry OSD saves the configuration, its passwords and the files you select for your Windows account on this PC. The list is in [Saved passwords and files](../foundry-osd/configuration-sharing/saved-passwords.md).
 
@@ -85,12 +83,11 @@ On a follower, every setting of the publication is read-only. Only the ISO outpu
 
 With the [network cache](../foundry-osd/network-cache.md) on, Foundry Deploy takes the custom Windows images, custom driver sets and post-installation content from the shares, and runs them on the device. Foundry OSD signs what it publishes, so that a device runs only what an administrator of Foundry OSD published.
 
-- **Who signs.** The reference PC of [configuration sharing](../foundry-osd/configuration-sharing.md), or the single PC when configuration sharing is not used. Each of them signs the index of its publication with a signing key saved, encrypted, for its Windows account on that PC. A follower never signs and never publishes an index.
-- **Where the signature is written.** In the index `Foundry\Index\<key id>.json` of each share, next to the content.
-- **What the media trust.** The public key of the signing PC: the key of the reference PC or the standalone PC, or, on a follower, the reference key it already accepted. The media carry only this public key. The private key never leaves the signing PC and is never written to the media or to a share.
-- **What a device refuses.** Foundry Deploy stops at start, and runs nothing, when the index is missing, was not signed by the trusted key, is damaged, is older than the index known when the media was created, or points to a file that is missing or changed. Someone who can write to a share cannot make devices run content that Foundry OSD did not publish, or go back to an older publication; they can only delete files, in which case devices stop at start with [Network cache not available](../troubleshooting/deployment/before-deployment-starts.md#network-cache-not-available).
+- **Who publishes.** The reference PC of [configuration sharing](../foundry-osd/configuration-sharing.md), or the single PC when configuration sharing is not used. Its signing key is saved for its Windows account on that PC and never leaves it: it is not written to the media or to a share. A follower never publishes.
+- **What the media trust.** Each media trusts only the PC that published for it: the reference PC or the single PC, or, on a follower, the reference PC it already accepted.
+- **What a device refuses.** Devices use only content published by that PC, and reject anything changed on the share. Foundry Deploy does not use a share whose published content is missing, was not published by the trusted PC, is damaged, is older than the publication known when the media was created, or includes a file that is missing or changed. It tries the next share of the device's IP scope, and stops at start, running nothing, when no share of the scope is usable. Someone who can write to a share cannot make devices run content that Foundry OSD did not publish, or go back to an older publication; they can only delete files, in which case devices use another share of their scope or stop at start with [Network cache not available](../troubleshooting/deployment/before-deployment-starts.md#network-cache-not-available).
 - **Reading.** Anyone who can read a share can read the published content, including post-installation scripts. Give read access to the devices and to the administrators only, and keep secrets out of scripts.
-- **When the reference PC changes.** The new reference PC signs with its own key and writes its own index beside the previous one. Media created before the change keep trusting the previous reference PC and read its last publication, until you create them again; media created after the change trust the new reference PC. Two PCs running Foundry OSD without configuration sharing coexist the same way, the media of each one reading the publication of the PC that created them. The same applies when a PC loses its saved data, for example after a reset of its Windows password: it signs with a new key, and media created before keep reading its last publication with the previous key. Create the media again.
+- **When the reference PC changes.** The new reference PC publishes beside the previous one. Media created before the change keep trusting the previous reference PC and read its last publication, until you create them again; media created after the change trust the new reference PC. Two PCs running Foundry OSD without configuration sharing coexist the same way, the media of each one reading the publication of the PC that created them. The same applies when a PC loses its saved data, for example after a reset of its Windows password: media created before keep reading its last publication. Create the media again.
 
 ## Windows Autopilot credentials
 
@@ -107,7 +104,7 @@ Facts that follow from this:
 - The media carries the tenant ID, the client ID of the app registration and the certificate PFX with its password. It carries no administrator credential and no sign-in token.
 - Foundry Deploy signs in as the app registration with the certificate private key. No technician signs in. The certificate is decrypted in memory and is not copied to the deployed device.
 - Anyone who obtains the PFX and its password can use the permission of the app registration until the certificate expires or is removed from the registration.
-- On the workstation, Foundry OSD keeps a copy of the PFX and its password for your Windows account: see [Saved on the workstation](#saved-on-the-workstation).
+- On the PC, Foundry OSD keeps a copy of the PFX and its password for your Windows account: see [Saved on this PC](#saved-on-this-pc).
 
 How to create the certificate, choose its validity (12 months at most), select it again, renew it and remove it is described in [Zero-touch hardware hash upload](../foundry-osd/autopilot/zero-touch-hardware-hash.md).
 
@@ -115,7 +112,7 @@ How to create the certificate, choose its validity (12 months at most), select i
 
 During a deployment with Domain Join, Foundry Deploy writes the join account and its password for the domain being joined to `credentials.bin` on the target disk, as listed in the table above. Foundry deletes the file as soon as the join has used it. If the deletion fails or the join was interrupted, the Foundry console after the restart keeps showing `Cleanup: Pending`: see [Cleanup stays Pending](../troubleshooting/domain-join.md#cleanup-pending).
 
-Diagnostic exports never include a file named `credentials.bin`. A copy saved under another name is not recognized, so do not copy or rename that file. How the join accounts are kept in Foundry OSD is described in [Saved on the workstation](#saved-on-the-workstation).
+Diagnostic exports never include a file named `credentials.bin`. A copy saved under another name is not recognized, so do not copy or rename that file. How the join accounts are kept in Foundry OSD is described in [Saved on this PC](#saved-on-this-pc).
 
 ## Recommended practices
 

@@ -9,7 +9,7 @@
 
 ## Before you start
 
-- **An account for the sign-in on the workstation.** With it, Foundry OSD creates an app registration and an enterprise application in your tenant and grants admin consent for one permission. Check with your tenant administrator which account may do this: the permissions the sign-in asks for are listed under [Windows Autopilot credentials](../../reference/security-and-credentials.md#windows-autopilot-credentials).
+- **An account for the sign-in on the PC.** With it, Foundry OSD creates an app registration and an enterprise application in your tenant and grants admin consent for one permission. Check with your tenant administrator which account may do this: the permissions the sign-in asks for are listed under [Windows Autopilot credentials](../../reference/security-and-credentials.md#windows-autopilot-credentials).
 - **The Deployment Tools of the Windows ADK.** Media creation takes `oa3tool.exe` from them. See [ADK](../adk.md).
 - **A safe place for the certificate file and its password**, such as a password vault.
 - **Password protection, recommended.** This mode works without it, but anyone who holds the media can then use the certificate it carries. See [Password protection](../general.md#password-protection).

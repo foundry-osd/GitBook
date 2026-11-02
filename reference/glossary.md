@@ -12,7 +12,7 @@ Windows Assessment and Deployment Kit, a free set of Microsoft tools. Foundry OS
 
 ## Administrator
 
-In this documentation, the person who prepares deployment media in Foundry OSD on a workstation.
+In this documentation, the person who prepares deployment media in Foundry OSD on a PC.
 
 ## Answer file
 
@@ -30,9 +30,13 @@ A list published by the Foundry project and read over the Internet: the Windows 
 
 The set of deployment options chosen in Foundry OSD, with their passwords and files. Each Windows account on a PC has one. **Configuration sharing** exports, imports, publishes and follows it.
 
+## Custom driver set
+
+A folder of `.inf` drivers imported on the **Custom drivers** page of Foundry OSD. The technician can choose it in Foundry Deploy as the driver source of the deployed Windows. See [Custom drivers](../foundry-osd/customization/custom-drivers.md).
+
 ## Deployment media
 
-The ISO file or USB drive created by Foundry OSD, from which a target device starts.
+The ISO file, USB drive or PXE files created by Foundry OSD, from which a target device starts.
 
 ## Deployment password
 
@@ -50,13 +54,17 @@ Making the target device a member of an Active Directory domain.
 
 A package of drivers published by a manufacturer for one model or family of devices, installed with Windows during the deployment.
 
+## Follower
+
+A PC that follows the folder of a reference PC in **Configuration sharing**. It applies the configuration that the reference PC publishes, and its shared settings are read-only. See [Follow a folder](../foundry-osd/configuration-sharing/follow-a-folder.md).
+
 ## Foundry Autopilot Interactive
 
 The full-screen window, opened during Windows setup after the restart, in which the technician signs in and registers the device in Windows Autopilot. It is used by the interactive hardware hash upload. See [Windows Autopilot step](../foundry-deploy/autopilot.md#register-the-device-after-the-restart).
 
 ## Foundry Cache
 
-The second volume of a USB drive created by Foundry OSD, labelled `Foundry Cache`. It keeps downloaded files, so that later deployments from the same drive do not download them again.
+The second volume of a USB drive created by Foundry OSD, labeled `Foundry Cache`. It keeps downloaded files, so that later deployments from the same drive do not download them again. A USB drive created without cache has no such volume.
 
 ## Foundry Connect
 
@@ -68,7 +76,7 @@ The application in which the technician chooses the disk, Windows and drivers, a
 
 ## Foundry OSD
 
-The desktop application, installed on the administrator workstation, that holds the deployment settings and creates the deployment media.
+The desktop application, installed on the administrator PC, that holds the deployment settings and creates the deployment media.
 
 ## Hardware hash
 
@@ -77,6 +85,10 @@ Data computed from the hardware of a device, which identifies it to Windows Auto
 ## Interactive
 
 A method that asks the technician for something during the deployment, such as a sign-in or the join account. The opposite is zero-touch.
+
+## IP scope
+
+An address range of the **Network cache** page: a subnet, a range or a single address. It chooses the shares that a device in that range uses, in order. See [Network cache](../foundry-osd/network-cache.md#ip-scopes).
 
 ## Join account
 
@@ -106,9 +118,17 @@ Two Microsoft certificates used to sign boot files for Secure Boot. PCA 2023 is 
 
 The step that runs in the installed Windows after the restart and before the first sign-in. It completes Foundry's own tasks, then runs the actions the administrator added on the **Post-installation** page.
 
+## Publication password
+
+The password that protects a configuration published to a folder in **Configuration sharing**. Followers need it, with the folder path, to read the publication. See [Publish to a folder](../foundry-osd/configuration-sharing/publish-to-a-folder.md).
+
 ## PXE
 
 Preboot Execution Environment: a way for a device to start from the network instead of from a disk or a USB drive.
+
+## Reference PC
+
+The PC that publishes its configuration to a folder in **Configuration sharing**. It is the only PC that publishes to that folder, and to the network cache shares, for the PCs that follow it. Another PC becomes the reference PC by taking the folder over. See [Publish to a folder](../foundry-osd/configuration-sharing/publish-to-a-folder.md).
 
 ## Specialize pass
 
@@ -144,7 +164,7 @@ The console window that appears first when a device starts from the media. It pr
 
 ## Windows RE
 
-Windows Recovery Environment: the recovery tools stored in the file `winre.wim` of a Windows image. Foundry builds every Windows PE boot image from the Windows RE of the newest Windows 11 package and keeps it in `%ProgramData%\Foundry\Cache\WinRe`.
+Windows Recovery Environment: the recovery tools stored in the file `winre.wim` of a Windows image. Foundry builds every Windows PE boot image from the Windows RE of the newest Windows 11 package, and keeps a copy for the next builds.
 
 ## Zero-touch
 

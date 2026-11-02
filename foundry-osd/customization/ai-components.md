@@ -41,7 +41,7 @@ C:\Windows\Temp\Foundry\Logs\PreOobe\appx-servicing.log
 
 ## Limits
 
-- **No compatibility check.** The page does not tell you whether a Windows version or edition honours a policy. Foundry writes the policy in every case.
+- **No compatibility check.** The page does not tell you whether a Windows version or edition honors a policy. Foundry writes the policy in every case.
 - **Recall.** **Disable Windows Recall by policy** leaves the Recall component in Windows. To add or remove the component, set **Recall** on [Optional features](optional-features.md). The two settings are independent.
 - **Paint and Notepad.** **Disable Paint AI features** and **Disable Notepad AI features** have no purpose when the same media removes Paint and Notepad through [AppX removals](appx-removals.md).
 - **Fixed list.** You cannot add an action. Use a script in [Post-installation](post-installation.md) for anything else.

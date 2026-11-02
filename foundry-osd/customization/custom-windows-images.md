@@ -11,7 +11,7 @@
 
 - **Source.** A `.wim` file, or an ISO that contains `sources\install.wim` or `sources\install.esd`. Split `.swm` images are not supported.
 - **Disk space.** Foundry OSD copies the image into `%LOCALAPPDATA%\Foundry\Images\Custom`. That drive needs free space of at least the size of the WIM or, for an `install.esd`, the expanded size of all its indexes plus 1 GB.
-- **Media type.** The page states: "With PXE boot, custom images need the network cache. Without it, use ISO or USB media." With the [network cache](../network-cache.md) on and at least one share, the note disappears: ISO and USB media no longer carry the images, and every device, PXE included, takes them from its share.
+- **Media type.** The page states: "With PXE boot, custom images need the network cache. Without it, use ISO or USB media." With the [network cache](../network-cache.md) on and at least one share, the note disappears: ISO files and USB drives no longer carry the images, and every device, PXE included, takes them from its share.
 - **Captured images.** Keep the recovery image in the capture, as described [below](#capture-an-image-that-keeps-windows-recovery).
 
 ## Import an image
@@ -41,7 +41,7 @@ Select an image row to list its indexes under **Selected image**, then use the c
 Below the tables, **Default image source in Foundry Deploy** decides which source Foundry Deploy shows first: **Foundry catalog**, the default, or **Custom Windows images**. Setting a preferred image does not change it. The technician then chooses the image and the index, with your preferred ones preselected: see [Select Windows](../../foundry-deploy/operating-system.md).
 
 - While the page is **Enabled**, Foundry OSD creates media only if at least one image is included and every included image shows the **Status** **Available**, even when the default source is **Foundry catalog**. To create media without custom images, switch the page off.
-- Every index of an included image must be built for the media **Architecture** set in [General](../general.md): `x64` media takes `x64` indexes, `arm64` media takes `arm64` indexes. Otherwise **Start** marks **Custom images** as **Needs attention** with "One or more included custom images are not built for the selected media architecture. Exclude them or change the media architecture." Check the **Architecture** column under **Selected image**. An index whose architecture Foundry cannot read does not block the media.
+- Every index of an included image must be built for the media **Architecture** set in [General](../general.md): `x64` media takes `x64` indexes, `arm64` media takes `arm64` indexes. Otherwise **Start** marks **Custom Windows images** as **Needs attention** with "One or more included custom images are not built for the selected media architecture. Exclude them or change the media architecture." Check the **Architecture** column under **Selected image**. An index whose architecture Foundry cannot read does not block the media.
 - Each media creation starts with the stage "Verifying custom image sources…", which checks every included image again and takes time with large images.
 - Excluding or removing the preferred image clears the preference.
 - **Remove** removes the image from the configuration and deletes its library copy. The original file and existing media are not changed.
@@ -50,7 +50,7 @@ Below the tables, **Default image source in Foundry Deploy** decides which sourc
 
 A [publication](../configuration-sharing/publish-to-a-folder.md) carries the image files: followers download them in the background. An [exported file](../configuration-sharing/export-and-import.md) carries the list of images and their defaults, not the image files. After such an import on another PC, or after the library copy is lost, the image shows **Missing**.
 
-Import the same `.wim` file again, under a name that is not yet used. Foundry OSD recognizes the image by the SHA-256 hash of the WIM, and the existing row keeps its name, inclusion and defaults. This is not guaranteed for an image converted from `install.esd`, because the conversion writes a new WIM file.
+Import the same `.wim` file again, under a name that is not yet used. Foundry OSD recognizes the same image file, and the existing row keeps its name, inclusion and defaults. This is not guaranteed for an image converted from `install.esd`, because the conversion writes a new WIM file.
 
 ## Add an image to a USB drive by hand
 

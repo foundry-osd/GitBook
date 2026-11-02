@@ -9,7 +9,7 @@
 
 ## Before you start
 
-Foundry OSD cannot test any of these from the workstation. Check them with one real deployment.
+Foundry OSD cannot test any of these from the PC. Check them with one real deployment.
 
 - **A technician account in your tenant.** The window signs the technician in to Foundry's own Microsoft Entra application and asks for permission to read and write Windows Autopilot device settings in Intune (the delegated Microsoft Graph permission `DeviceManagementServiceConfig.ReadWrite.All`). The account must also hold an Intune role that is allowed to import Windows Autopilot devices. Foundry does not check either point: check with your tenant administrator.
 - **Sign-in with a code is allowed.** The technician signs in with a code, on a phone or another computer. If a Conditional Access policy blocks this kind of sign-in, the window cannot register the device.

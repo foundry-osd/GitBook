@@ -40,7 +40,7 @@ Where each log is and how to export it is in [Logs and support information](logs
   - "The domain could not be searched. Check that this computer can reach it and that your Windows account can read it, or add OUs manually.": no domain controller was found, or the directory refused your account.
   - "The search timed out. You can add OUs manually.": no answer in time.
   - "The OUs were not added. They belong to a different domain than the selected one." or "Two OUs share the same internal ID. Remove one and add it again.": the result does not fit the list.
-- **Fix:** check from the workstation that the domain name resolves and that a domain controller answers on TCP 389. Otherwise select **Add** and type each OU.
+- **Fix:** check from the PC that the domain name resolves and that a domain controller answers on TCP 389. Otherwise select **Add** and type each OU.
 - **Collect:** the Foundry OSD log line that starts with `Domain destination discovery ended.` See [Log locations](logs-and-support.md#log-locations).
 
 A different case: when the import dialog opens with "Only some of the OUs could be listed. You can still add the ones shown.", the domain holds more than 4,096 OUs or answered partially. The OUs shown can be added; type the missing ones with **Add**.

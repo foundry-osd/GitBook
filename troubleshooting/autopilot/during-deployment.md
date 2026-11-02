@@ -29,7 +29,7 @@ The files named under **Collect** are described in [Evidence files](#evidence-fi
 
 ## "The interactive Autopilot registration assistant is not available for this Foundry release." <a href="#interactive-download-unavailable" id="interactive-download-unavailable"></a>
 
-- **Where:** **Check deployment readiness**, in interactive mode, before the disk is erased. The full messages are "The interactive Autopilot registration assistant is not available for this Foundry release. Check your connection and retry, or recreate the boot media. See the deployment log for details." and "GitHub temporarily limited downloads from this network. Wait a few minutes, then start the deployment again."
+- **Where:** **Check deployment setup**, in interactive mode, before the disk is erased. The full messages are "The interactive Autopilot registration assistant is not available for this Foundry release. Check your connection and retry, or recreate the boot media. See the deployment log for details." and "GitHub temporarily limited downloads from this network. Wait a few minutes, then start the deployment again."
 - **Cause:** before it touches the disk, Foundry Deploy checks that the matching Foundry Autopilot Interactive download is available on GitHub, from the same Foundry release as Foundry Deploy.
   - First message: the device cannot reach GitHub, or GitHub does not offer the download for this release.
   - Second message: GitHub limits the downloads of the network of the device, which is common when many devices share one public address.

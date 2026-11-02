@@ -36,4 +36,4 @@ On a PC that publishes or follows a folder, the publication password is lost too
 ## Related
 
 - [Configuration sharing](../configuration-sharing.md)
-- [Security and credentials](../../reference/security-and-credentials.md#saved-on-the-workstation)
+- [Security and credentials](../../reference/security-and-credentials.md#saved-on-this-pc)

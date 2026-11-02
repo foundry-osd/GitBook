@@ -30,7 +30,7 @@ Messages appear in the **USB media creation failed** or **USB media update faile
 **Fix:**
 
 1. Select **Refresh**.
-2. Connect the drive directly to a USB port of the workstation, another one if needed.
+2. Connect the drive directly to a USB port of the PC, another one if needed.
 3. If the card names the ADK, open the [ADK](../../foundry-osd/adk.md) page.
 
 A drive smaller than 16 GB is listed. With it selected, **Create USB** opens **USB creation is blocked**, which reads "The selected USB drive is too small for a cache. Use a USB drive of at least 16 GB, or select Create without cache from the arrow of Create USB.": [create the drive without cache](../../foundry-osd/media/create-usb.md#create-a-drive-without-cache), or use a larger drive. A drive sold as 16 GB is accepted, although the list shows it at about 14.5 GB. With a drive smaller than 1 GB, **Create USB** stays unavailable.
@@ -116,9 +116,9 @@ A drive smaller than 16 GB is listed. With it selected, **Create USB** opens **U
 | Second line | Cause | Fix |
 | --- | --- | --- |
 | "The USB disk has insufficient capacity for BOOT, custom images and runtime payloads." | The drive is too small for what you included. | Use a larger drive, or include fewer [custom images](../../foundry-osd/customization/custom-windows-images.md) |
-| "The data volume has insufficient free space for the custom images and runtime payloads." or `PreOobe.InsufficientMediaSpace` | During an update, the cache partition lacks room. Content of earlier builds is never removed. | Free space on **Foundry Cache**, or create the drive again |
-| "A media input is on the target disk or its physical disk could not be verified." | A source file is stored on the USB drive being written. | Keep the sources on the workstation |
-| "A custom image input no longer matches its verified length and SHA256." or `PreOobe.PackageContentChanged` | A file of the local library changed after its import. | Import the image again, or the content again in **Edit action** of [Post-installation](../../foundry-osd/customization/post-installation.md) |
+| "The data volume has insufficient free space for the custom images and runtime payloads." | During an update, the cache partition lacks room. Content of earlier builds is never removed. | Free space on **Foundry Cache**, or create the drive again |
+| "A media input is on the target disk or its physical disk could not be verified." | A source file is stored on the USB drive being written. | Keep the sources on the PC that runs Foundry OSD |
+| "A custom image input no longer matches its verified length and SHA256.", or a second line that says the content changed | A file of the local library changed after its import. | Import the image again, or the content again in **Edit action** of [Post-installation](../../foundry-osd/customization/post-installation.md) |
 
 **Collect:** The full text of the dialog and `Foundry.log`.
 
@@ -129,7 +129,7 @@ A drive smaller than 16 GB is listed. With it selected, **Create USB** opens **U
 **Cause:** Foundry shows nothing at this stage and cannot tell which of these applies. The first two follow from how Foundry builds the media; the last two depend on the firmware of the device and are possibilities to test, not facts Foundry establishes.
 
 - The **Architecture** of the media does not match the device: `x64` media on an ARM64 device, or the reverse.
-- A USB update was cancelled or failed, and **BOOT** is incomplete.
+- A USB update was canceled or failed, and **BOOT** is incomplete.
 - On a device with Secure Boot turned on in its firmware, the firmware may not yet trust the certificate that signs the boot files, **PCA 2023** by default. Microsoft's guidance is linked from [General](../../foundry-osd/general.md).
 - Some firmware may not list a USB drive with the chosen **USB partition style**.
 
@@ -148,7 +148,7 @@ If a console titled **Foundry Bootstrap** appears, the device did start from the
 
 **Where:** Foundry Deploy, on a device started from a PXE server such as Windows Deployment Services, before the disk is erased. The deployment log contains "The referenced post-installation media generation is unavailable."
 
-**Cause:** A PXE server delivers only the boot image. The deployment has a Post-installation action that uses imported files, and those files are copied only to ISO and USB media, or, while the [network cache](../../foundry-osd/network-cache.md) is on, only to its shares. The network cache is off. With the network cache on, a device that cannot use its share stops earlier, at **Network cache not available**: see [Before the deployment starts](../deployment/before-deployment-starts.md#network-cache-not-available).
+**Cause:** A PXE server delivers only the boot image. The deployment has a Post-installation action that uses imported files, and those files are copied only to ISO files and USB drives, or, while the [network cache](../../foundry-osd/network-cache.md) is on, only to its shares. The network cache is off. With the network cache on, a device that cannot use its share stops earlier, at **Network cache not available**: see [Before the deployment starts](../deployment/before-deployment-starts.md#network-cache-not-available).
 
 **Fix:**
 

@@ -12,7 +12,7 @@ After Foundry Deploy restarts the target device, Windows Setup finishes the inst
 1. Keep the device on power and on the network, and let Windows Setup run.
 2. Watch the console when it opens. Do not turn the device off: whatever was running is not run again.
 3. Let the device restart by itself. The console announces a planned restart and reopens after it with `Resuming after restart`.
-4. Read the status line, the coloured line under the list, before the console closes.
+4. Read the status line, the colored line under the list, before the console closes.
 
 | Status line | What it means |
 | --- | --- |

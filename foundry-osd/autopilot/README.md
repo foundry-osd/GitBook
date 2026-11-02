@@ -31,4 +31,4 @@ Foundry can prepare a device for Windows Autopilot in three ways: copy an Autopi
 - **Custom answer files.** With **JSON profile** or **Interactive**, Foundry Deploy refuses an answer file that contains settings known to prevent Autopilot enrollment. With **Zero-Touch** it accepts the file and warns. See [What a custom answer file overrides](../customization/unattend.md#what-a-custom-answer-file-overrides).
 - **The mode is part of the media.** Create or update the deployment media after any change on these pages.
 
-Deploy one test device before you hand media to technicians. Foundry OSD checks what it holds on the workstation. It cannot check what only happens on the device: the network path to Microsoft, the technician's sign-in, or the profile your tenant assigns once the device is registered.
+Deploy one test device before you hand media to technicians. Foundry OSD checks what it holds on the PC. It cannot check what only happens on the device: the network path to Microsoft, the technician's sign-in, or the profile your tenant assigns once the device is registered.

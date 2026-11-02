@@ -52,17 +52,17 @@ Foundry does not check that the file is an Autopilot profile: a valid JSON file 
   - A dialog titled "No Autopilot profiles found" ("No Autopilot profiles were returned by the tenant."): the tenant has no Windows Autopilot deployment profile, or you signed in to another tenant than intended.
 - **Fix:**
   1. Sign in to the right tenant with an account that can read its Windows Autopilot deployment profiles.
-  2. Check that the workstation reaches the hosts of [Network endpoints](../reference/network-endpoints.md).
+  2. Check that the PC reaches the hosts of [Network endpoints](../reference/network-endpoints.md).
   3. Otherwise, use **Import profile** with a profile file.
 - **Collect:** the line "Autopilot tenant download failed."
 
 ## "Tenant onboarding failed" <a href="#tenant-onboarding-failed" id="tenant-onboarding-failed"></a>
 
 - **Where:** **Windows Autopilot > Zero-Touch**, after **Connect tenant**. The page stays **Not connected**.
-- **Cause:** the dialog reads "Foundry could not configure the Autopilot app registration." and "Check your network connection and make sure your account can manage app registrations in the tenant, then try again. Details are in the log." The reason is in `%ProgramData%\Foundry\Logs\Foundry.log`, after the line "Autopilot hardware hash tenant onboarding failed.", and is usually "Microsoft Graph \<method> request failed with status code \<code>. ErrorCode=\<error>." The account may not read the organization, list or create app registrations, or create the enterprise application; the sign-in did not complete; or the workstation cannot reach Microsoft Graph.
+- **Cause:** the dialog reads "Foundry could not configure the Autopilot app registration." and "Check your network connection and make sure your account can manage app registrations in the tenant, then try again. Details are in the log." The reason is in `%ProgramData%\Foundry\Logs\Foundry.log`, after the line "Autopilot hardware hash tenant onboarding failed.", and is usually "Microsoft Graph \<method> request failed with status code \<code>. ErrorCode=\<error>." The account may not read the organization, list or create app registrations, or create the enterprise application; the sign-in did not complete; or the PC cannot reach Microsoft Graph.
 - **Fix:**
   1. Select **Connect tenant** again and sign in with an account that can manage app registrations and enterprise applications.
-  2. Check that the workstation reaches the hosts of [Network endpoints](../reference/network-endpoints.md).
+  2. Check that the PC reaches the hosts of [Network endpoints](../reference/network-endpoints.md).
 - **Collect:** the line "Autopilot hardware hash tenant onboarding failed."
 
 ## "Tenant onboarding requires attention" <a href="#tenant-onboarding-requires-attention" id="tenant-onboarding-requires-attention"></a>
