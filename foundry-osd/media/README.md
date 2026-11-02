@@ -10,7 +10,7 @@ The **Start** page shows whether your configuration is ready, then creates an IS
 ## Before you start
 
 - The [ADK](../adk.md) page reports **ADK is ready**. Until then **Start** cannot be opened.
-- 20 GB are free on each drive that holds `%ProgramData%\Foundry`, `%LocalAppData%\Foundry` or the Windows temporary folders, and on the drive of the ISO file. On most workstations this is the Windows drive.
+- 20 GB are free on each drive that holds `%ProgramData%\Foundry`, `%LocalAppData%\Foundry` or the Windows temporary folders, and on the drive of the ISO file. On most PCs this is the Windows drive.
 
 ## Read the readiness rows
 
@@ -48,7 +48,7 @@ On such a PC, media creation is blocked until the shared content is installed: e
 | --- | --- | --- | --- |
 | Boot image `sources\boot.wim`: Windows PE, its drivers, the program behind the startup console and your options | In the ISO | On the **BOOT** partition | `boot.wim`, with `boot.sdi`, `BCD` and `bootmgr.efi` to start it |
 | Foundry Connect and, with Domain Join, the post-installation application | In the boot image | In `Runtime\` on the cache partition, **Foundry Cache** | In the boot image |
-| Foundry Deploy | Not on the media: downloaded at each start | Not on the media: downloaded at a start, then kept in `Runtime\` | Not on the media: downloaded at each start |
+| Foundry Deploy | Not on the media: downloaded at each start | Not on the media: downloaded at the first start, then kept in `Runtime\` and reused until the drive is updated to another version | Not on the media: downloaded at each start |
 | [Custom images](../customization/custom-windows-images.md) | In the ISO, in `Cache\OperatingSystems\Custom\` | Same folder on the cache partition | Not delivered |
 | [Custom drivers](../customization/custom-drivers.md) | In the ISO, in `Cache\DriverPacks\Custom\` | Same folder on the cache partition | Not delivered |
 | [Post-installation](../customization/post-installation.md) content you imported | In the ISO, in `Cache\PreOobe\` | Same folder on the cache partition | Not delivered |
@@ -63,15 +63,15 @@ A USB drive [created without cache](create-usb.md#create-a-drive-without-cache) 
 | **BOOT** | FAT32, 2 GiB | Boot files and `sources\boot.wim` |
 | **Foundry Cache** | NTFS, rest of the drive | `Runtime\`, `Cache\OperatingSystems\`, `Cache\DriverPacks\`, `Cache\Firmware\`, `Cache\PreOobe\`, `Logs\` |
 
-At every start the device asks GitHub which release of these applications to use, and the start stops when Foundry Deploy cannot be obtained: [Windows PE startup](../../foundry-connect/windows-pe-startup.md#what-needs-internet-access) describes the sequence. An [update](update-usb.md) of a USB drive writes again what the media carries and keeps the downloaded copy of Foundry Deploy.
+The media runs the Foundry applications of the Foundry OSD version that created it, and downloads Foundry Deploy from that same release, at every start from an ISO or PXE files and once from a USB drive, which keeps it: [Windows PE startup](../../foundry-connect/windows-pe-startup.md#which-version-runs) describes the sequence. To use newer applications, update Foundry OSD, then create the media again or [update the USB drive](update-usb.md).
 
-Each included custom image is stored as `Cache\OperatingSystems\Custom\<hash>\image.wim`. To add `.wim` files to a USB drive yourself, see [Add an image to a USB drive by hand](../customization/custom-windows-images.md#add-an-image-to-a-usb-drive-by-hand).
+Included custom images are stored on the **Foundry Cache** partition. To add `.wim` files to a USB drive yourself, see [Add an image to a USB drive by hand](../customization/custom-windows-images.md#add-an-image-to-a-usb-drive-by-hand).
 
 ## While media is being created
 
 A dialog titled **Creating ISO**, **Creating PXE files**, **Creating USB media** or **Updating USB media** locks the rest of the app. It shows the step, such as "Step 3 of 5: Customizing the boot image", the overall percentage, a line naming the current action, such as a download with its size, and the elapsed time. When the operation ends, the title gives the result, such as **ISO created** or **USB media creation failed**. To stop, select **Cancel** (or press Esc), then **Stop operation** within 10 seconds to confirm. The operation stops once the disk or image step in progress has finished: keep Foundry OSD open and the USB drive connected until the dialog reads "Media creation was canceled."
 
-A cancelled or failed ISO build keeps the previous file, and cancelled or failed PXE files keep the previous ones. A cancelled USB operation does not restore the drive. Once Foundry OSD has started writing the drive, the dialog adds "The USB drive may no longer start a device. Create or update it again before you use it."
+A canceled or failed ISO build keeps the previous file, and canceled or failed PXE files keep the previous ones. A canceled USB operation does not restore the drive. Once Foundry OSD has started writing the drive, the dialog adds "The USB drive may no longer start a device. Create or update it again before you use it."
 
 ## Related
 

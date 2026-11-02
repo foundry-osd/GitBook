@@ -35,8 +35,8 @@ While the device is not online, the title of the status banner names the cause, 
 ## "New version available. Update Foundry OSD and rebuild boot media." <a href="#new-version-available" id="new-version-available"></a>
 
 - **Where:** Top right of Foundry Connect, next to the version. The text can also read "Update Foundry OSD and rebuild boot media."
-- **Cause:** The media was created with a version of Foundry OSD older than the Foundry Connect that is running, or with a version that cannot be identified. This is a notice: it blocks nothing.
-- **Fix:** Continue the deployment. Afterwards, the administrator updates Foundry OSD, then recreates the ISO or updates the USB drive.
+- **Cause:** A newer Foundry version is published than the Foundry OSD version that created the media, or that version cannot be identified. The media keeps running the applications of the version that created it. Foundry Connect and Foundry Deploy check this online in a few seconds; without Internet access, or when the check fails, no notice appears. This is a notice: it blocks nothing.
+- **Fix:** Continue the deployment. Afterwards, the administrator updates Foundry OSD, then recreates the ISO or the PXE files, or [updates the USB drive](../foundry-osd/media/update-usb.md).
 - **Collect:** Nothing.
 
 ## "Ethernet isn't available on this device." <a href="#no-ethernet-adapter" id="no-ethernet-adapter"></a>

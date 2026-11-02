@@ -55,7 +55,7 @@ The menu bar stays available on every screen, including the error screen.
 
 Use **Tools** before you restart a device whose deployment failed. See [Export logs from Foundry Connect and Foundry Deploy](../troubleshooting/logs-and-support.md#export-logs-from-foundry-connect-and-foundry-deploy).
 
-A notice next to the version number, "New version available. Update Foundry OSD and rebuild boot media." or "Update Foundry OSD and rebuild boot media.", means the media was created with an older Foundry OSD. You can still deploy. Tell the administrator, who updates Foundry OSD and then [recreates or updates the media](../foundry-osd/media/README.md).
+A notice next to the version number, "New version available. Update Foundry OSD and rebuild boot media." or "Update Foundry OSD and rebuild boot media.", means a newer Foundry version is published than the one that created the media. You can still deploy. Tell the administrator, who updates Foundry OSD and then [recreates or updates the media](../foundry-osd/media/README.md).
 
 ## If something stops you
 

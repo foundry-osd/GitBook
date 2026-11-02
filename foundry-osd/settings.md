@@ -7,7 +7,7 @@ Settings holds the options of the Foundry OSD application itself: language, appe
   <figcaption><strong>Configuration sharing</strong> on a PC that neither publishes nor follows a folder.</figcaption>
 </figure>
 
-Except for **Configuration sharing**, these choices are stored for the workstation, so they apply to every Windows account that uses Foundry OSD on it. The proxy username and password are the exception: they are saved in Windows Credential Manager for your Windows account, so another account must type them again.
+Except for **Configuration sharing**, these choices are stored for the PC, so they apply to every Windows account that uses Foundry OSD on it. The proxy username and password are the exception: they are saved in Windows Credential Manager for your Windows account, so another account must type them again.
 
 ## General
 
@@ -35,7 +35,7 @@ All of it is explained in [Configuration sharing](configuration-sharing.md).
 
 ## Proxy
 
-Use **Proxy** when the workstation reaches the Internet through a proxy. These settings apply to Foundry OSD only: they are not written to the media and do not affect Foundry Connect or Foundry Deploy.
+Use **Proxy** when the PC reaches the Internet through a proxy. These settings apply to Foundry OSD only: they are not written to the media and do not affect Foundry Connect or Foundry Deploy.
 
 1. Choose a **Proxy method**: **Use Windows settings (recommended)**, **Manual proxy** or **No proxy (direct connection)**.
 2. For **Manual proxy** only, fill in:
@@ -56,7 +56,7 @@ Both switches are on by default.
 | **Enable telemetry** | Anonymous usage events | After you restart Foundry OSD |
 | **Enable remote diagnostics** | Application logs and error reports, kept 7 days | At once |
 
-The choice is also written to the media you create afterwards. Existing media keeps the choice it was created with. Log files on the workstation are written whatever you choose. [Telemetry and privacy](../reference/telemetry-and-privacy.md) lists what is sent.
+The choice is also written to the media you create afterwards. Existing media keeps the choice it was created with. Log files on the PC are written whatever you choose. [Telemetry and privacy](../reference/telemetry-and-privacy.md) lists what is sent.
 
 ## Update app
 
@@ -74,6 +74,8 @@ The **Update app** page shows **Installed version**, the available or latest ver
 </figure>
 
 If you start a media creation while an update is known, a dialog titled **Update Foundry OSD before creating boot media** offers **Apply update** (or **View update** while it is still downloading), **Create anyway** and **Cancel**. Applying first is the safe choice: the media then carries the latest fixes.
+
+Existing media keep running the Foundry applications of the version that created them. After an update, recreate the ISO or the PXE files, or [update the USB drive](media/update-usb.md), to give them the new version.
 
 An update is not installed on closing while a second Foundry OSD window is open. See [The update stays on "Apply update"](../troubleshooting/foundry-osd.md#update-stays).
 
