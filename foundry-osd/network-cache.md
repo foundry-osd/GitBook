@@ -156,7 +156,7 @@ Foundry OSD deletes every download of the share and the imported content that ne
 
 Devices never wait for each other. When two devices need the same file and the share does not have it yet, both download it from the Internet; the first one to finish publishes it, and the other keeps its own copy. A device reads a file only once it is complete on the share.
 
-A device copies what it downloaded to the share in the background, without slowing the deployment. At the end, during **Finalize deployment**, it waits up to 2 minutes for the copies still running: the step shows the file being copied, its progress, the number of files still waiting and the time left. A copy that does not finish in time is dropped without any message; the next device downloads the file again.
+A device copies what it downloaded to the share in the background, without slowing the deployment. At the end, during **Finalize deployment**, it waits for the copies still running as long as they move forward: the step shows the file being copied, its progress and the number of files still waiting. On a slow network, the first device that downloads a Windows image can stay several minutes on this step; the next devices copy the image from the share. A copy that stops moving for about 30 seconds is dropped without any message; the next device downloads the file again.
 
 {% hint style="info" %}
 **Share speed**
