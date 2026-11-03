@@ -8,7 +8,7 @@ Problems met when Foundry Deploy opens and in its wizard, up to the **Deploy** b
 | --- | --- |
 | "The password is incorrect. Try again." | [Password refused](#password-incorrect) |
 | Foundry Deploy closes as soon as it opens | [Closes at start](#closes-at-start) |
-| **Network cache not available**, with **Retry** or **Close** | [Network cache not available](#network-cache-not-available) |
+| **Network cache not available**, with **Continue without network cache**, **Retry** or **Close** | [Network cache not available](#network-cache-not-available) |
 | The **Target disk** list is empty | [No disk](#no-disk) |
 | A disk line ending in "Blocked: ..." | [Disk blocked](#disk-blocked) |
 | "The disk identity is missing, ambiguous or has changed. ..." | [Disk identity](#disk-identity) |
@@ -51,7 +51,7 @@ Problems met when Foundry Deploy opens and in its wizard, up to the **Deploy** b
 
 **Where:** a window titled **Network cache not available**, before the wizard opens. It appears only on media where the administrator turned on the [network cache](../../foundry-osd/network-cache.md). Nothing has been erased.
 
-**Cause and fix:** Foundry Deploy checks the shares of the device and the content published by Foundry OSD before the wizard opens. It tries the shares of the IP scope of the device in order, skips a share whose published content is missing or out of date, and stops only when no share of the scope can be used. It then shows one of four messages, and each one says where the fix is.
+**Cause and fix:** Foundry Deploy checks the shares of the device and the content published by Foundry OSD before the wizard opens. It tries the shares of the IP scope of the device in order, skips a share whose published content is missing or out of date, and stops only when no share of the scope can be used. It then shows one of four messages, and each one says where the fix is. Under it, a second paragraph explains what **Continue without network cache** does.
 
 | Message | Cause | Fix | Retry |
 | --- | --- | --- | --- |
@@ -60,7 +60,11 @@ Problems met when Foundry Deploy opens and in its wizard, up to the **Deploy** b
 | "*Account* cannot open *share*. In Foundry OSD, on the Network cache page, check the account password; on the server, check its permissions." Without an account: "*Share* refused this device. In Foundry OSD, on the Network cache page, set an account for this share; on the server, check the share permissions." | The server refused the account, because its password changed, or it has no right on the share or its folder; or the share requires an account and none is set | The administrator corrects the account on the Network cache page and on the server, then creates the media again | No |
 | "The published content on *share* is missing or incomplete. In Foundry OSD, on the Network cache page, select Publish." When part of the content is incomplete, a line under it starts with "Missing:" and names it, such as **Custom Windows images** or **Driver sets**; it does not appear when nothing is published yet | No share of the scope has usable published content: nothing was published to the shares yet, or a file of the publication is missing or changed | The administrator selects **Publish** in Foundry OSD, then you select **Retry** | Yes |
 
-**Retry** checks again from the start, including the choice of the share, so you do not restart the device. It appears only for the causes that can resolve without new media. **Close** ends Foundry Deploy without deploying: use it, then restart the device from the media once the administrator has fixed the cause.
+The window offers three choices:
+
+- **Continue without network cache** opens the wizard and deploys without any share, whatever the cause. Windows and drivers are downloaded from the Internet, and nothing is written to a share. The content published to the shares is not available: the wizard offers no custom Windows image and no driver set, and the post-installation actions do not run. Use it when the device must be deployed now and can do without that content.
+- **Retry** checks again from the start, including the choice of the share, so you do not restart the device. It appears only for the causes that can resolve without new media.
+- **Close** ends Foundry Deploy without deploying: use it, then restart the device from the media once the administrator has fixed the cause.
 
 When the administrator changed the reference PC of [configuration sharing](../../foundry-osd/configuration-sharing.md), for example with **Take over**, a boot image created before the change keeps deploying what the previous reference PC published. If the last message stays after **Publish**, the administrator recreates the media from the current reference PC. See [Security and credentials](../../reference/security-and-credentials.md#network-cache-publication).
 
