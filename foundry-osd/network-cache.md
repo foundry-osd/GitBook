@@ -108,7 +108,7 @@ The **Status** column of each share shows one of three states.
 | --- | --- | --- |
 | **Up to date** | The share has your latest changes. | Deploy with your latest changes. |
 | **Outdated** | You changed the content since the last publication, or the last publication to this share failed. | Deploy with the previous publication. Media created after a publication that this share did not receive try the next share of their scope. |
-| **Not published** | The share has nothing you published: you never published to it, or its published content was deleted or moved. | Try the next share of their scope, and stop at start with [Network cache not available](../troubleshooting/deployment/before-deployment-starts.md#network-cache-not-available) when no share of the scope has your published content. |
+| **Not published** | The share has nothing you published: you never published to it, or its published content was deleted or moved. | Try the next share of their scope, and stop at start with [Network cache not available](../troubleshooting/deployment/before-deployment-starts.md#network-cache-not-available) when no share of the scope has your published content. The technician can then continue without the network cache and your published content. |
 
 While a share is **Outdated** or **Not published**, a warning bar asks you to select **Publish**, the **Network cache** item of the navigation pane shows an **Outdated** or **Not published** badge, and the **Network cache** row of [Start](media/README.md) adds the state to its summary. A share whose settings are incomplete shows what is missing in its **Status** column instead. Each time it measures the shares, Foundry OSD also checks that each share still holds what you published. The messages of the bar are explained in [Network cache troubleshooting](../troubleshooting/foundry-osd/network-cache.md#not-up-to-date).
 
@@ -178,7 +178,7 @@ All the devices that read from or write to a share at the same time share the ne
 
 ## If a device stops at start
 
-Foundry Deploy shows one message, **Network cache not available**, with the cause and the place to fix it, either in Foundry OSD or on the server. For some causes it offers **Retry**; **Close** ends Foundry Deploy without deploying. The messages, their causes and their fixes are listed in [Network cache not available](../troubleshooting/deployment/before-deployment-starts.md#network-cache-not-available).
+Foundry Deploy shows one message, **Network cache not available**, with the cause and the place to fix it, either in Foundry OSD or on the server. **Continue without network cache** deploys anyway, from the Internet and without the content you published: no custom Windows image, no driver set and no post-installation action. For some causes it also offers **Retry**; **Close** ends Foundry Deploy without deploying. The messages, their causes and their fixes are listed in [Network cache not available](../troubleshooting/deployment/before-deployment-starts.md#network-cache-not-available).
 
 For messages of this page, and for devices that deploy but do not read from or write to the share, see [Network cache troubleshooting](../troubleshooting/foundry-osd/network-cache.md).
 
