@@ -14,7 +14,7 @@ Each of the five stages goes from **Waiting** to **In progress**, then **Done**.
 | Stage | Line under the list | What happens |
 | --- | --- | --- |
 | **Environment** | "Preparing network access" | Windows PE starts its wired and Wi-Fi services. |
-| **Network connection** | "Preparing Foundry Connect", then "Waiting for Foundry Connect" | Foundry Connect opens from the program on the media. The stage stays **In progress** until you continue from [Foundry Connect](README.md). |
+| **Network connection** | "Waiting for Foundry Connect" | Foundry Connect opens from the program on the media. The stage stays **In progress** until you continue from [Foundry Connect](README.md). |
 | **Clock and time zone** | "Preparing the system clock and time zone" | The clock is set from the Internet and the time zone is applied. |
 | **Deployment files** | "Preparing Foundry PostInstall" | The post-installation application is taken from the media, or downloaded when the media does not carry it. |
 | **Deployment application** | "Starting Foundry Deploy" | Foundry Deploy opens. |
@@ -23,7 +23,7 @@ During a download of the post-installation application, the status reads **Downl
 
 ## Waits that are normal
 
-- **Network connection**: a few seconds on "Preparing Foundry Connect", then as long as you need in [Foundry Connect](network-readiness.md).
+- **Network connection**: as long as you need in [Foundry Connect](network-readiness.md).
 - **Clock and time zone**: up to 50 seconds on a network that filters the lookups (five lookups of 10 seconds).
 - **Deployment files**: a download of the post-installation application can run for 15 minutes and is tried 3 times.
 - **Deployment application**: up to 2 minutes before the Foundry Deploy window appears.
@@ -38,7 +38,7 @@ The media runs Foundry Connect and Foundry Deploy, both inside the Foundry WinPE
 
 If the post-installation application on the media is missing or damaged, the console downloads the same version again from the Foundry release that created the media and shows a yellow line such as "Warning: Foundry.PostInstall was repaired from release v26.11.2.1." Without a valid copy, startup stops: see [This boot stage could not be completed](../troubleshooting/windows-pe-startup.md#boot-stage-not-completed).
 
-When a newer Foundry release is published, Foundry Deploy shows a notice next to its version. Foundry Connect does not check online: it shows a notice only from what the media itself records, for example when the Foundry OSD version that created the media cannot be identified. Neither notice blocks anything: see [New version available](../troubleshooting/network.md#new-version-available).
+When a newer Foundry release is published, Foundry Deploy checks online once the network is ready and shows a notice next to its version. Foundry Connect does not check online: it shows a notice only from what the media itself records, for example when the Foundry OSD version that created the media cannot be identified. Neither notice blocks anything: see [New version available](../troubleshooting/network.md#new-version-available).
 
 ## What needs Internet access
 
