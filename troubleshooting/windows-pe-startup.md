@@ -1,6 +1,6 @@
 # Windows PE startup troubleshooting
 
-Use this page when the **Foundry Bootstrap** console stops, shows **Failed** in red, or shows yellow warnings before Foundry Deploy opens. [Windows PE startup](../foundry-connect/windows-pe-startup.md) describes a normal start.
+Use this page when the **Foundry WinPE** console stops, shows **Failed** in red, or shows yellow warnings before Foundry Deploy opens. [Windows PE startup](../foundry-connect/windows-pe-startup.md) describes a normal start.
 
 The reason is the line under the list of stages. On a failure, the console also shows a `Session:` identifier and the `Log:` path. Logs are in `X:\Foundry\Logs`, which is lost when the device restarts: collect them first. See [Log locations](logs-and-support.md#log-locations).
 
@@ -23,7 +23,7 @@ The reason is the line under the list of stages. On a failure, the console also 
 ## "Foundry startup failed. See X:\Foundry\Logs for details." <a href="#foundry-startup-failed" id="foundry-startup-failed"></a>
 
 - **Where:** A plain line at the command prompt, under the console.
-- **Cause:** This line follows every failed startup. The reason is the line under the list of stages. If the console never appeared and this is the only line, Foundry Bootstrap itself could not start.
+- **Cause:** This line follows every failed startup. The reason is the line under the list of stages. If the console never appeared and this is the only line, Foundry WinPE itself could not start.
 - **Fix:**
   1. Read the line under the list of stages and find it on this page.
   2. If there is no console, run `type X:\Foundry\Logs\FoundryBootstrap.Launcher.log` to read the exit code, then restart the device.
@@ -47,10 +47,10 @@ The reason is the line under the list of stages. On a failure, the console also 
 - **Fix:** Nothing, when only **Environment** shows the warning and the last stage ends with **Ready**: the clock is read again at **Clock and time zone**, after Foundry Connect. If **Clock and time zone** shows it too, or the time stays wrong, the device keeps its firmware clock: see [Wrong time or time zone](network.md#wrong-time-or-time-zone).
 - **Collect:** Nothing.
 
-## "Warning: Foundry.Connect was repaired from release v26.11.2.1." <a href="#repaired-from-release" id="repaired-from-release"></a>
+## "Warning: Foundry.PostInstall was repaired from release v26.11.2.1." <a href="#repaired-from-release" id="repaired-from-release"></a>
 
-- **Where:** A yellow line under the elapsed time. It names the application and the release, for example `Foundry.Connect` or `Foundry.PostInstall`.
-- **Cause:** The copy of that application on the media was missing or damaged. The console downloaded the same version again from the Foundry release that created the media, checked it, and used it.
+- **Where:** A yellow line under the elapsed time. It names the application and the release: `Foundry.PostInstall`.
+- **Cause:** The copy of the post-installation application on the media was missing or damaged. The console downloaded the same version again from the Foundry release that created the media, checked it, and used it.
 - **Fix:** Nothing for this start. If the line appears at every start, recreate the ISO or the PXE files, or [update the USB drive](../foundry-osd/media/update-usb.md), with the same version of Foundry OSD or a newer one.
 - **Collect:** `FoundryBootstrap.log` if the line keeps appearing. See [Logs and support information](logs-and-support.md).
 
@@ -85,17 +85,16 @@ The reason is the line under the list of stages. On a failure, the console also 
 - **Cause:** The Foundry Connect window was closed before the startup continued, or Ctrl+C was pressed in the console. Closing Foundry Connect never skips the network check.
 - **Fix:**
   1. Restart the device and start from the media again.
-  2. Without a restart: if a command prompt remains in the console window, you may type `X:\Foundry\Bootstrap\Launch.cmd` and press Enter. This is the command the device runs at startup, but running it a second time is not confirmed on a device. Use it only when no Foundry Connect window is open: after Ctrl+C, Foundry Connect may still be running, so close it first or restart.
+  2. Without a restart: if a command prompt remains in the console window, you may type `X:\Foundry\WinPE\Launch.cmd` and press Enter. This is the command the device runs at startup, but running it a second time is not confirmed on a device. Use it only when no Foundry Connect window is open: after Ctrl+C, Foundry Connect may still be running, so close it first or restart.
 - **Collect:** Nothing.
 
 ## "This boot stage could not be completed. Check the session log for details." <a href="#boot-stage-not-completed" id="boot-stage-not-completed"></a>
 
-- **Where:** Usually **Deployment files** shows **Failed**. Sometimes **Network connection**.
+- **Where:** Usually **Deployment files** shows **Failed**.
 - **Cause:**
-  1. GitHub does not answer from Windows PE. Foundry Deploy is downloaded from the Foundry release that created the media: at every start from an ISO or PXE files, and from a USB drive the first time or after it was updated to another version. The log contains "No authenticated original Foundry.Deploy payload is available. Recreate the boot media or connect to the network to obtain a verified runtime.", or the same line for `Foundry.PostInstall` on media without Domain Join: neither application is on the media, as [What each media type carries](../foundry-osd/media/README.md#what-each-media-type-carries) explains.
+  1. GitHub does not answer from Windows PE. The post-installation application is downloaded from the Foundry release that created the media when the media does not carry it: at every start from an ISO or PXE files, and from a USB drive the first time or after it was updated to another version. The log contains "No authenticated original Foundry.PostInstall payload is available. Recreate the boot media or connect to the network to obtain a verified runtime.", as [What each media type carries](../foundry-osd/media/README.md#what-each-media-type-carries) explains.
   2. The device clock is wrong, and secure connections fail.
   3. Possibly, many devices start behind the same public IP address. Each start sends three or four anonymous requests to `api.github.com`, and GitHub can limit anonymous requests from one address. Foundry does not report this case separately: the log shows the same line as for cause 1.
-  4. At **Network connection**: the copy of Foundry Connect on the media is missing or failed its integrity check, and it could not be downloaded again because the device had no network access within a few seconds. The log contains "No authenticated original Foundry.Connect payload is available. Recreate the boot media or connect to the network to obtain a verified runtime."
 - **Fix:**
   1. Check that the network allows the hosts in [Network endpoints](../reference/network-endpoints.md). **Network ready** in Foundry Connect does not prove it.
   2. Check the date and time in the firmware of the device.

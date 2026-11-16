@@ -35,7 +35,7 @@ The drive must have an NTFS volume named `Foundry Cache` and its **BOOT** partit
 | Replaced | Kept |
 | --- | --- |
 | The whole **BOOT** partition: boot files and the boot image, with your current options | `Cache\OperatingSystems`, `Cache\DriverPacks` and `Cache\Firmware`: the downloads of earlier deployments |
-| Foundry Connect, and the post-installation application with Domain Join, in `Runtime\` on the cache partition | The copy of Foundry Deploy downloaded by an earlier start, reused only while it is the version of the updated drive, `Logs\`, and any file you copied to the cache partition |
+| The post-installation application with Domain Join, in `Runtime\` on the cache partition | The copy of the post-installation application downloaded by an earlier start, reused only while it is the version of the updated drive, `Logs\`, and any file you copied to the cache partition |
 | The custom images, post-installation content and custom driver sets of the current configuration, added to the cache partition, except while the [network cache](../network-cache.md) is on | Custom images and post-installation content written by earlier builds. They keep using space. |
 | The driver sets that the new media no longer uses, removed from `Cache\DriverPacks\Custom\`, all of them when no set is left | The downloaded driver packs in `Cache\DriverPacks` |
 

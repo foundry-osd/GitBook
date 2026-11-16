@@ -140,7 +140,7 @@ A drive smaller than 16 GB is listed. With it selected, **Create USB** opens **U
 3. As a test, turn off the **Secure Boot** switch of **General**, which then reads **PCA 2011**, and create the ISO or update the USB drive again. This changes how the media is signed, not the firmware of the device.
 4. As a last test, delete the partitions of the USB drive in Windows Disk Management and create it again with the other **USB partition style**. This erases the drive and its downloads. With `arm64`, only **GPT** exists.
 
-If a console titled **Foundry Bootstrap** appears, the device did start from the media: continue with [Windows PE startup troubleshooting](../windows-pe-startup.md).
+If a console titled **Foundry WinPE** appears, the device did start from the media: continue with [Windows PE startup troubleshooting](../windows-pe-startup.md).
 
 **Collect:** The model of the device, whether Secure Boot is on in its firmware, and the values of **Architecture**, the **Secure Boot** switch and **USB partition style** used for the media.
 
