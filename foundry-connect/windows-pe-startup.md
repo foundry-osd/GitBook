@@ -38,7 +38,7 @@ The media runs Foundry Connect, Foundry Deploy and the post-installation applica
 
 If an application on the media is missing or damaged, the console downloads the same version again from the Foundry release that created the media and shows a yellow line such as "Warning: Foundry.Connect was repaired from release v26.11.2.1." Foundry Connect is checked before the network is set up, so its repair works only when the device already has network access within a few seconds. Without a valid copy, startup stops: see [This boot stage could not be completed](../troubleshooting/windows-pe-startup.md#boot-stage-not-completed).
 
-When a newer Foundry release is published, Foundry Connect and Foundry Deploy show a notice next to their version. It blocks nothing: see [New version available](../troubleshooting/network.md#new-version-available).
+When a newer Foundry release is published, Foundry Deploy shows a notice next to its version. Foundry Connect shows a notice only when the Foundry OSD version that created the media cannot be identified. Neither notice blocks anything: see [New version available](../troubleshooting/network.md#new-version-available).
 
 ## What needs Internet access
 
