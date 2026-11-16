@@ -40,7 +40,7 @@ Foundry OSD replaces the files only once all four are written: a failed or cance
 
 | Delivered | Not delivered |
 | --- | --- |
-| Windows PE with its drivers, and Foundry Connect. As with an ISO, Foundry Deploy is downloaded when the device starts. | [Custom Windows images](../customization/custom-windows-images.md) and [custom driver sets](../customization/custom-drivers.md) |
+| Windows PE with its drivers, and Foundry WinPE with Foundry Connect and Foundry Deploy. As with an ISO, the post-installation application is downloaded when the device starts if the media does not carry it. | [Custom Windows images](../customization/custom-windows-images.md) and [custom driver sets](../customization/custom-drivers.md) |
 | Every option of your configuration: network, Windows Autopilot, Domain Join, computer name, OOBE, answer file, optional features, AppX removals, AI components | [Post-installation](../customization/post-installation.md) actions that use imported files: every **PowerShell script (.ps1)** and **Software (.exe/.msi)** action, and a **Command line** action with imported content |
 | Post-installation actions that need no imported file: **Command line** without content and **Restart Windows** | A cache: each deployment downloads Windows and the driver pack again |
 
