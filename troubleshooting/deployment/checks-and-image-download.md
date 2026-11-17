@@ -13,7 +13,7 @@ On this page the disk may or may not have been erased. With an ISO or PXE, or a 
 | "Failed step: Validate answer file" | [Answer file validation](#validate-answer-file) |
 | "This device started in legacy BIOS mode. ..." | [Legacy BIOS mode](#legacy-bios-boot) |
 | "Windows optional feature configuration is invalid." | [Optional feature configuration](#optional-feature-configuration) |
-| "Post-installation preparation failed. ...", "The post-installation components could not be prepared. ..." | [Post-installation preparation](#post-installation-preparation-fails) |
+| "Post-installation preparation failed. ...", "The post-installation components of this boot media are missing or damaged. ..." | [Post-installation preparation](#post-installation-preparation-fails) |
 | A custom image message, or "Custom image is not ready." | [Custom image rejected](#custom-image-rejected) |
 | "The target disk does not have enough space ..." | [Not enough space](#not-enough-space) |
 | "The selected Windows edition is unavailable or ambiguous. ..." | [Edition unavailable](#edition-unavailable) |
@@ -85,19 +85,19 @@ If the step shows "The selected answer file is unavailable, invalid, or incompat
 
 ## "Post-installation preparation failed. Check the deployment log for details." <a href="#post-installation-preparation-fails" id="post-installation-preparation-fails"></a>
 
-**Where:** **Check deployment setup**. Disk not erased. The same step can show "The post-installation components could not be prepared. Check your connection and retry, or recreate the boot media. See the deployment log for details."
+**Where:** **Check deployment setup**. Disk not erased. The same step can show "The post-installation components of this boot media are missing or damaged. Recreate the boot media. See the deployment log for details."
 
 **Cause:**
 
 - First message: the deployment needs scripts or packages that Foundry cannot find or verify. The USB drive or ISO was removed, is not the one created with this boot image, or its files were changed. A PXE boot image does not carry imported scripts and packages, and no media carries them while the [network cache](../../foundry-osd/network-cache.md) is on: the device then takes them from its share.
-- Second message: it appears only on media created with an older Foundry OSD. The startup console of current media prepares the post-installation application before Foundry Deploy opens, at the line "Preparing Foundry PostInstall"; older media does not, although it starts the latest Foundry Deploy. Foundry Deploy then downloads the application itself from GitHub, showing "Preparing post-installation components...", and that download failed.
+- Second message: Foundry Deploy could not use the post-installation application that ships inside the boot image. The boot image was created without it, or its files are damaged. Nothing is downloaded, so retrying does not help.
 
 **Fix:**
 
 1. First message: connect the complete USB drive or ISO created together with the boot image, then restart from the media.
 2. First message with the network cache on: the share stopped answering, or its published content was deleted, after Foundry Deploy opened. Have the administrator check the share and select **Publish** on the [Network cache](../../foundry-osd/network-cache.md#publish) page, then restart the device. First message over PXE without the network cache: start the deployment from an ISO or a USB drive instead, or have the administrator disable the actions that use imported content. See [Deploy with PXE](../../foundry-osd/media/pxe-deployment.md).
-3. Second message: check that the device still reaches GitHub (see [Network endpoints](../../reference/network-endpoints.md)), then restart from the media to try again.
-4. If either message returns, the administrator updates Foundry OSD and recreates the media. For the second message this removes the cause.
+3. Second message: the administrator recreates the media with the current Foundry OSD: an ISO or PXE files again, or [Update USB](../../foundry-osd/media/update-usb.md).
+4. If the first message returns, the administrator updates Foundry OSD and recreates the media.
 
 **Collect:** the standard set. The log names the missing or changed item.
 
