@@ -270,11 +270,11 @@ While the device is not online, the title of the status banner names the cause, 
 
 ## Network ready appears, then downloads fail <a href="#network-ready-downloads-fail" id="network-ready-downloads-fail"></a>
 
-- **Where:** After **Continue**: the startup console fails at **Deployment files**, or Foundry Deploy cannot load its catalogs or download Windows.
+- **Where:** After **Continue**: Foundry Deploy cannot load its catalogs or download Windows.
 - **Cause:** **Network ready** only proves that one Microsoft test address answered. A firewall or a filtering proxy can let that test through while GitHub and the Microsoft download hosts stay blocked.
 - **Fix:**
   1. Check that the network allows the hosts in [Network endpoints](../reference/network-endpoints.md).
-  2. See ["This boot stage could not be completed. Check the session log for details."](windows-pe-startup.md#boot-stage-not-completed) for the startup console, and [Next stays unavailable on Target device](deployment/before-deployment-starts.md#next-unavailable) or [Download fails](deployment/checks-and-image-download.md#image-source-unavailable) for Foundry Deploy.
+  2. See [Next stays unavailable on Target device](deployment/before-deployment-starts.md#next-unavailable) or [Download fails](deployment/checks-and-image-download.md#image-source-unavailable) for Foundry Deploy.
 - **Collect:** `FoundryBootstrap.log` and `FoundryDeploy.log`. See [Logs and support information](logs-and-support.md).
 
 ## The time or the time zone is wrong in Windows PE <a href="#wrong-time-or-time-zone" id="wrong-time-or-time-zone"></a>
