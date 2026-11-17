@@ -3,8 +3,8 @@
 When a target device starts from deployment media, a console titled **Foundry WinPE** prepares Windows PE, opens Foundry Connect, then opens Foundry Deploy. Everything it runs is already on the media: nothing is downloaded, repaired or unpacked at startup. You only watch it: this page says what each line means and which waits are normal.
 
 <figure>
-  <img src="../.gitbook/assets/shared-bootstrap-01-download-progress.png" alt="Foundry WinPE console with five startup stages and a download progress bar">
-  <figcaption>The five stages, the current action with its progress bar, and the elapsed time.</figcaption>
+  <img src="../.gitbook/assets/shared-bootstrap-01-download-progress.png" alt="Foundry WinPE console with its startup stages">
+  <figcaption>The startup stages, the current action, and the elapsed time.</figcaption>
 </figure>
 
 ## What you see, in order

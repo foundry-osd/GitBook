@@ -111,7 +111,7 @@ A different case: when the import dialog opens with "Only some of the OUs could 
 - **Fix:** create the media again, or correct the answer file in the custom image, then redeploy.
 - **Collect:** `FoundryDeploy.log`.
 
-"The post-installation components could not be prepared..." is not specific to Domain Join: see [Post-installation preparation](deployment/checks-and-image-download.md#post-installation-preparation-fails).
+"The post-installation components of this boot media are missing or damaged..." is not specific to Domain Join: see [Post-installation preparation](deployment/checks-and-image-download.md#post-installation-preparation-fails).
 
 ## The join was skipped <a href="#join-skipped" id="join-skipped"></a>
 

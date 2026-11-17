@@ -13,7 +13,7 @@ On this page the disk may or may not have been erased. With an ISO or PXE, or a 
 | "Failed step: Validate answer file" | [Answer file validation](#validate-answer-file) |
 | "This device started in legacy BIOS mode. ..." | [Legacy BIOS mode](#legacy-bios-boot) |
 | "Windows optional feature configuration is invalid." | [Optional feature configuration](#optional-feature-configuration) |
-| "Post-installation preparation failed. ...", "The post-installation components could not be prepared. ..." | [Post-installation preparation](#post-installation-preparation-fails) |
+| "Post-installation preparation failed. ...", "The post-installation components of this boot media are missing or damaged. ..." | [Post-installation preparation](#post-installation-preparation-fails) |
 | A custom image message, or "Custom image is not ready." | [Custom image rejected](#custom-image-rejected) |
 | "The target disk does not have enough space ..." | [Not enough space](#not-enough-space) |
 | "The selected Windows edition is unavailable or ambiguous. ..." | [Edition unavailable](#edition-unavailable) |
@@ -90,7 +90,7 @@ If the step shows "The selected answer file is unavailable, invalid, or incompat
 **Cause:**
 
 - First message: the deployment needs scripts or packages that Foundry cannot find or verify. The USB drive or ISO was removed, is not the one created with this boot image, or its files were changed. A PXE boot image does not carry imported scripts and packages, and no media carries them while the [network cache](../../foundry-osd/network-cache.md) is on: the device then takes them from its share.
-- Second message: Foundry Deploy could not use the post-installation application stored on the media. The boot image does not carry it, or its files are damaged. Nothing is downloaded, so retrying does not help.
+- Second message: Foundry Deploy could not use the post-installation application that ships inside the boot image. The boot image was created without it, or its files are damaged. Nothing is downloaded, so retrying does not help.
 
 **Fix:**
 
