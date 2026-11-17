@@ -9,7 +9,7 @@ The reason is the line under the list of stages. On a failure, the console also 
 | Only "Foundry startup failed. See X:\Foundry\Logs for details." | [Foundry startup failed](#foundry-startup-failed) |
 | "The boot environment could not be initialized." | [The boot environment could not be initialized](#boot-environment-not-initialized) |
 | Yellow "Internet clock could not be resolved..." | [Internet clock could not be resolved](#internet-clock-not-resolved) |
-| Yellow "... was repaired from release ..." | [Repaired from release](#repaired-from-release) |
+| "This boot media is obsolete. Update Foundry OSD and recreate the media." in a window | [This boot media is obsolete](#boot-media-obsolete) |
 | "Foundry Connect could not load its configuration. Recreate the boot media." | [Foundry Connect could not load its configuration](#exit-code-22) |
 | "Foundry Connect could not start. Check the session log for details." | [Foundry Connect could not start](#exit-code-21) |
 | "Foundry Connect stopped unexpectedly. Check the session log for details." | [Foundry Connect stopped unexpectedly](#exit-code-23) |
@@ -47,12 +47,16 @@ The reason is the line under the list of stages. On a failure, the console also 
 - **Fix:** Nothing, when only **Environment** shows the warning and the last stage ends with **Ready**: the clock is read again at **Clock and time zone**, after Foundry Connect. If **Clock and time zone** shows it too, or the time stays wrong, the device keeps its firmware clock: see [Wrong time or time zone](network.md#wrong-time-or-time-zone).
 - **Collect:** Nothing.
 
-## "Warning: Foundry.PostInstall was repaired from release v26.11.2.1." <a href="#repaired-from-release" id="repaired-from-release"></a>
+## "This boot media is obsolete. Update Foundry OSD and recreate the media." <a href="#boot-media-obsolete" id="boot-media-obsolete"></a>
 
-- **Where:** A yellow line under the elapsed time. It names the application and the release: `Foundry.PostInstall`.
-- **Cause:** The copy of the post-installation application on the media was missing or damaged. The console downloaded the same version again from the Foundry release that created the media, checked it, and used it.
-- **Fix:** Nothing for this start. If the line appears at every start, recreate the ISO or the PXE files, or [update the USB drive](../foundry-osd/media/update-usb.md), with the same version of Foundry OSD or a newer one.
-- **Collect:** `FoundryBootstrap.log` if the line keeps appearing. See [Logs and support information](logs-and-support.md).
+- **Where:** A window with a **Close** button, shown where Foundry Connect or Foundry Deploy should open. Nothing else in it can be used, and no deployment starts.
+- **Cause:** The media was created with Foundry OSD v26.10.18.1 or earlier. Those media download Foundry Connect and Foundry Deploy from the latest release at each start, and the latest release now only shows this window.
+- **Fix:**
+  1. Update Foundry OSD.
+  2. Recreate the ISO or the PXE files, or [update the USB drive](../foundry-osd/media/update-usb.md).
+  3. Start the device from the new media.
+- **Good to know:** Such media that cannot reach GitHub (no network, or GitHub limits requests from your address) do not show the window: they start the application stored on the media and deploy as before. Recreate them anyway to get the current version.
+- **Collect:** Nothing.
 
 ## "Foundry Connect could not load its configuration. Recreate the boot media." <a href="#exit-code-22" id="exit-code-22"></a>
 
@@ -90,17 +94,11 @@ The reason is the line under the list of stages. On a failure, the console also 
 
 ## "This boot stage could not be completed. Check the session log for details." <a href="#boot-stage-not-completed" id="boot-stage-not-completed"></a>
 
-- **Where:** Usually **Deployment files** shows **Failed**.
-- **Cause:**
-  1. GitHub does not answer from Windows PE. The post-installation application is downloaded from the Foundry release that created the media when the media does not carry it: at every start from an ISO or PXE files, and from a USB drive the first time or after it was updated to another version. The log contains "No authenticated original Foundry.PostInstall payload is available. Recreate the boot media or connect to the network to obtain a verified runtime.", as [What each media type carries](../foundry-osd/media/README.md#what-each-media-type-carries) explains.
-  2. The device clock is wrong, and secure connections fail.
-  3. Possibly, many devices start behind the same public IP address. Each start sends three or four anonymous requests to `api.github.com`, and GitHub can limit anonymous requests from one address. Foundry does not report this case separately: the log shows the same line as for cause 1.
+- **Where:** A stage shows **Failed**.
+- **Cause:** The stage met an unexpected error. Nothing is downloaded at startup, so the network is not the cause.
 - **Fix:**
-  1. Check that the network allows the hosts in [Network endpoints](../reference/network-endpoints.md). **Network ready** in Foundry Connect does not prove it.
-  2. Check the date and time in the firmware of the device.
-  3. Restart the device and try again.
-  4. For a large batch behind one public address, space the starts or use a network with several public addresses.
-  5. If the failure is at **Network connection**, connect a network cable and restart, or recreate the ISO or the PXE files, or [update the USB drive](../foundry-osd/media/update-usb.md).
+  1. Restart the device and try again.
+  2. If it happens again, recreate the ISO or the PXE files, or [update the USB drive](../foundry-osd/media/update-usb.md), with the current version of Foundry OSD.
 - **Collect:** `FoundryBootstrap.log`. See [Logs and support information](logs-and-support.md).
 
 ## "Foundry Deploy stopped with exit code" and a number <a href="#foundry-deploy-stopped" id="foundry-deploy-stopped"></a>
