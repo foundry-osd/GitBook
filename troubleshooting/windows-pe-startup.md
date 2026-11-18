@@ -24,7 +24,7 @@ The reason is the line under the list of stages. On a failure, the console also 
 ## "Foundry stopped with an error. See X:\Foundry\Logs for details." <a href="#foundry-startup-failed" id="foundry-startup-failed"></a>
 
 - **Where:** A plain line at the command prompt, under the console.
-- **Cause:** This line follows every failed startup. The reason is the line under the list of stages. If the console never appeared and this is the only line, Foundry WinPE itself could not start.
+- **Cause:** This line follows every failed run, whether Foundry could not start or stopped later. The reason is the line under the list of stages. If the console never appeared and this is the only line, Foundry WinPE itself could not start.
 - **Fix:**
   1. Read the line under the list of stages and find it on this page.
   2. If there is no console, run `type X:\Foundry\Logs\FoundryBootstrap.Launcher.log` to read the exit code, then restart the device.
@@ -87,7 +87,10 @@ The reason is the line under the list of stages. On a failure, the console also 
 ## "Boot was cancelled. Deployment will not continue." <a href="#boot-cancelled" id="boot-cancelled"></a>
 
 - **Where:** **Foundry** shows **Cancelled** and the second line of the console reads "Startup cancelled".
-- **Cause:** The Foundry Connect window was closed before the startup continued, or Ctrl+C was pressed in the console. Closing Foundry Connect never skips the network check, and Foundry Deploy does not open.
+- **Cause:** One of these:
+  - The Foundry Connect window was closed before the startup continued. Closing Foundry Connect never skips the network check, and Foundry Deploy does not open.
+  - Foundry Deploy closed before its wizard opened: the deployment password prompt was cancelled, or the network cache window was closed.
+  - Ctrl+C was pressed in the console.
 - **Fix:**
   1. Restart the device and start from the media again.
   2. Without a restart: if a command prompt remains in the console window, you may type `X:\Foundry\WinPE\Launch.cmd` and press Enter. This is the command the device runs at startup, but running it a second time is not confirmed on a device. Use it only when no Foundry window is open: after Ctrl+C, Foundry may still be running, so close it first or restart.
