@@ -14,7 +14,7 @@ On media prepared for Windows Autopilot, Foundry Deploy shows an **Autopilot** s
 | Mode | In the wizard | In **Steps**, during the deployment |
 | --- | --- | --- |
 | JSON profile | **Autopilot** step: choose the profile | **Copy Autopilot profile** copies the profile into the installed Windows. |
-| Zero-touch hardware hash upload | **Autopilot** step: check the status and choose the group tag | **Register Autopilot device** reads the hardware hash, uploads it, then waits for the device to appear in the tenant. |
+| Zero-touch hardware hash upload | **Autopilot** step: check the status and choose the group tag | **Register Autopilot device** reads the hardware hash, uploads it, then waits for the device to appear in the tenant and for its Autopilot profile to be assigned. |
 | Interactive hardware hash upload | No step | **Prepare Autopilot assistant** downloads Foundry Autopilot Interactive into the installed Windows, for the window that opens after the restart. Nothing is uploaded yet: you [register the device after the restart](#register-the-device-after-the-restart). |
 
 ## Complete the step
@@ -36,7 +36,7 @@ When Foundry Deploy could not read the group tags from the tenant at startup, th
 
 In **Steps**, the Autopilot step is the last one before **Finalize deployment**. Windows is already on the disk when it runs.
 
-**Register Autopilot device** can last 10 minutes while it reads "Waiting for Autopilot device visibility..." with a countdown, and up to 10 more to confirm the group tag or the computer name. Keep the network connected.
+**Register Autopilot device** can last 10 minutes while it reads "Waiting for Autopilot device visibility..." with a countdown, up to 10 more to confirm the group tag or the computer name, then up to 20 minutes while it reads "Waiting for the Autopilot profile assignment..." with a countdown. Keep the network connected. The step succeeds even when the profile is not assigned in time; its text then says so, as described in [Windows Autopilot troubleshooting during the deployment](../troubleshooting/autopilot/during-deployment.md#profile-not-assigned).
 
 - **When Register Autopilot device is skipped**, a skipped icon appears next to its name in **Steps** and the deployment still ends on **Deployment complete**. Windows is installed, but the device is not registered, or is registered without its group tag or name. Point at the step to read the reason in a tooltip, and note it before the restart.
 - **When the step fails**, the deployment stops on **Deployment failed**, which reads "Failed step: Provision Autopilot" for the three modes. For **Register Autopilot device** this happens when the file `PCPKsp.dll` of the installed Windows is missing, cannot be copied, cannot be registered or cannot be loaded. **Copy Autopilot profile** and **Prepare Autopilot assistant** are never skipped: any problem there stops the deployment.

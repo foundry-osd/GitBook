@@ -132,6 +132,16 @@ If you deploy anyway, **Register Autopilot device** is skipped with the reason "
 
 For these four, collect `AutopilotUploadResult.json`: its `failureCode` names the case, for example `AutopilotDeviceTimedOut` or `AutopilotDeviceAmbiguous`.
 
+**Registered without its profile** <a href="#profile-not-assigned" id="profile-not-assigned"></a>. With the zero-touch mode, **Register Autopilot device** succeeds but its text reads one of these. The device is registered. Windows setup downloads the profile at the first setup screens, so a profile assigned before the device reaches them still applies.
+
+| Text | Meaning | Fix |
+| --- | --- | --- |
+| "Autopilot hardware hash imported, but no Autopilot profile was assigned within 20 minutes." | Your tenant did not assign a deployment profile to the device within 20 minutes. | Check that a Windows Autopilot deployment profile is assigned to a group that contains the device, for example a dynamic group on its group tag. Wait for the assignment before you start the device, or deploy again. |
+| "Autopilot hardware hash imported, but Intune reported that the Autopilot profile assignment failed." | Intune reports the assignment as failed. | Open the device in your tenant, check its profile status, correct the profile or its assignment, then deploy again. |
+| "Autopilot hardware hash imported, but the Autopilot profile status could not be read." | Foundry Deploy could not read the profile status from Microsoft Graph. | Check the profile status of the device in your tenant before you start it. |
+
+`AutopilotUploadResult.json` records the outcome in `profileAssignment`: `Assigned`, `TimedOut`, `Failed` or `Unavailable`.
+
 ## Evidence files <a href="#evidence-files" id="evidence-files"></a>
 
 Never publish a tenant identifier, a certificate or a hardware hash in a support request. `AutopilotHWID.csv` and `OA3.xml` contain the hardware hash of the device.
