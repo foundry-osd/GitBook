@@ -31,6 +31,7 @@ These failures happen in Foundry Deploy and are described with the other [Window
 | `[Failed]` on `Install drivers`, `Remove AppX packages` or another Foundry task | [Foundry task](#foundry-task-failed) |
 | "Waiting for a Windows Setup restart." and the device stays on | [No restart](#waiting-for-restart) |
 | "Post-installation completed with warnings..." | [Warnings](#completed-with-warnings) |
+| "Windows could not parse or process the unattend answer file for pass [specialize]..." right after the console closed | [Sequence stopped](#post-installation-stopped) |
 | Windows Setup shows an error about the answer file, or ignores its settings | [Windows Setup](#windows-setup) |
 | Computer name, OOBE choices or Autopilot name from Foundry are missing | With a custom answer file: [What a custom answer file overrides](../foundry-osd/customization/unattend.md#what-a-custom-answer-file-overrides). Otherwise: [OOBE](../foundry-osd/customization/oobe.md) |
 | An app selected for removal, Copilot or AI Hub is still installed | [AppX removals](../foundry-osd/customization/appx-removals.md#what-happens-on-the-device) and [AI components](../foundry-osd/customization/ai-components.md#what-happens-on-the-device) |
@@ -83,7 +84,7 @@ The files named below are on the Windows volume of the deployed device: Foundry'
 
 ## "Post-installation stopped. Review the execution result and logs before continuing Windows Setup." <a href="#post-installation-stopped" id="post-installation-stopped"></a>
 
-- **Where:** the status line, in red. The remaining lines show `[Skipped]` and the window closes at once, without the 10-second countdown.
+- **Where:** the status line, in red. The remaining lines show `[Skipped]` and the window closes at once, without the 10-second countdown. Windows Setup then shows "Windows could not parse or process the unattend answer file for pass [specialize]..." and cannot finish, even without a custom answer file: the answer file is not at fault, Foundry's command in it ended with an error.
 - **Cause:** a Foundry task or an action failed and the sequence was not allowed to continue, or Foundry cannot tell whether it finished.
 - **Fix:**
   1. Do not hand over the device.
@@ -136,14 +137,14 @@ The files named below are on the Windows volume of the deployed device: Foundry'
 
 | Foundry task | Why it fails, and the effect | Where to look |
 | --- | --- | --- |
-| `Install drivers` | The driver installer returned an error or ran out of time. The sequence stops and no administrator's action runs. | `Logs\PreOobe\surface-driverpack.log` for a Surface pack |
+| `Install drivers` | The driver installer returned an error, a driver of a Lenovo pack could not be installed, or the pack held no driver. The sequence continues, with warnings; Windows starts without the drivers that failed. If the installer, or one driver of a Lenovo pack, takes longer than its limit (30 minutes for the installer, 10 minutes per driver), the sequence [stops](#post-installation-stopped) and Windows Setup cannot finish. | `Logs\PreOobe\lenovo-drivers.log` for a Lenovo pack, `Logs\PreOobe\surface-driverpack.log` for a Surface pack |
 | `Remove AppX packages`, `Remove AI components` | Windows could not list the installed packages. The sequence stops. A package that cannot be removed is only a warning. | `Logs\PreOobe\appx-servicing.log` |
 | `Activate Windows` | See [Activation](#not-activated). The sequence continues, with warnings, unless the task takes more than 60 seconds. | `execution-result.json` |
 | `Join domain and place computer`, `Verify domain membership` | See [Domain Join troubleshooting](domain-join.md). The sequence continues, with warnings. | The Domain Join lines |
 | `Upload hardware hash to Windows Autopilot` | The registration was skipped or the window was closed before the device was registered, the window reached its 120-minute limit, or Foundry Autopilot Interactive was not copied to the device. The sequence continues, with warnings; the device is not registered. | `failureCode` in `execution-result.json`, then [Windows Autopilot troubleshooting after the restart](autopilot/after-the-restart.md) |
 | `Cleanup` | Temporary files or settings could not be removed. The sequence ends with warnings. | [Leftover files](#leftover-files) |
 
-- **Fix:** for `Install drivers` and the removals, deploy again. If `Install drivers` fails again, select another driver source in Foundry Deploy. For the other tasks, follow the linked section.
+- **Fix:** for `Install drivers` and the removals, deploy again. If `Install drivers` fails again, select another driver source in Foundry Deploy. In `lenovo-drivers.log`, each driver of the pack is listed with its exit code: `exit 0` and `exit 3010` mean installed, and `exit 259` is normal, the device is absent or Windows already has a better driver for it; `exit none` is a driver that ran out of time; any other code is a driver that failed. The reason of a failed driver is in `C:\Windows\INF\setupapi.dev.log`, a standard Windows log. For the other tasks, follow the linked section.
 - **Collect:** the `State\PreOobe` and `Logs\PreOobe` folders.
 
 ## "Waiting for a Windows Setup restart." <a href="#waiting-for-restart" id="waiting-for-restart"></a>
@@ -158,6 +159,7 @@ The files named below are on the Windows volume of the deployed device: Foundry'
 - **Where:** the status line, in yellow, with `Warnings:` above 0 in the summary line below. Windows Setup continues after the 10-second countdown.
 - **Cause:** one or more of these.
   - An action with **Continue on error** failed.
+  - `Install drivers` failed: see [Foundry task](#foundry-task-failed).
   - A network profile or a certificate was not imported, or an AppX package was not removed.
   - Windows activation failed.
   - A Domain Join part is not `Succeeded`.
@@ -168,7 +170,7 @@ The files named below are on the Windows volume of the deployed device: Foundry'
 ## Windows Setup fails on the answer file or ignores its settings <a href="#windows-setup" id="windows-setup"></a>
 
 - **Where:** Windows Setup, after the restart, with a custom answer file: an error screen about the answer file, or a deployed Windows without the expected settings.
-- **Cause:** a setting that is not valid for this Windows image, a component with the wrong `processorArchitecture`, or a command of the file that failed. Foundry checks the structure of the file, not what Windows makes of it. A computer name, OOBE choices or an Autopilot name set in Foundry are not applied at all with a custom answer file: see [What a custom answer file overrides](../foundry-osd/customization/unattend.md#what-a-custom-answer-file-overrides).
+- **Cause:** a setting that is not valid for this Windows image, a component with the wrong `processorArchitecture`, or a command of the file that failed. Foundry checks the structure of the file, not what Windows makes of it. A computer name, OOBE choices or an Autopilot name set in Foundry are not applied at all with a custom answer file: see [What a custom answer file overrides](../foundry-osd/customization/unattend.md#what-a-custom-answer-file-overrides). Without a custom answer file, the error "Windows could not parse or process the unattend answer file for pass [specialize]..." follows a stopped post-installation sequence: see [Sequence stopped](#post-installation-stopped).
 - **Fix:**
   1. Validate the file with Windows System Image Manager against the same image.
   2. Compare it with the file Windows used, `C:\Windows\Panther\unattend.xml`.
