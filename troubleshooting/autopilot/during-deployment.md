@@ -17,6 +17,7 @@ In **Steps**, the Autopilot step is named **Copy Autopilot profile**, **Register
 | **Register Autopilot device** is skipped with "Autopilot hardware hash capture failed: ..." | [Capture failed](#hardware-hash-capture-failed) |
 | "Autopilot hardware hash upload skipped: ..." | [Upload skipped](#hardware-hash-upload-skipped) |
 | "Imported Autopilot device did not appear ...", "Autopilot hardware hash import failed: ...", "The hardware hash is visible in Windows Autopilot, but ..." or "Multiple Windows Autopilot devices matched ..." | [Other results of the upload](#hardware-hash-upload-skipped) |
+| **Register Autopilot device** succeeds with "Autopilot hardware hash imported, but ..." | [Registered without its profile](#profile-not-assigned) |
 
 The files named under **Collect** are described in [Evidence files](#evidence-files); `FoundryDeploy.log` is in [Log locations](../logs-and-support.md#log-locations).
 
