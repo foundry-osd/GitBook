@@ -69,12 +69,12 @@ Foundry checks that the PFX opens with the password, contains a private key, has
 
 ## What the technician sees
 
-Foundry Deploy shows an **Autopilot** step where the technician can change the group tag. The upload runs near the end of the deployment, in the step **Register Autopilot device**, and waits up to 10 minutes for the device to appear in your tenant. Most failures of the hardware hash capture or upload only skip that step, and the deployment still completes. Three capture failures, about a Windows file named `PCPKsp.dll` that is missing or unusable, stop the deployment. See [Windows Autopilot step](../../foundry-deploy/autopilot.md).
+Foundry Deploy shows an **Autopilot** step where the technician can change the group tag. The upload runs near the end of the deployment, in the step **Register Autopilot device**, waits up to 10 minutes for the device to appear in your tenant, then up to 20 minutes for your tenant to assign its Autopilot profile, so that the device reaches the first Windows setup screens with it. Most failures of the hardware hash capture or upload only skip that step, and the deployment still completes. Three capture failures, about a Windows file named `PCPKsp.dll` that is missing or unusable, stop the deployment. See [Windows Autopilot step](../../foundry-deploy/autopilot.md).
 
 ## Check the result
 
 - On **Start**, the **Zero-Touch** row of the **Windows Autopilot** card reads "Enabled: zero-touch hardware hash upload".
-- After a deployment, find the device by its serial number among the Windows Autopilot devices of your tenant, with its group tag. Foundry waits for the device to be listed, not for a profile to be assigned to it.
+- After a deployment, find the device by its serial number among the Windows Autopilot devices of your tenant, with its group tag. The step text tells whether the Autopilot profile was assigned before the restart; Windows setup downloads the profile at the first setup screens, so a profile assigned before the device reaches them still applies.
 
 ## Limits
 

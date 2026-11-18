@@ -98,7 +98,7 @@ An expired code is not an error: the window replaces the code by itself; the QR 
 
 - **Where:** Windows setup, after a registration that succeeded.
 - **Cause:**
-  - In zero-touch mode, Foundry waits for the device to be listed in the tenant, not for a profile to be assigned to it. Your tenant can need more time.
+  - In zero-touch mode, **Register Autopilot device** waits for the profile for up to 20 minutes, then the deployment continues anyway; its text tells whether the profile was assigned, as described in [Registered without its profile](during-deployment.md#profile-not-assigned). OOBE can then start before the profile is assigned.
   - In interactive mode the window waits for the profile for up to 20 minutes, then lets Windows setup continue: "The profile is not assigned yet; Windows setup continues." It also continues when **Continue without waiting** is selected, or when it reads "The profile assignment status could not be read." or "Intune reported that the Autopilot profile assignment failed." OOBE can then start before the profile is assigned.
   - The group tag is missing or wrong, and your tenant uses it to assign the profile. A device that was already registered loses its tag when **None** is chosen in Foundry Deploy or in the registration window.
   - A custom answer file was used with the zero-touch mode. Foundry Deploy then warns "Hash upload does not guarantee Autopilot enrollment."

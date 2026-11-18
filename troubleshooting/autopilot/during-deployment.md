@@ -17,6 +17,7 @@ In **Steps**, the Autopilot step is named **Copy Autopilot profile**, **Register
 | **Register Autopilot device** is skipped with "Autopilot hardware hash capture failed: ..." | [Capture failed](#hardware-hash-capture-failed) |
 | "Autopilot hardware hash upload skipped: ..." | [Upload skipped](#hardware-hash-upload-skipped) |
 | "Imported Autopilot device did not appear ...", "Autopilot hardware hash import failed: ...", "The hardware hash is visible in Windows Autopilot, but ..." or "Multiple Windows Autopilot devices matched ..." | [Other results of the upload](#hardware-hash-upload-skipped) |
+| **Register Autopilot device** succeeds with "Autopilot hardware hash imported, but ..." | [Registered without its profile](#profile-not-assigned) |
 
 The files named under **Collect** are described in [Evidence files](#evidence-files); `FoundryDeploy.log` is in [Log locations](../logs-and-support.md#log-locations).
 
@@ -131,6 +132,16 @@ If you deploy anyway, **Register Autopilot device** is skipped with the reason "
 | "Multiple Windows Autopilot devices matched the captured serial number; device property reconciliation was skipped to avoid updating the wrong device." | Several Windows Autopilot devices of the tenant have this serial number. Foundry changed none of them. | Delete the outdated record in your tenant, then deploy again. |
 
 For these four, collect `AutopilotUploadResult.json`: its `failureCode` names the case, for example `AutopilotDeviceTimedOut` or `AutopilotDeviceAmbiguous`.
+
+**Registered without its profile** <a href="#profile-not-assigned" id="profile-not-assigned"></a>. With the zero-touch mode, **Register Autopilot device** succeeds but its text reads one of these. The device is registered. Windows setup downloads the profile at the first setup screens, so a profile assigned before the device reaches them still applies.
+
+| Text | Meaning | Fix |
+| --- | --- | --- |
+| "Autopilot hardware hash imported, but no Autopilot profile was assigned within 20 minutes." | Your tenant did not assign a deployment profile to the device within 20 minutes. | Check that a Windows Autopilot deployment profile is assigned to a group that contains the device, for example a dynamic group on its group tag. Wait for the assignment before you start the device, or deploy again. |
+| "Autopilot hardware hash imported, but Intune reported that the Autopilot profile assignment failed." | Intune reports the assignment as failed. | Open the device in your tenant, check its profile status, correct the profile or its assignment, then deploy again. |
+| "Autopilot hardware hash imported, but the Autopilot profile status could not be read." | Foundry Deploy could not read the profile status from Microsoft Graph. | Check the profile status of the device in your tenant before you start it. |
+
+`AutopilotUploadResult.json` records the outcome in `profileAssignment`: `Assigned`, `TimedOut`, `Failed` or `Unavailable`.
 
 ## Evidence files <a href="#evidence-files" id="evidence-files"></a>
 
