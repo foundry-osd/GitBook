@@ -1,12 +1,12 @@
 # Windows PE startup troubleshooting
 
-Use this page when the **Foundry WinPE** console stops, shows **Failed** in red, or shows yellow warnings before Foundry Deploy opens. [Windows PE startup](../foundry-connect/windows-pe-startup.md) describes a normal start.
+Use this page when the **Foundry WinPE** console stops, shows **Failed** in red, shows yellow warnings, or a **Foundry stopped** window appears. [Windows PE startup](../foundry-connect/windows-pe-startup.md) describes a normal start.
 
 The reason is the line under the list of stages. On a failure, the console also shows a `Session:` identifier and the `Log:` path. Logs are in `X:\Foundry\Logs`, which is lost when the device restarts: collect them first. See [Log locations](logs-and-support.md#log-locations).
 
 | What you see | Go to section |
 | --- | --- |
-| Only "Foundry startup failed. See X:\Foundry\Logs for details." | [Foundry startup failed](#foundry-startup-failed) |
+| Only "Foundry stopped with an error. See X:\Foundry\Logs for details." | [Foundry stopped with an error](#foundry-startup-failed) |
 | "The boot environment could not be initialized." | [The boot environment could not be initialized](#boot-environment-not-initialized) |
 | Yellow "Internet clock could not be resolved..." | [Internet clock could not be resolved](#internet-clock-not-resolved) |
 | "This boot media is obsolete. Update Foundry OSD and recreate the media." in a window | [This boot media is obsolete](#boot-media-obsolete) |
@@ -15,15 +15,16 @@ The reason is the line under the list of stages. On a failure, the console also 
 | "Foundry Connect stopped unexpectedly. Check the session log for details." | [Foundry Connect stopped unexpectedly](#exit-code-23) |
 | "Boot was cancelled. Deployment will not continue." | [Boot was cancelled](#boot-cancelled) |
 | "This boot stage could not be completed. Check the session log for details." | [This boot stage could not be completed](#boot-stage-not-completed) |
-| "Foundry Deploy stopped with exit code" and a number | [Foundry Deploy stopped](#foundry-deploy-stopped) |
+| A window titled **Foundry stopped**, and a yellow "Foundry stopped unexpectedly with exit code" and a number in the console | [Foundry stopped](#foundry-stopped) |
+| "Foundry Deploy could not start..." or "Foundry Deploy could not load its configuration..." | [Foundry Deploy stopped](#foundry-deploy-stopped) |
 | "Application readiness was not confirmed within two minutes..." | [Readiness was not confirmed](#readiness-not-confirmed) |
 | "Application startup metadata is invalid..." | [Startup metadata is invalid](#startup-metadata-invalid) |
-| Another yellow warning, or a last stage that shows **Unverified** | [Other warnings](#other-warnings) |
+| Another yellow warning | [Other warnings](#other-warnings) |
 
-## "Foundry startup failed. See X:\Foundry\Logs for details." <a href="#foundry-startup-failed" id="foundry-startup-failed"></a>
+## "Foundry stopped with an error. See X:\Foundry\Logs for details." <a href="#foundry-startup-failed" id="foundry-startup-failed"></a>
 
 - **Where:** A plain line at the command prompt, under the console.
-- **Cause:** This line follows every failed startup. The reason is the line under the list of stages. If the console never appeared and this is the only line, Foundry WinPE itself could not start.
+- **Cause:** This line follows every failed run, whether Foundry could not start or stopped later. The reason is the line under the list of stages. If the console never appeared and this is the only line, Foundry WinPE itself could not start.
 - **Fix:**
   1. Read the line under the list of stages and find it on this page.
   2. If there is no console, run `type X:\Foundry\Logs\FoundryBootstrap.Launcher.log` to read the exit code, then restart the device.
@@ -42,14 +43,14 @@ The reason is the line under the list of stages. On a failure, the console also 
 
 ## "Warning: Internet clock could not be resolved. Boot will continue without clock correction." <a href="#internet-clock-not-resolved" id="internet-clock-not-resolved"></a>
 
-- **Where:** A yellow line under the elapsed time. **Environment** ends with **Done (warning)**. If the same line appears twice and **Clock and time zone** also ends with **Done (warning)**, the clock could not be read after Foundry Connect either.
+- **Where:** A yellow line under the elapsed time. **Environment** ends with **Done (warning)**.
 - **Cause:** The device had no Internet access before Foundry Connect: no cable, DHCP not ready yet, or a network that requires authentication. This is expected on a Wi-Fi-only device.
-- **Fix:** Nothing, when only **Environment** shows the warning and the last stage ends with **Ready**: the clock is read again at **Clock and time zone**, after Foundry Connect. If **Clock and time zone** shows it too, or the time stays wrong, the device keeps its firmware clock: see [Wrong time or time zone](network.md#wrong-time-or-time-zone).
+- **Fix:** Nothing: the clock is read again after Foundry Connect, when the network works. If the time stays wrong, the device keeps its firmware clock: see [Wrong time or time zone](network.md#wrong-time-or-time-zone).
 - **Collect:** Nothing.
 
 ## "This boot media is obsolete. Update Foundry OSD and recreate the media." <a href="#boot-media-obsolete" id="boot-media-obsolete"></a>
 
-- **Where:** A window with a **Close** button, shown where Foundry Connect or Foundry Deploy should open. Nothing else in it can be used, and no deployment starts.
+- **Where:** A window with a **Close** button, shown where Foundry Connect should open. Nothing else in it can be used, and no deployment starts.
 - **Cause:** The media was created with Foundry OSD v26.10.18.1 or earlier. Those media download Foundry Connect and Foundry Deploy from the latest release at each start, and the latest release now only shows this window.
 - **Fix:**
   1. Update Foundry OSD.
@@ -60,14 +61,14 @@ The reason is the line under the list of stages. On a failure, the console also 
 
 ## "Foundry Connect could not load its configuration. Recreate the boot media." <a href="#exit-code-22" id="exit-code-22"></a>
 
-- **Where:** **Network connection** shows **Failed**. Foundry Connect does not open, or closes at once.
+- **Where:** **Foundry** shows **Failed**. Foundry Connect does not open, or closes at once.
 - **Cause:** The configuration file of Foundry Connect on the media is missing or damaged. A Wi-Fi or 802.1X secret that cannot be read does not stop Foundry Connect: only that network is marked unavailable, see [Provisioned Wi-Fi "Unavailable"](network.md#provisioned-wifi-unavailable).
 - **Fix:** Recreate the media in Foundry OSD.
 - **Collect:** `FoundryConnect.log` and `FoundryBootstrap.log`. See [Logs and support information](logs-and-support.md).
 
 ## "Foundry Connect could not start. Check the session log for details." <a href="#exit-code-21" id="exit-code-21"></a>
 
-- **Where:** **Network connection** shows **Failed**.
+- **Where:** **Foundry** shows **Failed**.
 - **Cause:** Foundry Connect met an unexpected error while starting.
 - **Fix:**
   1. Restart the device.
@@ -76,7 +77,7 @@ The reason is the line under the list of stages. On a failure, the console also 
 
 ## "Foundry Connect stopped unexpectedly. Check the session log for details." <a href="#exit-code-23" id="exit-code-23"></a>
 
-- **Where:** **Network connection** shows **Failed** after Foundry Connect had opened.
+- **Where:** **Foundry** shows **Failed** after Foundry Connect had opened.
 - **Cause:** Foundry Connect met an unexpected error while it was running.
 - **Fix:**
   1. Restart the device.
@@ -85,11 +86,14 @@ The reason is the line under the list of stages. On a failure, the console also 
 
 ## "Boot was cancelled. Deployment will not continue." <a href="#boot-cancelled" id="boot-cancelled"></a>
 
-- **Where:** **Network connection** shows **Cancelled** and the second line of the console reads "Startup cancelled".
-- **Cause:** The Foundry Connect window was closed before the startup continued, or Ctrl+C was pressed in the console. Closing Foundry Connect never skips the network check.
+- **Where:** **Foundry** shows **Cancelled** and the second line of the console reads "Startup cancelled".
+- **Cause:** One of these:
+  - The Foundry Connect window was closed before the startup continued. Closing Foundry Connect never skips the network check, and Foundry Deploy does not open.
+  - Foundry Deploy closed before its wizard opened: the deployment password prompt was cancelled, or the network cache window was closed.
+  - Ctrl+C was pressed in the console.
 - **Fix:**
   1. Restart the device and start from the media again.
-  2. Without a restart: if a command prompt remains in the console window, you may type `X:\Foundry\WinPE\Launch.cmd` and press Enter. This is the command the device runs at startup, but running it a second time is not confirmed on a device. Use it only when no Foundry Connect window is open: after Ctrl+C, Foundry Connect may still be running, so close it first or restart.
+  2. Without a restart: if a command prompt remains in the console window, you may type `X:\Foundry\WinPE\Launch.cmd` and press Enter. This is the command the device runs at startup, but running it a second time is not confirmed on a device. Use it only when no Foundry window is open: after Ctrl+C, Foundry may still be running, so close it first or restart.
 - **Collect:** Nothing.
 
 ## "This boot stage could not be completed. Check the session log for details." <a href="#boot-stage-not-completed" id="boot-stage-not-completed"></a>
@@ -101,10 +105,22 @@ The reason is the line under the list of stages. On a failure, the console also 
   2. If it happens again, recreate the ISO or the PXE files, or [update the USB drive](../foundry-osd/media/update-usb.md), with the current version of Foundry OSD.
 - **Collect:** `FoundryBootstrap.log`. See [Logs and support information](logs-and-support.md).
 
-## "Foundry Deploy stopped with exit code" and a number <a href="#foundry-deploy-stopped" id="foundry-deploy-stopped"></a>
+## A window titled "Foundry stopped" <a href="#foundry-stopped" id="foundry-stopped"></a>
 
-- **Where:** **Deployment application** shows **Failed**.
-- **Cause:** Foundry Deploy closed before its window was ready.
+- **Where:** A window in front of the console, after a Foundry window had appeared. The console shows a yellow "Foundry stopped unexpectedly with exit code" and a number. The window shows the folder that holds the logs.
+- **Cause:** The Foundry application closed unexpectedly, after its first window appeared: it crashed, or it was ended, for example from Task Manager. A restart or a shutdown of Windows PE, as when Foundry Deploy restarts the device at the end of a deployment, is never reported this way.
+- **Fix:**
+  1. Read the message in the window.
+  2. If **Relaunch** is offered, the deployment had not started to prepare the target disk: select it. Foundry starts again from Foundry Connect, and the target disk was not changed.
+  3. If only **Close** is offered, the deployment may already have changed the target disk, so Foundry cannot be relaunched. Select **Close**, then restart the device from the media to begin a new deployment.
+  4. If it happens again, recreate the media with the current version of Foundry OSD and open a support issue with the logs.
+- **Good to know:** Foundry is never relaunched by itself. A failure in Foundry Connect or Foundry Deploy that reports its own message, such as the ones above and below, does not show this window.
+- **Collect:** `FoundryBootstrap.log`, `FoundryConnect.log` and `FoundryDeploy.log`. See [Logs and support information](logs-and-support.md).
+
+## "Foundry Deploy could not start" or "could not load its configuration" <a href="#foundry-deploy-stopped" id="foundry-deploy-stopped"></a>
+
+- **Where:** **Foundry** shows **Failed** after Foundry Connect, with one of these lines: "Foundry Deploy could not start. Check the session log for details." or "Foundry Deploy could not load its configuration. Recreate the boot media."
+- **Cause:** Foundry Deploy could not read its configuration or start. This is a failure reported by Foundry Deploy itself, so no **Foundry stopped** window appears.
 - **Fix:**
   1. Restart the device.
   2. If it happens again, recreate the media with the current version of Foundry OSD.
@@ -112,18 +128,18 @@ The reason is the line under the list of stages. On a failure, the console also 
 
 ## "Application readiness was not confirmed within two minutes. The application may still be running." <a href="#readiness-not-confirmed" id="readiness-not-confirmed"></a>
 
-- **Where:** **Network connection** or **Deployment application** shows **Failed**.
-- **Cause:** Foundry Connect or Foundry Deploy did not report a usable window within 2 minutes. The console stops waiting but does not close the application.
+- **Where:** **Foundry** shows **Failed**.
+- **Cause:** Foundry did not show its first window, the Foundry Connect window, within 2 minutes. The console stops waiting but does not close the application.
 - **Fix:**
-  1. Look for the application window before doing anything else.
-  2. If the Foundry Deploy window is open, the application is running: continue in it.
-  3. If the stage was **Network connection**, restart the device: the startup no longer waits for Foundry Connect.
-- **Collect:** `FoundryBootstrap.log` and the log of the application. See [Logs and support information](logs-and-support.md).
+  1. Look for the Foundry window before doing anything else.
+  2. If a Foundry window is open, the application is running: continue in it.
+  3. Otherwise restart the device: the startup no longer waits for Foundry.
+- **Collect:** `FoundryBootstrap.log` and `FoundryConnect.log`. See [Logs and support information](logs-and-support.md).
 
 ## "Application startup metadata is invalid. Recreate the boot media or use Update USB." <a href="#startup-metadata-invalid" id="startup-metadata-invalid"></a>
 
-- **Where:** **Network connection** or **Deployment application** shows **Failed**.
-- **Cause:** The startup description inside the package of Foundry Connect or Foundry Deploy is invalid.
+- **Where:** **Foundry** shows **Failed**, and no Foundry window opens.
+- **Cause:** The startup description of the Foundry WinPE program on the media is missing or invalid.
 - **Fix:**
   1. Recreate the media with the current version of Foundry OSD, or [update the USB drive](../foundry-osd/media/update-usb.md).
   2. If it happens again, open a support issue with the log.
@@ -142,12 +158,9 @@ Yellow lines that start with "Warning:" never stop the startup. The console show
 | "Wired AutoConfig service could not be started. Boot will continue." | The Windows PE service for wired 802.1X did not start. A plain wired network still works. | Restart. A wired 802.1X profile cannot authenticate without it. |
 | "Wi-Fi AutoConfig service could not be started. Boot will continue." | The Windows PE wireless service did not start. Foundry Connect shows no Wi-Fi card and nothing about Wi-Fi. | Restart. See [The Wi-Fi card is missing](network.md#wi-fi-list-missing). |
 | "System clock could not be corrected. Boot will continue." | The Internet time was read but the clock could not be set. | Set the date and time in the firmware. |
-| "Public IP timezone could not be resolved. Boot will continue with UTC." | Automatic time zone detection got no answer. | See [Wrong time or time zone](network.md#wrong-time-or-time-zone). |
-| "IANA timezone map could not be loaded. Boot will continue with UTC if needed." | A file used to convert the detected time zone could not be read. | Nothing. The time zone may stay on UTC. |
-| "WinPE timezone could not be updated. Boot will continue." | The time zone was found but could not be applied. | Nothing. Times in Windows PE stay in the previous zone. |
-| "Embedded deployment timezone configuration could not be read. Boot will continue with automatic detection." | The time zone setting on the media could not be read. | Recreate the media if it repeats. |
 | "Online runtime verification failed. Continuing with the original application provisioned on the boot media.", "The verified runtime could not be saved to the cache. This boot can continue." or "Foundry Connect could not be updated. Continuing." | The media was created with an older Foundry OSD, which still looks for newer Foundry applications at each start, and that lookup or its copy to the USB drive failed. | Nothing for this start. Recreate the ISO or the PXE files, or [update the USB drive](../foundry-osd/media/update-usb.md), with the current Foundry OSD. |
-| "This application does not support startup confirmation. Readiness will remain unverified." | The console cannot confirm that the application opened. The last stage shows **Unverified** and the second line reads "Deployment application launched". | Check that the Foundry Deploy window is open. |
-| "Some network preparation was unavailable. Continuing.", "Early clock synchronization was unavailable. Continuing to Foundry Connect." or "Some system preparation was unavailable. Continuing." | A preparation step met an unexpected error. | Nothing, unless a later stage fails. |
+| "Some network preparation was unavailable. Continuing." or "Early clock synchronization was unavailable. Continuing to Foundry." | A preparation step met an unexpected error. | Nothing, unless a later stage fails. |
 
 </details>
+
+The time zone and the full clock synchronization run later, inside Foundry, after Foundry Connect: they never show a line in the console and only write to `FoundryConnect.log`. If the time zone is wrong, see [Wrong time or time zone](network.md#wrong-time-or-time-zone).

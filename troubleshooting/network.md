@@ -284,7 +284,7 @@ While the device is not online, the title of the status banner names the cause, 
 - **Fix:**
   1. Set the date and time in the firmware of the device.
   2. The administrator chooses a fixed [Windows PE time zone](../foundry-osd/general.md#windows-pe-time-zone) and recreates the media.
-- **Collect:** `FoundryBootstrap.log`. See [Logs and support information](logs-and-support.md).
+- **Collect:** `FoundryBootstrap.log` and `FoundryConnect.log`, which records the time zone and the clock synchronization done inside Foundry. See [Logs and support information](logs-and-support.md).
 
 ## The roamed profile does not connect after deployment <a href="#roamed-profile-does-not-connect" id="roamed-profile-does-not-connect"></a>
 

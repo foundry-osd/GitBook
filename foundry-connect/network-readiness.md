@@ -115,4 +115,4 @@ Find the text you see on screen in [Network and Foundry Connect troubleshooting]
 
 ## Next step
 
-The [startup console](windows-pe-startup.md) prepares Foundry Deploy, then [Foundry Deploy](../foundry-deploy/README.md) opens.
+The clock and the time zone are set, then [Foundry Deploy](../foundry-deploy/README.md) opens in the same application. The [startup console](windows-pe-startup.md) stays on screen behind it.
