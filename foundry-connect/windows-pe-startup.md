@@ -1,6 +1,6 @@
 # Windows PE startup
 
-When a target device starts from deployment media, a console titled **Foundry WinPE** prepares Windows PE, opens Foundry Connect, then opens Foundry Deploy. Everything it runs is already on the media: nothing is downloaded, repaired or unpacked at startup. You only watch it: this page says what each line means and which waits are normal.
+When a target device starts from deployment media, a console titled **Foundry WinPE** prepares Windows PE, then starts Foundry. Foundry is one application: it shows Foundry Connect, then continues into Foundry Deploy without closing or restarting. Everything it runs is already on the media: nothing is downloaded, repaired or unpacked at startup. You only watch it: this page says what each line means and which waits are normal.
 
 <figure>
   <img src="../.gitbook/assets/shared-bootstrap-01-download-progress.png" alt="Foundry WinPE console with its startup stages">
@@ -9,30 +9,30 @@ When a target device starts from deployment media, a console titled **Foundry Wi
 
 ## What you see, in order
 
-Each of the four stages goes from **Waiting** to **In progress**, then **Done**. The line under the list says what is happening now.
+The console lists two stages. Each goes from **Waiting** to **In progress**, then **Done**. The line under the list says what is happening now.
 
 | Stage | Line under the list | What happens |
 | --- | --- | --- |
 | **Environment** | "Preparing network access" | Windows PE starts its wired and Wi-Fi services. |
-| **Network connection** | "Waiting for Foundry Connect" | Foundry Connect opens from the program on the media. The stage stays **In progress** until you continue from [Foundry Connect](README.md). |
-| **Clock and time zone** | "Preparing the system clock and time zone" | The clock is set from the Internet and the time zone is applied. |
-| **Deployment application** | "Starting Foundry Deploy" | Foundry Deploy opens. |
+| **Foundry** | "Starting Foundry" | The Foundry window opens from the program on the media: first [Foundry Connect](README.md), then Foundry Deploy. The stage stays **In progress** as long as Foundry runs. |
 
-Startup is complete when the last stage shows **Ready** and the line under the list reads "Continue in Foundry Deploy."
+The console is only a progress screen. The work happens in the Foundry window: once Foundry Connect has confirmed the network and you continue, the clock and the time zone are set, then Foundry Deploy opens in the same application, with the theme, the language and the keyboard layout you chose in Foundry Connect. The console shows nothing more for those steps.
+
+If Foundry stops unexpectedly, the console shows a yellow warning "Foundry stopped unexpectedly with exit code" and a number, and a window offers the next step: see [If Foundry stops unexpectedly](#if-foundry-stops-unexpectedly).
 
 ## Waits that are normal
 
-- **Network connection**: as long as you need in [Foundry Connect](network-readiness.md).
-- **Clock and time zone**: up to 50 seconds on a network that filters the lookups (five lookups of 10 seconds).
-- **Deployment application**: up to 2 minutes before the Foundry Deploy window appears.
+- **Foundry window**: up to 2 minutes before the Foundry Connect window appears.
+- **Foundry Connect**: as long as you need in [Foundry Connect](network-readiness.md).
+- **Clock and time zone**: up to 50 seconds between Foundry Connect and Foundry Deploy on a network that filters the lookups (five lookups of 10 seconds).
 
 On a device with no cable, the Internet is out of reach before Foundry Connect. A yellow line can then appear and stay until the end: "Warning: Internet clock could not be resolved. Boot will continue without clock correction."
 
-It is expected on a Wi-Fi-only device. **Environment** ends with **Done (warning)** and the final screen adds a `Session:` and a `Log:` line. No action is needed when the last stage ends with **Ready**.
+It is expected on a Wi-Fi-only device. **Environment** ends with **Done (warning)**. No action is needed when Foundry Connect then opens.
 
 ## Which version runs
 
-The media runs Foundry Connect and Foundry Deploy, both inside the Foundry WinPE program, and carries the post-installation application, all of the Foundry OSD version that created it, never a newer one. To use newer versions, update Foundry OSD, then recreate the ISO or the PXE files, or [update the USB drive](../foundry-osd/media/update-usb.md).
+The media runs Foundry Connect and Foundry Deploy, both inside one Foundry WinPE application, and carries the post-installation application, all of the Foundry OSD version that created it, never a newer one. To use newer versions, update Foundry OSD, then recreate the ISO or the PXE files, or [update the USB drive](../foundry-osd/media/update-usb.md).
 
 The post-installation application is stored in the boot image like the Foundry WinPE program. If it is missing or damaged, nothing repairs it at startup: Foundry Deploy stops before it touches the disk and asks you to recreate the media (see [Checks and image download](../troubleshooting/deployment/checks-and-image-download.md#post-installation-preparation-fails)).
 
@@ -49,8 +49,12 @@ See [Network endpoints](../reference/network-endpoints.md) for the hosts. What t
 
 ## When the clock and the time zone are set
 
-The clock is corrected from the Internet before Foundry Connect when the network already works, otherwise at **Clock and time zone**. The time zone is applied at that stage, from the [Windows PE time zone](../foundry-osd/general.md#windows-pe-time-zone) setting of the media: a fixed zone, or the zone of the public IP address of the network, with UTC when that lookup gets no answer.
+The clock is corrected from the Internet before Foundry Connect when the network already works, and again between Foundry Connect and Foundry Deploy. The time zone is applied between them, from the [Windows PE time zone](../foundry-osd/general.md#windows-pe-time-zone) setting of the media: a fixed zone, or the zone of the public IP address of the network, with UTC when that lookup gets no answer.
 
 ## If startup stops
 
 A stage that shows **Failed** or **Cancelled** ends the startup, and the line under the list gives the reason. Find that text in [Windows PE startup troubleshooting](../troubleshooting/windows-pe-startup.md).
+
+## If Foundry stops unexpectedly <a href="#if-foundry-stops-unexpectedly" id="if-foundry-stops-unexpectedly"></a>
+
+When Foundry closes without finishing, after its first window appeared, a window titled **Foundry stopped** says so. It shows the folder that holds the logs. **Relaunch** appears only when the deployment had not yet started to prepare the target disk: Foundry then starts again from Foundry Connect. Otherwise the disk may already have been changed, only **Close** is offered, and you restart the device to begin a new deployment. See [Foundry stopped](../troubleshooting/windows-pe-startup.md#foundry-stopped).

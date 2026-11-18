@@ -1,6 +1,6 @@
 # Foundry Deploy
 
-Foundry Deploy is the wizard that installs Windows on the target device. It opens in Windows PE once [Foundry Connect](../foundry-connect/README.md) reports that the network is ready.
+Foundry Deploy is the wizard that installs Windows on the target device. It opens in Windows PE once [Foundry Connect](../foundry-connect/README.md) reports that the network is ready and you continue. Both run in one application: Foundry Deploy replaces the Foundry Connect window without a restart, and keeps its theme, language and keyboard layout.
 
 <figure>
   <img src="../.gitbook/assets/foundry-deploy-welcome-01-start.png" alt="Foundry Deploy Welcome screen with the Start deployment button">
@@ -24,7 +24,7 @@ Deployment erases the disk you select. Nothing is erased while you are in the wi
 2. Wait on the **Welcome** screen while it shows **Initializing components...**. Foundry Deploy detects the hardware, lists the disks and loads the Windows and driver catalogs.
 3. Select **Start deployment**.
 
-A wrong password shows "The password is incorrect. Try again.". Each failed attempt adds one second of waiting before the next prompt, up to five seconds. **Cancel** closes Foundry Deploy. A lost password cannot be recovered: the administrator must recreate the media, as explained in [Password protection](../foundry-osd/general.md#password-protection).
+A wrong password shows "The password is incorrect. Try again.". Each failed attempt adds one second of waiting before the next prompt, up to five seconds. **Cancel** closes Foundry Deploy and the startup is cancelled: the console shows "Boot was cancelled. Deployment will not continue." A lost password cannot be recovered: the administrator must recreate the media, as explained in [Password protection](../foundry-osd/general.md#password-protection).
 
 ## Wizard steps
 

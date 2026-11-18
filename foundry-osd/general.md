@@ -60,7 +60,7 @@ Windows PE only needs drivers for the network and storage hardware it must use. 
 
 ## Password protection
 
-Turn on **Password protection** and type the **Deployment password** twice. This is the password the technician types when Foundry Deploy starts, or earlier in Foundry Connect when a protected network setting needs it; without it, Foundry Deploy does not open.
+Turn on **Password protection** and type the **Deployment password** twice. This is the password the technician types once, in Foundry Connect when a protected network setting needs it, or when Foundry Deploy starts otherwise; without it, Foundry Deploy does not open.
 
 The password must have at least 8 characters; Foundry OSD recommends 12, or a passphrase. **Review and start** stays disabled until the two entries match.
 
@@ -78,7 +78,7 @@ The password must have at least 8 characters; Foundry OSD recommends 12, or a pa
 
 As soon as the media carries a Wi-Fi passphrase or a client certificate, Password protection is required. Until you turn it on, the Wi-Fi or Ethernet 802.1X page shows **Needs attention** with "Wi-Fi passwords and client certificates are protected by the deployment password. Turn on password protection on the General page and set the deployment password.", **Start** marks the network item and **Password protection** as **Needs attention**, and media creation is refused.
 
-On the target device, [Foundry Connect](../foundry-connect/README.md#deployment-password-in-foundry-connect) asks for the Deployment password only when it needs one of these network secrets. After a successful entry there, Foundry Deploy does not ask again.
+On the target device, [Foundry Connect](../foundry-connect/README.md#deployment-password-in-foundry-connect) asks for the Deployment password only when it needs one of these network secrets. After a successful entry there, Foundry Deploy, which runs in the same application, does not ask again.
 
 {% hint style="warning" %}
 Password protection does not encrypt the whole ISO file or USB drive. Anyone who holds the media and knows the Deployment password can recover every protected secret.

@@ -40,7 +40,7 @@ The ISO file, USB drive or PXE files created by Foundry OSD, from which a target
 
 ## Deployment password
 
-The password the technician types when Foundry Deploy starts, on media created with **Password protection** turned on. Foundry Connect asks for it earlier when a protected network setting needs it, and Foundry Deploy then does not ask again.
+The password the technician types when Foundry Deploy starts, on media created with **Password protection** turned on. Foundry Connect asks for it earlier when a protected network setting needs it, and Foundry Deploy, which runs in the same application, then does not ask again.
 
 ## Distinguished name
 
@@ -68,7 +68,7 @@ The second volume of a USB drive created by Foundry OSD, labeled `Foundry Cache`
 
 ## Foundry Connect
 
-The application that checks and sets up network access on the target device in Windows PE, before Foundry Deploy.
+The part of the Foundry application that checks and sets up network access on the target device in Windows PE, before Foundry Deploy. Both run in one application.
 
 ## Foundry Deploy
 
@@ -160,7 +160,7 @@ Windows Preinstallation Environment, a minimal Windows that runs from memory. Th
 
 ## Windows PE startup
 
-The console window that appears first when a device starts from the media. It prepares Windows PE and starts Foundry Connect, then Foundry Deploy.
+The console window that appears first when a device starts from the media. It prepares Windows PE, then starts and watches one Foundry application that shows Foundry Connect, then Foundry Deploy. If that application stops unexpectedly, it shows the **Foundry stopped** window.
 
 ## Windows RE
 

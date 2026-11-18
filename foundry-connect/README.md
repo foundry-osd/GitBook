@@ -1,6 +1,6 @@
 # Foundry Connect
 
-Foundry Connect opens after the startup console on a target device started from deployment media. It gets the device online in Windows PE and holds the startup until Internet access is confirmed, because the startup then needs GitHub to get Foundry Deploy.
+Foundry Connect opens first, after the startup console, on a target device started from deployment media. It gets the device online in Windows PE and holds the startup until Internet access is confirmed. Foundry Connect and [Foundry Deploy](../foundry-deploy/README.md) are two parts of one application: when you continue, Foundry Deploy opens in the same application, with nothing to start or restart in between.
 
 <figure>
   <img src="../.gitbook/assets/foundry-connect-overview-01-waiting.png" alt="Foundry Connect with the status banner on Connecting, the Ethernet card on No active link and the Provisioned Wi-Fi card in the left column, and the Wi-Fi card in the right column with a WPA3 Personal network selected, its Wi-Fi password box, eye button and Connect button">
@@ -31,7 +31,7 @@ Each problem is explained once. The banner says what blocks the device and what 
 
 ## Continue to Foundry Deploy
 
-When **Network ready** appears, the line under the title reads "Continuing automatically in 10s" and counts down, then Foundry Connect closes and the startup continues. You can:
+When **Network ready** appears, the line under the title reads "Continuing automatically in 10s" and counts down, then Foundry Connect hands over to Foundry Deploy. You can:
 
 - Select **Continue** to go on at once.
 - Select **Stay here** to stop the countdown. It does not start again: select **Continue** when you are ready.
@@ -42,7 +42,7 @@ The Deployment password window that Foundry Connect opens by itself does not cou
 
 Right after a network connects, Internet access can take a few seconds to answer: Foundry Connect shows the check in progress before it reports a problem.
 
-Before it closes, Foundry Connect checks Internet access once more. If the connection dropped, it stays open and waits for **Network ready** again.
+Before it hands over, Foundry Connect checks Internet access once more. If the connection dropped, it stays open and waits for **Network ready** again.
 
 When Internet access cannot be reached, there is no way to continue without it. Use **Retry** after you fixed the cause, or **Export diagnostics...** to take the logs to support. See [Network and Foundry Connect troubleshooting](../troubleshooting/network.md).
 
@@ -60,7 +60,7 @@ When the administrator put a Wi-Fi passphrase, a client certificate, or an enter
 
 Type the password in **Deployment password** and select **Continue**. A wrong password reopens the window with "The password is incorrect. Try again." after a short wait: one second more for each failed attempt, up to five seconds.
 
-One correct entry unlocks every protected network setting for the session, and [Foundry Deploy](../foundry-deploy/README.md#open-foundry-deploy) then opens without asking for the password again. If Foundry Deploy still asks, type the same password.
+One correct entry unlocks every protected network setting for the session. The password is asked once: [Foundry Deploy](../foundry-deploy/README.md#open-foundry-deploy) receives the unlocked settings from Foundry Connect in memory, nothing is written to the media, and Foundry Deploy opens without asking again. If Foundry Deploy still asks, type the same password.
 
 **Cancel** leaves the protected settings unused for the session: wired 802.1X shows **Unavailable**, and the provisioned Wi-Fi stays on **Password required** with "The deployment password was not entered. Select Connect to enter it." It is not asked for again by itself; its **Connect** button asks again. Plain Ethernet and the other Wi-Fi networks keep working, and Foundry Deploy asks for the password when it opens.
 
@@ -70,7 +70,7 @@ While the window is open, Foundry Connect never continues by itself. After a win
 
 | Menu | Use it to |
 | --- | --- |
-| **Theme**, **Language** | Change the appearance or the display language. Foundry Deploy opens with the same theme and language. |
+| **Theme**, **Language** | Change the appearance or the display language. Foundry Deploy opens with the same theme and language, in the same application. |
 | **Keyboard** | Change the keyboard layout of Windows PE, for example before typing a Wi-Fi password. The menu name shows the active layout. It lists the layouts of the same language first, and every other language under **Other languages**. Foundry Deploy keeps the layout chosen here. |
 | **Tools > Refresh status** | Check the network now instead of waiting for the next automatic check. Foundry Connect checks every 10 seconds. |
 | **Tools > Open log file** | Read the Foundry Connect log in Notepad. |
@@ -84,7 +84,7 @@ Press Alt to show the underlined letter of each menu, then press that letter to 
 
 | I want to | Go to |
 | --- | --- |
-| Understand the console that appears before Foundry Connect | [Windows PE startup](windows-pe-startup.md) |
+| Understand the console that runs alongside Foundry Connect | [Windows PE startup](windows-pe-startup.md) |
 | Connect to Wi-Fi, or read a status on screen | [Network readiness](network-readiness.md) |
 | Fix a device that does not reach **Network ready** | [Network and Foundry Connect troubleshooting](../troubleshooting/network.md) |
 | Continue after **Network ready** | [Foundry Deploy](../foundry-deploy/README.md) |
