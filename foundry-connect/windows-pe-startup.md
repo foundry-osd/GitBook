@@ -14,15 +14,15 @@ The console lists two stages. Each goes from **Waiting** to **In progress**, the
 | Stage | Line under the list | What happens |
 | --- | --- | --- |
 | **Environment** | "Preparing network access" | Windows PE starts its wired and Wi-Fi services. |
-| **Foundry** | "Starting Foundry" | The Foundry window opens from the program on the media: first [Foundry Connect](README.md), then Foundry Deploy. The stage stays **In progress** as long as Foundry runs. |
+| **Foundry** | "Starting Foundry" | One Foundry window opens from the program on the media and shows first [Foundry Connect](README.md), then Foundry Deploy. The stage stays **In progress** as long as Foundry runs. |
 
-The console is only a progress screen. The work happens in the Foundry window: once Foundry Connect has confirmed the network and you continue, the clock and the time zone are set, then Foundry Deploy opens in the same application, with the theme, the language and the keyboard layout you chose in Foundry Connect. The console shows nothing more for those steps.
+The console is only a progress screen. The work happens in the Foundry window: once Foundry Connect has confirmed the network and you continue, the clock and the time zone are set, then Foundry Deploy replaces the Foundry Connect content in the same window, with the theme, the language and the keyboard layout you chose in Foundry Connect. The console shows nothing more for those steps.
 
-If Foundry stops unexpectedly, the console shows a yellow warning "Foundry stopped unexpectedly with exit code" and a number, and a window offers the next step: see [If Foundry stops unexpectedly](#if-foundry-stops-unexpectedly).
+If Foundry stops unexpectedly, the console shows a yellow warning "Foundry stopped unexpectedly with exit code" and a number, and a full-screen page offers the next step: see [If Foundry stops unexpectedly](#if-foundry-stops-unexpectedly).
 
 ## Waits that are normal
 
-- **Foundry window**: up to 2 minutes before the Foundry Connect window appears.
+- **Foundry window**: up to 2 minutes before the Foundry window appears with Foundry Connect.
 - **Foundry Connect**: as long as you need in [Foundry Connect](network-readiness.md).
 - **Clock and time zone**: up to 50 seconds between Foundry Connect and Foundry Deploy on a network that filters the lookups (five lookups of 10 seconds).
 
@@ -57,4 +57,4 @@ A stage that shows **Failed** or **Cancelled** ends the startup, and the line un
 
 ## If Foundry stops unexpectedly <a href="#if-foundry-stops-unexpectedly" id="if-foundry-stops-unexpectedly"></a>
 
-When Foundry closes without finishing, after its first window appeared, a window titled **Foundry stopped** says so. It shows the folder that holds the logs. **Relaunch** appears only when the deployment had not yet started to prepare the target disk: Foundry then starts again from Foundry Connect. Otherwise the disk may already have been changed, only **Close** is offered, and you restart the device to begin a new deployment. See [Foundry stopped](../troubleshooting/windows-pe-startup.md#foundry-stopped).
+When Foundry closes without finishing, after its window appeared, a full-screen page titled **Foundry stopped** says so, in the language you chose in Foundry Connect, or else the language of Windows PE. It shows the folder that holds the logs. **Relaunch** appears only when the deployment had not yet started to prepare the target disk: Foundry then starts again from Foundry Connect. Otherwise the disk may already have been changed, only **Close** is offered, and you restart the device to begin a new deployment. See [Foundry stopped](../troubleshooting/windows-pe-startup.md#foundry-stopped).

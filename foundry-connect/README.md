@@ -1,6 +1,6 @@
 # Foundry Connect
 
-Foundry Connect opens first, after the startup console, on a target device started from deployment media. It gets the device online in Windows PE and holds the startup until Internet access is confirmed. Foundry Connect and [Foundry Deploy](../foundry-deploy/README.md) are two parts of one application: when you continue, Foundry Deploy opens in the same application, with nothing to start or restart in between.
+Foundry Connect opens first, after the startup console, on a target device started from deployment media. It gets the device online in Windows PE and holds the startup until Internet access is confirmed. Foundry Connect and [Foundry Deploy](../foundry-deploy/README.md) are two parts of one application with a single full-screen window: when you continue, Foundry Deploy replaces the Foundry Connect content in that window, with nothing to start or restart in between.
 
 <figure>
   <img src="../.gitbook/assets/foundry-connect-overview-01-waiting.png" alt="Foundry Connect with the status banner on Connecting, the Ethernet card on No active link and the Provisioned Wi-Fi card in the left column, and the Wi-Fi card in the right column with a WPA3 Personal network selected, its Wi-Fi password box, eye button and Connect button">
@@ -47,7 +47,7 @@ Before it hands over, Foundry Connect checks Internet access once more. If the c
 When Internet access cannot be reached, there is no way to continue without it. Use **Retry** after you fixed the cause, or **Export diagnostics...** to take the logs to support. See [Network and Foundry Connect troubleshooting](../troubleshooting/network.md).
 
 {% hint style="warning" %}
-Do not close Foundry Connect to get past it. Closing the window cancels the startup: Foundry Deploy does not open. See ["Boot was cancelled. Deployment will not continue."](../troubleshooting/windows-pe-startup.md#boot-cancelled) to start again.
+Do not close Foundry Connect to get past it. Closing the window during Foundry Connect cancels the startup: Foundry Deploy does not open. See ["Boot was cancelled. Deployment will not continue."](../troubleshooting/windows-pe-startup.md#boot-cancelled) to start again.
 {% endhint %}
 
 ## Deployment password in Foundry Connect <a href="#deployment-password-in-foundry-connect" id="deployment-password-in-foundry-connect"></a>
