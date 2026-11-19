@@ -8,6 +8,7 @@ Problems met when Foundry Deploy opens and in its wizard, up to the **Deploy** b
 | --- | --- |
 | "The password is incorrect. Try again." | [Password refused](#password-incorrect) |
 | Foundry Deploy closes as soon as it opens | [Closes at start](#closes-at-start) |
+| **Catalogs unavailable**, with **Retry** or **Close** | [Catalogs unavailable](#catalogs-unavailable) |
 | **Network cache not available**, with **Continue without network cache**, **Retry** or **Close** | [Network cache not available](#network-cache-not-available) |
 | The **Target disk** list is empty | [No disk](#no-disk) |
 | A disk line ending in "Blocked: ..." | [Disk blocked](#disk-blocked) |
@@ -46,6 +47,20 @@ Problems met when Foundry Deploy opens and in its wizard, up to the **Deploy** b
 2. If Foundry Deploy closes without asking for anything, the media is damaged or incomplete: the administrator recreates it. If a **Foundry stopped** page appears instead, see [A page titled "Foundry stopped"](../windows-pe-startup.md#foundry-stopped).
 
 **Collect:** `X:\Foundry\Logs\FoundryDeploy.log` if you can still reach it, or the `Logs` folder of the USB drive's **Foundry Cache** volume. See [Log locations](../logs-and-support.md#log-locations).
+
+## Catalogs unavailable <a href="#catalogs-unavailable" id="catalogs-unavailable"></a>
+
+**Where:** a dialog titled **Catalogs unavailable** when Foundry Deploy opens: "The Windows and driver catalogs could not be loaded. Check the network connection, then select Retry. Close ends Foundry Deploy."
+
+**Cause:** The Windows catalog or the driver catalog could not be downloaded, even after Foundry Deploy tried again by itself several times: no Internet access, a proxy, a firewall, or a wrong date and time.
+
+**Fix:**
+
+1. Check the network: cable or Wi-Fi, proxy, firewall, date and time. See [Network and Foundry Connect troubleshooting](../network.md) and [Network endpoints](../../reference/network-endpoints.md).
+2. Select **Retry**. Foundry Deploy downloads the catalogs again, and the dialog returns if it fails again. You can select **Retry** as often as needed.
+3. **Close** ends Foundry Deploy and the startup, as when it cannot start: see [Foundry Deploy stopped](../windows-pe-startup.md#foundry-deploy-stopped). Restart the device from the deployment media to begin again.
+
+**Collect:** the standard set. The log contains "Operating system catalog load failed" with the reason.
 
 ## Network cache not available <a href="#network-cache-not-available" id="network-cache-not-available"></a>
 
@@ -177,7 +192,7 @@ When the administrator changed the reference PC of [configuration sharing](../..
 **Fix:**
 
 1. Check the network: cable or Wi-Fi, proxy, firewall, date and time. See [Network and Foundry Connect troubleshooting](../network.md) and [Network endpoints](../../reference/network-endpoints.md).
-2. Restart the device from the deployment media. Foundry Deploy has no button to reload the catalog.
+2. If **Catalogs unavailable** was shown and you closed it, restart the device from the deployment media. Otherwise see [Catalogs unavailable](#catalogs-unavailable).
 
 **Collect:** the standard set. The log contains "Operating system catalog load failed" with the reason.
 

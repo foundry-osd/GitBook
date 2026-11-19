@@ -8,6 +8,7 @@ The reason is the line under the list of stages. On a failure, the console also 
 | --- | --- |
 | Only "Foundry stopped with an error. See X:\Foundry\Logs for details." | [Foundry stopped with an error](#foundry-startup-failed) |
 | "The boot environment could not be initialized." | [The boot environment could not be initialized](#boot-environment-not-initialized) |
+| Foundry Connect never appears | [Foundry Connect does not appear](#connect-skipped) |
 | Yellow "Internet clock could not be resolved..." | [Internet clock could not be resolved](#internet-clock-not-resolved) |
 | "This boot media is obsolete. Update Foundry OSD and recreate the media." on a full-screen page | [This boot media is obsolete](#boot-media-obsolete) |
 | "Foundry Connect could not load its configuration. Recreate the boot media." | [Foundry Connect could not load its configuration](#exit-code-22) |
@@ -41,11 +42,18 @@ The reason is the line under the list of stages. On a failure, the console also 
   3. If only one drive was connected, collect `FoundryBootstrap.log`, which names the error, then recreate the media.
 - **Collect:** `FoundryBootstrap.log`. See [Logs and support information](logs-and-support.md).
 
+## Foundry Connect does not appear <a href="#connect-skipped" id="connect-skipped"></a>
+
+- **Where:** After the **Looking for the network…** page, Foundry goes on to **Setting the clock and time zone…** or to Foundry Deploy, with no Foundry Connect page.
+- **Cause:** Expected. The device reached the Internet within 15 seconds, so Foundry skipped Foundry Connect. See [When Foundry Connect is skipped](../foundry-connect/README.md#when-foundry-connect-is-skipped).
+- **Fix:** Nothing. To get to Foundry Connect, for example to join a Wi-Fi network, start the device without Internet access. If a device that should be online shows Foundry Connect, see [Network and Foundry Connect troubleshooting](network.md).
+- **Collect:** Nothing.
+
 ## "Warning: Internet clock could not be resolved. Boot will continue without clock correction." <a href="#internet-clock-not-resolved" id="internet-clock-not-resolved"></a>
 
 - **Where:** A yellow line under the elapsed time. **Environment** ends with **Done (warning)**.
 - **Cause:** The device had no Internet access before Foundry Connect: no cable, DHCP not ready yet, or a network that requires authentication. This is expected on a Wi-Fi-only device.
-- **Fix:** Nothing: the clock is read again after Foundry Connect, when the network works. If the time stays wrong, the device keeps its firmware clock: see [Wrong time or time zone](network.md#wrong-time-or-time-zone).
+- **Fix:** Nothing: the clock is read again on the **Setting the clock and time zone…** page, when the network works. If the time stays wrong, the device keeps its firmware clock: see [Wrong time or time zone](network.md#wrong-time-or-time-zone).
 - **Collect:** Nothing.
 
 ## "This boot media is obsolete. Update Foundry OSD and recreate the media." <a href="#boot-media-obsolete" id="boot-media-obsolete"></a>
@@ -88,7 +96,7 @@ The reason is the line under the list of stages. On a failure, the console also 
 
 - **Where:** **Foundry** shows **Cancelled** and the second line of the console reads "Startup cancelled".
 - **Cause:** One of these:
-  - The Foundry window was closed during Foundry Connect, before the startup continued. Closing the window during Foundry Connect never skips the network check, and Foundry Deploy does not open.
+  - The Foundry window was closed during Foundry Connect or the status pages, before the startup continued. Closing the window during Foundry Connect never skips the network check, and Foundry Deploy does not open.
   - Foundry Deploy closed before its wizard opened: the deployment password prompt was cancelled, or the network cache window was closed.
   - Ctrl+C was pressed in the console.
 - **Fix:**

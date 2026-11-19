@@ -1,6 +1,6 @@
 # Windows PE startup
 
-When a target device starts from deployment media, a console titled **Foundry WinPE** prepares Windows PE, then starts Foundry. Foundry is one application: it shows Foundry Connect, then continues into Foundry Deploy without closing or restarting. Everything it runs is already on the media: nothing is downloaded, repaired or unpacked at startup. You only watch it: this page says what each line means and which waits are normal.
+When a target device starts from deployment media, a console titled **Foundry WinPE** prepares Windows PE, then starts Foundry. Foundry is one application: it shows Foundry Connect, then continues into Foundry Deploy without closing or restarting. When the device is already online, Foundry Connect is skipped. Everything it runs is already on the media: nothing is downloaded, repaired or unpacked at startup. You only watch it: this page says what each line means and which waits are normal.
 
 <figure>
   <img src="../.gitbook/assets/shared-bootstrap-01-download-progress.png" alt="Foundry WinPE console with its startup stages">
@@ -14,21 +14,28 @@ The console lists two stages. Each goes from **Waiting** to **In progress**, the
 | Stage | Line under the list | What happens |
 | --- | --- | --- |
 | **Environment** | "Preparing network access" | Windows PE starts its wired and Wi-Fi services. |
-| **Foundry** | "Starting Foundry" | One Foundry window opens from the program on the media and shows first [Foundry Connect](README.md), then Foundry Deploy. The stage stays **In progress** as long as Foundry runs. |
+| **Foundry** | "Starting Foundry" | One Foundry window opens from the program on the media and shows, in order, a status page, [Foundry Connect](README.md) unless the device is already online, a second status page, then Foundry Deploy. The stage stays **In progress** as long as Foundry runs. |
 
-The console is only a progress screen. The work happens in the Foundry window: once Foundry Connect has confirmed the network and you continue, the clock and the time zone are set, then Foundry Deploy replaces the Foundry Connect content in the same window, with the theme, the language and the keyboard layout you chose in Foundry Connect. The console shows nothing more for those steps.
+The console is only a progress screen. The work happens in the Foundry window:
+
+1. **Looking for the network…**: Foundry applies the network settings of the media and checks Internet access for up to 15 seconds. If it answers, Foundry Connect is skipped; otherwise Foundry Connect opens. See [When Foundry Connect is skipped](README.md#when-foundry-connect-is-skipped).
+2. **Setting the clock and time zone…**: once the network is confirmed, by the check or by you in Foundry Connect, the clock and the time zone are set. The page stays at least 1 second, and the startup goes on even if one of them fails.
+3. Foundry Deploy replaces the page in the same window, with the theme, the language and the keyboard layout you chose in Foundry Connect, if it was shown.
+
+The console shows nothing more for those steps.
 
 If Foundry stops unexpectedly, the console shows a yellow warning "Foundry stopped unexpectedly with exit code" and a number, and a full-screen page offers the next step: see [If Foundry stops unexpectedly](#if-foundry-stops-unexpectedly).
 
 ## Waits that are normal
 
 - **Foundry window**: up to 2 minutes before the Foundry window appears with Foundry Connect.
-- **Foundry Connect**: as long as you need in [Foundry Connect](network-readiness.md).
-- **Clock and time zone**: up to 50 seconds between Foundry Connect and Foundry Deploy on a network that filters the lookups (five lookups of 10 seconds).
+- **Looking for the network…**: up to 15 seconds of Internet checks, after the network settings of the media are applied.
+- **Foundry Connect**: only when the device is not online after that. It takes as long as you need in [Foundry Connect](network-readiness.md).
+- **Setting the clock and time zone…**: up to 50 seconds before Foundry Deploy on a network that filters the lookups (five lookups of 10 seconds).
 
-On a device with no cable, the Internet is out of reach before Foundry Connect. A yellow line can then appear and stay until the end: "Warning: Internet clock could not be resolved. Boot will continue without clock correction."
+On a device with no cable, the Internet is out of reach before the Foundry window opens. A yellow line can then appear and stay until the end: "Warning: Internet clock could not be resolved. Boot will continue without clock correction."
 
-It is expected on a Wi-Fi-only device. **Environment** ends with **Done (warning)**. No action is needed when Foundry Connect then opens.
+It is expected on a Wi-Fi-only device. **Environment** ends with **Done (warning)**. No action is needed: the clock is set again on the **Setting the clock and time zone…** page.
 
 ## Which version runs
 
@@ -49,7 +56,7 @@ See [Network endpoints](../reference/network-endpoints.md) for the hosts. What t
 
 ## When the clock and the time zone are set
 
-The clock is corrected from the Internet before Foundry Connect when the network already works, and again between Foundry Connect and Foundry Deploy. The time zone is applied between them, from the [Windows PE time zone](../foundry-osd/general.md#windows-pe-time-zone) setting of the media: a fixed zone, or the zone of the public IP address of the network, with UTC when that lookup gets no answer.
+The clock is corrected from the Internet before the Foundry window when the network already works, and again on the **Setting the clock and time zone…** page, before Foundry Deploy. The time zone is applied between them, from the [Windows PE time zone](../foundry-osd/general.md#windows-pe-time-zone) setting of the media: a fixed zone, or the zone of the public IP address of the network, with UTC when that lookup gets no answer.
 
 ## If startup stops
 

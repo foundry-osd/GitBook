@@ -1,6 +1,6 @@
 # Network readiness
 
-Foundry Connect shows the state of the wired and wireless connections of the target device, and lets you continue once it has reached the Internet.
+Foundry Connect shows the state of the wired and wireless connections of the target device, and lets you continue once it has reached the Internet. When the device is already online as the Foundry window opens, Foundry Connect is skipped: see [When Foundry Connect is skipped](README.md#when-foundry-connect-is-skipped).
 
 <figure>
   <img src="../.gitbook/assets/foundry-connect-network-readiness-01-ready.png" alt="Foundry Connect showing Network ready with the Ethernet label next to the title, the countdown Continuing automatically under it, the Continue and Stay here buttons at the right, and the Ethernet card on Connected, expanded on its adapter, IPv4 address, gateway and IP assignment">
@@ -45,6 +45,8 @@ When the profile is protected by the Deployment password, because it carries a p
 Every 10 seconds, and when you select **Retry** or **Tools > Refresh status**, Foundry Connect asks two Microsoft test addresses, `www.msftconnecttest.com` and `www.msftncsi.com`, for a known answer. **Network ready** appears only when one of them sends exactly that answer within 5 seconds.
 
 Any other answer means that something on the network intercepts web traffic, such as a sign-in page or a proxy that asks for credentials. The status banner then reads **Sign-in required** with "The network answered with a sign-in page instead of internet access.", followed by what to do: Windows PE has no browser to sign in.
+
+Before Foundry Connect, the same test decides whether it is needed: Foundry runs it every 2 seconds for up to 15 seconds, and skips Foundry Connect only on a correct answer. A sign-in page or a timeout opens Foundry Connect.
 
 The test cannot be changed or skipped. **Network ready** does not prove that the other hosts in [Network endpoints](../reference/network-endpoints.md) are reachable.
 
@@ -115,4 +117,4 @@ Find the text you see on screen in [Network and Foundry Connect troubleshooting]
 
 ## Next step
 
-The clock and the time zone are set, then [Foundry Deploy](../foundry-deploy/README.md) replaces this content in the same window. Closing the window is refused while the clock and the time zone are being set. The [startup console](windows-pe-startup.md) stays on screen behind it.
+A status page reads "Setting the clock and time zone…", then [Foundry Deploy](../foundry-deploy/README.md) replaces it in the same window. Closing the window is refused while the clock and the time zone are being set. The [startup console](windows-pe-startup.md) stays on screen behind it.
