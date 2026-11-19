@@ -28,6 +28,7 @@ While the device is not online, the title of the status banner names the cause, 
 | "Unable to complete the Wi-Fi action. Try again." or "Unable to disconnect. Try again." | [Unable to complete the Wi-Fi action](#wi-fi-action-fails) |
 | The countdown disappears, or does not start | [The countdown disappears](#countdown-disappears) |
 | **Network ready**, then downloads fail | [Network ready, then downloads fail](#network-ready-downloads-fail) |
+| The network changed after Foundry Deploy opened | [I changed networks mid-wizard](#changed-networks-mid-wizard) |
 | "Diagnostics export failed" | ["Diagnostics could not be exported."](logs-and-support.md#export-failed) in Logs and support information |
 | A wrong time or time zone | [Wrong time or time zone](#wrong-time-or-time-zone) |
 | No network in the installed Windows | [The roamed profile does not connect](#roamed-profile-does-not-connect) |
@@ -267,6 +268,18 @@ While the device is not online, the title of the status banner names the cause, 
   1. Select **Continue** when you are ready.
   2. If the connection keeps dropping, check the cable or move closer to the access point.
 - **Collect:** Nothing.
+
+## I changed networks mid-wizard <a href="#changed-networks-mid-wizard" id="changed-networks-mid-wizard"></a>
+
+- **Where:** Foundry Deploy, wizard. The **Network** item of the menu bar is disabled, or the wizard shows an old state after you changed the network.
+- **Cause:**
+  1. **Network** is available only on the wizard while no deployment runs. It is disabled during the deployment, after a successful deployment until the restart, on the error screen, and for a moment while Foundry Deploy loads again what changed.
+  2. The icon of **Network** shows the adapters, not the Internet: it can show Ethernet while the Internet is unreachable.
+- **Fix:**
+  1. On the wizard, select **Network**, change the network in Foundry Connect, then select **Back to deployment**. Your choices are kept. Foundry Deploy loads again the clock and the time zone if they were not set, the Autopilot group tags if they failed, the network cache if it failed, was skipped or the IP address changed, and the newer-release notice if it was not checked yet.
+  2. During or after a deployment, the network cannot be changed from Foundry Deploy: wait for the end, or restart the device from the media.
+  3. If something still reads as unavailable, for example the network cache, restart the device from the media on the right network.
+- **Collect:** `FoundryDeploy.log`: the line "Refreshing after the Network page returned" shows what was loaded again. See [Logs and support information](logs-and-support.md).
 
 ## Network ready appears, then downloads fail <a href="#network-ready-downloads-fail" id="network-ready-downloads-fail"></a>
 

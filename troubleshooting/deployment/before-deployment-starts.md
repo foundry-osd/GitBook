@@ -8,8 +8,8 @@ Problems met when Foundry Deploy opens and in its wizard, up to the **Deploy** b
 | --- | --- |
 | "The password is incorrect. Try again." | [Password refused](#password-incorrect) |
 | Foundry Deploy closes as soon as it opens | [Closes at start](#closes-at-start) |
-| **Catalogs unavailable**, with **Retry** or **Close** | [Catalogs unavailable](#catalogs-unavailable) |
-| **Network cache not available**, with **Continue without network cache**, **Retry** or **Close** | [Network cache not available](#network-cache-not-available) |
+| **Catalogs unavailable**, with **Retry**, **Network** or **Close** | [Catalogs unavailable](#catalogs-unavailable) |
+| **Network cache not available**, with **Continue without network cache**, **Retry**, **Network** or **Close** | [Network cache not available](#network-cache-not-available) |
 | The **Target disk** list is empty | [No disk](#no-disk) |
 | A disk line ending in "Blocked: ..." | [Disk blocked](#disk-blocked) |
 | "The disk identity is missing, ambiguous or has changed. ..." | [Disk identity](#disk-identity) |
@@ -50,15 +50,16 @@ Problems met when Foundry Deploy opens and in its wizard, up to the **Deploy** b
 
 ## Catalogs unavailable <a href="#catalogs-unavailable" id="catalogs-unavailable"></a>
 
-**Where:** a dialog titled **Catalogs unavailable** when Foundry Deploy opens: "The Windows and driver catalogs could not be loaded. Check the network connection, then select Retry. Close ends Foundry Deploy."
+**Where:** a dialog titled **Catalogs unavailable** when Foundry Deploy opens: "The Windows and driver catalogs could not be loaded. Check the network connection, then select Retry. Close ends Foundry Deploy." The dialog offers **Retry**, **Network** and **Close**.
 
 **Cause:** The Windows catalog or the driver catalog could not be downloaded, even after Foundry Deploy tried again by itself several times: no Internet access, a proxy, a firewall, or a wrong date and time.
 
 **Fix:**
 
 1. Check the network: cable or Wi-Fi, proxy, firewall, date and time. See [Network and Foundry Connect troubleshooting](../network.md) and [Network endpoints](../../reference/network-endpoints.md).
-2. Select **Retry**. Foundry Deploy downloads the catalogs again, and the dialog returns if it fails again. You can select **Retry** as often as needed.
-3. **Close** ends Foundry Deploy and the startup, as when it cannot start: see [Foundry Deploy stopped](../windows-pe-startup.md#foundry-deploy-stopped). Restart the device from the deployment media to begin again.
+2. To change the network, select **Network**. Foundry Connect opens again; select **Back to deployment** when you are done, and Foundry Deploy downloads the catalogs again. See [Foundry Connect again from Foundry Deploy](../../foundry-connect/README.md#open-foundry-connect-again).
+3. Select **Retry**. Foundry Deploy downloads the catalogs again, and the dialog returns if it fails again. You can select **Retry** as often as needed.
+4. **Close** ends Foundry Deploy and the startup, as when it cannot start: see [Foundry Deploy stopped](../windows-pe-startup.md#foundry-deploy-stopped). Restart the device from the deployment media to begin again.
 
 **Collect:** the standard set. The log contains "Operating system catalog load failed" or "Driver pack catalog load failed" with the reason.
 
@@ -75,10 +76,11 @@ Problems met when Foundry Deploy opens and in its wizard, up to the **Deploy** b
 | "*Account* cannot open *share*. In Foundry OSD, on the Network cache page, check the account password; on the server, check its permissions." Without an account: "*Share* refused this device. In Foundry OSD, on the Network cache page, set an account for this share; on the server, check the share permissions." | The server refused the account, because its password changed, or it has no right on the share or its folder; or the share requires an account and none is set | The administrator corrects the account on the Network cache page and on the server, then creates the media again | No |
 | "The published content on *share* is missing or incomplete. In Foundry OSD, on the Network cache page, select Publish." When part of the content is incomplete, a line under it starts with "Missing:" and names it, such as **Custom Windows images** or **Driver sets**; it does not appear when nothing is published yet | No share of the scope has usable published content: nothing was published to the shares yet, or a file of the publication is missing or changed | The administrator selects **Publish** in Foundry OSD, then you select **Retry** | Yes |
 
-The window offers three choices:
+The window offers up to four choices:
 
 - **Continue without network cache** opens the wizard and deploys without any share, whatever the cause. Windows and drivers are downloaded from the Internet, and nothing is written to a share. The content published to the shares is not available: the wizard offers no custom Windows image and no driver set, and the post-installation actions do not run. Use it when the device must be deployed now and can do without that content.
 - **Retry** checks again from the start, including the choice of the share, so you do not restart the device. It appears only for the causes that can resolve without new media.
+- **Network** opens Foundry Connect again so you can change the network, for example to reach a share from another network. **Back to deployment** returns to this window and checks again from the start, as **Retry** does. It appears for every cause.
 - **Close** ends Foundry Deploy without deploying: use it, then restart the device from the media once the administrator has fixed the cause.
 
 When the administrator changed the reference PC of [configuration sharing](../../foundry-osd/configuration-sharing.md), for example with **Take over**, a boot image created before the change keeps deploying what the previous reference PC published. If the last message stays after **Publish**, the administrator recreates the media from the current reference PC. See [Security and credentials](../../reference/security-and-credentials.md#network-cache-publication).
