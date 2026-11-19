@@ -86,8 +86,21 @@ While the window is open, Foundry Connect never continues by itself. After a win
 | **Tools > Export diagnostics...** | Save the logs to the USB drive for support. See [Export logs from Foundry Connect and Foundry Deploy](../troubleshooting/logs-and-support.md#export-logs-from-foundry-connect-and-foundry-deploy). |
 | **Tools > Export raw diagnostics...** | Save the logs without masking. Use it only when a support contact you trust asks for it. |
 | **About** | Open **About Foundry Connect**, which shows the version and the license of Foundry Connect. |
+| **Network** | Shown right of **About**, always disabled on this page. Its icon shows the state of the connection: Ethernet, Wi-Fi, **No internet** (the device is connected but cannot reach the Internet), or **Not connected**. Point to it to read the state in a tooltip. |
 
 Press Alt to show the underlined letter of each menu, then press that letter to open it. The version of Foundry Connect is shown at the top right of the window.
+
+## Open Foundry Connect again from Foundry Deploy <a href="#open-foundry-connect-again" id="open-foundry-connect-again"></a>
+
+Once Foundry Deploy is open, change the network without restarting the device: select **Network** in the menu bar of Foundry Deploy (see [Menu bar](../foundry-deploy/README.md#menu-bar)). Foundry Connect opens again in the same window, with these differences:
+
+- The page opens at once, even if the device is online, and the **Network** item is disabled.
+- **Back to deployment** replaces the countdown. It is always available: select it when you are done, even without Internet access. Nothing continues by itself.
+- The Deployment password is not asked again when Foundry Deploy already has it. See [Deployment password in Foundry Connect](#deployment-password-in-foundry-connect).
+- The network settings of the media are not applied again: only what you change on the page applies.
+- Closing the window follows the rule of Foundry Deploy, as if you closed it from the wizard.
+
+Foundry Deploy keeps what you chose on the wizard and loads again only what could not be loaded without network. See [Change the network in Foundry Deploy](../foundry-deploy/README.md#change-the-network).
 
 ## Where to go next
 

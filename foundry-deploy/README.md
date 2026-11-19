@@ -52,8 +52,22 @@ The menu bar stays available on every screen, including the error screen.
 | **Keyboard** | Change the keyboard layout of Windows PE. It opens on the layout chosen in Foundry Connect, or the one set for the media |
 | **Tools** | Open or export the logs: **Open log file**, **Export diagnostics...**, **Export raw diagnostics...** |
 | **About** | Read the Foundry Deploy version |
+| **Network** | Open Foundry Connect again to change the network. See [Change the network](#change-the-network) |
+
+The icon of **Network** shows the adapters of the device: Ethernet, Wi-Fi or **Not connected**. It is refreshed every 5 seconds and does not tell whether the Internet is reachable.
 
 Use **Tools** before you restart a device whose deployment failed. See [Export logs from Foundry Connect and Foundry Deploy](../troubleshooting/logs-and-support.md#export-logs-from-foundry-connect-and-foundry-deploy).
+
+## Change the network <a href="#change-the-network" id="change-the-network"></a>
+
+Select **Network** to open [Foundry Connect](../foundry-connect/README.md#open-foundry-connect-again) again, for example to join another Wi-Fi network or to fix a connection that dropped. The item is available only on the wizard, while no deployment runs. It is disabled while the deployment runs, after a successful deployment until the device restarts, and on the error screen. It is also disabled while the domain account is checked, including the check that **Start deployment** runs before the deployment begins, and briefly while Foundry Deploy loads again what changed.
+
+Select **Back to deployment** in Foundry Connect to return. Your choices on the wizard are kept. Foundry Deploy loads again only what may have failed or changed without network:
+
+- the clock and the time zone, if they were not set;
+- the Autopilot group tags, if they could not be read;
+- the network cache, if it failed, was skipped, or the IP address of the device changed;
+- the notice about a newer Foundry version, if it was not checked yet.
 
 A notice next to the version number, "New version available. Update Foundry OSD and rebuild boot media." or "Update Foundry OSD and rebuild boot media.", means a newer Foundry version is published than the one that created the media. You can still deploy. Tell the administrator, who updates Foundry OSD and then [recreates or updates the media](../foundry-osd/media/README.md).
 
@@ -61,6 +75,7 @@ A notice next to the version number, "New version available. Update Foundry OSD 
 
 | What you see | Go to |
 | --- | --- |
+| A dialog offers **Network**, or the network changed during the wizard | [Change the network](#change-the-network) |
 | The password is refused, or Foundry Deploy closes as soon as it opens | [Before the deployment starts](../troubleshooting/deployment/before-deployment-starts.md) |
 | **Next** stays unavailable on **Target device** | [Before the deployment starts](../troubleshooting/deployment/before-deployment-starts.md) |
 | **Deployment failed** | [Verify deployment](verify-deployment.md), then [Windows deployment troubleshooting](../troubleshooting/deployment.md) |

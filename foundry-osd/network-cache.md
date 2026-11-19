@@ -178,7 +178,7 @@ All the devices that read from or write to a share at the same time share the ne
 
 ## If a device stops at start
 
-Foundry Deploy shows one message, **Network cache not available**, with the cause and the place to fix it, either in Foundry OSD or on the server. **Continue without network cache** deploys anyway, from the Internet and without the content you published: no custom Windows image, no driver set and no post-installation action. For some causes it also offers **Retry**; **Close** ends Foundry Deploy without deploying. The messages, their causes and their fixes are listed in [Network cache not available](../troubleshooting/deployment/before-deployment-starts.md#network-cache-not-available).
+Foundry Deploy shows one message, **Network cache not available**, with the cause and the place to fix it, either in Foundry OSD or on the server. **Continue without network cache** deploys anyway, from the Internet and without the content you published: no custom Windows image, no driver set and no post-installation action. **Network** reopens Foundry Connect to change the network, then checks the network cache again. For some causes it also offers **Retry**. **Close** ends Foundry Deploy without deploying. The messages, their causes and their fixes are listed in [Network cache not available](../troubleshooting/deployment/before-deployment-starts.md#network-cache-not-available).
 
 For messages of this page, and for devices that deploy but do not read from or write to the share, see [Network cache troubleshooting](../troubleshooting/foundry-osd/network-cache.md).
 
