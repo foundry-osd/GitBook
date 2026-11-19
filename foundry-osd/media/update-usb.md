@@ -43,7 +43,7 @@ New custom images, post-installation content and driver sets are copied before *
 
 ## Check the result
 
-Eject the drive, start a test device from it, and check that Foundry Connect opens, then Foundry Deploy, with the options you changed.
+Eject the drive, start a test device from it, and check that Foundry Deploy opens with the options you changed. Foundry Connect opens first only when the device is not online: see [When Foundry Connect is skipped](../../foundry-connect/README.md#when-foundry-connect-is-skipped).
 
 If the update ends with "Unused custom driver sets could not be removed from the USB drive.", it still succeeded: see [Custom drivers](../customization/custom-drivers.md#update-a-usb-drive).
 

@@ -1,6 +1,6 @@
 # Foundry Connect
 
-Foundry Connect opens first, after the startup console, on a target device started from deployment media. It gets the device online in Windows PE and holds the startup until Internet access is confirmed. Foundry Connect and [Foundry Deploy](../foundry-deploy/README.md) are two parts of one application with a single full-screen window: when you continue, Foundry Deploy replaces the Foundry Connect content in that window, with nothing to start or restart in between.
+Foundry Connect gets a target device started from deployment media online in Windows PE and holds the startup until Internet access is confirmed. It opens after the startup console, unless the device is already online: see [When Foundry Connect is skipped](#when-foundry-connect-is-skipped). Foundry Connect and [Foundry Deploy](../foundry-deploy/README.md) are two parts of one application with a single full-screen window: when you continue, Foundry Deploy replaces the Foundry Connect content in that window, with nothing to start or restart in between.
 
 <figure>
   <img src="../.gitbook/assets/foundry-connect-overview-01-waiting.png" alt="Foundry Connect with the status banner on Connecting, the Ethernet card on No active link and the Provisioned Wi-Fi card in the left column, and the Wi-Fi card in the right column with a WPA3 Personal network selected, its Wi-Fi password box, eye button and Connect button">
@@ -8,6 +8,15 @@ Foundry Connect opens first, after the startup console, on a target device start
 </figure>
 
 Most of the time you do nothing. With a cable and DHCP, or with a network profile that the administrator put on the media, the status changes from **Checking the network** to **Network ready** by itself.
+
+## When Foundry Connect is skipped <a href="#when-foundry-connect-is-skipped" id="when-foundry-connect-is-skipped"></a>
+
+The Foundry window opens first on a status page that reads "Looking for the network…". Foundry applies the network settings from the media (wired 802.1X and the provisioned Wi-Fi; the [Deployment password](#deployment-password-in-foundry-connect) prompt appears over this page when the settings are protected), then checks Internet access every 2 seconds for up to 15 seconds, with the same test addresses as [Network ready](network-readiness.md#what-network-ready-tests).
+
+- **Internet access answers within 15 seconds**: Foundry Connect is not shown. Foundry goes on at once, as if you had selected **Continue**: the provisioned Wi-Fi, the Windows profile roaming and the protected settings are handled the same way.
+- **Anything else**: no Internet access, a sign-in page, or no answer after 15 seconds. Foundry Connect opens, and its countdown starts only once the page is visible.
+
+So on a device with a working cable or a profile from the media, Foundry Connect usually does not appear: this is expected, not a failure. A provisioned Wi-Fi network that needs more than 15 seconds to connect shows it. To see it anyway, for example to join a Wi-Fi network, start the device without Internet access. A password prompt that is still open holds the startup until you answer it.
 
 ## What the page shows
 
@@ -42,7 +51,7 @@ The Deployment password window that Foundry Connect opens by itself does not cou
 
 Right after a network connects, Internet access can take a few seconds to answer: Foundry Connect shows the check in progress before it reports a problem.
 
-Before it hands over, Foundry Connect checks Internet access once more. If the connection dropped, it stays open and waits for **Network ready** again.
+The countdown starts only once Foundry Connect is visible, never during the status page. Before it hands over, Foundry Connect checks Internet access once more. If the connection dropped, it stays open and waits for **Network ready** again.
 
 When Internet access cannot be reached, there is no way to continue without it. Use **Retry** after you fixed the cause, or **Export diagnostics...** to take the logs to support. See [Network and Foundry Connect troubleshooting](../troubleshooting/network.md).
 

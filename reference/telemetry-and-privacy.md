@@ -25,7 +25,7 @@ Telemetry is a small number of events, each sent at a precise moment:
 | Foundry OSD | When a media creation ends, whether it succeeded, failed or was canceled | Result, duration, failure details, and the options chosen for the media |
 | Foundry OSD | When **Publish** on the Network cache page ends | How the publication ended, and the number of shares |
 | Windows PE startup | Only when the startup fails | Failure category, last stage reached, elapsed time, and which application failed to start |
-| Foundry Connect | When the network is ready | Connection type, what was available, Wi-Fi security type |
+| Foundry Connect | When the network is ready, whether Foundry Connect was shown or skipped | Connection type, what was available, Wi-Fi security type, whether Foundry Connect was skipped |
 | Foundry Deploy | When a deployment ends, whether it succeeded, failed or was canceled | Result, duration, failure details; device manufacturer and model; the Windows, driver pack and options used |
 
 Every event also carries a format version, the application name and version, its build type, the environment it runs in, its language and architecture, a session identifier, and an anonymous installation identifier created at random by Foundry OSD. The two lists below give every field of each event.
@@ -69,7 +69,7 @@ Values are switches, counts or fixed choices. No name, path or text you typed is
 | Foundry OSD, once a day | Proxy method; authentication mode of a manual proxy |
 | Foundry OSD, Publish | An identifier of the operation; how the publication ended: published to every share, to some of them, to none, or not attempted; the number of shares |
 | Windows PE startup failure | Failure category; last stage reached; elapsed time; which application failed, its exit code and how far its start went; version of the application that failed, release or development build, and architecture; ISO or USB drive |
-| Foundry Connect, network ready | Connection type (Ethernet or Wi-Fi); whether Ethernet and Wi-Fi were available; Wi-Fi security type and the origin of the Wi-Fi connection; whether Ethernet 802.1X and Wi-Fi were set on the media; ISO or USB drive; release or development build of Foundry Connect |
+| Foundry Connect, network ready | Connection type (Ethernet or Wi-Fi); whether Ethernet and Wi-Fi were available; Wi-Fi security type and the origin of the Wi-Fi connection; whether Ethernet 802.1X and Wi-Fi were set on the media; whether Foundry Connect was skipped because the device was already online; ISO or USB drive; release or development build of Foundry Connect |
 | Foundry Deploy, result | Success, cancellation, duration, number of steps completed, an identifier of the operation; whether it was a test run and the session mode; ISO or USB drive; release or development build of Foundry Deploy |
 | Foundry Deploy, failure | Name of the step and of the operation that failed; kind, code and reason of the failure |
 | Foundry Deploy, network cache | Whether a share was used: off, no matching IP scope, connected or unavailable; when the cache stops the deployment at start, why: no IP scope contains the device, the share does not respond, the share refused the account, nothing is published or the published content is incomplete; whether the device could write to the share; the number of downloads read from it |
