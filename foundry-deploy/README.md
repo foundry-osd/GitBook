@@ -60,7 +60,7 @@ Use **Tools** before you restart a device whose deployment failed. See [Export l
 
 ## Change the network <a href="#change-the-network" id="change-the-network"></a>
 
-Select **Network** to open [Foundry Connect](../foundry-connect/README.md#open-foundry-connect-again) again, for example to join another Wi-Fi network or to fix a connection that dropped. The item is available only on the wizard, while no deployment runs. It is disabled while the deployment runs, after a successful deployment until the device restarts, and on the error screen. It is also disabled briefly while Foundry Deploy loads again what changed.
+Select **Network** to open [Foundry Connect](../foundry-connect/README.md#open-foundry-connect-again) again, for example to join another Wi-Fi network or to fix a connection that dropped. The item is available only on the wizard, while no deployment runs. It is disabled while the deployment runs, after a successful deployment until the device restarts, and on the error screen. It is also disabled while the domain account is checked, including the check that **Start deployment** runs before the deployment begins, and briefly while Foundry Deploy loads again what changed.
 
 Select **Back to deployment** in Foundry Connect to return. Your choices on the wizard are kept. Foundry Deploy loads again only what may have failed or changed without network:
 
