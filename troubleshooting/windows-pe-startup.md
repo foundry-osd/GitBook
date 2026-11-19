@@ -1,6 +1,6 @@
 # Windows PE startup troubleshooting
 
-Use this page when the **Foundry WinPE** console stops, shows **Failed** in red, shows yellow warnings, or a **Foundry stopped** window appears. [Windows PE startup](../foundry-connect/windows-pe-startup.md) describes a normal start.
+Use this page when the **Foundry WinPE** console stops, shows **Failed** in red, shows yellow warnings, or a **Foundry stopped** page appears. [Windows PE startup](../foundry-connect/windows-pe-startup.md) describes a normal start.
 
 The reason is the line under the list of stages. On a failure, the console also shows a `Session:` identifier and the `Log:` path. Logs are in `X:\Foundry\Logs`, which is lost when the device restarts: collect them first. See [Log locations](logs-and-support.md#log-locations).
 
@@ -9,13 +9,13 @@ The reason is the line under the list of stages. On a failure, the console also 
 | Only "Foundry stopped with an error. See X:\Foundry\Logs for details." | [Foundry stopped with an error](#foundry-startup-failed) |
 | "The boot environment could not be initialized." | [The boot environment could not be initialized](#boot-environment-not-initialized) |
 | Yellow "Internet clock could not be resolved..." | [Internet clock could not be resolved](#internet-clock-not-resolved) |
-| "This boot media is obsolete. Update Foundry OSD and recreate the media." in a window | [This boot media is obsolete](#boot-media-obsolete) |
+| "This boot media is obsolete. Update Foundry OSD and recreate the media." on a full-screen page | [This boot media is obsolete](#boot-media-obsolete) |
 | "Foundry Connect could not load its configuration. Recreate the boot media." | [Foundry Connect could not load its configuration](#exit-code-22) |
 | "Foundry Connect could not start. Check the session log for details." | [Foundry Connect could not start](#exit-code-21) |
 | "Foundry Connect stopped unexpectedly. Check the session log for details." | [Foundry Connect stopped unexpectedly](#exit-code-23) |
 | "Boot was cancelled. Deployment will not continue." | [Boot was cancelled](#boot-cancelled) |
 | "This boot stage could not be completed. Check the session log for details." | [This boot stage could not be completed](#boot-stage-not-completed) |
-| A window titled **Foundry stopped**, and a yellow "Foundry stopped unexpectedly with exit code" and a number in the console | [Foundry stopped](#foundry-stopped) |
+| A page titled **Foundry stopped**, and a yellow "Foundry stopped unexpectedly with exit code" and a number in the console | [Foundry stopped](#foundry-stopped) |
 | "Foundry Deploy could not start..." or "Foundry Deploy could not load its configuration..." | [Foundry Deploy stopped](#foundry-deploy-stopped) |
 | "Application readiness was not confirmed within two minutes..." | [Readiness was not confirmed](#readiness-not-confirmed) |
 | "Application startup metadata is invalid..." | [Startup metadata is invalid](#startup-metadata-invalid) |
@@ -50,13 +50,13 @@ The reason is the line under the list of stages. On a failure, the console also 
 
 ## "This boot media is obsolete. Update Foundry OSD and recreate the media." <a href="#boot-media-obsolete" id="boot-media-obsolete"></a>
 
-- **Where:** A window with a **Close** button, shown where Foundry Connect should open. Nothing else in it can be used, and no deployment starts.
-- **Cause:** The media was created with Foundry OSD v26.10.18.1 or earlier. Those media download Foundry Connect and Foundry Deploy from the latest release at each start, and the latest release now only shows this window.
+- **Where:** A full-screen page with a **Close** button, shown where Foundry Connect should open. Nothing else in it can be used, and no deployment starts.
+- **Cause:** The media was created with Foundry OSD v26.10.18.1 or earlier. Those media download Foundry Connect and Foundry Deploy from the latest release at each start, and the latest release now only shows this page.
 - **Fix:**
   1. Update Foundry OSD.
   2. Recreate the ISO or the PXE files, or [update the USB drive](../foundry-osd/media/update-usb.md).
   3. Start the device from the new media.
-- **Good to know:** Such media that cannot reach GitHub (no network, or GitHub limits requests from your address) do not show the window: they start the application stored on the media and deploy as before. Recreate them anyway to get the current version.
+- **Good to know:** Such media that cannot reach GitHub (no network, or GitHub limits requests from your address) do not show the page: they start the application stored on the media and deploy as before. Recreate them anyway to get the current version.
 - **Collect:** Nothing.
 
 ## "Foundry Connect could not load its configuration. Recreate the boot media." <a href="#exit-code-22" id="exit-code-22"></a>
@@ -88,7 +88,7 @@ The reason is the line under the list of stages. On a failure, the console also 
 
 - **Where:** **Foundry** shows **Cancelled** and the second line of the console reads "Startup cancelled".
 - **Cause:** One of these:
-  - The Foundry Connect window was closed before the startup continued. Closing Foundry Connect never skips the network check, and Foundry Deploy does not open.
+  - The Foundry window was closed during Foundry Connect, before the startup continued. Closing the window during Foundry Connect never skips the network check, and Foundry Deploy does not open.
   - Foundry Deploy closed before its wizard opened: the deployment password prompt was cancelled, or the network cache window was closed.
   - Ctrl+C was pressed in the console.
 - **Fix:**
@@ -105,22 +105,22 @@ The reason is the line under the list of stages. On a failure, the console also 
   2. If it happens again, recreate the ISO or the PXE files, or [update the USB drive](../foundry-osd/media/update-usb.md), with the current version of Foundry OSD.
 - **Collect:** `FoundryBootstrap.log`. See [Logs and support information](logs-and-support.md).
 
-## A window titled "Foundry stopped" <a href="#foundry-stopped" id="foundry-stopped"></a>
+## A page titled "Foundry stopped" <a href="#foundry-stopped" id="foundry-stopped"></a>
 
-- **Where:** A window in front of the console, after a Foundry window had appeared. The console shows a yellow "Foundry stopped unexpectedly with exit code" and a number. The window shows the folder that holds the logs.
-- **Cause:** The Foundry application closed unexpectedly, after its first window appeared: it crashed, or it was ended, for example from Task Manager. A restart or a shutdown of Windows PE, as when Foundry Deploy restarts the device at the end of a deployment, is never reported this way.
+- **Where:** A full-screen page in front of the console, after the Foundry window had appeared. The console shows a yellow "Foundry stopped unexpectedly with exit code" and a number. The page shows the folder that holds the logs, in the language you chose in Foundry Connect, or else the language of Windows PE.
+- **Cause:** The Foundry application closed unexpectedly, after its window appeared: it crashed, or it was ended, for example from Task Manager. A restart or a shutdown of Windows PE, as when Foundry Deploy restarts the device at the end of a deployment, is never reported this way.
 - **Fix:**
-  1. Read the message in the window.
+  1. Read the message on the page.
   2. If **Relaunch** is offered, the deployment had not started to prepare the target disk: select it. Foundry starts again from Foundry Connect, and the target disk was not changed.
-  3. If only **Close** is offered, the deployment may already have changed the target disk, so Foundry cannot be relaunched. Select **Close**, then restart the device from the media to begin a new deployment.
+  3. If only **Close** is offered, the deployment may already have changed the target disk, so Foundry cannot be relaunched. Select **Close** (or press Escape), then restart the device from the media to begin a new deployment.
   4. If it happens again, recreate the media with the current version of Foundry OSD and open a support issue with the logs.
-- **Good to know:** Foundry is never relaunched by itself. A failure in Foundry Connect or Foundry Deploy that reports its own message, such as the ones above and below, does not show this window.
+- **Good to know:** Foundry is never relaunched by itself. A failure in Foundry Connect or Foundry Deploy that reports its own message, such as the ones above and below, does not show this page.
 - **Collect:** `FoundryBootstrap.log`, `FoundryConnect.log` and `FoundryDeploy.log`. See [Logs and support information](logs-and-support.md).
 
 ## "Foundry Deploy could not start" or "could not load its configuration" <a href="#foundry-deploy-stopped" id="foundry-deploy-stopped"></a>
 
 - **Where:** **Foundry** shows **Failed** after Foundry Connect, with one of these lines: "Foundry Deploy could not start. Check the session log for details." or "Foundry Deploy could not load its configuration. Recreate the boot media."
-- **Cause:** Foundry Deploy could not read its configuration or start. This is a failure reported by Foundry Deploy itself, so no **Foundry stopped** window appears.
+- **Cause:** Foundry Deploy could not read its configuration or start. This is a failure reported by Foundry Deploy itself, so no **Foundry stopped** page appears.
 - **Fix:**
   1. Restart the device.
   2. If it happens again, recreate the media with the current version of Foundry OSD.
@@ -129,7 +129,7 @@ The reason is the line under the list of stages. On a failure, the console also 
 ## "Application readiness was not confirmed within two minutes. The application may still be running." <a href="#readiness-not-confirmed" id="readiness-not-confirmed"></a>
 
 - **Where:** **Foundry** shows **Failed**.
-- **Cause:** Foundry did not show its first window, the Foundry Connect window, within 2 minutes. The console stops waiting but does not close the application.
+- **Cause:** Foundry did not show its window with Foundry Connect within 2 minutes. The console stops waiting but does not close the application.
 - **Fix:**
   1. Look for the Foundry window before doing anything else.
   2. If a Foundry window is open, the application is running: continue in it.

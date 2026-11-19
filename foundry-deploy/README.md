@@ -1,6 +1,6 @@
 # Foundry Deploy
 
-Foundry Deploy is the wizard that installs Windows on the target device. It opens in Windows PE once [Foundry Connect](../foundry-connect/README.md) reports that the network is ready and you continue. Both run in one application: Foundry Deploy replaces the Foundry Connect window without a restart, and keeps its theme, language and keyboard layout.
+Foundry Deploy is the wizard that installs Windows on the target device. It opens in Windows PE once [Foundry Connect](../foundry-connect/README.md) reports that the network is ready and you continue. Both run in one application: Foundry Deploy replaces the Foundry Connect content in the same full-screen window, without a restart or a second window, and keeps its theme, language and keyboard layout.
 
 <figure>
   <img src="../.gitbook/assets/foundry-deploy-welcome-01-start.png" alt="Foundry Deploy Welcome screen with the Start deployment button">
