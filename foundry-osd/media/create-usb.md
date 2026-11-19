@@ -90,7 +90,7 @@ Foundry OSD does not recognize a drive without cache as a Foundry USB drive: the
 ## Check the result
 
 1. In File Explorer, check that two volumes named **BOOT** and **Foundry Cache** appear, or one volume named **FOUNDRY** for a drive without cache.
-2. Eject the drive, start a test device from it, and check that Foundry Connect opens, then Foundry Deploy.
+2. Eject the drive, start a test device from it, and check that Foundry Deploy opens. Foundry Connect opens first only when the device is not online: see [When Foundry Connect is skipped](../../foundry-connect/README.md#when-foundry-connect-is-skipped).
 
 ## Limits
 

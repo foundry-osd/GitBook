@@ -11,12 +11,12 @@ Most of the time you do nothing. With a cable and DHCP, or with a network profil
 
 ## When Foundry Connect is skipped <a href="#when-foundry-connect-is-skipped" id="when-foundry-connect-is-skipped"></a>
 
-The Foundry window opens first on a status page that reads "Looking for the network…". Foundry applies the network settings from the media (wired 802.1X and the provisioned Wi-Fi; the [Deployment password](#deployment-password-in-foundry-connect) prompt appears over this page when the settings are protected), then checks Internet access every 2 seconds for up to 15 seconds, with the same test addresses as [Network ready](network-readiness.md#what-network-ready-tests).
+The Foundry window opens first on a status page that reads "Looking for the networkâ€¦". Foundry applies the network settings from the media (wired 802.1X and the provisioned Wi-Fi; the [Deployment password](#deployment-password-in-foundry-connect) prompt appears over this page when the settings are protected), then checks Internet access every 2 seconds for up to 15 seconds, with the same test addresses as [Network ready](network-readiness.md#what-network-ready-tests).
 
 - **Internet access answers within 15 seconds**: Foundry Connect is not shown. Foundry goes on at once, as if you had selected **Continue**: the provisioned Wi-Fi, the Windows profile roaming and the protected settings are handled the same way.
 - **Anything else**: no Internet access, a sign-in page, or no answer after 15 seconds. Foundry Connect opens, and its countdown starts only once the page is visible.
 
-So on a device with a working cable or a profile from the media, Foundry Connect never appears: this is expected, not a failure. To see it anyway, for example to join a Wi-Fi network, start the device without Internet access. A password prompt that is still open holds the startup until you answer it.
+So on a device with a working cable or a profile from the media, Foundry Connect usually does not appear: this is expected, not a failure. A provisioned Wi-Fi network that needs more than 15 seconds to connect shows it. To see it anyway, for example to join a Wi-Fi network, start the device without Internet access. A password prompt that is still open holds the startup until you answer it.
 
 ## What the page shows
 

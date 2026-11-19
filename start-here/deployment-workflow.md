@@ -33,7 +33,7 @@ With the [network cache](../foundry-osd/network-cache.md) on, a change of import
 
 ## 2. Start Windows PE
 
-The technician starts the target device from the media. Windows PE loads, and a console window shows Foundry preparing the session: it sets up the environment and starts Foundry, one application that shows Foundry Connect, then Foundry Deploy.
+The technician starts the target device from the media. Windows PE loads, and a console window shows Foundry preparing the session: it sets up the environment and starts Foundry, one application that shows Foundry Connect (only when the device is not online), then Foundry Deploy.
 
 Nothing has to be typed here. [Windows PE startup](../foundry-connect/windows-pe-startup.md) explains each line of the console.
 

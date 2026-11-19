@@ -160,7 +160,7 @@ Windows Preinstallation Environment, a minimal Windows that runs from memory. Th
 
 ## Windows PE startup
 
-The console window that appears first when a device starts from the media. It prepares Windows PE, then starts and watches one Foundry application that shows Foundry Connect, then Foundry Deploy. If that application stops unexpectedly, it shows the **Foundry stopped** page.
+The console window that appears first when a device starts from the media. It prepares Windows PE, then starts and watches one Foundry application that shows Foundry Connect (only when the device is not online), then Foundry Deploy. If that application stops unexpectedly, it shows the **Foundry stopped** page.
 
 ## Windows RE
 

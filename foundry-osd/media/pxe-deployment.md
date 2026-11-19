@@ -52,7 +52,7 @@ Without the network cache, a deployment that needs a post-installation action wi
 
 1. Import the files in your PXE server, following the documentation of that server.
 2. Start a test device from the network.
-3. Check that Foundry Connect opens and reports the network as ready, then that Foundry Deploy opens in the same application once you continue.
+3. Check that the device gets online, then that Foundry Deploy opens in the same application. On a device that is already online, Foundry Connect is skipped; otherwise it opens, reports the network as ready, and Foundry Deploy replaces it once you continue: see [When Foundry Connect is skipped](../../foundry-connect/README.md#when-foundry-connect-is-skipped).
 4. Run one complete deployment and the [post-deployment checks](../../foundry-deploy/verify-deployment.md).
 
 ## Keep the boot image up to date

@@ -60,7 +60,7 @@ Problems met when Foundry Deploy opens and in its wizard, up to the **Deploy** b
 2. Select **Retry**. Foundry Deploy downloads the catalogs again, and the dialog returns if it fails again. You can select **Retry** as often as needed.
 3. **Close** ends Foundry Deploy and the startup, as when it cannot start: see [Foundry Deploy stopped](../windows-pe-startup.md#foundry-deploy-stopped). Restart the device from the deployment media to begin again.
 
-**Collect:** the standard set. The log contains "Operating system catalog load failed" with the reason.
+**Collect:** the standard set. The log contains "Operating system catalog load failed" or "Driver pack catalog load failed" with the reason.
 
 ## Network cache not available <a href="#network-cache-not-available" id="network-cache-not-available"></a>
 

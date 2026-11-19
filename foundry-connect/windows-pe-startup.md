@@ -18,8 +18,8 @@ The console lists two stages. Each goes from **Waiting** to **In progress**, the
 
 The console is only a progress screen. The work happens in the Foundry window:
 
-1. **Looking for the network…**: Foundry applies the network settings of the media and checks Internet access for up to 15 seconds. If it answers, Foundry Connect is skipped; otherwise Foundry Connect opens. See [When Foundry Connect is skipped](README.md#when-foundry-connect-is-skipped).
-2. **Setting the clock and time zone…**: once the network is confirmed, by the check or by you in Foundry Connect, the clock and the time zone are set. The page stays at least 1 second, and the startup goes on even if one of them fails.
+1. **Looking for the networkâ€¦**: Foundry applies the network settings of the media and checks Internet access for up to 15 seconds. If it answers, Foundry Connect is skipped; otherwise Foundry Connect opens. See [When Foundry Connect is skipped](README.md#when-foundry-connect-is-skipped).
+2. **Setting the clock and time zoneâ€¦**: once the network is confirmed, by the check or by you in Foundry Connect, the clock and the time zone are set. The page stays at least 1 second, and the startup goes on even if one of them fails.
 3. Foundry Deploy replaces the page in the same window, with the theme, the language and the keyboard layout you chose in Foundry Connect, if it was shown.
 
 The console shows nothing more for those steps.
@@ -28,14 +28,14 @@ If Foundry stops unexpectedly, the console shows a yellow warning "Foundry stopp
 
 ## Waits that are normal
 
-- **Foundry window**: up to 2 minutes before the Foundry window appears with Foundry Connect.
-- **Looking for the network…**: up to 15 seconds of Internet checks, after the network settings of the media are applied.
+- **Foundry window**: up to 2 minutes before the Foundry window appears, on the Looking for the networkâ€¦ page.
+- **Looking for the networkâ€¦**: up to 15 seconds of Internet checks, after the network settings of the media are applied.
 - **Foundry Connect**: only when the device is not online after that. It takes as long as you need in [Foundry Connect](network-readiness.md).
-- **Setting the clock and time zone…**: up to 50 seconds before Foundry Deploy on a network that filters the lookups (five lookups of 10 seconds).
+- **Setting the clock and time zoneâ€¦**: up to 50 seconds before Foundry Deploy on a network that filters the lookups (five lookups of 10 seconds).
 
 On a device with no cable, the Internet is out of reach before the Foundry window opens. A yellow line can then appear and stay until the end: "Warning: Internet clock could not be resolved. Boot will continue without clock correction."
 
-It is expected on a Wi-Fi-only device. **Environment** ends with **Done (warning)**. No action is needed: the clock is set again on the **Setting the clock and time zone…** page.
+It is expected on a Wi-Fi-only device. **Environment** ends with **Done (warning)**. No action is needed: the clock is set again on the **Setting the clock and time zoneâ€¦** page.
 
 ## Which version runs
 
@@ -56,7 +56,7 @@ See [Network endpoints](../reference/network-endpoints.md) for the hosts. What t
 
 ## When the clock and the time zone are set
 
-The clock is corrected from the Internet before the Foundry window when the network already works, and again on the **Setting the clock and time zone…** page, before Foundry Deploy. The time zone is applied between them, from the [Windows PE time zone](../foundry-osd/general.md#windows-pe-time-zone) setting of the media: a fixed zone, or the zone of the public IP address of the network, with UTC when that lookup gets no answer.
+The clock is corrected from the Internet before the Foundry window when the network already works, and again on the **Setting the clock and time zoneâ€¦** page, before Foundry Deploy. The time zone is applied between them, from the [Windows PE time zone](../foundry-osd/general.md#windows-pe-time-zone) setting of the media: a fixed zone, or the zone of the public IP address of the network, with UTC when that lookup gets no answer.
 
 ## If startup stops
 

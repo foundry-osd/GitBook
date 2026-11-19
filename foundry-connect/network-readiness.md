@@ -117,4 +117,4 @@ Find the text you see on screen in [Network and Foundry Connect troubleshooting]
 
 ## Next step
 
-A status page reads "Setting the clock and time zone…", then [Foundry Deploy](../foundry-deploy/README.md) replaces it in the same window. Closing the window is refused while the clock and the time zone are being set. The [startup console](windows-pe-startup.md) stays on screen behind it.
+A status page reads "Setting the clock and time zoneâ€¦", then [Foundry Deploy](../foundry-deploy/README.md) replaces it in the same window. Closing the window is refused while the clock and the time zone are being set. The [startup console](windows-pe-startup.md) stays on screen behind it.
