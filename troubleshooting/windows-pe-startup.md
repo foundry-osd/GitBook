@@ -108,7 +108,7 @@ The reason is the line under the list of stages. On a failure, the console also 
 ## A page titled "Foundry stopped" <a href="#foundry-stopped" id="foundry-stopped"></a>
 
 - **Where:** A full-screen page in front of the console, after the Foundry window had appeared. The console shows a yellow "Foundry stopped unexpectedly with exit code" and a number. The page shows the folder that holds the logs, in the language you chose in Foundry Connect, or else the language of Windows PE.
-- **Cause:** The Foundry application closed unexpectedly, after its first window appeared: it crashed, or it was ended, for example from Task Manager. A restart or a shutdown of Windows PE, as when Foundry Deploy restarts the device at the end of a deployment, is never reported this way.
+- **Cause:** The Foundry application closed unexpectedly, after its window appeared: it crashed, or it was ended, for example from Task Manager. A restart or a shutdown of Windows PE, as when Foundry Deploy restarts the device at the end of a deployment, is never reported this way.
 - **Fix:**
   1. Read the message on the page.
   2. If **Relaunch** is offered, the deployment had not started to prepare the target disk: select it. Foundry starts again from Foundry Connect, and the target disk was not changed.

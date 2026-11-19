@@ -36,14 +36,14 @@ Problems met when Foundry Deploy opens and in its wizard, up to the **Deploy** b
 
 ## Foundry Deploy closes as soon as it opens <a href="#closes-at-start" id="closes-at-start"></a>
 
-**Where:** right after Foundry Connect, with or without a password prompt. The console shows "Boot was cancelled. Deployment will not continue." or, when the configuration cannot be read, a line starting with "Foundry Deploy could not": see [Windows PE startup troubleshooting](../windows-pe-startup.md). No **Foundry stopped** window appears.
+**Where:** right after Foundry Connect, with or without a password prompt. The console shows "Boot was cancelled. Deployment will not continue." or, when the configuration cannot be read, a line starting with "Foundry Deploy could not": see [Windows PE startup troubleshooting](../windows-pe-startup.md). No **Foundry stopped** page appears.
 
 **Cause:** **Cancel** was selected in the **Protected deployment** window, or the deployment configuration on the media cannot be read, or the media carries protected content without the information needed to unlock it.
 
 **Fix:**
 
 1. Restart the device from the deployment media and enter the password.
-2. If Foundry Deploy closes without asking for anything, the media is damaged or incomplete: the administrator recreates it. If a **Foundry stopped** window appears instead, see [A window titled "Foundry stopped"](../windows-pe-startup.md#foundry-stopped).
+2. If Foundry Deploy closes without asking for anything, the media is damaged or incomplete: the administrator recreates it. If a **Foundry stopped** page appears instead, see [A page titled "Foundry stopped"](../windows-pe-startup.md#foundry-stopped).
 
 **Collect:** `X:\Foundry\Logs\FoundryDeploy.log` if you can still reach it, or the `Logs` folder of the USB drive's **Foundry Cache** volume. See [Log locations](../logs-and-support.md#log-locations).
 
